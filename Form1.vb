@@ -41,6 +41,8 @@ Public Class Form1
     'Her plasseres kode som er relevant til Inventar Tab.
     'Variabler som brukes her skal begynne med Inv. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+    'testgit morten
 #End Region
 
 
