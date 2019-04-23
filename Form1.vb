@@ -34,6 +34,10 @@ Public Class Form1
     'Her plasseres kode som er relevant til Kunde Tab.
     'Variabler som brukes her skal begynne med Kunde. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+
+    'Testing testing 123'
+    'Håvard var her >:)'
 #End Region
 
 
