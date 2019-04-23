@@ -8,6 +8,7 @@ Public Class Form1
     'Test forandring
     ' Test hilsen IVar
     'Globalevariabler som må sjekkes ved ønsket tilgang. LogBool settes til TRUE ved inlogging, AdminBool settes til TRUE hvis bruker er admin.
+    'e
     Dim LogBool As Boolean
     Dim AdminBool As Boolean
 #End Region
@@ -35,6 +36,10 @@ Public Class Form1
     'Her plasseres kode som er relevant til Kunde Tab.
     'Variabler som brukes her skal begynne med Kunde. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+
+    'Testing testing 123'
+    'Håvard var her >:)'
 #End Region
 
 
