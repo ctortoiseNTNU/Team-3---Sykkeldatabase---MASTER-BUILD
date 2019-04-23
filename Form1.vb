@@ -5,7 +5,7 @@ Public Class Form1
     'Her plasseres globale variabler
     'som gjenbrukes over programmet. De er uten navnekonvensjon
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
-
+    'Test forandring
     'Globalevariabler som må sjekkes ved ønsket tilgang. LogBool settes til TRUE ved inlogging, AdminBool settes til TRUE hvis bruker er admin.
     Dim LogBool As Boolean
     Dim AdminBool As Boolean
