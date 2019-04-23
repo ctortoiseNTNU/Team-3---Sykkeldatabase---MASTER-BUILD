@@ -48,7 +48,8 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Inv. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
-    'testgit morten
+    'Auto ID. Fast status (tilgjengelig), savnet (nei), skadet (nei)
+
 #End Region
 
 
@@ -56,6 +57,12 @@ Public Class Form1
     'Her plasseres kode som er relevant til Inventar Search Tab.
     'Variabler som brukes her skal begynne med Search. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+    'Fritt søkefelt
+    'Dropdown med tilgjengelige kategorier for å avgrense søk
+    'Mulig med tomt søkefelt for å finne alle objekter i en kategori
+    'Søkeresultat med alle kolonner
+
 #End Region
 
 
