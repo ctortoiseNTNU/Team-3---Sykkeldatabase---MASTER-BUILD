@@ -7,6 +7,7 @@ Public Class Form1
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
     'Test forandring
     'Globalevariabler som må sjekkes ved ønsket tilgang. LogBool settes til TRUE ved inlogging, AdminBool settes til TRUE hvis bruker er admin.
+    'e
     Dim LogBool As Boolean
     Dim AdminBool As Boolean
 #End Region
