@@ -138,6 +138,8 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1007,7 +1009,7 @@ Partial Class Form1
         'Button2
         '
         Me.Button2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(469, 499)
+        Me.Button2.Location = New System.Drawing.Point(479, 499)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(85, 23)
         Me.Button2.TabIndex = 39
@@ -1121,7 +1123,7 @@ Partial Class Form1
         'Button4
         '
         Me.Button4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(159, 453)
+        Me.Button4.Location = New System.Drawing.Point(212, 499)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(85, 23)
         Me.Button4.TabIndex = 23
@@ -1260,12 +1262,14 @@ Partial Class Form1
         Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.Location = New System.Drawing.Point(262, 222)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(46, 18)
+        Me.Label7.Size = New System.Drawing.Size(50, 18)
         Me.Label7.TabIndex = 42
-        Me.Label7.Text = "Status"
+        Me.Label7.Text = "Status:"
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.Button3)
+        Me.GroupBox4.Controls.Add(Me.Label3)
         Me.GroupBox4.Controls.Add(Me.Label2)
         Me.GroupBox4.Controls.Add(Me.Label9)
         Me.GroupBox4.Controls.Add(Me.Label8)
@@ -1343,12 +1347,32 @@ Partial Class Form1
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.Location = New System.Drawing.Point(259, 501)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(77, 18)
         Me.Label10.TabIndex = 47
         Me.Label10.Text = "Produkt ID:"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(41, 501)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(165, 18)
+        Me.Label3.TabIndex = 46
+        Me.Label3.Text = "Registrert med ID: xxxxxx"
+        '
+        'Button3
+        '
+        Me.Button3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(303, 499)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(85, 23)
+        Me.Button3.TabIndex = 47
+        Me.Button3.Text = "Endre"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -1496,4 +1520,6 @@ Partial Class Form1
     Friend WithEvents Label2 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Button3 As Button
 End Class
