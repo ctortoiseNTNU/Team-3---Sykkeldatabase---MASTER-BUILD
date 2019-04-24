@@ -11,6 +11,10 @@ Public Class Form1
     'e
     Dim LogBool As Boolean
     Dim AdminBool As Boolean
+
+
+
+
 #End Region
 
 #Region "GlobaleFunksjonerOgProsedyrer"
@@ -48,7 +52,32 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Inv. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
-    'Auto ID. Fast status (tilgjengelig), savnet (nei), skadet (nei)
+
+    Private Sub BtnInvRegistrer_Click(sender As Object, e As EventArgs) Handles BtnInvRegistrer.Click
+
+        'SQLspørring for innlegging av sykkel/utstyr i database. Data hentes fra felt
+
+    End Sub
+
+    Private Sub BtnInvEndre_Click(sender As Object, e As EventArgs) Handles BtnInvEndre.Click
+
+        'SQLspørring med endring av data for valgt produkt med ID fra valgt produkt i søkefelt
+
+    End Sub
+
+    Private Sub BtnIvnSokEndre_Click(sender As Object, e As EventArgs) Handles BtnIvnSokEndre.Click
+
+        'ID nummer hentes fra TxtInvSokProduktID og SQLspørring henter objektet og legger verdiene i feltet for
+        'registrering/endring. 
+
+    End Sub
+
+    Private Sub BtnInvSokSok_Click(sender As Object, e As EventArgs) Handles BtnInvSokSok.Click
+
+        'SQLspørring med valgte søkekriterier for søk etter objekter 
+
+    End Sub
+
 
 #End Region
 
