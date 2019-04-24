@@ -18,6 +18,12 @@ Public Class Form1
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
 #End Region
 
+#Region "Form Load og Login"
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+#End Region
+
 #Region "StartTab"
     'Her plasseres kode som er relevant til Start Tab.
     'Variabler som brukes her skal begynne med Start. Dette er for å unngå klasj.
