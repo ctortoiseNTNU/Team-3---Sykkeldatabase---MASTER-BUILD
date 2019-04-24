@@ -72,7 +72,7 @@ Partial Class Form1
         Me.CboInvKategori = New System.Windows.Forms.ComboBox()
         Me.TxtInvInnkjopspris = New System.Windows.Forms.TextBox()
         Me.BtnInvRegistrer = New System.Windows.Forms.Button()
-        Me.TxtInvForhandler = New System.Windows.Forms.ComboBox()
+        Me.CboInvForhandler = New System.Windows.Forms.ComboBox()
         Me.TxtInvVareNummer = New System.Windows.Forms.TextBox()
         Me.TxtInvProduktnavn = New System.Windows.Forms.TextBox()
         Me.LblInvForhandler = New System.Windows.Forms.Label()
@@ -407,6 +407,7 @@ Partial Class Form1
         '
         Me.LstInvSokSokeResultat.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LstInvSokSokeResultat.FormattingEnabled = True
+        Me.LstInvSokSokeResultat.HorizontalScrollbar = True
         Me.LstInvSokSokeResultat.ItemHeight = 15
         Me.LstInvSokSokeResultat.Location = New System.Drawing.Point(6, 159)
         Me.LstInvSokSokeResultat.Name = "LstInvSokSokeResultat"
@@ -417,6 +418,7 @@ Partial Class Form1
         '
         Me.CboInvSokKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvSokKategori.FormattingEnabled = True
+        Me.CboInvSokKategori.Items.AddRange(New Object() {"Sykkel", "Utstyr"})
         Me.CboInvSokKategori.Location = New System.Drawing.Point(101, 72)
         Me.CboInvSokKategori.Name = "CboInvSokKategori"
         Me.CboInvSokKategori.Size = New System.Drawing.Size(121, 26)
@@ -473,7 +475,7 @@ Partial Class Form1
         Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvKategori)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvInnkjopspris)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvRegistrer)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvForhandler)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvForhandler)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvVareNummer)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvProduktnavn)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvForhandler)
@@ -554,7 +556,7 @@ Partial Class Form1
         '
         Me.CboInvStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvStatus.FormattingEnabled = True
-        Me.CboInvStatus.Items.AddRange(New Object() {"Inne", "Ute"})
+        Me.CboInvStatus.Items.AddRange(New Object() {"Inne", "Ute", "1"})
         Me.CboInvStatus.Location = New System.Drawing.Point(265, 243)
         Me.CboInvStatus.Name = "CboInvStatus"
         Me.CboInvStatus.Size = New System.Drawing.Size(121, 26)
@@ -564,7 +566,7 @@ Partial Class Form1
         '
         Me.CboInvSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvSkadet.FormattingEnabled = True
-        Me.CboInvSkadet.Items.AddRange(New Object() {"Nei", "Ja"})
+        Me.CboInvSkadet.Items.AddRange(New Object() {"Nei", "Ja", "1"})
         Me.CboInvSkadet.Location = New System.Drawing.Point(265, 327)
         Me.CboInvSkadet.Name = "CboInvSkadet"
         Me.CboInvSkadet.Size = New System.Drawing.Size(121, 26)
@@ -574,7 +576,7 @@ Partial Class Form1
         '
         Me.CboInvSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvSavnet.FormattingEnabled = True
-        Me.CboInvSavnet.Items.AddRange(New Object() {"Nei", "Ja"})
+        Me.CboInvSavnet.Items.AddRange(New Object() {"Nei", "Ja", "1"})
         Me.CboInvSavnet.Location = New System.Drawing.Point(265, 411)
         Me.CboInvSavnet.Name = "CboInvSavnet"
         Me.CboInvSavnet.Size = New System.Drawing.Size(121, 26)
@@ -584,6 +586,7 @@ Partial Class Form1
         '
         Me.CboInvSubkategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvSubkategori.FormattingEnabled = True
+        Me.CboInvSubkategori.Items.AddRange(New Object() {"Offroad", "Bysykkel", "Elsykkel", "Racer", "Tandem", "Barnesykkel", "7777"})
         Me.CboInvSubkategori.Location = New System.Drawing.Point(123, 75)
         Me.CboInvSubkategori.Name = "CboInvSubkategori"
         Me.CboInvSubkategori.Size = New System.Drawing.Size(121, 26)
@@ -657,6 +660,7 @@ Partial Class Form1
         '
         Me.CboInvAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvAvdeling.FormattingEnabled = True
+        Me.CboInvAvdeling.Items.AddRange(New Object() {"Finse", "Flåm", "Haugastøl", "Myrdal", "Voss", "1111"})
         Me.CboInvAvdeling.Location = New System.Drawing.Point(123, 117)
         Me.CboInvAvdeling.Name = "CboInvAvdeling"
         Me.CboInvAvdeling.Size = New System.Drawing.Size(121, 26)
@@ -666,7 +670,7 @@ Partial Class Form1
         '
         Me.CboInvKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvKategori.FormattingEnabled = True
-        Me.CboInvKategori.Items.AddRange(New Object() {"Sykkel", "Utstyr"})
+        Me.CboInvKategori.Items.AddRange(New Object() {"Sykkel", "Utstyr", "9999"})
         Me.CboInvKategori.Location = New System.Drawing.Point(123, 33)
         Me.CboInvKategori.Name = "CboInvKategori"
         Me.CboInvKategori.Size = New System.Drawing.Size(121, 26)
@@ -690,14 +694,15 @@ Partial Class Form1
         Me.BtnInvRegistrer.Text = "Registrer"
         Me.BtnInvRegistrer.UseVisualStyleBackColor = True
         '
-        'TxtInvForhandler
+        'CboInvForhandler
         '
-        Me.TxtInvForhandler.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvForhandler.FormattingEnabled = True
-        Me.TxtInvForhandler.Location = New System.Drawing.Point(123, 411)
-        Me.TxtInvForhandler.Name = "TxtInvForhandler"
-        Me.TxtInvForhandler.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvForhandler.TabIndex = 20
+        Me.CboInvForhandler.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvForhandler.FormattingEnabled = True
+        Me.CboInvForhandler.Items.AddRange(New Object() {"DBS", "TREK", "Everest", "2222", "testforhandler"})
+        Me.CboInvForhandler.Location = New System.Drawing.Point(123, 411)
+        Me.CboInvForhandler.Name = "CboInvForhandler"
+        Me.CboInvForhandler.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvForhandler.TabIndex = 20
         '
         'TxtInvVareNummer
         '
@@ -1578,7 +1583,7 @@ Partial Class Form1
     Friend WithEvents CboInvKategori As ComboBox
     Friend WithEvents TxtInvInnkjopspris As TextBox
     Friend WithEvents BtnInvRegistrer As Button
-    Friend WithEvents TxtInvForhandler As ComboBox
+    Friend WithEvents CboInvForhandler As ComboBox
     Friend WithEvents TxtInvVareNummer As TextBox
     Friend WithEvents TxtInvProduktnavn As TextBox
     Friend WithEvents LblInvForhandler As Label
