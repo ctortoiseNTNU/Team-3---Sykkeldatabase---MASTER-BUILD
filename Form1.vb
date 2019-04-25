@@ -16,11 +16,47 @@ Public Class Form1
 #Region "GlobaleFunksjonerOgProsedyrer"
     'Her plasseres globale funksjoner og prosdyrer som gjenbrukes over programmet. De er uten navnekonvensjon
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
+
+
 #End Region
 
 #Region "Form Load og Login"
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
+
+
+#End Region
+
+#Region "TabSkifting"
+    'Denne regionen er brukt til eventkoding av det som skjer da du skifter tab.
+    'Nedenfor er en event som kjoeres hver gang man skifter tab. Den sjekker tabindex verdien og kjorer koden som er under det riktige caset.
+    'Dette er til bruk for f.eks tilgangsskjekker og for aa laste inn verdier da man bytter til tabs.
+    'Proev aa holde dette region saa ren som mulig, hvis man skal kjoere masse kode er det best aa lage egen prosedyre/funksjon for a derette kalle paa det nedenfor.
+    Private Sub HovedTab_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles HovedTab.SelectedIndexChanged
+        Dim HovedTabIndex As Integer
+        HovedTabIndex = HovedTab.SelectedIndex + 1
+
+        Select Case HovedTabIndex
+            Case 1 'Bestemmer det som skjer etter man har valgt startmeny.
+                MsgBox("Startmeny")
+            Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
+                MsgBox("Utleiemeny")
+            Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
+                MsgBox("KDBmeny")
+            Case 4 'Bestemmer det som skjer etter man har valgt Inventarmeny.
+                MsgBox("Inventarmeny")
+            Case 5 'Bestemmer det som skjer etter man har valgt Inventarsearchmeny.
+                MsgBox("InvSearchmeny")
+            Case 6 'Bestemmer det som skjer etter man har valgt Logistikkmeny.
+                MsgBox("Logistikkmeny")
+            Case 7 'Bestemmer det som skjer etter man har valgt Statistikkmeny.
+                MsgBox("Statistikkmeny")
+            Case 8 'Bestemmer det som skjer etter man har valgt Adminmeny.
+                MsgBox("AdminMeny")
+            Case 9 'Bestemmer det som skjer etter man har valgt AdminDBmeny.
+                MsgBox("AdminDBMeny")
+        End Select
     End Sub
 #End Region
 
