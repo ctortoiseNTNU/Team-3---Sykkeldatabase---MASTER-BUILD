@@ -214,7 +214,7 @@ Public Class Form1
                 Dim interntabell As New DataTable
                 da.SelectCommand = sqlRegistrer
                 da.Fill(interntabell)
-                DBdisconnect()
+                DBDisconnect()
             Catch ex As MySqlException
                 MsgBox(ex.Message)
             End Try
@@ -293,60 +293,6 @@ Public Class Form1
         testleser.Close()
 
         DBDisconnect()
-
-    End Sub
-
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-
-        Dim testarray(12) As String
-
-        For i = 0 To testarray.Length - 1
-            testarray(i) = CStr(i)
-        Next
-
-        Dim word As String
-        For Each word In testarray
-            LstInvSokSokeResultat.Items.Add(word)
-        Next
-
-        'For Each word In
-        'While testleser.Read()
-        '    testdata = testleser("sykkel_id")
-        '    testdata = testdata + " " + testleser("sykkel_status")
-        '    testdata = testdata + " " + testleser("girsystem")
-        '    LstInvSokSokeResultat.Items.Add(testdata)
-        'End While
-
-
-
-        'Dim AdminSoekefelt, AdminSoekekategori As String
-        '    AdminSoekefelt = TxtAdminBSFelt.Text
-        '    AdminSoekekategori = CboAdminBSEtter.Text
-        '    Try
-        '        DBConnect()
-        '        Dim AdminBrukerSearch As New MySqlCommand("SELECT * FROM brukere WHERE " & AdminSoekekategori & " LIKE '%" & AdminSoekefelt & "%'", tilkobling)
-        '        Dim AdminSearchAdapter As New MySqlDataAdapter
-        '        Dim AdminSearchTable As New DataTable
-        '        AdminSearchAdapter.SelectCommand = AdminBrukerSearch
-        '        AdminSearchAdapter.Fill(AdminSearchTable)
-        '        DBDisconnect()
-        '        Dim AdminRow As DataRow
-        '        Dim AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt As String
-        '        LvAdminBS.Items.Clear()
-        '        For Each AdminRow In AdminSearchTable.Rows
-        '            AdminBSbruker_id = AdminRow("bruker_id")
-        '            AdminBSfornavn = AdminRow("fornavn")
-        '            AdminBSetternavn = AdminRow("etternavn")
-        '            AdminBSsoekefelt = AdminRow(AdminSoekekategori)
-        '            LvAdminBS.Items.Add(New ListViewItem({AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt}))
-        '        Next
-        '    Catch SqlError2 As MySqlException
-        '        MsgBox("Man får ikke koble til databasen: " & SqlError2.Message)
-        '    End Try
-
-
 
     End Sub
 

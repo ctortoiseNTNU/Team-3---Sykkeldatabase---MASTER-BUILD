@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.HovedTab = New System.Windows.Forms.TabControl()
@@ -35,6 +35,18 @@ Partial Class Form1
         Me.GrpInvSok = New System.Windows.Forms.GroupBox()
         Me.LivSok = New System.Windows.Forms.ListView()
         Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Produktnavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Varenummer = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Kategori = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Ramme = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Girsystem = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Hjulstørrelse = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Innkjøpspris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Avdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Forhandler = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Status = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Skadet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Savnet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LblInvSokSavnet = New System.Windows.Forms.Label()
         Me.LblInvSokProduktID = New System.Windows.Forms.Label()
         Me.LblInvSokSkadet = New System.Windows.Forms.Label()
@@ -149,19 +161,6 @@ Partial Class Form1
         Me.LblAdminNBPassord = New System.Windows.Forms.Label()
         Me.LblAdminNBBID = New System.Windows.Forms.Label()
         Me.DBAdminTab = New System.Windows.Forms.TabPage()
-        Me.Produktnavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Varenummer = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Kategori = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Ramme = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Girsystem = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Hjulstørrelse = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Innkjøpspris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Avdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Forhandler = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Status = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Skadet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Savnet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -278,7 +277,6 @@ Partial Class Form1
         '
         'GrpInvSok
         '
-        Me.GrpInvSok.Controls.Add(Me.Button1)
         Me.GrpInvSok.Controls.Add(Me.LivSok)
         Me.GrpInvSok.Controls.Add(Me.LblInvSokSavnet)
         Me.GrpInvSok.Controls.Add(Me.LblInvSokProduktID)
@@ -320,6 +318,65 @@ Partial Class Form1
         '
         Me.ID.Text = "ID"
         Me.ID.Width = 42
+        '
+        'Produktnavn
+        '
+        Me.Produktnavn.Text = "Produktnavn"
+        Me.Produktnavn.Width = 80
+        '
+        'Varenummer
+        '
+        Me.Varenummer.Text = "Varenummer"
+        Me.Varenummer.Width = 84
+        '
+        'Kategori
+        '
+        Me.Kategori.Text = "Kategori"
+        '
+        'Ramme
+        '
+        Me.Ramme.Text = "Ramme"
+        Me.Ramme.Width = 54
+        '
+        'Girsystem
+        '
+        Me.Girsystem.Text = "Girsystem"
+        Me.Girsystem.Width = 69
+        '
+        'Hjulstørrelse
+        '
+        Me.Hjulstørrelse.Text = "Hjulstørrelse"
+        Me.Hjulstørrelse.Width = 25
+        '
+        'Innkjøpspris
+        '
+        Me.Innkjøpspris.Text = "Innkjøpspris"
+        Me.Innkjøpspris.Width = 82
+        '
+        'Avdeling
+        '
+        Me.Avdeling.Text = "Avdeling"
+        Me.Avdeling.Width = 59
+        '
+        'Forhandler
+        '
+        Me.Forhandler.Text = "Forhandler"
+        Me.Forhandler.Width = 73
+        '
+        'Status
+        '
+        Me.Status.Text = "Status"
+        Me.Status.Width = 56
+        '
+        'Skadet
+        '
+        Me.Skadet.Text = "Skadet"
+        Me.Skadet.Width = 51
+        '
+        'Savnet
+        '
+        Me.Savnet.Text = "Savnet"
+        Me.Savnet.Width = 50
         '
         'LblInvSokSavnet
         '
@@ -1506,74 +1563,6 @@ Partial Class Form1
         Me.DBAdminTab.Text = "DB Admin"
         Me.DBAdminTab.UseVisualStyleBackColor = True
         '
-        'Produktnavn
-        '
-        Me.Produktnavn.Text = "Produktnavn"
-        Me.Produktnavn.Width = 80
-        '
-        'Varenummer
-        '
-        Me.Varenummer.Text = "Varenummer"
-        Me.Varenummer.Width = 84
-        '
-        'Kategori
-        '
-        Me.Kategori.Text = "Kategori"
-        '
-        'Ramme
-        '
-        Me.Ramme.Text = "Ramme"
-        Me.Ramme.Width = 54
-        '
-        'Girsystem
-        '
-        Me.Girsystem.Text = "Girsystem"
-        Me.Girsystem.Width = 69
-        '
-        'Hjulstørrelse
-        '
-        Me.Hjulstørrelse.Text = "Hjulstørrelse"
-        Me.Hjulstørrelse.Width = 25
-        '
-        'Innkjøpspris
-        '
-        Me.Innkjøpspris.Text = "Innkjøpspris"
-        Me.Innkjøpspris.Width = 82
-        '
-        'Avdeling
-        '
-        Me.Avdeling.Text = "Avdeling"
-        Me.Avdeling.Width = 59
-        '
-        'Forhandler
-        '
-        Me.Forhandler.Text = "Forhandler"
-        Me.Forhandler.Width = 73
-        '
-        'Status
-        '
-        Me.Status.Text = "Status"
-        Me.Status.Width = 56
-        '
-        'Skadet
-        '
-        Me.Skadet.Text = "Skadet"
-        Me.Skadet.Width = 51
-        '
-        'Savnet
-        '
-        Me.Savnet.Text = "Savnet"
-        Me.Savnet.Width = 50
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(695, 573)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 55
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1731,7 +1720,6 @@ Partial Class Form1
     Friend WithEvents LblInvKategori As Label
     Friend WithEvents LivSok As ListView
     Friend WithEvents ID As ColumnHeader
-    Friend WithEvents Button1 As Button
     Friend WithEvents Produktnavn As ColumnHeader
     Friend WithEvents Varenummer As ColumnHeader
     Friend WithEvents Kategori As ColumnHeader
