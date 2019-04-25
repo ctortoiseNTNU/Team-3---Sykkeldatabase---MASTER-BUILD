@@ -77,6 +77,7 @@ Public Class Form1
             Case 8 'Bestemmer det som skjer etter man har valgt Adminmeny.
                 MsgBox("AdminMeny")
                 AdminAvdelingPopulate()
+                AdminBrukerIDCalc()
             Case 9 'Bestemmer det som skjer etter man har valgt AdminDBmeny.
                 MsgBox("AdminDBMeny")
         End Select
@@ -314,6 +315,27 @@ Public Class Form1
     'Her plasseres kode som er relevant til Admin Tab.
     'Variabler som brukes her skal begynne med Admin. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+    Private Sub AdminBrukerIDCalc()
+        Try
+            DBConnect()
+            Dim AdminBrukerIDKommando As New MySqlCommand("Select COUNT(bruker_id) FROM brukere", tilkobling)
+            Dim AdminBrukerIDAdapter As New MySqlDataAdapter
+            Dim AdminBrukerIDTable As New DataTable
+            AdminBrukerIDAdapter.SelectCommand = AdminBrukerIDKommando
+            AdminBrukerIDAdapter.Fill(AdminBrukerIDTable)
+            DBDisconnect()
+            Dim AdminBrukerIDVerdi As Integer
+            Dim AdminBrukerRow As DataRow
+            For Each AdminBrukerRow In AdminBrukerIDTable.Rows
+                AdminBrukerIDVerdi = AdminBrukerRow("COUNT(bruker_id)")
+                LblBrukerIDNBVis.Text = (AdminBrukerIDVerdi + 1)
+            Next
+
+        Catch AdminSqlError3 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError3.Message)
+
+        End Try
+    End Sub
 
     Private Sub AdminAvdelingPopulate()
         Try
@@ -333,8 +355,8 @@ Public Class Form1
                 CboAdminEBAvdeling.Items.Add(AdminAvdelingString)
             Next
 
-        Catch SqlError2 As MySqlException
-            MsgBox("Man får ikke koble til databasen: " & SqlError2.Message)
+        Catch AdminSqlError1 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError1.Message)
 
         End Try
     End Sub
@@ -363,8 +385,8 @@ Public Class Form1
                 AdminBSsoekefelt = AdminRow(AdminSoekekategori)
                 LvAdminBS.Items.Add(New ListViewItem({AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt}))
             Next
-        Catch SqlError2 As MySqlException
-            MsgBox("Man får ikke koble til databasen: " & SqlError2.Message)
+        Catch AdminSqlError2 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError2.Message)
         End Try
 
     End Sub
