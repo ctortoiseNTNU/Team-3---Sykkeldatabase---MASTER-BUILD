@@ -214,7 +214,7 @@ Public Class Form1
                 Dim interntabell As New DataTable
                 da.SelectCommand = sqlRegistrer
                 da.Fill(interntabell)
-                DBdisconnect()
+                DBDisconnect()
             Catch ex As MySqlException
                 MsgBox(ex.Message)
             End Try
@@ -283,6 +283,8 @@ Public Class Form1
 
     End Sub
 
+
+
 #End Region
 
 
@@ -311,5 +313,36 @@ Public Class Form1
     'Her plasseres kode som er relevant til Admin Tab.
     'Variabler som brukes her skal begynne med Admin. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+    Private Sub AdminBSSokB_Click(sender As Object, e As EventArgs) Handles AdminBSSokB.Click
+        Dim AdminSoekefelt, AdminSoekekategori As String
+        AdminSoekefelt = TxtAdminBSFelt.Text
+        AdminSoekekategori = CboAdminBSEtter.Text
+
+
+
+        Try
+            DBConnect()
+            Dim AdminBrukerSearch As New MySqlCommand("SELECT * FROM brukere WHERE " & AdminSoekekategori & " LIKE '%" & AdminSoekefelt & "%'", tilkobling)
+            Dim AdminSearchAdapter As New MySqlDataAdapter
+            Dim AdminSearchTable As New DataTable
+            AdminSearchAdapter.SelectCommand = AdminBrukerSearch
+            AdminSearchAdapter.Fill(AdminSearchTable)
+            DBDisconnect()
+            Dim AdminRow As DataRow
+            Dim AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt As String
+            LvAdminBS.Items.Clear()
+            For Each AdminRow In AdminSearchTable.Rows
+                AdminBSbruker_id = AdminRow("bruker_id")
+                AdminBSfornavn = AdminRow("fornavn")
+                AdminBSetternavn = AdminRow("etternavn")
+                AdminBSsoekefelt = AdminRow(AdminSoekekategori)
+                LvAdminBS.Items.Add(New ListViewItem({AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt}))
+            Next
+        Catch SqlError2 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & SqlError2.Message)
+        End Try
+
+    End Sub
+
 #End Region
 End Class
