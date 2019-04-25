@@ -152,8 +152,8 @@ Public Class Form1
         InvGirsystem = TxtInvGirsystem.Text
         InvForhandler = CboInvForhandler.SelectedItem
         InvStatus = CboInvStatus.SelectedItem
-        InvSkadet = CboInvSkadet.SelectedItem
-        InvSavnet = CboInvSavnet.SelectedItem
+        InvSkadet = CboInvSkadet.SelectedIndex
+        InvSavnet = CboInvSavnet.SelectedIndex
 
         'SQLspørringer for henting av id fra forhandler, avdeling og subkategori
         InvForhandlerIDSporring = "SELECT forhandler_id FROM forhandler WHERE forhandler_navn='testforhandler';"
@@ -189,6 +189,7 @@ Public Class Form1
             DBDisconnect()
 
             'LstInvSokSokeResultat.Items.Add(InvForhandlerID + " " + InvAvdelingID + " " + InvKategoriID)
+            LstInvSokSokeResultat.Items.Add(InvSkadet & " " & InvStatus)
 
         Catch ex As MySqlException
             MsgBox(ex.Message)
@@ -198,11 +199,12 @@ Public Class Form1
         'If invkategori is sykler then try:
 
         If CboInvKategori.SelectedItem = "Sykkel" Then
-            InvRegistrerSporring = "INSERT INTO sykler (forhandler_id, type_id, avdeling_id, sykkel_navn, sykkel_pris, sykkel_status, " _
-                & "hjul_str, sykkel_ramme, girsystem, savnet, skadet) VALUES (""" + InvForhandlerID & """, """ _
-                & InvSubKategoriID & """, """ & InvAvdelingID + """, """ & InvInnkjopspris & """, """ _
-                & InvStatus & """, """ & InvStatus & """, """ & InvHjulstorrlese & """, """ & InvRamme & """, """ _
-                & InvGirsystem & """, """ & InvSavnet & """, """ & InvSkadet & """);"
+            InvRegistrerSporring = "INSERT INTO sykler (forhandler_id, type_id, avdeling_id, sykkel_navn, " &
+                "sykkel_modell, sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)" _
+                & "VALUES (""" + InvForhandlerID & """, """ & InvSubKategoriID & """, """ _
+                & InvAvdelingID + """, """ & InvProduktnavn & """, """ & InvVarenummer & """, """ _
+                & InvInnkjopspris & """, """ & InvStatus & """, """ & InvHjulstorrlese & """, """ _
+                & InvRamme & """, """ & InvGirsystem & """, """ & InvSavnet & """, """ & InvSkadet & """);"
 
             'Testspørring.
             'Dim sporring As String

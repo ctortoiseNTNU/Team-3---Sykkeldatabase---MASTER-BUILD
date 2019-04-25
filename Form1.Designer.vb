@@ -349,11 +349,12 @@ Partial Class Form1
         '
         Me.CboInvSokStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvSokStatus.FormattingEnabled = True
-        Me.CboInvSokStatus.Items.AddRange(New Object() {"Inne", "Ute"})
+        Me.CboInvSokStatus.Items.AddRange(New Object() {"Ledig", "Utleid", "Verksted"})
         Me.CboInvSokStatus.Location = New System.Drawing.Point(443, 33)
         Me.CboInvSokStatus.Name = "CboInvSokStatus"
         Me.CboInvSokStatus.Size = New System.Drawing.Size(121, 26)
         Me.CboInvSokStatus.TabIndex = 50
+        Me.CboInvSokStatus.Text = "Inne"
         '
         'CboInvSokSkadet
         '
@@ -415,6 +416,7 @@ Partial Class Form1
         Me.LstInvSokSokeResultat.Name = "LstInvSokSokeResultat"
         Me.LstInvSokSokeResultat.Size = New System.Drawing.Size(558, 319)
         Me.LstInvSokSokeResultat.TabIndex = 27
+        Me.LstInvSokSokeResultat.Tag = ""
         '
         'CboInvSokKategori
         '
@@ -558,27 +560,29 @@ Partial Class Form1
         '
         Me.CboInvStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvStatus.FormattingEnabled = True
-        Me.CboInvStatus.Items.AddRange(New Object() {"Inne", "Ute", "1"})
+        Me.CboInvStatus.Items.AddRange(New Object() {"Ledig", "Utleid", "Verksted"})
         Me.CboInvStatus.Location = New System.Drawing.Point(265, 243)
         Me.CboInvStatus.Name = "CboInvStatus"
         Me.CboInvStatus.Size = New System.Drawing.Size(121, 26)
         Me.CboInvStatus.TabIndex = 41
+        Me.CboInvStatus.Text = "Inne"
         '
         'CboInvSkadet
         '
         Me.CboInvSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvSkadet.FormattingEnabled = True
-        Me.CboInvSkadet.Items.AddRange(New Object() {"Nei", "Ja", "1"})
+        Me.CboInvSkadet.Items.AddRange(New Object() {"Nei", "Ja"})
         Me.CboInvSkadet.Location = New System.Drawing.Point(265, 327)
         Me.CboInvSkadet.Name = "CboInvSkadet"
         Me.CboInvSkadet.Size = New System.Drawing.Size(121, 26)
         Me.CboInvSkadet.TabIndex = 40
+        Me.CboInvSkadet.Tag = ""
         '
         'CboInvSavnet
         '
         Me.CboInvSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvSavnet.FormattingEnabled = True
-        Me.CboInvSavnet.Items.AddRange(New Object() {"Nei", "Ja", "1"})
+        Me.CboInvSavnet.Items.AddRange(New Object() {"Nei", "Ja"})
         Me.CboInvSavnet.Location = New System.Drawing.Point(265, 411)
         Me.CboInvSavnet.Name = "CboInvSavnet"
         Me.CboInvSavnet.Size = New System.Drawing.Size(121, 26)
