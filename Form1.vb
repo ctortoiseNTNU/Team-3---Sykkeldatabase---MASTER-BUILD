@@ -14,6 +14,15 @@ Public Class Form1
     Dim tilkobling As MySqlConnection
 
 
+
+
+#End Region
+
+#Region "GlobaleFunksjonerOgProsedyrer"
+    'Her plasseres globale funksjoner og prosdyrer som gjenbrukes over programmet. De er uten navnekonvensjon
+    'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
+
+
     Private Sub DBConnect()
         tilkobling = New MySqlConnection(
         "Server=mysql-ait.stud.idi.ntnu.no;" _
@@ -27,16 +36,12 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub DBdisconnect()
+
+
+    Private Sub DBDisconnect()
         tilkobling.Close()
+        tilkobling.Dispose()
     End Sub
-#End Region
-
-#Region "GlobaleFunksjonerOgProsedyrer"
-    'Her plasseres globale funksjoner og prosdyrer som gjenbrukes over programmet. De er uten navnekonvensjon
-    'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
-
-
 #End Region
 
 #Region "Form Load og Login"
@@ -181,7 +186,7 @@ Public Class Form1
             End While
             InvSqlLeser.Close()
 
-            DBdisconnect()
+            DBDisconnect()
 
             'LstInvSokSokeResultat.Items.Add(InvForhandlerID + " " + InvAvdelingID + " " + InvKategoriID)
 
