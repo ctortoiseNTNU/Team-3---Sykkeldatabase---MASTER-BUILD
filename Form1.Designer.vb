@@ -131,7 +131,7 @@ Partial Class Form1
         Me.LblBrukerIDNBVis = New System.Windows.Forms.Label()
         Me.CboAdminNBSP = New System.Windows.Forms.ComboBox()
         Me.CboAdminNBStilling = New System.Windows.Forms.ComboBox()
-        Me.TxtAdminNBAvdeling = New System.Windows.Forms.ComboBox()
+        Me.CboAdminNBAvdeling = New System.Windows.Forms.ComboBox()
         Me.TxtAdminNBEpost = New System.Windows.Forms.TextBox()
         Me.TxtAdminNBTelefon = New System.Windows.Forms.TextBox()
         Me.TxtAdminNBEtternavn = New System.Windows.Forms.TextBox()
@@ -192,7 +192,7 @@ Partial Class Form1
         Me.StartTab.Location = New System.Drawing.Point(4, 32)
         Me.StartTab.Name = "StartTab"
         Me.StartTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.StartTab.Size = New System.Drawing.Size(1235, 641)
+        Me.StartTab.Size = New System.Drawing.Size(1416, 744)
         Me.StartTab.TabIndex = 0
         Me.StartTab.Text = "Start"
         Me.StartTab.UseVisualStyleBackColor = True
@@ -240,7 +240,7 @@ Partial Class Form1
         Me.UtleieTab.Location = New System.Drawing.Point(4, 32)
         Me.UtleieTab.Name = "UtleieTab"
         Me.UtleieTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.UtleieTab.Size = New System.Drawing.Size(976, 534)
+        Me.UtleieTab.Size = New System.Drawing.Size(1416, 744)
         Me.UtleieTab.TabIndex = 1
         Me.UtleieTab.Text = "Utleie"
         Me.UtleieTab.UseVisualStyleBackColor = True
@@ -249,7 +249,7 @@ Partial Class Form1
         '
         Me.KDTab.Location = New System.Drawing.Point(4, 32)
         Me.KDTab.Name = "KDTab"
-        Me.KDTab.Size = New System.Drawing.Size(1235, 641)
+        Me.KDTab.Size = New System.Drawing.Size(1416, 744)
         Me.KDTab.TabIndex = 2
         Me.KDTab.Text = "Kundedatabase"
         Me.KDTab.UseVisualStyleBackColor = True
@@ -794,7 +794,7 @@ Partial Class Form1
         '
         Me.ISTab.Location = New System.Drawing.Point(4, 32)
         Me.ISTab.Name = "ISTab"
-        Me.ISTab.Size = New System.Drawing.Size(976, 534)
+        Me.ISTab.Size = New System.Drawing.Size(1416, 744)
         Me.ISTab.TabIndex = 4
         Me.ISTab.Text = "Inventar Søk"
         Me.ISTab.UseVisualStyleBackColor = True
@@ -803,7 +803,7 @@ Partial Class Form1
         '
         Me.LogiTab.Location = New System.Drawing.Point(4, 32)
         Me.LogiTab.Name = "LogiTab"
-        Me.LogiTab.Size = New System.Drawing.Size(976, 534)
+        Me.LogiTab.Size = New System.Drawing.Size(1416, 744)
         Me.LogiTab.TabIndex = 5
         Me.LogiTab.Text = "Logistikk"
         Me.LogiTab.UseVisualStyleBackColor = True
@@ -812,7 +812,7 @@ Partial Class Form1
         '
         Me.StatTab.Location = New System.Drawing.Point(4, 32)
         Me.StatTab.Name = "StatTab"
-        Me.StatTab.Size = New System.Drawing.Size(976, 534)
+        Me.StatTab.Size = New System.Drawing.Size(1416, 744)
         Me.StatTab.TabIndex = 6
         Me.StatTab.Text = "Statistikk"
         Me.StatTab.UseVisualStyleBackColor = True
@@ -825,7 +825,7 @@ Partial Class Form1
         Me.AdminTab.Controls.Add(Me.AdminNyBrukerGroup)
         Me.AdminTab.Location = New System.Drawing.Point(4, 32)
         Me.AdminTab.Name = "AdminTab"
-        Me.AdminTab.Size = New System.Drawing.Size(976, 534)
+        Me.AdminTab.Size = New System.Drawing.Size(1416, 744)
         Me.AdminTab.TabIndex = 7
         Me.AdminTab.Text = "Admin"
         Me.AdminTab.UseVisualStyleBackColor = True
@@ -1043,6 +1043,7 @@ Partial Class Form1
         '
         Me.CboAdminEBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminEBStilling.FormattingEnabled = True
+        Me.CboAdminEBStilling.Items.AddRange(New Object() {"Butikkmedarbeider", "King Kong"})
         Me.CboAdminEBStilling.Location = New System.Drawing.Point(123, 237)
         Me.CboAdminEBStilling.Name = "CboAdminEBStilling"
         Me.CboAdminEBStilling.Size = New System.Drawing.Size(121, 26)
@@ -1236,7 +1237,7 @@ Partial Class Form1
         Me.AdminNyBrukerGroup.Controls.Add(Me.LblBrukerIDNBVis)
         Me.AdminNyBrukerGroup.Controls.Add(Me.CboAdminNBSP)
         Me.AdminNyBrukerGroup.Controls.Add(Me.CboAdminNBStilling)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBAvdeling)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.CboAdminNBAvdeling)
         Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBEpost)
         Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBTelefon)
         Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBEtternavn)
@@ -1305,19 +1306,20 @@ Partial Class Form1
         '
         Me.CboAdminNBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminNBStilling.FormattingEnabled = True
+        Me.CboAdminNBStilling.Items.AddRange(New Object() {"Butikkmedarbeider", "King Kong"})
         Me.CboAdminNBStilling.Location = New System.Drawing.Point(123, 237)
         Me.CboAdminNBStilling.Name = "CboAdminNBStilling"
         Me.CboAdminNBStilling.Size = New System.Drawing.Size(121, 26)
         Me.CboAdminNBStilling.TabIndex = 19
         '
-        'TxtAdminNBAvdeling
+        'CboAdminNBAvdeling
         '
-        Me.TxtAdminNBAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtAdminNBAvdeling.FormattingEnabled = True
-        Me.TxtAdminNBAvdeling.Location = New System.Drawing.Point(123, 195)
-        Me.TxtAdminNBAvdeling.Name = "TxtAdminNBAvdeling"
-        Me.TxtAdminNBAvdeling.Size = New System.Drawing.Size(121, 26)
-        Me.TxtAdminNBAvdeling.TabIndex = 18
+        Me.CboAdminNBAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboAdminNBAvdeling.FormattingEnabled = True
+        Me.CboAdminNBAvdeling.Location = New System.Drawing.Point(123, 195)
+        Me.CboAdminNBAvdeling.Name = "CboAdminNBAvdeling"
+        Me.CboAdminNBAvdeling.Size = New System.Drawing.Size(121, 26)
+        Me.CboAdminNBAvdeling.TabIndex = 18
         '
         'TxtAdminNBEpost
         '
@@ -1495,7 +1497,7 @@ Partial Class Form1
         '
         Me.DBAdminTab.Location = New System.Drawing.Point(4, 32)
         Me.DBAdminTab.Name = "DBAdminTab"
-        Me.DBAdminTab.Size = New System.Drawing.Size(976, 534)
+        Me.DBAdminTab.Size = New System.Drawing.Size(1416, 744)
         Me.DBAdminTab.TabIndex = 8
         Me.DBAdminTab.Text = "DB Admin"
         Me.DBAdminTab.UseVisualStyleBackColor = True
@@ -1576,7 +1578,7 @@ Partial Class Form1
     Friend WithEvents LblBrukerIDNBVis As Label
     Friend WithEvents CboAdminNBSP As ComboBox
     Friend WithEvents CboAdminNBStilling As ComboBox
-    Friend WithEvents TxtAdminNBAvdeling As ComboBox
+    Friend WithEvents CboAdminNBAvdeling As ComboBox
     Friend WithEvents TxtAdminNBEpost As TextBox
     Friend WithEvents TxtAdminNBTelefon As TextBox
     Friend WithEvents TxtAdminNBEtternavn As TextBox

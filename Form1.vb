@@ -76,6 +76,7 @@ Public Class Form1
                 MsgBox("Statistikkmeny")
             Case 8 'Bestemmer det som skjer etter man har valgt Adminmeny.
                 MsgBox("AdminMeny")
+                AdminAvdelingPopulate()
             Case 9 'Bestemmer det som skjer etter man har valgt AdminDBmeny.
                 MsgBox("AdminDBMeny")
         End Select
@@ -313,6 +314,30 @@ Public Class Form1
     'Her plasseres kode som er relevant til Admin Tab.
     'Variabler som brukes her skal begynne med Admin. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+    Private Sub AdminAvdelingPopulate()
+        Try
+            DBConnect()
+            Dim AdminAvdelingKommando As New MySqlCommand("SELECT * FROM avdeling", tilkobling)
+            Dim AdminAvdelingAdapter As New MySqlDataAdapter
+            Dim AdminAvdelingTable As New DataTable
+            AdminAvdelingAdapter.SelectCommand = AdminAvdelingKommando
+            AdminAvdelingAdapter.Fill(AdminAvdelingTable)
+            DBDisconnect()
+            CboAdminNBAvdeling.Items.Clear()
+            Dim AdminAvdelingRow As DataRow
+            Dim AdminAvdelingString As String
+            For Each AdminAvdelingRow In AdminAvdelingTable.Rows
+                AdminAvdelingString = AdminAvdelingRow("avd_navn")
+                CboAdminNBAvdeling.Items.Add(AdminAvdelingString)
+                CboAdminEBAvdeling.Items.Add(AdminAvdelingString)
+            Next
+
+        Catch SqlError2 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & SqlError2.Message)
+
+        End Try
+    End Sub
     Private Sub AdminBSSokB_Click(sender As Object, e As EventArgs) Handles AdminBSSokB.Click
         Dim AdminSoekefelt, AdminSoekekategori As String
         AdminSoekefelt = TxtAdminBSFelt.Text
