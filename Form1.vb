@@ -18,8 +18,8 @@ Public Class Form1
         tilkobling = New MySqlConnection(
         "Server=mysql-ait.stud.idi.ntnu.no;" _
         & "Database=colinft;" _
-        & "Uid=colinft;" &
-        "Pwd=BJhYR1HS;")
+        & "Uid=colinft;" _
+        & "Pwd=BJhYR1HS;")
         Try
             tilkobling.Open()
         Catch ex As MySqlException
@@ -126,12 +126,13 @@ Public Class Form1
             InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandler, InvStatus, InvSkadet, InvSavnet,
             InvSokefelt, InvProduktID As String
 
-        Dim InvRegistrerSporring As String
-        Dim InvForhandlerID, InvAvdelingID, InvKategoriID As String
+        Dim InvForhandlerID, InvAvdelingID, InvSubKategoriID As String
 
-        Dim InvForhandlerIDSporring As String
-        Dim InvAvdelingIDSporring As String
-        Dim InvKategoriIDSporring As String
+        Dim InvForhandlerIDSporring, InvAvdelingIDSporring, InvSubKategoriIDSporring As String
+
+        Dim InvRegistrerSporring As String
+
+        'Dim InvIDSporring As String    'evt reasign verdi mellom sporringer
 
         InvKategori = CboInvKategori.SelectedItem
         InvSubkategori = CboInvSubkategori.SelectedItem
@@ -147,10 +148,10 @@ Public Class Form1
         InvSkadet = CboInvSkadet.SelectedItem
         InvSavnet = CboInvSavnet.SelectedItem
 
-        'SQLspørring for henting av id fra navn
+        'SQLspørringer for henting av id fra forhandler, avdeling og subkategori
         InvForhandlerIDSporring = "SELECT forhandler_id FROM forhandler WHERE forhandler_navn='testforhandler';"
         InvAvdelingIDSporring = "SELECT avdeling_id FROM avdeling WHERE avd_navn='Finse';"
-        InvKategoriIDSporring = "SELECT type_id FROM sykkel_typer WHERE kategori='Racer';"
+        InvSubKategoriIDSporring = "SELECT type_id FROM sykkel_typer WHERE kategori='Racer';"
 
         Dim InvSqlID As MySqlCommand
         Dim InvSqlLeser As MySqlDataReader
@@ -171,10 +172,10 @@ Public Class Form1
             End While
             InvSqlLeser.Close()
 
-            InvSqlID = New MySqlCommand(InvKategoriIDSporring, tilkobling)
+            InvSqlID = New MySqlCommand(InvSubKategoriIDSporring, tilkobling)
             InvSqlLeser = InvSqlID.ExecuteReader()
             While InvSqlLeser.Read()
-                InvKategoriID = InvSqlLeser("type_id")
+                InvSubKategoriID = InvSqlLeser("type_id")
             End While
             InvSqlLeser.Close()
 
@@ -186,37 +187,39 @@ Public Class Form1
             MsgBox(ex.Message)
         End Try
 
-
         'SQLspørring for innlegging av sykkel/utstyr i database. Data hentes fra felt
         'If invkategori is sykler then try:
 
-        'sporring = "INSERT INTO sykler (forhandler_id, type_id, avdeling_id, sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet) VALUES (""" + InvForhandlerID + """, """ + InvSubkategori + """, """ +
-        '    InvAvdeling + """, """ + InvInnkjopspris + """, """ + InvStatus + """, """ + InvStatus + """, """ +
-        '    InvHjulstorrlese + """, """ + InvRamme + """, """ + InvGirsystem + """, """ + InvSavnet +
-        '    """, """ + InvSkadet + """);"
+        If CboInvKategori.SelectedItem = "Sykkel" Then
+            InvRegistrerSporring = "INSERT INTO sykler (forhandler_id, type_id, avdeling_id, sykkel_navn, sykkel_pris, sykkel_status, " _
+                & "hjul_str, sykkel_ramme, girsystem, savnet, skadet) VALUES (""" + InvForhandlerID & """, """ _
+                & InvSubKategoriID & """, """ & InvAvdelingID + """, """ & InvInnkjopspris & """, """ _
+                & InvStatus & """, """ & InvStatus & """, """ & InvHjulstorrlese & """, """ & InvRamme & """, """ _
+                & InvGirsystem & """, """ & InvSavnet & """, """ & InvSkadet & """);"
 
-        'sporring = "INSERT INTO sykler VALUES(""" + InvForhandlerID + """, """ + InvSubkategori + """, """ +
-        '    InvAvdeling + """, """ + InvInnkjopspris + """, """ + InvStatus + """, """ + InvStatus + """, """ +
-        '    InvHjulstorrlese + """, """ + InvRamme + """, """ + InvGirsystem + """, """ + InvSavnet +
-        '    """, """ + InvSkadet + """);"
+            'Testspørring.
+            'Dim sporring As String
+            'sporring = "INSERT INTO sykler(forhandler_id, type_id, avdeling_id, sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet) " &
+            '  "VALUES('9999', '9999', '9999', '899', 'status' , '43', 'ramme', 'gir', '1', '2');"
 
-        'testspørring. bruk linjer over med Id fra id spørring
-        InvRegistrerSporring = "INSERT INTO sykler(forhandler_id, type_id, avdeling_id, sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet) " &
-           "VALUES('9999', '9999', '9999', '899', 'status' , '43', 'ramme', 'gir', '1', '2');"
+            Try
+                DBConnect()
+                Dim da As New MySqlDataAdapter
+                Dim sqlRegistrer As New MySqlCommand(InvRegistrerSporring, tilkobling)
+                Dim interntabell As New DataTable
+                da.SelectCommand = sqlRegistrer
+                da.Fill(interntabell)
+                DBdisconnect()
+            Catch ex As MySqlException
+                MsgBox(ex.Message)
+            End Try
 
-        Try
-            DBConnect()
-            Dim da As New MySqlDataAdapter
-            Dim sqlRegistrer As New MySqlCommand(InvRegistrerSporring, tilkobling)
-            Dim interntabell As New DataTable
-            da.SelectCommand = sqlRegistrer
-            da.Fill(interntabell)
-            DBdisconnect()
-        Catch ex As MySqlException
-            MsgBox(ex.Message)
-        End Try
+            'LstInvSokSokeResultat.Items.Add(InvRegistrerSporring)
 
-        LstInvSokSokeResultat.Items.Add(InvRegistrerSporring)
+        Else
+
+        End If
+
 
     End Sub
 
