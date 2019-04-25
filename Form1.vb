@@ -22,7 +22,6 @@ Public Class Form1
     'Her plasseres globale funksjoner og prosdyrer som gjenbrukes over programmet. De er uten navnekonvensjon
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
 
-
     Private Sub DBConnect()
         tilkobling = New MySqlConnection(
         "Server=mysql-ait.stud.idi.ntnu.no;" _
@@ -36,12 +35,11 @@ Public Class Form1
         End Try
     End Sub
 
-
-
     Private Sub DBDisconnect()
         tilkobling.Close()
         tilkobling.Dispose()
     End Sub
+
 #End Region
 
 #Region "Form Load og Login"
@@ -119,7 +117,6 @@ Public Class Form1
     'Dropdown:
     'Kategori er delt i sykkel og utstyr.
     'Subkategorier vil avhenge av om det er sykkel eller utstyr som skal registreres. Disse må fastsettes.
-    'Forhandlere og avdeling må fastsettes.
     'Standardvalg for status, skadet, savnet er henholdsvis inne, nei, nei.
 
     'LblInvProduktID viser ID til objekt som ønskes endret.
@@ -196,7 +193,6 @@ Public Class Form1
         End Try
 
         'SQLspørring for innlegging av sykkel/utstyr i database. Data hentes fra felt
-        'If invkategori is sykler then try:
 
         If CboInvKategori.SelectedItem = "Sykkel" Then
             InvRegistrerSporring = "INSERT INTO sykler (forhandler_id, type_id, avdeling_id, sykkel_navn, " &
@@ -226,14 +222,16 @@ Public Class Form1
             'LstInvSokSokeResultat.Items.Add(InvRegistrerSporring)
 
         Else
-
+            'Spørring for innlegg av utstyr.
+            'Elementer i combobox for subkat må endres til subkat for utstyr.
+            'VedBytteAvVerdi.comboboxkat -> comboboxsubkat.elementer = ...
         End If
 
 
     End Sub
 
-    Private Sub BtnInvEndre_Click(sender As Object, e As EventArgs) Handles BtnInvEndre.Click        'SQLspørring med endring av data for valgt produkt med ID fra valgt produkt i søkefelt
-
+    Private Sub BtnInvEndre_Click(sender As Object, e As EventArgs) Handles BtnInvEndre.Click
+        'SQLspørring med _endring_ (alter table) av data for valgt produkt med ID fra valgt produkt i søkefelt
     End Sub
 
     Private Sub BtnIvnSokEndre_Click(sender As Object, e As EventArgs) Handles BtnIvnSokEndre.Click
@@ -243,6 +241,46 @@ Public Class Form1
 
     Private Sub BtnInvSokSok_Click(sender As Object, e As EventArgs) Handles BtnInvSokSok.Click
         'SQLspørring med valgte søkekriterier for søk etter objekter 
+
+        '  SELECT * FROM sykler WHERE diverse_felt = søkeverdi AND subkat, status, skadet, savnet = verdier
+
+        DBConnect()
+
+        'test for søk
+        Dim testcommand As New MySqlCommand
+        Dim testleser As MySqlDataReader
+        Dim testdata As String
+        Dim testsporring As String
+
+        testsporring = "select sykkel_id, sykkel_status, girsystem From sykler where forhandler_id=""9999"";"
+        testcommand = New MySqlCommand(testsporring, tilkobling)
+        testleser = testcommand.ExecuteReader()
+
+        While testleser.Read()
+            testdata = testleser("sykkel_id")
+            testdata = testdata + " " + testleser("sykkel_status")
+            testdata = testdata + " " + testleser("girsystem")
+            LstInvSokSokeResultat.Items.Add(testdata)
+        End While
+
+        testleser.Close()
+
+        'dårlig løsning.. ?
+        'Dim i As Int16 = 0
+        'While testleser.Read()
+        '    While i < 3
+        '        If testdata = "" Then
+        '            testdata = CStr(testleser(i))
+        '        Else
+        '            testdata = testdata + " - " + CStr(testleser(i))
+        '        End If
+        '        i = i + 1
+        '    End While
+        'LstInvSokSokeResultat.Items.Add(testdata)
+        'End While
+
+        DBDisconnect()
+
     End Sub
 
 #End Region

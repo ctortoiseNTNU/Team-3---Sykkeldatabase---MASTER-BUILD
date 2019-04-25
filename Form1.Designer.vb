@@ -510,16 +510,16 @@ Partial Class Form1
         '
         Me.LblInvRegistrertID.AutoSize = True
         Me.LblInvRegistrertID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvRegistrertID.Location = New System.Drawing.Point(41, 501)
+        Me.LblInvRegistrertID.Location = New System.Drawing.Point(6, 501)
         Me.LblInvRegistrertID.Name = "LblInvRegistrertID"
-        Me.LblInvRegistrertID.Size = New System.Drawing.Size(165, 18)
+        Me.LblInvRegistrertID.Size = New System.Drawing.Size(178, 18)
         Me.LblInvRegistrertID.TabIndex = 46
-        Me.LblInvRegistrertID.Text = "Registrert med ID: xxxxxx"
+        Me.LblInvRegistrertID.Text = "Siste registrering ID: xxxxxx"
         '
         'LblInvProduktID
         '
         Me.LblInvProduktID.AutoSize = True
-        Me.LblInvProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblInvProduktID.Location = New System.Drawing.Point(262, 36)
         Me.LblInvProduktID.Name = "LblInvProduktID"
         Me.LblInvProduktID.Size = New System.Drawing.Size(122, 18)
