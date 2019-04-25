@@ -103,8 +103,12 @@ Partial Class Form1
         Me.AdminMOTDEndreB = New System.Windows.Forms.Button()
         Me.AdminMOTDTB = New System.Windows.Forms.TextBox()
         Me.AdminBrukerSokGroup = New System.Windows.Forms.GroupBox()
+        Me.LvAdminBS = New System.Windows.Forms.ListView()
+        Me.LvAdminBID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LVAdminFornavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LVAdminEtternavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LVAdminSoekefelt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.AdminBSSokB = New System.Windows.Forms.Button()
-        Me.AdminBSResultatLB = New System.Windows.Forms.ListBox()
         Me.CboAdminBSEtter = New System.Windows.Forms.ComboBox()
         Me.LblAdminBSEtter = New System.Windows.Forms.Label()
         Me.TxtAdminBSFelt = New System.Windows.Forms.TextBox()
@@ -141,7 +145,7 @@ Partial Class Form1
         Me.LblBrukerIDNBVis = New System.Windows.Forms.Label()
         Me.CboAdminNBSP = New System.Windows.Forms.ComboBox()
         Me.CboAdminNBStilling = New System.Windows.Forms.ComboBox()
-        Me.TxtAdminNBAvdeling = New System.Windows.Forms.ComboBox()
+        Me.CboAdminNBAvdeling = New System.Windows.Forms.ComboBox()
         Me.TxtAdminNBEpost = New System.Windows.Forms.TextBox()
         Me.TxtAdminNBTelefon = New System.Windows.Forms.TextBox()
         Me.TxtAdminNBEtternavn = New System.Windows.Forms.TextBox()
@@ -949,8 +953,8 @@ Partial Class Form1
         '
         'AdminBrukerSokGroup
         '
+        Me.AdminBrukerSokGroup.Controls.Add(Me.LvAdminBS)
         Me.AdminBrukerSokGroup.Controls.Add(Me.AdminBSSokB)
-        Me.AdminBrukerSokGroup.Controls.Add(Me.AdminBSResultatLB)
         Me.AdminBrukerSokGroup.Controls.Add(Me.CboAdminBSEtter)
         Me.AdminBrukerSokGroup.Controls.Add(Me.LblAdminBSEtter)
         Me.AdminBrukerSokGroup.Controls.Add(Me.TxtAdminBSFelt)
@@ -963,6 +967,39 @@ Partial Class Form1
         Me.AdminBrukerSokGroup.TabStop = False
         Me.AdminBrukerSokGroup.Text = "Brukersøk"
         '
+        'LvAdminBS
+        '
+        Me.LvAdminBS.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvAdminBID, Me.LVAdminFornavn, Me.LVAdminEtternavn, Me.LVAdminSoekefelt})
+        Me.LvAdminBS.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvAdminBS.Location = New System.Drawing.Point(9, 114)
+        Me.LvAdminBS.Name = "LvAdminBS"
+        Me.LvAdminBS.Size = New System.Drawing.Size(332, 158)
+        Me.LvAdminBS.TabIndex = 29
+        Me.LvAdminBS.UseCompatibleStateImageBehavior = False
+        Me.LvAdminBS.View = System.Windows.Forms.View.Details
+        '
+        'LvAdminBID
+        '
+        Me.LvAdminBID.Text = "Bruk. ID"
+        '
+        'LVAdminFornavn
+        '
+        Me.LVAdminFornavn.Text = "Fornavn"
+        Me.LVAdminFornavn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.LVAdminFornavn.Width = 76
+        '
+        'LVAdminEtternavn
+        '
+        Me.LVAdminEtternavn.Text = "Etternavn"
+        Me.LVAdminEtternavn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.LVAdminEtternavn.Width = 85
+        '
+        'LVAdminSoekefelt
+        '
+        Me.LVAdminSoekefelt.Text = "Søkefelt"
+        Me.LVAdminSoekefelt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.LVAdminSoekefelt.Width = 104
+        '
         'AdminBSSokB
         '
         Me.AdminBSSokB.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -973,21 +1010,11 @@ Partial Class Form1
         Me.AdminBSSokB.Text = "Søk!"
         Me.AdminBSSokB.UseVisualStyleBackColor = True
         '
-        'AdminBSResultatLB
-        '
-        Me.AdminBSResultatLB.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminBSResultatLB.FormattingEnabled = True
-        Me.AdminBSResultatLB.ItemHeight = 15
-        Me.AdminBSResultatLB.Location = New System.Drawing.Point(6, 114)
-        Me.AdminBSResultatLB.Name = "AdminBSResultatLB"
-        Me.AdminBSResultatLB.Size = New System.Drawing.Size(335, 169)
-        Me.AdminBSResultatLB.TabIndex = 27
-        '
         'CboAdminBSEtter
         '
         Me.CboAdminBSEtter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminBSEtter.FormattingEnabled = True
-        Me.CboAdminBSEtter.Items.AddRange(New Object() {"Bruker ID", "Fornavn", "Etternavn", "Avdeling", "Stilling", "Timelønn", "Stillingsprosent", "Telefon", "Epost", "Admin"})
+        Me.CboAdminBSEtter.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
         Me.CboAdminBSEtter.Location = New System.Drawing.Point(101, 72)
         Me.CboAdminBSEtter.Name = "CboAdminBSEtter"
         Me.CboAdminBSEtter.Size = New System.Drawing.Size(121, 26)
@@ -1106,6 +1133,7 @@ Partial Class Form1
         '
         Me.CboAdminEBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminEBStilling.FormattingEnabled = True
+        Me.CboAdminEBStilling.Items.AddRange(New Object() {"Butikkmedarbeider", "King Kong"})
         Me.CboAdminEBStilling.Location = New System.Drawing.Point(123, 237)
         Me.CboAdminEBStilling.Name = "CboAdminEBStilling"
         Me.CboAdminEBStilling.Size = New System.Drawing.Size(121, 26)
@@ -1299,7 +1327,7 @@ Partial Class Form1
         Me.AdminNyBrukerGroup.Controls.Add(Me.LblBrukerIDNBVis)
         Me.AdminNyBrukerGroup.Controls.Add(Me.CboAdminNBSP)
         Me.AdminNyBrukerGroup.Controls.Add(Me.CboAdminNBStilling)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBAvdeling)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.CboAdminNBAvdeling)
         Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBEpost)
         Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBTelefon)
         Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBEtternavn)
@@ -1368,19 +1396,20 @@ Partial Class Form1
         '
         Me.CboAdminNBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminNBStilling.FormattingEnabled = True
+        Me.CboAdminNBStilling.Items.AddRange(New Object() {"Butikkmedarbeider", "King Kong"})
         Me.CboAdminNBStilling.Location = New System.Drawing.Point(123, 237)
         Me.CboAdminNBStilling.Name = "CboAdminNBStilling"
         Me.CboAdminNBStilling.Size = New System.Drawing.Size(121, 26)
         Me.CboAdminNBStilling.TabIndex = 19
         '
-        'TxtAdminNBAvdeling
+        'CboAdminNBAvdeling
         '
-        Me.TxtAdminNBAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtAdminNBAvdeling.FormattingEnabled = True
-        Me.TxtAdminNBAvdeling.Location = New System.Drawing.Point(123, 195)
-        Me.TxtAdminNBAvdeling.Name = "TxtAdminNBAvdeling"
-        Me.TxtAdminNBAvdeling.Size = New System.Drawing.Size(121, 26)
-        Me.TxtAdminNBAvdeling.TabIndex = 18
+        Me.CboAdminNBAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboAdminNBAvdeling.FormattingEnabled = True
+        Me.CboAdminNBAvdeling.Location = New System.Drawing.Point(123, 195)
+        Me.CboAdminNBAvdeling.Name = "CboAdminNBAvdeling"
+        Me.CboAdminNBAvdeling.Size = New System.Drawing.Size(121, 26)
+        Me.CboAdminNBAvdeling.TabIndex = 18
         '
         'TxtAdminNBEpost
         '
@@ -1639,7 +1668,7 @@ Partial Class Form1
     Friend WithEvents LblBrukerIDNBVis As Label
     Friend WithEvents CboAdminNBSP As ComboBox
     Friend WithEvents CboAdminNBStilling As ComboBox
-    Friend WithEvents TxtAdminNBAvdeling As ComboBox
+    Friend WithEvents CboAdminNBAvdeling As ComboBox
     Friend WithEvents TxtAdminNBEpost As TextBox
     Friend WithEvents TxtAdminNBTelefon As TextBox
     Friend WithEvents TxtAdminNBEtternavn As TextBox
@@ -1659,7 +1688,6 @@ Partial Class Form1
     Friend WithEvents LblAdminNBPassord As Label
     Friend WithEvents LblAdminNBBID As Label
     Friend WithEvents AdminBrukerSokGroup As GroupBox
-    Friend WithEvents AdminBSResultatLB As ListBox
     Friend WithEvents CboAdminBSEtter As ComboBox
     Friend WithEvents LblAdminBSEtter As Label
     Friend WithEvents TxtAdminBSFelt As TextBox
@@ -1718,6 +1746,11 @@ Partial Class Form1
     Friend WithEvents LblInvProduktnavn As Label
     Friend WithEvents LblInvAvdeling As Label
     Friend WithEvents LblInvKategori As Label
+    Friend WithEvents LvAdminBS As ListView
+    Friend WithEvents LvAdminBID As ColumnHeader
+    Friend WithEvents LVAdminFornavn As ColumnHeader
+    Friend WithEvents LVAdminEtternavn As ColumnHeader
+    Friend WithEvents LVAdminSoekefelt As ColumnHeader
     Friend WithEvents LivSok As ListView
     Friend WithEvents ID As ColumnHeader
     Friend WithEvents Produktnavn As ColumnHeader

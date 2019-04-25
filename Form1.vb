@@ -61,21 +61,23 @@ Public Class Form1
 
         Select Case HovedTabIndex
             Case 1 'Bestemmer det som skjer etter man har valgt startmeny.
-                'MsgBox("Startmeny")
+                MsgBox("Startmeny")
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
-                'MsgBox("Utleiemeny")
+                MsgBox("Utleiemeny")
             Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
-                'MsgBox("KDBmeny")
+                MsgBox("KDBmeny")
             Case 4 'Bestemmer det som skjer etter man har valgt Inventarmeny.
-                'MsgBox("Inventarmeny")
+                MsgBox("Inventarmeny")
             Case 5 'Bestemmer det som skjer etter man har valgt Inventarsearchmeny.
-                'MsgBox("InvSearchmeny")
+                MsgBox("InvSearchmeny")
             Case 6 'Bestemmer det som skjer etter man har valgt Logistikkmeny.
-                'MsgBox("Logistikkmeny")
+                MsgBox("Logistikkmeny")
             Case 7 'Bestemmer det som skjer etter man har valgt Statistikkmeny.
-                'MsgBox("Statistikkmeny")
+                MsgBox("Statistikkmeny")
             Case 8 'Bestemmer det som skjer etter man har valgt Adminmeny.
-                'MsgBox("AdminMeny")
+                MsgBox("AdminMeny")
+                AdminAvdelingPopulate()
+                AdminBrukerIDCalc()
             Case 9 'Bestemmer det som skjer etter man har valgt AdminDBmeny.
                 'MsgBox("AdminDBMeny")
         End Select
@@ -325,5 +327,81 @@ Public Class Form1
     'Her plasseres kode som er relevant til Admin Tab.
     'Variabler som brukes her skal begynne med Admin. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+    Private Sub AdminBrukerIDCalc()
+        Try
+            DBConnect()
+            Dim AdminBrukerIDKommando As New MySqlCommand("Select COUNT(bruker_id) FROM brukere", tilkobling)
+            Dim AdminBrukerIDAdapter As New MySqlDataAdapter
+            Dim AdminBrukerIDTable As New DataTable
+            AdminBrukerIDAdapter.SelectCommand = AdminBrukerIDKommando
+            AdminBrukerIDAdapter.Fill(AdminBrukerIDTable)
+            DBDisconnect()
+            Dim AdminBrukerIDVerdi As Integer
+            Dim AdminBrukerRow As DataRow
+            For Each AdminBrukerRow In AdminBrukerIDTable.Rows
+                AdminBrukerIDVerdi = AdminBrukerRow("COUNT(bruker_id)")
+                LblBrukerIDNBVis.Text = (AdminBrukerIDVerdi + 1)
+            Next
+
+        Catch AdminSqlError3 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError3.Message)
+
+        End Try
+    End Sub
+
+    Private Sub AdminAvdelingPopulate()
+        Try
+            DBConnect()
+            Dim AdminAvdelingKommando As New MySqlCommand("SELECT * FROM avdeling", tilkobling)
+            Dim AdminAvdelingAdapter As New MySqlDataAdapter
+            Dim AdminAvdelingTable As New DataTable
+            AdminAvdelingAdapter.SelectCommand = AdminAvdelingKommando
+            AdminAvdelingAdapter.Fill(AdminAvdelingTable)
+            DBDisconnect()
+            CboAdminNBAvdeling.Items.Clear()
+            Dim AdminAvdelingRow As DataRow
+            Dim AdminAvdelingString As String
+            For Each AdminAvdelingRow In AdminAvdelingTable.Rows
+                AdminAvdelingString = AdminAvdelingRow("avd_navn")
+                CboAdminNBAvdeling.Items.Add(AdminAvdelingString)
+                CboAdminEBAvdeling.Items.Add(AdminAvdelingString)
+            Next
+
+        Catch AdminSqlError1 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError1.Message)
+
+        End Try
+    End Sub
+    Private Sub AdminBSSokB_Click(sender As Object, e As EventArgs) Handles AdminBSSokB.Click
+        Dim AdminSoekefelt, AdminSoekekategori As String
+        AdminSoekefelt = TxtAdminBSFelt.Text
+        AdminSoekekategori = CboAdminBSEtter.Text
+
+
+
+        Try
+            DBConnect()
+            Dim AdminBrukerSearch As New MySqlCommand("SELECT * FROM brukere WHERE " & AdminSoekekategori & " LIKE '%" & AdminSoekefelt & "%'", tilkobling)
+            Dim AdminSearchAdapter As New MySqlDataAdapter
+            Dim AdminSearchTable As New DataTable
+            AdminSearchAdapter.SelectCommand = AdminBrukerSearch
+            AdminSearchAdapter.Fill(AdminSearchTable)
+            DBDisconnect()
+            Dim AdminRow As DataRow
+            Dim AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt As String
+            LvAdminBS.Items.Clear()
+            For Each AdminRow In AdminSearchTable.Rows
+                AdminBSbruker_id = AdminRow("bruker_id")
+                AdminBSfornavn = AdminRow("fornavn")
+                AdminBSetternavn = AdminRow("etternavn")
+                AdminBSsoekefelt = AdminRow(AdminSoekekategori)
+                LvAdminBS.Items.Add(New ListViewItem({AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt}))
+            Next
+        Catch AdminSqlError2 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError2.Message)
+        End Try
+
+    End Sub
+
 #End Region
 End Class
