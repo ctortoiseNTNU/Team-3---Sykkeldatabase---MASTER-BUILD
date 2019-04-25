@@ -61,23 +61,23 @@ Public Class Form1
 
         Select Case HovedTabIndex
             Case 1 'Bestemmer det som skjer etter man har valgt startmeny.
-                MsgBox("Startmeny")
+                'MsgBox("Startmeny")
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
-                MsgBox("Utleiemeny")
+                'MsgBox("Utleiemeny")
             Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
-                MsgBox("KDBmeny")
+                'MsgBox("KDBmeny")
             Case 4 'Bestemmer det som skjer etter man har valgt Inventarmeny.
-                MsgBox("Inventarmeny")
+                'MsgBox("Inventarmeny")
             Case 5 'Bestemmer det som skjer etter man har valgt Inventarsearchmeny.
-                MsgBox("InvSearchmeny")
+                'MsgBox("InvSearchmeny")
             Case 6 'Bestemmer det som skjer etter man har valgt Logistikkmeny.
-                MsgBox("Logistikkmeny")
+                'MsgBox("Logistikkmeny")
             Case 7 'Bestemmer det som skjer etter man har valgt Statistikkmeny.
-                MsgBox("Statistikkmeny")
+                'MsgBox("Statistikkmeny")
             Case 8 'Bestemmer det som skjer etter man har valgt Adminmeny.
-                MsgBox("AdminMeny")
+                'MsgBox("AdminMeny")
             Case 9 'Bestemmer det som skjer etter man har valgt AdminDBmeny.
-                MsgBox("AdminDBMeny")
+                'MsgBox("AdminDBMeny")
         End Select
     End Sub
 
@@ -241,47 +241,115 @@ Public Class Form1
 
     Private Sub BtnInvSokSok_Click(sender As Object, e As EventArgs) Handles BtnInvSokSok.Click
         'SQLspørring med valgte søkekriterier for søk etter objekter 
-
+        'Bruke samme skjema som reg/endre? 
+        'chkbox for å velge kolonner som skal vises
         '  SELECT * FROM sykler WHERE diverse_felt = søkeverdi AND subkat, status, skadet, savnet = verdier
 
         DBConnect()
 
         'test for søk
-        Dim testcommand As New MySqlCommand
+        Dim testcommand As MySqlCommand
         Dim testleser As MySqlDataReader
-        Dim testdata As String
         Dim testsporring As String
-
-        testsporring = "select sykkel_id, sykkel_status, girsystem From sykler where forhandler_id=""9999"";"
+        Dim testarray(12) As String
+        Dim arritem As ListViewItem
+        'Dim testsporring2 As String
+        Dim InvSokeKategori As String = "sykkel_navn"
+        testsporring = "SELECT * FROM sykler WHERE " & InvSokeKategori & " LIKE '%" & TxtInvSokSokefelt.Text & "%'"
+        'testsporring2 = "select * From sykler where forhandler_id=""9999"";"
         testcommand = New MySqlCommand(testsporring, tilkobling)
         testleser = testcommand.ExecuteReader()
 
+        'for hver kolonne les inn verdi 0-12 og legg i listview
         While testleser.Read()
-            testdata = testleser("sykkel_id")
-            testdata = testdata + " " + testleser("sykkel_status")
-            testdata = testdata + " " + testleser("girsystem")
-            LstInvSokSokeResultat.Items.Add(testdata)
+            For i = 0 To testleser.FieldCount - 1
+                If TypeOf testleser(i) Is DBNull Then
+                Else
+                    testarray(i) = testleser(i)
+                End If
+            Next
+            arritem = New ListViewItem(testarray)
+            LivSok.Items.Add(arritem)
         End While
 
-        testleser.Close()
-
-        'dårlig løsning.. ?
-        'Dim i As Int16 = 0
+        '   legger inn i listbox
+        'Dim testdata As String
         'While testleser.Read()
-        '    While i < 3
-        '        If testdata = "" Then
-        '            testdata = CStr(testleser(i))
+        '    testdata = ""
+        '    For i = 0 To testleser.FieldCount - 1
+        '        If TypeOf testleser(i) Is DBNull Then
+        '            testdata = testdata + ""
         '        Else
-        '            testdata = testdata + " - " + CStr(testleser(i))
+        '            If testdata = "" Then
+        '                testdata = CStr(testleser(i))
+        '            Else
+        '                testdata = testdata + " - " + CStr(testleser(i))
+        '            End If
         '        End If
-        '        i = i + 1
-        '    End While
-        'LstInvSokSokeResultat.Items.Add(testdata)
+        '    Next
+        '    LstInvSokSokeResultat.Items.Add(testdata)
         'End While
+
+        testleser.Close()
 
         DBDisconnect()
 
     End Sub
+
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+        Dim testarray(12) As String
+
+        For i = 0 To testarray.Length - 1
+            testarray(i) = CStr(i)
+        Next
+
+        Dim word As String
+        For Each word In testarray
+            LstInvSokSokeResultat.Items.Add(word)
+        Next
+
+        'For Each word In
+        'While testleser.Read()
+        '    testdata = testleser("sykkel_id")
+        '    testdata = testdata + " " + testleser("sykkel_status")
+        '    testdata = testdata + " " + testleser("girsystem")
+        '    LstInvSokSokeResultat.Items.Add(testdata)
+        'End While
+
+
+
+        'Dim AdminSoekefelt, AdminSoekekategori As String
+        '    AdminSoekefelt = TxtAdminBSFelt.Text
+        '    AdminSoekekategori = CboAdminBSEtter.Text
+        '    Try
+        '        DBConnect()
+        '        Dim AdminBrukerSearch As New MySqlCommand("SELECT * FROM brukere WHERE " & AdminSoekekategori & " LIKE '%" & AdminSoekefelt & "%'", tilkobling)
+        '        Dim AdminSearchAdapter As New MySqlDataAdapter
+        '        Dim AdminSearchTable As New DataTable
+        '        AdminSearchAdapter.SelectCommand = AdminBrukerSearch
+        '        AdminSearchAdapter.Fill(AdminSearchTable)
+        '        DBDisconnect()
+        '        Dim AdminRow As DataRow
+        '        Dim AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt As String
+        '        LvAdminBS.Items.Clear()
+        '        For Each AdminRow In AdminSearchTable.Rows
+        '            AdminBSbruker_id = AdminRow("bruker_id")
+        '            AdminBSfornavn = AdminRow("fornavn")
+        '            AdminBSetternavn = AdminRow("etternavn")
+        '            AdminBSsoekefelt = AdminRow(AdminSoekekategori)
+        '            LvAdminBS.Items.Add(New ListViewItem({AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt}))
+        '        Next
+        '    Catch SqlError2 As MySqlException
+        '        MsgBox("Man får ikke koble til databasen: " & SqlError2.Message)
+        '    End Try
+
+
+
+    End Sub
+
 
 #End Region
 

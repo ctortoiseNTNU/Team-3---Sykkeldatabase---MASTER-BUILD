@@ -33,6 +33,8 @@ Partial Class Form1
         Me.KDTab = New System.Windows.Forms.TabPage()
         Me.InventarTab = New System.Windows.Forms.TabPage()
         Me.GrpInvSok = New System.Windows.Forms.GroupBox()
+        Me.LivSok = New System.Windows.Forms.ListView()
+        Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LblInvSokSavnet = New System.Windows.Forms.Label()
         Me.LblInvSokProduktID = New System.Windows.Forms.Label()
         Me.LblInvSokSkadet = New System.Windows.Forms.Label()
@@ -147,6 +149,19 @@ Partial Class Form1
         Me.LblAdminNBPassord = New System.Windows.Forms.Label()
         Me.LblAdminNBBID = New System.Windows.Forms.Label()
         Me.DBAdminTab = New System.Windows.Forms.TabPage()
+        Me.Produktnavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Varenummer = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Kategori = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Ramme = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Girsystem = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Hjulstørrelse = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Innkjøpspris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Avdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Forhandler = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Status = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Skadet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Savnet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -188,7 +203,7 @@ Partial Class Form1
         Me.StartTab.Location = New System.Drawing.Point(4, 32)
         Me.StartTab.Name = "StartTab"
         Me.StartTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.StartTab.Size = New System.Drawing.Size(1235, 641)
+        Me.StartTab.Size = New System.Drawing.Size(1416, 744)
         Me.StartTab.TabIndex = 0
         Me.StartTab.Text = "Start"
         Me.StartTab.UseVisualStyleBackColor = True
@@ -236,7 +251,7 @@ Partial Class Form1
         Me.UtleieTab.Location = New System.Drawing.Point(4, 32)
         Me.UtleieTab.Name = "UtleieTab"
         Me.UtleieTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.UtleieTab.Size = New System.Drawing.Size(976, 534)
+        Me.UtleieTab.Size = New System.Drawing.Size(1416, 744)
         Me.UtleieTab.TabIndex = 1
         Me.UtleieTab.Text = "Utleie"
         Me.UtleieTab.UseVisualStyleBackColor = True
@@ -245,7 +260,7 @@ Partial Class Form1
         '
         Me.KDTab.Location = New System.Drawing.Point(4, 32)
         Me.KDTab.Name = "KDTab"
-        Me.KDTab.Size = New System.Drawing.Size(1235, 641)
+        Me.KDTab.Size = New System.Drawing.Size(1416, 744)
         Me.KDTab.TabIndex = 2
         Me.KDTab.Text = "Kundedatabase"
         Me.KDTab.UseVisualStyleBackColor = True
@@ -263,6 +278,8 @@ Partial Class Form1
         '
         'GrpInvSok
         '
+        Me.GrpInvSok.Controls.Add(Me.Button1)
+        Me.GrpInvSok.Controls.Add(Me.LivSok)
         Me.GrpInvSok.Controls.Add(Me.LblInvSokSavnet)
         Me.GrpInvSok.Controls.Add(Me.LblInvSokProduktID)
         Me.GrpInvSok.Controls.Add(Me.LblInvSokSkadet)
@@ -288,6 +305,22 @@ Partial Class Form1
         Me.GrpInvSok.TabStop = False
         Me.GrpInvSok.Text = "Søk i sykler og inventar"
         '
+        'LivSok
+        '
+        Me.LivSok.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer, Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling, Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet})
+        Me.LivSok.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LivSok.Location = New System.Drawing.Point(6, 330)
+        Me.LivSok.Name = "LivSok"
+        Me.LivSok.Size = New System.Drawing.Size(790, 147)
+        Me.LivSok.TabIndex = 54
+        Me.LivSok.UseCompatibleStateImageBehavior = False
+        Me.LivSok.View = System.Windows.Forms.View.Details
+        '
+        'ID
+        '
+        Me.ID.Text = "ID"
+        Me.ID.Width = 42
+        '
         'LblInvSokSavnet
         '
         Me.LblInvSokSavnet.AutoSize = True
@@ -302,7 +335,7 @@ Partial Class Form1
         '
         Me.LblInvSokProduktID.AutoSize = True
         Me.LblInvSokProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSokProduktID.Location = New System.Drawing.Point(134, 501)
+        Me.LblInvSokProduktID.Location = New System.Drawing.Point(140, 592)
         Me.LblInvSokProduktID.Name = "LblInvSokProduktID"
         Me.LblInvSokProduktID.Size = New System.Drawing.Size(202, 18)
         Me.LblInvSokProduktID.TabIndex = 47
@@ -321,7 +354,7 @@ Partial Class Form1
         'TxtInvSokProduktID
         '
         Me.TxtInvSokProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvSokProduktID.Location = New System.Drawing.Point(342, 498)
+        Me.TxtInvSokProduktID.Location = New System.Drawing.Point(348, 589)
         Me.TxtInvSokProduktID.Name = "TxtInvSokProduktID"
         Me.TxtInvSokProduktID.Size = New System.Drawing.Size(121, 26)
         Me.TxtInvSokProduktID.TabIndex = 46
@@ -389,7 +422,7 @@ Partial Class Form1
         'BtnIvnSokEndre
         '
         Me.BtnIvnSokEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnIvnSokEndre.Location = New System.Drawing.Point(479, 499)
+        Me.BtnIvnSokEndre.Location = New System.Drawing.Point(485, 590)
         Me.BtnIvnSokEndre.Name = "BtnIvnSokEndre"
         Me.BtnIvnSokEndre.Size = New System.Drawing.Size(85, 23)
         Me.BtnIvnSokEndre.TabIndex = 39
@@ -414,7 +447,7 @@ Partial Class Form1
         Me.LstInvSokSokeResultat.ItemHeight = 15
         Me.LstInvSokSokeResultat.Location = New System.Drawing.Point(6, 159)
         Me.LstInvSokSokeResultat.Name = "LstInvSokSokeResultat"
-        Me.LstInvSokSokeResultat.Size = New System.Drawing.Size(558, 319)
+        Me.LstInvSokSokeResultat.Size = New System.Drawing.Size(793, 139)
         Me.LstInvSokSokeResultat.TabIndex = 27
         Me.LstInvSokSokeResultat.Tag = ""
         '
@@ -790,7 +823,7 @@ Partial Class Form1
         '
         Me.ISTab.Location = New System.Drawing.Point(4, 32)
         Me.ISTab.Name = "ISTab"
-        Me.ISTab.Size = New System.Drawing.Size(976, 534)
+        Me.ISTab.Size = New System.Drawing.Size(1416, 744)
         Me.ISTab.TabIndex = 4
         Me.ISTab.Text = "Inventar Søk"
         Me.ISTab.UseVisualStyleBackColor = True
@@ -799,7 +832,7 @@ Partial Class Form1
         '
         Me.LogiTab.Location = New System.Drawing.Point(4, 32)
         Me.LogiTab.Name = "LogiTab"
-        Me.LogiTab.Size = New System.Drawing.Size(976, 534)
+        Me.LogiTab.Size = New System.Drawing.Size(1416, 744)
         Me.LogiTab.TabIndex = 5
         Me.LogiTab.Text = "Logistikk"
         Me.LogiTab.UseVisualStyleBackColor = True
@@ -808,7 +841,7 @@ Partial Class Form1
         '
         Me.StatTab.Location = New System.Drawing.Point(4, 32)
         Me.StatTab.Name = "StatTab"
-        Me.StatTab.Size = New System.Drawing.Size(976, 534)
+        Me.StatTab.Size = New System.Drawing.Size(1416, 744)
         Me.StatTab.TabIndex = 6
         Me.StatTab.Text = "Statistikk"
         Me.StatTab.UseVisualStyleBackColor = True
@@ -821,7 +854,7 @@ Partial Class Form1
         Me.AdminTab.Controls.Add(Me.AdminNyBrukerGroup)
         Me.AdminTab.Location = New System.Drawing.Point(4, 32)
         Me.AdminTab.Name = "AdminTab"
-        Me.AdminTab.Size = New System.Drawing.Size(976, 534)
+        Me.AdminTab.Size = New System.Drawing.Size(1416, 744)
         Me.AdminTab.TabIndex = 7
         Me.AdminTab.Text = "Admin"
         Me.AdminTab.UseVisualStyleBackColor = True
@@ -1468,10 +1501,78 @@ Partial Class Form1
         '
         Me.DBAdminTab.Location = New System.Drawing.Point(4, 32)
         Me.DBAdminTab.Name = "DBAdminTab"
-        Me.DBAdminTab.Size = New System.Drawing.Size(976, 534)
+        Me.DBAdminTab.Size = New System.Drawing.Size(1416, 744)
         Me.DBAdminTab.TabIndex = 8
         Me.DBAdminTab.Text = "DB Admin"
         Me.DBAdminTab.UseVisualStyleBackColor = True
+        '
+        'Produktnavn
+        '
+        Me.Produktnavn.Text = "Produktnavn"
+        Me.Produktnavn.Width = 80
+        '
+        'Varenummer
+        '
+        Me.Varenummer.Text = "Varenummer"
+        Me.Varenummer.Width = 84
+        '
+        'Kategori
+        '
+        Me.Kategori.Text = "Kategori"
+        '
+        'Ramme
+        '
+        Me.Ramme.Text = "Ramme"
+        Me.Ramme.Width = 54
+        '
+        'Girsystem
+        '
+        Me.Girsystem.Text = "Girsystem"
+        Me.Girsystem.Width = 69
+        '
+        'Hjulstørrelse
+        '
+        Me.Hjulstørrelse.Text = "Hjulstørrelse"
+        Me.Hjulstørrelse.Width = 25
+        '
+        'Innkjøpspris
+        '
+        Me.Innkjøpspris.Text = "Innkjøpspris"
+        Me.Innkjøpspris.Width = 82
+        '
+        'Avdeling
+        '
+        Me.Avdeling.Text = "Avdeling"
+        Me.Avdeling.Width = 59
+        '
+        'Forhandler
+        '
+        Me.Forhandler.Text = "Forhandler"
+        Me.Forhandler.Width = 73
+        '
+        'Status
+        '
+        Me.Status.Text = "Status"
+        Me.Status.Width = 56
+        '
+        'Skadet
+        '
+        Me.Skadet.Text = "Skadet"
+        Me.Skadet.Width = 51
+        '
+        'Savnet
+        '
+        Me.Savnet.Text = "Savnet"
+        Me.Savnet.Width = 50
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(695, 573)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 55
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -1628,4 +1729,19 @@ Partial Class Form1
     Friend WithEvents LblInvProduktnavn As Label
     Friend WithEvents LblInvAvdeling As Label
     Friend WithEvents LblInvKategori As Label
+    Friend WithEvents LivSok As ListView
+    Friend WithEvents ID As ColumnHeader
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Produktnavn As ColumnHeader
+    Friend WithEvents Varenummer As ColumnHeader
+    Friend WithEvents Kategori As ColumnHeader
+    Friend WithEvents Ramme As ColumnHeader
+    Friend WithEvents Girsystem As ColumnHeader
+    Friend WithEvents Hjulstørrelse As ColumnHeader
+    Friend WithEvents Innkjøpspris As ColumnHeader
+    Friend WithEvents Avdeling As ColumnHeader
+    Friend WithEvents Forhandler As ColumnHeader
+    Friend WithEvents Status As ColumnHeader
+    Friend WithEvents Skadet As ColumnHeader
+    Friend WithEvents Savnet As ColumnHeader
 End Class
