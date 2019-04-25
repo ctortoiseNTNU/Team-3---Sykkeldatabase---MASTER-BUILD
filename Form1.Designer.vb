@@ -179,7 +179,7 @@ Partial Class Form1
         Me.HovedTab.Location = New System.Drawing.Point(12, 12)
         Me.HovedTab.Name = "HovedTab"
         Me.HovedTab.SelectedIndex = 0
-        Me.HovedTab.Size = New System.Drawing.Size(984, 570)
+        Me.HovedTab.Size = New System.Drawing.Size(1424, 780)
         Me.HovedTab.TabIndex = 0
         '
         'StartTab
@@ -192,7 +192,7 @@ Partial Class Form1
         Me.StartTab.Location = New System.Drawing.Point(4, 32)
         Me.StartTab.Name = "StartTab"
         Me.StartTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.StartTab.Size = New System.Drawing.Size(976, 534)
+        Me.StartTab.Size = New System.Drawing.Size(1235, 641)
         Me.StartTab.TabIndex = 0
         Me.StartTab.Text = "Start"
         Me.StartTab.UseVisualStyleBackColor = True
@@ -249,7 +249,7 @@ Partial Class Form1
         '
         Me.KDTab.Location = New System.Drawing.Point(4, 32)
         Me.KDTab.Name = "KDTab"
-        Me.KDTab.Size = New System.Drawing.Size(976, 534)
+        Me.KDTab.Size = New System.Drawing.Size(1235, 641)
         Me.KDTab.TabIndex = 2
         Me.KDTab.Text = "Kundedatabase"
         Me.KDTab.UseVisualStyleBackColor = True
@@ -260,7 +260,7 @@ Partial Class Form1
         Me.InventarTab.Controls.Add(Me.GrpInvRegistrerEndre)
         Me.InventarTab.Location = New System.Drawing.Point(4, 32)
         Me.InventarTab.Name = "InventarTab"
-        Me.InventarTab.Size = New System.Drawing.Size(976, 534)
+        Me.InventarTab.Size = New System.Drawing.Size(1416, 744)
         Me.InventarTab.TabIndex = 3
         Me.InventarTab.Text = "Inventar"
         Me.InventarTab.UseVisualStyleBackColor = True
@@ -285,9 +285,9 @@ Partial Class Form1
         Me.GrpInvSok.Controls.Add(Me.TxtInvSokSokefelt)
         Me.GrpInvSok.Controls.Add(Me.LblInvSokSokefelt)
         Me.GrpInvSok.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpInvSok.Location = New System.Drawing.Point(403, 3)
+        Me.GrpInvSok.Location = New System.Drawing.Point(431, 3)
         Me.GrpInvSok.Name = "GrpInvSok"
-        Me.GrpInvSok.Size = New System.Drawing.Size(570, 528)
+        Me.GrpInvSok.Size = New System.Drawing.Size(805, 622)
         Me.GrpInvSok.TabIndex = 40
         Me.GrpInvSok.TabStop = False
         Me.GrpInvSok.Text = "Søk i sykler og inventar"
@@ -495,7 +495,7 @@ Partial Class Form1
         Me.GrpInvRegistrerEndre.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrpInvRegistrerEndre.Location = New System.Drawing.Point(3, 3)
         Me.GrpInvRegistrerEndre.Name = "GrpInvRegistrerEndre"
-        Me.GrpInvRegistrerEndre.Size = New System.Drawing.Size(394, 528)
+        Me.GrpInvRegistrerEndre.Size = New System.Drawing.Size(422, 622)
         Me.GrpInvRegistrerEndre.TabIndex = 39
         Me.GrpInvRegistrerEndre.TabStop = False
         Me.GrpInvRegistrerEndre.Text = "Registrer og Endre Inventar"
@@ -1504,7 +1504,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1008, 594)
+        Me.ClientSize = New System.Drawing.Size(1264, 681)
         Me.Controls.Add(Me.HovedTab)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
