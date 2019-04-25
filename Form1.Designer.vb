@@ -86,61 +86,61 @@ Partial Class Form1
         Me.AdminBrukerSokGroup = New System.Windows.Forms.GroupBox()
         Me.AdminBSSokB = New System.Windows.Forms.Button()
         Me.AdminBSResultatLB = New System.Windows.Forms.ListBox()
-        Me.AdminBSEtterCB = New System.Windows.Forms.ComboBox()
-        Me.AdminBSEtterL = New System.Windows.Forms.Label()
-        Me.AdminBSFeltTB = New System.Windows.Forms.TextBox()
-        Me.AdminBSFeltL = New System.Windows.Forms.Label()
+        Me.CboAdminBSEtter = New System.Windows.Forms.ComboBox()
+        Me.LblAdminBSEtter = New System.Windows.Forms.Label()
+        Me.TxtAdminBSFelt = New System.Windows.Forms.TextBox()
+        Me.LblAdminBSFelt = New System.Windows.Forms.Label()
         Me.AdminEndreBrukerGroup = New System.Windows.Forms.GroupBox()
-        Me.AdminEBTimeTB = New System.Windows.Forms.TextBox()
+        Me.TxtAdminEBTime = New System.Windows.Forms.TextBox()
         Me.AdminEBEndreB = New System.Windows.Forms.Button()
         Me.AdminEBLastInnB = New System.Windows.Forms.Button()
-        Me.AdminEBBIDTB = New System.Windows.Forms.TextBox()
-        Me.AdminEBSPCB = New System.Windows.Forms.ComboBox()
-        Me.AdminEBStillingCB = New System.Windows.Forms.ComboBox()
-        Me.AdminEBAvdelingCB = New System.Windows.Forms.ComboBox()
-        Me.AdminEBEpostTB = New System.Windows.Forms.TextBox()
-        Me.AdminEBTelefonTB = New System.Windows.Forms.TextBox()
-        Me.AdminEBEtternavnTB = New System.Windows.Forms.TextBox()
-        Me.AdminEBFornavnTB = New System.Windows.Forms.TextBox()
-        Me.AdminEBPassordTB = New System.Windows.Forms.TextBox()
-        Me.AdminEBTimeCB = New System.Windows.Forms.CheckBox()
-        Me.AdminEBAdminCB = New System.Windows.Forms.CheckBox()
-        Me.AdminEBAdminL = New System.Windows.Forms.Label()
-        Me.AdminEBEpostL = New System.Windows.Forms.Label()
-        Me.AdminEBSPL = New System.Windows.Forms.Label()
-        Me.AdminEBTelefonL = New System.Windows.Forms.Label()
-        Me.AdminEBTimeL = New System.Windows.Forms.Label()
-        Me.AdminEBStillingL = New System.Windows.Forms.Label()
-        Me.AdminEBAvdelingL = New System.Windows.Forms.Label()
-        Me.AdminEBEtternavnL = New System.Windows.Forms.Label()
-        Me.AdminEBFornavnL = New System.Windows.Forms.Label()
-        Me.AdminEBPassordL = New System.Windows.Forms.Label()
-        Me.AdminEBBIDL = New System.Windows.Forms.Label()
+        Me.TxtAdminEBBID = New System.Windows.Forms.TextBox()
+        Me.CboAdminEBSP = New System.Windows.Forms.ComboBox()
+        Me.CboAdminEBStilling = New System.Windows.Forms.ComboBox()
+        Me.CboAdminEBAvdeling = New System.Windows.Forms.ComboBox()
+        Me.TxtAdminEBEpost = New System.Windows.Forms.TextBox()
+        Me.TxtAdminEBTelefon = New System.Windows.Forms.TextBox()
+        Me.TxtAdminEBEtternavn = New System.Windows.Forms.TextBox()
+        Me.TxtAdminEBFornavn = New System.Windows.Forms.TextBox()
+        Me.TxtAdminEBPassord = New System.Windows.Forms.TextBox()
+        Me.ChkAdminEBTime = New System.Windows.Forms.CheckBox()
+        Me.ChkAdminEBAdmin = New System.Windows.Forms.CheckBox()
+        Me.LblAdminEBAdmin = New System.Windows.Forms.Label()
+        Me.LblAdminEBEpost = New System.Windows.Forms.Label()
+        Me.LblAdminEBSP = New System.Windows.Forms.Label()
+        Me.LblAdminEBTelefon = New System.Windows.Forms.Label()
+        Me.LblAdminEBTime = New System.Windows.Forms.Label()
+        Me.LblAdminEBStilling = New System.Windows.Forms.Label()
+        Me.LblAdminEBAvdeling = New System.Windows.Forms.Label()
+        Me.LblAdminEBEtternavn = New System.Windows.Forms.Label()
+        Me.LblAdminEBFornavn = New System.Windows.Forms.Label()
+        Me.LblAdminEBPassord = New System.Windows.Forms.Label()
+        Me.LblAdminEBBID = New System.Windows.Forms.Label()
         Me.AdminNyBrukerGroup = New System.Windows.Forms.GroupBox()
-        Me.AdminNBTimeTB = New System.Windows.Forms.TextBox()
+        Me.TxtAdminNBTime = New System.Windows.Forms.TextBox()
         Me.AdminNBOpprettB = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.AdminNBSPCB = New System.Windows.Forms.ComboBox()
-        Me.AdminNBStillingCB = New System.Windows.Forms.ComboBox()
-        Me.AdminNBAvdelingCB = New System.Windows.Forms.ComboBox()
-        Me.AdminNBEpostTB = New System.Windows.Forms.TextBox()
-        Me.AdminNBTelefonTB = New System.Windows.Forms.TextBox()
-        Me.AdminNBEtternavnTB = New System.Windows.Forms.TextBox()
-        Me.AdminNBFornavnTB = New System.Windows.Forms.TextBox()
-        Me.AdminNBPassordTB = New System.Windows.Forms.TextBox()
-        Me.AdminNBTimeCB = New System.Windows.Forms.CheckBox()
-        Me.AdminNBAdminCB = New System.Windows.Forms.CheckBox()
-        Me.AdminNBAdminL = New System.Windows.Forms.Label()
-        Me.AdminNBEpostL = New System.Windows.Forms.Label()
-        Me.AdminNBSPL = New System.Windows.Forms.Label()
-        Me.AdminNBTelefonL = New System.Windows.Forms.Label()
-        Me.AdminNBTimelonnL = New System.Windows.Forms.Label()
-        Me.AdminNBStillingL = New System.Windows.Forms.Label()
-        Me.AdminNBAvdelingL = New System.Windows.Forms.Label()
-        Me.AdminNBEtternavnL = New System.Windows.Forms.Label()
-        Me.AdminNBFornavnL = New System.Windows.Forms.Label()
-        Me.AdminNBPassordL = New System.Windows.Forms.Label()
-        Me.AdminNBBIDL = New System.Windows.Forms.Label()
+        Me.LblBrukerIDNBVis = New System.Windows.Forms.Label()
+        Me.CboAdminNBSP = New System.Windows.Forms.ComboBox()
+        Me.CboAdminNBStilling = New System.Windows.Forms.ComboBox()
+        Me.TxtAdminNBAvdeling = New System.Windows.Forms.ComboBox()
+        Me.TxtAdminNBEpost = New System.Windows.Forms.TextBox()
+        Me.TxtAdminNBTelefon = New System.Windows.Forms.TextBox()
+        Me.TxtAdminNBEtternavn = New System.Windows.Forms.TextBox()
+        Me.TxtAdminNBFornavn = New System.Windows.Forms.TextBox()
+        Me.TxtAdminNBPassord = New System.Windows.Forms.TextBox()
+        Me.ChkAdminNBTime = New System.Windows.Forms.CheckBox()
+        Me.ChkAdminNBAdmin = New System.Windows.Forms.CheckBox()
+        Me.LblAdminNBAdmin = New System.Windows.Forms.Label()
+        Me.LblAdminNBEpost = New System.Windows.Forms.Label()
+        Me.LblAdminNBSP = New System.Windows.Forms.Label()
+        Me.LblAdminNBTelefon = New System.Windows.Forms.Label()
+        Me.LblAdminNBTimelonn = New System.Windows.Forms.Label()
+        Me.LblAdminNBStilling = New System.Windows.Forms.Label()
+        Me.LblAdminNBAvdeling = New System.Windows.Forms.Label()
+        Me.LblAdminNBEtternavn = New System.Windows.Forms.Label()
+        Me.LblAdminNBFornavn = New System.Windows.Forms.Label()
+        Me.LblAdminNBPassord = New System.Windows.Forms.Label()
+        Me.LblAdminNBBID = New System.Windows.Forms.Label()
         Me.DBAdminTab = New System.Windows.Forms.TabPage()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
@@ -785,10 +785,10 @@ Partial Class Form1
         '
         Me.AdminBrukerSokGroup.Controls.Add(Me.AdminBSSokB)
         Me.AdminBrukerSokGroup.Controls.Add(Me.AdminBSResultatLB)
-        Me.AdminBrukerSokGroup.Controls.Add(Me.AdminBSEtterCB)
-        Me.AdminBrukerSokGroup.Controls.Add(Me.AdminBSEtterL)
-        Me.AdminBrukerSokGroup.Controls.Add(Me.AdminBSFeltTB)
-        Me.AdminBrukerSokGroup.Controls.Add(Me.AdminBSFeltL)
+        Me.AdminBrukerSokGroup.Controls.Add(Me.CboAdminBSEtter)
+        Me.AdminBrukerSokGroup.Controls.Add(Me.LblAdminBSEtter)
+        Me.AdminBrukerSokGroup.Controls.Add(Me.TxtAdminBSFelt)
+        Me.AdminBrukerSokGroup.Controls.Add(Me.LblAdminBSFelt)
         Me.AdminBrukerSokGroup.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AdminBrukerSokGroup.Location = New System.Drawing.Point(626, 3)
         Me.AdminBrukerSokGroup.Name = "AdminBrukerSokGroup"
@@ -817,70 +817,71 @@ Partial Class Form1
         Me.AdminBSResultatLB.Size = New System.Drawing.Size(335, 169)
         Me.AdminBSResultatLB.TabIndex = 27
         '
-        'AdminBSEtterCB
+        'CboAdminBSEtter
         '
-        Me.AdminBSEtterCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminBSEtterCB.FormattingEnabled = True
-        Me.AdminBSEtterCB.Location = New System.Drawing.Point(101, 72)
-        Me.AdminBSEtterCB.Name = "AdminBSEtterCB"
-        Me.AdminBSEtterCB.Size = New System.Drawing.Size(121, 26)
-        Me.AdminBSEtterCB.TabIndex = 26
+        Me.CboAdminBSEtter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboAdminBSEtter.FormattingEnabled = True
+        Me.CboAdminBSEtter.Items.AddRange(New Object() {"Bruker ID", "Fornavn", "Etternavn", "Avdeling", "Stilling", "Timelønn", "Stillingsprosent", "Telefon", "Epost", "Admin"})
+        Me.CboAdminBSEtter.Location = New System.Drawing.Point(101, 72)
+        Me.CboAdminBSEtter.Name = "CboAdminBSEtter"
+        Me.CboAdminBSEtter.Size = New System.Drawing.Size(121, 26)
+        Me.CboAdminBSEtter.TabIndex = 26
         '
-        'AdminBSEtterL
+        'LblAdminBSEtter
         '
-        Me.AdminBSEtterL.AutoSize = True
-        Me.AdminBSEtterL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminBSEtterL.Location = New System.Drawing.Point(6, 75)
-        Me.AdminBSEtterL.Name = "AdminBSEtterL"
-        Me.AdminBSEtterL.Size = New System.Drawing.Size(68, 18)
-        Me.AdminBSEtterL.TabIndex = 23
-        Me.AdminBSEtterL.Text = "Søk etter:"
+        Me.LblAdminBSEtter.AutoSize = True
+        Me.LblAdminBSEtter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminBSEtter.Location = New System.Drawing.Point(6, 75)
+        Me.LblAdminBSEtter.Name = "LblAdminBSEtter"
+        Me.LblAdminBSEtter.Size = New System.Drawing.Size(68, 18)
+        Me.LblAdminBSEtter.TabIndex = 23
+        Me.LblAdminBSEtter.Text = "Søk etter:"
         '
-        'AdminBSFeltTB
+        'TxtAdminBSFelt
         '
-        Me.AdminBSFeltTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminBSFeltTB.Location = New System.Drawing.Point(101, 33)
-        Me.AdminBSFeltTB.Name = "AdminBSFeltTB"
-        Me.AdminBSFeltTB.Size = New System.Drawing.Size(191, 26)
-        Me.AdminBSFeltTB.TabIndex = 22
+        Me.TxtAdminBSFelt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminBSFelt.Location = New System.Drawing.Point(101, 33)
+        Me.TxtAdminBSFelt.Name = "TxtAdminBSFelt"
+        Me.TxtAdminBSFelt.Size = New System.Drawing.Size(191, 26)
+        Me.TxtAdminBSFelt.TabIndex = 22
         '
-        'AdminBSFeltL
+        'LblAdminBSFelt
         '
-        Me.AdminBSFeltL.AutoSize = True
-        Me.AdminBSFeltL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminBSFeltL.Location = New System.Drawing.Point(6, 36)
-        Me.AdminBSFeltL.Name = "AdminBSFeltL"
-        Me.AdminBSFeltL.Size = New System.Drawing.Size(64, 18)
-        Me.AdminBSFeltL.TabIndex = 1
-        Me.AdminBSFeltL.Text = "Søkefelt:"
+        Me.LblAdminBSFelt.AutoSize = True
+        Me.LblAdminBSFelt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminBSFelt.Location = New System.Drawing.Point(6, 36)
+        Me.LblAdminBSFelt.Name = "LblAdminBSFelt"
+        Me.LblAdminBSFelt.Size = New System.Drawing.Size(64, 18)
+        Me.LblAdminBSFelt.TabIndex = 1
+        Me.LblAdminBSFelt.Text = "Søkefelt:"
         '
         'AdminEndreBrukerGroup
         '
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBTimeTB)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.TxtAdminEBTime)
         Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBEndreB)
         Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBLastInnB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBBIDTB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBSPCB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBStillingCB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBAvdelingCB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBEpostTB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBTelefonTB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBEtternavnTB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBFornavnTB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBPassordTB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBTimeCB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBAdminCB)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBAdminL)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBEpostL)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBSPL)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBTelefonL)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBTimeL)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBStillingL)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBAvdelingL)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBEtternavnL)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBFornavnL)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBPassordL)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.AdminEBBIDL)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.TxtAdminEBBID)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.CboAdminEBSP)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.CboAdminEBStilling)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.CboAdminEBAvdeling)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.TxtAdminEBEpost)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.TxtAdminEBTelefon)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.TxtAdminEBEtternavn)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.TxtAdminEBFornavn)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.TxtAdminEBPassord)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.ChkAdminEBTime)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.ChkAdminEBAdmin)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBAdmin)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBEpost)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBSP)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBTelefon)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBTime)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBStilling)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBAvdeling)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBEtternavn)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBFornavn)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBPassord)
+        Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBBID)
         Me.AdminEndreBrukerGroup.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AdminEndreBrukerGroup.Location = New System.Drawing.Point(310, 3)
         Me.AdminEndreBrukerGroup.Name = "AdminEndreBrukerGroup"
@@ -889,13 +890,13 @@ Partial Class Form1
         Me.AdminEndreBrukerGroup.TabStop = False
         Me.AdminEndreBrukerGroup.Text = "Endre Bruker"
         '
-        'AdminEBTimeTB
+        'TxtAdminEBTime
         '
-        Me.AdminEBTimeTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBTimeTB.Location = New System.Drawing.Point(166, 279)
-        Me.AdminEBTimeTB.Name = "AdminEBTimeTB"
-        Me.AdminEBTimeTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminEBTimeTB.TabIndex = 25
+        Me.TxtAdminEBTime.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminEBTime.Location = New System.Drawing.Point(166, 279)
+        Me.TxtAdminEBTime.Name = "TxtAdminEBTime"
+        Me.TxtAdminEBTime.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminEBTime.TabIndex = 25
         '
         'AdminEBEndreB
         '
@@ -917,239 +918,240 @@ Partial Class Form1
         Me.AdminEBLastInnB.Text = "Gå!"
         Me.AdminEBLastInnB.UseVisualStyleBackColor = True
         '
-        'AdminEBBIDTB
+        'TxtAdminEBBID
         '
-        Me.AdminEBBIDTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBBIDTB.Location = New System.Drawing.Point(123, 33)
-        Me.AdminEBBIDTB.Name = "AdminEBBIDTB"
-        Me.AdminEBBIDTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminEBBIDTB.TabIndex = 21
+        Me.TxtAdminEBBID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminEBBID.Location = New System.Drawing.Point(123, 33)
+        Me.TxtAdminEBBID.Name = "TxtAdminEBBID"
+        Me.TxtAdminEBBID.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminEBBID.TabIndex = 21
         '
-        'AdminEBSPCB
+        'CboAdminEBSP
         '
-        Me.AdminEBSPCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBSPCB.FormattingEnabled = True
-        Me.AdminEBSPCB.Location = New System.Drawing.Point(123, 320)
-        Me.AdminEBSPCB.Name = "AdminEBSPCB"
-        Me.AdminEBSPCB.Size = New System.Drawing.Size(121, 26)
-        Me.AdminEBSPCB.TabIndex = 20
+        Me.CboAdminEBSP.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboAdminEBSP.FormattingEnabled = True
+        Me.CboAdminEBSP.Items.AddRange(New Object() {"30", "40", "50", "60", "70", "80", "90", "100"})
+        Me.CboAdminEBSP.Location = New System.Drawing.Point(123, 320)
+        Me.CboAdminEBSP.Name = "CboAdminEBSP"
+        Me.CboAdminEBSP.Size = New System.Drawing.Size(121, 26)
+        Me.CboAdminEBSP.TabIndex = 20
         '
-        'AdminEBStillingCB
+        'CboAdminEBStilling
         '
-        Me.AdminEBStillingCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBStillingCB.FormattingEnabled = True
-        Me.AdminEBStillingCB.Location = New System.Drawing.Point(123, 237)
-        Me.AdminEBStillingCB.Name = "AdminEBStillingCB"
-        Me.AdminEBStillingCB.Size = New System.Drawing.Size(121, 26)
-        Me.AdminEBStillingCB.TabIndex = 19
+        Me.CboAdminEBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboAdminEBStilling.FormattingEnabled = True
+        Me.CboAdminEBStilling.Location = New System.Drawing.Point(123, 237)
+        Me.CboAdminEBStilling.Name = "CboAdminEBStilling"
+        Me.CboAdminEBStilling.Size = New System.Drawing.Size(121, 26)
+        Me.CboAdminEBStilling.TabIndex = 19
         '
-        'AdminEBAvdelingCB
+        'CboAdminEBAvdeling
         '
-        Me.AdminEBAvdelingCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBAvdelingCB.FormattingEnabled = True
-        Me.AdminEBAvdelingCB.Location = New System.Drawing.Point(123, 195)
-        Me.AdminEBAvdelingCB.Name = "AdminEBAvdelingCB"
-        Me.AdminEBAvdelingCB.Size = New System.Drawing.Size(121, 26)
-        Me.AdminEBAvdelingCB.TabIndex = 18
+        Me.CboAdminEBAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboAdminEBAvdeling.FormattingEnabled = True
+        Me.CboAdminEBAvdeling.Location = New System.Drawing.Point(123, 195)
+        Me.CboAdminEBAvdeling.Name = "CboAdminEBAvdeling"
+        Me.CboAdminEBAvdeling.Size = New System.Drawing.Size(121, 26)
+        Me.CboAdminEBAvdeling.TabIndex = 18
         '
-        'AdminEBEpostTB
+        'TxtAdminEBEpost
         '
-        Me.AdminEBEpostTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBEpostTB.Location = New System.Drawing.Point(123, 402)
-        Me.AdminEBEpostTB.Name = "AdminEBEpostTB"
-        Me.AdminEBEpostTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminEBEpostTB.TabIndex = 17
+        Me.TxtAdminEBEpost.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminEBEpost.Location = New System.Drawing.Point(123, 402)
+        Me.TxtAdminEBEpost.Name = "TxtAdminEBEpost"
+        Me.TxtAdminEBEpost.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminEBEpost.TabIndex = 17
         '
-        'AdminEBTelefonTB
+        'TxtAdminEBTelefon
         '
-        Me.AdminEBTelefonTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBTelefonTB.Location = New System.Drawing.Point(123, 363)
-        Me.AdminEBTelefonTB.Name = "AdminEBTelefonTB"
-        Me.AdminEBTelefonTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminEBTelefonTB.TabIndex = 16
+        Me.TxtAdminEBTelefon.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminEBTelefon.Location = New System.Drawing.Point(123, 363)
+        Me.TxtAdminEBTelefon.Name = "TxtAdminEBTelefon"
+        Me.TxtAdminEBTelefon.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminEBTelefon.TabIndex = 16
         '
-        'AdminEBEtternavnTB
+        'TxtAdminEBEtternavn
         '
-        Me.AdminEBEtternavnTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBEtternavnTB.Location = New System.Drawing.Point(123, 153)
-        Me.AdminEBEtternavnTB.Name = "AdminEBEtternavnTB"
-        Me.AdminEBEtternavnTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminEBEtternavnTB.TabIndex = 15
+        Me.TxtAdminEBEtternavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminEBEtternavn.Location = New System.Drawing.Point(123, 153)
+        Me.TxtAdminEBEtternavn.Name = "TxtAdminEBEtternavn"
+        Me.TxtAdminEBEtternavn.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminEBEtternavn.TabIndex = 15
         '
-        'AdminEBFornavnTB
+        'TxtAdminEBFornavn
         '
-        Me.AdminEBFornavnTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBFornavnTB.Location = New System.Drawing.Point(123, 111)
-        Me.AdminEBFornavnTB.Name = "AdminEBFornavnTB"
-        Me.AdminEBFornavnTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminEBFornavnTB.TabIndex = 14
+        Me.TxtAdminEBFornavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminEBFornavn.Location = New System.Drawing.Point(123, 111)
+        Me.TxtAdminEBFornavn.Name = "TxtAdminEBFornavn"
+        Me.TxtAdminEBFornavn.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminEBFornavn.TabIndex = 14
         '
-        'AdminEBPassordTB
+        'TxtAdminEBPassord
         '
-        Me.AdminEBPassordTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBPassordTB.Location = New System.Drawing.Point(123, 72)
-        Me.AdminEBPassordTB.Name = "AdminEBPassordTB"
-        Me.AdminEBPassordTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminEBPassordTB.TabIndex = 13
+        Me.TxtAdminEBPassord.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminEBPassord.Location = New System.Drawing.Point(123, 72)
+        Me.TxtAdminEBPassord.Name = "TxtAdminEBPassord"
+        Me.TxtAdminEBPassord.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminEBPassord.TabIndex = 13
         '
-        'AdminEBTimeCB
+        'ChkAdminEBTime
         '
-        Me.AdminEBTimeCB.AutoSize = True
-        Me.AdminEBTimeCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBTimeCB.Location = New System.Drawing.Point(123, 282)
-        Me.AdminEBTimeCB.Name = "AdminEBTimeCB"
-        Me.AdminEBTimeCB.Size = New System.Drawing.Size(39, 22)
-        Me.AdminEBTimeCB.TabIndex = 12
-        Me.AdminEBTimeCB.Text = "Ja"
-        Me.AdminEBTimeCB.UseVisualStyleBackColor = True
+        Me.ChkAdminEBTime.AutoSize = True
+        Me.ChkAdminEBTime.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkAdminEBTime.Location = New System.Drawing.Point(123, 282)
+        Me.ChkAdminEBTime.Name = "ChkAdminEBTime"
+        Me.ChkAdminEBTime.Size = New System.Drawing.Size(39, 22)
+        Me.ChkAdminEBTime.TabIndex = 12
+        Me.ChkAdminEBTime.Text = "Ja"
+        Me.ChkAdminEBTime.UseVisualStyleBackColor = True
         '
-        'AdminEBAdminCB
+        'ChkAdminEBAdmin
         '
-        Me.AdminEBAdminCB.AutoSize = True
-        Me.AdminEBAdminCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBAdminCB.Location = New System.Drawing.Point(123, 444)
-        Me.AdminEBAdminCB.Name = "AdminEBAdminCB"
-        Me.AdminEBAdminCB.Size = New System.Drawing.Size(39, 22)
-        Me.AdminEBAdminCB.TabIndex = 11
-        Me.AdminEBAdminCB.Text = "Ja"
-        Me.AdminEBAdminCB.UseVisualStyleBackColor = True
+        Me.ChkAdminEBAdmin.AutoSize = True
+        Me.ChkAdminEBAdmin.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkAdminEBAdmin.Location = New System.Drawing.Point(123, 444)
+        Me.ChkAdminEBAdmin.Name = "ChkAdminEBAdmin"
+        Me.ChkAdminEBAdmin.Size = New System.Drawing.Size(39, 22)
+        Me.ChkAdminEBAdmin.TabIndex = 11
+        Me.ChkAdminEBAdmin.Text = "Ja"
+        Me.ChkAdminEBAdmin.UseVisualStyleBackColor = True
         '
-        'AdminEBAdminL
+        'LblAdminEBAdmin
         '
-        Me.AdminEBAdminL.AutoSize = True
-        Me.AdminEBAdminL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBAdminL.Location = New System.Drawing.Point(7, 445)
-        Me.AdminEBAdminL.Name = "AdminEBAdminL"
-        Me.AdminEBAdminL.Size = New System.Drawing.Size(53, 18)
-        Me.AdminEBAdminL.TabIndex = 10
-        Me.AdminEBAdminL.Text = "Admin:"
+        Me.LblAdminEBAdmin.AutoSize = True
+        Me.LblAdminEBAdmin.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBAdmin.Location = New System.Drawing.Point(7, 445)
+        Me.LblAdminEBAdmin.Name = "LblAdminEBAdmin"
+        Me.LblAdminEBAdmin.Size = New System.Drawing.Size(53, 18)
+        Me.LblAdminEBAdmin.TabIndex = 10
+        Me.LblAdminEBAdmin.Text = "Admin:"
         '
-        'AdminEBEpostL
+        'LblAdminEBEpost
         '
-        Me.AdminEBEpostL.AutoSize = True
-        Me.AdminEBEpostL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBEpostL.Location = New System.Drawing.Point(7, 405)
-        Me.AdminEBEpostL.Name = "AdminEBEpostL"
-        Me.AdminEBEpostL.Size = New System.Drawing.Size(46, 18)
-        Me.AdminEBEpostL.TabIndex = 9
-        Me.AdminEBEpostL.Text = "Epost:"
+        Me.LblAdminEBEpost.AutoSize = True
+        Me.LblAdminEBEpost.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBEpost.Location = New System.Drawing.Point(7, 405)
+        Me.LblAdminEBEpost.Name = "LblAdminEBEpost"
+        Me.LblAdminEBEpost.Size = New System.Drawing.Size(46, 18)
+        Me.LblAdminEBEpost.TabIndex = 9
+        Me.LblAdminEBEpost.Text = "Epost:"
         '
-        'AdminEBSPL
+        'LblAdminEBSP
         '
-        Me.AdminEBSPL.AutoSize = True
-        Me.AdminEBSPL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBSPL.Location = New System.Drawing.Point(6, 323)
-        Me.AdminEBSPL.Name = "AdminEBSPL"
-        Me.AdminEBSPL.Size = New System.Drawing.Size(108, 18)
-        Me.AdminEBSPL.TabIndex = 8
-        Me.AdminEBSPL.Text = "Stillingsprosent:"
+        Me.LblAdminEBSP.AutoSize = True
+        Me.LblAdminEBSP.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBSP.Location = New System.Drawing.Point(6, 323)
+        Me.LblAdminEBSP.Name = "LblAdminEBSP"
+        Me.LblAdminEBSP.Size = New System.Drawing.Size(108, 18)
+        Me.LblAdminEBSP.TabIndex = 8
+        Me.LblAdminEBSP.Text = "Stillingsprosent:"
         '
-        'AdminEBTelefonL
+        'LblAdminEBTelefon
         '
-        Me.AdminEBTelefonL.AutoSize = True
-        Me.AdminEBTelefonL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBTelefonL.Location = New System.Drawing.Point(7, 366)
-        Me.AdminEBTelefonL.Name = "AdminEBTelefonL"
-        Me.AdminEBTelefonL.Size = New System.Drawing.Size(59, 18)
-        Me.AdminEBTelefonL.TabIndex = 7
-        Me.AdminEBTelefonL.Text = "Telefon:"
+        Me.LblAdminEBTelefon.AutoSize = True
+        Me.LblAdminEBTelefon.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBTelefon.Location = New System.Drawing.Point(7, 366)
+        Me.LblAdminEBTelefon.Name = "LblAdminEBTelefon"
+        Me.LblAdminEBTelefon.Size = New System.Drawing.Size(59, 18)
+        Me.LblAdminEBTelefon.TabIndex = 7
+        Me.LblAdminEBTelefon.Text = "Telefon:"
         '
-        'AdminEBTimeL
+        'LblAdminEBTime
         '
-        Me.AdminEBTimeL.AutoSize = True
-        Me.AdminEBTimeL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBTimeL.Location = New System.Drawing.Point(6, 282)
-        Me.AdminEBTimeL.Name = "AdminEBTimeL"
-        Me.AdminEBTimeL.Size = New System.Drawing.Size(71, 18)
-        Me.AdminEBTimeL.TabIndex = 6
-        Me.AdminEBTimeL.Text = "Timelønn:"
+        Me.LblAdminEBTime.AutoSize = True
+        Me.LblAdminEBTime.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBTime.Location = New System.Drawing.Point(6, 282)
+        Me.LblAdminEBTime.Name = "LblAdminEBTime"
+        Me.LblAdminEBTime.Size = New System.Drawing.Size(71, 18)
+        Me.LblAdminEBTime.TabIndex = 6
+        Me.LblAdminEBTime.Text = "Timelønn:"
         '
-        'AdminEBStillingL
+        'LblAdminEBStilling
         '
-        Me.AdminEBStillingL.AutoSize = True
-        Me.AdminEBStillingL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBStillingL.Location = New System.Drawing.Point(6, 240)
-        Me.AdminEBStillingL.Name = "AdminEBStillingL"
-        Me.AdminEBStillingL.Size = New System.Drawing.Size(54, 18)
-        Me.AdminEBStillingL.TabIndex = 5
-        Me.AdminEBStillingL.Text = "Stilling:"
+        Me.LblAdminEBStilling.AutoSize = True
+        Me.LblAdminEBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBStilling.Location = New System.Drawing.Point(6, 240)
+        Me.LblAdminEBStilling.Name = "LblAdminEBStilling"
+        Me.LblAdminEBStilling.Size = New System.Drawing.Size(54, 18)
+        Me.LblAdminEBStilling.TabIndex = 5
+        Me.LblAdminEBStilling.Text = "Stilling:"
         '
-        'AdminEBAvdelingL
+        'LblAdminEBAvdeling
         '
-        Me.AdminEBAvdelingL.AutoSize = True
-        Me.AdminEBAvdelingL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBAvdelingL.Location = New System.Drawing.Point(6, 198)
-        Me.AdminEBAvdelingL.Name = "AdminEBAvdelingL"
-        Me.AdminEBAvdelingL.Size = New System.Drawing.Size(67, 18)
-        Me.AdminEBAvdelingL.TabIndex = 4
-        Me.AdminEBAvdelingL.Text = "Avdeling:"
+        Me.LblAdminEBAvdeling.AutoSize = True
+        Me.LblAdminEBAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBAvdeling.Location = New System.Drawing.Point(6, 198)
+        Me.LblAdminEBAvdeling.Name = "LblAdminEBAvdeling"
+        Me.LblAdminEBAvdeling.Size = New System.Drawing.Size(67, 18)
+        Me.LblAdminEBAvdeling.TabIndex = 4
+        Me.LblAdminEBAvdeling.Text = "Avdeling:"
         '
-        'AdminEBEtternavnL
+        'LblAdminEBEtternavn
         '
-        Me.AdminEBEtternavnL.AutoSize = True
-        Me.AdminEBEtternavnL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBEtternavnL.Location = New System.Drawing.Point(6, 156)
-        Me.AdminEBEtternavnL.Name = "AdminEBEtternavnL"
-        Me.AdminEBEtternavnL.Size = New System.Drawing.Size(72, 18)
-        Me.AdminEBEtternavnL.TabIndex = 3
-        Me.AdminEBEtternavnL.Text = "Etternavn:"
+        Me.LblAdminEBEtternavn.AutoSize = True
+        Me.LblAdminEBEtternavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBEtternavn.Location = New System.Drawing.Point(6, 156)
+        Me.LblAdminEBEtternavn.Name = "LblAdminEBEtternavn"
+        Me.LblAdminEBEtternavn.Size = New System.Drawing.Size(72, 18)
+        Me.LblAdminEBEtternavn.TabIndex = 3
+        Me.LblAdminEBEtternavn.Text = "Etternavn:"
         '
-        'AdminEBFornavnL
+        'LblAdminEBFornavn
         '
-        Me.AdminEBFornavnL.AutoSize = True
-        Me.AdminEBFornavnL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBFornavnL.Location = New System.Drawing.Point(6, 114)
-        Me.AdminEBFornavnL.Name = "AdminEBFornavnL"
-        Me.AdminEBFornavnL.Size = New System.Drawing.Size(62, 18)
-        Me.AdminEBFornavnL.TabIndex = 2
-        Me.AdminEBFornavnL.Text = "Fornavn:"
+        Me.LblAdminEBFornavn.AutoSize = True
+        Me.LblAdminEBFornavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBFornavn.Location = New System.Drawing.Point(6, 114)
+        Me.LblAdminEBFornavn.Name = "LblAdminEBFornavn"
+        Me.LblAdminEBFornavn.Size = New System.Drawing.Size(62, 18)
+        Me.LblAdminEBFornavn.TabIndex = 2
+        Me.LblAdminEBFornavn.Text = "Fornavn:"
         '
-        'AdminEBPassordL
+        'LblAdminEBPassord
         '
-        Me.AdminEBPassordL.AutoSize = True
-        Me.AdminEBPassordL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBPassordL.Location = New System.Drawing.Point(6, 75)
-        Me.AdminEBPassordL.Name = "AdminEBPassordL"
-        Me.AdminEBPassordL.Size = New System.Drawing.Size(60, 18)
-        Me.AdminEBPassordL.TabIndex = 1
-        Me.AdminEBPassordL.Text = "Passord:"
+        Me.LblAdminEBPassord.AutoSize = True
+        Me.LblAdminEBPassord.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBPassord.Location = New System.Drawing.Point(6, 75)
+        Me.LblAdminEBPassord.Name = "LblAdminEBPassord"
+        Me.LblAdminEBPassord.Size = New System.Drawing.Size(60, 18)
+        Me.LblAdminEBPassord.TabIndex = 1
+        Me.LblAdminEBPassord.Text = "Passord:"
         '
-        'AdminEBBIDL
+        'LblAdminEBBID
         '
-        Me.AdminEBBIDL.AutoSize = True
-        Me.AdminEBBIDL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminEBBIDL.Location = New System.Drawing.Point(6, 36)
-        Me.AdminEBBIDL.Name = "AdminEBBIDL"
-        Me.AdminEBBIDL.Size = New System.Drawing.Size(69, 18)
-        Me.AdminEBBIDL.TabIndex = 0
-        Me.AdminEBBIDL.Text = "Bruker ID:"
+        Me.LblAdminEBBID.AutoSize = True
+        Me.LblAdminEBBID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminEBBID.Location = New System.Drawing.Point(6, 36)
+        Me.LblAdminEBBID.Name = "LblAdminEBBID"
+        Me.LblAdminEBBID.Size = New System.Drawing.Size(69, 18)
+        Me.LblAdminEBBID.TabIndex = 0
+        Me.LblAdminEBBID.Text = "Bruker ID:"
         '
         'AdminNyBrukerGroup
         '
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBTimeTB)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBTime)
         Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBOpprettB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.Label1)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBSPCB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBStillingCB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBAvdelingCB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBEpostTB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBTelefonTB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBEtternavnTB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBFornavnTB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBPassordTB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBTimeCB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBAdminCB)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBAdminL)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBEpostL)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBSPL)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBTelefonL)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBTimelonnL)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBStillingL)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBAvdelingL)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBEtternavnL)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBFornavnL)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBPassordL)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.AdminNBBIDL)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblBrukerIDNBVis)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.CboAdminNBSP)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.CboAdminNBStilling)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBAvdeling)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBEpost)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBTelefon)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBEtternavn)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBFornavn)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBPassord)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.ChkAdminNBTime)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.ChkAdminNBAdmin)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBAdmin)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBEpost)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBSP)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBTelefon)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBTimelonn)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBStilling)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBAvdeling)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBEtternavn)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBFornavn)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBPassord)
+        Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBBID)
         Me.AdminNyBrukerGroup.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AdminNyBrukerGroup.Location = New System.Drawing.Point(3, 3)
         Me.AdminNyBrukerGroup.Name = "AdminNyBrukerGroup"
@@ -1158,13 +1160,13 @@ Partial Class Form1
         Me.AdminNyBrukerGroup.TabStop = False
         Me.AdminNyBrukerGroup.Text = "Ny Bruker"
         '
-        'AdminNBTimeTB
+        'TxtAdminNBTime
         '
-        Me.AdminNBTimeTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBTimeTB.Location = New System.Drawing.Point(168, 279)
-        Me.AdminNBTimeTB.Name = "AdminNBTimeTB"
-        Me.AdminNBTimeTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminNBTimeTB.TabIndex = 24
+        Me.TxtAdminNBTime.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminNBTime.Location = New System.Drawing.Point(168, 279)
+        Me.TxtAdminNBTime.Name = "TxtAdminNBTime"
+        Me.TxtAdminNBTime.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminNBTime.TabIndex = 24
         '
         'AdminNBOpprettB
         '
@@ -1176,214 +1178,215 @@ Partial Class Form1
         Me.AdminNBOpprettB.Text = "Opprett Bruker"
         Me.AdminNBOpprettB.UseVisualStyleBackColor = True
         '
-        'Label1
+        'LblBrukerIDNBVis
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(120, 36)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(50, 18)
-        Me.Label1.TabIndex = 21
-        Me.Label1.Text = "xxxxxx"
+        Me.LblBrukerIDNBVis.AutoSize = True
+        Me.LblBrukerIDNBVis.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblBrukerIDNBVis.Location = New System.Drawing.Point(120, 36)
+        Me.LblBrukerIDNBVis.Name = "LblBrukerIDNBVis"
+        Me.LblBrukerIDNBVis.Size = New System.Drawing.Size(50, 18)
+        Me.LblBrukerIDNBVis.TabIndex = 21
+        Me.LblBrukerIDNBVis.Text = "xxxxxx"
         '
-        'AdminNBSPCB
+        'CboAdminNBSP
         '
-        Me.AdminNBSPCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBSPCB.FormattingEnabled = True
-        Me.AdminNBSPCB.Location = New System.Drawing.Point(123, 320)
-        Me.AdminNBSPCB.Name = "AdminNBSPCB"
-        Me.AdminNBSPCB.Size = New System.Drawing.Size(121, 26)
-        Me.AdminNBSPCB.TabIndex = 20
+        Me.CboAdminNBSP.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboAdminNBSP.FormattingEnabled = True
+        Me.CboAdminNBSP.Items.AddRange(New Object() {"30", "40", "50", "60", "70", "80", "90", "100"})
+        Me.CboAdminNBSP.Location = New System.Drawing.Point(123, 320)
+        Me.CboAdminNBSP.Name = "CboAdminNBSP"
+        Me.CboAdminNBSP.Size = New System.Drawing.Size(121, 26)
+        Me.CboAdminNBSP.TabIndex = 20
         '
-        'AdminNBStillingCB
+        'CboAdminNBStilling
         '
-        Me.AdminNBStillingCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBStillingCB.FormattingEnabled = True
-        Me.AdminNBStillingCB.Location = New System.Drawing.Point(123, 237)
-        Me.AdminNBStillingCB.Name = "AdminNBStillingCB"
-        Me.AdminNBStillingCB.Size = New System.Drawing.Size(121, 26)
-        Me.AdminNBStillingCB.TabIndex = 19
+        Me.CboAdminNBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboAdminNBStilling.FormattingEnabled = True
+        Me.CboAdminNBStilling.Location = New System.Drawing.Point(123, 237)
+        Me.CboAdminNBStilling.Name = "CboAdminNBStilling"
+        Me.CboAdminNBStilling.Size = New System.Drawing.Size(121, 26)
+        Me.CboAdminNBStilling.TabIndex = 19
         '
-        'AdminNBAvdelingCB
+        'TxtAdminNBAvdeling
         '
-        Me.AdminNBAvdelingCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBAvdelingCB.FormattingEnabled = True
-        Me.AdminNBAvdelingCB.Location = New System.Drawing.Point(123, 195)
-        Me.AdminNBAvdelingCB.Name = "AdminNBAvdelingCB"
-        Me.AdminNBAvdelingCB.Size = New System.Drawing.Size(121, 26)
-        Me.AdminNBAvdelingCB.TabIndex = 18
+        Me.TxtAdminNBAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminNBAvdeling.FormattingEnabled = True
+        Me.TxtAdminNBAvdeling.Location = New System.Drawing.Point(123, 195)
+        Me.TxtAdminNBAvdeling.Name = "TxtAdminNBAvdeling"
+        Me.TxtAdminNBAvdeling.Size = New System.Drawing.Size(121, 26)
+        Me.TxtAdminNBAvdeling.TabIndex = 18
         '
-        'AdminNBEpostTB
+        'TxtAdminNBEpost
         '
-        Me.AdminNBEpostTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBEpostTB.Location = New System.Drawing.Point(123, 402)
-        Me.AdminNBEpostTB.Name = "AdminNBEpostTB"
-        Me.AdminNBEpostTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminNBEpostTB.TabIndex = 17
+        Me.TxtAdminNBEpost.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminNBEpost.Location = New System.Drawing.Point(123, 402)
+        Me.TxtAdminNBEpost.Name = "TxtAdminNBEpost"
+        Me.TxtAdminNBEpost.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminNBEpost.TabIndex = 17
         '
-        'AdminNBTelefonTB
+        'TxtAdminNBTelefon
         '
-        Me.AdminNBTelefonTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBTelefonTB.Location = New System.Drawing.Point(123, 363)
-        Me.AdminNBTelefonTB.Name = "AdminNBTelefonTB"
-        Me.AdminNBTelefonTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminNBTelefonTB.TabIndex = 16
+        Me.TxtAdminNBTelefon.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminNBTelefon.Location = New System.Drawing.Point(123, 363)
+        Me.TxtAdminNBTelefon.Name = "TxtAdminNBTelefon"
+        Me.TxtAdminNBTelefon.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminNBTelefon.TabIndex = 16
         '
-        'AdminNBEtternavnTB
+        'TxtAdminNBEtternavn
         '
-        Me.AdminNBEtternavnTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBEtternavnTB.Location = New System.Drawing.Point(123, 153)
-        Me.AdminNBEtternavnTB.Name = "AdminNBEtternavnTB"
-        Me.AdminNBEtternavnTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminNBEtternavnTB.TabIndex = 15
+        Me.TxtAdminNBEtternavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminNBEtternavn.Location = New System.Drawing.Point(123, 153)
+        Me.TxtAdminNBEtternavn.Name = "TxtAdminNBEtternavn"
+        Me.TxtAdminNBEtternavn.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminNBEtternavn.TabIndex = 15
         '
-        'AdminNBFornavnTB
+        'TxtAdminNBFornavn
         '
-        Me.AdminNBFornavnTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBFornavnTB.Location = New System.Drawing.Point(123, 111)
-        Me.AdminNBFornavnTB.Name = "AdminNBFornavnTB"
-        Me.AdminNBFornavnTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminNBFornavnTB.TabIndex = 14
+        Me.TxtAdminNBFornavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminNBFornavn.Location = New System.Drawing.Point(123, 111)
+        Me.TxtAdminNBFornavn.Name = "TxtAdminNBFornavn"
+        Me.TxtAdminNBFornavn.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminNBFornavn.TabIndex = 14
         '
-        'AdminNBPassordTB
+        'TxtAdminNBPassord
         '
-        Me.AdminNBPassordTB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBPassordTB.Location = New System.Drawing.Point(123, 72)
-        Me.AdminNBPassordTB.Name = "AdminNBPassordTB"
-        Me.AdminNBPassordTB.Size = New System.Drawing.Size(100, 26)
-        Me.AdminNBPassordTB.TabIndex = 13
+        Me.TxtAdminNBPassord.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminNBPassord.Location = New System.Drawing.Point(123, 72)
+        Me.TxtAdminNBPassord.Name = "TxtAdminNBPassord"
+        Me.TxtAdminNBPassord.Size = New System.Drawing.Size(100, 26)
+        Me.TxtAdminNBPassord.TabIndex = 13
         '
-        'AdminNBTimeCB
+        'ChkAdminNBTime
         '
-        Me.AdminNBTimeCB.AutoSize = True
-        Me.AdminNBTimeCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBTimeCB.Location = New System.Drawing.Point(123, 282)
-        Me.AdminNBTimeCB.Name = "AdminNBTimeCB"
-        Me.AdminNBTimeCB.Size = New System.Drawing.Size(39, 22)
-        Me.AdminNBTimeCB.TabIndex = 12
-        Me.AdminNBTimeCB.Text = "Ja"
-        Me.AdminNBTimeCB.UseVisualStyleBackColor = True
+        Me.ChkAdminNBTime.AutoSize = True
+        Me.ChkAdminNBTime.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkAdminNBTime.Location = New System.Drawing.Point(123, 282)
+        Me.ChkAdminNBTime.Name = "ChkAdminNBTime"
+        Me.ChkAdminNBTime.Size = New System.Drawing.Size(39, 22)
+        Me.ChkAdminNBTime.TabIndex = 12
+        Me.ChkAdminNBTime.Text = "Ja"
+        Me.ChkAdminNBTime.UseVisualStyleBackColor = True
         '
-        'AdminNBAdminCB
+        'ChkAdminNBAdmin
         '
-        Me.AdminNBAdminCB.AutoSize = True
-        Me.AdminNBAdminCB.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBAdminCB.Location = New System.Drawing.Point(123, 444)
-        Me.AdminNBAdminCB.Name = "AdminNBAdminCB"
-        Me.AdminNBAdminCB.Size = New System.Drawing.Size(39, 22)
-        Me.AdminNBAdminCB.TabIndex = 11
-        Me.AdminNBAdminCB.Text = "Ja"
-        Me.AdminNBAdminCB.UseVisualStyleBackColor = True
+        Me.ChkAdminNBAdmin.AutoSize = True
+        Me.ChkAdminNBAdmin.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkAdminNBAdmin.Location = New System.Drawing.Point(123, 444)
+        Me.ChkAdminNBAdmin.Name = "ChkAdminNBAdmin"
+        Me.ChkAdminNBAdmin.Size = New System.Drawing.Size(39, 22)
+        Me.ChkAdminNBAdmin.TabIndex = 11
+        Me.ChkAdminNBAdmin.Text = "Ja"
+        Me.ChkAdminNBAdmin.UseVisualStyleBackColor = True
         '
-        'AdminNBAdminL
+        'LblAdminNBAdmin
         '
-        Me.AdminNBAdminL.AutoSize = True
-        Me.AdminNBAdminL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBAdminL.Location = New System.Drawing.Point(7, 445)
-        Me.AdminNBAdminL.Name = "AdminNBAdminL"
-        Me.AdminNBAdminL.Size = New System.Drawing.Size(53, 18)
-        Me.AdminNBAdminL.TabIndex = 10
-        Me.AdminNBAdminL.Text = "Admin:"
+        Me.LblAdminNBAdmin.AutoSize = True
+        Me.LblAdminNBAdmin.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBAdmin.Location = New System.Drawing.Point(7, 445)
+        Me.LblAdminNBAdmin.Name = "LblAdminNBAdmin"
+        Me.LblAdminNBAdmin.Size = New System.Drawing.Size(53, 18)
+        Me.LblAdminNBAdmin.TabIndex = 10
+        Me.LblAdminNBAdmin.Text = "Admin:"
         '
-        'AdminNBEpostL
+        'LblAdminNBEpost
         '
-        Me.AdminNBEpostL.AutoSize = True
-        Me.AdminNBEpostL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBEpostL.Location = New System.Drawing.Point(7, 405)
-        Me.AdminNBEpostL.Name = "AdminNBEpostL"
-        Me.AdminNBEpostL.Size = New System.Drawing.Size(46, 18)
-        Me.AdminNBEpostL.TabIndex = 9
-        Me.AdminNBEpostL.Text = "Epost:"
+        Me.LblAdminNBEpost.AutoSize = True
+        Me.LblAdminNBEpost.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBEpost.Location = New System.Drawing.Point(7, 405)
+        Me.LblAdminNBEpost.Name = "LblAdminNBEpost"
+        Me.LblAdminNBEpost.Size = New System.Drawing.Size(46, 18)
+        Me.LblAdminNBEpost.TabIndex = 9
+        Me.LblAdminNBEpost.Text = "Epost:"
         '
-        'AdminNBSPL
+        'LblAdminNBSP
         '
-        Me.AdminNBSPL.AutoSize = True
-        Me.AdminNBSPL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBSPL.Location = New System.Drawing.Point(6, 323)
-        Me.AdminNBSPL.Name = "AdminNBSPL"
-        Me.AdminNBSPL.Size = New System.Drawing.Size(108, 18)
-        Me.AdminNBSPL.TabIndex = 8
-        Me.AdminNBSPL.Text = "Stillingsprosent:"
+        Me.LblAdminNBSP.AutoSize = True
+        Me.LblAdminNBSP.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBSP.Location = New System.Drawing.Point(6, 323)
+        Me.LblAdminNBSP.Name = "LblAdminNBSP"
+        Me.LblAdminNBSP.Size = New System.Drawing.Size(108, 18)
+        Me.LblAdminNBSP.TabIndex = 8
+        Me.LblAdminNBSP.Text = "Stillingsprosent:"
         '
-        'AdminNBTelefonL
+        'LblAdminNBTelefon
         '
-        Me.AdminNBTelefonL.AutoSize = True
-        Me.AdminNBTelefonL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBTelefonL.Location = New System.Drawing.Point(7, 366)
-        Me.AdminNBTelefonL.Name = "AdminNBTelefonL"
-        Me.AdminNBTelefonL.Size = New System.Drawing.Size(59, 18)
-        Me.AdminNBTelefonL.TabIndex = 7
-        Me.AdminNBTelefonL.Text = "Telefon:"
+        Me.LblAdminNBTelefon.AutoSize = True
+        Me.LblAdminNBTelefon.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBTelefon.Location = New System.Drawing.Point(7, 366)
+        Me.LblAdminNBTelefon.Name = "LblAdminNBTelefon"
+        Me.LblAdminNBTelefon.Size = New System.Drawing.Size(59, 18)
+        Me.LblAdminNBTelefon.TabIndex = 7
+        Me.LblAdminNBTelefon.Text = "Telefon:"
         '
-        'AdminNBTimelonnL
+        'LblAdminNBTimelonn
         '
-        Me.AdminNBTimelonnL.AutoSize = True
-        Me.AdminNBTimelonnL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBTimelonnL.Location = New System.Drawing.Point(6, 282)
-        Me.AdminNBTimelonnL.Name = "AdminNBTimelonnL"
-        Me.AdminNBTimelonnL.Size = New System.Drawing.Size(71, 18)
-        Me.AdminNBTimelonnL.TabIndex = 6
-        Me.AdminNBTimelonnL.Text = "Timelønn:"
+        Me.LblAdminNBTimelonn.AutoSize = True
+        Me.LblAdminNBTimelonn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBTimelonn.Location = New System.Drawing.Point(6, 282)
+        Me.LblAdminNBTimelonn.Name = "LblAdminNBTimelonn"
+        Me.LblAdminNBTimelonn.Size = New System.Drawing.Size(71, 18)
+        Me.LblAdminNBTimelonn.TabIndex = 6
+        Me.LblAdminNBTimelonn.Text = "Timelønn:"
         '
-        'AdminNBStillingL
+        'LblAdminNBStilling
         '
-        Me.AdminNBStillingL.AutoSize = True
-        Me.AdminNBStillingL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBStillingL.Location = New System.Drawing.Point(6, 240)
-        Me.AdminNBStillingL.Name = "AdminNBStillingL"
-        Me.AdminNBStillingL.Size = New System.Drawing.Size(54, 18)
-        Me.AdminNBStillingL.TabIndex = 5
-        Me.AdminNBStillingL.Text = "Stilling:"
+        Me.LblAdminNBStilling.AutoSize = True
+        Me.LblAdminNBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBStilling.Location = New System.Drawing.Point(6, 240)
+        Me.LblAdminNBStilling.Name = "LblAdminNBStilling"
+        Me.LblAdminNBStilling.Size = New System.Drawing.Size(54, 18)
+        Me.LblAdminNBStilling.TabIndex = 5
+        Me.LblAdminNBStilling.Text = "Stilling:"
         '
-        'AdminNBAvdelingL
+        'LblAdminNBAvdeling
         '
-        Me.AdminNBAvdelingL.AutoSize = True
-        Me.AdminNBAvdelingL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBAvdelingL.Location = New System.Drawing.Point(6, 198)
-        Me.AdminNBAvdelingL.Name = "AdminNBAvdelingL"
-        Me.AdminNBAvdelingL.Size = New System.Drawing.Size(67, 18)
-        Me.AdminNBAvdelingL.TabIndex = 4
-        Me.AdminNBAvdelingL.Text = "Avdeling:"
+        Me.LblAdminNBAvdeling.AutoSize = True
+        Me.LblAdminNBAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBAvdeling.Location = New System.Drawing.Point(6, 198)
+        Me.LblAdminNBAvdeling.Name = "LblAdminNBAvdeling"
+        Me.LblAdminNBAvdeling.Size = New System.Drawing.Size(67, 18)
+        Me.LblAdminNBAvdeling.TabIndex = 4
+        Me.LblAdminNBAvdeling.Text = "Avdeling:"
         '
-        'AdminNBEtternavnL
+        'LblAdminNBEtternavn
         '
-        Me.AdminNBEtternavnL.AutoSize = True
-        Me.AdminNBEtternavnL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBEtternavnL.Location = New System.Drawing.Point(6, 156)
-        Me.AdminNBEtternavnL.Name = "AdminNBEtternavnL"
-        Me.AdminNBEtternavnL.Size = New System.Drawing.Size(72, 18)
-        Me.AdminNBEtternavnL.TabIndex = 3
-        Me.AdminNBEtternavnL.Text = "Etternavn:"
+        Me.LblAdminNBEtternavn.AutoSize = True
+        Me.LblAdminNBEtternavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBEtternavn.Location = New System.Drawing.Point(6, 156)
+        Me.LblAdminNBEtternavn.Name = "LblAdminNBEtternavn"
+        Me.LblAdminNBEtternavn.Size = New System.Drawing.Size(72, 18)
+        Me.LblAdminNBEtternavn.TabIndex = 3
+        Me.LblAdminNBEtternavn.Text = "Etternavn:"
         '
-        'AdminNBFornavnL
+        'LblAdminNBFornavn
         '
-        Me.AdminNBFornavnL.AutoSize = True
-        Me.AdminNBFornavnL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBFornavnL.Location = New System.Drawing.Point(6, 114)
-        Me.AdminNBFornavnL.Name = "AdminNBFornavnL"
-        Me.AdminNBFornavnL.Size = New System.Drawing.Size(62, 18)
-        Me.AdminNBFornavnL.TabIndex = 2
-        Me.AdminNBFornavnL.Text = "Fornavn:"
+        Me.LblAdminNBFornavn.AutoSize = True
+        Me.LblAdminNBFornavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBFornavn.Location = New System.Drawing.Point(6, 114)
+        Me.LblAdminNBFornavn.Name = "LblAdminNBFornavn"
+        Me.LblAdminNBFornavn.Size = New System.Drawing.Size(62, 18)
+        Me.LblAdminNBFornavn.TabIndex = 2
+        Me.LblAdminNBFornavn.Text = "Fornavn:"
         '
-        'AdminNBPassordL
+        'LblAdminNBPassord
         '
-        Me.AdminNBPassordL.AutoSize = True
-        Me.AdminNBPassordL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBPassordL.Location = New System.Drawing.Point(6, 75)
-        Me.AdminNBPassordL.Name = "AdminNBPassordL"
-        Me.AdminNBPassordL.Size = New System.Drawing.Size(60, 18)
-        Me.AdminNBPassordL.TabIndex = 1
-        Me.AdminNBPassordL.Text = "Passord:"
+        Me.LblAdminNBPassord.AutoSize = True
+        Me.LblAdminNBPassord.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBPassord.Location = New System.Drawing.Point(6, 75)
+        Me.LblAdminNBPassord.Name = "LblAdminNBPassord"
+        Me.LblAdminNBPassord.Size = New System.Drawing.Size(60, 18)
+        Me.LblAdminNBPassord.TabIndex = 1
+        Me.LblAdminNBPassord.Text = "Passord:"
         '
-        'AdminNBBIDL
+        'LblAdminNBBID
         '
-        Me.AdminNBBIDL.AutoSize = True
-        Me.AdminNBBIDL.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminNBBIDL.Location = New System.Drawing.Point(6, 36)
-        Me.AdminNBBIDL.Name = "AdminNBBIDL"
-        Me.AdminNBBIDL.Size = New System.Drawing.Size(69, 18)
-        Me.AdminNBBIDL.TabIndex = 0
-        Me.AdminNBBIDL.Text = "Bruker ID:"
+        Me.LblAdminNBBID.AutoSize = True
+        Me.LblAdminNBBID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAdminNBBID.Location = New System.Drawing.Point(6, 36)
+        Me.LblAdminNBBID.Name = "LblAdminNBBID"
+        Me.LblAdminNBBID.Size = New System.Drawing.Size(69, 18)
+        Me.LblAdminNBBID.TabIndex = 0
+        Me.LblAdminNBBID.Text = "Bruker ID:"
         '
         'DBAdminTab
         '
@@ -1439,62 +1442,62 @@ Partial Class Form1
     Friend WithEvents StartVelkommenLabel As Label
     Friend WithEvents StartLogo As PictureBox
     Friend WithEvents AdminEndreBrukerGroup As GroupBox
-    Friend WithEvents AdminEBTimeTB As TextBox
+    Friend WithEvents TxtAdminEBTime As TextBox
     Friend WithEvents AdminEBEndreB As Button
     Friend WithEvents AdminEBLastInnB As Button
-    Friend WithEvents AdminEBBIDTB As TextBox
-    Friend WithEvents AdminEBSPCB As ComboBox
-    Friend WithEvents AdminEBStillingCB As ComboBox
-    Friend WithEvents AdminEBAvdelingCB As ComboBox
-    Friend WithEvents AdminEBEpostTB As TextBox
-    Friend WithEvents AdminEBTelefonTB As TextBox
-    Friend WithEvents AdminEBEtternavnTB As TextBox
-    Friend WithEvents AdminEBFornavnTB As TextBox
-    Friend WithEvents AdminEBPassordTB As TextBox
-    Friend WithEvents AdminEBTimeCB As CheckBox
-    Friend WithEvents AdminEBAdminCB As CheckBox
-    Friend WithEvents AdminEBAdminL As Label
-    Friend WithEvents AdminEBEpostL As Label
-    Friend WithEvents AdminEBSPL As Label
-    Friend WithEvents AdminEBTelefonL As Label
-    Friend WithEvents AdminEBTimeL As Label
-    Friend WithEvents AdminEBStillingL As Label
-    Friend WithEvents AdminEBAvdelingL As Label
-    Friend WithEvents AdminEBEtternavnL As Label
-    Friend WithEvents AdminEBFornavnL As Label
-    Friend WithEvents AdminEBPassordL As Label
-    Friend WithEvents AdminEBBIDL As Label
+    Friend WithEvents TxtAdminEBBID As TextBox
+    Friend WithEvents CboAdminEBSP As ComboBox
+    Friend WithEvents CboAdminEBStilling As ComboBox
+    Friend WithEvents CboAdminEBAvdeling As ComboBox
+    Friend WithEvents TxtAdminEBEpost As TextBox
+    Friend WithEvents TxtAdminEBTelefon As TextBox
+    Friend WithEvents TxtAdminEBEtternavn As TextBox
+    Friend WithEvents TxtAdminEBFornavn As TextBox
+    Friend WithEvents TxtAdminEBPassord As TextBox
+    Friend WithEvents ChkAdminEBTime As CheckBox
+    Friend WithEvents ChkAdminEBAdmin As CheckBox
+    Friend WithEvents LblAdminEBAdmin As Label
+    Friend WithEvents LblAdminEBEpost As Label
+    Friend WithEvents LblAdminEBSP As Label
+    Friend WithEvents LblAdminEBTelefon As Label
+    Friend WithEvents LblAdminEBTime As Label
+    Friend WithEvents LblAdminEBStilling As Label
+    Friend WithEvents LblAdminEBAvdeling As Label
+    Friend WithEvents LblAdminEBEtternavn As Label
+    Friend WithEvents LblAdminEBFornavn As Label
+    Friend WithEvents LblAdminEBPassord As Label
+    Friend WithEvents LblAdminEBBID As Label
     Friend WithEvents AdminNyBrukerGroup As GroupBox
-    Friend WithEvents AdminNBTimeTB As TextBox
+    Friend WithEvents TxtAdminNBTime As TextBox
     Friend WithEvents AdminNBOpprettB As Button
-    Friend WithEvents Label1 As Label
-    Friend WithEvents AdminNBSPCB As ComboBox
-    Friend WithEvents AdminNBStillingCB As ComboBox
-    Friend WithEvents AdminNBAvdelingCB As ComboBox
-    Friend WithEvents AdminNBEpostTB As TextBox
-    Friend WithEvents AdminNBTelefonTB As TextBox
-    Friend WithEvents AdminNBEtternavnTB As TextBox
-    Friend WithEvents AdminNBFornavnTB As TextBox
-    Friend WithEvents AdminNBPassordTB As TextBox
-    Friend WithEvents AdminNBTimeCB As CheckBox
-    Friend WithEvents AdminNBAdminCB As CheckBox
-    Friend WithEvents AdminNBAdminL As Label
-    Friend WithEvents AdminNBEpostL As Label
-    Friend WithEvents AdminNBSPL As Label
-    Friend WithEvents AdminNBTelefonL As Label
-    Friend WithEvents AdminNBTimelonnL As Label
-    Friend WithEvents AdminNBStillingL As Label
-    Friend WithEvents AdminNBAvdelingL As Label
-    Friend WithEvents AdminNBEtternavnL As Label
-    Friend WithEvents AdminNBFornavnL As Label
-    Friend WithEvents AdminNBPassordL As Label
-    Friend WithEvents AdminNBBIDL As Label
+    Friend WithEvents LblBrukerIDNBVis As Label
+    Friend WithEvents CboAdminNBSP As ComboBox
+    Friend WithEvents CboAdminNBStilling As ComboBox
+    Friend WithEvents TxtAdminNBAvdeling As ComboBox
+    Friend WithEvents TxtAdminNBEpost As TextBox
+    Friend WithEvents TxtAdminNBTelefon As TextBox
+    Friend WithEvents TxtAdminNBEtternavn As TextBox
+    Friend WithEvents TxtAdminNBFornavn As TextBox
+    Friend WithEvents TxtAdminNBPassord As TextBox
+    Friend WithEvents ChkAdminNBTime As CheckBox
+    Friend WithEvents ChkAdminNBAdmin As CheckBox
+    Friend WithEvents LblAdminNBAdmin As Label
+    Friend WithEvents LblAdminNBEpost As Label
+    Friend WithEvents LblAdminNBSP As Label
+    Friend WithEvents LblAdminNBTelefon As Label
+    Friend WithEvents LblAdminNBTimelonn As Label
+    Friend WithEvents LblAdminNBStilling As Label
+    Friend WithEvents LblAdminNBAvdeling As Label
+    Friend WithEvents LblAdminNBEtternavn As Label
+    Friend WithEvents LblAdminNBFornavn As Label
+    Friend WithEvents LblAdminNBPassord As Label
+    Friend WithEvents LblAdminNBBID As Label
     Friend WithEvents AdminBrukerSokGroup As GroupBox
     Friend WithEvents AdminBSResultatLB As ListBox
-    Friend WithEvents AdminBSEtterCB As ComboBox
-    Friend WithEvents AdminBSEtterL As Label
-    Friend WithEvents AdminBSFeltTB As TextBox
-    Friend WithEvents AdminBSFeltL As Label
+    Friend WithEvents CboAdminBSEtter As ComboBox
+    Friend WithEvents LblAdminBSEtter As Label
+    Friend WithEvents TxtAdminBSFelt As TextBox
+    Friend WithEvents LblAdminBSFelt As Label
     Friend WithEvents AdminMOTDGroup As GroupBox
     Friend WithEvents AdminMOTDEndreB As Button
     Friend WithEvents AdminMOTDTB As TextBox
