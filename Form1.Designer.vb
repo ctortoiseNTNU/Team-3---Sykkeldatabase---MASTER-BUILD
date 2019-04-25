@@ -32,55 +32,6 @@ Partial Class Form1
         Me.UtleieTab = New System.Windows.Forms.TabPage()
         Me.KDTab = New System.Windows.Forms.TabPage()
         Me.InventarTab = New System.Windows.Forms.TabPage()
-        Me.GrpInvSok = New System.Windows.Forms.GroupBox()
-        Me.LblInvSokSavnet = New System.Windows.Forms.Label()
-        Me.LblInvSokProduktID = New System.Windows.Forms.Label()
-        Me.LblInvSokSkadet = New System.Windows.Forms.Label()
-        Me.TxtInvSokProduktID = New System.Windows.Forms.TextBox()
-        Me.LblInvSokStatus = New System.Windows.Forms.Label()
-        Me.CboInvSokSubkategori = New System.Windows.Forms.ComboBox()
-        Me.CboInvSokStatus = New System.Windows.Forms.ComboBox()
-        Me.CboInvSokSkadet = New System.Windows.Forms.ComboBox()
-        Me.LblInvSokSubkategori = New System.Windows.Forms.Label()
-        Me.CboInvSokSavnet = New System.Windows.Forms.ComboBox()
-        Me.BtnIvnSokEndre = New System.Windows.Forms.Button()
-        Me.BtnInvSokSok = New System.Windows.Forms.Button()
-        Me.LstInvSokSokeResultat = New System.Windows.Forms.ListBox()
-        Me.CboInvSokKategori = New System.Windows.Forms.ComboBox()
-        Me.LblInvSokKategori = New System.Windows.Forms.Label()
-        Me.TxtInvSokSokefelt = New System.Windows.Forms.TextBox()
-        Me.LblInvSokSokefelt = New System.Windows.Forms.Label()
-        Me.GrpInvRegistrerEndre = New System.Windows.Forms.GroupBox()
-        Me.BtnInvEndre = New System.Windows.Forms.Button()
-        Me.LblInvRegistrertID = New System.Windows.Forms.Label()
-        Me.LblInvProduktID = New System.Windows.Forms.Label()
-        Me.LblInvSavnet = New System.Windows.Forms.Label()
-        Me.LblInvSkadet = New System.Windows.Forms.Label()
-        Me.LblInvStatus = New System.Windows.Forms.Label()
-        Me.CboInvStatus = New System.Windows.Forms.ComboBox()
-        Me.CboInvSkadet = New System.Windows.Forms.ComboBox()
-        Me.CboInvSavnet = New System.Windows.Forms.ComboBox()
-        Me.CboInvSubkategori = New System.Windows.Forms.ComboBox()
-        Me.LblInvSubkategori = New System.Windows.Forms.Label()
-        Me.TxtInvGirsystem = New System.Windows.Forms.TextBox()
-        Me.TxtInvHjulstorrelse = New System.Windows.Forms.TextBox()
-        Me.TxtInvRamme = New System.Windows.Forms.TextBox()
-        Me.LblInvGirsystem = New System.Windows.Forms.Label()
-        Me.LblInvHjulstorrelse = New System.Windows.Forms.Label()
-        Me.LblInvRamme = New System.Windows.Forms.Label()
-        Me.CboInvAvdeling = New System.Windows.Forms.ComboBox()
-        Me.CboInvKategori = New System.Windows.Forms.ComboBox()
-        Me.TxtInvInnkjopspris = New System.Windows.Forms.TextBox()
-        Me.BtnInvRegistrer = New System.Windows.Forms.Button()
-        Me.CboInvForhandler = New System.Windows.Forms.ComboBox()
-        Me.TxtInvVareNummer = New System.Windows.Forms.TextBox()
-        Me.TxtInvProduktnavn = New System.Windows.Forms.TextBox()
-        Me.LblInvForhandler = New System.Windows.Forms.Label()
-        Me.LblInvInnkjopspris = New System.Windows.Forms.Label()
-        Me.LblInvVarenummer = New System.Windows.Forms.Label()
-        Me.LblInvProduktnavn = New System.Windows.Forms.Label()
-        Me.LblInvAvdeling = New System.Windows.Forms.Label()
-        Me.LblInvKategori = New System.Windows.Forms.Label()
         Me.ISTab = New System.Windows.Forms.TabPage()
         Me.LogiTab = New System.Windows.Forms.TabPage()
         Me.StatTab = New System.Windows.Forms.TabPage()
@@ -146,17 +97,67 @@ Partial Class Form1
         Me.AdminNBFornavnL = New System.Windows.Forms.Label()
         Me.AdminNBPassordL = New System.Windows.Forms.Label()
         Me.AdminNBBIDL = New System.Windows.Forms.Label()
+        Me.DBAdminTab = New System.Windows.Forms.TabPage()
+        Me.GrpInvRegistrerEndre = New System.Windows.Forms.GroupBox()
+        Me.BtnInvEndre = New System.Windows.Forms.Button()
+        Me.LblInvRegistrertID = New System.Windows.Forms.Label()
+        Me.LblInvProduktID = New System.Windows.Forms.Label()
+        Me.LblInvSavnet = New System.Windows.Forms.Label()
+        Me.LblInvSkadet = New System.Windows.Forms.Label()
+        Me.LblInvStatus = New System.Windows.Forms.Label()
+        Me.CboInvStatus = New System.Windows.Forms.ComboBox()
+        Me.CboInvSkadet = New System.Windows.Forms.ComboBox()
+        Me.CboInvSavnet = New System.Windows.Forms.ComboBox()
+        Me.CboInvSubkategori = New System.Windows.Forms.ComboBox()
+        Me.LblInvSubkategori = New System.Windows.Forms.Label()
+        Me.TxtInvGirsystem = New System.Windows.Forms.TextBox()
+        Me.TxtInvHjulstorrelse = New System.Windows.Forms.TextBox()
+        Me.TxtInvRamme = New System.Windows.Forms.TextBox()
+        Me.LblInvGirsystem = New System.Windows.Forms.Label()
+        Me.LblInvHjulstorrelse = New System.Windows.Forms.Label()
+        Me.LblInvRamme = New System.Windows.Forms.Label()
+        Me.CboInvAvdeling = New System.Windows.Forms.ComboBox()
+        Me.CboInvKategori = New System.Windows.Forms.ComboBox()
+        Me.TxtInvInnkjopspris = New System.Windows.Forms.TextBox()
+        Me.BtnInvRegistrer = New System.Windows.Forms.Button()
+        Me.CboInvForhandler = New System.Windows.Forms.ComboBox()
+        Me.TxtInvVareNummer = New System.Windows.Forms.TextBox()
+        Me.TxtInvProduktnavn = New System.Windows.Forms.TextBox()
+        Me.LblInvForhandler = New System.Windows.Forms.Label()
+        Me.LblInvInnkjopspris = New System.Windows.Forms.Label()
+        Me.LblInvVarenummer = New System.Windows.Forms.Label()
+        Me.LblInvProduktnavn = New System.Windows.Forms.Label()
+        Me.LblInvAvdeling = New System.Windows.Forms.Label()
+        Me.LblInvKategori = New System.Windows.Forms.Label()
+        Me.GrpInvSok = New System.Windows.Forms.GroupBox()
+        Me.LblInvSokSavnet = New System.Windows.Forms.Label()
+        Me.LblInvSokProduktID = New System.Windows.Forms.Label()
+        Me.LblInvSokSkadet = New System.Windows.Forms.Label()
+        Me.TxtInvSokProduktID = New System.Windows.Forms.TextBox()
+        Me.LblInvSokStatus = New System.Windows.Forms.Label()
+        Me.CboInvSokSubkategori = New System.Windows.Forms.ComboBox()
+        Me.CboInvSokStatus = New System.Windows.Forms.ComboBox()
+        Me.CboInvSokSkadet = New System.Windows.Forms.ComboBox()
+        Me.LblInvSokSubkategori = New System.Windows.Forms.Label()
+        Me.CboInvSokSavnet = New System.Windows.Forms.ComboBox()
+        Me.BtnIvnSokEndre = New System.Windows.Forms.Button()
+        Me.BtnInvSokSok = New System.Windows.Forms.Button()
+        Me.LstInvSokSokeResultat = New System.Windows.Forms.ListBox()
+        Me.CboInvSokKategori = New System.Windows.Forms.ComboBox()
+        Me.LblInvSokKategori = New System.Windows.Forms.Label()
+        Me.TxtInvSokSokefelt = New System.Windows.Forms.TextBox()
+        Me.LblInvSokSokefelt = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.InventarTab.SuspendLayout()
-        Me.GrpInvSok.SuspendLayout()
-        Me.GrpInvRegistrerEndre.SuspendLayout()
         Me.AdminTab.SuspendLayout()
         Me.AdminMOTDGroup.SuspendLayout()
         Me.AdminBrukerSokGroup.SuspendLayout()
         Me.AdminEndreBrukerGroup.SuspendLayout()
         Me.AdminNyBrukerGroup.SuspendLayout()
+        Me.GrpInvRegistrerEndre.SuspendLayout()
+        Me.GrpInvSok.SuspendLayout()
         Me.SuspendLayout()
         '
         'HovedTab
@@ -169,6 +170,7 @@ Partial Class Form1
         Me.HovedTab.Controls.Add(Me.LogiTab)
         Me.HovedTab.Controls.Add(Me.StatTab)
         Me.HovedTab.Controls.Add(Me.AdminTab)
+        Me.HovedTab.Controls.Add(Me.DBAdminTab)
         Me.HovedTab.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.HovedTab.Location = New System.Drawing.Point(12, 12)
         Me.HovedTab.Name = "HovedTab"
@@ -258,527 +260,6 @@ Partial Class Form1
         Me.InventarTab.TabIndex = 3
         Me.InventarTab.Text = "Inventar"
         Me.InventarTab.UseVisualStyleBackColor = True
-        '
-        'GrpInvSok
-        '
-        Me.GrpInvSok.Controls.Add(Me.LblInvSokSavnet)
-        Me.GrpInvSok.Controls.Add(Me.LblInvSokProduktID)
-        Me.GrpInvSok.Controls.Add(Me.LblInvSokSkadet)
-        Me.GrpInvSok.Controls.Add(Me.TxtInvSokProduktID)
-        Me.GrpInvSok.Controls.Add(Me.LblInvSokStatus)
-        Me.GrpInvSok.Controls.Add(Me.CboInvSokSubkategori)
-        Me.GrpInvSok.Controls.Add(Me.CboInvSokStatus)
-        Me.GrpInvSok.Controls.Add(Me.CboInvSokSkadet)
-        Me.GrpInvSok.Controls.Add(Me.LblInvSokSubkategori)
-        Me.GrpInvSok.Controls.Add(Me.CboInvSokSavnet)
-        Me.GrpInvSok.Controls.Add(Me.BtnIvnSokEndre)
-        Me.GrpInvSok.Controls.Add(Me.BtnInvSokSok)
-        Me.GrpInvSok.Controls.Add(Me.LstInvSokSokeResultat)
-        Me.GrpInvSok.Controls.Add(Me.CboInvSokKategori)
-        Me.GrpInvSok.Controls.Add(Me.LblInvSokKategori)
-        Me.GrpInvSok.Controls.Add(Me.TxtInvSokSokefelt)
-        Me.GrpInvSok.Controls.Add(Me.LblInvSokSokefelt)
-        Me.GrpInvSok.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpInvSok.Location = New System.Drawing.Point(403, 3)
-        Me.GrpInvSok.Name = "GrpInvSok"
-        Me.GrpInvSok.Size = New System.Drawing.Size(570, 528)
-        Me.GrpInvSok.TabIndex = 39
-        Me.GrpInvSok.TabStop = False
-        Me.GrpInvSok.Text = "Søk i sykler og inventar"
-        '
-        'LblInvSokSavnet
-        '
-        Me.LblInvSokSavnet.AutoSize = True
-        Me.LblInvSokSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSokSavnet.Location = New System.Drawing.Point(364, 114)
-        Me.LblInvSokSavnet.Name = "LblInvSokSavnet"
-        Me.LblInvSokSavnet.Size = New System.Drawing.Size(54, 18)
-        Me.LblInvSokSavnet.TabIndex = 53
-        Me.LblInvSokSavnet.Text = "Savnet:"
-        '
-        'LblInvSokProduktID
-        '
-        Me.LblInvSokProduktID.AutoSize = True
-        Me.LblInvSokProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSokProduktID.Location = New System.Drawing.Point(134, 501)
-        Me.LblInvSokProduktID.Name = "LblInvSokProduktID"
-        Me.LblInvSokProduktID.Size = New System.Drawing.Size(202, 18)
-        Me.LblInvSokProduktID.TabIndex = 47
-        Me.LblInvSokProduktID.Text = "Legg inn produkt ID for å endre:"
-        '
-        'LblInvSokSkadet
-        '
-        Me.LblInvSokSkadet.AutoSize = True
-        Me.LblInvSokSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSokSkadet.Location = New System.Drawing.Point(364, 75)
-        Me.LblInvSokSkadet.Name = "LblInvSokSkadet"
-        Me.LblInvSokSkadet.Size = New System.Drawing.Size(54, 18)
-        Me.LblInvSokSkadet.TabIndex = 52
-        Me.LblInvSokSkadet.Text = "Skadet:"
-        '
-        'TxtInvSokProduktID
-        '
-        Me.TxtInvSokProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvSokProduktID.Location = New System.Drawing.Point(342, 498)
-        Me.TxtInvSokProduktID.Name = "TxtInvSokProduktID"
-        Me.TxtInvSokProduktID.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvSokProduktID.TabIndex = 46
-        '
-        'LblInvSokStatus
-        '
-        Me.LblInvSokStatus.AutoSize = True
-        Me.LblInvSokStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSokStatus.Location = New System.Drawing.Point(364, 36)
-        Me.LblInvSokStatus.Name = "LblInvSokStatus"
-        Me.LblInvSokStatus.Size = New System.Drawing.Size(50, 18)
-        Me.LblInvSokStatus.TabIndex = 51
-        Me.LblInvSokStatus.Text = "Status:"
-        '
-        'CboInvSokSubkategori
-        '
-        Me.CboInvSokSubkategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvSokSubkategori.FormattingEnabled = True
-        Me.CboInvSokSubkategori.Location = New System.Drawing.Point(101, 111)
-        Me.CboInvSokSubkategori.Name = "CboInvSokSubkategori"
-        Me.CboInvSokSubkategori.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSokSubkategori.TabIndex = 41
-        '
-        'CboInvSokStatus
-        '
-        Me.CboInvSokStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvSokStatus.FormattingEnabled = True
-        Me.CboInvSokStatus.Items.AddRange(New Object() {"Inne", "Ute"})
-        Me.CboInvSokStatus.Location = New System.Drawing.Point(443, 33)
-        Me.CboInvSokStatus.Name = "CboInvSokStatus"
-        Me.CboInvSokStatus.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSokStatus.TabIndex = 50
-        '
-        'CboInvSokSkadet
-        '
-        Me.CboInvSokSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvSokSkadet.FormattingEnabled = True
-        Me.CboInvSokSkadet.Items.AddRange(New Object() {"Nei", "Ja"})
-        Me.CboInvSokSkadet.Location = New System.Drawing.Point(443, 72)
-        Me.CboInvSokSkadet.Name = "CboInvSokSkadet"
-        Me.CboInvSokSkadet.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSokSkadet.TabIndex = 49
-        '
-        'LblInvSokSubkategori
-        '
-        Me.LblInvSokSubkategori.AutoSize = True
-        Me.LblInvSokSubkategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSokSubkategori.Location = New System.Drawing.Point(6, 114)
-        Me.LblInvSokSubkategori.Name = "LblInvSokSubkategori"
-        Me.LblInvSokSubkategori.Size = New System.Drawing.Size(86, 18)
-        Me.LblInvSokSubkategori.TabIndex = 40
-        Me.LblInvSokSubkategori.Text = "Subkategori:"
-        '
-        'CboInvSokSavnet
-        '
-        Me.CboInvSokSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvSokSavnet.FormattingEnabled = True
-        Me.CboInvSokSavnet.Items.AddRange(New Object() {"Nei", "Ja"})
-        Me.CboInvSokSavnet.Location = New System.Drawing.Point(443, 111)
-        Me.CboInvSokSavnet.Name = "CboInvSokSavnet"
-        Me.CboInvSokSavnet.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSokSavnet.TabIndex = 48
-        '
-        'BtnIvnSokEndre
-        '
-        Me.BtnIvnSokEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnIvnSokEndre.Location = New System.Drawing.Point(479, 499)
-        Me.BtnIvnSokEndre.Name = "BtnIvnSokEndre"
-        Me.BtnIvnSokEndre.Size = New System.Drawing.Size(85, 23)
-        Me.BtnIvnSokEndre.TabIndex = 39
-        Me.BtnIvnSokEndre.Text = "Endre"
-        Me.BtnIvnSokEndre.UseVisualStyleBackColor = True
-        '
-        'BtnInvSokSok
-        '
-        Me.BtnInvSokSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvSokSok.Location = New System.Drawing.Point(262, 112)
-        Me.BtnInvSokSok.Name = "BtnInvSokSok"
-        Me.BtnInvSokSok.Size = New System.Drawing.Size(62, 23)
-        Me.BtnInvSokSok.TabIndex = 28
-        Me.BtnInvSokSok.Text = "Søk!"
-        Me.BtnInvSokSok.UseVisualStyleBackColor = True
-        '
-        'LstInvSokSokeResultat
-        '
-        Me.LstInvSokSokeResultat.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LstInvSokSokeResultat.FormattingEnabled = True
-        Me.LstInvSokSokeResultat.HorizontalScrollbar = True
-        Me.LstInvSokSokeResultat.ItemHeight = 15
-        Me.LstInvSokSokeResultat.Location = New System.Drawing.Point(6, 159)
-        Me.LstInvSokSokeResultat.Name = "LstInvSokSokeResultat"
-        Me.LstInvSokSokeResultat.Size = New System.Drawing.Size(558, 319)
-        Me.LstInvSokSokeResultat.TabIndex = 27
-        '
-        'CboInvSokKategori
-        '
-        Me.CboInvSokKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvSokKategori.FormattingEnabled = True
-        Me.CboInvSokKategori.Items.AddRange(New Object() {"Sykkel", "Utstyr"})
-        Me.CboInvSokKategori.Location = New System.Drawing.Point(101, 72)
-        Me.CboInvSokKategori.Name = "CboInvSokKategori"
-        Me.CboInvSokKategori.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSokKategori.TabIndex = 26
-        '
-        'LblInvSokKategori
-        '
-        Me.LblInvSokKategori.AutoSize = True
-        Me.LblInvSokKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSokKategori.Location = New System.Drawing.Point(6, 75)
-        Me.LblInvSokKategori.Name = "LblInvSokKategori"
-        Me.LblInvSokKategori.Size = New System.Drawing.Size(64, 18)
-        Me.LblInvSokKategori.TabIndex = 23
-        Me.LblInvSokKategori.Text = "Kategori:"
-        '
-        'TxtInvSokSokefelt
-        '
-        Me.TxtInvSokSokefelt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvSokSokefelt.Location = New System.Drawing.Point(101, 33)
-        Me.TxtInvSokSokefelt.Name = "TxtInvSokSokefelt"
-        Me.TxtInvSokSokefelt.Size = New System.Drawing.Size(211, 26)
-        Me.TxtInvSokSokefelt.TabIndex = 22
-        '
-        'LblInvSokSokefelt
-        '
-        Me.LblInvSokSokefelt.AutoSize = True
-        Me.LblInvSokSokefelt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSokSokefelt.Location = New System.Drawing.Point(6, 36)
-        Me.LblInvSokSokefelt.Name = "LblInvSokSokefelt"
-        Me.LblInvSokSokefelt.Size = New System.Drawing.Size(64, 18)
-        Me.LblInvSokSokefelt.TabIndex = 1
-        Me.LblInvSokSokefelt.Text = "Søkefelt:"
-        '
-        'GrpInvRegistrerEndre
-        '
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvEndre)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvRegistrertID)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvProduktID)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvSavnet)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvSkadet)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvStatus)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvStatus)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvSkadet)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvSavnet)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvSubkategori)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvSubkategori)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvGirsystem)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvHjulstorrelse)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvRamme)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvGirsystem)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvHjulstorrelse)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvRamme)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvAvdeling)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvKategori)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvInnkjopspris)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvRegistrer)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvForhandler)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvVareNummer)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvProduktnavn)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvForhandler)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvInnkjopspris)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvVarenummer)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvProduktnavn)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvAvdeling)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvKategori)
-        Me.GrpInvRegistrerEndre.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpInvRegistrerEndre.Location = New System.Drawing.Point(3, 3)
-        Me.GrpInvRegistrerEndre.Name = "GrpInvRegistrerEndre"
-        Me.GrpInvRegistrerEndre.Size = New System.Drawing.Size(394, 528)
-        Me.GrpInvRegistrerEndre.TabIndex = 38
-        Me.GrpInvRegistrerEndre.TabStop = False
-        Me.GrpInvRegistrerEndre.Text = "Registrer og Endre Inventar"
-        '
-        'BtnInvEndre
-        '
-        Me.BtnInvEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvEndre.Location = New System.Drawing.Point(303, 499)
-        Me.BtnInvEndre.Name = "BtnInvEndre"
-        Me.BtnInvEndre.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvEndre.TabIndex = 47
-        Me.BtnInvEndre.Text = "Endre"
-        Me.BtnInvEndre.UseVisualStyleBackColor = True
-        '
-        'LblInvRegistrertID
-        '
-        Me.LblInvRegistrertID.AutoSize = True
-        Me.LblInvRegistrertID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvRegistrertID.Location = New System.Drawing.Point(41, 501)
-        Me.LblInvRegistrertID.Name = "LblInvRegistrertID"
-        Me.LblInvRegistrertID.Size = New System.Drawing.Size(165, 18)
-        Me.LblInvRegistrertID.TabIndex = 46
-        Me.LblInvRegistrertID.Text = "Registrert med ID: xxxxxx"
-        '
-        'LblInvProduktID
-        '
-        Me.LblInvProduktID.AutoSize = True
-        Me.LblInvProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvProduktID.Location = New System.Drawing.Point(262, 36)
-        Me.LblInvProduktID.Name = "LblInvProduktID"
-        Me.LblInvProduktID.Size = New System.Drawing.Size(122, 18)
-        Me.LblInvProduktID.TabIndex = 45
-        Me.LblInvProduktID.Text = "Produkt ID: xxxxxx"
-        '
-        'LblInvSavnet
-        '
-        Me.LblInvSavnet.AutoSize = True
-        Me.LblInvSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSavnet.Location = New System.Drawing.Point(262, 390)
-        Me.LblInvSavnet.Name = "LblInvSavnet"
-        Me.LblInvSavnet.Size = New System.Drawing.Size(54, 18)
-        Me.LblInvSavnet.TabIndex = 44
-        Me.LblInvSavnet.Text = "Savnet:"
-        '
-        'LblInvSkadet
-        '
-        Me.LblInvSkadet.AutoSize = True
-        Me.LblInvSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSkadet.Location = New System.Drawing.Point(262, 306)
-        Me.LblInvSkadet.Name = "LblInvSkadet"
-        Me.LblInvSkadet.Size = New System.Drawing.Size(54, 18)
-        Me.LblInvSkadet.TabIndex = 43
-        Me.LblInvSkadet.Text = "Skadet:"
-        '
-        'LblInvStatus
-        '
-        Me.LblInvStatus.AutoSize = True
-        Me.LblInvStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvStatus.Location = New System.Drawing.Point(262, 222)
-        Me.LblInvStatus.Name = "LblInvStatus"
-        Me.LblInvStatus.Size = New System.Drawing.Size(50, 18)
-        Me.LblInvStatus.TabIndex = 42
-        Me.LblInvStatus.Text = "Status:"
-        '
-        'CboInvStatus
-        '
-        Me.CboInvStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvStatus.FormattingEnabled = True
-        Me.CboInvStatus.Items.AddRange(New Object() {"Inne", "Ute", "1"})
-        Me.CboInvStatus.Location = New System.Drawing.Point(265, 243)
-        Me.CboInvStatus.Name = "CboInvStatus"
-        Me.CboInvStatus.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvStatus.TabIndex = 41
-        '
-        'CboInvSkadet
-        '
-        Me.CboInvSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvSkadet.FormattingEnabled = True
-        Me.CboInvSkadet.Items.AddRange(New Object() {"Nei", "Ja", "1"})
-        Me.CboInvSkadet.Location = New System.Drawing.Point(265, 327)
-        Me.CboInvSkadet.Name = "CboInvSkadet"
-        Me.CboInvSkadet.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSkadet.TabIndex = 40
-        '
-        'CboInvSavnet
-        '
-        Me.CboInvSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvSavnet.FormattingEnabled = True
-        Me.CboInvSavnet.Items.AddRange(New Object() {"Nei", "Ja", "1"})
-        Me.CboInvSavnet.Location = New System.Drawing.Point(265, 411)
-        Me.CboInvSavnet.Name = "CboInvSavnet"
-        Me.CboInvSavnet.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSavnet.TabIndex = 39
-        '
-        'CboInvSubkategori
-        '
-        Me.CboInvSubkategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvSubkategori.FormattingEnabled = True
-        Me.CboInvSubkategori.Items.AddRange(New Object() {"Offroad", "Bysykkel", "Elsykkel", "Racer", "Tandem", "Barnesykkel", "7777"})
-        Me.CboInvSubkategori.Location = New System.Drawing.Point(123, 75)
-        Me.CboInvSubkategori.Name = "CboInvSubkategori"
-        Me.CboInvSubkategori.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSubkategori.TabIndex = 38
-        '
-        'LblInvSubkategori
-        '
-        Me.LblInvSubkategori.AutoSize = True
-        Me.LblInvSubkategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvSubkategori.Location = New System.Drawing.Point(6, 78)
-        Me.LblInvSubkategori.Name = "LblInvSubkategori"
-        Me.LblInvSubkategori.Size = New System.Drawing.Size(86, 18)
-        Me.LblInvSubkategori.TabIndex = 37
-        Me.LblInvSubkategori.Text = "Subkategori:"
-        '
-        'TxtInvGirsystem
-        '
-        Me.TxtInvGirsystem.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvGirsystem.Location = New System.Drawing.Point(123, 369)
-        Me.TxtInvGirsystem.Name = "TxtInvGirsystem"
-        Me.TxtInvGirsystem.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvGirsystem.TabIndex = 32
-        '
-        'TxtInvHjulstorrelse
-        '
-        Me.TxtInvHjulstorrelse.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvHjulstorrelse.Location = New System.Drawing.Point(123, 327)
-        Me.TxtInvHjulstorrelse.Name = "TxtInvHjulstorrelse"
-        Me.TxtInvHjulstorrelse.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvHjulstorrelse.TabIndex = 31
-        '
-        'TxtInvRamme
-        '
-        Me.TxtInvRamme.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvRamme.Location = New System.Drawing.Point(123, 285)
-        Me.TxtInvRamme.Name = "TxtInvRamme"
-        Me.TxtInvRamme.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvRamme.TabIndex = 30
-        '
-        'LblInvGirsystem
-        '
-        Me.LblInvGirsystem.AutoSize = True
-        Me.LblInvGirsystem.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvGirsystem.Location = New System.Drawing.Point(6, 372)
-        Me.LblInvGirsystem.Name = "LblInvGirsystem"
-        Me.LblInvGirsystem.Size = New System.Drawing.Size(74, 18)
-        Me.LblInvGirsystem.TabIndex = 29
-        Me.LblInvGirsystem.Text = "Girsystem:"
-        '
-        'LblInvHjulstorrelse
-        '
-        Me.LblInvHjulstorrelse.AutoSize = True
-        Me.LblInvHjulstorrelse.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvHjulstorrelse.Location = New System.Drawing.Point(6, 330)
-        Me.LblInvHjulstorrelse.Name = "LblInvHjulstorrelse"
-        Me.LblInvHjulstorrelse.Size = New System.Drawing.Size(88, 18)
-        Me.LblInvHjulstorrelse.TabIndex = 28
-        Me.LblInvHjulstorrelse.Text = "Hjulstørrelse"
-        '
-        'LblInvRamme
-        '
-        Me.LblInvRamme.AutoSize = True
-        Me.LblInvRamme.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvRamme.Location = New System.Drawing.Point(6, 288)
-        Me.LblInvRamme.Name = "LblInvRamme"
-        Me.LblInvRamme.Size = New System.Drawing.Size(59, 18)
-        Me.LblInvRamme.TabIndex = 27
-        Me.LblInvRamme.Text = "Ramme:"
-        '
-        'CboInvAvdeling
-        '
-        Me.CboInvAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvAvdeling.FormattingEnabled = True
-        Me.CboInvAvdeling.Items.AddRange(New Object() {"Finse", "Flåm", "Haugastøl", "Myrdal", "Voss", "1111"})
-        Me.CboInvAvdeling.Location = New System.Drawing.Point(123, 117)
-        Me.CboInvAvdeling.Name = "CboInvAvdeling"
-        Me.CboInvAvdeling.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvAvdeling.TabIndex = 26
-        '
-        'CboInvKategori
-        '
-        Me.CboInvKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvKategori.FormattingEnabled = True
-        Me.CboInvKategori.Items.AddRange(New Object() {"Sykkel", "Utstyr", "9999"})
-        Me.CboInvKategori.Location = New System.Drawing.Point(123, 33)
-        Me.CboInvKategori.Name = "CboInvKategori"
-        Me.CboInvKategori.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvKategori.TabIndex = 25
-        '
-        'TxtInvInnkjopspris
-        '
-        Me.TxtInvInnkjopspris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvInnkjopspris.Location = New System.Drawing.Point(123, 243)
-        Me.TxtInvInnkjopspris.Name = "TxtInvInnkjopspris"
-        Me.TxtInvInnkjopspris.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvInnkjopspris.TabIndex = 24
-        '
-        'BtnInvRegistrer
-        '
-        Me.BtnInvRegistrer.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvRegistrer.Location = New System.Drawing.Point(212, 499)
-        Me.BtnInvRegistrer.Name = "BtnInvRegistrer"
-        Me.BtnInvRegistrer.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvRegistrer.TabIndex = 23
-        Me.BtnInvRegistrer.Text = "Registrer"
-        Me.BtnInvRegistrer.UseVisualStyleBackColor = True
-        '
-        'CboInvForhandler
-        '
-        Me.CboInvForhandler.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboInvForhandler.FormattingEnabled = True
-        Me.CboInvForhandler.Items.AddRange(New Object() {"DBS", "TREK", "Everest", "2222", "testforhandler"})
-        Me.CboInvForhandler.Location = New System.Drawing.Point(123, 411)
-        Me.CboInvForhandler.Name = "CboInvForhandler"
-        Me.CboInvForhandler.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvForhandler.TabIndex = 20
-        '
-        'TxtInvVareNummer
-        '
-        Me.TxtInvVareNummer.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvVareNummer.Location = New System.Drawing.Point(123, 201)
-        Me.TxtInvVareNummer.Name = "TxtInvVareNummer"
-        Me.TxtInvVareNummer.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvVareNummer.TabIndex = 14
-        '
-        'TxtInvProduktnavn
-        '
-        Me.TxtInvProduktnavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvProduktnavn.Location = New System.Drawing.Point(123, 159)
-        Me.TxtInvProduktnavn.Name = "TxtInvProduktnavn"
-        Me.TxtInvProduktnavn.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvProduktnavn.TabIndex = 13
-        '
-        'LblInvForhandler
-        '
-        Me.LblInvForhandler.AutoSize = True
-        Me.LblInvForhandler.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvForhandler.Location = New System.Drawing.Point(6, 414)
-        Me.LblInvForhandler.Name = "LblInvForhandler"
-        Me.LblInvForhandler.Size = New System.Drawing.Size(80, 18)
-        Me.LblInvForhandler.TabIndex = 8
-        Me.LblInvForhandler.Text = "Forhandler:"
-        '
-        'LblInvInnkjopspris
-        '
-        Me.LblInvInnkjopspris.AutoSize = True
-        Me.LblInvInnkjopspris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvInnkjopspris.Location = New System.Drawing.Point(6, 246)
-        Me.LblInvInnkjopspris.Name = "LblInvInnkjopspris"
-        Me.LblInvInnkjopspris.Size = New System.Drawing.Size(88, 18)
-        Me.LblInvInnkjopspris.TabIndex = 6
-        Me.LblInvInnkjopspris.Text = "Innkjøpspris:"
-        '
-        'LblInvVarenummer
-        '
-        Me.LblInvVarenummer.AutoSize = True
-        Me.LblInvVarenummer.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvVarenummer.Location = New System.Drawing.Point(6, 204)
-        Me.LblInvVarenummer.Name = "LblInvVarenummer"
-        Me.LblInvVarenummer.Size = New System.Drawing.Size(93, 18)
-        Me.LblInvVarenummer.TabIndex = 5
-        Me.LblInvVarenummer.Text = "Varenummer:"
-        '
-        'LblInvProduktnavn
-        '
-        Me.LblInvProduktnavn.AutoSize = True
-        Me.LblInvProduktnavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvProduktnavn.Location = New System.Drawing.Point(6, 162)
-        Me.LblInvProduktnavn.Name = "LblInvProduktnavn"
-        Me.LblInvProduktnavn.Size = New System.Drawing.Size(91, 18)
-        Me.LblInvProduktnavn.TabIndex = 4
-        Me.LblInvProduktnavn.Text = "Produktnavn:"
-        '
-        'LblInvAvdeling
-        '
-        Me.LblInvAvdeling.AutoSize = True
-        Me.LblInvAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvAvdeling.Location = New System.Drawing.Point(6, 120)
-        Me.LblInvAvdeling.Name = "LblInvAvdeling"
-        Me.LblInvAvdeling.Size = New System.Drawing.Size(67, 18)
-        Me.LblInvAvdeling.TabIndex = 3
-        Me.LblInvAvdeling.Text = "Avdeling:"
-        '
-        'LblInvKategori
-        '
-        Me.LblInvKategori.AutoSize = True
-        Me.LblInvKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvKategori.Location = New System.Drawing.Point(6, 36)
-        Me.LblInvKategori.Name = "LblInvKategori"
-        Me.LblInvKategori.Size = New System.Drawing.Size(64, 18)
-        Me.LblInvKategori.TabIndex = 1
-        Me.LblInvKategori.Text = "Kategori:"
         '
         'ISTab
         '
@@ -1455,6 +936,536 @@ Partial Class Form1
         Me.AdminNBBIDL.TabIndex = 0
         Me.AdminNBBIDL.Text = "Bruker ID:"
         '
+        'DBAdminTab
+        '
+        Me.DBAdminTab.Location = New System.Drawing.Point(4, 32)
+        Me.DBAdminTab.Name = "DBAdminTab"
+        Me.DBAdminTab.Size = New System.Drawing.Size(976, 534)
+        Me.DBAdminTab.TabIndex = 8
+        Me.DBAdminTab.Text = "DB Admin"
+        Me.DBAdminTab.UseVisualStyleBackColor = True
+        '
+        'GrpInvRegistrerEndre
+        '
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvEndre)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvRegistrertID)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvProduktID)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvSavnet)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvSkadet)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvStatus)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvStatus)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvSkadet)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvSavnet)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvSubkategori)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvSubkategori)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvGirsystem)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvHjulstorrelse)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvRamme)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvGirsystem)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvHjulstorrelse)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvRamme)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvAvdeling)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvKategori)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvInnkjopspris)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvRegistrer)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.CboInvForhandler)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvVareNummer)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvProduktnavn)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvForhandler)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvInnkjopspris)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvVarenummer)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvProduktnavn)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvAvdeling)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvKategori)
+        Me.GrpInvRegistrerEndre.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpInvRegistrerEndre.Location = New System.Drawing.Point(3, 3)
+        Me.GrpInvRegistrerEndre.Name = "GrpInvRegistrerEndre"
+        Me.GrpInvRegistrerEndre.Size = New System.Drawing.Size(394, 528)
+        Me.GrpInvRegistrerEndre.TabIndex = 39
+        Me.GrpInvRegistrerEndre.TabStop = False
+        Me.GrpInvRegistrerEndre.Text = "Registrer og Endre Inventar"
+        '
+        'BtnInvEndre
+        '
+        Me.BtnInvEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnInvEndre.Location = New System.Drawing.Point(303, 499)
+        Me.BtnInvEndre.Name = "BtnInvEndre"
+        Me.BtnInvEndre.Size = New System.Drawing.Size(85, 23)
+        Me.BtnInvEndre.TabIndex = 47
+        Me.BtnInvEndre.Text = "Endre"
+        Me.BtnInvEndre.UseVisualStyleBackColor = True
+        '
+        'LblInvRegistrertID
+        '
+        Me.LblInvRegistrertID.AutoSize = True
+        Me.LblInvRegistrertID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvRegistrertID.Location = New System.Drawing.Point(41, 501)
+        Me.LblInvRegistrertID.Name = "LblInvRegistrertID"
+        Me.LblInvRegistrertID.Size = New System.Drawing.Size(165, 18)
+        Me.LblInvRegistrertID.TabIndex = 46
+        Me.LblInvRegistrertID.Text = "Registrert med ID: xxxxxx"
+        '
+        'LblInvProduktID
+        '
+        Me.LblInvProduktID.AutoSize = True
+        Me.LblInvProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvProduktID.Location = New System.Drawing.Point(262, 36)
+        Me.LblInvProduktID.Name = "LblInvProduktID"
+        Me.LblInvProduktID.Size = New System.Drawing.Size(122, 18)
+        Me.LblInvProduktID.TabIndex = 45
+        Me.LblInvProduktID.Text = "Produkt ID: xxxxxx"
+        '
+        'LblInvSavnet
+        '
+        Me.LblInvSavnet.AutoSize = True
+        Me.LblInvSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvSavnet.Location = New System.Drawing.Point(262, 390)
+        Me.LblInvSavnet.Name = "LblInvSavnet"
+        Me.LblInvSavnet.Size = New System.Drawing.Size(54, 18)
+        Me.LblInvSavnet.TabIndex = 44
+        Me.LblInvSavnet.Text = "Savnet:"
+        '
+        'LblInvSkadet
+        '
+        Me.LblInvSkadet.AutoSize = True
+        Me.LblInvSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvSkadet.Location = New System.Drawing.Point(262, 306)
+        Me.LblInvSkadet.Name = "LblInvSkadet"
+        Me.LblInvSkadet.Size = New System.Drawing.Size(54, 18)
+        Me.LblInvSkadet.TabIndex = 43
+        Me.LblInvSkadet.Text = "Skadet:"
+        '
+        'LblInvStatus
+        '
+        Me.LblInvStatus.AutoSize = True
+        Me.LblInvStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvStatus.Location = New System.Drawing.Point(262, 222)
+        Me.LblInvStatus.Name = "LblInvStatus"
+        Me.LblInvStatus.Size = New System.Drawing.Size(50, 18)
+        Me.LblInvStatus.TabIndex = 42
+        Me.LblInvStatus.Text = "Status:"
+        '
+        'CboInvStatus
+        '
+        Me.CboInvStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvStatus.FormattingEnabled = True
+        Me.CboInvStatus.Items.AddRange(New Object() {"Inne", "Ute", "1"})
+        Me.CboInvStatus.Location = New System.Drawing.Point(265, 243)
+        Me.CboInvStatus.Name = "CboInvStatus"
+        Me.CboInvStatus.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvStatus.TabIndex = 41
+        '
+        'CboInvSkadet
+        '
+        Me.CboInvSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvSkadet.FormattingEnabled = True
+        Me.CboInvSkadet.Items.AddRange(New Object() {"Nei", "Ja", "1"})
+        Me.CboInvSkadet.Location = New System.Drawing.Point(265, 327)
+        Me.CboInvSkadet.Name = "CboInvSkadet"
+        Me.CboInvSkadet.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvSkadet.TabIndex = 40
+        '
+        'CboInvSavnet
+        '
+        Me.CboInvSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvSavnet.FormattingEnabled = True
+        Me.CboInvSavnet.Items.AddRange(New Object() {"Nei", "Ja", "1"})
+        Me.CboInvSavnet.Location = New System.Drawing.Point(265, 411)
+        Me.CboInvSavnet.Name = "CboInvSavnet"
+        Me.CboInvSavnet.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvSavnet.TabIndex = 39
+        '
+        'CboInvSubkategori
+        '
+        Me.CboInvSubkategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvSubkategori.FormattingEnabled = True
+        Me.CboInvSubkategori.Items.AddRange(New Object() {"Offroad", "Bysykkel", "Elsykkel", "Racer", "Tandem", "Barnesykkel", "7777"})
+        Me.CboInvSubkategori.Location = New System.Drawing.Point(123, 75)
+        Me.CboInvSubkategori.Name = "CboInvSubkategori"
+        Me.CboInvSubkategori.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvSubkategori.TabIndex = 38
+        '
+        'LblInvSubkategori
+        '
+        Me.LblInvSubkategori.AutoSize = True
+        Me.LblInvSubkategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvSubkategori.Location = New System.Drawing.Point(6, 78)
+        Me.LblInvSubkategori.Name = "LblInvSubkategori"
+        Me.LblInvSubkategori.Size = New System.Drawing.Size(86, 18)
+        Me.LblInvSubkategori.TabIndex = 37
+        Me.LblInvSubkategori.Text = "Subkategori:"
+        '
+        'TxtInvGirsystem
+        '
+        Me.TxtInvGirsystem.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtInvGirsystem.Location = New System.Drawing.Point(123, 369)
+        Me.TxtInvGirsystem.Name = "TxtInvGirsystem"
+        Me.TxtInvGirsystem.Size = New System.Drawing.Size(121, 26)
+        Me.TxtInvGirsystem.TabIndex = 32
+        '
+        'TxtInvHjulstorrelse
+        '
+        Me.TxtInvHjulstorrelse.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtInvHjulstorrelse.Location = New System.Drawing.Point(123, 327)
+        Me.TxtInvHjulstorrelse.Name = "TxtInvHjulstorrelse"
+        Me.TxtInvHjulstorrelse.Size = New System.Drawing.Size(121, 26)
+        Me.TxtInvHjulstorrelse.TabIndex = 31
+        '
+        'TxtInvRamme
+        '
+        Me.TxtInvRamme.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtInvRamme.Location = New System.Drawing.Point(123, 285)
+        Me.TxtInvRamme.Name = "TxtInvRamme"
+        Me.TxtInvRamme.Size = New System.Drawing.Size(121, 26)
+        Me.TxtInvRamme.TabIndex = 30
+        '
+        'LblInvGirsystem
+        '
+        Me.LblInvGirsystem.AutoSize = True
+        Me.LblInvGirsystem.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvGirsystem.Location = New System.Drawing.Point(6, 372)
+        Me.LblInvGirsystem.Name = "LblInvGirsystem"
+        Me.LblInvGirsystem.Size = New System.Drawing.Size(74, 18)
+        Me.LblInvGirsystem.TabIndex = 29
+        Me.LblInvGirsystem.Text = "Girsystem:"
+        '
+        'LblInvHjulstorrelse
+        '
+        Me.LblInvHjulstorrelse.AutoSize = True
+        Me.LblInvHjulstorrelse.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvHjulstorrelse.Location = New System.Drawing.Point(6, 330)
+        Me.LblInvHjulstorrelse.Name = "LblInvHjulstorrelse"
+        Me.LblInvHjulstorrelse.Size = New System.Drawing.Size(88, 18)
+        Me.LblInvHjulstorrelse.TabIndex = 28
+        Me.LblInvHjulstorrelse.Text = "Hjulstørrelse"
+        '
+        'LblInvRamme
+        '
+        Me.LblInvRamme.AutoSize = True
+        Me.LblInvRamme.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvRamme.Location = New System.Drawing.Point(6, 288)
+        Me.LblInvRamme.Name = "LblInvRamme"
+        Me.LblInvRamme.Size = New System.Drawing.Size(59, 18)
+        Me.LblInvRamme.TabIndex = 27
+        Me.LblInvRamme.Text = "Ramme:"
+        '
+        'CboInvAvdeling
+        '
+        Me.CboInvAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvAvdeling.FormattingEnabled = True
+        Me.CboInvAvdeling.Items.AddRange(New Object() {"Finse", "Flåm", "Haugastøl", "Myrdal", "Voss", "1111"})
+        Me.CboInvAvdeling.Location = New System.Drawing.Point(123, 117)
+        Me.CboInvAvdeling.Name = "CboInvAvdeling"
+        Me.CboInvAvdeling.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvAvdeling.TabIndex = 26
+        '
+        'CboInvKategori
+        '
+        Me.CboInvKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvKategori.FormattingEnabled = True
+        Me.CboInvKategori.Items.AddRange(New Object() {"Sykkel", "Utstyr", "9999"})
+        Me.CboInvKategori.Location = New System.Drawing.Point(123, 33)
+        Me.CboInvKategori.Name = "CboInvKategori"
+        Me.CboInvKategori.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvKategori.TabIndex = 25
+        '
+        'TxtInvInnkjopspris
+        '
+        Me.TxtInvInnkjopspris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtInvInnkjopspris.Location = New System.Drawing.Point(123, 243)
+        Me.TxtInvInnkjopspris.Name = "TxtInvInnkjopspris"
+        Me.TxtInvInnkjopspris.Size = New System.Drawing.Size(121, 26)
+        Me.TxtInvInnkjopspris.TabIndex = 24
+        '
+        'BtnInvRegistrer
+        '
+        Me.BtnInvRegistrer.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnInvRegistrer.Location = New System.Drawing.Point(212, 499)
+        Me.BtnInvRegistrer.Name = "BtnInvRegistrer"
+        Me.BtnInvRegistrer.Size = New System.Drawing.Size(85, 23)
+        Me.BtnInvRegistrer.TabIndex = 23
+        Me.BtnInvRegistrer.Text = "Registrer"
+        Me.BtnInvRegistrer.UseVisualStyleBackColor = True
+        '
+        'CboInvForhandler
+        '
+        Me.CboInvForhandler.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvForhandler.FormattingEnabled = True
+        Me.CboInvForhandler.Items.AddRange(New Object() {"DBS", "TREK", "Everest", "2222", "testforhandler"})
+        Me.CboInvForhandler.Location = New System.Drawing.Point(123, 411)
+        Me.CboInvForhandler.Name = "CboInvForhandler"
+        Me.CboInvForhandler.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvForhandler.TabIndex = 20
+        '
+        'TxtInvVareNummer
+        '
+        Me.TxtInvVareNummer.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtInvVareNummer.Location = New System.Drawing.Point(123, 201)
+        Me.TxtInvVareNummer.Name = "TxtInvVareNummer"
+        Me.TxtInvVareNummer.Size = New System.Drawing.Size(121, 26)
+        Me.TxtInvVareNummer.TabIndex = 14
+        '
+        'TxtInvProduktnavn
+        '
+        Me.TxtInvProduktnavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtInvProduktnavn.Location = New System.Drawing.Point(123, 159)
+        Me.TxtInvProduktnavn.Name = "TxtInvProduktnavn"
+        Me.TxtInvProduktnavn.Size = New System.Drawing.Size(121, 26)
+        Me.TxtInvProduktnavn.TabIndex = 13
+        '
+        'LblInvForhandler
+        '
+        Me.LblInvForhandler.AutoSize = True
+        Me.LblInvForhandler.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvForhandler.Location = New System.Drawing.Point(6, 414)
+        Me.LblInvForhandler.Name = "LblInvForhandler"
+        Me.LblInvForhandler.Size = New System.Drawing.Size(80, 18)
+        Me.LblInvForhandler.TabIndex = 8
+        Me.LblInvForhandler.Text = "Forhandler:"
+        '
+        'LblInvInnkjopspris
+        '
+        Me.LblInvInnkjopspris.AutoSize = True
+        Me.LblInvInnkjopspris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvInnkjopspris.Location = New System.Drawing.Point(6, 246)
+        Me.LblInvInnkjopspris.Name = "LblInvInnkjopspris"
+        Me.LblInvInnkjopspris.Size = New System.Drawing.Size(88, 18)
+        Me.LblInvInnkjopspris.TabIndex = 6
+        Me.LblInvInnkjopspris.Text = "Innkjøpspris:"
+        '
+        'LblInvVarenummer
+        '
+        Me.LblInvVarenummer.AutoSize = True
+        Me.LblInvVarenummer.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvVarenummer.Location = New System.Drawing.Point(6, 204)
+        Me.LblInvVarenummer.Name = "LblInvVarenummer"
+        Me.LblInvVarenummer.Size = New System.Drawing.Size(93, 18)
+        Me.LblInvVarenummer.TabIndex = 5
+        Me.LblInvVarenummer.Text = "Varenummer:"
+        '
+        'LblInvProduktnavn
+        '
+        Me.LblInvProduktnavn.AutoSize = True
+        Me.LblInvProduktnavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvProduktnavn.Location = New System.Drawing.Point(6, 162)
+        Me.LblInvProduktnavn.Name = "LblInvProduktnavn"
+        Me.LblInvProduktnavn.Size = New System.Drawing.Size(91, 18)
+        Me.LblInvProduktnavn.TabIndex = 4
+        Me.LblInvProduktnavn.Text = "Produktnavn:"
+        '
+        'LblInvAvdeling
+        '
+        Me.LblInvAvdeling.AutoSize = True
+        Me.LblInvAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvAvdeling.Location = New System.Drawing.Point(6, 120)
+        Me.LblInvAvdeling.Name = "LblInvAvdeling"
+        Me.LblInvAvdeling.Size = New System.Drawing.Size(67, 18)
+        Me.LblInvAvdeling.TabIndex = 3
+        Me.LblInvAvdeling.Text = "Avdeling:"
+        '
+        'LblInvKategori
+        '
+        Me.LblInvKategori.AutoSize = True
+        Me.LblInvKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvKategori.Location = New System.Drawing.Point(6, 36)
+        Me.LblInvKategori.Name = "LblInvKategori"
+        Me.LblInvKategori.Size = New System.Drawing.Size(64, 18)
+        Me.LblInvKategori.TabIndex = 1
+        Me.LblInvKategori.Text = "Kategori:"
+        '
+        'GrpInvSok
+        '
+        Me.GrpInvSok.Controls.Add(Me.LblInvSokSavnet)
+        Me.GrpInvSok.Controls.Add(Me.LblInvSokProduktID)
+        Me.GrpInvSok.Controls.Add(Me.LblInvSokSkadet)
+        Me.GrpInvSok.Controls.Add(Me.TxtInvSokProduktID)
+        Me.GrpInvSok.Controls.Add(Me.LblInvSokStatus)
+        Me.GrpInvSok.Controls.Add(Me.CboInvSokSubkategori)
+        Me.GrpInvSok.Controls.Add(Me.CboInvSokStatus)
+        Me.GrpInvSok.Controls.Add(Me.CboInvSokSkadet)
+        Me.GrpInvSok.Controls.Add(Me.LblInvSokSubkategori)
+        Me.GrpInvSok.Controls.Add(Me.CboInvSokSavnet)
+        Me.GrpInvSok.Controls.Add(Me.BtnIvnSokEndre)
+        Me.GrpInvSok.Controls.Add(Me.BtnInvSokSok)
+        Me.GrpInvSok.Controls.Add(Me.LstInvSokSokeResultat)
+        Me.GrpInvSok.Controls.Add(Me.CboInvSokKategori)
+        Me.GrpInvSok.Controls.Add(Me.LblInvSokKategori)
+        Me.GrpInvSok.Controls.Add(Me.TxtInvSokSokefelt)
+        Me.GrpInvSok.Controls.Add(Me.LblInvSokSokefelt)
+        Me.GrpInvSok.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpInvSok.Location = New System.Drawing.Point(403, 3)
+        Me.GrpInvSok.Name = "GrpInvSok"
+        Me.GrpInvSok.Size = New System.Drawing.Size(570, 528)
+        Me.GrpInvSok.TabIndex = 40
+        Me.GrpInvSok.TabStop = False
+        Me.GrpInvSok.Text = "Søk i sykler og inventar"
+        '
+        'LblInvSokSavnet
+        '
+        Me.LblInvSokSavnet.AutoSize = True
+        Me.LblInvSokSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvSokSavnet.Location = New System.Drawing.Point(364, 114)
+        Me.LblInvSokSavnet.Name = "LblInvSokSavnet"
+        Me.LblInvSokSavnet.Size = New System.Drawing.Size(54, 18)
+        Me.LblInvSokSavnet.TabIndex = 53
+        Me.LblInvSokSavnet.Text = "Savnet:"
+        '
+        'LblInvSokProduktID
+        '
+        Me.LblInvSokProduktID.AutoSize = True
+        Me.LblInvSokProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvSokProduktID.Location = New System.Drawing.Point(134, 501)
+        Me.LblInvSokProduktID.Name = "LblInvSokProduktID"
+        Me.LblInvSokProduktID.Size = New System.Drawing.Size(202, 18)
+        Me.LblInvSokProduktID.TabIndex = 47
+        Me.LblInvSokProduktID.Text = "Legg inn produkt ID for å endre:"
+        '
+        'LblInvSokSkadet
+        '
+        Me.LblInvSokSkadet.AutoSize = True
+        Me.LblInvSokSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvSokSkadet.Location = New System.Drawing.Point(364, 75)
+        Me.LblInvSokSkadet.Name = "LblInvSokSkadet"
+        Me.LblInvSokSkadet.Size = New System.Drawing.Size(54, 18)
+        Me.LblInvSokSkadet.TabIndex = 52
+        Me.LblInvSokSkadet.Text = "Skadet:"
+        '
+        'TxtInvSokProduktID
+        '
+        Me.TxtInvSokProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtInvSokProduktID.Location = New System.Drawing.Point(342, 498)
+        Me.TxtInvSokProduktID.Name = "TxtInvSokProduktID"
+        Me.TxtInvSokProduktID.Size = New System.Drawing.Size(121, 26)
+        Me.TxtInvSokProduktID.TabIndex = 46
+        '
+        'LblInvSokStatus
+        '
+        Me.LblInvSokStatus.AutoSize = True
+        Me.LblInvSokStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvSokStatus.Location = New System.Drawing.Point(364, 36)
+        Me.LblInvSokStatus.Name = "LblInvSokStatus"
+        Me.LblInvSokStatus.Size = New System.Drawing.Size(50, 18)
+        Me.LblInvSokStatus.TabIndex = 51
+        Me.LblInvSokStatus.Text = "Status:"
+        '
+        'CboInvSokSubkategori
+        '
+        Me.CboInvSokSubkategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvSokSubkategori.FormattingEnabled = True
+        Me.CboInvSokSubkategori.Location = New System.Drawing.Point(101, 111)
+        Me.CboInvSokSubkategori.Name = "CboInvSokSubkategori"
+        Me.CboInvSokSubkategori.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvSokSubkategori.TabIndex = 41
+        '
+        'CboInvSokStatus
+        '
+        Me.CboInvSokStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvSokStatus.FormattingEnabled = True
+        Me.CboInvSokStatus.Items.AddRange(New Object() {"Inne", "Ute"})
+        Me.CboInvSokStatus.Location = New System.Drawing.Point(443, 33)
+        Me.CboInvSokStatus.Name = "CboInvSokStatus"
+        Me.CboInvSokStatus.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvSokStatus.TabIndex = 50
+        '
+        'CboInvSokSkadet
+        '
+        Me.CboInvSokSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvSokSkadet.FormattingEnabled = True
+        Me.CboInvSokSkadet.Items.AddRange(New Object() {"Nei", "Ja"})
+        Me.CboInvSokSkadet.Location = New System.Drawing.Point(443, 72)
+        Me.CboInvSokSkadet.Name = "CboInvSokSkadet"
+        Me.CboInvSokSkadet.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvSokSkadet.TabIndex = 49
+        '
+        'LblInvSokSubkategori
+        '
+        Me.LblInvSokSubkategori.AutoSize = True
+        Me.LblInvSokSubkategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvSokSubkategori.Location = New System.Drawing.Point(6, 114)
+        Me.LblInvSokSubkategori.Name = "LblInvSokSubkategori"
+        Me.LblInvSokSubkategori.Size = New System.Drawing.Size(86, 18)
+        Me.LblInvSokSubkategori.TabIndex = 40
+        Me.LblInvSokSubkategori.Text = "Subkategori:"
+        '
+        'CboInvSokSavnet
+        '
+        Me.CboInvSokSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvSokSavnet.FormattingEnabled = True
+        Me.CboInvSokSavnet.Items.AddRange(New Object() {"Nei", "Ja"})
+        Me.CboInvSokSavnet.Location = New System.Drawing.Point(443, 111)
+        Me.CboInvSokSavnet.Name = "CboInvSokSavnet"
+        Me.CboInvSokSavnet.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvSokSavnet.TabIndex = 48
+        '
+        'BtnIvnSokEndre
+        '
+        Me.BtnIvnSokEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnIvnSokEndre.Location = New System.Drawing.Point(479, 499)
+        Me.BtnIvnSokEndre.Name = "BtnIvnSokEndre"
+        Me.BtnIvnSokEndre.Size = New System.Drawing.Size(85, 23)
+        Me.BtnIvnSokEndre.TabIndex = 39
+        Me.BtnIvnSokEndre.Text = "Endre"
+        Me.BtnIvnSokEndre.UseVisualStyleBackColor = True
+        '
+        'BtnInvSokSok
+        '
+        Me.BtnInvSokSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnInvSokSok.Location = New System.Drawing.Point(262, 112)
+        Me.BtnInvSokSok.Name = "BtnInvSokSok"
+        Me.BtnInvSokSok.Size = New System.Drawing.Size(62, 23)
+        Me.BtnInvSokSok.TabIndex = 28
+        Me.BtnInvSokSok.Text = "Søk!"
+        Me.BtnInvSokSok.UseVisualStyleBackColor = True
+        '
+        'LstInvSokSokeResultat
+        '
+        Me.LstInvSokSokeResultat.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LstInvSokSokeResultat.FormattingEnabled = True
+        Me.LstInvSokSokeResultat.HorizontalScrollbar = True
+        Me.LstInvSokSokeResultat.ItemHeight = 15
+        Me.LstInvSokSokeResultat.Location = New System.Drawing.Point(6, 159)
+        Me.LstInvSokSokeResultat.Name = "LstInvSokSokeResultat"
+        Me.LstInvSokSokeResultat.Size = New System.Drawing.Size(558, 319)
+        Me.LstInvSokSokeResultat.TabIndex = 27
+        '
+        'CboInvSokKategori
+        '
+        Me.CboInvSokKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboInvSokKategori.FormattingEnabled = True
+        Me.CboInvSokKategori.Items.AddRange(New Object() {"Sykkel", "Utstyr"})
+        Me.CboInvSokKategori.Location = New System.Drawing.Point(101, 72)
+        Me.CboInvSokKategori.Name = "CboInvSokKategori"
+        Me.CboInvSokKategori.Size = New System.Drawing.Size(121, 26)
+        Me.CboInvSokKategori.TabIndex = 26
+        '
+        'LblInvSokKategori
+        '
+        Me.LblInvSokKategori.AutoSize = True
+        Me.LblInvSokKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvSokKategori.Location = New System.Drawing.Point(6, 75)
+        Me.LblInvSokKategori.Name = "LblInvSokKategori"
+        Me.LblInvSokKategori.Size = New System.Drawing.Size(64, 18)
+        Me.LblInvSokKategori.TabIndex = 23
+        Me.LblInvSokKategori.Text = "Kategori:"
+        '
+        'TxtInvSokSokefelt
+        '
+        Me.TxtInvSokSokefelt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtInvSokSokefelt.Location = New System.Drawing.Point(101, 33)
+        Me.TxtInvSokSokefelt.Name = "TxtInvSokSokefelt"
+        Me.TxtInvSokSokefelt.Size = New System.Drawing.Size(211, 26)
+        Me.TxtInvSokSokefelt.TabIndex = 22
+        '
+        'LblInvSokSokefelt
+        '
+        Me.LblInvSokSokefelt.AutoSize = True
+        Me.LblInvSokSokefelt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvSokSokefelt.Location = New System.Drawing.Point(6, 36)
+        Me.LblInvSokSokefelt.Name = "LblInvSokSokefelt"
+        Me.LblInvSokSokefelt.Size = New System.Drawing.Size(64, 18)
+        Me.LblInvSokSokefelt.TabIndex = 1
+        Me.LblInvSokSokefelt.Text = "Søkefelt:"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1469,10 +1480,6 @@ Partial Class Form1
         Me.StartTab.PerformLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.InventarTab.ResumeLayout(False)
-        Me.GrpInvSok.ResumeLayout(False)
-        Me.GrpInvSok.PerformLayout()
-        Me.GrpInvRegistrerEndre.ResumeLayout(False)
-        Me.GrpInvRegistrerEndre.PerformLayout()
         Me.AdminTab.ResumeLayout(False)
         Me.AdminMOTDGroup.ResumeLayout(False)
         Me.AdminMOTDGroup.PerformLayout()
@@ -1482,6 +1489,10 @@ Partial Class Form1
         Me.AdminEndreBrukerGroup.PerformLayout()
         Me.AdminNyBrukerGroup.ResumeLayout(False)
         Me.AdminNyBrukerGroup.PerformLayout()
+        Me.GrpInvRegistrerEndre.ResumeLayout(False)
+        Me.GrpInvRegistrerEndre.PerformLayout()
+        Me.GrpInvSok.ResumeLayout(False)
+        Me.GrpInvSok.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1560,9 +1571,18 @@ Partial Class Form1
     Friend WithEvents AdminMOTDEndreB As Button
     Friend WithEvents AdminMOTDTB As TextBox
     Friend WithEvents AdminBSSokB As Button
+    Friend WithEvents DBAdminTab As TabPage
     Friend WithEvents GrpInvSok As GroupBox
+    Friend WithEvents LblInvSokSavnet As Label
+    Friend WithEvents LblInvSokProduktID As Label
+    Friend WithEvents LblInvSokSkadet As Label
+    Friend WithEvents TxtInvSokProduktID As TextBox
+    Friend WithEvents LblInvSokStatus As Label
     Friend WithEvents CboInvSokSubkategori As ComboBox
+    Friend WithEvents CboInvSokStatus As ComboBox
+    Friend WithEvents CboInvSokSkadet As ComboBox
     Friend WithEvents LblInvSokSubkategori As Label
+    Friend WithEvents CboInvSokSavnet As ComboBox
     Friend WithEvents BtnIvnSokEndre As Button
     Friend WithEvents BtnInvSokSok As Button
     Friend WithEvents LstInvSokSokeResultat As ListBox
@@ -1571,6 +1591,15 @@ Partial Class Form1
     Friend WithEvents TxtInvSokSokefelt As TextBox
     Friend WithEvents LblInvSokSokefelt As Label
     Friend WithEvents GrpInvRegistrerEndre As GroupBox
+    Friend WithEvents BtnInvEndre As Button
+    Friend WithEvents LblInvRegistrertID As Label
+    Friend WithEvents LblInvProduktID As Label
+    Friend WithEvents LblInvSavnet As Label
+    Friend WithEvents LblInvSkadet As Label
+    Friend WithEvents LblInvStatus As Label
+    Friend WithEvents CboInvStatus As ComboBox
+    Friend WithEvents CboInvSkadet As ComboBox
+    Friend WithEvents CboInvSavnet As ComboBox
     Friend WithEvents CboInvSubkategori As ComboBox
     Friend WithEvents LblInvSubkategori As Label
     Friend WithEvents TxtInvGirsystem As TextBox
@@ -1592,21 +1621,4 @@ Partial Class Form1
     Friend WithEvents LblInvProduktnavn As Label
     Friend WithEvents LblInvAvdeling As Label
     Friend WithEvents LblInvKategori As Label
-    Friend WithEvents LblInvProduktID As Label
-    Friend WithEvents LblInvSokProduktID As Label
-    Friend WithEvents TxtInvSokProduktID As TextBox
-    Friend WithEvents LblInvRegistrertID As Label
-    Friend WithEvents BtnInvEndre As Button
-    Friend WithEvents LblInvSokSavnet As Label
-    Friend WithEvents LblInvSokSkadet As Label
-    Friend WithEvents LblInvSokStatus As Label
-    Friend WithEvents CboInvSokStatus As ComboBox
-    Friend WithEvents CboInvSokSkadet As ComboBox
-    Friend WithEvents CboInvSokSavnet As ComboBox
-    Friend WithEvents LblInvSavnet As Label
-    Friend WithEvents LblInvSkadet As Label
-    Friend WithEvents LblInvStatus As Label
-    Friend WithEvents CboInvStatus As ComboBox
-    Friend WithEvents CboInvSkadet As ComboBox
-    Friend WithEvents CboInvSavnet As ComboBox
 End Class
