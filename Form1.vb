@@ -348,6 +348,54 @@ Public Class Form1
     'Her plasseres kode som er relevant til Admin Tab.
     'Variabler som brukes her skal begynne med Admin. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+    Private Sub AdminNyBruker()
+        Try
+            DBConnect()
+            Dim AdminAvdelingNavn As String = ""
+            Dim AdminAdminStatus As Integer = 0
+            If ChkAdminNBAdmin.Checked = True Then
+                AdminAdminStatus = 1
+            End If
+            Dim AdminNyBruker2 As New MySqlCommand("INSERT INTO passord (passord_id, pwd, bruker_id) VALUES (" & LblBrukerIDNBVis.Text & ", '" & TxtAdminNBPassord.Text & "'," & LblBrukerIDNBVis.Text & ");", tilkobling)
+            Dim AdminNyBruker3 As New MySqlCommand("UPDATE brukere SET passord_id = " & LblBrukerIDNBVis.Text & " WHERE bruker_id = " & LblBrukerIDNBVis.Text & ";", tilkobling)
+            Dim AdminNyBruker4 As New MySqlCommand("SELECT avdeling_id FROM avdeling WHERE avd_navn ='" & CboAdminNBAvdeling.Text & "';", tilkobling)
+
+            Dim AdminNyBrukerIDAdapter As New MySqlDataAdapter
+            Dim AdminNyBrukerIDTable As New DataTable
+
+            AdminNyBrukerIDAdapter.SelectCommand = AdminNyBruker4
+            AdminNyBrukerIDAdapter.Fill(AdminNyBrukerIDTable)
+
+            Dim AdminNyBrukerRow As DataRow
+
+            For Each AdminNyBrukerRow In AdminNyBrukerIDTable.Rows
+                AdminAvdelingNavn = AdminNyBrukerRow("avdeling_id")
+            Next
+
+            Dim AdminNyBruker1 As New MySqlCommand("INSERT INTO brukere (bruker_id, avdeling_id, stilling, fornavn, etternavn, timelonn, telefon, epost, stilling_prosent, admin) VALUES (" & LblBrukerIDNBVis.Text & "," & AdminAvdelingNavn & ",'" & CboAdminNBStilling.Text & "','" & TxtAdminNBFornavn.Text & "','" & TxtAdminNBEtternavn.Text & "'," _
+                                                   & TxtAdminNBTime.Text & ",'" & TxtAdminNBTelefon.Text & "', '" & TxtAdminNBEpost.Text & "'," & CboAdminNBSP.Text & "," & AdminAdminStatus & ");", tilkobling)
+
+            AdminNyBruker1.ExecuteNonQuery()
+            AdminNyBruker2.ExecuteNonQuery()
+            AdminNyBruker3.ExecuteNonQuery()
+
+            DBDisconnect()
+            TxtAdminNBPassord.Text = ""
+            TxtAdminNBFornavn.Text = ""
+            TxtAdminNBEtternavn.Text = ""
+            TxtAdminNBTime.Text = ""
+            TxtAdminNBEpost.Text = ""
+            TxtAdminNBTelefon.Text = ""
+            ChkAdminNBAdmin.Checked = False
+
+            MsgBox("Ny Bruker Opprettet!")
+
+        Catch AdminSqlError6 As MySqlException
+            MsgBox("Man får ikke koble til databasen:  " & AdminSqlError6.Message)
+        End Try
+    End Sub
+
     Private Sub AdminBrukerIDCalc()
         Try
             DBConnect()
@@ -436,6 +484,11 @@ Public Class Form1
         Catch AdminSqlError4 As MySqlException
             MsgBox("Man får ikke koble til databasen: " & AdminSqlError4.Message)
         End Try
+    End Sub
+
+    Private Sub AdminNBOpprettB_Click(sender As Object, e As EventArgs) Handles AdminNBOpprettB.Click
+        AdminNyBruker()
+        AdminBrukerIDCalc()
     End Sub
 
 
