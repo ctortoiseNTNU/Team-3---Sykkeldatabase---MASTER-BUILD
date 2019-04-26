@@ -25,7 +25,7 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.HovedTab = New System.Windows.Forms.TabControl()
         Me.StartTab = New System.Windows.Forms.TabPage()
-        Me.StartMOTDLabel = New System.Windows.Forms.Label()
+        Me.LblStartMOTD = New System.Windows.Forms.Label()
         Me.StartRettigheterLabel = New System.Windows.Forms.Label()
         Me.StartVelkommenLabel = New System.Windows.Forms.Label()
         Me.StartLogo = New System.Windows.Forms.PictureBox()
@@ -101,7 +101,7 @@ Partial Class Form1
         Me.AdminTab = New System.Windows.Forms.TabPage()
         Me.AdminMOTDGroup = New System.Windows.Forms.GroupBox()
         Me.AdminMOTDEndreB = New System.Windows.Forms.Button()
-        Me.AdminMOTDTB = New System.Windows.Forms.TextBox()
+        Me.TxtAdminMOTD = New System.Windows.Forms.TextBox()
         Me.AdminBrukerSokGroup = New System.Windows.Forms.GroupBox()
         Me.LvAdminBS = New System.Windows.Forms.ListView()
         Me.LvAdminBID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -199,7 +199,7 @@ Partial Class Form1
         'StartTab
         '
         Me.StartTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.StartTab.Controls.Add(Me.StartMOTDLabel)
+        Me.StartTab.Controls.Add(Me.LblStartMOTD)
         Me.StartTab.Controls.Add(Me.StartRettigheterLabel)
         Me.StartTab.Controls.Add(Me.StartVelkommenLabel)
         Me.StartTab.Controls.Add(Me.StartLogo)
@@ -211,19 +211,19 @@ Partial Class Form1
         Me.StartTab.Text = "Start"
         Me.StartTab.UseVisualStyleBackColor = True
         '
-        'StartMOTDLabel
+        'LblStartMOTD
         '
-        Me.StartMOTDLabel.AutoSize = True
-        Me.StartMOTDLabel.Location = New System.Drawing.Point(210, 445)
-        Me.StartMOTDLabel.Name = "StartMOTDLabel"
-        Me.StartMOTDLabel.Size = New System.Drawing.Size(539, 23)
-        Me.StartMOTDLabel.TabIndex = 3
-        Me.StartMOTDLabel.Text = "Message of the Day: Per, kunne du kjøpe erstatnings hjulene i dag?"
+        Me.LblStartMOTD.Location = New System.Drawing.Point(19, 426)
+        Me.LblStartMOTD.Name = "LblStartMOTD"
+        Me.LblStartMOTD.Size = New System.Drawing.Size(1192, 50)
+        Me.LblStartMOTD.TabIndex = 3
+        Me.LblStartMOTD.Text = "Message of the Day: Per, kunne du kjøpe erstatnings hjulene i dag?"
+        Me.LblStartMOTD.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'StartRettigheterLabel
         '
         Me.StartRettigheterLabel.AutoSize = True
-        Me.StartRettigheterLabel.Location = New System.Drawing.Point(374, 73)
+        Me.StartRettigheterLabel.Location = New System.Drawing.Point(507, 72)
         Me.StartRettigheterLabel.Name = "StartRettigheterLabel"
         Me.StartRettigheterLabel.Size = New System.Drawing.Size(211, 23)
         Me.StartRettigheterLabel.TabIndex = 2
@@ -232,7 +232,7 @@ Partial Class Form1
         'StartVelkommenLabel
         '
         Me.StartVelkommenLabel.AutoSize = True
-        Me.StartVelkommenLabel.Location = New System.Drawing.Point(361, 34)
+        Me.StartVelkommenLabel.Location = New System.Drawing.Point(489, 28)
         Me.StartVelkommenLabel.Name = "StartVelkommenLabel"
         Me.StartVelkommenLabel.Size = New System.Drawing.Size(244, 23)
         Me.StartVelkommenLabel.TabIndex = 1
@@ -242,7 +242,7 @@ Partial Class Form1
         '
         Me.StartLogo.Image = CType(resources.GetObject("StartLogo.Image"), System.Drawing.Image)
         Me.StartLogo.InitialImage = CType(resources.GetObject("StartLogo.InitialImage"), System.Drawing.Image)
-        Me.StartLogo.Location = New System.Drawing.Point(348, 121)
+        Me.StartLogo.Location = New System.Drawing.Point(476, 129)
         Me.StartLogo.Name = "StartLogo"
         Me.StartLogo.Size = New System.Drawing.Size(257, 260)
         Me.StartLogo.TabIndex = 0
@@ -923,7 +923,7 @@ Partial Class Form1
         'AdminMOTDGroup
         '
         Me.AdminMOTDGroup.Controls.Add(Me.AdminMOTDEndreB)
-        Me.AdminMOTDGroup.Controls.Add(Me.AdminMOTDTB)
+        Me.AdminMOTDGroup.Controls.Add(Me.TxtAdminMOTD)
         Me.AdminMOTDGroup.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AdminMOTDGroup.Location = New System.Drawing.Point(626, 310)
         Me.AdminMOTDGroup.Name = "AdminMOTDGroup"
@@ -942,14 +942,14 @@ Partial Class Form1
         Me.AdminMOTDEndreB.Text = "Endre MOTD"
         Me.AdminMOTDEndreB.UseVisualStyleBackColor = True
         '
-        'AdminMOTDTB
+        'TxtAdminMOTD
         '
-        Me.AdminMOTDTB.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AdminMOTDTB.Location = New System.Drawing.Point(9, 31)
-        Me.AdminMOTDTB.Multiline = True
-        Me.AdminMOTDTB.Name = "AdminMOTDTB"
-        Me.AdminMOTDTB.Size = New System.Drawing.Size(321, 128)
-        Me.AdminMOTDTB.TabIndex = 0
+        Me.TxtAdminMOTD.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAdminMOTD.Location = New System.Drawing.Point(9, 31)
+        Me.TxtAdminMOTD.Multiline = True
+        Me.TxtAdminMOTD.Name = "TxtAdminMOTD"
+        Me.TxtAdminMOTD.Size = New System.Drawing.Size(321, 128)
+        Me.TxtAdminMOTD.TabIndex = 0
         '
         'AdminBrukerSokGroup
         '
@@ -1632,7 +1632,7 @@ Partial Class Form1
     Friend WithEvents LogiTab As TabPage
     Friend WithEvents StatTab As TabPage
     Friend WithEvents AdminTab As TabPage
-    Friend WithEvents StartMOTDLabel As Label
+    Friend WithEvents LblStartMOTD As Label
     Friend WithEvents StartRettigheterLabel As Label
     Friend WithEvents StartVelkommenLabel As Label
     Friend WithEvents StartLogo As PictureBox
@@ -1694,7 +1694,7 @@ Partial Class Form1
     Friend WithEvents LblAdminBSFelt As Label
     Friend WithEvents AdminMOTDGroup As GroupBox
     Friend WithEvents AdminMOTDEndreB As Button
-    Friend WithEvents AdminMOTDTB As TextBox
+    Friend WithEvents TxtAdminMOTD As TextBox
     Friend WithEvents AdminBSSokB As Button
     Friend WithEvents DBAdminTab As TabPage
     Friend WithEvents GrpInvSok As GroupBox

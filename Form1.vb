@@ -44,7 +44,7 @@ Public Class Form1
 
 #Region "Form Load og Login"
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        StartMOTDUpdate()
     End Sub
 
 
@@ -62,6 +62,7 @@ Public Class Form1
         Select Case HovedTabIndex
             Case 1 'Bestemmer det som skjer etter man har valgt startmeny.
                 MsgBox("Startmeny")
+                StartMOTDUpdate()
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
                 MsgBox("Utleiemeny")
             Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
@@ -90,6 +91,26 @@ Public Class Form1
     'Her plasseres kode som er relevant til Start Tab.
     'Variabler som brukes her skal begynne med Start. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+    Private Sub StartMOTDUpdate()
+        Try
+            DBConnect()
+            Dim StartMOTDKommando As New MySqlCommand("Select * FROM message_of_the_day WHERE message_id = 1", tilkobling)
+            Dim StartMOTDAdapter As New MySqlDataAdapter
+            Dim StartMOTDTable As New DataTable
+            StartMOTDAdapter.SelectCommand = StartMOTDKommando
+            StartMOTDAdapter.Fill(StartMOTDTable)
+            DBDisconnect()
+            Dim StartMOTDRow As DataRow
+            For Each StartMOTDRow In StartMOTDTable.Rows
+                LblStartMOTD.Text = "Message of the Day: " + StartMOTDRow("message")
+            Next
+
+        Catch StartSqlError1 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & StartSqlError1.Message)
+
+        End Try
+    End Sub
 #End Region
 
 
@@ -402,6 +423,22 @@ Public Class Form1
         End Try
 
     End Sub
+
+    Private Sub AdminMOTDEndreB_Click(sender As Object, e As EventArgs) Handles AdminMOTDEndreB.Click
+        Try
+            DBConnect()
+            Dim AdminMOTDSet As New MySqlCommand("UPDATE message_of_the_day SET message = '" & TxtAdminMOTD.Text & "' WHERE message_id = 1;", tilkobling)
+            AdminMOTDSet.ExecuteNonQuery()
+            DBDisconnect()
+            TxtAdminMOTD.Text = ""
+            MsgBox("Message of the Day har blitt endret!")
+            StartMOTDUpdate()
+        Catch AdminSqlError4 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError4.Message)
+        End Try
+    End Sub
+
+
 
 #End Region
 End Class
