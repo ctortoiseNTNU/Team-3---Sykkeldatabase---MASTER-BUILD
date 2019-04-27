@@ -491,13 +491,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-
-
-
-
-    End Sub
-
 #End Region
 
 
