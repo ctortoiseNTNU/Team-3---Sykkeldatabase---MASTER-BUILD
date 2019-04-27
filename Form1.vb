@@ -407,25 +407,22 @@ Public Class Form1
 
     'Dropdown:
     'Kategori er delt i sykkel og utstyr.
-    'Subkategorier vil avhenge av om det er sykkel eller utstyr som skal registreres. Disse må fastsettes.
+    'Subkategorier vil avhenge av om det er sykkel eller utstyr som skal registreres.
+    'Foreløpig ingen kategorier for utstyr
+
     'Standardvalg for status, skadet, savnet er henholdsvis inne, nei, nei. ???
 
-    'LblInvProduktID viser ID til objekt som ønskes endret.
-    'LblInvRegistrertID viser ID til produkt som er registrert ETTER registreringen er fullført.
-
+    'Må gjøres:
     'MsgBox for bekreftelse av registrering og endring av objekter.
+    'Sjekk av kun tall der et er nødvendig
+    'True / false i søkeresultat -> "ja" / "nei" for skadet/savnet
 
     Private Sub BtnInvRegistrer_Click(sender As Object, e As EventArgs) Handles BtnInvRegistrer.Click
 
         Dim InvKategori, InvSubkategori, InvAvdeling, InvProduktnavn, InvVarenummer, InvInnkjopspris,
             InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandler, InvStatus, InvSkadet, InvSavnet,
-            InvSokefelt, InvProduktID As String
-
-        Dim InvForhandlerID, InvAvdelingID, InvSubKategoriID As String
-
-        Dim InvForhandlerIDSporring, InvAvdelingIDSporring, InvSubKategoriIDSporring As String
-
-        Dim InvRegistrerSporring As String
+            InvForhandlerID, InvAvdelingID, InvSubKategoriID, InvForhandlerIDSporring,
+            InvAvdelingIDSporring, InvSubKategoriIDSporring, InvRegistrerSporring As String
 
         InvKategori = CboInvKategori.SelectedItem
         InvSubkategori = CboInvSubkategori.SelectedItem
@@ -448,6 +445,8 @@ Public Class Form1
 
         Dim InvSqlID As MySqlCommand
         Dim InvSqlLeser As MySqlDataReader
+
+        'Henter ID fra forhandler, avdeling og subkategori basert på navn i respektive comboboxer
         Try
             DBConnect()
 
@@ -473,13 +472,11 @@ Public Class Form1
             InvSqlLeser.Close()
 
             DBDisconnect()
-
         Catch ex As MySqlException
-            MsgBox(ex.Message)
+            MsgBox("Feil ved henting av ID:" & vbNewLine & ex.Message)
         End Try
 
-
-        'SQLspørring for innlegging av sykkel/utstyr i database. Data hentes fra felt
+        'SQLspørring for innlegging av sykkel i database. Data hentes fra felt
         If CboInvKategori.SelectedItem = "Sykkel" Then
             InvRegistrerSporring = "INSERT INTO sykler (forhandler_id, type_id, avdeling_id, sykkel_navn, " &
                 "sykkel_modell, sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)" _
@@ -497,20 +494,34 @@ Public Class Form1
                 da.Fill(interntabell)
                 DBDisconnect()
             Catch ex As MySqlException
-                MsgBox(ex.Message)
+                MsgBox("Feil ved registrering av sykkel:" & vbNewLine & ex.Message)
             End Try
 
-        Else
-            'Spørring for innlegg av utstyr.
-            'Elementer i combobox for subkat må endres til subkat for utstyr.
-            'VedBytteAvVerdi.comboboxkat -> comboboxsubkat.elementer = ...
-        End If
+            'SQLspørring for innlegging av utstyr i database. Data hentes fra felt
+        ElseIf CboInvKategori.SelectedItem = "Sykkel" Then
+            InvRegistrerSporring = "INSERT INTO utstyr (utstyr_navn, varenummer, utstyr_pris, forhandler_id)" _
+                & " VALUES('" & InvProduktnavn & "' ,'" & InvVarenummer & "', '" & InvInnkjopspris _
+                & "', '" & InvForhandlerID & "');"
 
+            Try
+                DBConnect()
+                Dim da As New MySqlDataAdapter
+                Dim sqlRegistrer As New MySqlCommand(InvRegistrerSporring, tilkobling)
+                Dim interntabell As New DataTable
+                da.SelectCommand = sqlRegistrer
+                da.Fill(interntabell)
+                DBDisconnect()
+            Catch ex As MySqlException
+                MsgBox("Feil ved registrering av utstyr:" & vbNewLine & ex.Message)
+            End Try
+        Else
+            MsgBox("Velg kategori")
+        End If
 
     End Sub
 
     Private Sub BtnInvSoke_Click(sender As Object, e As EventArgs) Handles BtnInvSoke.Click
-        'skadet og savnet må settes selectedindex - ?
+        'skadet og savnet må settes selectedindex? - se if else for å unngå NULL
 
         'Tømmer tidligere søkeresultat fra listview
         LivSok.Items.Clear()
@@ -518,6 +529,8 @@ Public Class Form1
         Dim InvForhandlerID As String
         Dim InvAvdelingID As String
         Dim InvSubKategoriID As String
+        Dim SpSkadet As String
+        Dim SpSavnet As String
 
         Dim InvForhandlerNavn As String = CboInvForhandler.SelectedItem
         Dim InvAvdelingNavn As String = CboInvAvdeling.SelectedItem
@@ -557,11 +570,10 @@ Public Class Form1
 
             DBDisconnect()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox("Feil ved henting av ID:" & vbNewLine & ex.Message)
         End Try
 
-        Dim SpSkadet As String
-        Dim SpSavnet As String
+        'Deklarering av variabler for oppbygging av SQLspørring
         Dim SpInit As String = "SELECT * FROM sykler WHERE "
         Dim SpSykkelNavn As String = "sykkel_navn LIKE '%" & TxtInvProduktnavn.Text.Trim & "%'"
         Dim SpsykkelModell As String = "type_id LIKE '%" & InvSubKategoriID & "%'"
@@ -574,7 +586,7 @@ Public Class Form1
         Dim SpForhandlerID As String = "forhandler_id LIKE '%" & InvForhandlerID & "%'"
         Dim SpSykkelStatus As String = "sykkel_status LIKE '%" & CboInvStatus.SelectedItem & "%'"
 
-        'Unngår NULL verdi fra combobox skadet og savnet - (nødvendig?)
+        'Unngår NULL verdi fra combobox skadet og savnet - (nødvendig? sammenheng med selectedindex presatt...)
         If CboInvSkadet.SelectedIndex = 0 Or CboInvSkadet.SelectedIndex = 1 Then
             SpSkadet = "skadet LIKE '%" & CboInvSkadet.SelectedIndex & "%'"
         Else
@@ -596,7 +608,8 @@ Public Class Form1
         Dim InvResultatArray(12) As String
         Dim InvResultatObjekt As ListViewItem
 
-        'Sender spørring basert på innlagte data i skjema [navn] og skriver ut returnerte rader til listview [navn]
+        'Sender spørring for søk basert på innlagte data i skjema [navn].
+        'Skriver ut returnerte rader til listview [navn]
         Try
             DBConnect()
 
@@ -619,7 +632,7 @@ Public Class Form1
 
             DBDisconnect()
         Catch ex As MySqlException
-            MsgBox(ex.Message)
+            MsgBox("Feil ved søk i database:" & vbNewLine & ex.Message)
         End Try
     End Sub
 
@@ -627,137 +640,33 @@ Public Class Form1
         'SQLspørring med _endring_ (alter table) av data for valgt produkt med ID fra valgt produkt i søkefelt
     End Sub
 
-    Private Sub BtnIvnSokEndre_Click(sender As Object, e As EventArgs) Handles BtnIvnSokEndre.Click
-        'ID nummer hentes fra TxtInvSokProduktID og SQLspørring henter objektet og legger verdiene i feltet for
-        'registrering/endring. 
-        Dim InvKategori, InvSubkategori, InvAvdeling, InvProduktnavn, InvVarenummer, InvInnkjopspris,
-            InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandler, InvStatus, InvSkadet, InvSavnet,
-            InvSokefelt, InvProduktID As String
-        Dim InvForhandlerID, InvAvdelingID, InvSubKategoriID As String
-        Dim InvForhandlerIDSporring, InvAvdelingIDSporring, InvSubKategoriIDSporring As String
-        Dim InvRegistrerSporring As String
+    'Setter Enabled false på ukurrante felt for utstyr
+    Private Sub CboInvKategori_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboInvKategori.SelectedIndexChanged
+        If CboInvKategori.SelectedItem = "Utstyr" Then
+            CboInvSubkategori.Enabled = False
+            CboInvAvdeling.Enabled = False
+            TxtInvRamme.Enabled = False
+            TxtInvHjulstorrelse.Enabled = False
+            TxtInvGirsystem.Enabled = False
+            CboInvStatus.Enabled = False
+            CboInvSkadet.Enabled = False
+            CboInvSavnet.Enabled = False
+        Else
+            CboInvSubkategori.Enabled = True
+            CboInvAvdeling.Enabled = True
+            TxtInvRamme.Enabled = True
+            TxtInvHjulstorrelse.Enabled = True
+            TxtInvGirsystem.Enabled = True
+            CboInvStatus.Enabled = True
+            CboInvSkadet.Enabled = True
+            CboInvSavnet.Enabled = True
+        End If
+    End Sub
 
-        InvKategori = CboInvKategori.SelectedItem
-        InvSubkategori = CboInvSubkategori.SelectedItem
-        InvAvdeling = CboInvAvdeling.SelectedItem
-        InvProduktnavn = TxtInvProduktnavn.Text
-        InvVarenummer = TxtInvVareNummer.Text
-        InvInnkjopspris = TxtInvInnkjopspris.Text
-        InvRamme = TxtInvRamme.Text
-        InvHjulstorrlese = TxtInvHjulstorrelse.Text
-        InvGirsystem = TxtInvGirsystem.Text
-        InvForhandler = CboInvForhandler.SelectedItem
-        InvStatus = CboInvStatus.SelectedItem
-        InvSkadet = CboInvSkadet.SelectedIndex
-        InvSavnet = CboInvSavnet.SelectedIndex
-
-        InvForhandlerIDSporring = "SELECT forhandler_id FROM forhandler WHERE forhandler_navn='testforhandler';"
-        InvAvdelingIDSporring = "SELECT avdeling_id FROM avdeling WHERE avd_navn='Finse';"
-        InvSubKategoriIDSporring = "SELECT type_id FROM sykkel_typer WHERE kategori='Racer';"
-
-        Dim InvSqlID As MySqlCommand
-        Dim InvSqlLeser As MySqlDataReader
-
-        DBConnect()
-
-        InvSqlID = New MySqlCommand(InvForhandlerIDSporring, tilkobling)
-        InvSqlLeser = InvSqlID.ExecuteReader()
-        While InvSqlLeser.Read()
-            InvForhandlerID = InvSqlLeser("forhandler_id")
-        End While
-        InvSqlLeser.Close()
-        InvSqlID = New MySqlCommand(InvAvdelingIDSporring, tilkobling)
-        InvSqlLeser = InvSqlID.ExecuteReader()
-        While InvSqlLeser.Read()
-            InvAvdelingID = InvSqlLeser("avdeling_id")
-        End While
-        InvSqlLeser.Close()
-        InvSqlID = New MySqlCommand(InvSubKategoriIDSporring, tilkobling)
-        InvSqlLeser = InvSqlID.ExecuteReader()
-        While InvSqlLeser.Read()
-            InvSubKategoriID = InvSqlLeser("type_id")
-        End While
-        InvSqlLeser.Close()
-        DBDisconnect()
-
-        InvRegistrerSporring = "SELECT * FROM sykler WHERE forhandler_id LIKE '%" & InvForhandlerID _
-            & "%'"
-
-        ', type_id, avdeling_id, sykkel_navn, " &
-        '        "sykkel_modell, sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)""
-
-
-
-        ' & "VALUES (""" + InvForhandlerID & """, """ & InvSubKategoriID & """, """ _
-        '                & InvAvdelingID + """, """ & InvProduktnavn & """, """ & InvVarenummer & """, """ _
-        '                & InvInnkjopspris & """, """ & InvStatus & """, """ & InvHjulstorrlese & """, """ _
-        '                & InvRamme & """, """ & InvGirsystem & """, """ & InvSavnet & """, """ & InvSkadet & """);"
-
-
+    Private Sub BtnInvHent_Click(sender As Object, e As EventArgs) Handles BtnInvHent.Click
 
     End Sub
 
-    Private Sub BtnInvSokSok_Click(sender As Object, e As EventArgs) Handles BtnInvSokSok.Click
-        'SQLspørring med valgte søkekriterier for søk etter objekter 
-        'Bruke samme skjema som reg/endre? 
-        'chkbox for å velge kolonner som skal vises
-        '  SELECT * FROM sykler WHERE diverse_felt = søkeverdi AND subkat, status, skadet, savnet = verdier
-
-        DBConnect()
-
-
-        'test for søk
-        Dim testcommand As MySqlCommand
-        Dim testleser As MySqlDataReader
-        Dim testsporring As String
-        Dim testarray(12) As String
-        Dim arritem As ListViewItem
-        Dim testsporring3 As String
-        Dim InvSokeKategori As String = "sykkel_navn"
-        testsporring = "SELECT * FROM sykler WHERE " & InvSokeKategori & " Like '%" & TxtInvSokSokefelt.Text & "%'"
-        testsporring3 = "SELECT * FROM sykler WHERE forhandler_id LIKE '%" & CboInvForhandler.SelectedItem & "%'"
-
-        'SELECT sykler.sykkel_navn, forhandler.forhandler_navn FROM sykler INNER JOIN forhandler ON sykler.forhandler_id=forhandler.forhandler_id
-
-        'testsporring2 = "select * From sykler where forhandler_id=""9999"";"
-        testcommand = New MySqlCommand(testsporring3, tilkobling)
-        testleser = testcommand.ExecuteReader()
-
-        'for hver kolonne les inn verdi 0-12 og legg i listview
-        While testleser.Read()
-            For i = 0 To testleser.FieldCount - 1
-                If TypeOf testleser(i) Is DBNull Then
-                Else
-                    testarray(i) = testleser(i)
-                End If
-            Next
-            arritem = New ListViewItem(testarray)
-            LivSok.Items.Add(arritem)
-        End While
-
-        '   legger inn i listbox
-        'Dim testdata As String
-        'While testleser.Read()
-        '    testdata = ""
-        '    For i = 0 To testleser.FieldCount - 1
-        '        If TypeOf testleser(i) Is DBNull Then
-        '            testdata = testdata + ""
-        '        Else
-        '            If testdata = "" Then
-        '                testdata = CStr(testleser(i))
-        '            Else
-        '                testdata = testdata + " - " + CStr(testleser(i))
-        '            End If
-        '        End If
-        '    Next
-        '    LstInvSokSokeResultat.Items.Add(testdata)
-        'End While
-
-        testleser.Close()
-
-        DBDisconnect()
-
-    End Sub
 
 #End Region
 
@@ -1039,12 +948,6 @@ Public Class Form1
     Private Sub AdminEBEndreB_Click(sender As Object, e As EventArgs) Handles AdminEBEndreB.Click
         AdminEndreBruker()
     End Sub
-
-
-
-
-
-
 
 
 
