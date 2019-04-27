@@ -44,7 +44,7 @@ Public Class Form1
 
 #Region "Form Load og Login"
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        StartMOTDUpdate()
     End Sub
 
 
@@ -62,6 +62,7 @@ Public Class Form1
         Select Case HovedTabIndex
             Case 1 'Bestemmer det som skjer etter man har valgt startmeny.
                 MsgBox("Startmeny")
+                StartMOTDUpdate()
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
                 MsgBox("Utleiemeny")
             Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
@@ -90,6 +91,26 @@ Public Class Form1
     'Her plasseres kode som er relevant til Start Tab.
     'Variabler som brukes her skal begynne med Start. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+    Private Sub StartMOTDUpdate()
+        Try
+            DBConnect()
+            Dim StartMOTDKommando As New MySqlCommand("Select * FROM message_of_the_day WHERE message_id = 1", tilkobling)
+            Dim StartMOTDAdapter As New MySqlDataAdapter
+            Dim StartMOTDTable As New DataTable
+            StartMOTDAdapter.SelectCommand = StartMOTDKommando
+            StartMOTDAdapter.Fill(StartMOTDTable)
+            DBDisconnect()
+            Dim StartMOTDRow As DataRow
+            For Each StartMOTDRow In StartMOTDTable.Rows
+                LblStartMOTD.Text = "Message of the Day: " + StartMOTDRow("message")
+            Next
+
+        Catch StartSqlError1 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & StartSqlError1.Message)
+
+        End Try
+    End Sub
 #End Region
 
 
@@ -396,6 +417,54 @@ Public Class Form1
     'Her plasseres kode som er relevant til Admin Tab.
     'Variabler som brukes her skal begynne med Admin. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+    Private Sub AdminNyBruker()
+        Try
+            DBConnect()
+            Dim AdminAvdelingNavn As String = ""
+            Dim AdminAdminStatus As Integer = 0
+            If ChkAdminNBAdmin.Checked = True Then
+                AdminAdminStatus = 1
+            End If
+            Dim AdminNyBruker2 As New MySqlCommand("INSERT INTO passord (passord_id, pwd, bruker_id) VALUES (" & LblBrukerIDNBVis.Text & ", '" & TxtAdminNBPassord.Text & "'," & LblBrukerIDNBVis.Text & ");", tilkobling)
+            Dim AdminNyBruker3 As New MySqlCommand("UPDATE brukere SET passord_id = " & LblBrukerIDNBVis.Text & " WHERE bruker_id = " & LblBrukerIDNBVis.Text & ";", tilkobling)
+            Dim AdminNyBruker4 As New MySqlCommand("SELECT avdeling_id FROM avdeling WHERE avd_navn ='" & CboAdminNBAvdeling.Text & "';", tilkobling)
+
+            Dim AdminNyBrukerIDAdapter As New MySqlDataAdapter
+            Dim AdminNyBrukerIDTable As New DataTable
+
+            AdminNyBrukerIDAdapter.SelectCommand = AdminNyBruker4
+            AdminNyBrukerIDAdapter.Fill(AdminNyBrukerIDTable)
+
+            Dim AdminNyBrukerRow As DataRow
+
+            For Each AdminNyBrukerRow In AdminNyBrukerIDTable.Rows
+                AdminAvdelingNavn = AdminNyBrukerRow("avdeling_id")
+            Next
+
+            Dim AdminNyBruker1 As New MySqlCommand("INSERT INTO brukere (bruker_id, avdeling_id, stilling, fornavn, etternavn, timelonn, telefon, epost, stilling_prosent, admin) VALUES (" & LblBrukerIDNBVis.Text & "," & AdminAvdelingNavn & ",'" & CboAdminNBStilling.Text & "','" & TxtAdminNBFornavn.Text & "','" & TxtAdminNBEtternavn.Text & "'," _
+                                                   & TxtAdminNBTime.Text & ",'" & TxtAdminNBTelefon.Text & "', '" & TxtAdminNBEpost.Text & "'," & CboAdminNBSP.Text & "," & AdminAdminStatus & ");", tilkobling)
+
+            AdminNyBruker1.ExecuteNonQuery()
+            AdminNyBruker2.ExecuteNonQuery()
+            AdminNyBruker3.ExecuteNonQuery()
+
+            DBDisconnect()
+            TxtAdminNBPassord.Text = ""
+            TxtAdminNBFornavn.Text = ""
+            TxtAdminNBEtternavn.Text = ""
+            TxtAdminNBTime.Text = ""
+            TxtAdminNBEpost.Text = ""
+            TxtAdminNBTelefon.Text = ""
+            ChkAdminNBAdmin.Checked = False
+
+            MsgBox("Ny Bruker Opprettet!")
+
+        Catch AdminSqlError6 As MySqlException
+            MsgBox("Man får ikke koble til databasen:  " & AdminSqlError6.Message)
+        End Try
+    End Sub
+
     Private Sub AdminBrukerIDCalc()
         Try
             DBConnect()
@@ -471,6 +540,27 @@ Public Class Form1
         End Try
 
     End Sub
+
+    Private Sub AdminMOTDEndreB_Click(sender As Object, e As EventArgs) Handles AdminMOTDEndreB.Click
+        Try
+            DBConnect()
+            Dim AdminMOTDSet As New MySqlCommand("UPDATE message_of_the_day SET message = '" & TxtAdminMOTD.Text & "' WHERE message_id = 1;", tilkobling)
+            AdminMOTDSet.ExecuteNonQuery()
+            DBDisconnect()
+            TxtAdminMOTD.Text = ""
+            MsgBox("Message of the Day har blitt endret!")
+            StartMOTDUpdate()
+        Catch AdminSqlError4 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError4.Message)
+        End Try
+    End Sub
+
+    Private Sub AdminNBOpprettB_Click(sender As Object, e As EventArgs) Handles AdminNBOpprettB.Click
+        AdminNyBruker()
+        AdminBrukerIDCalc()
+    End Sub
+
+
 
 #End Region
 End Class
