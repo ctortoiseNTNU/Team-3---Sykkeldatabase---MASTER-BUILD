@@ -567,6 +567,105 @@ Public Class Form1
         End Try
     End Sub
 
+    Private Sub AdminEndreBruker()
+        Try
+            DBConnect()
+            Dim AdminAvdelingNavn As String = ""
+            Dim AdminAdminStatus As Integer = 0
+            If ChkAdminNBAdmin.Checked = True Then
+                AdminAdminStatus = 1
+            End If
+
+            Dim AdminEndreBruker3 As New MySqlCommand("UPDATE passord SET pwd ='" & TxtAdminEBPassord.Text & "' WHERE bruker_id = " & TxtAdminEBBID.Text & ";", tilkobling)
+            Dim AdminEndreBruker4 As New MySqlCommand("SELECT avdeling_id FROM avdeling WHERE avd_navn ='" & CboAdminEBAvdeling.Text & "';", tilkobling)
+
+            Dim AdminEndreBrukerIDAdapter As New MySqlDataAdapter
+            Dim AdminEndreBrukerIDTable As New DataTable
+
+            AdminEndreBrukerIDAdapter.SelectCommand = AdminEndreBruker4
+            AdminEndreBrukerIDAdapter.Fill(AdminEndreBrukerIDTable)
+
+            Dim AdminNyBrukerRow As DataRow
+
+            For Each AdminNyBrukerRow In AdminEndreBrukerIDTable.Rows
+                AdminAvdelingNavn = AdminNyBrukerRow("avdeling_id")
+            Next
+
+            Dim AdminEndreBruker1 As New MySqlCommand("UPDATE brukere SET avdeling_id=" & AdminAvdelingNavn & ", stilling='" & CboAdminEBStilling.Text & "', fornavn='" & TxtAdminEBFornavn.Text & "', etternavn='" & TxtAdminEBEtternavn.Text & "', timelonn=" & TxtAdminEBTime.Text & ", telefon='" & TxtAdminEBTelefon.Text & "', epost='" & TxtAdminEBEpost.Text & "', stilling_prosent=" & CboAdminEBSP.Text & ", admin=" & AdminAdminStatus & " WHERE bruker_id=" & TxtAdminEBBID.Text & ";", tilkobling)
+
+            AdminEndreBruker1.ExecuteNonQuery()
+
+            If TxtAdminEBPassord.Text = "" Then
+            Else
+                AdminEndreBruker3.ExecuteNonQuery()
+            End If
+
+
+            DBDisconnect()
+            TxtAdminEBPassord.Text = ""
+            TxtAdminEBFornavn.Text = ""
+            TxtAdminEBEtternavn.Text = ""
+            TxtAdminEBTime.Text = ""
+            TxtAdminEBEpost.Text = ""
+            TxtAdminEBTelefon.Text = ""
+            ChkAdminEBAdmin.Checked = False
+
+            MsgBox("Bruker Endret!")
+
+        Catch AdminSqlError8 As MySqlException
+            MsgBox("Man får ikke koble til databasen:  " & AdminSqlError8.Message)
+        End Try
+    End Sub
+    Private Sub AdminLastInnEndreBruker()
+        Try
+            DBConnect()
+            Dim AdminEBBIDKommando As New MySqlCommand("Select * FROM brukere WHERE bruker_id =" & TxtAdminEBBID.Text & ";", tilkobling)
+            Dim AdminEBBIDAdapter As New MySqlDataAdapter
+            Dim AdminEBBIDTable As New DataTable
+            Dim AdminEBAvdelingID As String = ""
+            AdminEBBIDAdapter.SelectCommand = AdminEBBIDKommando
+            AdminEBBIDAdapter.Fill(AdminEBBIDTable)
+            DBDisconnect()
+
+            Dim AdminEBBIDRow As DataRow
+            For Each AdminEBBIDRow In AdminEBBIDTable.Rows
+                TxtAdminEBFornavn.Text = AdminEBBIDRow("fornavn")
+                TxtAdminEBEtternavn.Text = AdminEBBIDRow("etternavn")
+                TxtAdminEBTime.Text = AdminEBBIDRow("timelonn")
+                TxtAdminEBEpost.Text = AdminEBBIDRow("epost")
+                TxtAdminEBTelefon.Text = AdminEBBIDRow("telefon")
+                CboAdminEBStilling.SelectedText = AdminEBBIDRow("stilling")
+                CboAdminEBSP.SelectedText = AdminEBBIDRow("stilling_prosent")
+                If AdminEBBIDRow("admin") = "1" Then
+                    ChkAdminEBAdmin.Checked = True
+                End If
+                AdminEBAvdelingID = AdminEBBIDRow("avdeling_id")
+
+            Next
+
+            DBConnect()
+            Dim AdminEBAvdelingKom As New MySqlCommand("SELECT avd_navn FROM avdeling WHERE avdeling_id =" & AdminEBAvdelingID & ";", tilkobling)
+            Dim AdminEBAvdelingAdapter As New MySqlDataAdapter
+            Dim AdminEBAvdelingTable As New DataTable
+
+            AdminEBAvdelingAdapter.SelectCommand = AdminEBAvdelingKom
+            AdminEBAvdelingAdapter.Fill(AdminEBAvdelingTable)
+            DBDisconnect()
+
+            Dim AdminEBAvdelingRow As DataRow
+
+            For Each AdminEBAvdelingRow In AdminEBAvdelingTable.Rows
+                CboAdminEBAvdeling.SelectedText = AdminEBAvdelingRow("avd_navn")
+            Next
+
+            If TxtAdminEBFornavn.Text = "" Then
+                MsgBox("Brukeren med ID: " & TxtAdminEBBID.Text & " eksisterer ikke.")
+            End If
+        Catch AdminSqlError7 As MySqlException
+            MsgBox("Man får ikke koble til databasen:  " & AdminSqlError7.Message)
+        End Try
+    End Sub
+
     Private Sub AdminBrukerIDCalc()
         Try
             DBConnect()
@@ -660,6 +759,16 @@ Public Class Form1
     Private Sub AdminNBOpprettB_Click(sender As Object, e As EventArgs) Handles AdminNBOpprettB.Click
         AdminNyBruker()
         AdminBrukerIDCalc()
+    End Sub
+
+    Private Sub AdminEBLastInnB_Click(sender As Object, e As EventArgs) Handles AdminEBLastInnB.Click
+        AdminLastInnEndreBruker()
+
+
+    End Sub
+
+    Private Sub AdminEBEndreB_Click(sender As Object, e As EventArgs) Handles AdminEBEndreB.Click
+        AdminEndreBruker()
     End Sub
 
 
