@@ -16,16 +16,23 @@ Public Class Form1
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8cf8fdf3676373e7791d2068835f9c6c8999bfee
 #End Region
 
 #Region "GlobaleFunksjonerOgProsedyrer"
     'Her plasseres globale funksjoner og prosdyrer som gjenbrukes over programmet. De er uten navnekonvensjon
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
+=======
+    Private Sub DBConnect()
+>>>>>>> 8cf8fdf3676373e7791d2068835f9c6c8999bfee
         tilkobling = New MySqlConnection(
         "Server=mysql-ait.stud.idi.ntnu.no;" _
         & "Database=colinft;" _
@@ -43,6 +50,9 @@ Public Class Form1
         tilkobling.Dispose()
     End Sub
 
+<<<<<<< HEAD
+>>>>>>> 8cf8fdf3676373e7791d2068835f9c6c8999bfee
+=======
 >>>>>>> 8cf8fdf3676373e7791d2068835f9c6c8999bfee
 #End Region
 
@@ -93,6 +103,9 @@ Public Class Form1
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8cf8fdf3676373e7791d2068835f9c6c8999bfee
 =======
 >>>>>>> 8cf8fdf3676373e7791d2068835f9c6c8999bfee
 #End Region
