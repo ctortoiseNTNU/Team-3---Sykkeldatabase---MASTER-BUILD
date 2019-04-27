@@ -188,7 +188,7 @@ Public Class Form1
             DBDisconnect()
 
             'LstInvSokSokeResultat.Items.Add(InvForhandlerID + " " + InvAvdelingID + " " + InvKategoriID)
-            LstInvSokSokeResultat.Items.Add(InvSkadet & " " & InvStatus)
+            'LstInvSokSokeResultat.Items.Add(InvSkadet & " " & InvStatus)
 
         Catch ex As MySqlException
             MsgBox(ex.Message)
@@ -239,6 +239,71 @@ Public Class Form1
     Private Sub BtnIvnSokEndre_Click(sender As Object, e As EventArgs) Handles BtnIvnSokEndre.Click
         'ID nummer hentes fra TxtInvSokProduktID og SQLspørring henter objektet og legger verdiene i feltet for
         'registrering/endring. 
+        Dim InvKategori, InvSubkategori, InvAvdeling, InvProduktnavn, InvVarenummer, InvInnkjopspris,
+            InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandler, InvStatus, InvSkadet, InvSavnet,
+            InvSokefelt, InvProduktID As String
+        Dim InvForhandlerID, InvAvdelingID, InvSubKategoriID As String
+        Dim InvForhandlerIDSporring, InvAvdelingIDSporring, InvSubKategoriIDSporring As String
+        Dim InvRegistrerSporring As String
+
+        InvKategori = CboInvKategori.SelectedItem
+        InvSubkategori = CboInvSubkategori.SelectedItem
+        InvAvdeling = CboInvAvdeling.SelectedItem
+        InvProduktnavn = TxtInvProduktnavn.Text
+        InvVarenummer = TxtInvVareNummer.Text
+        InvInnkjopspris = TxtInvInnkjopspris.Text
+        InvRamme = TxtInvRamme.Text
+        InvHjulstorrlese = TxtInvHjulstorrelse.Text
+        InvGirsystem = TxtInvGirsystem.Text
+        InvForhandler = CboInvForhandler.SelectedItem
+        InvStatus = CboInvStatus.SelectedItem
+        InvSkadet = CboInvSkadet.SelectedIndex
+        InvSavnet = CboInvSavnet.SelectedIndex
+
+        InvForhandlerIDSporring = "SELECT forhandler_id FROM forhandler WHERE forhandler_navn='testforhandler';"
+        InvAvdelingIDSporring = "SELECT avdeling_id FROM avdeling WHERE avd_navn='Finse';"
+        InvSubKategoriIDSporring = "SELECT type_id FROM sykkel_typer WHERE kategori='Racer';"
+
+        Dim InvSqlID As MySqlCommand
+        Dim InvSqlLeser As MySqlDataReader
+
+        DBConnect()
+
+        InvSqlID = New MySqlCommand(InvForhandlerIDSporring, tilkobling)
+        InvSqlLeser = InvSqlID.ExecuteReader()
+        While InvSqlLeser.Read()
+            InvForhandlerID = InvSqlLeser("forhandler_id")
+        End While
+        InvSqlLeser.Close()
+        InvSqlID = New MySqlCommand(InvAvdelingIDSporring, tilkobling)
+        InvSqlLeser = InvSqlID.ExecuteReader()
+        While InvSqlLeser.Read()
+            InvAvdelingID = InvSqlLeser("avdeling_id")
+        End While
+        InvSqlLeser.Close()
+        InvSqlID = New MySqlCommand(InvSubKategoriIDSporring, tilkobling)
+        InvSqlLeser = InvSqlID.ExecuteReader()
+        While InvSqlLeser.Read()
+            InvSubKategoriID = InvSqlLeser("type_id")
+        End While
+        InvSqlLeser.Close()
+        DBDisconnect()
+
+        InvRegistrerSporring = "SELECT * FROM sykler WHERE forhandler_id LIKE '%" & InvForhandlerID _
+            & "%'"
+
+        ', type_id, avdeling_id, sykkel_navn, " &
+        '        "sykkel_modell, sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)""
+
+
+
+        ' & "VALUES (""" + InvForhandlerID & """, """ & InvSubKategoriID & """, """ _
+        '                & InvAvdelingID + """, """ & InvProduktnavn & """, """ & InvVarenummer & """, """ _
+        '                & InvInnkjopspris & """, """ & InvStatus & """, """ & InvHjulstorrlese & """, """ _
+        '                & InvRamme & """, """ & InvGirsystem & """, """ & InvSavnet & """, """ & InvSkadet & """);"
+
+
+
     End Sub
 
     Private Sub BtnInvSokSok_Click(sender As Object, e As EventArgs) Handles BtnInvSokSok.Click
@@ -255,11 +320,15 @@ Public Class Form1
         Dim testsporring As String
         Dim testarray(12) As String
         Dim arritem As ListViewItem
-        'Dim testsporring2 As String
+        Dim testsporring3 As String
         Dim InvSokeKategori As String = "sykkel_navn"
-        testsporring = "SELECT * FROM sykler WHERE " & InvSokeKategori & " LIKE '%" & TxtInvSokSokefelt.Text & "%'"
+        testsporring = "SELECT * FROM sykler WHERE " & InvSokeKategori & " Like '%" & TxtInvSokSokefelt.Text & "%'"
+        testsporring3 = "SELECT * FROM sykler WHERE forhandler_id LIKE '%" & CboInvForhandler.SelectedItem & "%'"
+
+        'SELECT sykler.sykkel_navn, forhandler.forhandler_navn FROM sykler INNER JOIN forhandler ON sykler.forhandler_id=forhandler.forhandler_id
+
         'testsporring2 = "select * From sykler where forhandler_id=""9999"";"
-        testcommand = New MySqlCommand(testsporring, tilkobling)
+        testcommand = New MySqlCommand(testsporring3, tilkobling)
         testleser = testcommand.ExecuteReader()
 
         'for hver kolonne les inn verdi 0-12 og legg i listview
