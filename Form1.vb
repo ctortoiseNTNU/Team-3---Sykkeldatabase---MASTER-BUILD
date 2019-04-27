@@ -641,8 +641,8 @@ Public Class Form1
                 TxtAdminEBTime.Text = AdminEBBIDRow("timelonn")
                 TxtAdminEBEpost.Text = AdminEBBIDRow("epost")
                 TxtAdminEBTelefon.Text = AdminEBBIDRow("telefon")
-                CboAdminEBStilling.SelectedText = AdminEBBIDRow("stilling")
-                CboAdminEBSP.SelectedText = AdminEBBIDRow("stilling_prosent")
+                CboAdminEBStilling.SelectedItem = AdminEBBIDRow("stilling")
+                CboAdminEBSP.SelectedItem = AdminEBBIDRow("stilling_prosent")
                 If AdminEBBIDRow("admin") = "1" Then
                     ChkAdminEBAdmin.Checked = True
                 End If
@@ -662,7 +662,7 @@ Public Class Form1
             Dim AdminEBAvdelingRow As DataRow
 
             For Each AdminEBAvdelingRow In AdminEBAvdelingTable.Rows
-                CboAdminEBAvdeling.SelectedText = AdminEBAvdelingRow("avd_navn")
+                CboAdminEBAvdeling.SelectedItem = AdminEBAvdelingRow("avd_navn")
             Next
 
             If TxtAdminEBFornavn.Text = "" Then
@@ -705,6 +705,7 @@ Public Class Form1
             AdminAvdelingAdapter.Fill(AdminAvdelingTable)
             DBDisconnect()
             CboAdminNBAvdeling.Items.Clear()
+            CboAdminEBAvdeling.Items.Clear()
             Dim AdminAvdelingRow As DataRow
             Dim AdminAvdelingString As String
             For Each AdminAvdelingRow In AdminAvdelingTable.Rows
