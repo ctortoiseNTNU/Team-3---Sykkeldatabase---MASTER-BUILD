@@ -73,6 +73,7 @@ Public Class Form1
                     CmbKndSok.Items.Add(innhold(i))
                 Next
                 MsgBox("KDBmeny")
+                BtnKndEndre.Enabled = False
             Case 4 'Bestemmer det som skjer etter man har valgt Inventarmeny.
                 MsgBox("Inventarmeny")
             Case 5 'Bestemmer det som skjer etter man har valgt Inventarsearchmeny.
@@ -215,6 +216,26 @@ Public Class Form1
 
         'Insert new data with SQL
 
+        If KndFornavn = "" Then
+            MsgBox("Vennligst fyll inn fornavn")
+            Exit Sub
+        End If
+        If KndEtternavn = "" Then
+            MsgBox("Vennligst fyll inn etternavn")
+            Exit Sub
+        End If
+        If KndAdresse = "" Then
+            MsgBox("Vennligst fyll inn adresse")
+            Exit Sub
+        End If
+        If KndTlf = "" Then
+            MsgBox("Vennligst fyll inn telefonnummer")
+            Exit Sub
+        End If
+        If KndEpost = "" Then
+            MsgBox("Vennligst fyll inn epost")
+            Exit Sub
+        End If
 
 
 
@@ -227,11 +248,11 @@ Public Class Form1
         Catch feilmelding As MySqlException
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
         End Try
+        MsgBox("Innlegging var vellykket")
     End Sub
 
 
-    Dim KndSokInput
-    Dim KndSokSelectedTag
+
     Dim KndSokKundeID
 
     Dim KndFornavnSelected
@@ -245,13 +266,15 @@ Public Class Form1
 
 
 
-
-
-
     'ENDRE FANE
     Private Sub BtnKndKundeID_Click(sender As Object, e As EventArgs) Handles BtnKndKundeID.Click
 
         KndSokKundeID = TxtKndKundeID.Text
+        If KndSokKundeID = "" Then
+            MsgBox("Vennligst fyll inn ID for søk")
+            Exit Sub
+        End If
+
 
 
         Try
@@ -284,11 +307,17 @@ Public Class Form1
 
 
 
+
         Catch feilmelding As MySqlException
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
 
         End Try
-
+        If KndFornavnSelected <> "" Then
+            BtnKndEndre.Enabled = True
+        Else
+            MsgBox("Beklager, ingen treff på det nummeret")
+            BtnKndEndre.Enabled = False
+        End If
     End Sub
 
 
@@ -306,9 +335,22 @@ Public Class Form1
 
     'SØK KNAPP
 
+    Dim KndSokInput
+    Dim KndSokSelectedTag
+
+
     Private Sub BtnKndSok_Click(sender As Object, e As EventArgs) Handles BtnKndSok.Click
         KndSokInput = TxtKndSok.Text
         Dim KndTempVar = CmbKndSok.SelectedIndex
+
+        If KndSokInput = "" Then
+            MsgBox("Vennligst fyll inn gylding søkeord")
+            Exit Sub
+        End If
+        If KndTempVar = -1 Then
+            MsgBox("Vennligst velg en søkekategori")
+            Exit Sub
+        End If
 
         Dim KndSQLKolonner = New String() {"kunde_id", "kunde_fornavn", "kunde_etternavn", "adresse", "telefon", "epost", "rabatt_id", "handlet_for"}
         KndSokSelectedTag = KndSQLKolonner(KndTempVar)
@@ -375,6 +417,41 @@ Public Class Form1
         Dim KndChangeValueEP = TxtKndEndreEP.Text
         Dim KndChangeValueRbt = TxtKndEndreRbt.Text
         Dim KndChangeValueHF = TxtKndEndreHF.Text
+
+
+        If selectedKundeId = "" Then
+            MsgBox("Vennligst fyll inn et gyldig ID-nummer")
+            Exit Sub
+        End If
+
+        If KndChangeValueFN = "" Then
+            MsgBox("Vennligst fyll inn et fornavn")
+            Exit Sub
+        End If
+        If KndChangeValueEN = "" Then
+            MsgBox("Vennligst fyll inn et etternavn")
+            Exit Sub
+        End If
+        If KndChangeValueAdr = "" Then
+            MsgBox("Vennligst fyll inn en adresse")
+            Exit Sub
+        End If
+        If KndChangeValueTlf = "" And KndChangeValueTlf.Length <> 8 Then
+            MsgBox("Vennligst fyll inn et gyldig telefonnummer")
+            Exit Sub
+        End If
+        If KndChangeValueEP = "" Then
+            MsgBox("Vennligst fyll inn en epostadresse")
+            Exit Sub
+        End If
+        If KndChangeValueRbt = "" Then
+            KndChangeValueRbt = "1"
+        End If
+
+        If KndChangeValueHF = "" Then
+            KndChangeValueHF = "0"
+        End If
+
 
 
         Try
