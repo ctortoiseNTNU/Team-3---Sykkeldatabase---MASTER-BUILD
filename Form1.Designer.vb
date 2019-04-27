@@ -95,8 +95,7 @@ Partial Class Form1
         Me.Status = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Skadet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Savnet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LblInvRegistrertID = New System.Windows.Forms.Label()
-        Me.LblInvProduktID = New System.Windows.Forms.Label()
+        Me.LblInvTest = New System.Windows.Forms.Label()
         Me.GrpInvRegistrerEndre = New System.Windows.Forms.GroupBox()
         Me.BtnInvSoke = New System.Windows.Forms.Button()
         Me.LblInvHentID = New System.Windows.Forms.Label()
@@ -200,6 +199,7 @@ Partial Class Form1
         Me.LblAdminNBPassord = New System.Windows.Forms.Label()
         Me.LblAdminNBBID = New System.Windows.Forms.Label()
         Me.DBAdminTab = New System.Windows.Forms.TabPage()
+        Me.BtnInvTom = New System.Windows.Forms.Button()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -774,8 +774,6 @@ Partial Class Form1
         'GrpInvSok
         '
         Me.GrpInvSok.Controls.Add(Me.LivSok)
-        Me.GrpInvSok.Controls.Add(Me.LblInvRegistrertID)
-        Me.GrpInvSok.Controls.Add(Me.LblInvProduktID)
         Me.GrpInvSok.Enabled = False
         Me.GrpInvSok.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrpInvSok.Location = New System.Drawing.Point(377, 3)
@@ -791,7 +789,7 @@ Partial Class Form1
         Me.LivSok.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LivSok.Location = New System.Drawing.Point(6, 33)
         Me.LivSok.Name = "LivSok"
-        Me.LivSok.Size = New System.Drawing.Size(847, 448)
+        Me.LivSok.Size = New System.Drawing.Size(847, 583)
         Me.LivSok.TabIndex = 54
         Me.LivSok.UseCompatibleStateImageBehavior = False
         Me.LivSok.View = System.Windows.Forms.View.Details
@@ -861,28 +859,20 @@ Partial Class Form1
         Me.Savnet.Text = "Savnet"
         Me.Savnet.Width = 50
         '
-        'LblInvRegistrertID
+        'LblInvTest
         '
-        Me.LblInvRegistrertID.AutoSize = True
-        Me.LblInvRegistrertID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvRegistrertID.Location = New System.Drawing.Point(267, 525)
-        Me.LblInvRegistrertID.Name = "LblInvRegistrertID"
-        Me.LblInvRegistrertID.Size = New System.Drawing.Size(178, 18)
-        Me.LblInvRegistrertID.TabIndex = 46
-        Me.LblInvRegistrertID.Text = "Siste registrering ID: xxxxxx"
-        '
-        'LblInvProduktID
-        '
-        Me.LblInvProduktID.AutoSize = True
-        Me.LblInvProduktID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvProduktID.Location = New System.Drawing.Point(63, 525)
-        Me.LblInvProduktID.Name = "LblInvProduktID"
-        Me.LblInvProduktID.Size = New System.Drawing.Size(122, 18)
-        Me.LblInvProduktID.TabIndex = 45
-        Me.LblInvProduktID.Text = "Produkt ID: xxxxxx"
+        Me.LblInvTest.AutoSize = True
+        Me.LblInvTest.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvTest.Location = New System.Drawing.Point(6, 601)
+        Me.LblInvTest.Name = "LblInvTest"
+        Me.LblInvTest.Size = New System.Drawing.Size(32, 18)
+        Me.LblInvTest.TabIndex = 45
+        Me.LblInvTest.Text = "test"
         '
         'GrpInvRegistrerEndre
         '
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvTom)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvTest)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvSoke)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvHentID)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvHentID)
@@ -1941,6 +1931,15 @@ Partial Class Form1
         Me.DBAdminTab.Text = "DB Admin"
         Me.DBAdminTab.UseVisualStyleBackColor = True
         '
+        'BtnInvTom
+        '
+        Me.BtnInvTom.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnInvTom.Location = New System.Drawing.Point(48, 500)
+        Me.BtnInvTom.Name = "BtnInvTom"
+        Me.BtnInvTom.Size = New System.Drawing.Size(75, 23)
+        Me.BtnInvTom.TabIndex = 48
+        Me.BtnInvTom.Text = "Tøm felt"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1963,7 +1962,6 @@ Partial Class Form1
         Me.GroupBox2.PerformLayout()
         Me.InventarTab.ResumeLayout(False)
         Me.GrpInvSok.ResumeLayout(False)
-        Me.GrpInvSok.PerformLayout()
         Me.GrpInvRegistrerEndre.ResumeLayout(False)
         Me.GrpInvRegistrerEndre.PerformLayout()
         Me.AdminTab.ResumeLayout(False)
@@ -2059,8 +2057,7 @@ Partial Class Form1
     Friend WithEvents BtnInvHent As Button
     Friend WithEvents GrpInvRegistrerEndre As GroupBox
     Friend WithEvents BtnInvEndre As Button
-    Friend WithEvents LblInvRegistrertID As Label
-    Friend WithEvents LblInvProduktID As Label
+    Friend WithEvents LblInvTest As Label
     Friend WithEvents LblInvSavnet As Label
     Friend WithEvents LblInvSkadet As Label
     Friend WithEvents LblInvStatus As Label
@@ -2156,4 +2153,5 @@ Partial Class Form1
     Friend WithEvents Label23 As Label
     Friend WithEvents Label24 As Label
     Friend WithEvents Label25 As Label
+    Friend WithEvents BtnInvTom As Button
 End Class

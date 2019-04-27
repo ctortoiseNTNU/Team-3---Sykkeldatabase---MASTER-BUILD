@@ -410,12 +410,14 @@ Public Class Form1
     'Subkategorier vil avhenge av om det er sykkel eller utstyr som skal registreres.
     'Foreløpig ingen kategorier for utstyr
 
-    'Standardvalg for status, skadet, savnet er henholdsvis inne, nei, nei. ???
+    'Standardvalg for status, skadet, savnet bør være henholdsvis inne, nei, nei. ???
 
     'Må gjøres:
     'MsgBox for bekreftelse av registrering og endring av objekter.
-    'Sjekk av kun tall der et er nødvendig
+    'Sjekk av tillatte verdier
     'True / false i søkeresultat -> "ja" / "nei" for skadet/savnet
+    'Legge inn kode for henting av utstyr
+    'håndtering av null resultat ved søk.. ?
 
     Private Sub BtnInvRegistrer_Click(sender As Object, e As EventArgs) Handles BtnInvRegistrer.Click
 
@@ -640,8 +642,8 @@ Public Class Form1
         'SQLspørring med _endring_ (alter table) av data for valgt produkt med ID fra valgt produkt i søkefelt
     End Sub
 
-    'Setter Enabled false på ukurrante felt for utstyr
     Private Sub CboInvKategori_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboInvKategori.SelectedIndexChanged
+        'Setter Enabled false på ukurrante felt for utstyr
         If CboInvKategori.SelectedItem = "Utstyr" Then
             CboInvSubkategori.Enabled = False
             CboInvAvdeling.Enabled = False
@@ -664,6 +666,107 @@ Public Class Form1
     End Sub
 
     Private Sub BtnInvHent_Click(sender As Object, e As EventArgs) Handles BtnInvHent.Click
+        'Henter data for objekt med inntastet ID fra database og legger i skjema
+
+        Dim InvForhandlerIDSporring, InvAvdelingIDSporring, InvSubKategoriIDSporring,
+            InvForhandlerID, InvAvdelingID, InvSubkategoriID, InvForhandler, InvAvdeling,
+            InvSubkategori As String
+
+        Dim InvSkadetBol, InvSavnetBol As Boolean
+
+        Dim InvSqlCom As MySqlCommand
+        Dim InvSqlDA As New MySqlDataAdapter
+        Dim InvSqlLeser As MySqlDataReader
+        Dim InvDatatable As New DataTable
+
+        Dim InvProduktID As String = TxtInvHentID.Text.Trim
+
+        If CboInvKategori.SelectedItem = "Sykkel" Then
+            Dim InvHentSporring As String = "Select * FROM sykler WHERE sykkel_id ='" & InvProduktID & "';"
+
+            InvSqlCom = New MySqlCommand(InvHentSporring, tilkobling)
+
+            Try
+                DBConnect()
+                InvSqlDA.SelectCommand = InvSqlCom
+                InvSqlDA.Fill(InvDatatable)
+                DBDisconnect()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+            'Setter verdier i skjema basert på spørring. For fremmednøkler lagres ID for uthenting av navn.
+            'Bool verdier lagres for setting av korrekt index i combobox
+            Dim InvHentRad As DataRow
+            Try
+                For Each InvHentRad In InvDatatable.Rows
+                    InvSubkategoriID = InvHentRad("type_id").ToString 'ID greie
+                    InvAvdelingID = InvHentRad("avdeling_id").ToString 'og her må det noe til...
+                    TxtInvProduktnavn.Text = InvHentRad("sykkel_navn")
+                    TxtInvVareNummer.Text = InvHentRad("sykkel_modell")
+                    TxtInvInnkjopspris.Text = InvHentRad("sykkel_pris")
+                    TxtInvRamme.Text = InvHentRad("sykkel_ramme")
+                    TxtInvHjulstorrelse.Text = InvHentRad("hjul_str")
+                    TxtInvGirsystem.Text = InvHentRad("girsystem")
+                    InvForhandlerID = InvHentRad("forhandler_id").ToString 'og her...
+                    CboInvStatus.SelectedItem = InvHentRad("sykkel_status")
+                    InvSkadetBol = InvHentRad("skadet")
+                    InvSavnetBol = InvHentRad("savnet")
+                Next
+            Catch ex As Exception
+                MsgBox("Innlegg av data i skjema: " & ex.Message)
+            End Try
+
+            InvForhandlerIDSporring = "SELECT forhandler_navn FROM forhandler WHERE forhandler_id='" & InvForhandlerID & "';"
+            InvAvdelingIDSporring = "SELECT avd_navn FROM avdeling WHERE avdeling_id='" & InvAvdelingID & "';"
+            InvSubKategoriIDSporring = "SELECT kategori FROM sykkel_typer WHERE type_id='" & InvSubkategoriID & "';"
+
+            'Henter navn fra forhandler, avdeling og subkategori basert på ID 
+            Try
+                DBConnect()
+                InvSqlCom = New MySqlCommand(InvForhandlerIDSporring, tilkobling)
+                InvSqlLeser = InvSqlCom.ExecuteReader()
+                While InvSqlLeser.Read()
+                    InvForhandler = InvSqlLeser("forhandler_navn")
+                End While
+                InvSqlLeser.Close()
+                InvSqlCom = New MySqlCommand(InvAvdelingIDSporring, tilkobling)
+                InvSqlLeser = InvSqlCom.ExecuteReader()
+                While InvSqlLeser.Read()
+                    InvAvdeling = InvSqlLeser("avd_navn")
+                End While
+                InvSqlLeser.Close()
+                InvSqlCom = New MySqlCommand(InvSubKategoriIDSporring, tilkobling)
+                InvSqlLeser = InvSqlCom.ExecuteReader()
+                While InvSqlLeser.Read()
+                    InvSubkategori = InvSqlLeser("kategori")
+                End While
+                InvSqlLeser.Close()
+                DBDisconnect()
+            Catch ex As MySqlException
+                MsgBox("Feil ved henting av navn:" & vbNewLine & ex.Message)
+            End Try
+
+            'Fyller inn resterende data i skjema 
+            CboInvAvdeling.SelectedItem = InvAvdeling
+            CboInvForhandler.SelectedItem = InvForhandler
+            CboInvSubkategori.SelectedItem = InvSubkategori
+            If InvSkadetBol = False Then
+                CboInvSkadet.SelectedIndex = 0
+            Else
+                CboInvSkadet.SelectedIndex = 1
+            End If
+            If InvSavnetBol = False Then
+                CboInvSavnet.SelectedIndex = 0
+            Else
+                CboInvSavnet.SelectedIndex = 1
+            End If
+        ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
+
+        Else
+            MsgBox("Velg kategori")
+        End If
+
 
     End Sub
 
