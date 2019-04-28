@@ -96,6 +96,8 @@ Partial Class Form1
         Me.Skadet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Savnet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GrpInvRegistrerEndre = New System.Windows.Forms.GroupBox()
+        Me.BtnInvTest = New System.Windows.Forms.Button()
+        Me.BtnInvAvbrytEndre = New System.Windows.Forms.Button()
         Me.BtnInvTom = New System.Windows.Forms.Button()
         Me.LblInvAktivProdukt = New System.Windows.Forms.Label()
         Me.BtnInvSoke = New System.Windows.Forms.Button()
@@ -200,8 +202,6 @@ Partial Class Form1
         Me.LblAdminNBPassord = New System.Windows.Forms.Label()
         Me.LblAdminNBBID = New System.Windows.Forms.Label()
         Me.DBAdminTab = New System.Windows.Forms.TabPage()
-        Me.BtnInvAvbrytEndre = New System.Windows.Forms.Button()
-        Me.BtnInvTest = New System.Windows.Forms.Button()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -907,10 +907,28 @@ Partial Class Form1
         Me.GrpInvRegistrerEndre.TabStop = False
         Me.GrpInvRegistrerEndre.Text = "Registrer og Endre Inventar"
         '
+        'BtnInvTest
+        '
+        Me.BtnInvTest.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnInvTest.Location = New System.Drawing.Point(277, 592)
+        Me.BtnInvTest.Name = "BtnInvTest"
+        Me.BtnInvTest.Size = New System.Drawing.Size(85, 23)
+        Me.BtnInvTest.TabIndex = 50
+        Me.BtnInvTest.Text = "Test"
+        '
+        'BtnInvAvbrytEndre
+        '
+        Me.BtnInvAvbrytEndre.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnInvAvbrytEndre.Location = New System.Drawing.Point(242, 500)
+        Me.BtnInvAvbrytEndre.Name = "BtnInvAvbrytEndre"
+        Me.BtnInvAvbrytEndre.Size = New System.Drawing.Size(85, 23)
+        Me.BtnInvAvbrytEndre.TabIndex = 49
+        Me.BtnInvAvbrytEndre.Text = "Avbryt"
+        '
         'BtnInvTom
         '
         Me.BtnInvTom.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvTom.Location = New System.Drawing.Point(39, 500)
+        Me.BtnInvTom.Location = New System.Drawing.Point(140, 500)
         Me.BtnInvTom.Name = "BtnInvTom"
         Me.BtnInvTom.Size = New System.Drawing.Size(85, 23)
         Me.BtnInvTom.TabIndex = 48
@@ -920,7 +938,7 @@ Partial Class Form1
         '
         Me.LblInvAktivProdukt.AutoSize = True
         Me.LblInvAktivProdukt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvAktivProdukt.Location = New System.Drawing.Point(6, 582)
+        Me.LblInvAktivProdukt.Location = New System.Drawing.Point(36, 593)
         Me.LblInvAktivProdukt.Name = "LblInvAktivProdukt"
         Me.LblInvAktivProdukt.Size = New System.Drawing.Size(139, 18)
         Me.LblInvAktivProdukt.TabIndex = 45
@@ -939,7 +957,7 @@ Partial Class Form1
         '
         Me.LblInvHentID.AutoSize = True
         Me.LblInvHentID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvHentID.Location = New System.Drawing.Point(6, 552)
+        Me.LblInvHentID.Location = New System.Drawing.Point(36, 549)
         Me.LblInvHentID.Name = "LblInvHentID"
         Me.LblInvHentID.Size = New System.Drawing.Size(141, 18)
         Me.LblInvHentID.TabIndex = 47
@@ -948,7 +966,7 @@ Partial Class Form1
         'TxtInvHentID
         '
         Me.TxtInvHentID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtInvHentID.Location = New System.Drawing.Point(153, 549)
+        Me.TxtInvHentID.Location = New System.Drawing.Point(183, 546)
         Me.TxtInvHentID.Name = "TxtInvHentID"
         Me.TxtInvHentID.Size = New System.Drawing.Size(84, 26)
         Me.TxtInvHentID.TabIndex = 46
@@ -956,7 +974,7 @@ Partial Class Form1
         'BtnInvHent
         '
         Me.BtnInvHent.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvHent.Location = New System.Drawing.Point(243, 550)
+        Me.BtnInvHent.Location = New System.Drawing.Point(39, 500)
         Me.BtnInvHent.Name = "BtnInvHent"
         Me.BtnInvHent.Size = New System.Drawing.Size(85, 23)
         Me.BtnInvHent.TabIndex = 39
@@ -965,6 +983,7 @@ Partial Class Form1
         '
         'BtnInvEndre
         '
+        Me.BtnInvEndre.Enabled = False
         Me.BtnInvEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInvEndre.Location = New System.Drawing.Point(242, 470)
         Me.BtnInvEndre.Name = "BtnInvEndre"
@@ -1943,24 +1962,6 @@ Partial Class Form1
         Me.DBAdminTab.TabIndex = 8
         Me.DBAdminTab.Text = "DB Admin"
         Me.DBAdminTab.UseVisualStyleBackColor = True
-        '
-        'BtnInvAvbrytEndre
-        '
-        Me.BtnInvAvbrytEndre.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvAvbrytEndre.Location = New System.Drawing.Point(242, 500)
-        Me.BtnInvAvbrytEndre.Name = "BtnInvAvbrytEndre"
-        Me.BtnInvAvbrytEndre.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvAvbrytEndre.TabIndex = 49
-        Me.BtnInvAvbrytEndre.Text = "Avbryt"
-        '
-        'BtnInvTest
-        '
-        Me.BtnInvTest.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvTest.Location = New System.Drawing.Point(140, 500)
-        Me.BtnInvTest.Name = "BtnInvTest"
-        Me.BtnInvTest.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvTest.TabIndex = 50
-        Me.BtnInvTest.Text = "Test"
         '
         'Form1
         '
