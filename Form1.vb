@@ -698,10 +698,6 @@ Public Class Form1
     Private Sub BtnInvSok_Click(sender As Object, e As EventArgs) Handles BtnInvSok.Click
         'skadet og savnet må settes selectedindex? - se if else for å unngå NULL
 
-
-
-
-        'Tømmer tidligere søkeresultat fra listview
         LvInvSok.Items.Clear()
 
         Dim InvSpSkadet As String
@@ -710,70 +706,120 @@ Public Class Form1
         Dim InvSqlSok As MySqlCommand
         Dim invSqlLeser As MySqlDataReader
 
-        Dim SpInit As String = "Select sykler.sykkel_id, sykler.sykkel_navn, sykler.sykkel_modell, " _
-            & "sykkel_typer.kategori, sykler.sykkel_ramme, sykler.girsystem, sykler.hjul_str, " _
-            & "sykler.sykkel_pris, avdeling.avd_navn, forhandler.forhandler_navn, sykler.sykkel_status, " _
-            & "sykler.skadet, sykler.savnet From sykler Left Join avdeling ON " _
-            & "sykler.avdeling_id=avdeling.avdeling_id Left Join forhandler on " _
-            & "sykler.forhandler_id=forhandler.forhandler_id Left Join sykkel_typer on " _
-            & "sykler.type_id=sykkel_typer.type_id where "
-        Dim SpSykkelNavn As String = "sykkel_navn Like '%" & TxtInvProduktnavn.Text.Trim & "%'"
-        Dim SpsykkelModell As String = "kategori LIKE '%" & CboInvSubkategori.SelectedItem & "%'"
-        Dim SpTypeid As String = "sykkel_modell LIKE '%" & TxtInvVareNummer.Text.Trim & "%'"
-        Dim SpSykkelRamme As String = "sykkel_ramme LIKE '%" & TxtInvRamme.Text.Trim & "%'"
-        Dim SpGirsystem As String = "girsystem LIKE '%" & TxtInvGirsystem.Text.Trim & "%'"
-        Dim SpHjulstorrelse As String = "hjul_str LIKE '%" & TxtInvHjulstorrelse.Text.Trim & "%'"
-        Dim SpSykkelPris As String = "sykkel_pris LIKE '%" & TxtInvInnkjopspris.Text.Trim & "%'"
-        Dim SpAvdeling As String = "avd_navn LIKE '%" & CboInvAvdeling.SelectedItem & "%'"
-        Dim SpForhandlerID As String = "forhandler_navn LIKE '%" & CboInvForhandler.SelectedItem & "%'"
-        Dim SpSykkelStatus As String = "sykkel_status LIKE '%" & CboInvStatus.SelectedItem & "%'"
 
-        'Unngår NULL verdi fra combobox skadet og savnet og dermed søk uten resultat
-        'selectedindex presatt på skaded og savnet vil også omgå dette (?)
-        If CboInvSkadet.SelectedIndex = 0 Or CboInvSkadet.SelectedIndex = 1 Then
-            InvSpSkadet = "skadet LIKE '%" & CboInvSkadet.SelectedIndex & "%'"
+        If CboInvKategori.SelectedItem = "Sykkel" Then
+            Dim SpInit As String = "Select sykler.sykkel_id, sykler.sykkel_navn, sykler.sykkel_modell, " _
+           & "sykkel_typer.kategori, sykler.sykkel_ramme, sykler.girsystem, sykler.hjul_str, " _
+           & "sykler.sykkel_pris, avdeling.avd_navn, forhandler.forhandler_navn, sykler.sykkel_status, " _
+           & "sykler.skadet, sykler.savnet From sykler Left Join avdeling ON " _
+           & "sykler.avdeling_id=avdeling.avdeling_id Left Join forhandler on " _
+           & "sykler.forhandler_id=forhandler.forhandler_id Left Join sykkel_typer on " _
+           & "sykler.type_id=sykkel_typer.type_id where "
+            Dim SpSykkelNavn As String = "sykkel_navn Like '%" & TxtInvProduktnavn.Text.Trim & "%'"
+            Dim SpsykkelModell As String = "kategori LIKE '%" & CboInvSubkategori.SelectedItem & "%'"
+            Dim SpTypeid As String = "sykkel_modell LIKE '%" & TxtInvVareNummer.Text.Trim & "%'"
+            Dim SpSykkelRamme As String = "sykkel_ramme LIKE '%" & TxtInvRamme.Text.Trim & "%'"
+            Dim SpGirsystem As String = "girsystem LIKE '%" & TxtInvGirsystem.Text.Trim & "%'"
+            Dim SpHjulstorrelse As String = "hjul_str LIKE '%" & TxtInvHjulstorrelse.Text.Trim & "%'"
+            Dim SpSykkelPris As String = "sykkel_pris LIKE '%" & TxtInvInnkjopspris.Text.Trim & "%'"
+            Dim SpAvdeling As String = "avd_navn LIKE '%" & CboInvAvdeling.SelectedItem & "%'"
+            Dim SpForhandlerID As String = "forhandler_navn LIKE '%" & CboInvForhandler.SelectedItem & "%'"
+            Dim SpSykkelStatus As String = "sykkel_status LIKE '%" & CboInvStatus.SelectedItem & "%'"
+
+            'Unngår NULL verdi fra combobox skadet og savnet og dermed søk uten resultat
+            'selectedindex presatt på skaded og savnet vil også omgå dette (?)
+            If CboInvSkadet.SelectedIndex = 0 Or CboInvSkadet.SelectedIndex = 1 Then
+                InvSpSkadet = "skadet LIKE '%" & CboInvSkadet.SelectedIndex & "%'"
+            Else
+                InvSpSkadet = "skadet LIKE '%%'"
+            End If
+
+            If CboInvSavnet.SelectedIndex = 0 Or CboInvSavnet.SelectedIndex = 1 Then
+                InvSpSavnet = "savnet LIKE '%" & CboInvSavnet.SelectedIndex & "%'"
+            Else
+                InvSpSavnet = "savnet LIKE '%%'"
+            End If
+
+            Dim InvSokSporring As String
+            InvSokSporring = SpInit & SpSykkelNavn & " AND " & SpsykkelModell & " AND " &
+                SpTypeid & " AND " & SpSykkelRamme & " AND " & SpGirsystem & " AND " &
+                SpHjulstorrelse & " AND " & SpSykkelPris & " AND " & SpAvdeling & " AND " &
+                SpForhandlerID & " AND " & SpSykkelStatus & " AND " & InvSpSkadet & " AND " & InvSpSavnet & ";"
+
+            Dim InvResultatArray(12) As String
+            Dim InvResultatObjekt As ListViewItem
+
+            'Sender spørring for søk basert på innlagte data i skjema. Skriver ut returnerte rader til listview 
+            Try
+                DBConnect()
+                InvSqlSok = New MySqlCommand(InvSokSporring, tilkobling)
+                invSqlLeser = InvSqlSok.ExecuteReader()
+
+                'For hver kolonne les inn verdi 0-12 og legg i listview
+                While invSqlLeser.Read()
+                    For i = 0 To invSqlLeser.FieldCount - 1
+                        If TypeOf invSqlLeser(i) Is DBNull Then
+                        Else
+                            InvResultatArray(i) = invSqlLeser(i)
+                        End If
+                    Next
+                    InvResultatObjekt = New ListViewItem(InvResultatArray)
+                    LvInvSok.Items.Add(InvResultatObjekt)
+                End While
+                invSqlLeser.Close()
+                DBDisconnect()
+
+            Catch ex As MySqlException
+                MsgBox("Feil ved søk i sykkeldatabase:" & vbNewLine & ex.Message)
+            End Try
+
+        ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
+
+            Dim SpInit As String = "SELECT utstyr.utstyr_id, utstyr.utstyr_navn, utstyr.utstyr_pris, " _
+                & "utstyr.varenummer, forhandler.forhandler_navn FROM utstyr LEFT JOIN forhandler ON " _
+                & "utstyr.forhandler_id=forhandler.forhandler_id WHERE "
+
+            Dim InvSpUtstyrNavn As String = "utstyr_navn Like '%" & TxtInvProduktnavn.Text.Trim & "%'"
+            Dim InvSpVarenummer As String = "varenummer LIKE '%" & TxtInvVareNummer.Text.Trim & "%'"
+            Dim InvSpUtstyrPris As String = "utstyr_pris LIKE '%" & TxtInvInnkjopspris.Text.Trim & "%'"
+            Dim InvSpForhandlerNavn As String = "forhandler_navn LIKE '%" & CboInvForhandler.SelectedItem & "%'"
+
+            'Unngår NULL verdi fra combobox skadet og savnet og dermed søk uten resultat
+            'selectedindex presatt på skaded og savnet vil også omgå dette (?)
+
+            Dim InvSokSporring As String
+            InvSokSporring = SpInit & InvSpUtstyrNavn & " AND " & InvSpVarenummer & " AND " & InvSpUtstyrPris & " AND " & InvSpForhandlerNavn & ";"
+
+            Dim InvResultatArray(4) As String
+            Dim InvResultatObjekt As ListViewItem
+
+            'Sender spørring for søk basert på innlagte data i skjema. Skriver ut returnerte rader til listview 
+            Try
+                DBConnect()
+                InvSqlSok = New MySqlCommand(InvSokSporring, tilkobling)
+                invSqlLeser = InvSqlSok.ExecuteReader()
+
+                'For hver kolonne les inn verdi 0-12 og legg i listview
+                While invSqlLeser.Read()
+                    For i = 0 To invSqlLeser.FieldCount - 1
+                        If TypeOf invSqlLeser(i) Is DBNull Then
+                        Else
+                            InvResultatArray(i) = invSqlLeser(i)
+                        End If
+                    Next
+                    InvResultatObjekt = New ListViewItem(InvResultatArray)
+                    LvInvSok.Items.Add(InvResultatObjekt)
+                End While
+                invSqlLeser.Close()
+                DBDisconnect()
+
+            Catch ex As MySqlException
+                MsgBox("Feil ved søk i utstyrdatabase:" & vbNewLine & ex.Message)
+            End Try
         Else
-            InvSpSkadet = "skadet LIKE '%%'"
+            MsgBox("Velg en kategori")
         End If
 
-        If CboInvSavnet.SelectedIndex = 0 Or CboInvSavnet.SelectedIndex = 1 Then
-            InvSpSavnet = "savnet LIKE '%" & CboInvSavnet.SelectedIndex & "%'"
-        Else
-            InvSpSavnet = "savnet LIKE '%%'"
-        End If
-
-        Dim InvSokSporring As String
-        InvSokSporring = SpInit & SpSykkelNavn & " AND " & SpsykkelModell & " AND " &
-            SpTypeid & " AND " & SpSykkelRamme & " AND " & SpGirsystem & " AND " &
-            SpHjulstorrelse & " AND " & SpSykkelPris & " AND " & SpAvdeling & " AND " &
-            SpForhandlerID & " AND " & SpSykkelStatus & " AND " & InvSpSkadet & " AND " & InvSpSavnet & ";"
-
-        Dim InvResultatArray(12) As String
-        Dim InvResultatObjekt As ListViewItem
-
-        'Sender spørring for søk basert på innlagte data i skjema. Skriver ut returnerte rader til listview 
-        Try
-            DBConnect()
-            InvSqlSok = New MySqlCommand(InvSokSporring, tilkobling)
-            invSqlLeser = InvSqlSok.ExecuteReader()
-
-            'For hver kolonne les inn verdi 0-12 og legg i listview
-            While invSqlLeser.Read()
-                For i = 0 To invSqlLeser.FieldCount - 1
-                    If TypeOf invSqlLeser(i) Is DBNull Then
-                    Else
-                        InvResultatArray(i) = invSqlLeser(i)
-                    End If
-                Next
-                InvResultatObjekt = New ListViewItem(InvResultatArray)
-                LvInvSok.Items.Add(InvResultatObjekt)
-            End While
-            invSqlLeser.Close()
-            DBDisconnect()
-
-        Catch ex As MySqlException
-            MsgBox("Feil ved søk i database:" & vbNewLine & ex.Message)
-        End Try
 
     End Sub
 
@@ -822,6 +868,7 @@ Public Class Form1
                 DBDisconnect()
                 MsgBox("Endring av sykkel med ID " & InvAktivtProduktID & " vellykket.")
                 InvAktivtProduktID = ""
+                LblInvAktivProdukt.Text = "Ingen aktive produkt."
                 BtnInvEndre.Enabled = False
             Catch ex As MySqlException
                 MsgBox("Feil ved endring av sykkel:" & vbNewLine & ex.Message)
@@ -876,6 +923,10 @@ Public Class Form1
             CboInvStatus.Enabled = False
             CboInvSkadet.Enabled = False
             CboInvSavnet.Enabled = False
+            LvInvSok.Items.Clear()
+            LvInvSok.Columns.Clear()
+            LvInvSok.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer, Me.Innkjøpspris, Me.Forhandler})
+
         Else
             CboInvSubkategori.Enabled = True
             CboInvAvdeling.Enabled = True
@@ -885,6 +936,10 @@ Public Class Form1
             CboInvStatus.Enabled = True
             CboInvSkadet.Enabled = True
             CboInvSavnet.Enabled = True
+            LvInvSok.Items.Clear()
+            LvInvSok.Columns.Clear()
+            LvInvSok.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer, Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling, Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet})
+
         End If
     End Sub
 
