@@ -95,8 +95,9 @@ Partial Class Form1
         Me.Status = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Skadet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Savnet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LblInvTest = New System.Windows.Forms.Label()
         Me.GrpInvRegistrerEndre = New System.Windows.Forms.GroupBox()
+        Me.BtnInvTom = New System.Windows.Forms.Button()
+        Me.LblInvAktivProdukt = New System.Windows.Forms.Label()
         Me.BtnInvSoke = New System.Windows.Forms.Button()
         Me.LblInvHentID = New System.Windows.Forms.Label()
         Me.TxtInvHentID = New System.Windows.Forms.TextBox()
@@ -199,7 +200,8 @@ Partial Class Form1
         Me.LblAdminNBPassord = New System.Windows.Forms.Label()
         Me.LblAdminNBBID = New System.Windows.Forms.Label()
         Me.DBAdminTab = New System.Windows.Forms.TabPage()
-        Me.BtnInvTom = New System.Windows.Forms.Button()
+        Me.BtnInvAvbrytEndre = New System.Windows.Forms.Button()
+        Me.BtnInvTest = New System.Windows.Forms.Button()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -859,20 +861,12 @@ Partial Class Form1
         Me.Savnet.Text = "Savnet"
         Me.Savnet.Width = 50
         '
-        'LblInvTest
-        '
-        Me.LblInvTest.AutoSize = True
-        Me.LblInvTest.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblInvTest.Location = New System.Drawing.Point(6, 601)
-        Me.LblInvTest.Name = "LblInvTest"
-        Me.LblInvTest.Size = New System.Drawing.Size(32, 18)
-        Me.LblInvTest.TabIndex = 45
-        Me.LblInvTest.Text = "test"
-        '
         'GrpInvRegistrerEndre
         '
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvTest)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvAvbrytEndre)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvTom)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvTest)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvAktivProdukt)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvSoke)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvHentID)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvHentID)
@@ -913,12 +907,31 @@ Partial Class Form1
         Me.GrpInvRegistrerEndre.TabStop = False
         Me.GrpInvRegistrerEndre.Text = "Registrer og Endre Inventar"
         '
+        'BtnInvTom
+        '
+        Me.BtnInvTom.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnInvTom.Location = New System.Drawing.Point(39, 500)
+        Me.BtnInvTom.Name = "BtnInvTom"
+        Me.BtnInvTom.Size = New System.Drawing.Size(85, 23)
+        Me.BtnInvTom.TabIndex = 48
+        Me.BtnInvTom.Text = "Tøm felt"
+        '
+        'LblInvAktivProdukt
+        '
+        Me.LblInvAktivProdukt.AutoSize = True
+        Me.LblInvAktivProdukt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblInvAktivProdukt.Location = New System.Drawing.Point(6, 582)
+        Me.LblInvAktivProdukt.Name = "LblInvAktivProdukt"
+        Me.LblInvAktivProdukt.Size = New System.Drawing.Size(139, 18)
+        Me.LblInvAktivProdukt.TabIndex = 45
+        Me.LblInvAktivProdukt.Text = "Ingen aktive produkt."
+        '
         'BtnInvSoke
         '
         Me.BtnInvSoke.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvSoke.Location = New System.Drawing.Point(48, 471)
+        Me.BtnInvSoke.Location = New System.Drawing.Point(39, 471)
         Me.BtnInvSoke.Name = "BtnInvSoke"
-        Me.BtnInvSoke.Size = New System.Drawing.Size(75, 23)
+        Me.BtnInvSoke.Size = New System.Drawing.Size(85, 23)
         Me.BtnInvSoke.TabIndex = 0
         Me.BtnInvSoke.Text = "Søk"
         '
@@ -1931,14 +1944,23 @@ Partial Class Form1
         Me.DBAdminTab.Text = "DB Admin"
         Me.DBAdminTab.UseVisualStyleBackColor = True
         '
-        'BtnInvTom
+        'BtnInvAvbrytEndre
         '
-        Me.BtnInvTom.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvTom.Location = New System.Drawing.Point(48, 500)
-        Me.BtnInvTom.Name = "BtnInvTom"
-        Me.BtnInvTom.Size = New System.Drawing.Size(75, 23)
-        Me.BtnInvTom.TabIndex = 48
-        Me.BtnInvTom.Text = "Tøm felt"
+        Me.BtnInvAvbrytEndre.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnInvAvbrytEndre.Location = New System.Drawing.Point(242, 500)
+        Me.BtnInvAvbrytEndre.Name = "BtnInvAvbrytEndre"
+        Me.BtnInvAvbrytEndre.Size = New System.Drawing.Size(85, 23)
+        Me.BtnInvAvbrytEndre.TabIndex = 49
+        Me.BtnInvAvbrytEndre.Text = "Avbryt"
+        '
+        'BtnInvTest
+        '
+        Me.BtnInvTest.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnInvTest.Location = New System.Drawing.Point(140, 500)
+        Me.BtnInvTest.Name = "BtnInvTest"
+        Me.BtnInvTest.Size = New System.Drawing.Size(85, 23)
+        Me.BtnInvTest.TabIndex = 50
+        Me.BtnInvTest.Text = "Test"
         '
         'Form1
         '
@@ -2057,7 +2079,7 @@ Partial Class Form1
     Friend WithEvents BtnInvHent As Button
     Friend WithEvents GrpInvRegistrerEndre As GroupBox
     Friend WithEvents BtnInvEndre As Button
-    Friend WithEvents LblInvTest As Label
+    Friend WithEvents LblInvAktivProdukt As Label
     Friend WithEvents LblInvSavnet As Label
     Friend WithEvents LblInvSkadet As Label
     Friend WithEvents LblInvStatus As Label
@@ -2154,4 +2176,6 @@ Partial Class Form1
     Friend WithEvents Label24 As Label
     Friend WithEvents Label25 As Label
     Friend WithEvents BtnInvTom As Button
+    Friend WithEvents BtnInvTest As Button
+    Friend WithEvents BtnInvAvbrytEndre As Button
 End Class
