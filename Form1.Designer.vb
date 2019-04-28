@@ -81,7 +81,7 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.InventarTab = New System.Windows.Forms.TabPage()
         Me.GrpInvSok = New System.Windows.Forms.GroupBox()
-        Me.LivSok = New System.Windows.Forms.ListView()
+        Me.LvInvSok = New System.Windows.Forms.ListView()
         Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Produktnavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Varenummer = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -100,7 +100,7 @@ Partial Class Form1
         Me.BtnInvAvbrytEndre = New System.Windows.Forms.Button()
         Me.BtnInvTom = New System.Windows.Forms.Button()
         Me.LblInvAktivProdukt = New System.Windows.Forms.Label()
-        Me.BtnInvSoke = New System.Windows.Forms.Button()
+        Me.BtnInvSok = New System.Windows.Forms.Button()
         Me.LblInvHentID = New System.Windows.Forms.Label()
         Me.TxtInvHentID = New System.Windows.Forms.TextBox()
         Me.BtnInvHent = New System.Windows.Forms.Button()
@@ -775,8 +775,7 @@ Partial Class Form1
         '
         'GrpInvSok
         '
-        Me.GrpInvSok.Controls.Add(Me.LivSok)
-        Me.GrpInvSok.Enabled = False
+        Me.GrpInvSok.Controls.Add(Me.LvInvSok)
         Me.GrpInvSok.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrpInvSok.Location = New System.Drawing.Point(377, 3)
         Me.GrpInvSok.Name = "GrpInvSok"
@@ -785,16 +784,16 @@ Partial Class Form1
         Me.GrpInvSok.TabStop = False
         Me.GrpInvSok.Text = "Søkeresultater"
         '
-        'LivSok
+        'LvInvSok
         '
-        Me.LivSok.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer, Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling, Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet})
-        Me.LivSok.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LivSok.Location = New System.Drawing.Point(6, 33)
-        Me.LivSok.Name = "LivSok"
-        Me.LivSok.Size = New System.Drawing.Size(847, 583)
-        Me.LivSok.TabIndex = 54
-        Me.LivSok.UseCompatibleStateImageBehavior = False
-        Me.LivSok.View = System.Windows.Forms.View.Details
+        Me.LvInvSok.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer, Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling, Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet})
+        Me.LvInvSok.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvInvSok.Location = New System.Drawing.Point(6, 33)
+        Me.LvInvSok.Name = "LvInvSok"
+        Me.LvInvSok.Size = New System.Drawing.Size(847, 583)
+        Me.LvInvSok.TabIndex = 54
+        Me.LvInvSok.UseCompatibleStateImageBehavior = False
+        Me.LvInvSok.View = System.Windows.Forms.View.Details
         '
         'ID
         '
@@ -867,7 +866,7 @@ Partial Class Form1
         Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvAvbrytEndre)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvTom)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvAktivProdukt)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvSoke)
+        Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvSok)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvHentID)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.TxtInvHentID)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvHent)
@@ -944,14 +943,14 @@ Partial Class Form1
         Me.LblInvAktivProdukt.TabIndex = 45
         Me.LblInvAktivProdukt.Text = "Ingen aktive produkt."
         '
-        'BtnInvSoke
+        'BtnInvSok
         '
-        Me.BtnInvSoke.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvSoke.Location = New System.Drawing.Point(39, 471)
-        Me.BtnInvSoke.Name = "BtnInvSoke"
-        Me.BtnInvSoke.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvSoke.TabIndex = 0
-        Me.BtnInvSoke.Text = "Søk"
+        Me.BtnInvSok.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnInvSok.Location = New System.Drawing.Point(39, 471)
+        Me.BtnInvSok.Name = "BtnInvSok"
+        Me.BtnInvSok.Size = New System.Drawing.Size(85, 23)
+        Me.BtnInvSok.TabIndex = 0
+        Me.BtnInvSok.Text = "Søk"
         '
         'LblInvHentID
         '
@@ -2113,7 +2112,7 @@ Partial Class Form1
     Friend WithEvents LVAdminFornavn As ColumnHeader
     Friend WithEvents LVAdminEtternavn As ColumnHeader
     Friend WithEvents LVAdminSoekefelt As ColumnHeader
-    Friend WithEvents LivSok As ListView
+    Friend WithEvents LvInvSok As ListView
     Friend WithEvents ID As ColumnHeader
     Friend WithEvents Produktnavn As ColumnHeader
     Friend WithEvents Varenummer As ColumnHeader
@@ -2127,7 +2126,7 @@ Partial Class Form1
     Friend WithEvents Status As ColumnHeader
     Friend WithEvents Skadet As ColumnHeader
     Friend WithEvents Savnet As ColumnHeader
-    Friend WithEvents BtnInvSoke As Button
+    Friend WithEvents BtnInvSok As Button
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents BtnKndEndre As Button
     Friend WithEvents BtnKndKundeID As Button
