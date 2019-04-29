@@ -54,6 +54,8 @@ Partial Class Form1
         Me.LblUtleieAvd = New System.Windows.Forms.Label()
         Me.KDTab = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.DateKndEndre = New System.Windows.Forms.DateTimePicker()
         Me.TxtKndEndreHF = New System.Windows.Forms.TextBox()
         Me.TxtKndEndreRbt = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -73,6 +75,8 @@ Partial Class Form1
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.DateKndFdato = New System.Windows.Forms.DateTimePicker()
+        Me.LblKndFdato = New System.Windows.Forms.Label()
         Me.BtnKndRegistrer = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TxtKndEpost = New System.Windows.Forms.TextBox()
@@ -224,10 +228,6 @@ Partial Class Form1
         Me.LblAdminNBPassord = New System.Windows.Forms.Label()
         Me.LblAdminNBBID = New System.Windows.Forms.Label()
         Me.DBAdminTab = New System.Windows.Forms.TabPage()
-        Me.LblKndFdato = New System.Windows.Forms.Label()
-        Me.DateKndFdato = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -549,7 +549,7 @@ Partial Class Form1
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.Label7)
-        Me.GroupBox3.Controls.Add(Me.DateTimePicker1)
+        Me.GroupBox3.Controls.Add(Me.DateKndEndre)
         Me.GroupBox3.Controls.Add(Me.TxtKndEndreHF)
         Me.GroupBox3.Controls.Add(Me.TxtKndEndreRbt)
         Me.GroupBox3.Controls.Add(Me.Label5)
@@ -575,6 +575,24 @@ Partial Class Form1
         Me.GroupBox3.TabIndex = 26
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Endre Kunde"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(7, 416)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(87, 18)
+        Me.Label7.TabIndex = 27
+        Me.Label7.Text = "Fødselsdato:"
+        '
+        'DateKndEndre
+        '
+        Me.DateKndEndre.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateKndEndre.Location = New System.Drawing.Point(123, 413)
+        Me.DateKndEndre.Name = "DateKndEndre"
+        Me.DateKndEndre.Size = New System.Drawing.Size(162, 22)
+        Me.DateKndEndre.TabIndex = 27
         '
         'TxtKndEndreHF
         '
@@ -764,6 +782,24 @@ Partial Class Form1
         Me.GroupBox4.TabIndex = 25
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Ny Kunde"
+        '
+        'DateKndFdato
+        '
+        Me.DateKndFdato.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateKndFdato.Location = New System.Drawing.Point(123, 279)
+        Me.DateKndFdato.Name = "DateKndFdato"
+        Me.DateKndFdato.Size = New System.Drawing.Size(172, 22)
+        Me.DateKndFdato.TabIndex = 26
+        '
+        'LblKndFdato
+        '
+        Me.LblKndFdato.AutoSize = True
+        Me.LblKndFdato.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndFdato.Location = New System.Drawing.Point(7, 282)
+        Me.LblKndFdato.Name = "LblKndFdato"
+        Me.LblKndFdato.Size = New System.Drawing.Size(87, 18)
+        Me.LblKndFdato.TabIndex = 25
+        Me.LblKndFdato.Text = "Fødselsdato:"
         '
         'BtnKndRegistrer
         '
@@ -2207,42 +2243,6 @@ Partial Class Form1
         Me.DBAdminTab.Text = "DB Admin"
         Me.DBAdminTab.UseVisualStyleBackColor = True
         '
-        'LblKndFdato
-        '
-        Me.LblKndFdato.AutoSize = True
-        Me.LblKndFdato.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblKndFdato.Location = New System.Drawing.Point(7, 282)
-        Me.LblKndFdato.Name = "LblKndFdato"
-        Me.LblKndFdato.Size = New System.Drawing.Size(87, 18)
-        Me.LblKndFdato.TabIndex = 25
-        Me.LblKndFdato.Text = "Fødselsdato:"
-        '
-        'DateKndFdato
-        '
-        Me.DateKndFdato.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateKndFdato.Location = New System.Drawing.Point(123, 279)
-        Me.DateKndFdato.Name = "DateKndFdato"
-        Me.DateKndFdato.Size = New System.Drawing.Size(172, 22)
-        Me.DateKndFdato.TabIndex = 26
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker1.Location = New System.Drawing.Point(123, 413)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(162, 22)
-        Me.DateTimePicker1.TabIndex = 27
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(7, 416)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(87, 18)
-        Me.Label7.TabIndex = 27
-        Me.Label7.Text = "Fødselsdato:"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2492,5 +2492,5 @@ Partial Class Form1
     Friend WithEvents DateKndFdato As DateTimePicker
     Friend WithEvents LblKndFdato As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents DateKndEndre As DateTimePicker
 End Class

@@ -228,6 +228,7 @@ Public Class Form1
             End If
         End If
     End Sub
+
     Private Sub TxtKndAdresse_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndAdresse.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå1234567890"
@@ -237,6 +238,7 @@ Public Class Form1
             End If
         End If
     End Sub
+
     Private Sub TxtKndEpost_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndEpost.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå1234567890@!#$%&'*+-/=?^_`{|}~;."
@@ -314,6 +316,7 @@ Public Class Form1
     Dim KndEpostSelected
     Dim KndRabattSelected
     Dim KndHandletSelected
+    Dim KndFdatoSelected As Date
 
 
     'ENDRE FANE
@@ -324,8 +327,6 @@ Public Class Form1
             MsgBox("Vennligst fyll inn ID for søk")
             Exit Sub
         End If
-
-
 
         Try
             DBConnect()
@@ -341,6 +342,7 @@ Public Class Form1
                 KndEpostSelected = tempVarSporring("epost")
                 KndRabattSelected = tempVarSporring("rabatt_id")
                 KndHandletSelected = tempVarSporring("handlet_for")
+                KndFdatoSelected = tempVarSporring("kunde_fdato")
 
             End While
             tempVarSporring.Close()
@@ -354,9 +356,7 @@ Public Class Form1
             TxtKndEndreEP.Text = KndEpostSelected
             TxtKndEndreRbt.Text = KndRabattSelected
             TxtKndEndreHF.Text = KndHandletSelected
-
-
-
+            DateKndEndre.Value = KndFdatoSelected
 
         Catch feilmelding As MySqlException
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
