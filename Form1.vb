@@ -204,59 +204,95 @@ Public Class Form1
     Dim KndFodselsar As Date
     Dim KndTlf As String
     Dim KndEpost As String
+    Dim KndTegn As String = ".-@ "
 
-    'Bedre måte å gjøre dette på:
+    'Bedre måte å gjøre dette på:    '
+    'lage en sub som utfører de repeterende oppgavene.
 
-    ' lage en sub som utfører de repeterende oppgavene.
+
+
+    '[Morten] Har laget noen korte funksjoner for inputsjekk som kan brukes for de forskjellige textbokser.
+    'Funksjonene tar to variabler; keypresseventargs, og en string bestående av ekstra tillatte tegn.
+    'Mulig dette ikke er en optimal løsning så kom gjerne med forslag :) (om noen noengang leser dette)
+
+    Private Function KndSjekkInputTall(e)
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Function
+
+    Private Function KndSjekkInputBokstav(e, tegn)
+        If Not Char.IsLetter(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) _
+            AndAlso Not tegn.Contains(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Function
+
+    Private Function KndSjekkInputBokstavTall(e, tegn)
+        If Not Char.IsLetterOrDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) _
+            AndAlso Not tegn.Contains(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Function
+
 
     Private Sub TxtKndFornavn_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndFornavn.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå -"
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
+        Dim KndTegn As String = "-"
+        KndSjekkInputBokstav(e, KndTegn)
+        'If Not (Asc(e.KeyChar) = 8) Then
+        '    Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå -"
+        '    If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
+        '        e.KeyChar = ChrW(0)
+        '        e.Handled = True
+        '    End If
+        'End If
     End Sub
 
     Private Sub TxtKndEtternavn_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndEtternavn.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå -"
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
+        Dim KndTegn As String = "-"
+        KndSjekkInputBokstav(e, KndTegn)
+        'If Not (Asc(e.KeyChar) = 8) Then
+        '    Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå -"
+        '    If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
+        '        e.KeyChar = ChrW(0)
+        '        e.Handled = True
+        '    End If
+        'End If
     End Sub
 
     Private Sub TxtKndAdresse_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndAdresse.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå1234567890"
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
+        Dim KndTegn As String = "-."
+        KndSjekkInputBokstavTall(e, KndTegn)
+        'If Not (Asc(e.KeyChar) = 8) Then
+        '    Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå1234567890"
+        '    If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
+        '        e.KeyChar = ChrW(0)
+        '        e.Handled = True
+        '    End If
+        'End If
     End Sub
 
     Private Sub TxtKndEpost_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndEpost.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå1234567890@!#$%&'*+-/=?^_`{|}~;."
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
+        Dim KndTegn As String = "-.@_"
+        KndSjekkInputBokstavTall(e, KndTegn)
+        'If Not (Asc(e.KeyChar) = 8) Then
+        '    Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå1234567890@!#$%&'*+-/=?^_`{|}~;."
+        '    If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
+        '        e.KeyChar = ChrW(0)
+        '        e.Handled = True
+        '    End If
+        'End If
     End Sub
 
     Private Sub TxtKndTlf_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndTlf.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            Dim allowedChars As String = "1234567890"
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
+        KndSjekkInputTall(e)
+        'If Not (Asc(e.KeyChar) = 8) Then
+        '    Dim allowedChars As String = "1234567890"
+        '    If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
+        '        e.KeyChar = ChrW(0)
+        '        e.Handled = True
+        '    End If
+        'End If
     End Sub
 
 
