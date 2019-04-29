@@ -178,11 +178,8 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Kunde. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
-
     'Testing testing 123'
     'Håvard var her >:)'
-
-
 
     Dim KndFornavn As String
     Dim KndEtternavn As String
@@ -190,10 +187,6 @@ Public Class Form1
     Dim KndFodselsar As Date
     Dim KndTlf As String
     Dim KndEpost As String
-
-
-
-
 
     'Bedre måte å gjøre dette på:
     Private Sub TxtKndFornavn_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndFornavn.KeyPress
@@ -245,13 +238,10 @@ Public Class Form1
     End Sub
 
 
-
-
-
     'LEGG INN NYE KUNDER
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles BtnKndRegistrer.Click
 
-
+        Dim KnDFdato As Date = DateKndFdato.Value
         KndFornavn = TxtKndFornavn.Text
         KndEtternavn = TxtKndEtternavn.Text
         KndAdresse = TxtKndAdresse.Text
@@ -282,11 +272,9 @@ Public Class Form1
             Exit Sub
         End If
 
-
-
         Try
             DBConnect()
-            Dim sporring As New MySqlCommand("INSERT INTO kunder (kunde_fornavn, kunde_etternavn, adresse, telefon, epost, rabatt_id, handlet_for) VALUES ('" & KndFornavn & "', '" & KndEtternavn & "', '" & KndAdresse & "', " & KndTlf & ", '" & KndEpost & "', 1, 0)", tilkobling)
+            Dim sporring As New MySqlCommand("INSERT INTO kunder (kunde_fdato, kunde_fornavn, kunde_etternavn, adresse, telefon, epost, rabatt_id, handlet_for) VALUES ('" & KnDFdato.ToString("yyyy-mm-dd") & "', '" & KndFornavn & "', '" & KndEtternavn & "', '" & KndAdresse & "', " & KndTlf & ", '" & KndEpost & "', 1, 0)", tilkobling)
             sporring.ExecuteNonQuery()
 
             DBDisconnect()
@@ -295,8 +283,6 @@ Public Class Form1
         End Try
         MsgBox("Innlegging var vellykket")
     End Sub
-
-
 
     Dim KndSokKundeID
 
@@ -308,7 +294,6 @@ Public Class Form1
     Dim KndEpostSelected
     Dim KndRabattSelected
     Dim KndHandletSelected
-
 
 
     'ENDRE FANE
@@ -364,8 +349,6 @@ Public Class Form1
             BtnKndEndre.Enabled = False
         End If
     End Sub
-
-
 
 
     'SØK DROPDOWN
@@ -447,8 +430,6 @@ Public Class Form1
 
 
     End Sub
-
-
 
 
     Private Sub BtnKndEndre_Click(sender As Object, e As EventArgs) Handles BtnKndEndre.Click
@@ -803,6 +784,8 @@ Public Class Form1
 
                 End If
 
+                'select replace(convert(varchar, getdate(),101),'/','')
+
                 'SQLspørring for innlegging av utstyr i database. Data hentes fra felt
             ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
                 Dim InvBekreftUtstyrReg As DialogResult
@@ -900,7 +883,7 @@ Public Class Form1
                                 InvResultatArray(i) = "Ja"
                             End If
                         Else
-                                InvResultatArray(i) = invSqlLeser(i)
+                            InvResultatArray(i) = invSqlLeser(i)
                         End If
                     Next
                     InvResultatObjekt = New ListViewItem(InvResultatArray)
@@ -964,9 +947,22 @@ Public Class Form1
 
     End Sub
 
+    ' - ----------------------- TEST TEST TEST - --------------------
     Private Sub BtnInvTest_Click(sender As Object, e As EventArgs) Handles BtnInvTest.Click
-
+        'Dim testdato As Date
+        'Dim testsp As String = "select kunde_fdato from kunder where kunde_etternavn='faug'"
+        'Dim sql As MySqlCommand
+        'Dim leser As MySqlDataReader
+        'DBConnect()
+        'sql = New MySqlCommand(testsp, tilkobling)
+        'leser = sql.ExecuteReader()
+        'While leser.Read()
+        '    testdato = leser(0)
+        'End While
+        'leser.close()
+        'LblInvAktivProdukt.Text = CStr(testdato)
     End Sub
+
     'SQLspørring med endering av data for valgt produkt med ID fra valgt produkt i søkefelt
     Private Sub BtnInvEndre_Click(sender As Object, e As EventArgs) Handles BtnInvEndre.Click
 
@@ -1523,6 +1519,8 @@ Public Class Form1
     Private Sub AdminEBEndreB_Click(sender As Object, e As EventArgs) Handles AdminEBEndreB.Click
         AdminEndreBruker()
     End Sub
+
+
 
 
 
