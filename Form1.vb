@@ -14,6 +14,8 @@ Public Class Form1
     Dim tilkobling As MySqlConnection
     Dim InvAktivtProduktID As String
 
+
+
 #End Region
 
 #Region "GlobaleFunksjonerOgProsedyrer"
@@ -79,6 +81,9 @@ Public Class Form1
             Return False
         End If
     End Function
+
+
+
 #End Region
 
 #Region "Form Load og Login"
@@ -106,7 +111,17 @@ Public Class Form1
                 MsgBox("Startmeny")
                 StartMOTDUpdate()
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
+
                 MsgBox("Utleiemeny")
+
+                Dim dato As Date = Date.Today
+
+                LblUtleieDatoTxt.Text = dato
+                LblUtleieKlokke.Text = TimeOfDay
+
+
+
+
             Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
                 CmbKndSok.Items.Clear()
                 Dim innhold = New String() {"ID", "Fornavn", "Etternavn", "Adresse", "Telefon", "Epost", "Rabatt Tier", "Handlet For"}
@@ -168,8 +183,10 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Leie. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
-
     'Utstyr tilgjengelig for valgt sykkel kan legges i combobox som populeres automatisk ?
+
+
+
 #End Region
 
 
@@ -189,6 +206,9 @@ Public Class Form1
     Dim KndEpost As String
 
     'Bedre måte å gjøre dette på:
+
+    ' lage en sub som utfører de repeterende oppgavene.
+
     Private Sub TxtKndFornavn_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndFornavn.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå -"
@@ -1288,6 +1308,8 @@ Public Class Form1
     'Hvis passordfeltet er tom, så byttes ikke passordet. AEB1 : Update Bruker AEB3 : Update Passord AEB4 : Hent avdelingid
 
     Private Sub AdminEndreBruker()
+        Dim EBInputSjekk As Boolean
+
 
         TxtAdminEBPassord.Text = SQLWhiteWash(TxtAdminEBPassord.Text)
         TxtAdminEBFornavn.Text = SQLWhiteWash(TxtAdminEBFornavn.Text)
@@ -1362,7 +1384,7 @@ Public Class Form1
             AdminEBBIDAdapter.SelectCommand = AdminEBBIDKommando
             AdminEBBIDAdapter.Fill(AdminEBBIDTable)
             DBDisconnect()
-
+            Dim EBSPString As String
             Dim AdminEBBIDRow As DataRow
             For Each AdminEBBIDRow In AdminEBBIDTable.Rows
                 TxtAdminEBFornavn.Text = AdminEBBIDRow("fornavn")
@@ -1371,7 +1393,8 @@ Public Class Form1
                 TxtAdminEBEpost.Text = AdminEBBIDRow("epost")
                 TxtAdminEBTelefon.Text = AdminEBBIDRow("telefon")
                 CboAdminEBStilling.SelectedItem = AdminEBBIDRow("stilling")
-                CboAdminEBSP.SelectedItem = AdminEBBIDRow("stilling_prosent")
+                EBSPString = AdminEBBIDRow("stilling_prosent")
+                CboAdminEBSP.SelectedItem = EBSPString
                 If AdminEBBIDRow("admin") = "1" Then
                     ChkAdminEBAdmin.Checked = True
                 End If
@@ -1506,6 +1529,39 @@ Public Class Form1
     End Sub
 
     Private Sub AdminNBOpprettB_Click(sender As Object, e As EventArgs) Handles AdminNBOpprettB.Click
+        Dim NBInputSjekk As Boolean
+
+        NBInputSjekk = CheckVarChar30(TxtAdminNBPassord.Text)
+        If NBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig passord. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+        NBInputSjekk = CheckVarChar20(TxtAdminNBFornavn.Text)
+        If NBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig fornavn. (Mindre enn 20 char)")
+            Exit Sub
+        End If
+        NBInputSjekk = CheckVarChar30(TxtAdminNBEtternavn.Text)
+        If NBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig etternavn. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+        NBInputSjekk = CheckIntValue(TxtAdminNBTime.Text)
+        If NBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig timelønn. Tallformat.")
+            Exit Sub
+        End If
+        NBInputSjekk = CheckVarChar30(TxtAdminNBEpost.Text)
+        If NBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig epost. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+        NBInputSjekk = CheckVarChar15(TxtAdminNBTelefon.Text)
+        If NBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig passord. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+
         AdminNyBruker()
         AdminBrukerIDCalc()
     End Sub
@@ -1517,6 +1573,39 @@ Public Class Form1
     End Sub
 
     Private Sub AdminEBEndreB_Click(sender As Object, e As EventArgs) Handles AdminEBEndreB.Click
+        Dim EBInputSjekk As Boolean
+
+        EBInputSjekk = CheckIntValue(TxtAdminEBBID.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig Bruker ID. (Tall mindre enn 12 char)")
+            Exit Sub
+        End If
+        EBInputSjekk = CheckVarChar20(TxtAdminEBFornavn.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig fornavn. (Mindre enn 20 char)")
+            Exit Sub
+        End If
+        EBInputSjekk = CheckVarChar30(TxtAdminEBEtternavn.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig etternavn. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+        EBInputSjekk = CheckIntValue(TxtAdminEBTime.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig timelønn. Tallformat.")
+            Exit Sub
+        End If
+        EBInputSjekk = CheckVarChar30(TxtAdminEBEpost.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig epost. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+        EBInputSjekk = CheckVarChar15(TxtAdminEBTelefon.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig passord. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+
         AdminEndreBruker()
     End Sub
 
