@@ -47,6 +47,38 @@ Public Class Form1
         Return EndString
 
     End Function
+
+    Private Function CheckVarChar20(ByVal CheckString As String) As Boolean
+        If CheckString.Length > 0 And CheckString.Length < 21 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Function CheckVarChar30(ByVal CheckString As String) As Boolean
+        If CheckString.Length > 0 And CheckString.Length < 31 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Function CheckVarChar15(ByVal CheckString As String) As Boolean
+        If CheckString.Length > 0 And CheckString.Length < 16 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Function CheckIntValue(ByVal CheckString As String) As Boolean
+        If CheckString.Length > 0 And CheckString.Length < 11 And IsNumeric(CheckString) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 #End Region
 
 #Region "Form Load og Login"
