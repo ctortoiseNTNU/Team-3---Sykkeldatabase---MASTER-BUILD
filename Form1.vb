@@ -34,15 +34,27 @@ Public Class Form1
     End Sub
 
     Private Sub DBDisconnect()
+
         tilkobling.Close()
         tilkobling.Dispose()
+
     End Sub
 
+    Private Function SQLWhiteWash(ByVal StartString As String) As String
+
+        Dim EndString As String
+        EndString = StartString.Replace("'", "\'")
+        Return EndString
+
+    End Function
 #End Region
 
 #Region "Form Load og Login"
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         StartMOTDUpdate()
+
     End Sub
 
 
@@ -1089,6 +1101,14 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Admin. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
+
+    'Prosedyre som brukes til lagring av ny bruker i MySQLDatabasen.
+    'Dette er kjørt når man trykker på ny bruker knappen.
+    'Her er det slik at Passord og Avdelinger befinner seg i egne tabeller.
+    'Vi henter først AvdelingsIDen til Avdelingen som har blitt valgt vha MySQL som leser Avd_navn og skriver tilsvarende avdelings id til variabel.
+    'Da kjører vi insert sql i 3 stadier - insert bruker, insert passord, update bruker. Dette er slik at vi får lenket opp passord fk og bruker fk med hverandre
+    'ANB1 : Insert ny bruker ANB2 : Insert ny passord ANB3 : Update bruker for å knytte passord fk ANB4 : laster inn tilsvarende avdelings id.
+
     Private Sub AdminNyBruker()
         Try
             DBConnect()
@@ -1135,6 +1155,12 @@ Public Class Form1
             MsgBox("Man får ikke koble til databasen:  " & AdminSqlError6.Message)
         End Try
     End Sub
+
+    'Prosedyre som brukes til endring av ekisterende bruker i SQLdatabasen.
+    'Veldig lik den som brukes til ny bruker, men noen forandringer:
+    'Som før så hentes tilsvarende avdeling id slik at FK til brukeren kan oppdateres riktig.
+    'Da er det SQL update for å bytte bruker detaljene.
+    'Hvis passordfeltet er tom, så byttes ikke passordet. AEB1 : Update Bruker AEB3 : Update Passord AEB4 : Hent avdelingid
 
     Private Sub AdminEndreBruker()
         Try
@@ -1185,6 +1211,11 @@ Public Class Form1
             MsgBox("Man får ikke koble til databasen:  " & AdminSqlError8.Message)
         End Try
     End Sub
+
+
+    'Prosedyre for inn lasting av bruker detaljer. Når man taster inn bruker ID så lastes inn info slik at man vet hva det var før.
+    'Her har vi mysql kode som laster in tabellen for tilsvarende brukerID. Den kjøres ved knappetrykk.
+    'Da populeres det som befinner seg i formen med verdiene som er i tabellen som vi har laget.
     Private Sub AdminLastInnEndreBruker()
         Try
             DBConnect()
@@ -1235,6 +1266,8 @@ Public Class Form1
         End Try
     End Sub
 
+    'Dette er en prosedyre som kjører på hvert lasting av Adminside og ved lagring av ny bruker.
+    'Den kalkulerer neste bruker ID automatisk. Dette er gjort fordi det fjerner muligheten for menneskefeil iht bruker id.
     Private Sub AdminBrukerIDCalc()
         Try
             DBConnect()
@@ -1257,6 +1290,8 @@ Public Class Form1
         End Try
     End Sub
 
+    'Dette er en prosedyre som populerer ComboBoksene til avdelingene. Dette gir muligheten å velge riktig avdelingsnavn.
+    'Comboboksene er tatt i bruk for å ha best mulig information hygiene på plass.
     Private Sub AdminAvdelingPopulate()
         Try
             DBConnect()
@@ -1281,6 +1316,9 @@ Public Class Form1
 
         End Try
     End Sub
+
+    'Dette er søkeboksprosedyren.
+    'Den søker vha et select command som gjør at søkefeltet er kolonnen som blir søket på. Vi bruker også LIKE sql commando som gjør at vi får partial matching.
     Private Sub AdminBSSokB_Click(sender As Object, e As EventArgs) Handles AdminBSSokB.Click
         Dim AdminSoekefelt, AdminSoekekategori As String
         AdminSoekefelt = TxtAdminBSFelt.Text
@@ -1312,6 +1350,8 @@ Public Class Form1
 
     End Sub
 
+    'Dette oppdaterer MOTD i databasen og reflekterer det som vises på fremsiden. Man klikker på knappen for å kjøre koden.
+    'Den kjører også en tilleggsprosydre som oppdaterer på start siden også.
     Private Sub AdminMOTDEndreB_Click(sender As Object, e As EventArgs) Handles AdminMOTDEndreB.Click
         Try
             DBConnect()
