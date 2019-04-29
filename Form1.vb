@@ -47,6 +47,38 @@ Public Class Form1
         Return EndString
 
     End Function
+
+    Private Function CheckVarChar20(ByVal CheckString As String) As Boolean
+        If CheckString.Length > 0 And CheckString.Length < 21 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Function CheckVarChar30(ByVal CheckString As String) As Boolean
+        If CheckString.Length > 0 And CheckString.Length < 31 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Function CheckVarChar15(ByVal CheckString As String) As Boolean
+        If CheckString.Length > 0 And CheckString.Length < 16 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Function CheckIntValue(ByVal CheckString As String) As Boolean
+        If CheckString.Length > 0 And CheckString.Length < 11 And IsNumeric(CheckString) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 #End Region
 
 #Region "Form Load og Login"
@@ -1206,6 +1238,14 @@ Public Class Form1
             If ChkAdminNBAdmin.Checked = True Then
                 AdminAdminStatus = 1
             End If
+
+            TxtAdminNBPassord.Text = SQLWhiteWash(TxtAdminNBPassord.Text)
+            TxtAdminNBFornavn.Text = SQLWhiteWash(TxtAdminNBFornavn.Text)
+            TxtAdminNBEtternavn.Text = SQLWhiteWash(TxtAdminNBEtternavn.Text)
+            TxtAdminNBTime.Text = SQLWhiteWash(TxtAdminNBTime.Text)
+            TxtAdminNBEpost.Text = SQLWhiteWash(TxtAdminNBEpost.Text)
+            TxtAdminNBTelefon.Text = SQLWhiteWash(TxtAdminNBTelefon.Text)
+
             Dim AdminNyBruker2 As New MySqlCommand("INSERT INTO passord (passord_id, pwd, bruker_id) VALUES (" & LblBrukerIDNBVis.Text & ", '" & TxtAdminNBPassord.Text & "'," & LblBrukerIDNBVis.Text & ");", tilkobling)
             Dim AdminNyBruker3 As New MySqlCommand("UPDATE brukere SET passord_id = " & LblBrukerIDNBVis.Text & " WHERE bruker_id = " & LblBrukerIDNBVis.Text & ";", tilkobling)
             Dim AdminNyBruker4 As New MySqlCommand("SELECT avdeling_id FROM avdeling WHERE avd_navn ='" & CboAdminNBAvdeling.Text & "';", tilkobling)
@@ -1252,6 +1292,14 @@ Public Class Form1
     'Hvis passordfeltet er tom, så byttes ikke passordet. AEB1 : Update Bruker AEB3 : Update Passord AEB4 : Hent avdelingid
 
     Private Sub AdminEndreBruker()
+
+        TxtAdminEBPassord.Text = SQLWhiteWash(TxtAdminEBPassord.Text)
+        TxtAdminEBFornavn.Text = SQLWhiteWash(TxtAdminEBFornavn.Text)
+        TxtAdminEBEtternavn.Text = SQLWhiteWash(TxtAdminEBEtternavn.Text)
+        TxtAdminEBTime.Text = SQLWhiteWash(TxtAdminEBTime.Text)
+        TxtAdminEBEpost.Text = SQLWhiteWash(TxtAdminEBEpost.Text)
+        TxtAdminEBTelefon.Text = SQLWhiteWash(TxtAdminEBTelefon.Text)
+
         Try
             DBConnect()
             Dim AdminAvdelingNavn As String = ""
@@ -1306,6 +1354,9 @@ Public Class Form1
     'Her har vi mysql kode som laster in tabellen for tilsvarende brukerID. Den kjøres ved knappetrykk.
     'Da populeres det som befinner seg i formen med verdiene som er i tabellen som vi har laget.
     Private Sub AdminLastInnEndreBruker()
+
+        TxtAdminEBBID.Text = SQLWhiteWash(TxtAdminEBBID.Text)
+
         Try
             DBConnect()
             Dim AdminEBBIDKommando As New MySqlCommand("Select * FROM brukere WHERE bruker_id =" & TxtAdminEBBID.Text & ";", tilkobling)
@@ -1410,7 +1461,7 @@ Public Class Form1
     'Den søker vha et select command som gjør at søkefeltet er kolonnen som blir søket på. Vi bruker også LIKE sql commando som gjør at vi får partial matching.
     Private Sub AdminBSSokB_Click(sender As Object, e As EventArgs) Handles AdminBSSokB.Click
         Dim AdminSoekefelt, AdminSoekekategori As String
-        AdminSoekefelt = TxtAdminBSFelt.Text
+        AdminSoekefelt = SQLWhiteWash(TxtAdminBSFelt.Text)
         AdminSoekekategori = CboAdminBSEtter.Text
 
 
@@ -1442,6 +1493,9 @@ Public Class Form1
     'Dette oppdaterer MOTD i databasen og reflekterer det som vises på fremsiden. Man klikker på knappen for å kjøre koden.
     'Den kjører også en tilleggsprosydre som oppdaterer på start siden også.
     Private Sub AdminMOTDEndreB_Click(sender As Object, e As EventArgs) Handles AdminMOTDEndreB.Click
+
+        TxtAdminMOTD.Text = SQLWhiteWash(TxtAdminMOTD.Text)
+
         Try
             DBConnect()
             Dim AdminMOTDSet As New MySqlCommand("UPDATE message_of_the_day SET message = '" & TxtAdminMOTD.Text & "' WHERE message_id = 1;", tilkobling)
