@@ -14,6 +14,8 @@ Public Class Form1
     Dim tilkobling As MySqlConnection
     Dim InvAktivtProduktID As String
 
+
+
 #End Region
 
 #Region "GlobaleFunksjonerOgProsedyrer"
@@ -79,6 +81,9 @@ Public Class Form1
             Return False
         End If
     End Function
+
+
+
 #End Region
 
 #Region "Form Load og Login"
@@ -106,7 +111,17 @@ Public Class Form1
                 MsgBox("Startmeny")
                 StartMOTDUpdate()
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
+
                 MsgBox("Utleiemeny")
+
+                Dim dato As Date = Date.Today
+
+                LblUtleieDatoTxt.Text = dato
+                LblUtleieKlokke.Text = TimeOfDay
+
+
+
+
             Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
                 CmbKndSok.Items.Clear()
                 Dim innhold = New String() {"ID", "Fornavn", "Etternavn", "Adresse", "Telefon", "Epost", "Rabatt Tier", "Handlet For"}
@@ -168,8 +183,10 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Leie. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
-
     'Utstyr tilgjengelig for valgt sykkel kan legges i combobox som populeres automatisk ?
+
+
+
 #End Region
 
 
@@ -196,6 +213,9 @@ Public Class Form1
 
 
     'Bedre måte å gjøre dette på:
+
+    ' lage en sub som utfører de repeterende oppgavene.
+
     Private Sub TxtKndFornavn_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndFornavn.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå -"
@@ -1592,6 +1612,12 @@ Public Class Form1
 
         AdminEndreBruker()
     End Sub
+
+
+
+
+
+
 
 
 
