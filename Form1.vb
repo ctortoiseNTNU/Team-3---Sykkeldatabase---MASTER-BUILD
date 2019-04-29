@@ -1117,6 +1117,14 @@ Public Class Form1
             If ChkAdminNBAdmin.Checked = True Then
                 AdminAdminStatus = 1
             End If
+
+            TxtAdminNBPassord.Text = SQLWhiteWash(TxtAdminNBPassord.Text)
+            TxtAdminNBFornavn.Text = SQLWhiteWash(TxtAdminNBFornavn.Text)
+            TxtAdminNBEtternavn.Text = SQLWhiteWash(TxtAdminNBEtternavn.Text)
+            TxtAdminNBTime.Text = SQLWhiteWash(TxtAdminNBTime.Text)
+            TxtAdminNBEpost.Text = SQLWhiteWash(TxtAdminNBEpost.Text)
+            TxtAdminNBTelefon.Text = SQLWhiteWash(TxtAdminNBTelefon.Text)
+
             Dim AdminNyBruker2 As New MySqlCommand("INSERT INTO passord (passord_id, pwd, bruker_id) VALUES (" & LblBrukerIDNBVis.Text & ", '" & TxtAdminNBPassord.Text & "'," & LblBrukerIDNBVis.Text & ");", tilkobling)
             Dim AdminNyBruker3 As New MySqlCommand("UPDATE brukere SET passord_id = " & LblBrukerIDNBVis.Text & " WHERE bruker_id = " & LblBrukerIDNBVis.Text & ";", tilkobling)
             Dim AdminNyBruker4 As New MySqlCommand("SELECT avdeling_id FROM avdeling WHERE avd_navn ='" & CboAdminNBAvdeling.Text & "';", tilkobling)
