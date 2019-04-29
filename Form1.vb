@@ -1203,6 +1203,8 @@ Public Class Form1
     'Hvis passordfeltet er tom, så byttes ikke passordet. AEB1 : Update Bruker AEB3 : Update Passord AEB4 : Hent avdelingid
 
     Private Sub AdminEndreBruker()
+        Dim EBInputSjekk As Boolean
+
 
         TxtAdminEBPassord.Text = SQLWhiteWash(TxtAdminEBPassord.Text)
         TxtAdminEBFornavn.Text = SQLWhiteWash(TxtAdminEBFornavn.Text)
@@ -1432,6 +1434,39 @@ Public Class Form1
     End Sub
 
     Private Sub AdminEBEndreB_Click(sender As Object, e As EventArgs) Handles AdminEBEndreB.Click
+        Dim EBInputSjekk As Boolean
+
+        EBInputSjekk = CheckVarChar30(TxtAdminEBPassord.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig passord. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+        EBInputSjekk = CheckVarChar20(TxtAdminEBFornavn.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig fornavn. (Mindre enn 20 char)")
+            Exit Sub
+        End If
+        EBInputSjekk = CheckVarChar30(TxtAdminEBEtternavn.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig etternavn. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+        EBInputSjekk = CheckIntValue(TxtAdminEBTime.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig timelønn. Tallformat.")
+            Exit Sub
+        End If
+        EBInputSjekk = CheckVarChar30(TxtAdminEBEpost.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig epost. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+        EBInputSjekk = CheckVarChar15(TxtAdminEBTelefon.Text)
+        If EBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig passord. (Mindre enn 30 char)")
+            Exit Sub
+        End If
+
         AdminEndreBruker()
     End Sub
 
