@@ -780,7 +780,7 @@ Partial Class Form1
         Me.GrpInvSok.Location = New System.Drawing.Point(377, 3)
         Me.GrpInvSok.Name = "GrpInvSok"
         Me.GrpInvSok.Size = New System.Drawing.Size(859, 622)
-        Me.GrpInvSok.TabIndex = 40
+        Me.GrpInvSok.TabIndex = 0
         Me.GrpInvSok.TabStop = False
         Me.GrpInvSok.Text = "Søkeresultater"
         '
@@ -791,7 +791,7 @@ Partial Class Form1
         Me.LvInvSok.Location = New System.Drawing.Point(6, 33)
         Me.LvInvSok.Name = "LvInvSok"
         Me.LvInvSok.Size = New System.Drawing.Size(847, 583)
-        Me.LvInvSok.TabIndex = 54
+        Me.LvInvSok.TabIndex = 0
         Me.LvInvSok.UseCompatibleStateImageBehavior = False
         Me.LvInvSok.View = System.Windows.Forms.View.Details
         '
@@ -902,7 +902,7 @@ Partial Class Form1
         Me.GrpInvRegistrerEndre.Location = New System.Drawing.Point(3, 3)
         Me.GrpInvRegistrerEndre.Name = "GrpInvRegistrerEndre"
         Me.GrpInvRegistrerEndre.Size = New System.Drawing.Size(368, 622)
-        Me.GrpInvRegistrerEndre.TabIndex = 39
+        Me.GrpInvRegistrerEndre.TabIndex = 0
         Me.GrpInvRegistrerEndre.TabStop = False
         Me.GrpInvRegistrerEndre.Text = "Registrer og Endre Inventar"
         '
@@ -921,7 +921,7 @@ Partial Class Form1
         Me.BtnInvAvbrytEndre.Location = New System.Drawing.Point(242, 500)
         Me.BtnInvAvbrytEndre.Name = "BtnInvAvbrytEndre"
         Me.BtnInvAvbrytEndre.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvAvbrytEndre.TabIndex = 49
+        Me.BtnInvAvbrytEndre.TabIndex = 19
         Me.BtnInvAvbrytEndre.Text = "Avbryt"
         '
         'BtnInvTom
@@ -930,7 +930,7 @@ Partial Class Form1
         Me.BtnInvTom.Location = New System.Drawing.Point(140, 500)
         Me.BtnInvTom.Name = "BtnInvTom"
         Me.BtnInvTom.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvTom.TabIndex = 48
+        Me.BtnInvTom.TabIndex = 18
         Me.BtnInvTom.Text = "Tøm felt"
         '
         'LblInvAktivProdukt
@@ -949,7 +949,7 @@ Partial Class Form1
         Me.BtnInvSok.Location = New System.Drawing.Point(39, 471)
         Me.BtnInvSok.Name = "BtnInvSok"
         Me.BtnInvSok.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvSok.TabIndex = 0
+        Me.BtnInvSok.TabIndex = 14
         Me.BtnInvSok.Text = "Søk"
         '
         'LblInvHentID
@@ -968,7 +968,7 @@ Partial Class Form1
         Me.TxtInvHentID.Location = New System.Drawing.Point(183, 546)
         Me.TxtInvHentID.Name = "TxtInvHentID"
         Me.TxtInvHentID.Size = New System.Drawing.Size(84, 26)
-        Me.TxtInvHentID.TabIndex = 46
+        Me.TxtInvHentID.TabIndex = 20
         '
         'BtnInvHent
         '
@@ -976,7 +976,7 @@ Partial Class Form1
         Me.BtnInvHent.Location = New System.Drawing.Point(39, 500)
         Me.BtnInvHent.Name = "BtnInvHent"
         Me.BtnInvHent.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvHent.TabIndex = 39
+        Me.BtnInvHent.TabIndex = 17
         Me.BtnInvHent.Text = "Hent"
         Me.BtnInvHent.UseVisualStyleBackColor = True
         '
@@ -987,7 +987,7 @@ Partial Class Form1
         Me.BtnInvEndre.Location = New System.Drawing.Point(242, 470)
         Me.BtnInvEndre.Name = "BtnInvEndre"
         Me.BtnInvEndre.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvEndre.TabIndex = 47
+        Me.BtnInvEndre.TabIndex = 16
         Me.BtnInvEndre.Text = "Endre"
         Me.BtnInvEndre.UseVisualStyleBackColor = True
         '
@@ -1023,44 +1023,48 @@ Partial Class Form1
         '
         'CboInvStatus
         '
+        Me.CboInvStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboInvStatus.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvStatus.FormattingEnabled = True
         Me.CboInvStatus.Items.AddRange(New Object() {"Ledig", "Utleid", "Verksted"})
         Me.CboInvStatus.Location = New System.Drawing.Point(242, 243)
         Me.CboInvStatus.Name = "CboInvStatus"
         Me.CboInvStatus.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvStatus.TabIndex = 41
+        Me.CboInvStatus.TabIndex = 11
         '
         'CboInvSkadet
         '
+        Me.CboInvSkadet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboInvSkadet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvSkadet.FormattingEnabled = True
         Me.CboInvSkadet.Items.AddRange(New Object() {"Nei", "Ja"})
         Me.CboInvSkadet.Location = New System.Drawing.Point(242, 327)
         Me.CboInvSkadet.Name = "CboInvSkadet"
         Me.CboInvSkadet.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSkadet.TabIndex = 40
-        Me.CboInvSkadet.Tag = ""
+        Me.CboInvSkadet.TabIndex = 12
         '
         'CboInvSavnet
         '
+        Me.CboInvSavnet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboInvSavnet.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvSavnet.FormattingEnabled = True
         Me.CboInvSavnet.Items.AddRange(New Object() {"Nei", "Ja"})
         Me.CboInvSavnet.Location = New System.Drawing.Point(242, 411)
         Me.CboInvSavnet.Name = "CboInvSavnet"
         Me.CboInvSavnet.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSavnet.TabIndex = 39
+        Me.CboInvSavnet.TabIndex = 13
         '
         'CboInvSubkategori
         '
+        Me.CboInvSubkategori.BackColor = System.Drawing.SystemColors.Window
+        Me.CboInvSubkategori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboInvSubkategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvSubkategori.FormattingEnabled = True
         Me.CboInvSubkategori.Items.AddRange(New Object() {"Barnesykkel", "Bysykkel", "Downhill", "Elsykkel", "Racer", "Tandem", "Terrengsykkel"})
         Me.CboInvSubkategori.Location = New System.Drawing.Point(104, 75)
         Me.CboInvSubkategori.Name = "CboInvSubkategori"
         Me.CboInvSubkategori.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvSubkategori.TabIndex = 38
+        Me.CboInvSubkategori.TabIndex = 2
         '
         'LblInvSubkategori
         '
@@ -1078,7 +1082,7 @@ Partial Class Form1
         Me.TxtInvGirsystem.Location = New System.Drawing.Point(104, 369)
         Me.TxtInvGirsystem.Name = "TxtInvGirsystem"
         Me.TxtInvGirsystem.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvGirsystem.TabIndex = 32
+        Me.TxtInvGirsystem.TabIndex = 9
         '
         'TxtInvHjulstorrelse
         '
@@ -1086,7 +1090,7 @@ Partial Class Form1
         Me.TxtInvHjulstorrelse.Location = New System.Drawing.Point(104, 327)
         Me.TxtInvHjulstorrelse.Name = "TxtInvHjulstorrelse"
         Me.TxtInvHjulstorrelse.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvHjulstorrelse.TabIndex = 31
+        Me.TxtInvHjulstorrelse.TabIndex = 8
         '
         'TxtInvRamme
         '
@@ -1094,7 +1098,7 @@ Partial Class Form1
         Me.TxtInvRamme.Location = New System.Drawing.Point(104, 285)
         Me.TxtInvRamme.Name = "TxtInvRamme"
         Me.TxtInvRamme.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvRamme.TabIndex = 30
+        Me.TxtInvRamme.TabIndex = 7
         '
         'LblInvGirsystem
         '
@@ -1128,23 +1132,25 @@ Partial Class Form1
         '
         'CboInvAvdeling
         '
+        Me.CboInvAvdeling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboInvAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvAvdeling.FormattingEnabled = True
         Me.CboInvAvdeling.Items.AddRange(New Object() {"Finse", "Flåm", "Haugastøl", "Myrdal", "Voss"})
         Me.CboInvAvdeling.Location = New System.Drawing.Point(104, 117)
         Me.CboInvAvdeling.Name = "CboInvAvdeling"
         Me.CboInvAvdeling.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvAvdeling.TabIndex = 26
+        Me.CboInvAvdeling.TabIndex = 3
         '
         'CboInvKategori
         '
+        Me.CboInvKategori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboInvKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvKategori.FormattingEnabled = True
         Me.CboInvKategori.Items.AddRange(New Object() {"Sykkel", "Utstyr"})
         Me.CboInvKategori.Location = New System.Drawing.Point(104, 33)
         Me.CboInvKategori.Name = "CboInvKategori"
         Me.CboInvKategori.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvKategori.TabIndex = 25
+        Me.CboInvKategori.TabIndex = 1
         '
         'TxtInvInnkjopspris
         '
@@ -1152,7 +1158,7 @@ Partial Class Form1
         Me.TxtInvInnkjopspris.Location = New System.Drawing.Point(104, 243)
         Me.TxtInvInnkjopspris.Name = "TxtInvInnkjopspris"
         Me.TxtInvInnkjopspris.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvInnkjopspris.TabIndex = 24
+        Me.TxtInvInnkjopspris.TabIndex = 6
         '
         'BtnInvRegistrer
         '
@@ -1160,19 +1166,20 @@ Partial Class Form1
         Me.BtnInvRegistrer.Location = New System.Drawing.Point(140, 470)
         Me.BtnInvRegistrer.Name = "BtnInvRegistrer"
         Me.BtnInvRegistrer.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvRegistrer.TabIndex = 23
+        Me.BtnInvRegistrer.TabIndex = 15
         Me.BtnInvRegistrer.Text = "Registrer"
         Me.BtnInvRegistrer.UseVisualStyleBackColor = True
         '
         'CboInvForhandler
         '
+        Me.CboInvForhandler.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboInvForhandler.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboInvForhandler.FormattingEnabled = True
         Me.CboInvForhandler.Items.AddRange(New Object() {"Stians Sport AS", "Svendsens sykler AS"})
         Me.CboInvForhandler.Location = New System.Drawing.Point(104, 411)
         Me.CboInvForhandler.Name = "CboInvForhandler"
         Me.CboInvForhandler.Size = New System.Drawing.Size(121, 26)
-        Me.CboInvForhandler.TabIndex = 20
+        Me.CboInvForhandler.TabIndex = 10
         '
         'TxtInvVareNummer
         '
@@ -1180,7 +1187,7 @@ Partial Class Form1
         Me.TxtInvVareNummer.Location = New System.Drawing.Point(104, 201)
         Me.TxtInvVareNummer.Name = "TxtInvVareNummer"
         Me.TxtInvVareNummer.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvVareNummer.TabIndex = 14
+        Me.TxtInvVareNummer.TabIndex = 5
         '
         'TxtInvProduktnavn
         '
@@ -1188,7 +1195,7 @@ Partial Class Form1
         Me.TxtInvProduktnavn.Location = New System.Drawing.Point(104, 159)
         Me.TxtInvProduktnavn.Name = "TxtInvProduktnavn"
         Me.TxtInvProduktnavn.Size = New System.Drawing.Size(121, 26)
-        Me.TxtInvProduktnavn.TabIndex = 13
+        Me.TxtInvProduktnavn.TabIndex = 4
         '
         'LblInvForhandler
         '
