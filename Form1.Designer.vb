@@ -295,6 +295,7 @@ Partial Class Form1
         Me.BtnStaGo = New System.Windows.Forms.Button()
         Me.CmbStaAvdeling2 = New System.Windows.Forms.ComboBox()
         Me.LblStaVelgAvd2 = New System.Windows.Forms.Label()
+        Me.Verksted = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1639,18 +1640,18 @@ Partial Class Form1
         Me.GrbStaTilgjengelig.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrbStaTilgjengelig.Location = New System.Drawing.Point(3, 3)
         Me.GrbStaTilgjengelig.Name = "GrbStaTilgjengelig"
-        Me.GrbStaTilgjengelig.Size = New System.Drawing.Size(458, 341)
+        Me.GrbStaTilgjengelig.Size = New System.Drawing.Size(666, 341)
         Me.GrbStaTilgjengelig.TabIndex = 24
         Me.GrbStaTilgjengelig.TabStop = False
         Me.GrbStaTilgjengelig.Text = "Antall sykler tilgjengelig"
         '
         'LvStaTilgjengelig
         '
-        Me.LvStaTilgjengelig.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader11, Me.ColumnHeader13, Me.ColumnHeader14, Me.ColumnHeader15})
+        Me.LvStaTilgjengelig.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader11, Me.ColumnHeader13, Me.ColumnHeader14, Me.ColumnHeader15, Me.Verksted})
         Me.LvStaTilgjengelig.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvStaTilgjengelig.Location = New System.Drawing.Point(3, 120)
         Me.LvStaTilgjengelig.Name = "LvStaTilgjengelig"
-        Me.LvStaTilgjengelig.Size = New System.Drawing.Size(449, 207)
+        Me.LvStaTilgjengelig.Size = New System.Drawing.Size(657, 207)
         Me.LvStaTilgjengelig.TabIndex = 29
         Me.LvStaTilgjengelig.UseCompatibleStateImageBehavior = False
         Me.LvStaTilgjengelig.View = System.Windows.Forms.View.Details
@@ -1658,25 +1659,25 @@ Partial Class Form1
         'ColumnHeader11
         '
         Me.ColumnHeader11.Text = "Avdeling"
-        Me.ColumnHeader11.Width = 157
+        Me.ColumnHeader11.Width = 178
         '
         'ColumnHeader13
         '
         Me.ColumnHeader13.Text = "Sykkel type"
         Me.ColumnHeader13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ColumnHeader13.Width = 130
+        Me.ColumnHeader13.Width = 190
         '
         'ColumnHeader14
         '
         Me.ColumnHeader14.Text = "Utleid"
         Me.ColumnHeader14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ColumnHeader14.Width = 80
+        Me.ColumnHeader14.Width = 97
         '
         'ColumnHeader15
         '
         Me.ColumnHeader15.Text = "Ledig"
         Me.ColumnHeader15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ColumnHeader15.Width = 80
+        Me.ColumnHeader15.Width = 101
         '
         'BtnStaSok
         '
@@ -2895,7 +2896,7 @@ Partial Class Form1
         '
         'CmbStaType
         '
-        Me.CmbStaType.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
+        Me.CmbStaType.Font = New System.Drawing.Font("Calibri", 11.25!)
         Me.CmbStaType.FormattingEnabled = True
         Me.CmbStaType.Location = New System.Drawing.Point(169, 71)
         Me.CmbStaType.Name = "CmbStaType"
@@ -2920,9 +2921,9 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.CmbStaAvdeling2)
         Me.GroupBox1.Controls.Add(Me.LblStaVelgAvd2)
         Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(467, 3)
+        Me.GroupBox1.Location = New System.Drawing.Point(675, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(456, 341)
+        Me.GroupBox1.Size = New System.Drawing.Size(455, 341)
         Me.GroupBox1.TabIndex = 25
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Mest Utleide Sykler"
@@ -2941,7 +2942,7 @@ Partial Class Form1
         'ColumnHeader16
         '
         Me.ColumnHeader16.Text = "Avdeling"
-        Me.ColumnHeader16.Width = 213
+        Me.ColumnHeader16.Width = 211
         '
         'ColumnHeader17
         '
@@ -2985,6 +2986,12 @@ Partial Class Form1
         Me.LblStaVelgAvd2.Size = New System.Drawing.Size(95, 18)
         Me.LblStaVelgAvd2.TabIndex = 1
         Me.LblStaVelgAvd2.Text = "Velg avdeling:"
+        '
+        'Verksted
+        '
+        Me.Verksted.Text = "Verksted"
+        Me.Verksted.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.Verksted.Width = 87
         '
         'Form1
         '
@@ -3320,4 +3327,5 @@ Partial Class Form1
     Friend WithEvents BtnStaGo As Button
     Friend WithEvents CmbStaAvdeling2 As ComboBox
     Friend WithEvents LblStaVelgAvd2 As Label
+    Friend WithEvents Verksted As ColumnHeader
 End Class
