@@ -158,7 +158,6 @@ Partial Class Form1
         Me.LblInvProduktnavn = New System.Windows.Forms.Label()
         Me.LblInvAvdeling = New System.Windows.Forms.Label()
         Me.LblInvKategori = New System.Windows.Forms.Label()
-        Me.ISTab = New System.Windows.Forms.TabPage()
         Me.LogiTab = New System.Windows.Forms.TabPage()
         Me.StatTab = New System.Windows.Forms.TabPage()
         Me.AdminTab = New System.Windows.Forms.TabPage()
@@ -228,6 +227,55 @@ Partial Class Form1
         Me.LblAdminNBPassord = New System.Windows.Forms.Label()
         Me.LblAdminNBBID = New System.Windows.Forms.Label()
         Me.DBAdminTab = New System.Windows.Forms.TabPage()
+        Me.GrpDBADBS = New System.Windows.Forms.GroupBox()
+        Me.ListView2 = New System.Windows.Forms.ListView()
+        Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader10 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader12 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BtnDBASok = New System.Windows.Forms.Button()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.LblDBASoketter = New System.Windows.Forms.Label()
+        Me.TxtDBASokefelt = New System.Windows.Forms.TextBox()
+        Me.LblDBASokefelt = New System.Windows.Forms.Label()
+        Me.GrpDBANyUK = New System.Windows.Forms.GroupBox()
+        Me.TxtDBAKnavn = New System.Windows.Forms.TextBox()
+        Me.TxtDBAKID = New System.Windows.Forms.TextBox()
+        Me.BtnDBAUKEndre = New System.Windows.Forms.Button()
+        Me.UKLast = New System.Windows.Forms.Button()
+        Me.BtnDBAUKNy = New System.Windows.Forms.Button()
+        Me.LblDBAKID = New System.Windows.Forms.Label()
+        Me.LblDBAKnavn = New System.Windows.Forms.Label()
+        Me.GrpDBANyST = New System.Windows.Forms.GroupBox()
+        Me.TxtDBATypeNavn = New System.Windows.Forms.TextBox()
+        Me.TxtDBATypeID = New System.Windows.Forms.TextBox()
+        Me.BtnDBASTLast = New System.Windows.Forms.Button()
+        Me.BtnDBASTEndre = New System.Windows.Forms.Button()
+        Me.BtnDBASTNy = New System.Windows.Forms.Button()
+        Me.LblDBATypeID = New System.Windows.Forms.Label()
+        Me.LblDBATypenavn = New System.Windows.Forms.Label()
+        Me.GrpDBAInvKategori = New System.Windows.Forms.GroupBox()
+        Me.GrpDBAAvdeling = New System.Windows.Forms.GroupBox()
+        Me.CboDBALandsdel = New System.Windows.Forms.ComboBox()
+        Me.TxtDBAAvdAdr = New System.Windows.Forms.TextBox()
+        Me.TxtDBAAvdNavn = New System.Windows.Forms.TextBox()
+        Me.TxtDBAAvdelingID = New System.Windows.Forms.TextBox()
+        Me.BtnDBAAvdLast = New System.Windows.Forms.Button()
+        Me.BtnDBAAvdEndre = New System.Windows.Forms.Button()
+        Me.BtnDBAAvdNy = New System.Windows.Forms.Button()
+        Me.LblDBALandsdel = New System.Windows.Forms.Label()
+        Me.LblDBAAvdAdr = New System.Windows.Forms.Label()
+        Me.LblDBAAvdNavn = New System.Windows.Forms.Label()
+        Me.LblDBAAvdID = New System.Windows.Forms.Label()
+        Me.LoginTab = New System.Windows.Forms.TabPage()
+        Me.BtnLoginAvslutt = New System.Windows.Forms.Button()
+        Me.BtnLoginLogin = New System.Windows.Forms.Button()
+        Me.TxtLoginPassord = New System.Windows.Forms.TextBox()
+        Me.TxtLoginBrukerID = New System.Windows.Forms.TextBox()
+        Me.LblLoginCopyright = New System.Windows.Forms.Label()
+        Me.LblLoginPassord = New System.Windows.Forms.Label()
+        Me.LblLoginBID = New System.Windows.Forms.Label()
+        Me.LblLoginTittel = New System.Windows.Forms.Label()
+        Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -248,6 +296,13 @@ Partial Class Form1
         Me.AdminBrukerSokGroup.SuspendLayout()
         Me.AdminEndreBrukerGroup.SuspendLayout()
         Me.AdminNyBrukerGroup.SuspendLayout()
+        Me.DBAdminTab.SuspendLayout()
+        Me.GrpDBADBS.SuspendLayout()
+        Me.GrpDBANyUK.SuspendLayout()
+        Me.GrpDBANyST.SuspendLayout()
+        Me.GrpDBAAvdeling.SuspendLayout()
+        Me.LoginTab.SuspendLayout()
+        CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'HovedTab
@@ -256,11 +311,11 @@ Partial Class Form1
         Me.HovedTab.Controls.Add(Me.UtleieTab)
         Me.HovedTab.Controls.Add(Me.KDTab)
         Me.HovedTab.Controls.Add(Me.InventarTab)
-        Me.HovedTab.Controls.Add(Me.ISTab)
         Me.HovedTab.Controls.Add(Me.LogiTab)
         Me.HovedTab.Controls.Add(Me.StatTab)
         Me.HovedTab.Controls.Add(Me.AdminTab)
         Me.HovedTab.Controls.Add(Me.DBAdminTab)
+        Me.HovedTab.Controls.Add(Me.LoginTab)
         Me.HovedTab.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.HovedTab.Location = New System.Drawing.Point(12, 12)
         Me.HovedTab.Name = "HovedTab"
@@ -1531,15 +1586,6 @@ Partial Class Form1
         Me.LblInvKategori.TabIndex = 1
         Me.LblInvKategori.Text = "Kategori:"
         '
-        'ISTab
-        '
-        Me.ISTab.Location = New System.Drawing.Point(4, 32)
-        Me.ISTab.Name = "ISTab"
-        Me.ISTab.Size = New System.Drawing.Size(1416, 744)
-        Me.ISTab.TabIndex = 4
-        Me.ISTab.Text = "Inventar Søk"
-        Me.ISTab.UseVisualStyleBackColor = True
-        '
         'LogiTab
         '
         Me.LogiTab.Location = New System.Drawing.Point(4, 32)
@@ -1838,6 +1884,7 @@ Partial Class Form1
         Me.TxtAdminEBPassord.Name = "TxtAdminEBPassord"
         Me.TxtAdminEBPassord.Size = New System.Drawing.Size(100, 26)
         Me.TxtAdminEBPassord.TabIndex = 13
+        Me.TxtAdminEBPassord.UseSystemPasswordChar = True
         '
         'ChkAdminEBTime
         '
@@ -2101,6 +2148,7 @@ Partial Class Form1
         Me.TxtAdminNBPassord.Name = "TxtAdminNBPassord"
         Me.TxtAdminNBPassord.Size = New System.Drawing.Size(100, 26)
         Me.TxtAdminNBPassord.TabIndex = 13
+        Me.TxtAdminNBPassord.UseSystemPasswordChar = True
         '
         'ChkAdminNBTime
         '
@@ -2236,6 +2284,11 @@ Partial Class Form1
         '
         'DBAdminTab
         '
+        Me.DBAdminTab.Controls.Add(Me.GrpDBADBS)
+        Me.DBAdminTab.Controls.Add(Me.GrpDBANyUK)
+        Me.DBAdminTab.Controls.Add(Me.GrpDBANyST)
+        Me.DBAdminTab.Controls.Add(Me.GrpDBAInvKategori)
+        Me.DBAdminTab.Controls.Add(Me.GrpDBAAvdeling)
         Me.DBAdminTab.Location = New System.Drawing.Point(4, 32)
         Me.DBAdminTab.Name = "DBAdminTab"
         Me.DBAdminTab.Size = New System.Drawing.Size(1416, 744)
@@ -2243,11 +2296,503 @@ Partial Class Form1
         Me.DBAdminTab.Text = "DB Admin"
         Me.DBAdminTab.UseVisualStyleBackColor = True
         '
+        'GrpDBADBS
+        '
+        Me.GrpDBADBS.Controls.Add(Me.ListView2)
+        Me.GrpDBADBS.Controls.Add(Me.BtnDBASok)
+        Me.GrpDBADBS.Controls.Add(Me.ComboBox1)
+        Me.GrpDBADBS.Controls.Add(Me.LblDBASoketter)
+        Me.GrpDBADBS.Controls.Add(Me.TxtDBASokefelt)
+        Me.GrpDBADBS.Controls.Add(Me.LblDBASokefelt)
+        Me.GrpDBADBS.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpDBADBS.Location = New System.Drawing.Point(823, 14)
+        Me.GrpDBADBS.Name = "GrpDBADBS"
+        Me.GrpDBADBS.Size = New System.Drawing.Size(482, 599)
+        Me.GrpDBADBS.TabIndex = 24
+        Me.GrpDBADBS.TabStop = False
+        Me.GrpDBADBS.Text = "DB Søk"
+        '
+        'ListView2
+        '
+        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader9, Me.ColumnHeader10, Me.ColumnHeader12})
+        Me.ListView2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListView2.Location = New System.Drawing.Point(0, 114)
+        Me.ListView2.Name = "ListView2"
+        Me.ListView2.Size = New System.Drawing.Size(482, 485)
+        Me.ListView2.TabIndex = 29
+        Me.ListView2.UseCompatibleStateImageBehavior = False
+        Me.ListView2.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader9
+        '
+        Me.ColumnHeader9.Text = "PK ID"
+        Me.ColumnHeader9.Width = 115
+        '
+        'ColumnHeader10
+        '
+        Me.ColumnHeader10.Text = "Navn"
+        Me.ColumnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeader10.Width = 192
+        '
+        'ColumnHeader12
+        '
+        Me.ColumnHeader12.Text = "Søkefelt"
+        Me.ColumnHeader12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeader12.Width = 167
+        '
+        'BtnDBASok
+        '
+        Me.BtnDBASok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDBASok.Location = New System.Drawing.Point(252, 73)
+        Me.BtnDBASok.Name = "BtnDBASok"
+        Me.BtnDBASok.Size = New System.Drawing.Size(62, 23)
+        Me.BtnDBASok.TabIndex = 28
+        Me.BtnDBASok.Text = "Søk!"
+        Me.BtnDBASok.UseVisualStyleBackColor = True
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"avdeling_id", "avd_navn", "avd_adresse", "landsdel", "type_id", "sykkelkategori", "utstyr_kat_id", "utstyr_kat"})
+        Me.ComboBox1.Location = New System.Drawing.Point(101, 72)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(121, 26)
+        Me.ComboBox1.TabIndex = 26
+        '
+        'LblDBASoketter
+        '
+        Me.LblDBASoketter.AutoSize = True
+        Me.LblDBASoketter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBASoketter.Location = New System.Drawing.Point(6, 75)
+        Me.LblDBASoketter.Name = "LblDBASoketter"
+        Me.LblDBASoketter.Size = New System.Drawing.Size(68, 18)
+        Me.LblDBASoketter.TabIndex = 23
+        Me.LblDBASoketter.Text = "Søk etter:"
+        '
+        'TxtDBASokefelt
+        '
+        Me.TxtDBASokefelt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBASokefelt.Location = New System.Drawing.Point(101, 33)
+        Me.TxtDBASokefelt.Name = "TxtDBASokefelt"
+        Me.TxtDBASokefelt.Size = New System.Drawing.Size(191, 26)
+        Me.TxtDBASokefelt.TabIndex = 22
+        '
+        'LblDBASokefelt
+        '
+        Me.LblDBASokefelt.AutoSize = True
+        Me.LblDBASokefelt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBASokefelt.Location = New System.Drawing.Point(6, 36)
+        Me.LblDBASokefelt.Name = "LblDBASokefelt"
+        Me.LblDBASokefelt.Size = New System.Drawing.Size(64, 18)
+        Me.LblDBASokefelt.TabIndex = 1
+        Me.LblDBASokefelt.Text = "Søkefelt:"
+        '
+        'GrpDBANyUK
+        '
+        Me.GrpDBANyUK.Controls.Add(Me.TxtDBAKnavn)
+        Me.GrpDBANyUK.Controls.Add(Me.TxtDBAKID)
+        Me.GrpDBANyUK.Controls.Add(Me.BtnDBAUKEndre)
+        Me.GrpDBANyUK.Controls.Add(Me.UKLast)
+        Me.GrpDBANyUK.Controls.Add(Me.BtnDBAUKNy)
+        Me.GrpDBANyUK.Controls.Add(Me.LblDBAKID)
+        Me.GrpDBANyUK.Controls.Add(Me.LblDBAKnavn)
+        Me.GrpDBANyUK.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpDBANyUK.Location = New System.Drawing.Point(414, 327)
+        Me.GrpDBANyUK.Name = "GrpDBANyUK"
+        Me.GrpDBANyUK.Size = New System.Drawing.Size(383, 286)
+        Me.GrpDBANyUK.TabIndex = 4
+        Me.GrpDBANyUK.TabStop = False
+        Me.GrpDBANyUK.Text = "Utstyrskategori"
+        '
+        'TxtDBAKnavn
+        '
+        Me.TxtDBAKnavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBAKnavn.Location = New System.Drawing.Point(144, 103)
+        Me.TxtDBAKnavn.Name = "TxtDBAKnavn"
+        Me.TxtDBAKnavn.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBAKnavn.TabIndex = 39
+        '
+        'TxtDBAKID
+        '
+        Me.TxtDBAKID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBAKID.Location = New System.Drawing.Point(144, 54)
+        Me.TxtDBAKID.Name = "TxtDBAKID"
+        Me.TxtDBAKID.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBAKID.TabIndex = 38
+        '
+        'BtnDBAUKEndre
+        '
+        Me.BtnDBAUKEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDBAUKEndre.Location = New System.Drawing.Point(184, 225)
+        Me.BtnDBAUKEndre.Name = "BtnDBAUKEndre"
+        Me.BtnDBAUKEndre.Size = New System.Drawing.Size(62, 23)
+        Me.BtnDBAUKEndre.TabIndex = 32
+        Me.BtnDBAUKEndre.Text = "Endre"
+        Me.BtnDBAUKEndre.UseVisualStyleBackColor = True
+        '
+        'UKLast
+        '
+        Me.UKLast.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.UKLast.Location = New System.Drawing.Point(302, 57)
+        Me.UKLast.Name = "UKLast"
+        Me.UKLast.Size = New System.Drawing.Size(62, 23)
+        Me.UKLast.TabIndex = 32
+        Me.UKLast.Text = "Last Inn"
+        Me.UKLast.UseVisualStyleBackColor = True
+        '
+        'BtnDBAUKNy
+        '
+        Me.BtnDBAUKNy.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDBAUKNy.Location = New System.Drawing.Point(103, 225)
+        Me.BtnDBAUKNy.Name = "BtnDBAUKNy"
+        Me.BtnDBAUKNy.Size = New System.Drawing.Size(62, 23)
+        Me.BtnDBAUKNy.TabIndex = 31
+        Me.BtnDBAUKNy.Text = "Ny"
+        Me.BtnDBAUKNy.UseVisualStyleBackColor = True
+        '
+        'LblDBAKID
+        '
+        Me.LblDBAKID.AutoSize = True
+        Me.LblDBAKID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBAKID.Location = New System.Drawing.Point(18, 57)
+        Me.LblDBAKID.Name = "LblDBAKID"
+        Me.LblDBAKID.Size = New System.Drawing.Size(80, 18)
+        Me.LblDBAKID.TabIndex = 5
+        Me.LblDBAKID.Text = "Kategori ID:"
+        '
+        'LblDBAKnavn
+        '
+        Me.LblDBAKnavn.AutoSize = True
+        Me.LblDBAKnavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBAKnavn.Location = New System.Drawing.Point(18, 106)
+        Me.LblDBAKnavn.Name = "LblDBAKnavn"
+        Me.LblDBAKnavn.Size = New System.Drawing.Size(94, 18)
+        Me.LblDBAKnavn.TabIndex = 4
+        Me.LblDBAKnavn.Text = "Kategorinavn:"
+        '
+        'GrpDBANyST
+        '
+        Me.GrpDBANyST.Controls.Add(Me.TxtDBATypeNavn)
+        Me.GrpDBANyST.Controls.Add(Me.TxtDBATypeID)
+        Me.GrpDBANyST.Controls.Add(Me.BtnDBASTLast)
+        Me.GrpDBANyST.Controls.Add(Me.BtnDBASTEndre)
+        Me.GrpDBANyST.Controls.Add(Me.BtnDBASTNy)
+        Me.GrpDBANyST.Controls.Add(Me.LblDBATypeID)
+        Me.GrpDBANyST.Controls.Add(Me.LblDBATypenavn)
+        Me.GrpDBANyST.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpDBANyST.Location = New System.Drawing.Point(414, 14)
+        Me.GrpDBANyST.Name = "GrpDBANyST"
+        Me.GrpDBANyST.Size = New System.Drawing.Size(383, 286)
+        Me.GrpDBANyST.TabIndex = 3
+        Me.GrpDBANyST.TabStop = False
+        Me.GrpDBANyST.Text = "Sykkeltype"
+        '
+        'TxtDBATypeNavn
+        '
+        Me.TxtDBATypeNavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBATypeNavn.Location = New System.Drawing.Point(144, 95)
+        Me.TxtDBATypeNavn.Name = "TxtDBATypeNavn"
+        Me.TxtDBATypeNavn.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBATypeNavn.TabIndex = 37
+        '
+        'TxtDBATypeID
+        '
+        Me.TxtDBATypeID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBATypeID.Location = New System.Drawing.Point(144, 52)
+        Me.TxtDBATypeID.Name = "TxtDBATypeID"
+        Me.TxtDBATypeID.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBATypeID.TabIndex = 36
+        '
+        'BtnDBASTLast
+        '
+        Me.BtnDBASTLast.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDBASTLast.Location = New System.Drawing.Point(302, 52)
+        Me.BtnDBASTLast.Name = "BtnDBASTLast"
+        Me.BtnDBASTLast.Size = New System.Drawing.Size(62, 23)
+        Me.BtnDBASTLast.TabIndex = 33
+        Me.BtnDBASTLast.Text = "Last Inn"
+        Me.BtnDBASTLast.UseVisualStyleBackColor = True
+        '
+        'BtnDBASTEndre
+        '
+        Me.BtnDBASTEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDBASTEndre.Location = New System.Drawing.Point(184, 233)
+        Me.BtnDBASTEndre.Name = "BtnDBASTEndre"
+        Me.BtnDBASTEndre.Size = New System.Drawing.Size(62, 23)
+        Me.BtnDBASTEndre.TabIndex = 31
+        Me.BtnDBASTEndre.Text = "Endre"
+        Me.BtnDBASTEndre.UseVisualStyleBackColor = True
+        '
+        'BtnDBASTNy
+        '
+        Me.BtnDBASTNy.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDBASTNy.Location = New System.Drawing.Point(103, 233)
+        Me.BtnDBASTNy.Name = "BtnDBASTNy"
+        Me.BtnDBASTNy.Size = New System.Drawing.Size(62, 23)
+        Me.BtnDBASTNy.TabIndex = 30
+        Me.BtnDBASTNy.Text = "Ny"
+        Me.BtnDBASTNy.UseVisualStyleBackColor = True
+        '
+        'LblDBATypeID
+        '
+        Me.LblDBATypeID.AutoSize = True
+        Me.LblDBATypeID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBATypeID.Location = New System.Drawing.Point(18, 54)
+        Me.LblDBATypeID.Name = "LblDBATypeID"
+        Me.LblDBATypeID.Size = New System.Drawing.Size(57, 18)
+        Me.LblDBATypeID.TabIndex = 5
+        Me.LblDBATypeID.Text = "Type ID:"
+        '
+        'LblDBATypenavn
+        '
+        Me.LblDBATypenavn.AutoSize = True
+        Me.LblDBATypenavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBATypenavn.Location = New System.Drawing.Point(18, 98)
+        Me.LblDBATypenavn.Name = "LblDBATypenavn"
+        Me.LblDBATypenavn.Size = New System.Drawing.Size(71, 18)
+        Me.LblDBATypenavn.TabIndex = 4
+        Me.LblDBATypenavn.Text = "Typenavn:"
+        '
+        'GrpDBAInvKategori
+        '
+        Me.GrpDBAInvKategori.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpDBAInvKategori.Location = New System.Drawing.Point(13, 327)
+        Me.GrpDBAInvKategori.Name = "GrpDBAInvKategori"
+        Me.GrpDBAInvKategori.Size = New System.Drawing.Size(383, 286)
+        Me.GrpDBAInvKategori.TabIndex = 2
+        Me.GrpDBAInvKategori.TabStop = False
+        Me.GrpDBAInvKategori.Text = "Inv Kategori"
+        '
+        'GrpDBAAvdeling
+        '
+        Me.GrpDBAAvdeling.Controls.Add(Me.CboDBALandsdel)
+        Me.GrpDBAAvdeling.Controls.Add(Me.TxtDBAAvdAdr)
+        Me.GrpDBAAvdeling.Controls.Add(Me.TxtDBAAvdNavn)
+        Me.GrpDBAAvdeling.Controls.Add(Me.TxtDBAAvdelingID)
+        Me.GrpDBAAvdeling.Controls.Add(Me.BtnDBAAvdLast)
+        Me.GrpDBAAvdeling.Controls.Add(Me.BtnDBAAvdEndre)
+        Me.GrpDBAAvdeling.Controls.Add(Me.BtnDBAAvdNy)
+        Me.GrpDBAAvdeling.Controls.Add(Me.LblDBALandsdel)
+        Me.GrpDBAAvdeling.Controls.Add(Me.LblDBAAvdAdr)
+        Me.GrpDBAAvdeling.Controls.Add(Me.LblDBAAvdNavn)
+        Me.GrpDBAAvdeling.Controls.Add(Me.LblDBAAvdID)
+        Me.GrpDBAAvdeling.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpDBAAvdeling.Location = New System.Drawing.Point(13, 14)
+        Me.GrpDBAAvdeling.Name = "GrpDBAAvdeling"
+        Me.GrpDBAAvdeling.Size = New System.Drawing.Size(383, 286)
+        Me.GrpDBAAvdeling.TabIndex = 0
+        Me.GrpDBAAvdeling.TabStop = False
+        Me.GrpDBAAvdeling.Text = "Avdeling"
+        '
+        'CboDBALandsdel
+        '
+        Me.CboDBALandsdel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboDBALandsdel.FormattingEnabled = True
+        Me.CboDBALandsdel.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
+        Me.CboDBALandsdel.Location = New System.Drawing.Point(148, 170)
+        Me.CboDBALandsdel.Name = "CboDBALandsdel"
+        Me.CboDBALandsdel.Size = New System.Drawing.Size(121, 26)
+        Me.CboDBALandsdel.TabIndex = 35
+        '
+        'TxtDBAAvdAdr
+        '
+        Me.TxtDBAAvdAdr.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBAAvdAdr.Location = New System.Drawing.Point(148, 134)
+        Me.TxtDBAAvdAdr.Name = "TxtDBAAvdAdr"
+        Me.TxtDBAAvdAdr.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBAAvdAdr.TabIndex = 34
+        '
+        'TxtDBAAvdNavn
+        '
+        Me.TxtDBAAvdNavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBAAvdNavn.Location = New System.Drawing.Point(148, 95)
+        Me.TxtDBAAvdNavn.Name = "TxtDBAAvdNavn"
+        Me.TxtDBAAvdNavn.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBAAvdNavn.TabIndex = 33
+        '
+        'TxtDBAAvdelingID
+        '
+        Me.TxtDBAAvdelingID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBAAvdelingID.Location = New System.Drawing.Point(148, 51)
+        Me.TxtDBAAvdelingID.Name = "TxtDBAAvdelingID"
+        Me.TxtDBAAvdelingID.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBAAvdelingID.TabIndex = 32
+        '
+        'BtnDBAAvdLast
+        '
+        Me.BtnDBAAvdLast.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDBAAvdLast.Location = New System.Drawing.Point(306, 52)
+        Me.BtnDBAAvdLast.Name = "BtnDBAAvdLast"
+        Me.BtnDBAAvdLast.Size = New System.Drawing.Size(62, 23)
+        Me.BtnDBAAvdLast.TabIndex = 31
+        Me.BtnDBAAvdLast.Text = "Last Inn"
+        Me.BtnDBAAvdLast.UseVisualStyleBackColor = True
+        '
+        'BtnDBAAvdEndre
+        '
+        Me.BtnDBAAvdEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDBAAvdEndre.Location = New System.Drawing.Point(187, 233)
+        Me.BtnDBAAvdEndre.Name = "BtnDBAAvdEndre"
+        Me.BtnDBAAvdEndre.Size = New System.Drawing.Size(62, 23)
+        Me.BtnDBAAvdEndre.TabIndex = 30
+        Me.BtnDBAAvdEndre.Text = "Endre"
+        Me.BtnDBAAvdEndre.UseVisualStyleBackColor = True
+        '
+        'BtnDBAAvdNy
+        '
+        Me.BtnDBAAvdNy.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDBAAvdNy.Location = New System.Drawing.Point(105, 233)
+        Me.BtnDBAAvdNy.Name = "BtnDBAAvdNy"
+        Me.BtnDBAAvdNy.Size = New System.Drawing.Size(62, 23)
+        Me.BtnDBAAvdNy.TabIndex = 29
+        Me.BtnDBAAvdNy.Text = "Ny"
+        Me.BtnDBAAvdNy.UseVisualStyleBackColor = True
+        '
+        'LblDBALandsdel
+        '
+        Me.LblDBALandsdel.AutoSize = True
+        Me.LblDBALandsdel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBALandsdel.Location = New System.Drawing.Point(16, 173)
+        Me.LblDBALandsdel.Name = "LblDBALandsdel"
+        Me.LblDBALandsdel.Size = New System.Drawing.Size(67, 18)
+        Me.LblDBALandsdel.TabIndex = 6
+        Me.LblDBALandsdel.Text = "Landsdel:"
+        '
+        'LblDBAAvdAdr
+        '
+        Me.LblDBAAvdAdr.AutoSize = True
+        Me.LblDBAAvdAdr.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBAAvdAdr.Location = New System.Drawing.Point(16, 137)
+        Me.LblDBAAvdAdr.Name = "LblDBAAvdAdr"
+        Me.LblDBAAvdAdr.Size = New System.Drawing.Size(115, 18)
+        Me.LblDBAAvdAdr.TabIndex = 5
+        Me.LblDBAAvdAdr.Text = "Avdelingadresse:"
+        '
+        'LblDBAAvdNavn
+        '
+        Me.LblDBAAvdNavn.AutoSize = True
+        Me.LblDBAAvdNavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBAAvdNavn.Location = New System.Drawing.Point(16, 98)
+        Me.LblDBAAvdNavn.Name = "LblDBAAvdNavn"
+        Me.LblDBAAvdNavn.Size = New System.Drawing.Size(97, 18)
+        Me.LblDBAAvdNavn.TabIndex = 4
+        Me.LblDBAAvdNavn.Text = "Avdelingnavn:"
+        '
+        'LblDBAAvdID
+        '
+        Me.LblDBAAvdID.AutoSize = True
+        Me.LblDBAAvdID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBAAvdID.Location = New System.Drawing.Point(16, 54)
+        Me.LblDBAAvdID.Name = "LblDBAAvdID"
+        Me.LblDBAAvdID.Size = New System.Drawing.Size(83, 18)
+        Me.LblDBAAvdID.TabIndex = 3
+        Me.LblDBAAvdID.Text = "Avdeling ID:"
+        '
+        'LoginTab
+        '
+        Me.LoginTab.Controls.Add(Me.BtnLoginAvslutt)
+        Me.LoginTab.Controls.Add(Me.BtnLoginLogin)
+        Me.LoginTab.Controls.Add(Me.TxtLoginPassord)
+        Me.LoginTab.Controls.Add(Me.TxtLoginBrukerID)
+        Me.LoginTab.Controls.Add(Me.LblLoginCopyright)
+        Me.LoginTab.Controls.Add(Me.LblLoginPassord)
+        Me.LoginTab.Controls.Add(Me.LblLoginBID)
+        Me.LoginTab.Controls.Add(Me.LblLoginTittel)
+        Me.LoginTab.Controls.Add(Me.PicLoginLogo)
+        Me.LoginTab.Location = New System.Drawing.Point(4, 32)
+        Me.LoginTab.Name = "LoginTab"
+        Me.LoginTab.Size = New System.Drawing.Size(1416, 744)
+        Me.LoginTab.TabIndex = 9
+        Me.LoginTab.Text = "Login"
+        Me.LoginTab.UseVisualStyleBackColor = True
+        '
+        'BtnLoginAvslutt
+        '
+        Me.BtnLoginAvslutt.Location = New System.Drawing.Point(1023, 492)
+        Me.BtnLoginAvslutt.Name = "BtnLoginAvslutt"
+        Me.BtnLoginAvslutt.Size = New System.Drawing.Size(114, 32)
+        Me.BtnLoginAvslutt.TabIndex = 8
+        Me.BtnLoginAvslutt.Text = "Avslutt"
+        Me.BtnLoginAvslutt.UseVisualStyleBackColor = True
+        '
+        'BtnLoginLogin
+        '
+        Me.BtnLoginLogin.Location = New System.Drawing.Point(818, 491)
+        Me.BtnLoginLogin.Name = "BtnLoginLogin"
+        Me.BtnLoginLogin.Size = New System.Drawing.Size(111, 33)
+        Me.BtnLoginLogin.TabIndex = 7
+        Me.BtnLoginLogin.Text = "Log In"
+        Me.BtnLoginLogin.UseVisualStyleBackColor = True
+        '
+        'TxtLoginPassord
+        '
+        Me.TxtLoginPassord.Location = New System.Drawing.Point(879, 386)
+        Me.TxtLoginPassord.Name = "TxtLoginPassord"
+        Me.TxtLoginPassord.Size = New System.Drawing.Size(258, 31)
+        Me.TxtLoginPassord.TabIndex = 6
+        Me.TxtLoginPassord.UseSystemPasswordChar = True
+        '
+        'TxtLoginBrukerID
+        '
+        Me.TxtLoginBrukerID.Location = New System.Drawing.Point(879, 207)
+        Me.TxtLoginBrukerID.Name = "TxtLoginBrukerID"
+        Me.TxtLoginBrukerID.Size = New System.Drawing.Size(258, 31)
+        Me.TxtLoginBrukerID.TabIndex = 5
+        '
+        'LblLoginCopyright
+        '
+        Me.LblLoginCopyright.AutoSize = True
+        Me.LblLoginCopyright.Font = New System.Drawing.Font("Calibri Light", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblLoginCopyright.Location = New System.Drawing.Point(1221, 615)
+        Me.LblLoginCopyright.Name = "LblLoginCopyright"
+        Me.LblLoginCopyright.Size = New System.Drawing.Size(101, 13)
+        Me.LblLoginCopyright.TabIndex = 4
+        Me.LblLoginCopyright.Text = "Utviklet av Team 3 AS"
+        '
+        'LblLoginPassord
+        '
+        Me.LblLoginPassord.AutoSize = True
+        Me.LblLoginPassord.Location = New System.Drawing.Point(727, 389)
+        Me.LblLoginPassord.Name = "LblLoginPassord"
+        Me.LblLoginPassord.Size = New System.Drawing.Size(77, 23)
+        Me.LblLoginPassord.TabIndex = 3
+        Me.LblLoginPassord.Text = "Passord:"
+        '
+        'LblLoginBID
+        '
+        Me.LblLoginBID.AutoSize = True
+        Me.LblLoginBID.Location = New System.Drawing.Point(727, 210)
+        Me.LblLoginBID.Name = "LblLoginBID"
+        Me.LblLoginBID.Size = New System.Drawing.Size(89, 23)
+        Me.LblLoginBID.TabIndex = 2
+        Me.LblLoginBID.Text = "Bruker ID:"
+        '
+        'LblLoginTittel
+        '
+        Me.LblLoginTittel.AutoSize = True
+        Me.LblLoginTittel.Font = New System.Drawing.Font("Calibri", 26.25!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
+                Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblLoginTittel.Location = New System.Drawing.Point(811, 57)
+        Me.LblLoginTittel.Name = "LblLoginTittel"
+        Me.LblLoginTittel.Size = New System.Drawing.Size(315, 42)
+        Me.LblLoginTittel.TabIndex = 1
+        Me.LblLoginTittel.Text = "SykkelUtleie DB v1.0"
+        '
+        'PicLoginLogo
+        '
+        Me.PicLoginLogo.Image = CType(resources.GetObject("PicLoginLogo.Image"), System.Drawing.Image)
+        Me.PicLoginLogo.Location = New System.Drawing.Point(63, 57)
+        Me.PicLoginLogo.Name = "PicLoginLogo"
+        Me.PicLoginLogo.Size = New System.Drawing.Size(516, 502)
+        Me.PicLoginLogo.TabIndex = 0
+        Me.PicLoginLogo.TabStop = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1264, 681)
+        Me.ClientSize = New System.Drawing.Size(1350, 681)
         Me.Controls.Add(Me.HovedTab)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
@@ -2284,6 +2829,18 @@ Partial Class Form1
         Me.AdminEndreBrukerGroup.PerformLayout()
         Me.AdminNyBrukerGroup.ResumeLayout(False)
         Me.AdminNyBrukerGroup.PerformLayout()
+        Me.DBAdminTab.ResumeLayout(False)
+        Me.GrpDBADBS.ResumeLayout(False)
+        Me.GrpDBADBS.PerformLayout()
+        Me.GrpDBANyUK.ResumeLayout(False)
+        Me.GrpDBANyUK.PerformLayout()
+        Me.GrpDBANyST.ResumeLayout(False)
+        Me.GrpDBANyST.PerformLayout()
+        Me.GrpDBAAvdeling.ResumeLayout(False)
+        Me.GrpDBAAvdeling.PerformLayout()
+        Me.LoginTab.ResumeLayout(False)
+        Me.LoginTab.PerformLayout()
+        CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2293,7 +2850,6 @@ Partial Class Form1
     Friend WithEvents UtleieTab As TabPage
     Friend WithEvents KDTab As TabPage
     Friend WithEvents InventarTab As TabPage
-    Friend WithEvents ISTab As TabPage
     Friend WithEvents LogiTab As TabPage
     Friend WithEvents StatTab As TabPage
     Friend WithEvents AdminTab As TabPage
@@ -2493,4 +3049,53 @@ Partial Class Form1
     Friend WithEvents LblKndFdato As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents DateKndEndre As DateTimePicker
+    Friend WithEvents LoginTab As TabPage
+    Friend WithEvents BtnLoginAvslutt As Button
+    Friend WithEvents BtnLoginLogin As Button
+    Friend WithEvents TxtLoginPassord As TextBox
+    Friend WithEvents TxtLoginBrukerID As TextBox
+    Friend WithEvents LblLoginCopyright As Label
+    Friend WithEvents LblLoginPassord As Label
+    Friend WithEvents LblLoginBID As Label
+    Friend WithEvents LblLoginTittel As Label
+    Friend WithEvents PicLoginLogo As PictureBox
+    Friend WithEvents GrpDBAInvKategori As GroupBox
+    Friend WithEvents GrpDBAAvdeling As GroupBox
+    Friend WithEvents GrpDBANyUK As GroupBox
+    Friend WithEvents GrpDBANyST As GroupBox
+    Friend WithEvents GrpDBADBS As GroupBox
+    Friend WithEvents ListView2 As ListView
+    Friend WithEvents ColumnHeader9 As ColumnHeader
+    Friend WithEvents ColumnHeader10 As ColumnHeader
+    Friend WithEvents ColumnHeader12 As ColumnHeader
+    Friend WithEvents BtnDBASok As Button
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents LblDBASoketter As Label
+    Friend WithEvents TxtDBASokefelt As TextBox
+    Friend WithEvents LblDBASokefelt As Label
+    Friend WithEvents BtnDBAAvdLast As Button
+    Friend WithEvents BtnDBAAvdEndre As Button
+    Friend WithEvents BtnDBAAvdNy As Button
+    Friend WithEvents LblDBALandsdel As Label
+    Friend WithEvents LblDBAAvdAdr As Label
+    Friend WithEvents LblDBAAvdNavn As Label
+    Friend WithEvents LblDBAAvdID As Label
+    Friend WithEvents BtnDBAUKEndre As Button
+    Friend WithEvents UKLast As Button
+    Friend WithEvents BtnDBAUKNy As Button
+    Friend WithEvents LblDBAKID As Label
+    Friend WithEvents LblDBAKnavn As Label
+    Friend WithEvents BtnDBASTLast As Button
+    Friend WithEvents BtnDBASTEndre As Button
+    Friend WithEvents BtnDBASTNy As Button
+    Friend WithEvents LblDBATypeID As Label
+    Friend WithEvents LblDBATypenavn As Label
+    Friend WithEvents TxtDBAAvdelingID As TextBox
+    Friend WithEvents TxtDBAKnavn As TextBox
+    Friend WithEvents TxtDBAKID As TextBox
+    Friend WithEvents TxtDBATypeNavn As TextBox
+    Friend WithEvents TxtDBATypeID As TextBox
+    Friend WithEvents CboDBALandsdel As ComboBox
+    Friend WithEvents TxtDBAAvdAdr As TextBox
+    Friend WithEvents TxtDBAAvdNavn As TextBox
 End Class

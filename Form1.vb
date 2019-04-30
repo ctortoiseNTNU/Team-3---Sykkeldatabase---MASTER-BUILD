@@ -133,18 +133,16 @@ Public Class Form1
                 BtnKndEndre.Enabled = False
             Case 4 'Bestemmer det som skjer etter man har valgt Inventarmeny.
                 'MsgBox("Inventarmeny")
-            Case 5 'Bestemmer det som skjer etter man har valgt Inventarsearchmeny.
-                MsgBox("InvSearchmeny")
-            Case 6 'Bestemmer det som skjer etter man har valgt Logistikkmeny.
+            Case 5 'Bestemmer det som skjer etter man har valgt Logistikkmeny.
                 MsgBox("Logistikkmeny")
-            Case 7 'Bestemmer det som skjer etter man har valgt Statistikkmeny.
+            Case 6 'Bestemmer det som skjer etter man har valgt Statistikkmeny.
                 MsgBox("Statistikkmeny")
-            Case 8 'Bestemmer det som skjer etter man har valgt Adminmeny.
+            Case 7 'Bestemmer det som skjer etter man har valgt Adminmeny.
                 MsgBox("AdminMeny")
                 AdminAvdelingPopulate()
                 AdminBrukerIDCalc()
-            Case 9 'Bestemmer det som skjer etter man har valgt AdminDBmeny.
-                'MsgBox("AdminDBMeny")
+            Case 8 'Bestemmer det som skjer etter man har valgt AdminDBmeny.
+                MsgBox("AdminDBMeny")
         End Select
     End Sub
 
@@ -1644,6 +1642,12 @@ Public Class Form1
 
         AdminEndreBruker()
     End Sub
+
+
+
+
+
+
 
 
 
