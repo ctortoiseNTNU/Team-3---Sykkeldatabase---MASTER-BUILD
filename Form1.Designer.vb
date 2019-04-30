@@ -1697,6 +1697,7 @@ Partial Class Form1
         Me.CmbStaAvdeling.Name = "CmbStaAvdeling"
         Me.CmbStaAvdeling.Size = New System.Drawing.Size(121, 26)
         Me.CmbStaAvdeling.TabIndex = 26
+        Me.CmbStaAvdeling.Text = "Velg"
         '
         'LblStaVelgAvd
         '
@@ -2900,6 +2901,7 @@ Partial Class Form1
         Me.CmbStaType.Name = "CmbStaType"
         Me.CmbStaType.Size = New System.Drawing.Size(121, 26)
         Me.CmbStaType.TabIndex = 30
+        Me.CmbStaType.Text = "Velg"
         '
         'LblStaVelgType
         '
@@ -2907,9 +2909,9 @@ Partial Class Form1
         Me.LblStaVelgType.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
         Me.LblStaVelgType.Location = New System.Drawing.Point(7, 74)
         Me.LblStaVelgType.Name = "LblStaVelgType"
-        Me.LblStaVelgType.Size = New System.Drawing.Size(110, 18)
+        Me.LblStaVelgType.Size = New System.Drawing.Size(126, 18)
         Me.LblStaVelgType.TabIndex = 31
-        Me.LblStaVelgType.Text = "Velg Sykkeltype:"
+        Me.LblStaVelgType.Text = "Velg Sykkelmodell:"
         '
         'GroupBox1
         '
@@ -2972,6 +2974,7 @@ Partial Class Form1
         Me.CmbStaAvdeling2.Name = "CmbStaAvdeling2"
         Me.CmbStaAvdeling2.Size = New System.Drawing.Size(121, 26)
         Me.CmbStaAvdeling2.TabIndex = 26
+        Me.CmbStaAvdeling2.Text = "Velg"
         '
         'LblStaVelgAvd2
         '

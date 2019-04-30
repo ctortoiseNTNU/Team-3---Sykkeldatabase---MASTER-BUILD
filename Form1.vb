@@ -137,6 +137,23 @@ Public Class Form1
                 MsgBox("Logistikkmeny")
             Case 6 'Bestemmer det som skjer etter man har valgt Statistikkmeny.
                 MsgBox("Statistikkmeny")
+                CmbStaAvdeling.Items.Clear()
+                CmbStaAvdeling2.Items.Clear()
+                CmbStaType.Items.Clear()
+
+                Dim StaLokasjoner = New String() {"Haugastøl", "Finse", "Flåm", "Voss", "Myrdal"}
+                Dim StaSykkeltype = New String() {"Barnesykker", "Terrengsykkel", "Downhill", "Racer", "Bysykkel", "Elsykkel", "Tandem"}
+
+
+                For i As Integer = 0 To StaLokasjoner.Length - 1
+                    CmbStaAvdeling.Items.Add(StaLokasjoner(i))
+                    CmbStaAvdeling2.Items.Add(StaLokasjoner(i))
+                Next
+                For j As Integer = 0 To StaSykkeltype.Length - 1
+                    CmbStaType.Items.Add(StaSykkeltype(j))
+                Next
+
+
             Case 7 'Bestemmer det som skjer etter man har valgt Adminmeny.
                 MsgBox("AdminMeny")
                 AdminAvdelingPopulate()
@@ -404,18 +421,6 @@ Public Class Form1
         End If
     End Sub
 
-
-    'SØK DROPDOWN
-    '  Private Sub CmbKndSok_Click(sender As Object, e As EventArgs) Handles CmbKndSok.Click
-    '      CmbKndSok.Items.Clear()
-    '  Dim innhold = New String() {"ID", "Fornavn", "Etternavn", "Adresse", "Telefon", "Epost", "Rabatt Tier", "Handlet For"}
-
-    ' For i As Integer = 0 To innhold.Length - 1
-    '           CmbKndSok.Items.Add(innhold(i))
-    '   Next
-    '  End Sub
-
-    'SØK KNAPP
 
     Dim KndSokInput
     Dim KndSokSelectedTag
@@ -1264,6 +1269,43 @@ Public Class Form1
     'Her plasseres kode som er relevant til Statistikk Tab.
     'Variabler som brukes her skal begynne med Stat. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+    Dim StaValgtAvdTilgj As String
+    Dim StaValgtTypTilgj As String
+
+    Private Sub BtnStaSok_Click(sender As Object, e As EventArgs) Handles BtnStaSok.Click
+
+
+        Dim outputAntallSykler As Integer
+        Dim StaSykkeltypeValue = New Integer() {9999, 10000, 10001, 10002, 10003, 10004, 10005, 10006}
+        Dim StaAvdelingValue = New Integer() {10000, 10001, 10002, 10003, 10004}
+        StaValgtAvdTilgj = StaAvdelingValue(CmbStaAvdeling.SelectedIndex)
+        StaValgtTypTilgj = StaSykkeltypeValue(CmbStaType.SelectedIndex)
+        MsgBox(StaValgtAvdTilgj)
+        MsgBox(StaValgtTypTilgj)
+
+        Try
+            DBConnect()
+
+            Dim sporring As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "'", tilkobling)
+
+            outputAntallSykler = sporring.ExecuteScalar()
+            MsgBox(outputAntallSykler)
+
+
+            DBDisconnect()
+        Catch feilmelding As MySqlException
+            MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+        End Try
+
+
+
+    End Sub
+
+
+
+
+
 #End Region
 
 
@@ -1605,6 +1647,8 @@ Public Class Form1
 
 
     End Sub
+
+
 
     Private Sub AdminEBEndreB_Click(sender As Object, e As EventArgs) Handles AdminEBEndreB.Click
         Dim EBInputSjekk As Boolean
