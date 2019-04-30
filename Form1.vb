@@ -807,7 +807,7 @@ Public Class Form1
             CboInvSavnet.Enabled = False
             LvInvSok.Items.Clear()
             LvInvSok.Columns.Clear()
-            LvInvSok.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.Produktnavn, Me.Kategori, Me.Varenummer, Me.Innkjøpspris, Me.Forhandler})
+            LvInvSok.Columns.AddRange(New ColumnHeader() {Me.ID, Me.Produktnavn, Me.Kategori, Me.Varenummer, Me.Innkjøpspris, Me.Forhandler})
             CboInvSubkategori.Items.Clear()
             CboInvSubkategori.Items.AddRange(New Object() {"Hjelmer", "Sykkelveske", "Barnesete", "Barnehenger", "Lastehenger", "Beskyttelse", "Låser", "Lappesaker"})
 
@@ -822,7 +822,7 @@ Public Class Form1
             CboInvSavnet.Enabled = True
             LvInvSok.Items.Clear()
             LvInvSok.Columns.Clear()
-            LvInvSok.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer, Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling, Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet})
+            LvInvSok.Columns.AddRange(New ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer, Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling, Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet})
             CboInvSubkategori.Items.Clear()
             CboInvSubkategori.Items.AddRange(New Object() {"Barnesykkel", "Bysykkel", "Downhill", "Elsykkel", "Racer", "Tandem", "Terrengsykkel"})
 
@@ -892,9 +892,6 @@ Public Class Form1
                 End If
             End If
 
-
-            'select replace(convert(varchar, getdate(),101),'/','')
-
             'SQLspørring for innlegging av utstyr i database. Data hentes fra felt
         ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
             If CboInvForhandler.SelectedIndex = -1 Or CboInvSubkategori.SelectedIndex = -1 Or
@@ -944,7 +941,6 @@ Public Class Form1
 
     'SQLspørring med søk på valgte verdier i søkefelt
     Private Sub BtnInvSok_Click(sender As Object, e As EventArgs) Handles BtnInvSok.Click
-        'skadet og savnet må settes selectedindex? - se if else for å unngå NULL
 
         LvInvSok.Items.Clear()
 
@@ -1028,22 +1024,25 @@ Public Class Form1
 
         ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
 
-            Dim SpInit As String = "SELECT utstyr.utstyr_id, utstyr.utstyr_navn, utstyr.utstyr_pris, " _
-                & "utstyr.varenummer, forhandler.forhandler_navn FROM utstyr LEFT JOIN forhandler ON " _
-                & "utstyr.forhandler_id=forhandler.forhandler_id WHERE "
+            Dim SpInit As String = "SELECT utstyr.utstyr_id, utstyr.utstyr_navn, utstyr_kategori.utstyr_kat, " _
+                & "utstyr.varenummer, utstyr.utstyr_pris, forhandler.forhandler_navn " _
+                & "FROM utstyr LEFT JOIN forhandler ON utstyr.forhandler_id=forhandler.forhandler_id " _
+                & "LEFT JOIN utstyr_kategori ON utstyr.utstyr_kat_id=utstyr_kategori.utstyr_kat_id WHERE "
 
             Dim InvSpUtstyrNavn As String = "utstyr_navn Like '%" & TxtInvProduktnavn.Text.Trim & "%'"
             Dim InvSpVarenummer As String = "varenummer LIKE '%" & TxtInvVareNummer.Text.Trim & "%'"
             Dim InvSpUtstyrPris As String = "utstyr_pris LIKE '%" & TxtInvInnkjopspris.Text.Trim & "%'"
             Dim InvSpForhandlerNavn As String = "forhandler_navn LIKE '%" & CboInvForhandler.SelectedItem & "%'"
+            Dim InvSpUtstyrkategori As String = "utstyr_kat LIKE '%" & CboInvSubkategori.SelectedItem & "%'"
 
             'Unngår NULL verdi fra combobox skadet og savnet og dermed søk uten resultat
             'selectedindex presatt på skaded og savnet vil også omgå dette (?)
 
             Dim InvSokSporring As String
-            InvSokSporring = SpInit & InvSpUtstyrNavn & " AND " & InvSpVarenummer & " AND " & InvSpUtstyrPris & " AND " & InvSpForhandlerNavn & ";"
+            InvSokSporring = SpInit & InvSpUtstyrNavn & " AND " & InvSpUtstyrkategori & " AND " _
+                & InvSpVarenummer & " AND " & InvSpUtstyrPris & " AND " & InvSpForhandlerNavn & ";"
 
-            Dim InvResultatArray(4) As String
+            Dim InvResultatArray(5) As String
             Dim InvResultatObjekt As ListViewItem
 
             'Sender spørring for søk basert på innlagte data i skjema. Skriver ut returnerte rader til listview 
@@ -1052,7 +1051,7 @@ Public Class Form1
                 InvSqlSok = New MySqlCommand(InvSokSporring, tilkobling)
                 invSqlLeser = InvSqlSok.ExecuteReader()
 
-                'For hver kolonne les inn verdi 0-12 og legg i listview
+                'For hver kolonne les inn verdi * til * og legg i listview
                 While invSqlLeser.Read()
                     For i = 0 To invSqlLeser.FieldCount - 1
                         If TypeOf invSqlLeser(i) Is DBNull Then
