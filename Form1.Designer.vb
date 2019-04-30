@@ -160,6 +160,15 @@ Partial Class Form1
         Me.LblInvKategori = New System.Windows.Forms.Label()
         Me.LogiTab = New System.Windows.Forms.TabPage()
         Me.StatTab = New System.Windows.Forms.TabPage()
+        Me.GrbStaTilgjengelig = New System.Windows.Forms.GroupBox()
+        Me.LvStaTilgjengelig = New System.Windows.Forms.ListView()
+        Me.ColumnHeader11 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader13 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader14 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader15 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BtnStaSok = New System.Windows.Forms.Button()
+        Me.CmbStaAvdeling = New System.Windows.Forms.ComboBox()
+        Me.LblStaVelgAvd = New System.Windows.Forms.Label()
         Me.AdminTab = New System.Windows.Forms.TabPage()
         Me.AdminMOTDGroup = New System.Windows.Forms.GroupBox()
         Me.AdminMOTDEndreB = New System.Windows.Forms.Button()
@@ -276,6 +285,17 @@ Partial Class Form1
         Me.LblLoginBID = New System.Windows.Forms.Label()
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
+        Me.CmbStaType = New System.Windows.Forms.ComboBox()
+        Me.LblStaVelgType = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LvStaMestUtleid = New System.Windows.Forms.ListView()
+        Me.ColumnHeader16 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader17 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader18 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BtnStaGo = New System.Windows.Forms.Button()
+        Me.CmbStaAvdeling2 = New System.Windows.Forms.ComboBox()
+        Me.LblStaVelgAvd2 = New System.Windows.Forms.Label()
+        Me.Verksted = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -289,7 +309,10 @@ Partial Class Form1
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.InventarTab.SuspendLayout()
+        Me.GrpInvSok.SuspendLayout()
         Me.GrpInvRegistrerEndre.SuspendLayout()
+        Me.StatTab.SuspendLayout()
+        Me.GrbStaTilgjengelig.SuspendLayout()
         Me.AdminTab.SuspendLayout()
         Me.AdminMOTDGroup.SuspendLayout()
         Me.AdminBrukerSokGroup.SuspendLayout()
@@ -302,6 +325,7 @@ Partial Class Form1
         Me.GrpDBAAvdeling.SuspendLayout()
         Me.LoginTab.SuspendLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'HovedTab
@@ -1121,12 +1145,12 @@ Partial Class Form1
         'Produktnavn
         '
         Me.Produktnavn.Text = "Produktnavn"
-        Me.Produktnavn.Width = 107
+        Me.Produktnavn.Width = 91
         '
         'Varenummer
         '
         Me.Varenummer.Text = "Varenr"
-        Me.Varenummer.Width = 72
+        Me.Varenummer.Width = 56
         '
         'Kategori
         '
@@ -1136,7 +1160,7 @@ Partial Class Form1
         'Ramme
         '
         Me.Ramme.Text = "Ramme"
-        Me.Ramme.Width = 70
+        Me.Ramme.Width = 54
         '
         'Girsystem
         '
@@ -1596,12 +1620,95 @@ Partial Class Form1
         '
         'StatTab
         '
+        Me.StatTab.Controls.Add(Me.GroupBox1)
+        Me.StatTab.Controls.Add(Me.GrbStaTilgjengelig)
         Me.StatTab.Location = New System.Drawing.Point(4, 32)
         Me.StatTab.Name = "StatTab"
         Me.StatTab.Size = New System.Drawing.Size(1416, 744)
         Me.StatTab.TabIndex = 6
         Me.StatTab.Text = "Statistikk"
         Me.StatTab.UseVisualStyleBackColor = True
+        '
+        'GrbStaTilgjengelig
+        '
+        Me.GrbStaTilgjengelig.Controls.Add(Me.LblStaVelgType)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.CmbStaType)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.LvStaTilgjengelig)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.BtnStaSok)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.CmbStaAvdeling)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.LblStaVelgAvd)
+        Me.GrbStaTilgjengelig.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrbStaTilgjengelig.Location = New System.Drawing.Point(3, 3)
+        Me.GrbStaTilgjengelig.Name = "GrbStaTilgjengelig"
+        Me.GrbStaTilgjengelig.Size = New System.Drawing.Size(666, 341)
+        Me.GrbStaTilgjengelig.TabIndex = 24
+        Me.GrbStaTilgjengelig.TabStop = False
+        Me.GrbStaTilgjengelig.Text = "Antall sykler tilgjengelig"
+        '
+        'LvStaTilgjengelig
+        '
+        Me.LvStaTilgjengelig.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader11, Me.ColumnHeader13, Me.ColumnHeader14, Me.ColumnHeader15, Me.Verksted})
+        Me.LvStaTilgjengelig.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvStaTilgjengelig.Location = New System.Drawing.Point(3, 120)
+        Me.LvStaTilgjengelig.Name = "LvStaTilgjengelig"
+        Me.LvStaTilgjengelig.Size = New System.Drawing.Size(657, 207)
+        Me.LvStaTilgjengelig.TabIndex = 29
+        Me.LvStaTilgjengelig.UseCompatibleStateImageBehavior = False
+        Me.LvStaTilgjengelig.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader11
+        '
+        Me.ColumnHeader11.Text = "Avdeling"
+        Me.ColumnHeader11.Width = 178
+        '
+        'ColumnHeader13
+        '
+        Me.ColumnHeader13.Text = "Sykkel type"
+        Me.ColumnHeader13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeader13.Width = 190
+        '
+        'ColumnHeader14
+        '
+        Me.ColumnHeader14.Text = "Utleid"
+        Me.ColumnHeader14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeader14.Width = 97
+        '
+        'ColumnHeader15
+        '
+        Me.ColumnHeader15.Text = "Ledig"
+        Me.ColumnHeader15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeader15.Width = 101
+        '
+        'BtnStaSok
+        '
+        Me.BtnStaSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnStaSok.Location = New System.Drawing.Point(315, 71)
+        Me.BtnStaSok.Name = "BtnStaSok"
+        Me.BtnStaSok.Size = New System.Drawing.Size(69, 26)
+        Me.BtnStaSok.TabIndex = 28
+        Me.BtnStaSok.Text = "Søk!"
+        Me.BtnStaSok.UseVisualStyleBackColor = True
+        '
+        'CmbStaAvdeling
+        '
+        Me.CmbStaAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CmbStaAvdeling.FormattingEnabled = True
+        Me.CmbStaAvdeling.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
+        Me.CmbStaAvdeling.Location = New System.Drawing.Point(169, 39)
+        Me.CmbStaAvdeling.Name = "CmbStaAvdeling"
+        Me.CmbStaAvdeling.Size = New System.Drawing.Size(121, 26)
+        Me.CmbStaAvdeling.TabIndex = 26
+        Me.CmbStaAvdeling.Text = "Velg"
+        '
+        'LblStaVelgAvd
+        '
+        Me.LblStaVelgAvd.AutoSize = True
+        Me.LblStaVelgAvd.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaVelgAvd.Location = New System.Drawing.Point(6, 42)
+        Me.LblStaVelgAvd.Name = "LblStaVelgAvd"
+        Me.LblStaVelgAvd.Size = New System.Drawing.Size(95, 18)
+        Me.LblStaVelgAvd.TabIndex = 1
+        Me.LblStaVelgAvd.Text = "Velg avdeling:"
         '
         'AdminTab
         '
@@ -2787,6 +2894,105 @@ Partial Class Form1
         Me.PicLoginLogo.TabIndex = 0
         Me.PicLoginLogo.TabStop = False
         '
+        'CmbStaType
+        '
+        Me.CmbStaType.Font = New System.Drawing.Font("Calibri", 11.25!)
+        Me.CmbStaType.FormattingEnabled = True
+        Me.CmbStaType.Location = New System.Drawing.Point(169, 71)
+        Me.CmbStaType.Name = "CmbStaType"
+        Me.CmbStaType.Size = New System.Drawing.Size(121, 26)
+        Me.CmbStaType.TabIndex = 30
+        Me.CmbStaType.Text = "Velg"
+        '
+        'LblStaVelgType
+        '
+        Me.LblStaVelgType.AutoSize = True
+        Me.LblStaVelgType.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
+        Me.LblStaVelgType.Location = New System.Drawing.Point(7, 74)
+        Me.LblStaVelgType.Name = "LblStaVelgType"
+        Me.LblStaVelgType.Size = New System.Drawing.Size(126, 18)
+        Me.LblStaVelgType.TabIndex = 31
+        Me.LblStaVelgType.Text = "Velg Sykkelmodell:"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.LvStaMestUtleid)
+        Me.GroupBox1.Controls.Add(Me.BtnStaGo)
+        Me.GroupBox1.Controls.Add(Me.CmbStaAvdeling2)
+        Me.GroupBox1.Controls.Add(Me.LblStaVelgAvd2)
+        Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(675, 3)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(455, 341)
+        Me.GroupBox1.TabIndex = 25
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Mest Utleide Sykler"
+        '
+        'LvStaMestUtleid
+        '
+        Me.LvStaMestUtleid.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader16, Me.ColumnHeader17, Me.ColumnHeader18})
+        Me.LvStaMestUtleid.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvStaMestUtleid.Location = New System.Drawing.Point(3, 120)
+        Me.LvStaMestUtleid.Name = "LvStaMestUtleid"
+        Me.LvStaMestUtleid.Size = New System.Drawing.Size(449, 207)
+        Me.LvStaMestUtleid.TabIndex = 29
+        Me.LvStaMestUtleid.UseCompatibleStateImageBehavior = False
+        Me.LvStaMestUtleid.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader16
+        '
+        Me.ColumnHeader16.Text = "Avdeling"
+        Me.ColumnHeader16.Width = 211
+        '
+        'ColumnHeader17
+        '
+        Me.ColumnHeader17.Text = "Sykkel type"
+        Me.ColumnHeader17.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeader17.Width = 123
+        '
+        'ColumnHeader18
+        '
+        Me.ColumnHeader18.Text = "Ganger utleid"
+        Me.ColumnHeader18.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeader18.Width = 110
+        '
+        'BtnStaGo
+        '
+        Me.BtnStaGo.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnStaGo.Location = New System.Drawing.Point(317, 39)
+        Me.BtnStaGo.Name = "BtnStaGo"
+        Me.BtnStaGo.Size = New System.Drawing.Size(69, 26)
+        Me.BtnStaGo.TabIndex = 28
+        Me.BtnStaGo.Text = "Go!"
+        Me.BtnStaGo.UseVisualStyleBackColor = True
+        '
+        'CmbStaAvdeling2
+        '
+        Me.CmbStaAvdeling2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CmbStaAvdeling2.FormattingEnabled = True
+        Me.CmbStaAvdeling2.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
+        Me.CmbStaAvdeling2.Location = New System.Drawing.Point(169, 39)
+        Me.CmbStaAvdeling2.Name = "CmbStaAvdeling2"
+        Me.CmbStaAvdeling2.Size = New System.Drawing.Size(121, 26)
+        Me.CmbStaAvdeling2.TabIndex = 26
+        Me.CmbStaAvdeling2.Text = "Velg"
+        '
+        'LblStaVelgAvd2
+        '
+        Me.LblStaVelgAvd2.AutoSize = True
+        Me.LblStaVelgAvd2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaVelgAvd2.Location = New System.Drawing.Point(6, 42)
+        Me.LblStaVelgAvd2.Name = "LblStaVelgAvd2"
+        Me.LblStaVelgAvd2.Size = New System.Drawing.Size(95, 18)
+        Me.LblStaVelgAvd2.TabIndex = 1
+        Me.LblStaVelgAvd2.Text = "Velg avdeling:"
+        '
+        'Verksted
+        '
+        Me.Verksted.Text = "Verksted"
+        Me.Verksted.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.Verksted.Width = 87
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2816,8 +3022,12 @@ Partial Class Form1
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.InventarTab.ResumeLayout(False)
+        Me.GrpInvSok.ResumeLayout(False)
         Me.GrpInvRegistrerEndre.ResumeLayout(False)
         Me.GrpInvRegistrerEndre.PerformLayout()
+        Me.StatTab.ResumeLayout(False)
+        Me.GrbStaTilgjengelig.ResumeLayout(False)
+        Me.GrbStaTilgjengelig.PerformLayout()
         Me.AdminTab.ResumeLayout(False)
         Me.AdminMOTDGroup.ResumeLayout(False)
         Me.AdminMOTDGroup.PerformLayout()
@@ -2839,6 +3049,8 @@ Partial Class Form1
         Me.LoginTab.ResumeLayout(False)
         Me.LoginTab.PerformLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3096,4 +3308,24 @@ Partial Class Form1
     Friend WithEvents CboDBALandsdel As ComboBox
     Friend WithEvents TxtDBAAvdAdr As TextBox
     Friend WithEvents TxtDBAAvdNavn As TextBox
+    Friend WithEvents GrbStaTilgjengelig As GroupBox
+    Friend WithEvents LvStaTilgjengelig As ListView
+    Friend WithEvents ColumnHeader11 As ColumnHeader
+    Friend WithEvents ColumnHeader13 As ColumnHeader
+    Friend WithEvents ColumnHeader14 As ColumnHeader
+    Friend WithEvents ColumnHeader15 As ColumnHeader
+    Friend WithEvents BtnStaSok As Button
+    Friend WithEvents CmbStaAvdeling As ComboBox
+    Friend WithEvents LblStaVelgAvd As Label
+    Friend WithEvents LblStaVelgType As Label
+    Friend WithEvents CmbStaType As ComboBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents LvStaMestUtleid As ListView
+    Friend WithEvents ColumnHeader16 As ColumnHeader
+    Friend WithEvents ColumnHeader17 As ColumnHeader
+    Friend WithEvents ColumnHeader18 As ColumnHeader
+    Friend WithEvents BtnStaGo As Button
+    Friend WithEvents CmbStaAvdeling2 As ComboBox
+    Friend WithEvents LblStaVelgAvd2 As Label
+    Friend WithEvents Verksted As ColumnHeader
 End Class

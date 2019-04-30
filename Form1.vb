@@ -937,7 +937,7 @@ Public Class Form1
             End If
 
         Else
-                MsgBox("Velg kategori")
+            MsgBox("Velg kategori")
         End If
 
     End Sub
@@ -1344,30 +1344,47 @@ Public Class Form1
     Dim StaValgtAvdTilgj As String
     Dim StaValgtTypTilgj As String
 
-    Private Sub BtnStaSok_Click(sender As Object, e As EventArgs) 
+    Private Sub BtnStaSok_Click(sender As Object, e As EventArgs) Handles BtnStaSok.Click
+        Dim StaValgtAvdeling = CmbStaAvdeling.SelectedItem
+        Dim StaSykkelType = CmbStaType.SelectedItem
+
+        If StaValgtAvdeling = "" Then
+            MsgBox("Vennligst velg avdeling")
+            Exit Sub
+        End If
+        If StaSykkelType = "" Then
+            MsgBox("Vennligst velg type")
+            Exit Sub
+        End If
 
 
-        Dim outputAntallSykler As Integer
+        Dim outputAntallSyklerLedig, outputAntallSyklerUtleid, outputAntallSyklerVerksted As Integer
         Dim StaSykkeltypeValue = New Integer() {9999, 10000, 10001, 10002, 10003, 10004, 10005, 10006}
         Dim StaAvdelingValue = New Integer() {10000, 10001, 10002, 10003, 10004}
         StaValgtAvdTilgj = StaAvdelingValue(CmbStaAvdeling.SelectedIndex)
         StaValgtTypTilgj = StaSykkeltypeValue(CmbStaType.SelectedIndex)
-        MsgBox(StaValgtAvdTilgj)
-        MsgBox(StaValgtTypTilgj)
+
 
         Try
             DBConnect()
 
-            Dim sporring As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "'", tilkobling)
-
-            outputAntallSykler = sporring.ExecuteScalar()
-            MsgBox(outputAntallSykler)
-
+            Dim sporring As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Ledig'", tilkobling)
+            Dim sporring2 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Utleid'", tilkobling)
+            Dim sporring3 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Verksted'", tilkobling)
+            outputAntallSyklerLedig = sporring.ExecuteScalar()
+            outputAntallSyklerUtleid = sporring2.ExecuteScalar()
+            outputAntallSyklerVerksted = sporring3.ExecuteScalar()
 
             DBDisconnect()
         Catch feilmelding As MySqlException
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
         End Try
+
+
+        LvStaTilgjengelig.Items.Clear()
+
+        LvStaTilgjengelig.Items.Add(New ListViewItem({StaValgtAvdeling, StaSykkelType, outputAntallSyklerLedig, outputAntallSyklerUtleid, outputAntallSyklerVerksted}))
+
 
 
 
