@@ -1344,7 +1344,7 @@ Public Class Form1
     Dim StaValgtAvdTilgj As String
     Dim StaValgtTypTilgj As String
 
-    Private Sub BtnStaSok_Click(sender As Object, e As EventArgs) Handles BtnStaSok.Click
+    Private Sub BtnStaSok_Click(sender As Object, e As EventArgs) 
 
 
         Dim outputAntallSykler As Integer
