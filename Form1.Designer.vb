@@ -106,7 +106,6 @@ Partial Class Form1
         Me.TxtKndSok = New System.Windows.Forms.TextBox()
         Me.LblKndSokInput = New System.Windows.Forms.Label()
         Me.InventarTab = New System.Windows.Forms.TabPage()
-        Me.GrpInvSok = New System.Windows.Forms.GroupBox()
         Me.LvInvSok = New System.Windows.Forms.ListView()
         Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Produktnavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -121,6 +120,7 @@ Partial Class Form1
         Me.Status = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Skadet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Savnet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.GrpInvSok = New System.Windows.Forms.GroupBox()
         Me.GrpInvRegistrerEndre = New System.Windows.Forms.GroupBox()
         Me.BtnInvTest = New System.Windows.Forms.Button()
         Me.BtnInvAvbrytEndre = New System.Windows.Forms.Button()
@@ -1116,6 +1116,7 @@ Partial Class Form1
         '
         'InventarTab
         '
+        Me.InventarTab.Controls.Add(Me.LvInvSok)
         Me.InventarTab.Controls.Add(Me.GrpInvSok)
         Me.InventarTab.Controls.Add(Me.GrpInvRegistrerEndre)
         Me.InventarTab.Location = New System.Drawing.Point(4, 32)
@@ -1125,24 +1126,13 @@ Partial Class Form1
         Me.InventarTab.Text = "Inventar"
         Me.InventarTab.UseVisualStyleBackColor = True
         '
-        'GrpInvSok
-        '
-        Me.GrpInvSok.Controls.Add(Me.LvInvSok)
-        Me.GrpInvSok.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpInvSok.Location = New System.Drawing.Point(377, 3)
-        Me.GrpInvSok.Name = "GrpInvSok"
-        Me.GrpInvSok.Size = New System.Drawing.Size(859, 622)
-        Me.GrpInvSok.TabIndex = 0
-        Me.GrpInvSok.TabStop = False
-        Me.GrpInvSok.Text = "Søkeresultater"
-        '
         'LvInvSok
         '
         Me.LvInvSok.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer, Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling, Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet})
         Me.LvInvSok.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LvInvSok.Location = New System.Drawing.Point(6, 33)
+        Me.LvInvSok.Location = New System.Drawing.Point(383, 36)
         Me.LvInvSok.Name = "LvInvSok"
-        Me.LvInvSok.Size = New System.Drawing.Size(847, 583)
+        Me.LvInvSok.Size = New System.Drawing.Size(939, 583)
         Me.LvInvSok.TabIndex = 0
         Me.LvInvSok.UseCompatibleStateImageBehavior = False
         Me.LvInvSok.View = System.Windows.Forms.View.Details
@@ -1180,7 +1170,7 @@ Partial Class Form1
         'Hjulstørrelse
         '
         Me.Hjulstørrelse.Text = "Hjulstr."
-        Me.Hjulstørrelse.Width = 50
+        Me.Hjulstørrelse.Width = 51
         '
         'Innkjøpspris
         '
@@ -1195,7 +1185,7 @@ Partial Class Form1
         'Forhandler
         '
         Me.Forhandler.Text = "Forhandler"
-        Me.Forhandler.Width = 86
+        Me.Forhandler.Width = 98
         '
         'Status
         '
@@ -1211,6 +1201,16 @@ Partial Class Form1
         '
         Me.Savnet.Text = "Savnet"
         Me.Savnet.Width = 50
+        '
+        'GrpInvSok
+        '
+        Me.GrpInvSok.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpInvSok.Location = New System.Drawing.Point(377, 3)
+        Me.GrpInvSok.Name = "GrpInvSok"
+        Me.GrpInvSok.Size = New System.Drawing.Size(859, 622)
+        Me.GrpInvSok.TabIndex = 0
+        Me.GrpInvSok.TabStop = False
+        Me.GrpInvSok.Text = "Søkeresultater"
         '
         'GrpInvRegistrerEndre
         '
