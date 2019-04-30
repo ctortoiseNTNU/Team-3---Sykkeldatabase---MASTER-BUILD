@@ -598,6 +598,58 @@ Public Class Form1
         CboInvSavnet.SelectedIndex = -1
     End Sub
 
+    Private Sub InvRegSykkelveske(ID)
+        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr VALUES " _
+            & "(sykkel_utstyr_id, " & ID & ", 2)"
+        Try
+            DBConnect()
+            Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
+            InvSqlRegistrer.ExecuteNonQuery()
+            DBDisconnect()
+        Catch ex As Exception
+            MsgBox("Feil ved registrering av tilhørende sykkelveske:" & vbNewLine & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub InvRegBarnesete(ID)
+        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr VALUES " _
+            & "(sykkel_utstyr_id, " & ID & ", 3)"
+        Try
+            DBConnect()
+            Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
+            InvSqlRegistrer.ExecuteNonQuery()
+            DBDisconnect()
+        Catch ex As Exception
+            MsgBox("Feil ved registrering av tilhørende barnesete:" & vbNewLine & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub InvRegBarnehenger(ID)
+        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr VALUES " _
+            & "(sykkel_utstyr_id, " & ID & ", 4)"
+        Try
+            DBConnect()
+            Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
+            InvSqlRegistrer.ExecuteNonQuery()
+            DBDisconnect()
+        Catch ex As Exception
+            MsgBox("Feil ved registrering av tilhørende barnehenger:" & vbNewLine & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub invreglastehenger(ID)
+        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr VALUES " _
+            & "(sykkel_utstyr_id, " & ID & ", 5)"
+        Try
+            DBConnect()
+            Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
+            InvSqlRegistrer.ExecuteNonQuery()
+            DBDisconnect()
+        Catch ex As Exception
+            MsgBox("Feil ved registrering av tilhørende lastehenger:" & vbNewLine & ex.Message)
+        End Try
+    End Sub
+
     'Prosedyre for å hente forhandlerID basert på forhandlerNavn i database.
     'Dette i forbindelse med registrering og endring av fremmednøkler,
     'og søk og innhenting av produkt på fremmednøkler.
@@ -811,6 +863,27 @@ Public Class Form1
             CboInvSubkategori.Items.Clear()
             CboInvSubkategori.Items.AddRange(New Object() {"Hjelmer", "Sykkelveske", "Barnesete", "Barnehenger", "Lastehenger", "Beskyttelse", "Låser", "Lappesaker"})
 
+            'Test for autofill av combobox
+
+            'Dim InvSokSporring As String = "SELECT utstyr_kat FROM utstyr_kategori"
+            'Dim invSqlLeser As MySqlDataReader
+
+            'DBConnect()
+            'Dim InvSqlSok = New MySqlCommand(InvSokSporring, tilkobling)
+            'invSqlLeser = InvSqlSok.ExecuteReader()
+            'Dim InvArSize As Integer = invSqlLeser.FieldCount - 1
+            'Dim InvComboList(InvArSize) As String
+            ''For hver kolonne les inn verdi 0-12 og legg i listview
+            'While invSqlLeser.Read()
+            '    For i = 0 To invSqlLeser.FieldCount - 1
+            '        InvComboList(i) = invSqlLeser(i)
+            '    Next
+            'End While
+            'For i = 0 To InvArSize
+            '    CboInvSubkategori.Items.AddRange(New Object() {InvComboList(i)})
+            'Next
+            'DBDisconnect()
+
         Else
             'CboInvSubkategori.Enabled = True
             CboInvAvdeling.Enabled = True
@@ -832,8 +905,6 @@ Public Class Form1
     'SQLspørring med registrering av nytt produkt basert på innlagt data i skjema.
     Private Sub BtnInvRegistrer_Click(sender As Object, e As EventArgs) Handles BtnInvRegistrer.Click
 
-
-
         'SQLspørring for innlegging av sykkel i database. Data hentes fra felt
 
         If CboInvKategori.SelectedItem = "Sykkel" Then
@@ -847,7 +918,7 @@ Public Class Form1
             Else
                 Dim InvKategori, InvSubkategori, InvAvdelingNavn, InvProduktnavn, InvVarenummer, InvInnkjopspris,
             InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandlerNavn, InvStatus, InvSkadet, InvSavnet,
-            InvForhandlerID, InvAvdelingID, InvSubKategoriID, InvRegistrerSporring As String
+            InvForhandlerID, InvAvdelingID, InvSubKategoriID, InvRegistrerSporring, InvSykkelID As String
 
                 Dim InvSqlRegistrer As MySqlCommand
 
@@ -872,6 +943,8 @@ Public Class Form1
                 Dim InvBekreftSykkelReg As DialogResult
                 InvBekreftSykkelReg = MsgBox("Bekreft registrering av sykkel", MsgBoxStyle.OkCancel)
                 If InvBekreftSykkelReg = DialogResult.OK Then
+
+
                     InvRegistrerSporring = "INSERT INTO sykler (forhandler_id, type_id, avdeling_id, sykkel_navn, " &
                     "sykkel_modell, sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)" _
                     & "VALUES ('" + InvForhandlerID & "', '" & InvSubKategoriID & "', '" _
@@ -883,6 +956,32 @@ Public Class Form1
                         InvSqlRegistrer = New MySqlCommand(InvRegistrerSporring, tilkobling)
                         InvSqlRegistrer.ExecuteNonQuery()
                         DBDisconnect()
+
+                        DBConnect()
+                        Dim InvSisteID As String = "SELECT LAST_INSERT_ID();"
+                        Dim InvSqlLeser As MySqlDataReader
+                        InvSqlRegistrer = New MySqlCommand(InvSisteID, tilkobling)
+                        InvSqlLeser = InvSqlRegistrer.ExecuteReader()
+                        While InvSqlLeser.Read()
+                            InvSykkelID = InvSqlLeser(0)
+                        End While
+                        InvSqlLeser.Close()
+                        DBDisconnect()
+
+                        'Registerer valgt utstyr på siste sykkelID
+                        If ChkInvBarneHenger.Checked = True Then
+                            InvRegBarnehenger(InvSykkelID)
+                        End If
+                        If ChkInvBarnesete.Checked = True Then
+                            InvRegBarnehenger(InvSykkelID)
+                        End If
+                        If ChkInvLastehenger.Checked = True Then
+                            InvRegBarnehenger(InvSykkelID)
+                        End If
+                        If ChkInvSykkelveske.Checked = True Then
+                            InvRegBarnehenger(InvSykkelID)
+                        End If
+
                         MsgBox("Registrering vellykket")
                         InvTomFelt()
                     Catch ex As MySqlException
@@ -949,7 +1048,6 @@ Public Class Form1
 
         Dim InvSqlSok As MySqlCommand
         Dim invSqlLeser As MySqlDataReader
-
 
         If CboInvKategori.SelectedItem = "Sykkel" Then
             Dim SpInit As String = "Select sykler.sykkel_id, sykler.sykkel_navn, sykler.sykkel_modell, " _
@@ -1074,22 +1172,6 @@ Public Class Form1
         End If
 
 
-    End Sub
-
-    ' - ----------------------- TEST TEST TEST - --------------------
-    Private Sub BtnInvTest_Click(sender As Object, e As EventArgs) Handles BtnInvTest.Click
-        'Dim testdato As Date
-        'Dim testsp As String = "select kunde_fdato from kunder where kunde_etternavn='faug'"
-        'Dim sql As MySqlCommand
-        'Dim leser As MySqlDataReader
-        'DBConnect()
-        'sql = New MySqlCommand(testsp, tilkobling)
-        'leser = sql.ExecuteReader()
-        'While leser.Read()
-        '    testdato = leser(0)
-        'End While
-        'leser.close()
-        'LblInvAktivProdukt.Text = CStr(testdato)
     End Sub
 
     'SQLspørring med endering av data for valgt produkt med ID fra valgt produkt i søkefelt
@@ -1315,6 +1397,23 @@ Public Class Form1
             MsgBox("Velg kategori")
         End If
 
+    End Sub
+
+
+    ' - ----------------------- TEST TEST TEST - --------------------
+    Private Sub BtnInvTest_Click(sender As Object, e As EventArgs) Handles BtnInvTest.Click
+        'Dim testdato As Date
+        'Dim testsp As String = "select kunde_fdato from kunder where kunde_etternavn='faug'"
+        'Dim sql As MySqlCommand
+        'Dim leser As MySqlDataReader
+        'DBConnect()
+        'sql = New MySqlCommand(testsp, tilkobling)
+        'leser = sql.ExecuteReader()
+        'While leser.Read()
+        '    testdato = leser(0)
+        'End While
+        'leser.close()
+        'LblInvAktivProdukt.Text = CStr(testdato)
     End Sub
 
 
