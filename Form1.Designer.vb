@@ -53,7 +53,7 @@ Partial Class Form1
         Me.LblUtleieDato = New System.Windows.Forms.Label()
         Me.LblUtleieAvd = New System.Windows.Forms.Label()
         Me.KDTab = New System.Windows.Forms.TabPage()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GrbKndEndre = New System.Windows.Forms.GroupBox()
         Me.LblKndEnrFdato = New System.Windows.Forms.Label()
         Me.DateKndEndre = New System.Windows.Forms.DateTimePicker()
         Me.TxtKndEndreHF = New System.Windows.Forms.TextBox()
@@ -74,7 +74,7 @@ Partial Class Form1
         Me.LblKndEnrEN = New System.Windows.Forms.Label()
         Me.LblKndEnrFN = New System.Windows.Forms.Label()
         Me.LblKndEnrBID = New System.Windows.Forms.Label()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.GrbKndNyKunde = New System.Windows.Forms.GroupBox()
         Me.DateKndFdato = New System.Windows.Forms.DateTimePicker()
         Me.LblKndNyFdato = New System.Windows.Forms.Label()
         Me.BtnKndRegistrer = New System.Windows.Forms.Button()
@@ -90,7 +90,7 @@ Partial Class Form1
         Me.LblKndNyEN = New System.Windows.Forms.Label()
         Me.LblKndNyFN = New System.Windows.Forms.Label()
         Me.LblKndNyBID = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GrbKndSok = New System.Windows.Forms.GroupBox()
         Me.LvKndSok = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -287,7 +287,7 @@ Partial Class Form1
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.CmbStaType = New System.Windows.Forms.ComboBox()
         Me.LblStaVelgType = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GrbStaMestLeid = New System.Windows.Forms.GroupBox()
         Me.LvStaMestUtleid = New System.Windows.Forms.ListView()
         Me.ColumnHeader16 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader17 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -305,9 +305,9 @@ Partial Class Form1
         Me.GrpUtleieSelger.SuspendLayout()
         Me.GrpUtleieAvd.SuspendLayout()
         Me.KDTab.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GrbKndEndre.SuspendLayout()
+        Me.GrbKndNyKunde.SuspendLayout()
+        Me.GrbKndSok.SuspendLayout()
         Me.InventarTab.SuspendLayout()
         Me.GrpInvSok.SuspendLayout()
         Me.GrpInvRegistrerEndre.SuspendLayout()
@@ -325,7 +325,7 @@ Partial Class Form1
         Me.GrpDBAAvdeling.SuspendLayout()
         Me.LoginTab.SuspendLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
+        Me.GrbStaMestLeid.SuspendLayout()
         Me.SuspendLayout()
         '
         'HovedTab
@@ -614,9 +614,9 @@ Partial Class Form1
         '
         'KDTab
         '
-        Me.KDTab.Controls.Add(Me.GroupBox3)
-        Me.KDTab.Controls.Add(Me.GroupBox4)
-        Me.KDTab.Controls.Add(Me.GroupBox2)
+        Me.KDTab.Controls.Add(Me.GrbKndEndre)
+        Me.KDTab.Controls.Add(Me.GrbKndNyKunde)
+        Me.KDTab.Controls.Add(Me.GrbKndSok)
         Me.KDTab.Location = New System.Drawing.Point(4, 32)
         Me.KDTab.Name = "KDTab"
         Me.KDTab.Size = New System.Drawing.Size(1416, 744)
@@ -624,35 +624,35 @@ Partial Class Form1
         Me.KDTab.Text = "Kundedatabase"
         Me.KDTab.UseVisualStyleBackColor = True
         '
-        'GroupBox3
+        'GrbKndEndre
         '
-        Me.GroupBox3.Controls.Add(Me.LblKndEnrFdato)
-        Me.GroupBox3.Controls.Add(Me.DateKndEndre)
-        Me.GroupBox3.Controls.Add(Me.TxtKndEndreHF)
-        Me.GroupBox3.Controls.Add(Me.TxtKndEndreRbt)
-        Me.GroupBox3.Controls.Add(Me.LblKndEnrHF)
-        Me.GroupBox3.Controls.Add(Me.LblKndEnrRbt)
-        Me.GroupBox3.Controls.Add(Me.BtnKndEndre)
-        Me.GroupBox3.Controls.Add(Me.BtnKndKundeID)
-        Me.GroupBox3.Controls.Add(Me.TxtKndKundeID)
-        Me.GroupBox3.Controls.Add(Me.TxtKndEndreEP)
-        Me.GroupBox3.Controls.Add(Me.TxtKndEndreTlf)
-        Me.GroupBox3.Controls.Add(Me.TxtKndEndreAdr)
-        Me.GroupBox3.Controls.Add(Me.TxtKndEndreEN)
-        Me.GroupBox3.Controls.Add(Me.TxtKndEndreFN)
-        Me.GroupBox3.Controls.Add(Me.LblKndEnrEP)
-        Me.GroupBox3.Controls.Add(Me.LblKndEnrTlf)
-        Me.GroupBox3.Controls.Add(Me.LblKndEnrAdr)
-        Me.GroupBox3.Controls.Add(Me.LblKndEnrEN)
-        Me.GroupBox3.Controls.Add(Me.LblKndEnrFN)
-        Me.GroupBox3.Controls.Add(Me.LblKndEnrBID)
-        Me.GroupBox3.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(309, 4)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(301, 528)
-        Me.GroupBox3.TabIndex = 26
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Endre Kunde"
+        Me.GrbKndEndre.Controls.Add(Me.LblKndEnrFdato)
+        Me.GrbKndEndre.Controls.Add(Me.DateKndEndre)
+        Me.GrbKndEndre.Controls.Add(Me.TxtKndEndreHF)
+        Me.GrbKndEndre.Controls.Add(Me.TxtKndEndreRbt)
+        Me.GrbKndEndre.Controls.Add(Me.LblKndEnrHF)
+        Me.GrbKndEndre.Controls.Add(Me.LblKndEnrRbt)
+        Me.GrbKndEndre.Controls.Add(Me.BtnKndEndre)
+        Me.GrbKndEndre.Controls.Add(Me.BtnKndKundeID)
+        Me.GrbKndEndre.Controls.Add(Me.TxtKndKundeID)
+        Me.GrbKndEndre.Controls.Add(Me.TxtKndEndreEP)
+        Me.GrbKndEndre.Controls.Add(Me.TxtKndEndreTlf)
+        Me.GrbKndEndre.Controls.Add(Me.TxtKndEndreAdr)
+        Me.GrbKndEndre.Controls.Add(Me.TxtKndEndreEN)
+        Me.GrbKndEndre.Controls.Add(Me.TxtKndEndreFN)
+        Me.GrbKndEndre.Controls.Add(Me.LblKndEnrEP)
+        Me.GrbKndEndre.Controls.Add(Me.LblKndEnrTlf)
+        Me.GrbKndEndre.Controls.Add(Me.LblKndEnrAdr)
+        Me.GrbKndEndre.Controls.Add(Me.LblKndEnrEN)
+        Me.GrbKndEndre.Controls.Add(Me.LblKndEnrFN)
+        Me.GrbKndEndre.Controls.Add(Me.LblKndEnrBID)
+        Me.GrbKndEndre.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrbKndEndre.Location = New System.Drawing.Point(309, 4)
+        Me.GrbKndEndre.Name = "GrbKndEndre"
+        Me.GrbKndEndre.Size = New System.Drawing.Size(301, 528)
+        Me.GrbKndEndre.TabIndex = 26
+        Me.GrbKndEndre.TabStop = False
+        Me.GrbKndEndre.Text = "Endre Kunde"
         '
         'LblKndEnrFdato
         '
@@ -836,30 +836,30 @@ Partial Class Form1
         Me.LblKndEnrBID.TabIndex = 0
         Me.LblKndEnrBID.Text = "Bruker ID:"
         '
-        'GroupBox4
+        'GrbKndNyKunde
         '
-        Me.GroupBox4.Controls.Add(Me.DateKndFdato)
-        Me.GroupBox4.Controls.Add(Me.LblKndNyFdato)
-        Me.GroupBox4.Controls.Add(Me.BtnKndRegistrer)
-        Me.GroupBox4.Controls.Add(Me.Label14)
-        Me.GroupBox4.Controls.Add(Me.TxtKndEpost)
-        Me.GroupBox4.Controls.Add(Me.TxtKndTlf)
-        Me.GroupBox4.Controls.Add(Me.TxtKndAdresse)
-        Me.GroupBox4.Controls.Add(Me.TxtKndEtternavn)
-        Me.GroupBox4.Controls.Add(Me.TxtKndFornavn)
-        Me.GroupBox4.Controls.Add(Me.LblKndNyEP)
-        Me.GroupBox4.Controls.Add(Me.LblKndNyTlf)
-        Me.GroupBox4.Controls.Add(Me.LblKndNyAdr)
-        Me.GroupBox4.Controls.Add(Me.LblKndNyEN)
-        Me.GroupBox4.Controls.Add(Me.LblKndNyFN)
-        Me.GroupBox4.Controls.Add(Me.LblKndNyBID)
-        Me.GroupBox4.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox4.Location = New System.Drawing.Point(2, 4)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(301, 528)
-        Me.GroupBox4.TabIndex = 25
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Ny Kunde"
+        Me.GrbKndNyKunde.Controls.Add(Me.DateKndFdato)
+        Me.GrbKndNyKunde.Controls.Add(Me.LblKndNyFdato)
+        Me.GrbKndNyKunde.Controls.Add(Me.BtnKndRegistrer)
+        Me.GrbKndNyKunde.Controls.Add(Me.Label14)
+        Me.GrbKndNyKunde.Controls.Add(Me.TxtKndEpost)
+        Me.GrbKndNyKunde.Controls.Add(Me.TxtKndTlf)
+        Me.GrbKndNyKunde.Controls.Add(Me.TxtKndAdresse)
+        Me.GrbKndNyKunde.Controls.Add(Me.TxtKndEtternavn)
+        Me.GrbKndNyKunde.Controls.Add(Me.TxtKndFornavn)
+        Me.GrbKndNyKunde.Controls.Add(Me.LblKndNyEP)
+        Me.GrbKndNyKunde.Controls.Add(Me.LblKndNyTlf)
+        Me.GrbKndNyKunde.Controls.Add(Me.LblKndNyAdr)
+        Me.GrbKndNyKunde.Controls.Add(Me.LblKndNyEN)
+        Me.GrbKndNyKunde.Controls.Add(Me.LblKndNyFN)
+        Me.GrbKndNyKunde.Controls.Add(Me.LblKndNyBID)
+        Me.GrbKndNyKunde.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrbKndNyKunde.Location = New System.Drawing.Point(2, 4)
+        Me.GrbKndNyKunde.Name = "GrbKndNyKunde"
+        Me.GrbKndNyKunde.Size = New System.Drawing.Size(301, 528)
+        Me.GrbKndNyKunde.TabIndex = 25
+        Me.GrbKndNyKunde.TabStop = False
+        Me.GrbKndNyKunde.Text = "Ny Kunde"
         '
         'DateKndFdato
         '
@@ -999,21 +999,21 @@ Partial Class Form1
         Me.LblKndNyBID.TabIndex = 0
         Me.LblKndNyBID.Text = "Bruker ID:"
         '
-        'GroupBox2
+        'GrbKndSok
         '
-        Me.GroupBox2.Controls.Add(Me.LvKndSok)
-        Me.GroupBox2.Controls.Add(Me.BtnKndSok)
-        Me.GroupBox2.Controls.Add(Me.CmbKndSok)
-        Me.GroupBox2.Controls.Add(Me.LblKndSokEtter)
-        Me.GroupBox2.Controls.Add(Me.TxtKndSok)
-        Me.GroupBox2.Controls.Add(Me.LblKndSokInput)
-        Me.GroupBox2.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(616, 2)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(613, 292)
-        Me.GroupBox2.TabIndex = 24
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Kundesøk"
+        Me.GrbKndSok.Controls.Add(Me.LvKndSok)
+        Me.GrbKndSok.Controls.Add(Me.BtnKndSok)
+        Me.GrbKndSok.Controls.Add(Me.CmbKndSok)
+        Me.GrbKndSok.Controls.Add(Me.LblKndSokEtter)
+        Me.GrbKndSok.Controls.Add(Me.TxtKndSok)
+        Me.GrbKndSok.Controls.Add(Me.LblKndSokInput)
+        Me.GrbKndSok.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrbKndSok.Location = New System.Drawing.Point(616, 2)
+        Me.GrbKndSok.Name = "GrbKndSok"
+        Me.GrbKndSok.Size = New System.Drawing.Size(613, 292)
+        Me.GrbKndSok.TabIndex = 24
+        Me.GrbKndSok.TabStop = False
+        Me.GrbKndSok.Text = "Kundesøk"
         '
         'LvKndSok
         '
@@ -1620,7 +1620,7 @@ Partial Class Form1
         '
         'StatTab
         '
-        Me.StatTab.Controls.Add(Me.GroupBox1)
+        Me.StatTab.Controls.Add(Me.GrbStaMestLeid)
         Me.StatTab.Controls.Add(Me.GrbStaTilgjengelig)
         Me.StatTab.Location = New System.Drawing.Point(4, 32)
         Me.StatTab.Name = "StatTab"
@@ -2914,19 +2914,19 @@ Partial Class Form1
         Me.LblStaVelgType.TabIndex = 31
         Me.LblStaVelgType.Text = "Velg Sykkelmodell:"
         '
-        'GroupBox1
+        'GrbStaMestLeid
         '
-        Me.GroupBox1.Controls.Add(Me.LvStaMestUtleid)
-        Me.GroupBox1.Controls.Add(Me.BtnStaGo)
-        Me.GroupBox1.Controls.Add(Me.CmbStaAvdeling2)
-        Me.GroupBox1.Controls.Add(Me.LblStaVelgAvd2)
-        Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(675, 3)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(455, 341)
-        Me.GroupBox1.TabIndex = 25
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Mest Utleide Sykler"
+        Me.GrbStaMestLeid.Controls.Add(Me.LvStaMestUtleid)
+        Me.GrbStaMestLeid.Controls.Add(Me.BtnStaGo)
+        Me.GrbStaMestLeid.Controls.Add(Me.CmbStaAvdeling2)
+        Me.GrbStaMestLeid.Controls.Add(Me.LblStaVelgAvd2)
+        Me.GrbStaMestLeid.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrbStaMestLeid.Location = New System.Drawing.Point(675, 3)
+        Me.GrbStaMestLeid.Name = "GrbStaMestLeid"
+        Me.GrbStaMestLeid.Size = New System.Drawing.Size(455, 341)
+        Me.GrbStaMestLeid.TabIndex = 25
+        Me.GrbStaMestLeid.TabStop = False
+        Me.GrbStaMestLeid.Text = "Mest Utleide Sykler"
         '
         'LvStaMestUtleid
         '
@@ -3015,12 +3015,12 @@ Partial Class Form1
         Me.GrpUtleieAvd.ResumeLayout(False)
         Me.GrpUtleieAvd.PerformLayout()
         Me.KDTab.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.GrbKndEndre.ResumeLayout(False)
+        Me.GrbKndEndre.PerformLayout()
+        Me.GrbKndNyKunde.ResumeLayout(False)
+        Me.GrbKndNyKunde.PerformLayout()
+        Me.GrbKndSok.ResumeLayout(False)
+        Me.GrbKndSok.PerformLayout()
         Me.InventarTab.ResumeLayout(False)
         Me.GrpInvSok.ResumeLayout(False)
         Me.GrpInvRegistrerEndre.ResumeLayout(False)
@@ -3049,8 +3049,8 @@ Partial Class Form1
         Me.LoginTab.ResumeLayout(False)
         Me.LoginTab.PerformLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GrbStaMestLeid.ResumeLayout(False)
+        Me.GrbStaMestLeid.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3182,7 +3182,7 @@ Partial Class Form1
     Friend WithEvents Skadet As ColumnHeader
     Friend WithEvents Savnet As ColumnHeader
     Friend WithEvents BtnInvSok As Button
-    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents GrbKndEndre As GroupBox
     Friend WithEvents BtnKndEndre As Button
     Friend WithEvents BtnKndKundeID As Button
     Friend WithEvents TxtKndKundeID As TextBox
@@ -3197,7 +3197,7 @@ Partial Class Form1
     Friend WithEvents LblKndEnrEN As Label
     Friend WithEvents LblKndEnrFN As Label
     Friend WithEvents LblKndEnrBID As Label
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GrbKndSok As GroupBox
     Friend WithEvents LvKndSok As ListView
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents ColumnHeader2 As ColumnHeader
@@ -3216,7 +3216,7 @@ Partial Class Form1
     Friend WithEvents TxtKndEndreRbt As TextBox
     Friend WithEvents LblKndEnrHF As Label
     Friend WithEvents LblKndEnrRbt As Label
-    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents GrbKndNyKunde As GroupBox
     Friend WithEvents BtnKndRegistrer As Button
     Friend WithEvents Label14 As Label
     Friend WithEvents TxtKndEpost As TextBox
@@ -3319,7 +3319,7 @@ Partial Class Form1
     Friend WithEvents LblStaVelgAvd As Label
     Friend WithEvents LblStaVelgType As Label
     Friend WithEvents CmbStaType As ComboBox
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents GrbStaMestLeid As GroupBox
     Friend WithEvents LvStaMestUtleid As ListView
     Friend WithEvents ColumnHeader16 As ColumnHeader
     Friend WithEvents ColumnHeader17 As ColumnHeader
