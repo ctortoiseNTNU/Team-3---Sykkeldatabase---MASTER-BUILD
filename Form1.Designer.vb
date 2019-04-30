@@ -54,12 +54,12 @@ Partial Class Form1
         Me.LblUtleieAvd = New System.Windows.Forms.Label()
         Me.KDTab = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.LblKndEnrFdato = New System.Windows.Forms.Label()
         Me.DateKndEndre = New System.Windows.Forms.DateTimePicker()
         Me.TxtKndEndreHF = New System.Windows.Forms.TextBox()
         Me.TxtKndEndreRbt = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LblKndEnrHF = New System.Windows.Forms.Label()
+        Me.LblKndEnrRbt = New System.Windows.Forms.Label()
         Me.BtnKndEndre = New System.Windows.Forms.Button()
         Me.BtnKndKundeID = New System.Windows.Forms.Button()
         Me.TxtKndKundeID = New System.Windows.Forms.TextBox()
@@ -68,15 +68,15 @@ Partial Class Form1
         Me.TxtKndEndreAdr = New System.Windows.Forms.TextBox()
         Me.TxtKndEndreEN = New System.Windows.Forms.TextBox()
         Me.TxtKndEndreFN = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.LblKndEnrEP = New System.Windows.Forms.Label()
+        Me.LblKndEnrTlf = New System.Windows.Forms.Label()
+        Me.LblKndEnrAdr = New System.Windows.Forms.Label()
+        Me.LblKndEnrEN = New System.Windows.Forms.Label()
+        Me.LblKndEnrFN = New System.Windows.Forms.Label()
+        Me.LblKndEnrBID = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.DateKndFdato = New System.Windows.Forms.DateTimePicker()
-        Me.LblKndFdato = New System.Windows.Forms.Label()
+        Me.LblKndNyFdato = New System.Windows.Forms.Label()
         Me.BtnKndRegistrer = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TxtKndEpost = New System.Windows.Forms.TextBox()
@@ -84,12 +84,12 @@ Partial Class Form1
         Me.TxtKndAdresse = New System.Windows.Forms.TextBox()
         Me.TxtKndEtternavn = New System.Windows.Forms.TextBox()
         Me.TxtKndFornavn = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label25 = New System.Windows.Forms.Label()
+        Me.LblKndNyEP = New System.Windows.Forms.Label()
+        Me.LblKndNyTlf = New System.Windows.Forms.Label()
+        Me.LblKndNyAdr = New System.Windows.Forms.Label()
+        Me.LblKndNyEN = New System.Windows.Forms.Label()
+        Me.LblKndNyFN = New System.Windows.Forms.Label()
+        Me.LblKndNyBID = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LvKndSok = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -102,9 +102,9 @@ Partial Class Form1
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnKndSok = New System.Windows.Forms.Button()
         Me.CmbKndSok = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblKndSokEtter = New System.Windows.Forms.Label()
         Me.TxtKndSok = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.LblKndSokInput = New System.Windows.Forms.Label()
         Me.InventarTab = New System.Windows.Forms.TabPage()
         Me.GrpInvSok = New System.Windows.Forms.GroupBox()
         Me.LvInvSok = New System.Windows.Forms.ListView()
@@ -160,6 +160,16 @@ Partial Class Form1
         Me.LblInvKategori = New System.Windows.Forms.Label()
         Me.LogiTab = New System.Windows.Forms.TabPage()
         Me.StatTab = New System.Windows.Forms.TabPage()
+        Me.GrbStaTilgjengelig = New System.Windows.Forms.GroupBox()
+        Me.ListView3 = New System.Windows.Forms.ListView()
+        Me.ColumnHeader11 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader13 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader14 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader15 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BtnStaSok = New System.Windows.Forms.Button()
+        Me.CmbStaTilgjengelig = New System.Windows.Forms.ComboBox()
+        Me.LblStaSok = New System.Windows.Forms.Label()
+        Me.LblStaVelgAvd = New System.Windows.Forms.Label()
         Me.AdminTab = New System.Windows.Forms.TabPage()
         Me.AdminMOTDGroup = New System.Windows.Forms.GroupBox()
         Me.AdminMOTDEndreB = New System.Windows.Forms.Button()
@@ -291,6 +301,8 @@ Partial Class Form1
         Me.InventarTab.SuspendLayout()
         Me.GrpInvSok.SuspendLayout()
         Me.GrpInvRegistrerEndre.SuspendLayout()
+        Me.StatTab.SuspendLayout()
+        Me.GrbStaTilgjengelig.SuspendLayout()
         Me.AdminTab.SuspendLayout()
         Me.AdminMOTDGroup.SuspendLayout()
         Me.AdminBrukerSokGroup.SuspendLayout()
@@ -603,12 +615,12 @@ Partial Class Form1
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.Label7)
+        Me.GroupBox3.Controls.Add(Me.LblKndEnrFdato)
         Me.GroupBox3.Controls.Add(Me.DateKndEndre)
         Me.GroupBox3.Controls.Add(Me.TxtKndEndreHF)
         Me.GroupBox3.Controls.Add(Me.TxtKndEndreRbt)
-        Me.GroupBox3.Controls.Add(Me.Label5)
-        Me.GroupBox3.Controls.Add(Me.Label3)
+        Me.GroupBox3.Controls.Add(Me.LblKndEnrHF)
+        Me.GroupBox3.Controls.Add(Me.LblKndEnrRbt)
         Me.GroupBox3.Controls.Add(Me.BtnKndEndre)
         Me.GroupBox3.Controls.Add(Me.BtnKndKundeID)
         Me.GroupBox3.Controls.Add(Me.TxtKndKundeID)
@@ -617,12 +629,12 @@ Partial Class Form1
         Me.GroupBox3.Controls.Add(Me.TxtKndEndreAdr)
         Me.GroupBox3.Controls.Add(Me.TxtKndEndreEN)
         Me.GroupBox3.Controls.Add(Me.TxtKndEndreFN)
-        Me.GroupBox3.Controls.Add(Me.Label4)
-        Me.GroupBox3.Controls.Add(Me.Label6)
-        Me.GroupBox3.Controls.Add(Me.Label10)
-        Me.GroupBox3.Controls.Add(Me.Label11)
-        Me.GroupBox3.Controls.Add(Me.Label12)
-        Me.GroupBox3.Controls.Add(Me.Label13)
+        Me.GroupBox3.Controls.Add(Me.LblKndEnrEP)
+        Me.GroupBox3.Controls.Add(Me.LblKndEnrTlf)
+        Me.GroupBox3.Controls.Add(Me.LblKndEnrAdr)
+        Me.GroupBox3.Controls.Add(Me.LblKndEnrEN)
+        Me.GroupBox3.Controls.Add(Me.LblKndEnrFN)
+        Me.GroupBox3.Controls.Add(Me.LblKndEnrBID)
         Me.GroupBox3.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox3.Location = New System.Drawing.Point(309, 4)
         Me.GroupBox3.Name = "GroupBox3"
@@ -631,15 +643,15 @@ Partial Class Form1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Endre Kunde"
         '
-        'Label7
+        'LblKndEnrFdato
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(7, 416)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(87, 18)
-        Me.Label7.TabIndex = 27
-        Me.Label7.Text = "Fødselsdato:"
+        Me.LblKndEnrFdato.AutoSize = True
+        Me.LblKndEnrFdato.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndEnrFdato.Location = New System.Drawing.Point(7, 416)
+        Me.LblKndEnrFdato.Name = "LblKndEnrFdato"
+        Me.LblKndEnrFdato.Size = New System.Drawing.Size(87, 18)
+        Me.LblKndEnrFdato.TabIndex = 27
+        Me.LblKndEnrFdato.Text = "Fødselsdato:"
         '
         'DateKndEndre
         '
@@ -665,25 +677,25 @@ Partial Class Form1
         Me.TxtKndEndreRbt.Size = New System.Drawing.Size(162, 26)
         Me.TxtKndEndreRbt.TabIndex = 26
         '
-        'Label5
+        'LblKndEnrHF
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(7, 370)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(82, 18)
-        Me.Label5.TabIndex = 25
-        Me.Label5.Text = "Handlet for:"
+        Me.LblKndEnrHF.AutoSize = True
+        Me.LblKndEnrHF.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndEnrHF.Location = New System.Drawing.Point(7, 370)
+        Me.LblKndEnrHF.Name = "LblKndEnrHF"
+        Me.LblKndEnrHF.Size = New System.Drawing.Size(82, 18)
+        Me.LblKndEnrHF.TabIndex = 25
+        Me.LblKndEnrHF.Text = "Handlet for:"
         '
-        'Label3
+        'LblKndEnrRbt
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(7, 324)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(52, 18)
-        Me.Label3.TabIndex = 24
-        Me.Label3.Text = "Rabatt:"
+        Me.LblKndEnrRbt.AutoSize = True
+        Me.LblKndEnrRbt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndEnrRbt.Location = New System.Drawing.Point(7, 324)
+        Me.LblKndEnrRbt.Name = "LblKndEnrRbt"
+        Me.LblKndEnrRbt.Size = New System.Drawing.Size(52, 18)
+        Me.LblKndEnrRbt.TabIndex = 24
+        Me.LblKndEnrRbt.Text = "Rabatt:"
         '
         'BtnKndEndre
         '
@@ -753,70 +765,70 @@ Partial Class Form1
         Me.TxtKndEndreFN.Size = New System.Drawing.Size(162, 26)
         Me.TxtKndEndreFN.TabIndex = 13
         '
-        'Label4
+        'LblKndEnrEP
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(7, 282)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(46, 18)
-        Me.Label4.TabIndex = 9
-        Me.Label4.Text = "Epost:"
+        Me.LblKndEnrEP.AutoSize = True
+        Me.LblKndEnrEP.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndEnrEP.Location = New System.Drawing.Point(7, 282)
+        Me.LblKndEnrEP.Name = "LblKndEnrEP"
+        Me.LblKndEnrEP.Size = New System.Drawing.Size(46, 18)
+        Me.LblKndEnrEP.TabIndex = 9
+        Me.LblKndEnrEP.Text = "Epost:"
         '
-        'Label6
+        'LblKndEnrTlf
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(7, 243)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(59, 18)
-        Me.Label6.TabIndex = 7
-        Me.Label6.Text = "Telefon:"
+        Me.LblKndEnrTlf.AutoSize = True
+        Me.LblKndEnrTlf.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndEnrTlf.Location = New System.Drawing.Point(7, 243)
+        Me.LblKndEnrTlf.Name = "LblKndEnrTlf"
+        Me.LblKndEnrTlf.Size = New System.Drawing.Size(59, 18)
+        Me.LblKndEnrTlf.TabIndex = 7
+        Me.LblKndEnrTlf.Text = "Telefon:"
         '
-        'Label10
+        'LblKndEnrAdr
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(6, 198)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(62, 18)
-        Me.Label10.TabIndex = 3
-        Me.Label10.Text = "Adresse:"
+        Me.LblKndEnrAdr.AutoSize = True
+        Me.LblKndEnrAdr.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndEnrAdr.Location = New System.Drawing.Point(6, 198)
+        Me.LblKndEnrAdr.Name = "LblKndEnrAdr"
+        Me.LblKndEnrAdr.Size = New System.Drawing.Size(62, 18)
+        Me.LblKndEnrAdr.TabIndex = 3
+        Me.LblKndEnrAdr.Text = "Adresse:"
         '
-        'Label11
+        'LblKndEnrEN
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(6, 156)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(72, 18)
-        Me.Label11.TabIndex = 2
-        Me.Label11.Text = "Etternavn:"
+        Me.LblKndEnrEN.AutoSize = True
+        Me.LblKndEnrEN.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndEnrEN.Location = New System.Drawing.Point(6, 156)
+        Me.LblKndEnrEN.Name = "LblKndEnrEN"
+        Me.LblKndEnrEN.Size = New System.Drawing.Size(72, 18)
+        Me.LblKndEnrEN.TabIndex = 2
+        Me.LblKndEnrEN.Text = "Etternavn:"
         '
-        'Label12
+        'LblKndEnrFN
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(6, 117)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(58, 18)
-        Me.Label12.TabIndex = 1
-        Me.Label12.Text = "Fornavn"
+        Me.LblKndEnrFN.AutoSize = True
+        Me.LblKndEnrFN.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndEnrFN.Location = New System.Drawing.Point(6, 117)
+        Me.LblKndEnrFN.Name = "LblKndEnrFN"
+        Me.LblKndEnrFN.Size = New System.Drawing.Size(58, 18)
+        Me.LblKndEnrFN.TabIndex = 1
+        Me.LblKndEnrFN.Text = "Fornavn"
         '
-        'Label13
+        'LblKndEnrBID
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(6, 36)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(69, 18)
-        Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Bruker ID:"
+        Me.LblKndEnrBID.AutoSize = True
+        Me.LblKndEnrBID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndEnrBID.Location = New System.Drawing.Point(6, 36)
+        Me.LblKndEnrBID.Name = "LblKndEnrBID"
+        Me.LblKndEnrBID.Size = New System.Drawing.Size(69, 18)
+        Me.LblKndEnrBID.TabIndex = 0
+        Me.LblKndEnrBID.Text = "Bruker ID:"
         '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.DateKndFdato)
-        Me.GroupBox4.Controls.Add(Me.LblKndFdato)
+        Me.GroupBox4.Controls.Add(Me.LblKndNyFdato)
         Me.GroupBox4.Controls.Add(Me.BtnKndRegistrer)
         Me.GroupBox4.Controls.Add(Me.Label14)
         Me.GroupBox4.Controls.Add(Me.TxtKndEpost)
@@ -824,12 +836,12 @@ Partial Class Form1
         Me.GroupBox4.Controls.Add(Me.TxtKndAdresse)
         Me.GroupBox4.Controls.Add(Me.TxtKndEtternavn)
         Me.GroupBox4.Controls.Add(Me.TxtKndFornavn)
-        Me.GroupBox4.Controls.Add(Me.Label16)
-        Me.GroupBox4.Controls.Add(Me.Label18)
-        Me.GroupBox4.Controls.Add(Me.Label22)
-        Me.GroupBox4.Controls.Add(Me.Label23)
-        Me.GroupBox4.Controls.Add(Me.Label24)
-        Me.GroupBox4.Controls.Add(Me.Label25)
+        Me.GroupBox4.Controls.Add(Me.LblKndNyEP)
+        Me.GroupBox4.Controls.Add(Me.LblKndNyTlf)
+        Me.GroupBox4.Controls.Add(Me.LblKndNyAdr)
+        Me.GroupBox4.Controls.Add(Me.LblKndNyEN)
+        Me.GroupBox4.Controls.Add(Me.LblKndNyFN)
+        Me.GroupBox4.Controls.Add(Me.LblKndNyBID)
         Me.GroupBox4.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox4.Location = New System.Drawing.Point(2, 4)
         Me.GroupBox4.Name = "GroupBox4"
@@ -846,15 +858,15 @@ Partial Class Form1
         Me.DateKndFdato.Size = New System.Drawing.Size(172, 22)
         Me.DateKndFdato.TabIndex = 26
         '
-        'LblKndFdato
+        'LblKndNyFdato
         '
-        Me.LblKndFdato.AutoSize = True
-        Me.LblKndFdato.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblKndFdato.Location = New System.Drawing.Point(7, 282)
-        Me.LblKndFdato.Name = "LblKndFdato"
-        Me.LblKndFdato.Size = New System.Drawing.Size(87, 18)
-        Me.LblKndFdato.TabIndex = 25
-        Me.LblKndFdato.Text = "Fødselsdato:"
+        Me.LblKndNyFdato.AutoSize = True
+        Me.LblKndNyFdato.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndNyFdato.Location = New System.Drawing.Point(7, 282)
+        Me.LblKndNyFdato.Name = "LblKndNyFdato"
+        Me.LblKndNyFdato.Size = New System.Drawing.Size(87, 18)
+        Me.LblKndNyFdato.TabIndex = 25
+        Me.LblKndNyFdato.Text = "Fødselsdato:"
         '
         'BtnKndRegistrer
         '
@@ -916,74 +928,74 @@ Partial Class Form1
         Me.TxtKndFornavn.Size = New System.Drawing.Size(172, 26)
         Me.TxtKndFornavn.TabIndex = 13
         '
-        'Label16
+        'LblKndNyEP
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(7, 240)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(46, 18)
-        Me.Label16.TabIndex = 9
-        Me.Label16.Text = "Epost:"
+        Me.LblKndNyEP.AutoSize = True
+        Me.LblKndNyEP.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndNyEP.Location = New System.Drawing.Point(7, 240)
+        Me.LblKndNyEP.Name = "LblKndNyEP"
+        Me.LblKndNyEP.Size = New System.Drawing.Size(46, 18)
+        Me.LblKndNyEP.TabIndex = 9
+        Me.LblKndNyEP.Text = "Epost:"
         '
-        'Label18
+        'LblKndNyTlf
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(7, 201)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(59, 18)
-        Me.Label18.TabIndex = 7
-        Me.Label18.Text = "Telefon:"
+        Me.LblKndNyTlf.AutoSize = True
+        Me.LblKndNyTlf.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndNyTlf.Location = New System.Drawing.Point(7, 201)
+        Me.LblKndNyTlf.Name = "LblKndNyTlf"
+        Me.LblKndNyTlf.Size = New System.Drawing.Size(59, 18)
+        Me.LblKndNyTlf.TabIndex = 7
+        Me.LblKndNyTlf.Text = "Telefon:"
         '
-        'Label22
+        'LblKndNyAdr
         '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(6, 156)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(62, 18)
-        Me.Label22.TabIndex = 3
-        Me.Label22.Text = "Adresse:"
+        Me.LblKndNyAdr.AutoSize = True
+        Me.LblKndNyAdr.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndNyAdr.Location = New System.Drawing.Point(6, 156)
+        Me.LblKndNyAdr.Name = "LblKndNyAdr"
+        Me.LblKndNyAdr.Size = New System.Drawing.Size(62, 18)
+        Me.LblKndNyAdr.TabIndex = 3
+        Me.LblKndNyAdr.Text = "Adresse:"
         '
-        'Label23
+        'LblKndNyEN
         '
-        Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.Location = New System.Drawing.Point(6, 114)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(72, 18)
-        Me.Label23.TabIndex = 2
-        Me.Label23.Text = "Etternavn:"
+        Me.LblKndNyEN.AutoSize = True
+        Me.LblKndNyEN.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndNyEN.Location = New System.Drawing.Point(6, 114)
+        Me.LblKndNyEN.Name = "LblKndNyEN"
+        Me.LblKndNyEN.Size = New System.Drawing.Size(72, 18)
+        Me.LblKndNyEN.TabIndex = 2
+        Me.LblKndNyEN.Text = "Etternavn:"
         '
-        'Label24
+        'LblKndNyFN
         '
-        Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(6, 75)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(62, 18)
-        Me.Label24.TabIndex = 1
-        Me.Label24.Text = "Fornavn:"
+        Me.LblKndNyFN.AutoSize = True
+        Me.LblKndNyFN.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndNyFN.Location = New System.Drawing.Point(6, 75)
+        Me.LblKndNyFN.Name = "LblKndNyFN"
+        Me.LblKndNyFN.Size = New System.Drawing.Size(62, 18)
+        Me.LblKndNyFN.TabIndex = 1
+        Me.LblKndNyFN.Text = "Fornavn:"
         '
-        'Label25
+        'LblKndNyBID
         '
-        Me.Label25.AutoSize = True
-        Me.Label25.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(6, 36)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(69, 18)
-        Me.Label25.TabIndex = 0
-        Me.Label25.Text = "Bruker ID:"
+        Me.LblKndNyBID.AutoSize = True
+        Me.LblKndNyBID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndNyBID.Location = New System.Drawing.Point(6, 36)
+        Me.LblKndNyBID.Name = "LblKndNyBID"
+        Me.LblKndNyBID.Size = New System.Drawing.Size(69, 18)
+        Me.LblKndNyBID.TabIndex = 0
+        Me.LblKndNyBID.Text = "Bruker ID:"
         '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.LvKndSok)
         Me.GroupBox2.Controls.Add(Me.BtnKndSok)
         Me.GroupBox2.Controls.Add(Me.CmbKndSok)
-        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Controls.Add(Me.LblKndSokEtter)
         Me.GroupBox2.Controls.Add(Me.TxtKndSok)
-        Me.GroupBox2.Controls.Add(Me.Label2)
+        Me.GroupBox2.Controls.Add(Me.LblKndSokInput)
         Me.GroupBox2.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.Location = New System.Drawing.Point(616, 2)
         Me.GroupBox2.Name = "GroupBox2"
@@ -1063,15 +1075,15 @@ Partial Class Form1
         Me.CmbKndSok.Size = New System.Drawing.Size(121, 26)
         Me.CmbKndSok.TabIndex = 26
         '
-        'Label1
+        'LblKndSokEtter
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(6, 75)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(68, 18)
-        Me.Label1.TabIndex = 23
-        Me.Label1.Text = "Søk etter:"
+        Me.LblKndSokEtter.AutoSize = True
+        Me.LblKndSokEtter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndSokEtter.Location = New System.Drawing.Point(6, 75)
+        Me.LblKndSokEtter.Name = "LblKndSokEtter"
+        Me.LblKndSokEtter.Size = New System.Drawing.Size(68, 18)
+        Me.LblKndSokEtter.TabIndex = 23
+        Me.LblKndSokEtter.Text = "Søk etter:"
         '
         'TxtKndSok
         '
@@ -1081,15 +1093,15 @@ Partial Class Form1
         Me.TxtKndSok.Size = New System.Drawing.Size(191, 26)
         Me.TxtKndSok.TabIndex = 22
         '
-        'Label2
+        'LblKndSokInput
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(6, 36)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(64, 18)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Søkefelt:"
+        Me.LblKndSokInput.AutoSize = True
+        Me.LblKndSokInput.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblKndSokInput.Location = New System.Drawing.Point(6, 36)
+        Me.LblKndSokInput.Name = "LblKndSokInput"
+        Me.LblKndSokInput.Size = New System.Drawing.Size(64, 18)
+        Me.LblKndSokInput.TabIndex = 1
+        Me.LblKndSokInput.Text = "Søkefelt:"
         '
         'InventarTab
         '
@@ -1597,12 +1609,101 @@ Partial Class Form1
         '
         'StatTab
         '
+        Me.StatTab.Controls.Add(Me.GrbStaTilgjengelig)
         Me.StatTab.Location = New System.Drawing.Point(4, 32)
         Me.StatTab.Name = "StatTab"
         Me.StatTab.Size = New System.Drawing.Size(1416, 744)
         Me.StatTab.TabIndex = 6
         Me.StatTab.Text = "Statistikk"
         Me.StatTab.UseVisualStyleBackColor = True
+        '
+        'GrbStaTilgjengelig
+        '
+        Me.GrbStaTilgjengelig.Controls.Add(Me.ListView3)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.BtnStaSok)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.CmbStaTilgjengelig)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.LblStaSok)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.LblStaVelgAvd)
+        Me.GrbStaTilgjengelig.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrbStaTilgjengelig.Location = New System.Drawing.Point(3, 3)
+        Me.GrbStaTilgjengelig.Name = "GrbStaTilgjengelig"
+        Me.GrbStaTilgjengelig.Size = New System.Drawing.Size(396, 382)
+        Me.GrbStaTilgjengelig.TabIndex = 24
+        Me.GrbStaTilgjengelig.TabStop = False
+        Me.GrbStaTilgjengelig.Text = "Antall sykler tilgjengelig"
+        '
+        'ListView3
+        '
+        Me.ListView3.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader11, Me.ColumnHeader13, Me.ColumnHeader14, Me.ColumnHeader15})
+        Me.ListView3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListView3.Location = New System.Drawing.Point(9, 114)
+        Me.ListView3.Name = "ListView3"
+        Me.ListView3.Size = New System.Drawing.Size(332, 158)
+        Me.ListView3.TabIndex = 29
+        Me.ListView3.UseCompatibleStateImageBehavior = False
+        Me.ListView3.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader11
+        '
+        Me.ColumnHeader11.Text = "Bruk. ID"
+        '
+        'ColumnHeader13
+        '
+        Me.ColumnHeader13.Text = "Fornavn"
+        Me.ColumnHeader13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeader13.Width = 76
+        '
+        'ColumnHeader14
+        '
+        Me.ColumnHeader14.Text = "Etternavn"
+        Me.ColumnHeader14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeader14.Width = 85
+        '
+        'ColumnHeader15
+        '
+        Me.ColumnHeader15.Text = "Søkefelt"
+        Me.ColumnHeader15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeader15.Width = 104
+        '
+        'BtnStaSok
+        '
+        Me.BtnStaSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnStaSok.Location = New System.Drawing.Point(252, 73)
+        Me.BtnStaSok.Name = "BtnStaSok"
+        Me.BtnStaSok.Size = New System.Drawing.Size(62, 23)
+        Me.BtnStaSok.TabIndex = 28
+        Me.BtnStaSok.Text = "Søk!"
+        Me.BtnStaSok.UseVisualStyleBackColor = True
+        '
+        'CmbStaTilgjengelig
+        '
+        Me.CmbStaTilgjengelig.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CmbStaTilgjengelig.FormattingEnabled = True
+        Me.CmbStaTilgjengelig.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
+        Me.CmbStaTilgjengelig.Location = New System.Drawing.Point(110, 33)
+        Me.CmbStaTilgjengelig.Name = "CmbStaTilgjengelig"
+        Me.CmbStaTilgjengelig.Size = New System.Drawing.Size(121, 26)
+        Me.CmbStaTilgjengelig.TabIndex = 26
+        '
+        'LblStaSok
+        '
+        Me.LblStaSok.AutoSize = True
+        Me.LblStaSok.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaSok.Location = New System.Drawing.Point(6, 75)
+        Me.LblStaSok.Name = "LblStaSok"
+        Me.LblStaSok.Size = New System.Drawing.Size(68, 18)
+        Me.LblStaSok.TabIndex = 23
+        Me.LblStaSok.Text = "Søk etter:"
+        '
+        'LblStaVelgAvd
+        '
+        Me.LblStaVelgAvd.AutoSize = True
+        Me.LblStaVelgAvd.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaVelgAvd.Location = New System.Drawing.Point(6, 36)
+        Me.LblStaVelgAvd.Name = "LblStaVelgAvd"
+        Me.LblStaVelgAvd.Size = New System.Drawing.Size(95, 18)
+        Me.LblStaVelgAvd.TabIndex = 1
+        Me.LblStaVelgAvd.Text = "Velg avdeling:"
         '
         'AdminTab
         '
@@ -2820,6 +2921,9 @@ Partial Class Form1
         Me.GrpInvSok.ResumeLayout(False)
         Me.GrpInvRegistrerEndre.ResumeLayout(False)
         Me.GrpInvRegistrerEndre.PerformLayout()
+        Me.StatTab.ResumeLayout(False)
+        Me.GrbStaTilgjengelig.ResumeLayout(False)
+        Me.GrbStaTilgjengelig.PerformLayout()
         Me.AdminTab.ResumeLayout(False)
         Me.AdminMOTDGroup.ResumeLayout(False)
         Me.AdminMOTDGroup.PerformLayout()
@@ -2981,12 +3085,12 @@ Partial Class Form1
     Friend WithEvents TxtKndEndreAdr As TextBox
     Friend WithEvents TxtKndEndreEN As TextBox
     Friend WithEvents TxtKndEndreFN As TextBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label13 As Label
+    Friend WithEvents LblKndEnrEP As Label
+    Friend WithEvents LblKndEnrTlf As Label
+    Friend WithEvents LblKndEnrAdr As Label
+    Friend WithEvents LblKndEnrEN As Label
+    Friend WithEvents LblKndEnrFN As Label
+    Friend WithEvents LblKndEnrBID As Label
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents LvKndSok As ListView
     Friend WithEvents ColumnHeader1 As ColumnHeader
@@ -2999,13 +3103,13 @@ Partial Class Form1
     Friend WithEvents ColumnHeader8 As ColumnHeader
     Friend WithEvents BtnKndSok As Button
     Friend WithEvents CmbKndSok As ComboBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LblKndSokEtter As Label
     Friend WithEvents TxtKndSok As TextBox
-    Friend WithEvents Label2 As Label
+    Friend WithEvents LblKndSokInput As Label
     Friend WithEvents TxtKndEndreHF As TextBox
     Friend WithEvents TxtKndEndreRbt As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label3 As Label
+    Friend WithEvents LblKndEnrHF As Label
+    Friend WithEvents LblKndEnrRbt As Label
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents BtnKndRegistrer As Button
     Friend WithEvents Label14 As Label
@@ -3014,12 +3118,12 @@ Partial Class Form1
     Friend WithEvents TxtKndAdresse As TextBox
     Friend WithEvents TxtKndEtternavn As TextBox
     Friend WithEvents TxtKndFornavn As TextBox
-    Friend WithEvents Label16 As Label
-    Friend WithEvents Label18 As Label
-    Friend WithEvents Label22 As Label
-    Friend WithEvents Label23 As Label
-    Friend WithEvents Label24 As Label
-    Friend WithEvents Label25 As Label
+    Friend WithEvents LblKndNyEP As Label
+    Friend WithEvents LblKndNyTlf As Label
+    Friend WithEvents LblKndNyAdr As Label
+    Friend WithEvents LblKndNyEN As Label
+    Friend WithEvents LblKndNyFN As Label
+    Friend WithEvents LblKndNyBID As Label
     Friend WithEvents BtnInvTom As Button
     Friend WithEvents BtnInvTest As Button
     Friend WithEvents BtnInvAvbrytEndre As Button
@@ -3046,8 +3150,8 @@ Partial Class Form1
     Friend WithEvents LblUtleieKlokke As Label
     Friend WithEvents LblUtleieKlokkeTxt As Label
     Friend WithEvents DateKndFdato As DateTimePicker
-    Friend WithEvents LblKndFdato As Label
-    Friend WithEvents Label7 As Label
+    Friend WithEvents LblKndNyFdato As Label
+    Friend WithEvents LblKndEnrFdato As Label
     Friend WithEvents DateKndEndre As DateTimePicker
     Friend WithEvents LoginTab As TabPage
     Friend WithEvents BtnLoginAvslutt As Button
@@ -3098,4 +3202,14 @@ Partial Class Form1
     Friend WithEvents CboDBALandsdel As ComboBox
     Friend WithEvents TxtDBAAvdAdr As TextBox
     Friend WithEvents TxtDBAAvdNavn As TextBox
+    Friend WithEvents GrbStaTilgjengelig As GroupBox
+    Friend WithEvents ListView3 As ListView
+    Friend WithEvents ColumnHeader11 As ColumnHeader
+    Friend WithEvents ColumnHeader13 As ColumnHeader
+    Friend WithEvents ColumnHeader14 As ColumnHeader
+    Friend WithEvents ColumnHeader15 As ColumnHeader
+    Friend WithEvents BtnStaSok As Button
+    Friend WithEvents CmbStaTilgjengelig As ComboBox
+    Friend WithEvents LblStaSok As Label
+    Friend WithEvents LblStaVelgAvd As Label
 End Class
