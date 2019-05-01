@@ -32,7 +32,9 @@ Partial Class Form1
         Me.UtleieTab = New System.Windows.Forms.TabPage()
         Me.BtnUtlAbort = New System.Windows.Forms.Button()
         Me.GrpUtlRabatt = New System.Windows.Forms.GroupBox()
+        Me.LblUtlRabatt = New System.Windows.Forms.Label()
         Me.GrpUtleieSum = New System.Windows.Forms.GroupBox()
+        Me.LblUtleieSum = New System.Windows.Forms.Label()
         Me.GrpUtleieOrdre = New System.Windows.Forms.GroupBox()
         Me.LvUtleieOrdre = New System.Windows.Forms.ListView()
         Me.UtleieVareId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -340,8 +342,6 @@ Partial Class Form1
         Me.LblLoginBID = New System.Windows.Forms.Label()
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
-        Me.LblUtlRabatt = New System.Windows.Forms.Label()
-        Me.LblUtleieSum = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -490,6 +490,15 @@ Partial Class Form1
         Me.GrpUtlRabatt.TabStop = False
         Me.GrpUtlRabatt.Text = "Avgitt rabatt:"
         '
+        'LblUtlRabatt
+        '
+        Me.LblUtlRabatt.AutoSize = True
+        Me.LblUtlRabatt.Location = New System.Drawing.Point(39, 35)
+        Me.LblUtlRabatt.Name = "LblUtlRabatt"
+        Me.LblUtlRabatt.Size = New System.Drawing.Size(105, 23)
+        Me.LblUtlRabatt.TabIndex = 0
+        Me.LblUtlRabatt.Text = "-Rabatt Text-"
+        '
         'GrpUtleieSum
         '
         Me.GrpUtleieSum.Controls.Add(Me.LblUtleieSum)
@@ -500,6 +509,15 @@ Partial Class Form1
         Me.GrpUtleieSum.TabIndex = 7
         Me.GrpUtleieSum.TabStop = False
         Me.GrpUtleieSum.Text = "Ordresum:"
+        '
+        'LblUtleieSum
+        '
+        Me.LblUtleieSum.AutoSize = True
+        Me.LblUtleieSum.Location = New System.Drawing.Point(35, 35)
+        Me.LblUtleieSum.Name = "LblUtleieSum"
+        Me.LblUtleieSum.Size = New System.Drawing.Size(81, 23)
+        Me.LblUtleieSum.TabIndex = 0
+        Me.LblUtleieSum.Text = "-Sum Txt-"
         '
         'GrpUtleieOrdre
         '
@@ -3453,24 +3471,6 @@ Partial Class Form1
         Me.PicLoginLogo.Size = New System.Drawing.Size(516, 502)
         Me.PicLoginLogo.TabIndex = 0
         Me.PicLoginLogo.TabStop = False
-        '
-        'LblUtlRabatt
-        '
-        Me.LblUtlRabatt.AutoSize = True
-        Me.LblUtlRabatt.Location = New System.Drawing.Point(39, 35)
-        Me.LblUtlRabatt.Name = "LblUtlRabatt"
-        Me.LblUtlRabatt.Size = New System.Drawing.Size(105, 23)
-        Me.LblUtlRabatt.TabIndex = 0
-        Me.LblUtlRabatt.Text = "-Rabatt Text-"
-        '
-        'LblUtleieSum
-        '
-        Me.LblUtleieSum.AutoSize = True
-        Me.LblUtleieSum.Location = New System.Drawing.Point(35, 35)
-        Me.LblUtleieSum.Name = "LblUtleieSum"
-        Me.LblUtleieSum.Size = New System.Drawing.Size(81, 23)
-        Me.LblUtleieSum.TabIndex = 0
-        Me.LblUtleieSum.Text = "-Sum Txt-"
         '
         'Form1
         '
