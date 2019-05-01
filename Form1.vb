@@ -598,9 +598,9 @@ Public Class Form1
         CboInvSavnet.SelectedIndex = -1
     End Sub
 
-    Private Sub InvRegSykkelveske(ID)
-        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr VALUES " _
-            & "(sykkel_utstyr_id, " & ID & ", 2)"
+    Private Sub InvRegSykkelveske(SykkelID)
+        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr(sykkel_id, utstyr_kat_id) VALUES" _
+            & "('" & SykkelID & "', 2)"
         Try
             DBConnect()
             Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
@@ -611,9 +611,9 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub InvRegBarnesete(ID)
-        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr VALUES " _
-            & "(sykkel_utstyr_id, " & ID & ", 3)"
+    Private Sub InvRegBarnesete(SykkelID)
+        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr(sykkel_id, utstyr_kat_id) VALUES" _
+            & "('" & SykkelID & "', 3)"
         Try
             DBConnect()
             Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
@@ -624,9 +624,9 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub InvRegBarnehenger(ID)
-        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr VALUES " _
-            & "(sykkel_utstyr_id, " & ID & ", 4)"
+    Private Sub InvRegBarnehenger(SykkelID)
+        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr(sykkel_id, utstyr_kat_id) VALUES" _
+            & "('" & SykkelID & "', 4)"
         Try
             DBConnect()
             Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
@@ -637,9 +637,9 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub invreglastehenger(ID)
-        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr VALUES " _
-            & "(sykkel_utstyr_id, " & ID & ", 5)"
+    Private Sub invreglastehenger(SykkelID)
+        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr(sykkel_id, utstyr_kat_id) VALUES" _
+            & "('" & SykkelID & "', 5)"
         Try
             DBConnect()
             Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
@@ -650,9 +650,8 @@ Public Class Form1
         End Try
     End Sub
 
-    'Prosedyre for å hente forhandlerID basert på forhandlerNavn i database.
-    'Dette i forbindelse med registrering og endring av fremmednøkler,
-    'og søk og innhenting av produkt på fremmednøkler.
+    'Prosedyrene under, InvHent__ID og InvHent__Navn er for å hente ID basert på Navn, og motsatt, i database.
+    'Dette i forbindelse med registrering og endring av fremmednøkler.
     Private Function InvHentForhandlerID(forhandlernavn)
         Dim InvForhandlerID As String = ""
         Dim InvForhandlerIDSporring As String = "SELECT forhandler_id FROM forhandler WHERE forhandler_navn='" & forhandlernavn & "';"
@@ -973,16 +972,16 @@ Public Class Form1
                             InvRegBarnehenger(InvSykkelID)
                         End If
                         If ChkInvBarnesete.Checked = True Then
-                            InvRegBarnehenger(InvSykkelID)
+                            InvRegBarnesete(InvSykkelID)
                         End If
                         If ChkInvLastehenger.Checked = True Then
-                            InvRegBarnehenger(InvSykkelID)
+                            invreglastehenger(InvSykkelID)
                         End If
                         If ChkInvSykkelveske.Checked = True Then
-                            InvRegBarnehenger(InvSykkelID)
+                            InvRegSykkelveske(InvSykkelID)
                         End If
 
-                        MsgBox("Registrering vellykket")
+                        MsgBox("Registrering av sykkel vellykket")
                         InvTomFelt()
                     Catch ex As MySqlException
                         MsgBox("Feil ved registrering av sykkel:" & vbNewLine & ex.Message)
@@ -1050,26 +1049,64 @@ Public Class Form1
         Dim invSqlLeser As MySqlDataReader
 
         If CboInvKategori.SelectedItem = "Sykkel" Then
-            Dim SpInit As String = "Select sykler.sykkel_id, sykler.sykkel_navn, sykler.sykkel_modell, " _
-           & "sykkel_typer.kategori, sykler.sykkel_ramme, sykler.girsystem, sykler.hjul_str, " _
-           & "sykler.sykkel_pris, avdeling.avd_navn, forhandler.forhandler_navn, sykler.sykkel_status, " _
-           & "sykler.skadet, sykler.savnet From sykler Left Join avdeling ON " _
-           & "sykler.avdeling_id=avdeling.avdeling_id Left Join forhandler on " _
-           & "sykler.forhandler_id=forhandler.forhandler_id Left Join sykkel_typer on " _
-           & "sykler.type_id=sykkel_typer.type_id where "
-            Dim SpSykkelNavn As String = "sykkel_navn Like '%" & TxtInvProduktnavn.Text.Trim & "%'"
-            Dim SpsykkelModell As String = "kategori LIKE '%" & CboInvSubkategori.SelectedItem & "%'"
-            Dim SpTypeid As String = "sykkel_modell LIKE '%" & TxtInvVareNummer.Text.Trim & "%'"
-            Dim SpSykkelRamme As String = "sykkel_ramme LIKE '%" & TxtInvRamme.Text.Trim & "%'"
-            Dim SpGirsystem As String = "girsystem LIKE '%" & TxtInvGirsystem.Text.Trim & "%'"
-            Dim SpHjulstorrelse As String = "hjul_str LIKE '%" & TxtInvHjulstorrelse.Text.Trim & "%'"
-            Dim SpSykkelPris As String = "sykkel_pris LIKE '%" & TxtInvInnkjopspris.Text.Trim & "%'"
-            Dim SpAvdeling As String = "avd_navn LIKE '%" & CboInvAvdeling.SelectedItem & "%'"
-            Dim SpForhandlerID As String = "forhandler_navn LIKE '%" & CboInvForhandler.SelectedItem & "%'"
-            Dim SpSykkelStatus As String = "sykkel_status LIKE '%" & CboInvStatus.SelectedItem & "%'"
+
+            Dim InvSpInit As String = "SELECT s.sykkel_id, s.sykkel_navn, s.sykkel_modell, " _
+                & "sykkel_typer.kategori, s.sykkel_ramme, s.girsystem, s.hjul_str, " _
+                & "s.sykkel_pris, avdeling.avd_navn, forhandler.forhandler_navn, s.sykkel_status, " _
+                & "s.skadet, s.savnet FROM sykler AS s LEFT JOIN avdeling ON " _
+                & "s.avdeling_id=avdeling.avdeling_id LEFT JOIN forhandler ON " _
+                & "s.forhandler_id=forhandler.forhandler_id LEFT JOIN sykkel_typer ON " _
+                & "s.type_id=sykkel_typer.type_id "
+            Dim InvSpUtstyrJoin As String = "inner Join sykkel_utstyr as su on s.sykkel_id=su.sykkel_id " _
+                & "inner join utstyr_kategori as uk on su.utstyr_kat_id=uk.utstyr_kat_id "
+            Dim InvSpSykkelNavn As String = "sykkel_navn Like '%" & TxtInvProduktnavn.Text.Trim & "%'"
+            Dim InvSpsykkelModell As String = "kategori LIKE '%" & CboInvSubkategori.SelectedItem & "%'"
+            Dim InvSpTypeid As String = "sykkel_modell LIKE '%" & TxtInvVareNummer.Text.Trim & "%'"
+            Dim InvSpSykkelRamme As String = "sykkel_ramme LIKE '%" & TxtInvRamme.Text.Trim & "%'"
+            Dim InvSpGirsystem As String = "girsystem LIKE '%" & TxtInvGirsystem.Text.Trim & "%'"
+            Dim InvSpHjulstorrelse As String = "hjul_str LIKE '%" & TxtInvHjulstorrelse.Text.Trim & "%'"
+            Dim InvSpSykkelPris As String = "sykkel_pris LIKE '%" & TxtInvInnkjopspris.Text.Trim & "%'"
+            Dim InvSpAvdeling As String = "avd_navn LIKE '%" & CboInvAvdeling.SelectedItem & "%'"
+            Dim InvSpForhandlerID As String = "forhandler_navn LIKE '%" & CboInvForhandler.SelectedItem & "%'"
+            Dim InvSpSykkelStatus As String = "sykkel_status LIKE '%" & CboInvStatus.SelectedItem & "%'"
+            Dim InvSpSykkelUtstyr As String = ""
+            Dim InvSpUtstyrAntall As Integer = -1
+
+            If ChkInvSykkelveske.Checked = True Or ChkInvBarnesete.Checked = True _
+                Or ChkInvBarneHenger.Checked = True Or ChkInvLastehenger.Checked = True Then
+                InvSpInit = InvSpInit + InvSpUtstyrJoin
+                If ChkInvSykkelveske.Checked = True Then
+                    InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=2"
+                    InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+                End If
+                If ChkInvBarnesete.Checked = True Then
+                    If InvSpUtstyrAntall = -1 Then
+                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=3"
+                    Else
+                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " OR su.utstyr_kat_id=3"
+                    End If
+                    InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+                End If
+                If ChkInvBarneHenger.Checked = True Then
+                    If InvSpUtstyrAntall = -1 Then
+                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=4"
+                    Else
+                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " OR su.utstyr_kat_id=4"
+                    End If
+                    InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+                End If
+                If ChkInvLastehenger.Checked = True Then
+                    If InvSpUtstyrAntall = -1 Then
+                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=5"
+                    Else
+                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " OR su.utstyr_kat_id=5"
+                    End If
+                    InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+                End If
+                InvSpSykkelUtstyr = InvSpSykkelUtstyr & ")" & " GROUP by s.sykkel_id HAVING COUNT(su.sykkel_id) > " & CStr(InvSpUtstyrAntall)
+            End If
 
             'Unngår NULL verdi fra combobox skadet og savnet og dermed søk uten resultat
-            'selectedindex presatt på skaded og savnet vil også omgå dette (?)
             If CboInvSkadet.SelectedIndex = 0 Or CboInvSkadet.SelectedIndex = 1 Then
                 InvSpSkadet = "skadet LIKE '%" & CboInvSkadet.SelectedIndex & "%'"
             Else
@@ -1083,10 +1120,11 @@ Public Class Form1
             End If
 
             Dim InvSokSporring As String
-            InvSokSporring = SpInit & SpSykkelNavn & " AND " & SpsykkelModell & " AND " &
-                SpTypeid & " AND " & SpSykkelRamme & " AND " & SpGirsystem & " AND " &
-                SpHjulstorrelse & " AND " & SpSykkelPris & " AND " & SpAvdeling & " AND " &
-                SpForhandlerID & " AND " & SpSykkelStatus & " AND " & InvSpSkadet & " AND " & InvSpSavnet & ";"
+            InvSokSporring = InvSpInit & " WHERE " & InvSpSykkelNavn & " AND " & InvSpsykkelModell & " AND " &
+                InvSpTypeid & " AND " & InvSpSykkelRamme & " AND " & InvSpGirsystem & " AND " &
+                InvSpHjulstorrelse & " AND " & InvSpSykkelPris & " AND " & InvSpAvdeling & " AND " &
+                InvSpForhandlerID & " AND " & InvSpSykkelStatus & " AND " & InvSpSkadet & " AND " &
+                InvSpSavnet & InvSpSykkelUtstyr & ";"
 
             Dim InvResultatArray(12) As String
             Dim InvResultatObjekt As ListViewItem
@@ -1122,7 +1160,7 @@ Public Class Form1
 
         ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
 
-            Dim SpInit As String = "SELECT utstyr.utstyr_id, utstyr.utstyr_navn, utstyr_kategori.utstyr_kat, " _
+            Dim InvSpInit As String = "SELECT utstyr.utstyr_id, utstyr.utstyr_navn, utstyr_kategori.utstyr_kat, " _
                 & "utstyr.varenummer, utstyr.utstyr_pris, forhandler.forhandler_navn " _
                 & "FROM utstyr LEFT JOIN forhandler ON utstyr.forhandler_id=forhandler.forhandler_id " _
                 & "LEFT JOIN utstyr_kategori ON utstyr.utstyr_kat_id=utstyr_kategori.utstyr_kat_id WHERE "
@@ -1134,10 +1172,9 @@ Public Class Form1
             Dim InvSpUtstyrkategori As String = "utstyr_kat LIKE '%" & CboInvSubkategori.SelectedItem & "%'"
 
             'Unngår NULL verdi fra combobox skadet og savnet og dermed søk uten resultat
-            'selectedindex presatt på skaded og savnet vil også omgå dette (?)
 
             Dim InvSokSporring As String
-            InvSokSporring = SpInit & InvSpUtstyrNavn & " AND " & InvSpUtstyrkategori & " AND " _
+            InvSokSporring = InvSpInit & InvSpUtstyrNavn & " AND " & InvSpUtstyrkategori & " AND " _
                 & InvSpVarenummer & " AND " & InvSpUtstyrPris & " AND " & InvSpForhandlerNavn & ";"
 
             Dim InvResultatArray(5) As String
