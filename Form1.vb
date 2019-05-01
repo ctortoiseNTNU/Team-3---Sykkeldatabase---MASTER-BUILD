@@ -18,6 +18,7 @@ Public Class Form1
 
 #End Region
 
+
 #Region "GlobaleFunksjonerOgProsedyrer"
     'Her plasseres globale funksjoner og prosdyrer som gjenbrukes over programmet. De er uten navnekonvensjon
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
@@ -86,6 +87,7 @@ Public Class Form1
 
 #End Region
 
+
 #Region "Form Load og Login"
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -96,6 +98,7 @@ Public Class Form1
 
 
 #End Region
+
 
 #Region "TabSkifting"
     'Denne regionen er brukt til eventkoding av det som skjer da du skifter tab.
@@ -167,6 +170,7 @@ Public Class Form1
 
 
 #End Region
+
 
 #Region "StartTab"
     'Her plasseres kode som er relevant til Start Tab.
@@ -300,8 +304,6 @@ Public Class Form1
     'Bedre måte å gjøre dette på:    '
     'lage en sub som utfører de repeterende oppgavene.
 
-
-
     '[Morten] Har laget noen korte funksjoner for inputsjekk som kan brukes for de forskjellige textbokser.
     'Funksjonene tar to variabler; keypresseventargs, og en string bestående av ekstra tillatte tegn.
     'Mulig dette ikke er en optimal løsning så kom gjerne med forslag :) (om noen noengang leser dette)
@@ -387,9 +389,9 @@ Public Class Form1
 
 
     'LEGG INN NYE KUNDER
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles BtnKndRegistrer.Click
+    Private Sub BtnKndRegistrer_Click(sender As Object, e As EventArgs) Handles BtnKndRegistrer.Click
 
-        Dim KnDFdato As Date = DateKndFdato.Value
+        Dim KnDFdato As Date = DateKndReg.Value
         KndFornavn = TxtKndFornavn.Text
         KndEtternavn = TxtKndEtternavn.Text
         KndAdresse = TxtKndAdresse.Text
@@ -418,8 +420,6 @@ Public Class Form1
             MsgBox("Vennligst fyll inn epost")
             Exit Sub
         End If
-        '                & KnDFdato.Date.ToString("yyyy-mm-dd") & "', '" & KndFornavn & "', '" & KndEtternavn _
-
 
         Try
             DBConnect()
@@ -428,7 +428,6 @@ Public Class Form1
                 & KnDFdato.ToString("yyyy-MM-dd") & "', '" & KndFornavn & "', '" & KndEtternavn _
                 & "', '" & KndAdresse & "', " & KndTlf & ", '" & KndEpost & "', 1, 0)", tilkobling)
             sporring.ExecuteNonQuery()
-
             DBDisconnect()
             MsgBox("Innlegging var vellykket")
         Catch feilmelding As MySqlException
@@ -442,7 +441,6 @@ Public Class Form1
     Dim KndFornavnSelected
     Dim KndEtternavnSelected
     Dim KndAdresseSelected
-
     Dim KndTlfSelected
     Dim KndEpostSelected
     Dim KndRabattSelected
@@ -468,21 +466,19 @@ Public Class Form1
                 KndFornavnSelected = tempVarSporring("kunde_fornavn")
                 KndEtternavnSelected = tempVarSporring("kunde_etternavn")
                 KndAdresseSelected = tempVarSporring("adresse")
-
                 KndTlfSelected = tempVarSporring("telefon")
                 KndEpostSelected = tempVarSporring("epost")
                 KndRabattSelected = tempVarSporring("rabatt_id")
                 KndHandletSelected = tempVarSporring("handlet_for")
                 KndFdatoSelected = tempVarSporring("kunde_fdato")
-
             End While
+
             tempVarSporring.Close()
             DBDisconnect()
 
             TxtKndEndreFN.Text = KndFornavnSelected
             TxtKndEndreEN.Text = KndEtternavnSelected
             TxtKndEndreAdr.Text = KndAdresseSelected
-
             TxtKndEndreTlf.Text = KndTlfSelected
             TxtKndEndreEP.Text = KndEpostSelected
             TxtKndEndreRbt.Text = KndRabattSelected
@@ -491,20 +487,19 @@ Public Class Form1
 
         Catch feilmelding As MySqlException
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
-
         End Try
+
         If KndFornavnSelected <> "" Then
             BtnKndEndre.Enabled = True
         Else
             MsgBox("Beklager, ingen treff på det nummeret")
             BtnKndEndre.Enabled = False
         End If
-    End Sub
 
+    End Sub
 
     Dim KndSokInput
     Dim KndSokSelectedTag
-
 
     Private Sub BtnKndSok_Click(sender As Object, e As EventArgs) Handles BtnKndSok.Click
         KndSokInput = TxtKndSok.Text
@@ -519,14 +514,14 @@ Public Class Form1
             Exit Sub
         End If
 
-        Dim KndSQLKolonner = New String() {"kunde_id", "kunde_fornavn", "kunde_etternavn", "adresse", "telefon", "epost", "rabatt_id", "handlet_for"}
+        Dim KndSQLKolonner = New String() {"kunde_id", "kunde_fornavn", "kunde_etternavn",
+            "adresse", "telefon", "epost", "rabatt_id", "handlet_for"}
         KndSokSelectedTag = KndSQLKolonner(KndTempVar)
-
-
 
         Try
             DBConnect()
-            Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE " & KndSokSelectedTag & " LIKE '%" & KndSokInput & "%'", tilkobling)
+            Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE " & KndSokSelectedTag _
+                & " LIKE '%" & KndSokInput & "%'", tilkobling)
 
 
             Dim KndSearchAdapter As New MySqlDataAdapter
@@ -537,7 +532,8 @@ Public Class Form1
             DBDisconnect()
 
             Dim KundeRow As DataRow
-            Dim Kunde_ID, Kunde_Fornavn, Kunde_Etternavn, Kunde_Adresse, Kunde_Tlf, Kunde_Epost, Kunde_rabatt, Kunde_HF, KundeSok As String
+            Dim Kunde_ID, Kunde_Fornavn, Kunde_Etternavn, Kunde_Adresse, Kunde_Tlf, Kunde_Epost,
+                Kunde_rabatt, Kunde_HF, KundeSok As String
             LvKndSok.Items.Clear()
             For Each KundeRow In KndSearchTable.Rows
                 Kunde_ID = KundeRow("kunde_id")
@@ -551,7 +547,8 @@ Public Class Form1
                 Kunde_HF = KundeRow("handlet_for")
 
                 KundeSok = KundeRow(KndSokSelectedTag)
-                LvKndSok.Items.Add(New ListViewItem({Kunde_ID, Kunde_Fornavn, Kunde_Etternavn, Kunde_Adresse, Kunde_Tlf, Kunde_Epost, Kunde_rabatt, Kunde_HF, KundeSok}))
+                LvKndSok.Items.Add(New ListViewItem({Kunde_ID, Kunde_Fornavn, Kunde_Etternavn,
+                    Kunde_Adresse, Kunde_Tlf, Kunde_Epost, Kunde_rabatt, Kunde_HF, KundeSok}))
             Next
 
 
@@ -570,11 +567,9 @@ Public Class Form1
 
     End Sub
 
-
     Private Sub BtnKndEndre_Click(sender As Object, e As EventArgs) Handles BtnKndEndre.Click
-
+        Dim KnDFdato As Date = DateKndEndre.Value
         Dim selectedKundeId = TxtKndKundeID.Text
-
         Dim KndChangeValueFN = TxtKndEndreFN.Text
         Dim KndChangeValueEN = TxtKndEndreEN.Text
         Dim KndChangeValueAdr = TxtKndEndreAdr.Text
@@ -583,12 +578,10 @@ Public Class Form1
         Dim KndChangeValueRbt = TxtKndEndreRbt.Text
         Dim KndChangeValueHF = TxtKndEndreHF.Text
 
-
         If selectedKundeId = "" Then
             MsgBox("Vennligst fyll inn et gyldig ID-nummer")
             Exit Sub
         End If
-
         If KndChangeValueFN = "" Then
             MsgBox("Vennligst fyll inn et fornavn")
             Exit Sub
@@ -612,29 +605,24 @@ Public Class Form1
         If KndChangeValueRbt = "" Then
             KndChangeValueRbt = "1"
         End If
-
         If KndChangeValueHF = "" Then
             KndChangeValueHF = "0"
         End If
 
-
-
         Try
             DBConnect()
-            Dim sporring As New MySqlCommand("UPDATE kunder SET kunde_fornavn = '" & KndChangeValueFN & "', kunde_etternavn = '" & KndChangeValueEN & "', adresse = '" & KndChangeValueAdr & "', telefon = " & KndChangeValueTlf & ", epost = '" & KndChangeValueEP & "', rabatt_id = " & KndChangeValueRbt & ", handlet_for = " & KndChangeValueHF & " WHERE kunde_id = " & selectedKundeId, tilkobling)
+            Dim sporring As New MySqlCommand("UPDATE kunder SET kunde_fdato='" & KnDFdato.ToString("yyyy-MM-dd") _
+                & " , kunde_fornavn = '" & KndChangeValueFN & "', kunde_etternavn = '" & KndChangeValueEN _
+                & "', adresse = '" & KndChangeValueAdr & "', telefon = " & KndChangeValueTlf & ", epost = '" _
+                & KndChangeValueEP & "', rabatt_id = " & KndChangeValueRbt & ", handlet_for = " & KndChangeValueHF _
+                & " WHERE kunde_id = " & selectedKundeId, tilkobling)
             sporring.ExecuteNonQuery()
-
             DBDisconnect()
-
             MsgBox("Endring vellykket")
-
-
-
         Catch feilmelding As MySqlException
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
 
         End Try
-
 
     End Sub
 

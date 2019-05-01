@@ -117,7 +117,7 @@ Partial Class Form1
         Me.LblKndEnrFN = New System.Windows.Forms.Label()
         Me.LblKndEnrBID = New System.Windows.Forms.Label()
         Me.GrbKndNyKunde = New System.Windows.Forms.GroupBox()
-        Me.DateKndFdato = New System.Windows.Forms.DateTimePicker()
+        Me.DateKndReg = New System.Windows.Forms.DateTimePicker()
         Me.LblKndNyFdato = New System.Windows.Forms.Label()
         Me.BtnKndRegistrer = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -1269,7 +1269,7 @@ Partial Class Form1
         '
         'GrbKndNyKunde
         '
-        Me.GrbKndNyKunde.Controls.Add(Me.DateKndFdato)
+        Me.GrbKndNyKunde.Controls.Add(Me.DateKndReg)
         Me.GrbKndNyKunde.Controls.Add(Me.LblKndNyFdato)
         Me.GrbKndNyKunde.Controls.Add(Me.BtnKndRegistrer)
         Me.GrbKndNyKunde.Controls.Add(Me.Label14)
@@ -1292,13 +1292,13 @@ Partial Class Form1
         Me.GrbKndNyKunde.TabStop = False
         Me.GrbKndNyKunde.Text = "Ny Kunde"
         '
-        'DateKndFdato
+        'DateKndReg
         '
-        Me.DateKndFdato.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateKndFdato.Location = New System.Drawing.Point(123, 279)
-        Me.DateKndFdato.Name = "DateKndFdato"
-        Me.DateKndFdato.Size = New System.Drawing.Size(172, 22)
-        Me.DateKndFdato.TabIndex = 26
+        Me.DateKndReg.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateKndReg.Location = New System.Drawing.Point(123, 279)
+        Me.DateKndReg.Name = "DateKndReg"
+        Me.DateKndReg.Size = New System.Drawing.Size(172, 22)
+        Me.DateKndReg.TabIndex = 26
         '
         'LblKndNyFdato
         '
@@ -3739,7 +3739,7 @@ Partial Class Form1
     Friend WithEvents BtnUtleieNyKunde As Button
     Friend WithEvents LblUtleieKlokke As Label
     Friend WithEvents LblUtleieKlokkeTxt As Label
-    Friend WithEvents DateKndFdato As DateTimePicker
+    Friend WithEvents DateKndReg As DateTimePicker
     Friend WithEvents LblKndNyFdato As Label
     Friend WithEvents LblKndEnrFdato As Label
     Friend WithEvents DateKndEndre As DateTimePicker
