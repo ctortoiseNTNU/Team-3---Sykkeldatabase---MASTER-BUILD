@@ -30,8 +30,30 @@ Partial Class Form1
         Me.StartVelkommenLabel = New System.Windows.Forms.Label()
         Me.StartLogo = New System.Windows.Forms.PictureBox()
         Me.UtleieTab = New System.Windows.Forms.TabPage()
+        Me.GrpUtlRabatt = New System.Windows.Forms.GroupBox()
+        Me.GrpUtleieSum = New System.Windows.Forms.GroupBox()
+        Me.GrpUtleieOrdre = New System.Windows.Forms.GroupBox()
+        Me.LvUtleieOrdre = New System.Windows.Forms.ListView()
+        Me.UtleieVareId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtleieVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtleieRabatt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtleiePris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtleieDag = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtleieUke = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
+        Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
+        Me.BtnUtlAddVare = New System.Windows.Forms.Button()
+        Me.LvUtlVarer = New System.Windows.Forms.ListView()
+        Me.UtlVare = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtlVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtleieTPris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtlDPris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtlUPris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LblUtlSubKat = New System.Windows.Forms.Label()
+        Me.CboUtlKat = New System.Windows.Forms.ComboBox()
+        Me.LblUtleieKategori = New System.Windows.Forms.Label()
         Me.GrpUtleieKundeInfo = New System.Windows.Forms.GroupBox()
-        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.LvUtleieKunde = New System.Windows.Forms.ListView()
         Me.KundeID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Fornavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Etternavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -41,15 +63,15 @@ Partial Class Form1
         Me.GrpUtleieKunde = New System.Windows.Forms.GroupBox()
         Me.BtnUtleieNyKunde = New System.Windows.Forms.Button()
         Me.BtnUtleieKundeSok = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TxtUtleieKundeSok = New System.Windows.Forms.TextBox()
         Me.LblUtleieKundesok = New System.Windows.Forms.Label()
         Me.GrpUtleieSelger = New System.Windows.Forms.GroupBox()
         Me.LblUtleieSelger = New System.Windows.Forms.Label()
         Me.GrpUtleieAvd = New System.Windows.Forms.GroupBox()
+        Me.CboUtlAvd = New System.Windows.Forms.ComboBox()
         Me.LblUtleieKlokke = New System.Windows.Forms.Label()
         Me.LblUtleieKlokkeTxt = New System.Windows.Forms.Label()
         Me.LblUtleieDatoTxt = New System.Windows.Forms.Label()
-        Me.LblUtleieAvdTxt = New System.Windows.Forms.Label()
         Me.LblUtleieDato = New System.Windows.Forms.Label()
         Me.LblUtleieAvd = New System.Windows.Forms.Label()
         Me.KDTab = New System.Windows.Forms.TabPage()
@@ -122,6 +144,10 @@ Partial Class Form1
         Me.Savnet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GrpInvSok = New System.Windows.Forms.GroupBox()
         Me.GrpInvRegistrerEndre = New System.Windows.Forms.GroupBox()
+        Me.ChkInvLastehenger = New System.Windows.Forms.CheckBox()
+        Me.ChkInvBarneHenger = New System.Windows.Forms.CheckBox()
+        Me.ChkInvBarnesete = New System.Windows.Forms.CheckBox()
+        Me.ChkInvSykkelveske = New System.Windows.Forms.CheckBox()
         Me.BtnInvTest = New System.Windows.Forms.Button()
         Me.BtnInvAvbrytEndre = New System.Windows.Forms.Button()
         Me.BtnInvTom = New System.Windows.Forms.Button()
@@ -296,14 +322,29 @@ Partial Class Form1
         Me.LblLoginBID = New System.Windows.Forms.Label()
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
-        Me.ChkInvSykkelveske = New System.Windows.Forms.CheckBox()
-        Me.ChkInvBarnesete = New System.Windows.Forms.CheckBox()
-        Me.ChkInvBarneHenger = New System.Windows.Forms.CheckBox()
-        Me.ChkInvLastehenger = New System.Windows.Forms.CheckBox()
+        Me.CboUtlSubkat = New System.Windows.Forms.ComboBox()
+        Me.UtlRabatt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LblUtsRabatt = New System.Windows.Forms.Label()
+        Me.CboUtlRabatt = New System.Windows.Forms.ComboBox()
+        Me.BtnUtlAbort = New System.Windows.Forms.Button()
+        Me.DtpUtleieFra = New System.Windows.Forms.DateTimePicker()
+        Me.DtpUtleieTil = New System.Windows.Forms.DateTimePicker()
+        Me.LblUtleieFra = New System.Windows.Forms.Label()
+        Me.LblUtleieTil = New System.Windows.Forms.Label()
+        Me.UtlTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LblUtleieAnt = New System.Windows.Forms.Label()
+        Me.RdbUtlTimer = New System.Windows.Forms.RadioButton()
+        Me.RdbUtlDager = New System.Windows.Forms.RadioButton()
+        Me.RdbUtlUke = New System.Windows.Forms.RadioButton()
+        Me.TxtUtlAntall = New System.Windows.Forms.TextBox()
+        Me.LblUtlInfo = New System.Windows.Forms.Label()
+        Me.UtlAntall = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.UtleieTab.SuspendLayout()
+        Me.GrpUtleieOrdre.SuspendLayout()
+        Me.GrpUtleieProdukter.SuspendLayout()
         Me.GrpUtleieKundeInfo.SuspendLayout()
         Me.GrpUtleieKunde.SuspendLayout()
         Me.GrpUtleieSelger.SuspendLayout()
@@ -403,7 +444,14 @@ Partial Class Form1
         '
         'UtleieTab
         '
+        Me.UtleieTab.BackColor = System.Drawing.Color.Transparent
         Me.UtleieTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UtleieTab.Controls.Add(Me.BtnUtlAbort)
+        Me.UtleieTab.Controls.Add(Me.GrpUtlRabatt)
+        Me.UtleieTab.Controls.Add(Me.GrpUtleieSum)
+        Me.UtleieTab.Controls.Add(Me.GrpUtleieOrdre)
+        Me.UtleieTab.Controls.Add(Me.BtnUtleieFullfør)
+        Me.UtleieTab.Controls.Add(Me.GrpUtleieProdukter)
         Me.UtleieTab.Controls.Add(Me.GrpUtleieKundeInfo)
         Me.UtleieTab.Controls.Add(Me.GrpUtleieKunde)
         Me.UtleieTab.Controls.Add(Me.GrpUtleieSelger)
@@ -414,70 +462,260 @@ Partial Class Form1
         Me.UtleieTab.Size = New System.Drawing.Size(1416, 744)
         Me.UtleieTab.TabIndex = 1
         Me.UtleieTab.Text = "Utleie"
-        Me.UtleieTab.UseVisualStyleBackColor = True
+        '
+        'GrpUtlRabatt
+        '
+        Me.GrpUtlRabatt.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
+        Me.GrpUtlRabatt.Location = New System.Drawing.Point(740, 539)
+        Me.GrpUtlRabatt.Name = "GrpUtlRabatt"
+        Me.GrpUtlRabatt.Size = New System.Drawing.Size(190, 85)
+        Me.GrpUtlRabatt.TabIndex = 8
+        Me.GrpUtlRabatt.TabStop = False
+        Me.GrpUtlRabatt.Text = "Avgitt rabatt:"
+        '
+        'GrpUtleieSum
+        '
+        Me.GrpUtleieSum.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
+        Me.GrpUtleieSum.Location = New System.Drawing.Point(932, 539)
+        Me.GrpUtleieSum.Name = "GrpUtleieSum"
+        Me.GrpUtleieSum.Size = New System.Drawing.Size(190, 85)
+        Me.GrpUtleieSum.TabIndex = 7
+        Me.GrpUtleieSum.TabStop = False
+        Me.GrpUtleieSum.Text = "Ordresum:"
+        '
+        'GrpUtleieOrdre
+        '
+        Me.GrpUtleieOrdre.Controls.Add(Me.LvUtleieOrdre)
+        Me.GrpUtleieOrdre.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
+        Me.GrpUtleieOrdre.Location = New System.Drawing.Point(617, 146)
+        Me.GrpUtleieOrdre.Name = "GrpUtleieOrdre"
+        Me.GrpUtleieOrdre.Size = New System.Drawing.Size(704, 387)
+        Me.GrpUtleieOrdre.TabIndex = 6
+        Me.GrpUtleieOrdre.TabStop = False
+        Me.GrpUtleieOrdre.Text = "Utleiedetaljer:"
+        '
+        'LvUtleieOrdre
+        '
+        Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.UtleieVareId, Me.UtleieVareNavn, Me.UtleieRabatt, Me.UtleiePris, Me.UtleieDag, Me.UtleieUke, Me.UtlTime})
+        Me.LvUtleieOrdre.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvUtleieOrdre.Location = New System.Drawing.Point(6, 30)
+        Me.LvUtleieOrdre.Name = "LvUtleieOrdre"
+        Me.LvUtleieOrdre.Size = New System.Drawing.Size(692, 351)
+        Me.LvUtleieOrdre.TabIndex = 2
+        Me.LvUtleieOrdre.UseCompatibleStateImageBehavior = False
+        Me.LvUtleieOrdre.View = System.Windows.Forms.View.Details
+        '
+        'UtleieVareId
+        '
+        Me.UtleieVareId.Text = "Varenummer"
+        Me.UtleieVareId.Width = 90
+        '
+        'UtleieVareNavn
+        '
+        Me.UtleieVareNavn.Text = "Varenavn"
+        Me.UtleieVareNavn.Width = 242
+        '
+        'UtleieRabatt
+        '
+        Me.UtleieRabatt.DisplayIndex = 5
+        Me.UtleieRabatt.Text = "Rabatt"
+        Me.UtleieRabatt.Width = 55
+        '
+        'UtleiePris
+        '
+        Me.UtleiePris.DisplayIndex = 6
+        Me.UtleiePris.Text = "Pris"
+        Me.UtleiePris.Width = 58
+        '
+        'UtleieDag
+        '
+        Me.UtleieDag.DisplayIndex = 3
+        Me.UtleieDag.Text = "Dager"
+        Me.UtleieDag.Width = 56
+        '
+        'UtleieUke
+        '
+        Me.UtleieUke.DisplayIndex = 4
+        Me.UtleieUke.Text = "Uker"
+        Me.UtleieUke.Width = 53
+        '
+        'BtnUtleieFullfør
+        '
+        Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1128, 539)
+        Me.BtnUtleieFullfør.Name = "BtnUtleieFullfør"
+        Me.BtnUtleieFullfør.Size = New System.Drawing.Size(193, 85)
+        Me.BtnUtleieFullfør.TabIndex = 5
+        Me.BtnUtleieFullfør.Text = "Fullfør"
+        Me.BtnUtleieFullfør.UseVisualStyleBackColor = True
+        '
+        'GrpUtleieProdukter
+        '
+        Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlInfo)
+        Me.GrpUtleieProdukter.Controls.Add(Me.TxtUtlAntall)
+        Me.GrpUtleieProdukter.Controls.Add(Me.RdbUtlUke)
+        Me.GrpUtleieProdukter.Controls.Add(Me.RdbUtlDager)
+        Me.GrpUtleieProdukter.Controls.Add(Me.RdbUtlTimer)
+        Me.GrpUtleieProdukter.Controls.Add(Me.LblUtleieAnt)
+        Me.GrpUtleieProdukter.Controls.Add(Me.LblUtleieTil)
+        Me.GrpUtleieProdukter.Controls.Add(Me.LblUtleieFra)
+        Me.GrpUtleieProdukter.Controls.Add(Me.DtpUtleieTil)
+        Me.GrpUtleieProdukter.Controls.Add(Me.DtpUtleieFra)
+        Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlRabatt)
+        Me.GrpUtleieProdukter.Controls.Add(Me.LblUtsRabatt)
+        Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlSubkat)
+        Me.GrpUtleieProdukter.Controls.Add(Me.BtnUtlAddVare)
+        Me.GrpUtleieProdukter.Controls.Add(Me.LvUtlVarer)
+        Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlSubKat)
+        Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlKat)
+        Me.GrpUtleieProdukter.Controls.Add(Me.LblUtleieKategori)
+        Me.GrpUtleieProdukter.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
+        Me.GrpUtleieProdukter.Location = New System.Drawing.Point(12, 146)
+        Me.GrpUtleieProdukter.Name = "GrpUtleieProdukter"
+        Me.GrpUtleieProdukter.Size = New System.Drawing.Size(599, 478)
+        Me.GrpUtleieProdukter.TabIndex = 4
+        Me.GrpUtleieProdukter.TabStop = False
+        Me.GrpUtleieProdukter.Text = "Produkter:"
+        '
+        'BtnUtlAddVare
+        '
+        Me.BtnUtlAddVare.Location = New System.Drawing.Point(518, 188)
+        Me.BtnUtlAddVare.Name = "BtnUtlAddVare"
+        Me.BtnUtlAddVare.Size = New System.Drawing.Size(75, 56)
+        Me.BtnUtlAddVare.TabIndex = 39
+        Me.BtnUtlAddVare.Text = "Legg til vare"
+        Me.BtnUtlAddVare.UseVisualStyleBackColor = True
+        '
+        'LvUtlVarer
+        '
+        Me.LvUtlVarer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.UtlVare, Me.UtlVareNavn, Me.UtleieTPris, Me.UtlDPris, Me.UtlUPris, Me.UtlAntall})
+        Me.LvUtlVarer.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvUtlVarer.Location = New System.Drawing.Point(6, 253)
+        Me.LvUtlVarer.Name = "LvUtlVarer"
+        Me.LvUtlVarer.Size = New System.Drawing.Size(584, 219)
+        Me.LvUtlVarer.TabIndex = 3
+        Me.LvUtlVarer.UseCompatibleStateImageBehavior = False
+        Me.LvUtlVarer.View = System.Windows.Forms.View.Details
+        '
+        'UtlVare
+        '
+        Me.UtlVare.Text = "Varenummer"
+        Me.UtlVare.Width = 81
+        '
+        'UtlVareNavn
+        '
+        Me.UtlVareNavn.Text = "Varenavn"
+        Me.UtlVareNavn.Width = 202
+        '
+        'UtleieTPris
+        '
+        Me.UtleieTPris.DisplayIndex = 3
+        Me.UtleieTPris.Text = "Timepris"
+        Me.UtleieTPris.Width = 75
+        '
+        'UtlDPris
+        '
+        Me.UtlDPris.DisplayIndex = 4
+        Me.UtlDPris.Text = "Døgnpris"
+        Me.UtlDPris.Width = 74
+        '
+        'UtlUPris
+        '
+        Me.UtlUPris.DisplayIndex = 5
+        Me.UtlUPris.Text = "Ukepris"
+        '
+        'LblUtlSubKat
+        '
+        Me.LblUtlSubKat.AutoSize = True
+        Me.LblUtlSubKat.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtlSubKat.Location = New System.Drawing.Point(6, 75)
+        Me.LblUtlSubKat.Name = "LblUtlSubKat"
+        Me.LblUtlSubKat.Size = New System.Drawing.Size(86, 18)
+        Me.LblUtlSubKat.TabIndex = 38
+        Me.LblUtlSubKat.Text = "Subkategori:"
+        '
+        'CboUtlKat
+        '
+        Me.CboUtlKat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboUtlKat.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboUtlKat.FormattingEnabled = True
+        Me.CboUtlKat.Items.AddRange(New Object() {"Sykkel", "Utstyr"})
+        Me.CboUtlKat.Location = New System.Drawing.Point(126, 34)
+        Me.CboUtlKat.Name = "CboUtlKat"
+        Me.CboUtlKat.Size = New System.Drawing.Size(121, 26)
+        Me.CboUtlKat.TabIndex = 3
+        '
+        'LblUtleieKategori
+        '
+        Me.LblUtleieKategori.AutoSize = True
+        Me.LblUtleieKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieKategori.Location = New System.Drawing.Point(6, 34)
+        Me.LblUtleieKategori.Name = "LblUtleieKategori"
+        Me.LblUtleieKategori.Size = New System.Drawing.Size(64, 18)
+        Me.LblUtleieKategori.TabIndex = 2
+        Me.LblUtleieKategori.Text = "Kategori:"
         '
         'GrpUtleieKundeInfo
         '
-        Me.GrpUtleieKundeInfo.Controls.Add(Me.ListView1)
+        Me.GrpUtleieKundeInfo.Controls.Add(Me.LvUtleieKunde)
         Me.GrpUtleieKundeInfo.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
-        Me.GrpUtleieKundeInfo.Location = New System.Drawing.Point(6, 150)
+        Me.GrpUtleieKundeInfo.Location = New System.Drawing.Point(309, 6)
         Me.GrpUtleieKundeInfo.Name = "GrpUtleieKundeInfo"
-        Me.GrpUtleieKundeInfo.Size = New System.Drawing.Size(573, 141)
+        Me.GrpUtleieKundeInfo.Size = New System.Drawing.Size(627, 134)
         Me.GrpUtleieKundeInfo.TabIndex = 3
         Me.GrpUtleieKundeInfo.TabStop = False
         Me.GrpUtleieKundeInfo.Text = "Kundeinfo:"
         '
-        'ListView1
+        'LvUtleieKunde
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.KundeID, Me.Fornavn, Me.Etternavn, Me.Adresse, Me.Tlf, Me.Epost})
-        Me.ListView1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView1.Location = New System.Drawing.Point(15, 30)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(547, 99)
-        Me.ListView1.TabIndex = 1
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.LvUtleieKunde.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.KundeID, Me.Fornavn, Me.Etternavn, Me.Adresse, Me.Tlf, Me.Epost, Me.UtlRabatt})
+        Me.LvUtleieKunde.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvUtleieKunde.Location = New System.Drawing.Point(6, 24)
+        Me.LvUtleieKunde.Name = "LvUtleieKunde"
+        Me.LvUtleieKunde.Size = New System.Drawing.Size(615, 105)
+        Me.LvUtleieKunde.TabIndex = 1
+        Me.LvUtleieKunde.UseCompatibleStateImageBehavior = False
+        Me.LvUtleieKunde.View = System.Windows.Forms.View.Details
         '
         'KundeID
         '
-        Me.KundeID.Text = "KundeID"
-        Me.KundeID.Width = 59
+        Me.KundeID.Text = "ID"
+        Me.KundeID.Width = 27
         '
         'Fornavn
         '
         Me.Fornavn.Text = "Fornavn"
-        Me.Fornavn.Width = 91
+        Me.Fornavn.Width = 77
         '
         'Etternavn
         '
         Me.Etternavn.Text = "Etternavn"
-        Me.Etternavn.Width = 77
+        Me.Etternavn.Width = 78
         '
         'Adresse
         '
         Me.Adresse.Text = "Adresse"
-        Me.Adresse.Width = 72
+        Me.Adresse.Width = 85
         '
         'Tlf
         '
         Me.Tlf.Text = "Tlf"
-        Me.Tlf.Width = 54
+        Me.Tlf.Width = 112
         '
         'Epost
         '
         Me.Epost.Text = "Epost"
-        Me.Epost.Width = 136
+        Me.Epost.Width = 132
         '
         'GrpUtleieKunde
         '
         Me.GrpUtleieKunde.Controls.Add(Me.BtnUtleieNyKunde)
         Me.GrpUtleieKunde.Controls.Add(Me.BtnUtleieKundeSok)
-        Me.GrpUtleieKunde.Controls.Add(Me.TextBox1)
+        Me.GrpUtleieKunde.Controls.Add(Me.TxtUtleieKundeSok)
         Me.GrpUtleieKunde.Controls.Add(Me.LblUtleieKundesok)
         Me.GrpUtleieKunde.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
         Me.GrpUtleieKunde.Location = New System.Drawing.Point(12, 2)
         Me.GrpUtleieKunde.Name = "GrpUtleieKunde"
-        Me.GrpUtleieKunde.Size = New System.Drawing.Size(345, 138)
+        Me.GrpUtleieKunde.Size = New System.Drawing.Size(291, 138)
         Me.GrpUtleieKunde.TabIndex = 2
         Me.GrpUtleieKunde.TabStop = False
         Me.GrpUtleieKunde.Text = "Kundesøk:"
@@ -485,7 +723,7 @@ Partial Class Form1
         'BtnUtleieNyKunde
         '
         Me.BtnUtleieNyKunde.Font = New System.Drawing.Font("Calibri", 14.25!)
-        Me.BtnUtleieNyKunde.Location = New System.Drawing.Point(238, 90)
+        Me.BtnUtleieNyKunde.Location = New System.Drawing.Point(181, 90)
         Me.BtnUtleieNyKunde.Name = "BtnUtleieNyKunde"
         Me.BtnUtleieNyKunde.Size = New System.Drawing.Size(101, 39)
         Me.BtnUtleieNyKunde.TabIndex = 3
@@ -495,19 +733,19 @@ Partial Class Form1
         'BtnUtleieKundeSok
         '
         Me.BtnUtleieKundeSok.Font = New System.Drawing.Font("Calibri", 14.25!)
-        Me.BtnUtleieKundeSok.Location = New System.Drawing.Point(9, 93)
+        Me.BtnUtleieKundeSok.Location = New System.Drawing.Point(181, 52)
         Me.BtnUtleieKundeSok.Name = "BtnUtleieKundeSok"
-        Me.BtnUtleieKundeSok.Size = New System.Drawing.Size(82, 32)
+        Me.BtnUtleieKundeSok.Size = New System.Drawing.Size(101, 32)
         Me.BtnUtleieKundeSok.TabIndex = 2
         Me.BtnUtleieKundeSok.Text = "SØK"
         Me.BtnUtleieKundeSok.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'TxtUtleieKundeSok
         '
-        Me.TextBox1.Location = New System.Drawing.Point(9, 56)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(157, 31)
-        Me.TextBox1.TabIndex = 1
+        Me.TxtUtleieKundeSok.Location = New System.Drawing.Point(9, 56)
+        Me.TxtUtleieKundeSok.Name = "TxtUtleieKundeSok"
+        Me.TxtUtleieKundeSok.Size = New System.Drawing.Size(157, 31)
+        Me.TxtUtleieKundeSok.TabIndex = 1
         '
         'LblUtleieKundesok
         '
@@ -523,9 +761,9 @@ Partial Class Form1
         '
         Me.GrpUtleieSelger.Controls.Add(Me.LblUtleieSelger)
         Me.GrpUtleieSelger.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
-        Me.GrpUtleieSelger.Location = New System.Drawing.Point(717, 6)
+        Me.GrpUtleieSelger.Location = New System.Drawing.Point(942, 6)
         Me.GrpUtleieSelger.Name = "GrpUtleieSelger"
-        Me.GrpUtleieSelger.Size = New System.Drawing.Size(188, 138)
+        Me.GrpUtleieSelger.Size = New System.Drawing.Size(188, 134)
         Me.GrpUtleieSelger.TabIndex = 1
         Me.GrpUtleieSelger.TabStop = False
         Me.GrpUtleieSelger.Text = "Selger:"
@@ -541,25 +779,36 @@ Partial Class Form1
         '
         'GrpUtleieAvd
         '
+        Me.GrpUtleieAvd.Controls.Add(Me.CboUtlAvd)
         Me.GrpUtleieAvd.Controls.Add(Me.LblUtleieKlokke)
         Me.GrpUtleieAvd.Controls.Add(Me.LblUtleieKlokkeTxt)
         Me.GrpUtleieAvd.Controls.Add(Me.LblUtleieDatoTxt)
-        Me.GrpUtleieAvd.Controls.Add(Me.LblUtleieAvdTxt)
         Me.GrpUtleieAvd.Controls.Add(Me.LblUtleieDato)
         Me.GrpUtleieAvd.Controls.Add(Me.LblUtleieAvd)
         Me.GrpUtleieAvd.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
-        Me.GrpUtleieAvd.Location = New System.Drawing.Point(944, 6)
+        Me.GrpUtleieAvd.Location = New System.Drawing.Point(1136, 6)
         Me.GrpUtleieAvd.Name = "GrpUtleieAvd"
-        Me.GrpUtleieAvd.Size = New System.Drawing.Size(271, 138)
+        Me.GrpUtleieAvd.Size = New System.Drawing.Size(185, 134)
         Me.GrpUtleieAvd.TabIndex = 0
         Me.GrpUtleieAvd.TabStop = False
         Me.GrpUtleieAvd.Text = "Tid og sted:"
+        '
+        'CboUtlAvd
+        '
+        Me.CboUtlAvd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboUtlAvd.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboUtlAvd.FormattingEnabled = True
+        Me.CboUtlAvd.Items.AddRange(New Object() {"Finse", "Flåm", "Haugastøl", "Myrdal", "Voss"})
+        Me.CboUtlAvd.Location = New System.Drawing.Point(78, 24)
+        Me.CboUtlAvd.Name = "CboUtlAvd"
+        Me.CboUtlAvd.Size = New System.Drawing.Size(98, 26)
+        Me.CboUtlAvd.TabIndex = 5
         '
         'LblUtleieKlokke
         '
         Me.LblUtleieKlokke.AutoSize = True
         Me.LblUtleieKlokke.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.LblUtleieKlokke.Location = New System.Drawing.Point(133, 98)
+        Me.LblUtleieKlokke.Location = New System.Drawing.Point(75, 98)
         Me.LblUtleieKlokke.Name = "LblUtleieKlokke"
         Me.LblUtleieKlokke.Size = New System.Drawing.Size(45, 18)
         Me.LblUtleieKlokke.TabIndex = 4
@@ -569,7 +818,7 @@ Partial Class Form1
         '
         Me.LblUtleieKlokkeTxt.AutoSize = True
         Me.LblUtleieKlokkeTxt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.LblUtleieKlokkeTxt.Location = New System.Drawing.Point(22, 98)
+        Me.LblUtleieKlokkeTxt.Location = New System.Drawing.Point(6, 98)
         Me.LblUtleieKlokkeTxt.Name = "LblUtleieKlokkeTxt"
         Me.LblUtleieKlokkeTxt.Size = New System.Drawing.Size(54, 18)
         Me.LblUtleieKlokkeTxt.TabIndex = 3
@@ -579,27 +828,17 @@ Partial Class Form1
         '
         Me.LblUtleieDatoTxt.AutoSize = True
         Me.LblUtleieDatoTxt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.LblUtleieDatoTxt.Location = New System.Drawing.Point(133, 63)
+        Me.LblUtleieDatoTxt.Location = New System.Drawing.Point(75, 62)
         Me.LblUtleieDatoTxt.Name = "LblUtleieDatoTxt"
         Me.LblUtleieDatoTxt.Size = New System.Drawing.Size(55, 18)
         Me.LblUtleieDatoTxt.TabIndex = 2
         Me.LblUtleieDatoTxt.Text = "DatoTxt"
         '
-        'LblUtleieAvdTxt
-        '
-        Me.LblUtleieAvdTxt.AutoSize = True
-        Me.LblUtleieAvdTxt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.LblUtleieAvdTxt.Location = New System.Drawing.Point(133, 31)
-        Me.LblUtleieAvdTxt.Name = "LblUtleieAvdTxt"
-        Me.LblUtleieAvdTxt.Size = New System.Drawing.Size(50, 18)
-        Me.LblUtleieAvdTxt.TabIndex = 1
-        Me.LblUtleieAvdTxt.Text = "AvdTxt"
-        '
         'LblUtleieDato
         '
         Me.LblUtleieDato.AutoSize = True
         Me.LblUtleieDato.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.LblUtleieDato.Location = New System.Drawing.Point(22, 63)
+        Me.LblUtleieDato.Location = New System.Drawing.Point(6, 62)
         Me.LblUtleieDato.Name = "LblUtleieDato"
         Me.LblUtleieDato.Size = New System.Drawing.Size(41, 18)
         Me.LblUtleieDato.TabIndex = 1
@@ -609,7 +848,7 @@ Partial Class Form1
         '
         Me.LblUtleieAvd.AutoSize = True
         Me.LblUtleieAvd.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.LblUtleieAvd.Location = New System.Drawing.Point(22, 31)
+        Me.LblUtleieAvd.Location = New System.Drawing.Point(6, 30)
         Me.LblUtleieAvd.Name = "LblUtleieAvd"
         Me.LblUtleieAvd.Size = New System.Drawing.Size(67, 18)
         Me.LblUtleieAvd.TabIndex = 0
@@ -1264,6 +1503,50 @@ Partial Class Form1
         Me.GrpInvRegistrerEndre.TabIndex = 0
         Me.GrpInvRegistrerEndre.TabStop = False
         Me.GrpInvRegistrerEndre.Text = "Registrer og Endre Inventar"
+        '
+        'ChkInvLastehenger
+        '
+        Me.ChkInvLastehenger.AutoSize = True
+        Me.ChkInvLastehenger.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkInvLastehenger.Location = New System.Drawing.Point(255, 159)
+        Me.ChkInvLastehenger.Name = "ChkInvLastehenger"
+        Me.ChkInvLastehenger.Size = New System.Drawing.Size(93, 18)
+        Me.ChkInvLastehenger.TabIndex = 54
+        Me.ChkInvLastehenger.Text = "Lastehenger"
+        Me.ChkInvLastehenger.UseVisualStyleBackColor = True
+        '
+        'ChkInvBarneHenger
+        '
+        Me.ChkInvBarneHenger.AutoSize = True
+        Me.ChkInvBarneHenger.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkInvBarneHenger.Location = New System.Drawing.Point(255, 117)
+        Me.ChkInvBarneHenger.Name = "ChkInvBarneHenger"
+        Me.ChkInvBarneHenger.Size = New System.Drawing.Size(97, 18)
+        Me.ChkInvBarneHenger.TabIndex = 53
+        Me.ChkInvBarneHenger.Text = "BarneHenger"
+        Me.ChkInvBarneHenger.UseVisualStyleBackColor = True
+        '
+        'ChkInvBarnesete
+        '
+        Me.ChkInvBarnesete.AutoSize = True
+        Me.ChkInvBarnesete.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkInvBarnesete.Location = New System.Drawing.Point(255, 75)
+        Me.ChkInvBarnesete.Name = "ChkInvBarnesete"
+        Me.ChkInvBarnesete.Size = New System.Drawing.Size(82, 18)
+        Me.ChkInvBarnesete.TabIndex = 52
+        Me.ChkInvBarnesete.Text = "Barnesete"
+        Me.ChkInvBarnesete.UseVisualStyleBackColor = True
+        '
+        'ChkInvSykkelveske
+        '
+        Me.ChkInvSykkelveske.AutoSize = True
+        Me.ChkInvSykkelveske.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkInvSykkelveske.Location = New System.Drawing.Point(255, 31)
+        Me.ChkInvSykkelveske.Name = "ChkInvSykkelveske"
+        Me.ChkInvSykkelveske.Size = New System.Drawing.Size(91, 18)
+        Me.ChkInvSykkelveske.TabIndex = 51
+        Me.ChkInvSykkelveske.Text = "Sykkelveske"
+        Me.ChkInvSykkelveske.UseVisualStyleBackColor = True
         '
         'BtnInvTest
         '
@@ -3000,49 +3283,157 @@ Partial Class Form1
         Me.PicLoginLogo.TabIndex = 0
         Me.PicLoginLogo.TabStop = False
         '
-        'ChkInvSykkelveske
+        'CboUtlSubkat
         '
-        Me.ChkInvSykkelveske.AutoSize = True
-        Me.ChkInvSykkelveske.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkInvSykkelveske.Location = New System.Drawing.Point(255, 31)
-        Me.ChkInvSykkelveske.Name = "ChkInvSykkelveske"
-        Me.ChkInvSykkelveske.Size = New System.Drawing.Size(91, 18)
-        Me.ChkInvSykkelveske.TabIndex = 51
-        Me.ChkInvSykkelveske.Text = "Sykkelveske"
-        Me.ChkInvSykkelveske.UseVisualStyleBackColor = True
+        Me.CboUtlSubkat.BackColor = System.Drawing.SystemColors.Window
+        Me.CboUtlSubkat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboUtlSubkat.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboUtlSubkat.FormattingEnabled = True
+        Me.CboUtlSubkat.Items.AddRange(New Object() {"Barnesykkel", "Bysykkel", "Downhill", "Elsykkel", "Racer", "Tandem", "Terrengsykkel"})
+        Me.CboUtlSubkat.Location = New System.Drawing.Point(126, 75)
+        Me.CboUtlSubkat.Name = "CboUtlSubkat"
+        Me.CboUtlSubkat.Size = New System.Drawing.Size(121, 26)
+        Me.CboUtlSubkat.TabIndex = 40
         '
-        'ChkInvBarnesete
+        'UtlRabatt
         '
-        Me.ChkInvBarnesete.AutoSize = True
-        Me.ChkInvBarnesete.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkInvBarnesete.Location = New System.Drawing.Point(255, 75)
-        Me.ChkInvBarnesete.Name = "ChkInvBarnesete"
-        Me.ChkInvBarnesete.Size = New System.Drawing.Size(82, 18)
-        Me.ChkInvBarnesete.TabIndex = 52
-        Me.ChkInvBarnesete.Text = "Barnesete"
-        Me.ChkInvBarnesete.UseVisualStyleBackColor = True
+        Me.UtlRabatt.Text = "Rabattkode"
+        Me.UtlRabatt.Width = 83
         '
-        'ChkInvBarneHenger
+        'LblUtsRabatt
         '
-        Me.ChkInvBarneHenger.AutoSize = True
-        Me.ChkInvBarneHenger.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkInvBarneHenger.Location = New System.Drawing.Point(255, 117)
-        Me.ChkInvBarneHenger.Name = "ChkInvBarneHenger"
-        Me.ChkInvBarneHenger.Size = New System.Drawing.Size(97, 18)
-        Me.ChkInvBarneHenger.TabIndex = 53
-        Me.ChkInvBarneHenger.Text = "BarneHenger"
-        Me.ChkInvBarneHenger.UseVisualStyleBackColor = True
+        Me.LblUtsRabatt.AutoSize = True
+        Me.LblUtsRabatt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtsRabatt.Location = New System.Drawing.Point(6, 114)
+        Me.LblUtsRabatt.Name = "LblUtsRabatt"
+        Me.LblUtsRabatt.Size = New System.Drawing.Size(108, 18)
+        Me.LblUtsRabatt.TabIndex = 41
+        Me.LblUtsRabatt.Text = "Overstyr Rabatt:"
         '
-        'ChkInvLastehenger
+        'CboUtlRabatt
         '
-        Me.ChkInvLastehenger.AutoSize = True
-        Me.ChkInvLastehenger.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkInvLastehenger.Location = New System.Drawing.Point(255, 159)
-        Me.ChkInvLastehenger.Name = "ChkInvLastehenger"
-        Me.ChkInvLastehenger.Size = New System.Drawing.Size(93, 18)
-        Me.ChkInvLastehenger.TabIndex = 54
-        Me.ChkInvLastehenger.Text = "Lastehenger"
-        Me.ChkInvLastehenger.UseVisualStyleBackColor = True
+        Me.CboUtlRabatt.FormattingEnabled = True
+        Me.CboUtlRabatt.Items.AddRange(New Object() {"5%", "10%", "15%", "20%", "25%", "30%"})
+        Me.CboUtlRabatt.Location = New System.Drawing.Point(126, 114)
+        Me.CboUtlRabatt.Name = "CboUtlRabatt"
+        Me.CboUtlRabatt.Size = New System.Drawing.Size(121, 31)
+        Me.CboUtlRabatt.TabIndex = 42
+        '
+        'BtnUtlAbort
+        '
+        Me.BtnUtlAbort.Location = New System.Drawing.Point(635, 539)
+        Me.BtnUtlAbort.Name = "BtnUtlAbort"
+        Me.BtnUtlAbort.Size = New System.Drawing.Size(90, 79)
+        Me.BtnUtlAbort.TabIndex = 9
+        Me.BtnUtlAbort.Text = "Avbryt/ Tøm Skjema"
+        Me.BtnUtlAbort.UseVisualStyleBackColor = True
+        '
+        'DtpUtleieFra
+        '
+        Me.DtpUtleieFra.Location = New System.Drawing.Point(321, 17)
+        Me.DtpUtleieFra.Name = "DtpUtleieFra"
+        Me.DtpUtleieFra.Size = New System.Drawing.Size(272, 31)
+        Me.DtpUtleieFra.TabIndex = 43
+        '
+        'DtpUtleieTil
+        '
+        Me.DtpUtleieTil.Location = New System.Drawing.Point(321, 54)
+        Me.DtpUtleieTil.Name = "DtpUtleieTil"
+        Me.DtpUtleieTil.Size = New System.Drawing.Size(272, 31)
+        Me.DtpUtleieTil.TabIndex = 44
+        '
+        'LblUtleieFra
+        '
+        Me.LblUtleieFra.AutoSize = True
+        Me.LblUtleieFra.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieFra.Location = New System.Drawing.Point(253, 30)
+        Me.LblUtleieFra.Name = "LblUtleieFra"
+        Me.LblUtleieFra.Size = New System.Drawing.Size(62, 18)
+        Me.LblUtleieFra.TabIndex = 45
+        Me.LblUtleieFra.Text = "Fra dato:"
+        '
+        'LblUtleieTil
+        '
+        Me.LblUtleieTil.AutoSize = True
+        Me.LblUtleieTil.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieTil.Location = New System.Drawing.Point(253, 67)
+        Me.LblUtleieTil.Name = "LblUtleieTil"
+        Me.LblUtleieTil.Size = New System.Drawing.Size(58, 18)
+        Me.LblUtleieTil.TabIndex = 46
+        Me.LblUtleieTil.Text = "Til dato:"
+        '
+        'UtlTime
+        '
+        Me.UtlTime.DisplayIndex = 2
+        Me.UtlTime.Text = "Timer"
+        '
+        'LblUtleieAnt
+        '
+        Me.LblUtleieAnt.AutoSize = True
+        Me.LblUtleieAnt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieAnt.Location = New System.Drawing.Point(262, 114)
+        Me.LblUtleieAnt.Name = "LblUtleieAnt"
+        Me.LblUtleieAnt.Size = New System.Drawing.Size(49, 18)
+        Me.LblUtleieAnt.TabIndex = 47
+        Me.LblUtleieAnt.Text = "Antall:"
+        '
+        'RdbUtlTimer
+        '
+        Me.RdbUtlTimer.AutoSize = True
+        Me.RdbUtlTimer.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
+        Me.RdbUtlTimer.Location = New System.Drawing.Point(399, 110)
+        Me.RdbUtlTimer.Name = "RdbUtlTimer"
+        Me.RdbUtlTimer.Size = New System.Drawing.Size(62, 22)
+        Me.RdbUtlTimer.TabIndex = 51
+        Me.RdbUtlTimer.TabStop = True
+        Me.RdbUtlTimer.Text = "Timer"
+        Me.RdbUtlTimer.UseVisualStyleBackColor = True
+        '
+        'RdbUtlDager
+        '
+        Me.RdbUtlDager.AutoSize = True
+        Me.RdbUtlDager.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
+        Me.RdbUtlDager.Location = New System.Drawing.Point(467, 112)
+        Me.RdbUtlDager.Name = "RdbUtlDager"
+        Me.RdbUtlDager.Size = New System.Drawing.Size(58, 22)
+        Me.RdbUtlDager.TabIndex = 52
+        Me.RdbUtlDager.TabStop = True
+        Me.RdbUtlDager.Text = "Døgn"
+        Me.RdbUtlDager.UseVisualStyleBackColor = True
+        '
+        'RdbUtlUke
+        '
+        Me.RdbUtlUke.AutoSize = True
+        Me.RdbUtlUke.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
+        Me.RdbUtlUke.Location = New System.Drawing.Point(531, 112)
+        Me.RdbUtlUke.Name = "RdbUtlUke"
+        Me.RdbUtlUke.Size = New System.Drawing.Size(50, 22)
+        Me.RdbUtlUke.TabIndex = 53
+        Me.RdbUtlUke.TabStop = True
+        Me.RdbUtlUke.Text = "Uke"
+        Me.RdbUtlUke.UseVisualStyleBackColor = True
+        '
+        'TxtUtlAntall
+        '
+        Me.TxtUtlAntall.Location = New System.Drawing.Point(321, 101)
+        Me.TxtUtlAntall.Name = "TxtUtlAntall"
+        Me.TxtUtlAntall.Size = New System.Drawing.Size(60, 31)
+        Me.TxtUtlAntall.TabIndex = 54
+        '
+        'LblUtlInfo
+        '
+        Me.LblUtlInfo.AutoSize = True
+        Me.LblUtlInfo.Location = New System.Drawing.Point(6, 227)
+        Me.LblUtlInfo.Name = "LblUtlInfo"
+        Me.LblUtlInfo.Size = New System.Drawing.Size(181, 23)
+        Me.LblUtlInfo.TabIndex = 55
+        Me.LblUtlInfo.Text = "Tilgjengelige modeller:"
+        '
+        'UtlAntall
+        '
+        Me.UtlAntall.DisplayIndex = 2
+        Me.UtlAntall.Text = "Tilgjengelig"
+        Me.UtlAntall.Width = 77
         '
         'Form1
         '
@@ -3058,6 +3449,9 @@ Partial Class Form1
         Me.StartTab.PerformLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.UtleieTab.ResumeLayout(False)
+        Me.GrpUtleieOrdre.ResumeLayout(False)
+        Me.GrpUtleieProdukter.ResumeLayout(False)
+        Me.GrpUtleieProdukter.PerformLayout()
         Me.GrpUtleieKundeInfo.ResumeLayout(False)
         Me.GrpUtleieKunde.ResumeLayout(False)
         Me.GrpUtleieKunde.PerformLayout()
@@ -3286,16 +3680,15 @@ Partial Class Form1
     Friend WithEvents GrpUtleieKundeInfo As GroupBox
     Friend WithEvents GrpUtleieKunde As GroupBox
     Friend WithEvents BtnUtleieKundeSok As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TxtUtleieKundeSok As TextBox
     Friend WithEvents LblUtleieKundesok As Label
     Friend WithEvents GrpUtleieSelger As GroupBox
     Friend WithEvents LblUtleieSelger As Label
     Friend WithEvents GrpUtleieAvd As GroupBox
     Friend WithEvents LblUtleieDatoTxt As Label
-    Friend WithEvents LblUtleieAvdTxt As Label
     Friend WithEvents LblUtleieDato As Label
     Friend WithEvents LblUtleieAvd As Label
-    Friend WithEvents ListView1 As ListView
+    Friend WithEvents LvUtleieKunde As ListView
     Friend WithEvents KundeID As ColumnHeader
     Friend WithEvents Fornavn As ColumnHeader
     Friend WithEvents Etternavn As ColumnHeader
@@ -3382,4 +3775,44 @@ Partial Class Form1
     Friend WithEvents ChkInvBarneHenger As CheckBox
     Friend WithEvents ChkInvBarnesete As CheckBox
     Friend WithEvents ChkInvSykkelveske As CheckBox
+    Friend WithEvents GrpUtleieSum As GroupBox
+    Friend WithEvents GrpUtleieOrdre As GroupBox
+    Friend WithEvents LvUtleieOrdre As ListView
+    Friend WithEvents UtleieVareId As ColumnHeader
+    Friend WithEvents UtleieVareNavn As ColumnHeader
+    Friend WithEvents UtleieRabatt As ColumnHeader
+    Friend WithEvents UtleiePris As ColumnHeader
+    Friend WithEvents UtleieDag As ColumnHeader
+    Friend WithEvents UtleieUke As ColumnHeader
+    Friend WithEvents BtnUtleieFullfør As Button
+    Friend WithEvents GrpUtleieProdukter As GroupBox
+    Friend WithEvents CboUtlKat As ComboBox
+    Friend WithEvents LblUtleieKategori As Label
+    Friend WithEvents LblUtlSubKat As Label
+    Friend WithEvents CboUtlAvd As ComboBox
+    Friend WithEvents GrpUtlRabatt As GroupBox
+    Friend WithEvents BtnUtlAddVare As Button
+    Friend WithEvents LvUtlVarer As ListView
+    Friend WithEvents UtlVare As ColumnHeader
+    Friend WithEvents UtlVareNavn As ColumnHeader
+    Friend WithEvents UtleieTPris As ColumnHeader
+    Friend WithEvents UtlDPris As ColumnHeader
+    Friend WithEvents UtlUPris As ColumnHeader
+    Friend WithEvents CboUtlSubkat As ComboBox
+    Friend WithEvents LblUtsRabatt As Label
+    Friend WithEvents UtlRabatt As ColumnHeader
+    Friend WithEvents CboUtlRabatt As ComboBox
+    Friend WithEvents BtnUtlAbort As Button
+    Friend WithEvents DtpUtleieFra As DateTimePicker
+    Friend WithEvents UtlTime As ColumnHeader
+    Friend WithEvents LblUtleieTil As Label
+    Friend WithEvents LblUtleieFra As Label
+    Friend WithEvents DtpUtleieTil As DateTimePicker
+    Friend WithEvents TxtUtlAntall As TextBox
+    Friend WithEvents RdbUtlUke As RadioButton
+    Friend WithEvents RdbUtlDager As RadioButton
+    Friend WithEvents RdbUtlTimer As RadioButton
+    Friend WithEvents LblUtleieAnt As Label
+    Friend WithEvents LblUtlInfo As Label
+    Friend WithEvents UtlAntall As ColumnHeader
 End Class
