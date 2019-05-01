@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.HovedTab = New System.Windows.Forms.TabControl()
         Me.StartTab = New System.Windows.Forms.TabPage()
@@ -32,7 +33,9 @@ Partial Class Form1
         Me.UtleieTab = New System.Windows.Forms.TabPage()
         Me.BtnUtlAbort = New System.Windows.Forms.Button()
         Me.GrpUtlRabatt = New System.Windows.Forms.GroupBox()
+        Me.LblUtlRabatt = New System.Windows.Forms.Label()
         Me.GrpUtleieSum = New System.Windows.Forms.GroupBox()
+        Me.LblUtleieSum = New System.Windows.Forms.Label()
         Me.GrpUtleieOrdre = New System.Windows.Forms.GroupBox()
         Me.LvUtleieOrdre = New System.Windows.Forms.ListView()
         Me.UtleieVareId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -340,8 +343,7 @@ Partial Class Form1
         Me.LblLoginBID = New System.Windows.Forms.Label()
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
-        Me.LblUtlRabatt = New System.Windows.Forms.Label()
-        Me.LblUtleieSum = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -449,7 +451,7 @@ Partial Class Form1
         '
         'UtleieTab
         '
-        Me.UtleieTab.BackColor = System.Drawing.Color.Transparent
+        Me.UtleieTab.BackColor = System.Drawing.Color.Bisque
         Me.UtleieTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.UtleieTab.Controls.Add(Me.BtnUtlAbort)
         Me.UtleieTab.Controls.Add(Me.GrpUtlRabatt)
@@ -490,6 +492,15 @@ Partial Class Form1
         Me.GrpUtlRabatt.TabStop = False
         Me.GrpUtlRabatt.Text = "Avgitt rabatt:"
         '
+        'LblUtlRabatt
+        '
+        Me.LblUtlRabatt.AutoSize = True
+        Me.LblUtlRabatt.Location = New System.Drawing.Point(39, 35)
+        Me.LblUtlRabatt.Name = "LblUtlRabatt"
+        Me.LblUtlRabatt.Size = New System.Drawing.Size(105, 23)
+        Me.LblUtlRabatt.TabIndex = 0
+        Me.LblUtlRabatt.Text = "-Rabatt Text-"
+        '
         'GrpUtleieSum
         '
         Me.GrpUtleieSum.Controls.Add(Me.LblUtleieSum)
@@ -500,6 +511,15 @@ Partial Class Form1
         Me.GrpUtleieSum.TabIndex = 7
         Me.GrpUtleieSum.TabStop = False
         Me.GrpUtleieSum.Text = "Ordresum:"
+        '
+        'LblUtleieSum
+        '
+        Me.LblUtleieSum.AutoSize = True
+        Me.LblUtleieSum.Location = New System.Drawing.Point(35, 35)
+        Me.LblUtleieSum.Name = "LblUtleieSum"
+        Me.LblUtleieSum.Size = New System.Drawing.Size(81, 23)
+        Me.LblUtleieSum.TabIndex = 0
+        Me.LblUtleieSum.Text = "-Sum Txt-"
         '
         'GrpUtleieOrdre
         '
@@ -978,10 +998,12 @@ Partial Class Form1
         'LblUtleieKlokke
         '
         Me.LblUtleieKlokke.AutoSize = True
-        Me.LblUtleieKlokke.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.LblUtleieKlokke.Location = New System.Drawing.Point(75, 98)
+        Me.LblUtleieKlokke.BackColor = System.Drawing.Color.Fuchsia
+        Me.LblUtleieKlokke.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.LblUtleieKlokke.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.LblUtleieKlokke.Location = New System.Drawing.Point(75, 93)
         Me.LblUtleieKlokke.Name = "LblUtleieKlokke"
-        Me.LblUtleieKlokke.Size = New System.Drawing.Size(45, 18)
+        Me.LblUtleieKlokke.Size = New System.Drawing.Size(58, 23)
         Me.LblUtleieKlokke.TabIndex = 4
         Me.LblUtleieKlokke.Text = "TidTxt"
         '
@@ -998,7 +1020,7 @@ Partial Class Form1
         'LblUtleieDatoTxt
         '
         Me.LblUtleieDatoTxt.AutoSize = True
-        Me.LblUtleieDatoTxt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
+        Me.LblUtleieDatoTxt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.LblUtleieDatoTxt.Location = New System.Drawing.Point(75, 62)
         Me.LblUtleieDatoTxt.Name = "LblUtleieDatoTxt"
         Me.LblUtleieDatoTxt.Size = New System.Drawing.Size(55, 18)
@@ -3454,23 +3476,10 @@ Partial Class Form1
         Me.PicLoginLogo.TabIndex = 0
         Me.PicLoginLogo.TabStop = False
         '
-        'LblUtlRabatt
+        'Timer1
         '
-        Me.LblUtlRabatt.AutoSize = True
-        Me.LblUtlRabatt.Location = New System.Drawing.Point(39, 35)
-        Me.LblUtlRabatt.Name = "LblUtlRabatt"
-        Me.LblUtlRabatt.Size = New System.Drawing.Size(105, 23)
-        Me.LblUtlRabatt.TabIndex = 0
-        Me.LblUtlRabatt.Text = "-Rabatt Text-"
-        '
-        'LblUtleieSum
-        '
-        Me.LblUtleieSum.AutoSize = True
-        Me.LblUtleieSum.Location = New System.Drawing.Point(35, 35)
-        Me.LblUtleieSum.Name = "LblUtleieSum"
-        Me.LblUtleieSum.Size = New System.Drawing.Size(81, 23)
-        Me.LblUtleieSum.TabIndex = 0
-        Me.LblUtleieSum.Text = "-Sum Txt-"
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 1000
         '
         'Form1
         '
@@ -3859,4 +3868,5 @@ Partial Class Form1
     Friend WithEvents UtlAvdeling As ColumnHeader
     Friend WithEvents LblUtlRabatt As Label
     Friend WithEvents LblUtleieSum As Label
+    Friend WithEvents Timer1 As Timer
 End Class

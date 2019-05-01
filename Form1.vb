@@ -5,9 +5,7 @@ Public Class Form1
     'Her plasseres globale variabler
     'som gjenbrukes over programmet. De er uten navnekonvensjon
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
-    'Test forandring
-    ' Test hilsen IVar
-    'Globalevariabler som må sjekkes ved ønsket tilgang. LogBool settes til TRUE ved inlogging, AdminBool settes til TRUE hvis bruker er admin.
+    'Globale variabler som må sjekkes ved ønsket tilgang. LogBool settes til TRUE ved inlogging, AdminBool settes til TRUE hvis bruker er admin.
 
     Dim LogBool As Boolean
     Dim AdminBool As Boolean
@@ -117,7 +115,7 @@ Public Class Form1
                 Dim dato As Date = Date.Today
 
                 LblUtleieDatoTxt.Text = dato
-                LblUtleieKlokke.Text = TimeOfDay
+                'LblUtleieKlokke.Text = TimeOfDay
                 Me.CboUtlAvd.SelectedIndex = 2
 
 
@@ -131,7 +129,7 @@ Public Class Form1
                 For i As Integer = 0 To innhold.Length - 1
                     CmbKndSok.Items.Add(innhold(i))
                 Next
-                MsgBox("KDBmeny")
+                'MsgBox("KDBmeny")
                 BtnKndEndre.Enabled = False
             Case 4 'Bestemmer det som skjer etter man har valgt Inventarmeny.
                 'MsgBox("Inventarmeny")
@@ -216,13 +214,18 @@ Public Class Form1
         DtpUtleieTil.Value = Now
         LvUtleieKunde.Items.Clear()
 
-
     End Sub
+
+    ' tikkende klokke-label
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        LblUtleieKlokke.Text = Format(Now, "HH:mm:ss")
+    End Sub
+
     Private Sub BtnUtleieKundeSok_Click(sender As Object, e As EventArgs) Handles BtnUtleieKundeSok.Click
         LvUtleieKunde.Items.Clear()
 
         If IsNumeric(TxtUtleieKundeSok.Text) And TxtUtleieKundeSok.Text <> "" And TxtUtleieKundeSok.Text.Length = 8 Then
-            UtlKndSok = TxtUtleieKundeSok.Text
+            UtlKndSok = SQLWhiteWash(TxtUtleieKundeSok.Text)
         Else
             MsgBox("Vennligst skriv inn et gyldig mobilnummer, 8 siffer")
             TxtUtleieKundeSok.Clear()
@@ -236,6 +239,7 @@ Public Class Form1
             Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE telefon =" & UtlKndSok & "", tilkobling)
 
 
+
             Dim UtleieSøkAdapter As New MySqlDataAdapter
             Dim UtleieSøkTable As New DataTable
             UtleieSøkAdapter.SelectCommand = sporring
@@ -246,19 +250,26 @@ Public Class Form1
             Dim KundeRow As DataRow
             Dim Kunde_ID, Kunde_Fornavn, Kunde_Etternavn, Kunde_Adresse, Kunde_Tlf, Kunde_Epost, Kunde_rabatt As String
             LvUtleieKunde.Items.Clear()
-            For Each KundeRow In UtleieSøkTable.Rows
-                Kunde_ID = KundeRow("kunde_id")
-                Kunde_Fornavn = KundeRow("kunde_fornavn")
-                Kunde_Etternavn = KundeRow("kunde_etternavn")
-                Kunde_Adresse = KundeRow("adresse")
 
-                Kunde_Tlf = KundeRow("telefon")
-                Kunde_Epost = KundeRow("epost")
-                Kunde_rabatt = KundeRow("rabatt_id")
+            ' sjekker om datatable gir et tomt svar. Gir beskjed om kunde ikke finnes fra før, og hopper til kundemenyen.
+            If UtleieSøkTable.Rows.Count = 0 Then
+                MsgBox("Ingen kunder med dette nummeret er registrert. Registrer ny kunde")
+                BtnUtleieNyKunde.PerformClick()
+            Else
+                For Each KundeRow In UtleieSøkTable.Rows
+                    Kunde_ID = KundeRow("kunde_id")
+                    Kunde_Fornavn = KundeRow("kunde_fornavn")
+                    Kunde_Etternavn = KundeRow("kunde_etternavn")
+                    Kunde_Adresse = KundeRow("adresse")
 
-                LvUtleieKunde.Items.Add(New ListViewItem({Kunde_ID, Kunde_Fornavn, Kunde_Etternavn, Kunde_Adresse, Kunde_Tlf, Kunde_Epost, Kunde_rabatt}))
-            Next
+                    Kunde_Tlf = KundeRow("telefon")
+                    Kunde_Epost = KundeRow("epost")
+                    Kunde_rabatt = KundeRow("rabatt_id")
 
+                    LvUtleieKunde.Items.Add(New ListViewItem({Kunde_ID, Kunde_Fornavn, Kunde_Etternavn, Kunde_Adresse, Kunde_Tlf, Kunde_Epost, Kunde_rabatt}))
+                Next
+
+            End If
 
 
         Catch feilmelding As MySqlException
@@ -268,6 +279,7 @@ Public Class Form1
 
     End Sub
 
+    ' hopp til kundetab. og ta med telefonnr
     Private Sub BtnUtleieNyKunde_Click(sender As Object, e As EventArgs) Handles BtnUtleieNyKunde.Click
         HovedTab.SelectTab(KDTab)
         TxtKndTlf.Text = TxtUtleieKundeSok.Text
@@ -2065,6 +2077,10 @@ Public Class Form1
 
         AdminEndreBruker()
     End Sub
+
+
+
+
 
 
 
