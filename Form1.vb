@@ -214,6 +214,8 @@ Public Class Form1
         RdbUtlUke.Checked = False
         DtpUtleieFra.Value = Now
         DtpUtleieTil.Value = Now
+        LvUtleieKunde.Items.Clear()
+
 
     End Sub
     Private Sub BtnUtleieKundeSok_Click(sender As Object, e As EventArgs) Handles BtnUtleieKundeSok.Click
@@ -2167,6 +2169,8 @@ Public Class Form1
 
         AdminEndreBruker()
     End Sub
+
+
 
 
 

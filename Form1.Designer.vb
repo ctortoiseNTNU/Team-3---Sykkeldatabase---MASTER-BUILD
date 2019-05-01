@@ -42,6 +42,7 @@ Partial Class Form1
         Me.UtleieDag = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtleieUke = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtlTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
         Me.LblUtlInfo = New System.Windows.Forms.Label()
@@ -339,11 +340,14 @@ Partial Class Form1
         Me.LblLoginBID = New System.Windows.Forms.Label()
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
-        Me.UtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LblUtlRabatt = New System.Windows.Forms.Label()
+        Me.LblUtleieSum = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.UtleieTab.SuspendLayout()
+        Me.GrpUtlRabatt.SuspendLayout()
+        Me.GrpUtleieSum.SuspendLayout()
         Me.GrpUtleieOrdre.SuspendLayout()
         Me.GrpUtleieProdukter.SuspendLayout()
         Me.GrpUtleieKundeInfo.SuspendLayout()
@@ -466,15 +470,18 @@ Partial Class Form1
         '
         'BtnUtlAbort
         '
+        Me.BtnUtlAbort.BackColor = System.Drawing.Color.OrangeRed
+        Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
         Me.BtnUtlAbort.Location = New System.Drawing.Point(635, 539)
         Me.BtnUtlAbort.Name = "BtnUtlAbort"
         Me.BtnUtlAbort.Size = New System.Drawing.Size(90, 79)
         Me.BtnUtlAbort.TabIndex = 9
         Me.BtnUtlAbort.Text = "Avbryt/ Tøm Skjema"
-        Me.BtnUtlAbort.UseVisualStyleBackColor = True
+        Me.BtnUtlAbort.UseVisualStyleBackColor = False
         '
         'GrpUtlRabatt
         '
+        Me.GrpUtlRabatt.Controls.Add(Me.LblUtlRabatt)
         Me.GrpUtlRabatt.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
         Me.GrpUtlRabatt.Location = New System.Drawing.Point(740, 539)
         Me.GrpUtlRabatt.Name = "GrpUtlRabatt"
@@ -485,6 +492,7 @@ Partial Class Form1
         '
         'GrpUtleieSum
         '
+        Me.GrpUtleieSum.Controls.Add(Me.LblUtleieSum)
         Me.GrpUtleieSum.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
         Me.GrpUtleieSum.Location = New System.Drawing.Point(932, 539)
         Me.GrpUtleieSum.Name = "GrpUtleieSum"
@@ -554,14 +562,21 @@ Partial Class Form1
         Me.UtlTime.DisplayIndex = 2
         Me.UtlTime.Text = "Timer"
         '
+        'UtlAvdeling
+        '
+        Me.UtlAvdeling.Text = "Avdeling"
+        Me.UtlAvdeling.Width = 99
+        '
         'BtnUtleieFullfør
         '
+        Me.BtnUtleieFullfør.BackColor = System.Drawing.Color.DodgerBlue
+        Me.BtnUtleieFullfør.Font = New System.Drawing.Font("Calibri", 25.0!, System.Drawing.FontStyle.Bold)
         Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1128, 539)
         Me.BtnUtleieFullfør.Name = "BtnUtleieFullfør"
         Me.BtnUtleieFullfør.Size = New System.Drawing.Size(193, 85)
         Me.BtnUtleieFullfør.TabIndex = 5
         Me.BtnUtleieFullfør.Text = "Fullfør"
-        Me.BtnUtleieFullfør.UseVisualStyleBackColor = True
+        Me.BtnUtleieFullfør.UseVisualStyleBackColor = False
         '
         'GrpUtleieProdukter
         '
@@ -720,12 +735,13 @@ Partial Class Form1
         '
         'BtnUtlAddVare
         '
-        Me.BtnUtlAddVare.Location = New System.Drawing.Point(518, 188)
+        Me.BtnUtlAddVare.BackColor = System.Drawing.Color.LawnGreen
+        Me.BtnUtlAddVare.Location = New System.Drawing.Point(467, 191)
         Me.BtnUtlAddVare.Name = "BtnUtlAddVare"
-        Me.BtnUtlAddVare.Size = New System.Drawing.Size(75, 56)
+        Me.BtnUtlAddVare.Size = New System.Drawing.Size(126, 56)
         Me.BtnUtlAddVare.TabIndex = 39
         Me.BtnUtlAddVare.Text = "Legg til vare"
-        Me.BtnUtlAddVare.UseVisualStyleBackColor = True
+        Me.BtnUtlAddVare.UseVisualStyleBackColor = False
         '
         'LvUtlVarer
         '
@@ -806,9 +822,9 @@ Partial Class Form1
         '
         Me.GrpUtleieKundeInfo.Controls.Add(Me.LvUtleieKunde)
         Me.GrpUtleieKundeInfo.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
-        Me.GrpUtleieKundeInfo.Location = New System.Drawing.Point(309, 6)
+        Me.GrpUtleieKundeInfo.Location = New System.Drawing.Point(309, 2)
         Me.GrpUtleieKundeInfo.Name = "GrpUtleieKundeInfo"
-        Me.GrpUtleieKundeInfo.Size = New System.Drawing.Size(627, 134)
+        Me.GrpUtleieKundeInfo.Size = New System.Drawing.Size(598, 134)
         Me.GrpUtleieKundeInfo.TabIndex = 3
         Me.GrpUtleieKundeInfo.TabStop = False
         Me.GrpUtleieKundeInfo.Text = "Kundeinfo:"
@@ -819,7 +835,7 @@ Partial Class Form1
         Me.LvUtleieKunde.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtleieKunde.Location = New System.Drawing.Point(6, 24)
         Me.LvUtleieKunde.Name = "LvUtleieKunde"
-        Me.LvUtleieKunde.Size = New System.Drawing.Size(615, 105)
+        Me.LvUtleieKunde.Size = New System.Drawing.Size(583, 105)
         Me.LvUtleieKunde.TabIndex = 1
         Me.LvUtleieKunde.UseCompatibleStateImageBehavior = False
         Me.LvUtleieKunde.View = System.Windows.Forms.View.Details
@@ -827,7 +843,7 @@ Partial Class Form1
         'KundeID
         '
         Me.KundeID.Text = "ID"
-        Me.KundeID.Width = 27
+        Me.KundeID.Width = 36
         '
         'Fornavn
         '
@@ -847,12 +863,12 @@ Partial Class Form1
         'Tlf
         '
         Me.Tlf.Text = "Tlf"
-        Me.Tlf.Width = 112
+        Me.Tlf.Width = 87
         '
         'Epost
         '
         Me.Epost.Text = "Epost"
-        Me.Epost.Width = 132
+        Me.Epost.Width = 130
         '
         'UtlRabatt
         '
@@ -875,23 +891,25 @@ Partial Class Form1
         '
         'BtnUtleieNyKunde
         '
+        Me.BtnUtleieNyKunde.BackColor = System.Drawing.Color.Orange
         Me.BtnUtleieNyKunde.Font = New System.Drawing.Font("Calibri", 14.25!)
         Me.BtnUtleieNyKunde.Location = New System.Drawing.Point(181, 90)
         Me.BtnUtleieNyKunde.Name = "BtnUtleieNyKunde"
         Me.BtnUtleieNyKunde.Size = New System.Drawing.Size(101, 39)
         Me.BtnUtleieNyKunde.TabIndex = 3
         Me.BtnUtleieNyKunde.Text = "Ny kunde?"
-        Me.BtnUtleieNyKunde.UseVisualStyleBackColor = True
+        Me.BtnUtleieNyKunde.UseVisualStyleBackColor = False
         '
         'BtnUtleieKundeSok
         '
+        Me.BtnUtleieKundeSok.BackColor = System.Drawing.Color.Yellow
         Me.BtnUtleieKundeSok.Font = New System.Drawing.Font("Calibri", 14.25!)
         Me.BtnUtleieKundeSok.Location = New System.Drawing.Point(181, 52)
         Me.BtnUtleieKundeSok.Name = "BtnUtleieKundeSok"
         Me.BtnUtleieKundeSok.Size = New System.Drawing.Size(101, 32)
         Me.BtnUtleieKundeSok.TabIndex = 2
         Me.BtnUtleieKundeSok.Text = "SØK"
-        Me.BtnUtleieKundeSok.UseVisualStyleBackColor = True
+        Me.BtnUtleieKundeSok.UseVisualStyleBackColor = False
         '
         'TxtUtleieKundeSok
         '
@@ -914,7 +932,7 @@ Partial Class Form1
         '
         Me.GrpUtleieSelger.Controls.Add(Me.LblUtleieSelger)
         Me.GrpUtleieSelger.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
-        Me.GrpUtleieSelger.Location = New System.Drawing.Point(942, 6)
+        Me.GrpUtleieSelger.Location = New System.Drawing.Point(942, 2)
         Me.GrpUtleieSelger.Name = "GrpUtleieSelger"
         Me.GrpUtleieSelger.Size = New System.Drawing.Size(188, 134)
         Me.GrpUtleieSelger.TabIndex = 1
@@ -939,7 +957,7 @@ Partial Class Form1
         Me.GrpUtleieAvd.Controls.Add(Me.LblUtleieDato)
         Me.GrpUtleieAvd.Controls.Add(Me.LblUtleieAvd)
         Me.GrpUtleieAvd.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
-        Me.GrpUtleieAvd.Location = New System.Drawing.Point(1136, 6)
+        Me.GrpUtleieAvd.Location = New System.Drawing.Point(1136, 2)
         Me.GrpUtleieAvd.Name = "GrpUtleieAvd"
         Me.GrpUtleieAvd.Size = New System.Drawing.Size(185, 134)
         Me.GrpUtleieAvd.TabIndex = 0
@@ -3436,10 +3454,23 @@ Partial Class Form1
         Me.PicLoginLogo.TabIndex = 0
         Me.PicLoginLogo.TabStop = False
         '
-        'UtlAvdeling
+        'LblUtlRabatt
         '
-        Me.UtlAvdeling.Text = "Avdeling"
-        Me.UtlAvdeling.Width = 99
+        Me.LblUtlRabatt.AutoSize = True
+        Me.LblUtlRabatt.Location = New System.Drawing.Point(39, 35)
+        Me.LblUtlRabatt.Name = "LblUtlRabatt"
+        Me.LblUtlRabatt.Size = New System.Drawing.Size(105, 23)
+        Me.LblUtlRabatt.TabIndex = 0
+        Me.LblUtlRabatt.Text = "-Rabatt Text-"
+        '
+        'LblUtleieSum
+        '
+        Me.LblUtleieSum.AutoSize = True
+        Me.LblUtleieSum.Location = New System.Drawing.Point(35, 35)
+        Me.LblUtleieSum.Name = "LblUtleieSum"
+        Me.LblUtleieSum.Size = New System.Drawing.Size(81, 23)
+        Me.LblUtleieSum.TabIndex = 0
+        Me.LblUtleieSum.Text = "-Sum Txt-"
         '
         'Form1
         '
@@ -3455,6 +3486,10 @@ Partial Class Form1
         Me.StartTab.PerformLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.UtleieTab.ResumeLayout(False)
+        Me.GrpUtlRabatt.ResumeLayout(False)
+        Me.GrpUtlRabatt.PerformLayout()
+        Me.GrpUtleieSum.ResumeLayout(False)
+        Me.GrpUtleieSum.PerformLayout()
         Me.GrpUtleieOrdre.ResumeLayout(False)
         Me.GrpUtleieProdukter.ResumeLayout(False)
         Me.GrpUtleieProdukter.PerformLayout()
@@ -3822,4 +3857,6 @@ Partial Class Form1
     Friend WithEvents LblUtlInfo As Label
     Friend WithEvents UtlAntall As ColumnHeader
     Friend WithEvents UtlAvdeling As ColumnHeader
+    Friend WithEvents LblUtlRabatt As Label
+    Friend WithEvents LblUtleieSum As Label
 End Class
