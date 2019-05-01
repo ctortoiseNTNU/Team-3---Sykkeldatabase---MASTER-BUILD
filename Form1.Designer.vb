@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.HovedTab = New System.Windows.Forms.TabControl()
         Me.StartTab = New System.Windows.Forms.TabPage()
@@ -342,6 +343,7 @@ Partial Class Form1
         Me.LblLoginBID = New System.Windows.Forms.Label()
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -449,7 +451,7 @@ Partial Class Form1
         '
         'UtleieTab
         '
-        Me.UtleieTab.BackColor = System.Drawing.Color.Transparent
+        Me.UtleieTab.BackColor = System.Drawing.Color.Bisque
         Me.UtleieTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.UtleieTab.Controls.Add(Me.BtnUtlAbort)
         Me.UtleieTab.Controls.Add(Me.GrpUtlRabatt)
@@ -996,10 +998,12 @@ Partial Class Form1
         'LblUtleieKlokke
         '
         Me.LblUtleieKlokke.AutoSize = True
-        Me.LblUtleieKlokke.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.LblUtleieKlokke.Location = New System.Drawing.Point(75, 98)
+        Me.LblUtleieKlokke.BackColor = System.Drawing.Color.Fuchsia
+        Me.LblUtleieKlokke.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.LblUtleieKlokke.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.LblUtleieKlokke.Location = New System.Drawing.Point(75, 93)
         Me.LblUtleieKlokke.Name = "LblUtleieKlokke"
-        Me.LblUtleieKlokke.Size = New System.Drawing.Size(45, 18)
+        Me.LblUtleieKlokke.Size = New System.Drawing.Size(58, 23)
         Me.LblUtleieKlokke.TabIndex = 4
         Me.LblUtleieKlokke.Text = "TidTxt"
         '
@@ -1016,7 +1020,7 @@ Partial Class Form1
         'LblUtleieDatoTxt
         '
         Me.LblUtleieDatoTxt.AutoSize = True
-        Me.LblUtleieDatoTxt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
+        Me.LblUtleieDatoTxt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.LblUtleieDatoTxt.Location = New System.Drawing.Point(75, 62)
         Me.LblUtleieDatoTxt.Name = "LblUtleieDatoTxt"
         Me.LblUtleieDatoTxt.Size = New System.Drawing.Size(55, 18)
@@ -3472,6 +3476,11 @@ Partial Class Form1
         Me.PicLoginLogo.TabIndex = 0
         Me.PicLoginLogo.TabStop = False
         '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 1000
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3859,4 +3868,5 @@ Partial Class Form1
     Friend WithEvents UtlAvdeling As ColumnHeader
     Friend WithEvents LblUtlRabatt As Label
     Friend WithEvents LblUtleieSum As Label
+    Friend WithEvents Timer1 As Timer
 End Class
