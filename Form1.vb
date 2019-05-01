@@ -112,12 +112,14 @@ Public Class Form1
                 StartMOTDUpdate()
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
 
-                MsgBox("Utleiemeny")
+                'MsgBox("Utleiemeny")
 
                 Dim dato As Date = Date.Today
 
                 LblUtleieDatoTxt.Text = dato
                 LblUtleieKlokke.Text = TimeOfDay
+                Me.CboUtlAvd.SelectedIndex = 2
+
 
 
 
@@ -199,7 +201,79 @@ Public Class Form1
     'Husk kode kommentarer.
 
     'Utstyr tilgjengelig for valgt sykkel kan legges i combobox som populeres automatisk ?
+    Dim UtlKndSok As Integer
 
+    Private Sub UtleieTomFelt()
+        CboUtlKat.SelectedIndex = -1
+        CboUtlRabatt.SelectedIndex = -1
+        CboUtlSubkat.SelectedIndex = -1
+        TxtUtlAntall.Text = ""
+        TxtUtleieKundeSok.Text = ""
+        RdbUtlTimer.Checked = False
+        RdbUtlDager.Checked = False
+        RdbUtlUke.Checked = False
+        DtpUtleieFra.Value = Now
+        DtpUtleieTil.Value = Now
+
+    End Sub
+    Private Sub BtnUtleieKundeSok_Click(sender As Object, e As EventArgs) Handles BtnUtleieKundeSok.Click
+        LvUtleieKunde.Items.Clear()
+
+        If IsNumeric(TxtUtleieKundeSok.Text) And TxtUtleieKundeSok.Text <> "" And TxtUtleieKundeSok.Text.Length = 8 Then
+            UtlKndSok = TxtUtleieKundeSok.Text
+        Else
+            MsgBox("Vennligst skriv inn et gyldig mobilnummer, 8 siffer")
+            TxtUtleieKundeSok.Clear()
+        End If
+
+        Dim KndSQLKolonner = New String() {"kunde_id", "kunde_fornavn", "kunde_etternavn", "adresse", "telefon", "epost", "rabatt_id"}
+
+
+        Try
+            DBConnect()
+            Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE telefon =" & UtlKndSok & "", tilkobling)
+
+
+            Dim UtleieSøkAdapter As New MySqlDataAdapter
+            Dim UtleieSøkTable As New DataTable
+            UtleieSøkAdapter.SelectCommand = sporring
+            UtleieSøkAdapter.Fill(UtleieSøkTable)
+
+            DBDisconnect()
+
+            Dim KundeRow As DataRow
+            Dim Kunde_ID, Kunde_Fornavn, Kunde_Etternavn, Kunde_Adresse, Kunde_Tlf, Kunde_Epost, Kunde_rabatt As String
+            LvUtleieKunde.Items.Clear()
+            For Each KundeRow In UtleieSøkTable.Rows
+                Kunde_ID = KundeRow("kunde_id")
+                Kunde_Fornavn = KundeRow("kunde_fornavn")
+                Kunde_Etternavn = KundeRow("kunde_etternavn")
+                Kunde_Adresse = KundeRow("adresse")
+
+                Kunde_Tlf = KundeRow("telefon")
+                Kunde_Epost = KundeRow("epost")
+                Kunde_rabatt = KundeRow("rabatt_id")
+
+                LvUtleieKunde.Items.Add(New ListViewItem({Kunde_ID, Kunde_Fornavn, Kunde_Etternavn, Kunde_Adresse, Kunde_Tlf, Kunde_Epost, Kunde_rabatt}))
+            Next
+
+
+
+        Catch feilmelding As MySqlException
+            MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+
+        End Try
+
+    End Sub
+
+    Private Sub BtnUtleieNyKunde_Click(sender As Object, e As EventArgs) Handles BtnUtleieNyKunde.Click
+        HovedTab.SelectTab(KDTab)
+        TxtKndTlf.Text = TxtUtleieKundeSok.Text
+    End Sub
+
+    Private Sub BtnUtlAbort_Click(sender As Object, e As EventArgs) Handles BtnUtlAbort.Click
+        UtleieTomFelt()
+    End Sub
 
 
 #End Region
@@ -1909,6 +1983,12 @@ Public Class Form1
 
         AdminEndreBruker()
     End Sub
+
+
+
+
+
+
 
 
 

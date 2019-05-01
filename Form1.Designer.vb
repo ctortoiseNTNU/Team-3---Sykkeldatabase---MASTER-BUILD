@@ -30,6 +30,7 @@ Partial Class Form1
         Me.StartVelkommenLabel = New System.Windows.Forms.Label()
         Me.StartLogo = New System.Windows.Forms.PictureBox()
         Me.UtleieTab = New System.Windows.Forms.TabPage()
+        Me.BtnUtlAbort = New System.Windows.Forms.Button()
         Me.GrpUtlRabatt = New System.Windows.Forms.GroupBox()
         Me.GrpUtleieSum = New System.Windows.Forms.GroupBox()
         Me.GrpUtleieOrdre = New System.Windows.Forms.GroupBox()
@@ -40,8 +41,22 @@ Partial Class Form1
         Me.UtleiePris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtleieDag = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtleieUke = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtlTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
+        Me.LblUtlInfo = New System.Windows.Forms.Label()
+        Me.TxtUtlAntall = New System.Windows.Forms.TextBox()
+        Me.RdbUtlUke = New System.Windows.Forms.RadioButton()
+        Me.RdbUtlDager = New System.Windows.Forms.RadioButton()
+        Me.RdbUtlTimer = New System.Windows.Forms.RadioButton()
+        Me.LblUtleieAnt = New System.Windows.Forms.Label()
+        Me.LblUtleieTil = New System.Windows.Forms.Label()
+        Me.LblUtleieFra = New System.Windows.Forms.Label()
+        Me.DtpUtleieTil = New System.Windows.Forms.DateTimePicker()
+        Me.DtpUtleieFra = New System.Windows.Forms.DateTimePicker()
+        Me.CboUtlRabatt = New System.Windows.Forms.ComboBox()
+        Me.LblUtsRabatt = New System.Windows.Forms.Label()
+        Me.CboUtlSubkat = New System.Windows.Forms.ComboBox()
         Me.BtnUtlAddVare = New System.Windows.Forms.Button()
         Me.LvUtlVarer = New System.Windows.Forms.ListView()
         Me.UtlVare = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -49,6 +64,7 @@ Partial Class Form1
         Me.UtleieTPris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtlDPris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtlUPris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtlAntall = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LblUtlSubKat = New System.Windows.Forms.Label()
         Me.CboUtlKat = New System.Windows.Forms.ComboBox()
         Me.LblUtleieKategori = New System.Windows.Forms.Label()
@@ -60,6 +76,7 @@ Partial Class Form1
         Me.Adresse = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Tlf = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Epost = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtlRabatt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GrpUtleieKunde = New System.Windows.Forms.GroupBox()
         Me.BtnUtleieNyKunde = New System.Windows.Forms.Button()
         Me.BtnUtleieKundeSok = New System.Windows.Forms.Button()
@@ -322,23 +339,7 @@ Partial Class Form1
         Me.LblLoginBID = New System.Windows.Forms.Label()
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
-        Me.CboUtlSubkat = New System.Windows.Forms.ComboBox()
-        Me.UtlRabatt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LblUtsRabatt = New System.Windows.Forms.Label()
-        Me.CboUtlRabatt = New System.Windows.Forms.ComboBox()
-        Me.BtnUtlAbort = New System.Windows.Forms.Button()
-        Me.DtpUtleieFra = New System.Windows.Forms.DateTimePicker()
-        Me.DtpUtleieTil = New System.Windows.Forms.DateTimePicker()
-        Me.LblUtleieFra = New System.Windows.Forms.Label()
-        Me.LblUtleieTil = New System.Windows.Forms.Label()
-        Me.UtlTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LblUtleieAnt = New System.Windows.Forms.Label()
-        Me.RdbUtlTimer = New System.Windows.Forms.RadioButton()
-        Me.RdbUtlDager = New System.Windows.Forms.RadioButton()
-        Me.RdbUtlUke = New System.Windows.Forms.RadioButton()
-        Me.TxtUtlAntall = New System.Windows.Forms.TextBox()
-        Me.LblUtlInfo = New System.Windows.Forms.Label()
-        Me.UtlAntall = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -463,6 +464,15 @@ Partial Class Form1
         Me.UtleieTab.TabIndex = 1
         Me.UtleieTab.Text = "Utleie"
         '
+        'BtnUtlAbort
+        '
+        Me.BtnUtlAbort.Location = New System.Drawing.Point(635, 539)
+        Me.BtnUtlAbort.Name = "BtnUtlAbort"
+        Me.BtnUtlAbort.Size = New System.Drawing.Size(90, 79)
+        Me.BtnUtlAbort.TabIndex = 9
+        Me.BtnUtlAbort.Text = "Avbryt/ Tøm Skjema"
+        Me.BtnUtlAbort.UseVisualStyleBackColor = True
+        '
         'GrpUtlRabatt
         '
         Me.GrpUtlRabatt.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
@@ -496,7 +506,7 @@ Partial Class Form1
         '
         'LvUtleieOrdre
         '
-        Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.UtleieVareId, Me.UtleieVareNavn, Me.UtleieRabatt, Me.UtleiePris, Me.UtleieDag, Me.UtleieUke, Me.UtlTime})
+        Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.UtleieVareId, Me.UtleieVareNavn, Me.UtleieRabatt, Me.UtleiePris, Me.UtleieDag, Me.UtleieUke, Me.UtlTime, Me.UtlAvdeling})
         Me.LvUtleieOrdre.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtleieOrdre.Location = New System.Drawing.Point(6, 30)
         Me.LvUtleieOrdre.Name = "LvUtleieOrdre"
@@ -513,7 +523,7 @@ Partial Class Form1
         'UtleieVareNavn
         '
         Me.UtleieVareNavn.Text = "Varenavn"
-        Me.UtleieVareNavn.Width = 242
+        Me.UtleieVareNavn.Width = 212
         '
         'UtleieRabatt
         '
@@ -538,6 +548,11 @@ Partial Class Form1
         Me.UtleieUke.DisplayIndex = 4
         Me.UtleieUke.Text = "Uker"
         Me.UtleieUke.Width = 53
+        '
+        'UtlTime
+        '
+        Me.UtlTime.DisplayIndex = 2
+        Me.UtlTime.Text = "Timer"
         '
         'BtnUtleieFullfør
         '
@@ -575,6 +590,133 @@ Partial Class Form1
         Me.GrpUtleieProdukter.TabIndex = 4
         Me.GrpUtleieProdukter.TabStop = False
         Me.GrpUtleieProdukter.Text = "Produkter:"
+        '
+        'LblUtlInfo
+        '
+        Me.LblUtlInfo.AutoSize = True
+        Me.LblUtlInfo.Location = New System.Drawing.Point(6, 227)
+        Me.LblUtlInfo.Name = "LblUtlInfo"
+        Me.LblUtlInfo.Size = New System.Drawing.Size(181, 23)
+        Me.LblUtlInfo.TabIndex = 55
+        Me.LblUtlInfo.Text = "Tilgjengelige modeller:"
+        '
+        'TxtUtlAntall
+        '
+        Me.TxtUtlAntall.Location = New System.Drawing.Point(321, 101)
+        Me.TxtUtlAntall.Name = "TxtUtlAntall"
+        Me.TxtUtlAntall.Size = New System.Drawing.Size(60, 31)
+        Me.TxtUtlAntall.TabIndex = 54
+        '
+        'RdbUtlUke
+        '
+        Me.RdbUtlUke.AutoSize = True
+        Me.RdbUtlUke.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
+        Me.RdbUtlUke.Location = New System.Drawing.Point(531, 112)
+        Me.RdbUtlUke.Name = "RdbUtlUke"
+        Me.RdbUtlUke.Size = New System.Drawing.Size(50, 22)
+        Me.RdbUtlUke.TabIndex = 53
+        Me.RdbUtlUke.TabStop = True
+        Me.RdbUtlUke.Text = "Uke"
+        Me.RdbUtlUke.UseVisualStyleBackColor = True
+        '
+        'RdbUtlDager
+        '
+        Me.RdbUtlDager.AutoSize = True
+        Me.RdbUtlDager.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
+        Me.RdbUtlDager.Location = New System.Drawing.Point(467, 112)
+        Me.RdbUtlDager.Name = "RdbUtlDager"
+        Me.RdbUtlDager.Size = New System.Drawing.Size(58, 22)
+        Me.RdbUtlDager.TabIndex = 52
+        Me.RdbUtlDager.TabStop = True
+        Me.RdbUtlDager.Text = "Døgn"
+        Me.RdbUtlDager.UseVisualStyleBackColor = True
+        '
+        'RdbUtlTimer
+        '
+        Me.RdbUtlTimer.AutoSize = True
+        Me.RdbUtlTimer.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
+        Me.RdbUtlTimer.Location = New System.Drawing.Point(399, 110)
+        Me.RdbUtlTimer.Name = "RdbUtlTimer"
+        Me.RdbUtlTimer.Size = New System.Drawing.Size(62, 22)
+        Me.RdbUtlTimer.TabIndex = 51
+        Me.RdbUtlTimer.TabStop = True
+        Me.RdbUtlTimer.Text = "Timer"
+        Me.RdbUtlTimer.UseVisualStyleBackColor = True
+        '
+        'LblUtleieAnt
+        '
+        Me.LblUtleieAnt.AutoSize = True
+        Me.LblUtleieAnt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieAnt.Location = New System.Drawing.Point(262, 114)
+        Me.LblUtleieAnt.Name = "LblUtleieAnt"
+        Me.LblUtleieAnt.Size = New System.Drawing.Size(49, 18)
+        Me.LblUtleieAnt.TabIndex = 47
+        Me.LblUtleieAnt.Text = "Antall:"
+        '
+        'LblUtleieTil
+        '
+        Me.LblUtleieTil.AutoSize = True
+        Me.LblUtleieTil.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieTil.Location = New System.Drawing.Point(253, 67)
+        Me.LblUtleieTil.Name = "LblUtleieTil"
+        Me.LblUtleieTil.Size = New System.Drawing.Size(58, 18)
+        Me.LblUtleieTil.TabIndex = 46
+        Me.LblUtleieTil.Text = "Til dato:"
+        '
+        'LblUtleieFra
+        '
+        Me.LblUtleieFra.AutoSize = True
+        Me.LblUtleieFra.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieFra.Location = New System.Drawing.Point(253, 30)
+        Me.LblUtleieFra.Name = "LblUtleieFra"
+        Me.LblUtleieFra.Size = New System.Drawing.Size(62, 18)
+        Me.LblUtleieFra.TabIndex = 45
+        Me.LblUtleieFra.Text = "Fra dato:"
+        '
+        'DtpUtleieTil
+        '
+        Me.DtpUtleieTil.Location = New System.Drawing.Point(321, 54)
+        Me.DtpUtleieTil.Name = "DtpUtleieTil"
+        Me.DtpUtleieTil.Size = New System.Drawing.Size(272, 31)
+        Me.DtpUtleieTil.TabIndex = 44
+        '
+        'DtpUtleieFra
+        '
+        Me.DtpUtleieFra.Location = New System.Drawing.Point(321, 17)
+        Me.DtpUtleieFra.Name = "DtpUtleieFra"
+        Me.DtpUtleieFra.Size = New System.Drawing.Size(272, 31)
+        Me.DtpUtleieFra.TabIndex = 43
+        '
+        'CboUtlRabatt
+        '
+        Me.CboUtlRabatt.FormattingEnabled = True
+        Me.CboUtlRabatt.Items.AddRange(New Object() {"5%", "10%", "15%", "20%", "25%", "30%"})
+        Me.CboUtlRabatt.Location = New System.Drawing.Point(126, 114)
+        Me.CboUtlRabatt.Name = "CboUtlRabatt"
+        Me.CboUtlRabatt.Size = New System.Drawing.Size(121, 31)
+        Me.CboUtlRabatt.TabIndex = 42
+        '
+        'LblUtsRabatt
+        '
+        Me.LblUtsRabatt.AutoSize = True
+        Me.LblUtsRabatt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtsRabatt.Location = New System.Drawing.Point(6, 114)
+        Me.LblUtsRabatt.Name = "LblUtsRabatt"
+        Me.LblUtsRabatt.Size = New System.Drawing.Size(108, 18)
+        Me.LblUtsRabatt.TabIndex = 41
+        Me.LblUtsRabatt.Text = "Overstyr Rabatt:"
+        '
+        'CboUtlSubkat
+        '
+        Me.CboUtlSubkat.BackColor = System.Drawing.SystemColors.Window
+        Me.CboUtlSubkat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboUtlSubkat.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboUtlSubkat.FormattingEnabled = True
+        Me.CboUtlSubkat.Items.AddRange(New Object() {"Barnesykkel", "Bysykkel", "Downhill", "Elsykkel", "Racer", "Tandem", "Terrengsykkel"})
+        Me.CboUtlSubkat.Location = New System.Drawing.Point(126, 75)
+        Me.CboUtlSubkat.Name = "CboUtlSubkat"
+        Me.CboUtlSubkat.Size = New System.Drawing.Size(121, 26)
+        Me.CboUtlSubkat.TabIndex = 40
         '
         'BtnUtlAddVare
         '
@@ -622,6 +764,12 @@ Partial Class Form1
         '
         Me.UtlUPris.DisplayIndex = 5
         Me.UtlUPris.Text = "Ukepris"
+        '
+        'UtlAntall
+        '
+        Me.UtlAntall.DisplayIndex = 2
+        Me.UtlAntall.Text = "Tilgjengelig"
+        Me.UtlAntall.Width = 77
         '
         'LblUtlSubKat
         '
@@ -705,6 +853,11 @@ Partial Class Form1
         '
         Me.Epost.Text = "Epost"
         Me.Epost.Width = 132
+        '
+        'UtlRabatt
+        '
+        Me.UtlRabatt.Text = "Rabattkode"
+        Me.UtlRabatt.Width = 83
         '
         'GrpUtleieKunde
         '
@@ -3283,157 +3436,10 @@ Partial Class Form1
         Me.PicLoginLogo.TabIndex = 0
         Me.PicLoginLogo.TabStop = False
         '
-        'CboUtlSubkat
+        'UtlAvdeling
         '
-        Me.CboUtlSubkat.BackColor = System.Drawing.SystemColors.Window
-        Me.CboUtlSubkat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CboUtlSubkat.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboUtlSubkat.FormattingEnabled = True
-        Me.CboUtlSubkat.Items.AddRange(New Object() {"Barnesykkel", "Bysykkel", "Downhill", "Elsykkel", "Racer", "Tandem", "Terrengsykkel"})
-        Me.CboUtlSubkat.Location = New System.Drawing.Point(126, 75)
-        Me.CboUtlSubkat.Name = "CboUtlSubkat"
-        Me.CboUtlSubkat.Size = New System.Drawing.Size(121, 26)
-        Me.CboUtlSubkat.TabIndex = 40
-        '
-        'UtlRabatt
-        '
-        Me.UtlRabatt.Text = "Rabattkode"
-        Me.UtlRabatt.Width = 83
-        '
-        'LblUtsRabatt
-        '
-        Me.LblUtsRabatt.AutoSize = True
-        Me.LblUtsRabatt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtsRabatt.Location = New System.Drawing.Point(6, 114)
-        Me.LblUtsRabatt.Name = "LblUtsRabatt"
-        Me.LblUtsRabatt.Size = New System.Drawing.Size(108, 18)
-        Me.LblUtsRabatt.TabIndex = 41
-        Me.LblUtsRabatt.Text = "Overstyr Rabatt:"
-        '
-        'CboUtlRabatt
-        '
-        Me.CboUtlRabatt.FormattingEnabled = True
-        Me.CboUtlRabatt.Items.AddRange(New Object() {"5%", "10%", "15%", "20%", "25%", "30%"})
-        Me.CboUtlRabatt.Location = New System.Drawing.Point(126, 114)
-        Me.CboUtlRabatt.Name = "CboUtlRabatt"
-        Me.CboUtlRabatt.Size = New System.Drawing.Size(121, 31)
-        Me.CboUtlRabatt.TabIndex = 42
-        '
-        'BtnUtlAbort
-        '
-        Me.BtnUtlAbort.Location = New System.Drawing.Point(635, 539)
-        Me.BtnUtlAbort.Name = "BtnUtlAbort"
-        Me.BtnUtlAbort.Size = New System.Drawing.Size(90, 79)
-        Me.BtnUtlAbort.TabIndex = 9
-        Me.BtnUtlAbort.Text = "Avbryt/ Tøm Skjema"
-        Me.BtnUtlAbort.UseVisualStyleBackColor = True
-        '
-        'DtpUtleieFra
-        '
-        Me.DtpUtleieFra.Location = New System.Drawing.Point(321, 17)
-        Me.DtpUtleieFra.Name = "DtpUtleieFra"
-        Me.DtpUtleieFra.Size = New System.Drawing.Size(272, 31)
-        Me.DtpUtleieFra.TabIndex = 43
-        '
-        'DtpUtleieTil
-        '
-        Me.DtpUtleieTil.Location = New System.Drawing.Point(321, 54)
-        Me.DtpUtleieTil.Name = "DtpUtleieTil"
-        Me.DtpUtleieTil.Size = New System.Drawing.Size(272, 31)
-        Me.DtpUtleieTil.TabIndex = 44
-        '
-        'LblUtleieFra
-        '
-        Me.LblUtleieFra.AutoSize = True
-        Me.LblUtleieFra.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtleieFra.Location = New System.Drawing.Point(253, 30)
-        Me.LblUtleieFra.Name = "LblUtleieFra"
-        Me.LblUtleieFra.Size = New System.Drawing.Size(62, 18)
-        Me.LblUtleieFra.TabIndex = 45
-        Me.LblUtleieFra.Text = "Fra dato:"
-        '
-        'LblUtleieTil
-        '
-        Me.LblUtleieTil.AutoSize = True
-        Me.LblUtleieTil.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtleieTil.Location = New System.Drawing.Point(253, 67)
-        Me.LblUtleieTil.Name = "LblUtleieTil"
-        Me.LblUtleieTil.Size = New System.Drawing.Size(58, 18)
-        Me.LblUtleieTil.TabIndex = 46
-        Me.LblUtleieTil.Text = "Til dato:"
-        '
-        'UtlTime
-        '
-        Me.UtlTime.DisplayIndex = 2
-        Me.UtlTime.Text = "Timer"
-        '
-        'LblUtleieAnt
-        '
-        Me.LblUtleieAnt.AutoSize = True
-        Me.LblUtleieAnt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtleieAnt.Location = New System.Drawing.Point(262, 114)
-        Me.LblUtleieAnt.Name = "LblUtleieAnt"
-        Me.LblUtleieAnt.Size = New System.Drawing.Size(49, 18)
-        Me.LblUtleieAnt.TabIndex = 47
-        Me.LblUtleieAnt.Text = "Antall:"
-        '
-        'RdbUtlTimer
-        '
-        Me.RdbUtlTimer.AutoSize = True
-        Me.RdbUtlTimer.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.RdbUtlTimer.Location = New System.Drawing.Point(399, 110)
-        Me.RdbUtlTimer.Name = "RdbUtlTimer"
-        Me.RdbUtlTimer.Size = New System.Drawing.Size(62, 22)
-        Me.RdbUtlTimer.TabIndex = 51
-        Me.RdbUtlTimer.TabStop = True
-        Me.RdbUtlTimer.Text = "Timer"
-        Me.RdbUtlTimer.UseVisualStyleBackColor = True
-        '
-        'RdbUtlDager
-        '
-        Me.RdbUtlDager.AutoSize = True
-        Me.RdbUtlDager.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.RdbUtlDager.Location = New System.Drawing.Point(467, 112)
-        Me.RdbUtlDager.Name = "RdbUtlDager"
-        Me.RdbUtlDager.Size = New System.Drawing.Size(58, 22)
-        Me.RdbUtlDager.TabIndex = 52
-        Me.RdbUtlDager.TabStop = True
-        Me.RdbUtlDager.Text = "Døgn"
-        Me.RdbUtlDager.UseVisualStyleBackColor = True
-        '
-        'RdbUtlUke
-        '
-        Me.RdbUtlUke.AutoSize = True
-        Me.RdbUtlUke.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.RdbUtlUke.Location = New System.Drawing.Point(531, 112)
-        Me.RdbUtlUke.Name = "RdbUtlUke"
-        Me.RdbUtlUke.Size = New System.Drawing.Size(50, 22)
-        Me.RdbUtlUke.TabIndex = 53
-        Me.RdbUtlUke.TabStop = True
-        Me.RdbUtlUke.Text = "Uke"
-        Me.RdbUtlUke.UseVisualStyleBackColor = True
-        '
-        'TxtUtlAntall
-        '
-        Me.TxtUtlAntall.Location = New System.Drawing.Point(321, 101)
-        Me.TxtUtlAntall.Name = "TxtUtlAntall"
-        Me.TxtUtlAntall.Size = New System.Drawing.Size(60, 31)
-        Me.TxtUtlAntall.TabIndex = 54
-        '
-        'LblUtlInfo
-        '
-        Me.LblUtlInfo.AutoSize = True
-        Me.LblUtlInfo.Location = New System.Drawing.Point(6, 227)
-        Me.LblUtlInfo.Name = "LblUtlInfo"
-        Me.LblUtlInfo.Size = New System.Drawing.Size(181, 23)
-        Me.LblUtlInfo.TabIndex = 55
-        Me.LblUtlInfo.Text = "Tilgjengelige modeller:"
-        '
-        'UtlAntall
-        '
-        Me.UtlAntall.DisplayIndex = 2
-        Me.UtlAntall.Text = "Tilgjengelig"
-        Me.UtlAntall.Width = 77
+        Me.UtlAvdeling.Text = "Avdeling"
+        Me.UtlAvdeling.Width = 99
         '
         'Form1
         '
@@ -3815,4 +3821,5 @@ Partial Class Form1
     Friend WithEvents LblUtleieAnt As Label
     Friend WithEvents LblUtlInfo As Label
     Friend WithEvents UtlAntall As ColumnHeader
+    Friend WithEvents UtlAvdeling As ColumnHeader
 End Class
