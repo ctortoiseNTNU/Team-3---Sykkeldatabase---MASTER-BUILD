@@ -214,6 +214,8 @@ Public Class Form1
         RdbUtlUke.Checked = False
         DtpUtleieFra.Value = Now
         DtpUtleieTil.Value = Now
+        LvUtleieKunde.Items.Clear()
+
 
     End Sub
     Private Sub BtnUtleieKundeSok_Click(sender As Object, e As EventArgs) Handles BtnUtleieKundeSok.Click
@@ -1053,7 +1055,7 @@ Public Class Form1
                             InvRegBarnesete(InvSykkelID)
                         End If
                         If ChkInvLastehenger.Checked = True Then
-                            invreglastehenger(InvSykkelID)
+                            InvRegLastehenger(InvSykkelID)
                         End If
                         If ChkInvSykkelveske.Checked = True Then
                             InvRegSykkelveske(InvSykkelID)
@@ -2025,6 +2027,8 @@ Public Class Form1
 
         AdminEndreBruker()
     End Sub
+
+
 
 
 
