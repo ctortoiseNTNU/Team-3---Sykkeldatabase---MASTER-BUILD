@@ -416,12 +416,14 @@ Public Class Form1
             MsgBox("Vennligst fyll inn epost")
             Exit Sub
         End If
+        '                & KnDFdato.Date.ToString("yyyy-mm-dd") & "', '" & KndFornavn & "', '" & KndEtternavn _
+
 
         Try
             DBConnect()
             Dim sporring As New MySqlCommand("INSERT INTO kunder (kunde_fdato, kunde_fornavn, " _
                 & "kunde_etternavn, adresse, telefon, epost, rabatt_id, handlet_for) VALUES('" _
-                & KnDFdato.ToString("yyyy-mm-dd") & "', '" & KndFornavn & "', '" & KndEtternavn _
+                & KnDFdato.ToString("yyyy-MM-dd") & "', '" & KndFornavn & "', '" & KndEtternavn _
                 & "', '" & KndAdresse & "', " & KndTlf & ", '" & KndEpost & "', 1, 0)", tilkobling)
             sporring.ExecuteNonQuery()
 
@@ -647,7 +649,6 @@ Public Class Form1
     'ListViewItemSorter kanskje ...
     'flytting av kode til prosedyrer. Sjekk om det er mye dobbelt
     'AUTOPOP av kategorier, avdeling og forhandler  i lister
-    'Inkludere kategorier for utstyr i endringer
 
 
     'Prosedyre for tømming av alle felt i skjema
@@ -949,28 +950,8 @@ Public Class Form1
             LvInvSok.Columns.AddRange(InvLvKolonnerUtstyr())
             CboInvSubkategori.Items.Clear()
             CboInvSubkategori.Items.AddRange(New Object() {"Hjelmer", "Sykkelveske", "Barnesete",
-                "Barnehenger", "Lastehenger", "Beskyttelse", "Låser", "Lappesaker"})
-
-            'Test for autofill av combobox
-
-            'Dim InvSokSporring As String = "SELECT utstyr_kat FROM utstyr_kategori"
-            'Dim invSqlLeser As MySqlDataReader
-
-            'DBConnect()
-            'Dim InvSqlSok = New MySqlCommand(InvSokSporring, tilkobling)
-            'invSqlLeser = InvSqlSok.ExecuteReader()
-            'Dim InvArSize As Integer = invSqlLeser.FieldCount - 1
-            'Dim InvComboList(InvArSize) As String
-            ''For hver kolonne les inn verdi 0-12 og legg i listview
-            'While invSqlLeser.Read()
-            '    For i = 0 To invSqlLeser.FieldCount - 1
-            '        InvComboList(i) = invSqlLeser(i)
-            '    Next
-            'End While
-            'For i = 0 To InvArSize
-            '    CboInvSubkategori.Items.AddRange(New Object() {InvComboList(i)})
-            'Next
-            'DBDisconnect()
+               "Barnehenger", "Lastehenger", "Beskyttelse", "Låser", "Lappesaker"})
+            'InvAutoPopCbo(sender, "utstyr_kategori", "utstyr_kat")
 
         Else
             CboInvAvdeling.Enabled = True
@@ -1004,6 +985,132 @@ Public Class Form1
                         Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling,
                         Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet}
     End Function
+
+    Private Sub InvAutoPopCbo(sender, tabell, kolonne)
+        Try
+            DBConnect()
+            Dim InvSqlCom As New MySqlCommand("SELECT " & kolonne & " FROM " & tabell, tilkobling)
+            Dim InvSqlDA As New MySqlDataAdapter
+            Dim InvUtstyrComboDaT As New DataTable
+            InvSqlDA.SelectCommand = InvSqlCom
+            InvSqlDA.Fill(InvUtstyrComboDaT)
+            DBDisconnect()
+            sender.Items.Clear()
+            Dim InvUtstyrRow As DataRow
+            Dim InvUtstyrString As String
+            For Each InvUtstyrRow In InvUtstyrComboDaT.Rows
+                InvUtstyrString = InvUtstyrRow(kolonne)
+                sender.Items.Add(InvUtstyrString)
+            Next
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av " & CStr(sender) & ": " & ex.Message)
+        End Try
+
+        'DBConnect()
+        'Dim AdminAvdelingKommando As New MySqlCommand("SELECT * FROM avdeling", tilkobling)
+        'Dim AdminAvdelingAdapter As New MySqlDataAdapter
+        'Dim AdminAvdelingTable As New DataTable
+        'AdminAvdelingAdapter.SelectCommand = AdminAvdelingKommando
+        'AdminAvdelingAdapter.Fill(AdminAvdelingTable)
+        'DBDisconnect()
+        'CboAdminNBAvdeling.Items.Clear()
+        'CboAdminEBAvdeling.Items.Clear()
+        'Dim AdminAvdelingRow As DataRow
+        'Dim AdminAvdelingString As String
+        'For Each AdminAvdelingRow In AdminAvdelingTable.Rows
+        '    AdminAvdelingString = AdminAvdelingRow("avd_navn")
+        '    CboAdminNBAvdeling.Items.Add(AdminAvdelingString)
+        '    CboAdminEBAvdeling.Items.Add(AdminAvdelingString)
+        'Next
+    End Sub
+
+    Private Sub InvAutoPopUtstyr()
+        Try
+            DBConnect()
+            Dim InvSqlCom As New MySqlCommand("SELECT utstyr_kat FROM utstyr_kategori", tilkobling)
+            Dim InvSqlDA As New MySqlDataAdapter
+            Dim InvUtstyrComboDaT As New DataTable
+            InvSqlDA.SelectCommand = InvSqlCom
+            InvSqlDA.Fill(InvUtstyrComboDaT)
+            DBDisconnect()
+            CboInvSubkategori.Items.Clear()
+            Dim InvUtstyrRow As DataRow
+            Dim InvUtstyrString As String
+            For Each InvUtstyrRow In InvUtstyrComboDaT.Rows
+                InvUtstyrString = InvUtstyrRow("utstyr_kat")
+                CboInvSubkategori.Items.Add(InvUtstyrString)
+            Next
+
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub InvAutoPopSykkel()
+        Try
+            DBConnect()
+            Dim InvSqlCom As New MySqlCommand("SELECT kategori FROM sykkel_typer", tilkobling)
+            Dim InvSqlDA As New MySqlDataAdapter
+            Dim InvUtstyrComboDaT As New DataTable
+            InvSqlDA.SelectCommand = InvSqlCom
+            InvSqlDA.Fill(InvUtstyrComboDaT)
+            DBDisconnect()
+            CboInvSubkategori.Items.Clear()
+            Dim InvUtstyrRow As DataRow
+            Dim InvUtstyrString As String
+            For Each InvUtstyrRow In InvUtstyrComboDaT.Rows
+                InvUtstyrString = InvUtstyrRow("kategori")
+                CboInvSubkategori.Items.Add(InvUtstyrString)
+            Next
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av sykkelkategorier: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub InvAutoPopAvdeling()
+        Try
+            DBConnect()
+            Dim InvSqlCom As New MySqlCommand("SELECT avd_navn FROM avdeling", tilkobling)
+            Dim InvSqlDA As New MySqlDataAdapter
+            Dim InvUtstyrComboDaT As New DataTable
+            InvSqlDA.SelectCommand = InvSqlCom
+            InvSqlDA.Fill(InvUtstyrComboDaT)
+            DBDisconnect()
+            CboInvSubkategori.Items.Clear()
+            Dim InvUtstyrRow As DataRow
+            Dim InvUtstyrString As String
+            For Each InvUtstyrRow In InvUtstyrComboDaT.Rows
+                InvUtstyrString = InvUtstyrRow("avd_navn")
+                CboInvSubkategori.Items.Add(InvUtstyrString)
+            Next
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av avdelinger: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub InvAutoPopForhandler()
+        Try
+            DBConnect()
+            Dim InvSqlCom As New MySqlCommand("SELECT forhandler_navn FROM forhandler", tilkobling)
+            Dim InvSqlDA As New MySqlDataAdapter
+            Dim InvUtstyrComboDaT As New DataTable
+            InvSqlDA.SelectCommand = InvSqlCom
+            InvSqlDA.Fill(InvUtstyrComboDaT)
+            DBDisconnect()
+            CboInvSubkategori.Items.Clear()
+            Dim InvUtstyrRow As DataRow
+            Dim InvUtstyrString As String
+            For Each InvUtstyrRow In InvUtstyrComboDaT.Rows
+                InvUtstyrString = InvUtstyrRow("forhandler_navn")
+                CboInvSubkategori.Items.Add(InvUtstyrString)
+            Next
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av avdelinger: " & ex.Message)
+        End Try
+    End Sub
+
+
+
 
     'SQLspørring med registrering av nytt produkt basert på innlagt data i skjema.
     Private Sub BtnInvRegistrer_Click(sender As Object, e As EventArgs) Handles BtnInvRegistrer.Click
@@ -1397,7 +1504,7 @@ Public Class Form1
                     InvSubKategoriID = InvHentUtstyrKategoriID(InvSubkategori)
                     InvEndreSporring = "UPDATE utstyr SET utstyr_navn='" & InvProduktnavn & "', varenummer='" _
                     & InvVarenummer & "', utstyr_pris='" & InvInnkjopspris & "', forhandler_id='" _
-                    & InvForhandlerID & "', utstyr_kat_id='" & InvSubKategoriID & " WHERE utstyr_id='" _
+                    & InvForhandlerID & "', utstyr_kat_id='" & InvSubKategoriID & "' WHERE utstyr_id='" _
                     & InvAktivtProduktID & "';"
 
                     Try
@@ -1414,9 +1521,6 @@ Public Class Form1
 
                 End If
             End If
-
-
-
         Else
             MsgBox("Velg kategori")
         End If
