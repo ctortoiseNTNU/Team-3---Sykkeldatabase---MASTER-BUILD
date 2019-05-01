@@ -647,12 +647,6 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Inv. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
-    'Må gjøres:
-    'ListViewItemSorter kanskje ...
-    'flytting av kode til prosedyrer. Sjekk om det er mye dobbelt
-    'AUTOPOP av kategorier, avdeling og forhandler  i lister
-
-
     'Prosedyre for tømming av alle felt i skjema
     Private Sub InvTomFelt()
         CboInvKategori.SelectedIndex = -1
@@ -674,73 +668,19 @@ Public Class Form1
         ChkInvSykkelveske.Checked = False
     End Sub
 
-    'Funksjoner InvReg__ registrerer hvilke utstyrkategorier som er tilgjengelig for den sykkel som registreres.
-    Private Sub InvRegSykkelveske(SykkelID)
+    'Registrerer hvilke utstyrkategorier som er tilgjengelig for den sykkel som registreres.
+    Private Sub InvRegUtstyrSykkel(SykkelID, kategoriID)
         Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr(sykkel_id, utstyr_kat_id) VALUES" _
-            & "('" & SykkelID & "', 2)"
+            & "('" & SykkelID & "', '" & kategoriID & "')"
         Try
             DBConnect()
             Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
             InvSqlRegistrer.ExecuteNonQuery()
             DBDisconnect()
         Catch ex As Exception
-            MsgBox("Feil ved registrering av tilhørende sykkelveske:" & vbNewLine & ex.Message)
+            MsgBox("Feil ved registrering av tilhørende utstyr:" & vbNewLine & ex.Message)
         End Try
     End Sub
-
-    Private Sub InvRegBarnesete(SykkelID)
-        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr(sykkel_id, utstyr_kat_id) VALUES" _
-            & "('" & SykkelID & "', 3)"
-        Try
-            DBConnect()
-            Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
-            InvSqlRegistrer.ExecuteNonQuery()
-            DBDisconnect()
-        Catch ex As Exception
-            MsgBox("Feil ved registrering av tilhørende barnesete:" & vbNewLine & ex.Message)
-        End Try
-    End Sub
-
-    Private Sub InvRegBarnehenger(SykkelID)
-        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr(sykkel_id, utstyr_kat_id) VALUES" _
-            & "('" & SykkelID & "', 4)"
-        Try
-            DBConnect()
-            Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
-            InvSqlRegistrer.ExecuteNonQuery()
-            DBDisconnect()
-        Catch ex As Exception
-            MsgBox("Feil ved registrering av tilhørende barnehenger:" & vbNewLine & ex.Message)
-        End Try
-    End Sub
-
-    Private Sub InvRegLastehenger(SykkelID)
-        Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr(sykkel_id, utstyr_kat_id) VALUES" _
-            & "('" & SykkelID & "', 5)"
-        Try
-            DBConnect()
-            Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
-            InvSqlRegistrer.ExecuteNonQuery()
-            DBDisconnect()
-        Catch ex As Exception
-            MsgBox("Feil ved registrering av tilhørende lastehenger:" & vbNewLine & ex.Message)
-        End Try
-    End Sub
-
-
-    ' LAG GENERELL
-    'Private Sub InvRegBarnehenger(SykkelID)
-    '    Dim InvRegSykUtsporring As String = "insert into sykkel_utstyr(sykkel_id, utstyr_kat_id) VALUES" _
-    '        & "('" & SykkelID & "', 4)"
-    '    Try
-    '        DBConnect()
-    '        Dim InvSqlRegistrer As New MySqlCommand(InvRegSykUtsporring, tilkobling)
-    '        InvSqlRegistrer.ExecuteNonQuery()
-    '        DBDisconnect()
-    '    Catch ex As Exception
-    '        MsgBox("Feil ved registrering av tilhørende barnehenger:" & vbNewLine & ex.Message)
-    '    End Try
-    'End Sub
 
     'Prosedyrene under, InvHent__ID og InvHent__Navn er for å hente ID basert på Navn, og motsatt, i database.
     'Dette i forbindelse med registrering og endring av fremmednøkler.
@@ -913,7 +853,6 @@ Public Class Form1
         End Try
     End Function
 
-
     'Tillater kun inntasting av tall i textbox for innkjøpspris
     Private Sub TxtInvInnkjopspris_Keypress(ByVal sender As Object, ByVal e As KeyPressEventArgs) _
         Handles TxtInvInnkjopspris.KeyPress
@@ -929,7 +868,6 @@ Public Class Form1
             e.Handled = True
         End If
     End Sub
-
 
     'Endrer status på felt i skjema avhengig om det er sykkel eller utstyr som skal registreres.
     'Med kategori "Sykkel" valgt vil alle felt være tilgjengelig.
@@ -1068,51 +1006,6 @@ Public Class Form1
     End Sub
 
 
-    'Fjern neste to Sub
-    Private Sub InvAutoPopAvdeling()
-        Try
-            DBConnect()
-            Dim InvSqlCom As New MySqlCommand("SELECT avd_navn FROM avdeling", tilkobling)
-            Dim InvSqlDA As New MySqlDataAdapter
-            Dim InvUtstyrComboDaT As New DataTable
-            InvSqlDA.SelectCommand = InvSqlCom
-            InvSqlDA.Fill(InvUtstyrComboDaT)
-            DBDisconnect()
-            CboInvSubkategori.Items.Clear()
-            Dim InvUtstyrRow As DataRow
-            Dim InvUtstyrString As String
-            For Each InvUtstyrRow In InvUtstyrComboDaT.Rows
-                InvUtstyrString = InvUtstyrRow("avd_navn")
-                CboInvSubkategori.Items.Add(InvUtstyrString)
-            Next
-        Catch ex As MySqlException
-            MsgBox("Feil med autoutfylling av avdelinger: " & ex.Message)
-        End Try
-    End Sub
-
-    Private Sub InvAutoPopForhandler()
-        Try
-            DBConnect()
-            Dim InvSqlCom As New MySqlCommand("SELECT forhandler_navn FROM forhandler", tilkobling)
-            Dim InvSqlDA As New MySqlDataAdapter
-            Dim InvUtstyrComboDaT As New DataTable
-            InvSqlDA.SelectCommand = InvSqlCom
-            InvSqlDA.Fill(InvUtstyrComboDaT)
-            DBDisconnect()
-            CboInvSubkategori.Items.Clear()
-            Dim InvUtstyrRow As DataRow
-            Dim InvUtstyrString As String
-            For Each InvUtstyrRow In InvUtstyrComboDaT.Rows
-                InvUtstyrString = InvUtstyrRow("forhandler_navn")
-                CboInvSubkategori.Items.Add(InvUtstyrString)
-            Next
-        Catch ex As MySqlException
-            MsgBox("Feil med autoutfylling av avdelinger: " & ex.Message)
-        End Try
-    End Sub
-
-
-
     'SQLspørring med registrering av nytt produkt basert på innlagt data i skjema.
     Private Sub BtnInvRegistrer_Click(sender As Object, e As EventArgs) Handles BtnInvRegistrer.Click
 
@@ -1179,16 +1072,16 @@ Public Class Form1
 
                         'Registerer valgt utstyr på siste sykkelID
                         If ChkInvBarneHenger.Checked = True Then
-                            InvRegBarnehenger(InvSykkelID)
+                            InvRegUtstyrSykkel(InvSykkelID, 4)
                         End If
                         If ChkInvBarnesete.Checked = True Then
-                            InvRegBarnesete(InvSykkelID)
+                            InvRegUtstyrSykkel(InvSykkelID, 3)
                         End If
                         If ChkInvLastehenger.Checked = True Then
-                            InvRegLastehenger(InvSykkelID)
+                            InvRegUtstyrSykkel(InvSykkelID, 5)
                         End If
                         If ChkInvSykkelveske.Checked = True Then
-                            InvRegSykkelveske(InvSykkelID)
+                            InvRegUtstyrSykkel(InvSykkelID, 2)
                         End If
 
                         MsgBox("Registrering av sykkel vellykket")
@@ -1489,16 +1382,16 @@ Public Class Form1
 
                         'Registerer valgt utstyr på AktivtProduktID
                         If ChkInvBarneHenger.Checked = True Then
-                            InvRegBarnehenger(InvAktivtProduktID)
+                            InvRegUtstyrSykkel(InvAktivtProduktID, 4)
                         End If
                         If ChkInvBarnesete.Checked = True Then
-                            InvRegBarnesete(InvAktivtProduktID)
+                            InvRegUtstyrSykkel(InvAktivtProduktID, 3)
                         End If
                         If ChkInvLastehenger.Checked = True Then
-                            InvRegLastehenger(InvAktivtProduktID)
+                            InvRegUtstyrSykkel(InvAktivtProduktID, 5)
                         End If
                         If ChkInvSykkelveske.Checked = True Then
-                            InvRegSykkelveske(InvAktivtProduktID)
+                            InvRegUtstyrSykkel(InvAktivtProduktID, 2)
                         End If
 
                         MsgBox("Endring av sykkel med ID " & InvAktivtProduktID & " vellykket.")
