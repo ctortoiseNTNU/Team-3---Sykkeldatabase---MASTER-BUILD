@@ -1857,25 +1857,23 @@ Public Class Form1
 
     Private Sub StaMestPopulaer()
         Dim StaAntSyklTyp As Integer
-        Try
-            DBConnect()
 
-            Dim sporring As New MySqlCommand("SELECT COUNT(*) AS c FROM sykkel_typer", tilkobling)
-            Dim StaTempVarSporring2 = sporring.ExecuteReader()
-            While StaTempVarSporring2.Read
-                StaAntSyklTyp = StaTempVarSporring2("c")
-            End While
-            DBDisconnect()
-            MsgBox(StaAntSyklTyp)
-        Catch feilmelding As MySqlException
-            MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
-        End Try
+        Dim StaSQLFinnAnt = SQLSelect("sykkel_typer", "COUNT(*) AS c", "1")
+        For Each row As DataRow In StaSQLFinnAnt.Rows
+            StaAntSyklTyp = row.Field(Of Int64)(0)
+        Next
 
         Dim StaAntSykler(StaAntSyklTyp) As Integer
         Dim StaTypeSykkel(StaAntSyklTyp) As String
 
         Dim StaInputCommand As String = "select sykkel_typer.kategori, count(*) AS c from sykkel_typer join " _
             & "sykler as s on sykkel_typer.type_id=s.type_id join utleie on s.sykkel_id=utleie.sykkel_id group by sykkel_typer.kategori"
+
+        Dim part1 As String = "select sykkel_typer.kategori, count(*) As c"
+        Dim part2 As String = "from sykkel_typer join sykler as s on sykkel_typer.type_id=s.type_id join utleie on s.sykkel_id=utleie.sykkel_id group by sykkel_typer.kategori"
+        Dim part3 As String = "1"
+
+        ' Dim tretest123 = SQLSelect(part1, part2, part3)
 
         Try
             DBConnect()
