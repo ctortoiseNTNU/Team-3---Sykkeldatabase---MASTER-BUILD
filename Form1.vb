@@ -81,7 +81,16 @@ Public Class Form1
         End If
     End Function
 
-    Private Function SQLSelect(ByVal WhereTable As String, WhereColumn As String, WhereCriteria As String) As DataTable
+    ''' <summary>
+    ''' SQL Select spørring som returnerer DataTable basert på søkekriterier.
+    ''' </summary>
+    ''' <param name="WhereTable">Tabell det skal søkes i</param>
+    ''' <param name="WhereColumn">Kolonner som skal inkluderes i søkeresultat.
+    ''' String = "column1, coulmn2, ..."''' </param>
+    ''' <param name="WhereCriteria">Kriterier for søk. Angis med alle søkeparametre etter WHERE.
+    ''' "column1='value1' AND column2=' ..."value2'</param>
+    ''' <returns>DataTabell med søkeresultat fra spørringen</returns>
+    Private Function SQLSelect(ByVal WhereTable As String, WhereColumn As String, WhereCriteria As String)
         Try
             DBConnect()
             Dim SqlWhereKommando As New MySqlCommand("SELECT " & WhereColumn & " FROM " & WhereTable & " WHERE " _
@@ -98,19 +107,26 @@ Public Class Form1
         End Try
     End Function
 
-    Private Function SQLInsert(ByVal InsertTable As String, InsertColumn As String, InsertValues As String) _
-        As DataTable
+    ''' <summary>
+    ''' SQL Insert spørring som legger til kolonne i valgt tabell
+    ''' </summary>
+    ''' <param name="InsertTable">Tabell det skal legges inn i</param>
+    ''' <param name="InsertColumn">Kolonner som skal legges inn. Angis med parantes.
+    ''' (column1, column2, ...)</param>
+    ''' <param name="InsertValues">De verdier hver kolonne skal tillegges. Angis med parantes.
+    ''' (value1, value2, ...)</param>
+    Private Sub SQLInsert(ByVal InsertTable As String, InsertColumn As String, InsertValues As String)
         Try
             DBConnect()
             Dim SqlCom As New MySqlCommand("INSERT INTO " & InsertTable & InsertColumn & " VALUES " &
                 InsertValues, tilkobling)
             SqlCom.ExecuteNonQuery()
             DBDisconnect()
-            MsgBox("Registrering vellykket.")
+            'MsgBox("Registrering vellykket.")
         Catch ex As MySqlException
             MsgBox("Feil med spørring mot database:" & vbNewLine & ex.Message)
         End Try
-    End Function
+    End Sub
 
 
 #End Region
@@ -1166,7 +1182,8 @@ Public Class Form1
                 Dim InvKategori, InvSubkategori, InvAvdelingNavn, InvProduktnavn, InvVarenummer,
                     InvInnkjopspris, InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandlerNavn,
                     InvStatus, InvSkadet, InvSavnet, InvForhandlerID, InvAvdelingID, InvSubKategoriID,
-                    InvRegistrerSporring, InvSykkelID, InvSisteID As String
+                    InvRegistrerSporring, InvSykkelID, InvSisteID, InvRegKolonner, InvRegTabell,
+                    InvRegVerdier As String
 
                 Dim InvSqlRegistrer As MySqlCommand
                 Dim InvBekreftSykkelReg As DialogResult
@@ -1192,18 +1209,17 @@ Public Class Form1
                 InvBekreftSykkelReg = MsgBox("Bekreft registrering av sykkel", MsgBoxStyle.OkCancel)
                 If InvBekreftSykkelReg = DialogResult.OK Then
 
-                    InvRegistrerSporring = "INSERT INTO sykler (forhandler_id, type_id, avdeling_id, sykkel_navn, " &
-                    "sykkel_modell, sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)" _
-                    & "VALUES ('" + InvForhandlerID & "', '" & InvSubKategoriID & "', '" _
+
+                    InvRegKolonner = "(forhandler_id, type_id, avdeling_id, sykkel_navn, sykkel_modell, " &
+                        "sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)"
+                    InvRegTabell = "sykler"
+                    InvRegVerdier = "('" + InvForhandlerID & "', '" & InvSubKategoriID & "', '" _
                     & InvAvdelingID + "', '" & InvProduktnavn & "', '" & InvVarenummer & "', '" _
                     & InvInnkjopspris & "', '" & InvStatus & "', '" & InvHjulstorrlese & "', '" _
-                    & InvRamme & "', '" & InvGirsystem & "', '" & InvSavnet & "', '" & InvSkadet & "');"
-                    Try
-                        DBConnect()
-                        InvSqlRegistrer = New MySqlCommand(InvRegistrerSporring, tilkobling)
-                        InvSqlRegistrer.ExecuteNonQuery()
-                        DBDisconnect()
+                    & InvRamme & "', '" & InvGirsystem & "', '" & InvSavnet & "', '" & InvSkadet & "')"
 
+                    Try
+                        SQLInsert(InvRegTabell, InvRegKolonner, InvRegVerdier)
                         DBConnect()
                         InvSisteID = "SELECT LAST_INSERT_ID();"
                         Dim InvSqlLeser As MySqlDataReader
@@ -1217,7 +1233,9 @@ Public Class Form1
 
                         'Registerer valgt utstyr på siste sykkelID
                         If ChkInvBarneHenger.Checked = True Then
-                            InvRegUtstyrSykkel(InvSykkelID, 4)
+
+                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 4)")
+                            'InvRegUtstyrSykkel(InvSykkelID, 4)
                         End If
                         If ChkInvBarnesete.Checked = True Then
                             InvRegUtstyrSykkel(InvSykkelID, 3)
