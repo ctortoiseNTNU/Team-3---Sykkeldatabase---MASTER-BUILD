@@ -100,7 +100,7 @@ Public Class Form1
     End Function
 
 
-    'OBS OBS OBS, Da dette referers til må du huske på ' på slutten og starten av WhereEquals strengen HVIS SqlDataType er ikke INT.
+
     Private Function SQLWhereSelect(ByVal TableString As String, WhereColumn As String, WhereEquals As String) As DataTable
         Try
             DBConnect()
@@ -1819,8 +1819,6 @@ Public Class Form1
     'Hvis passordfeltet er tom, så byttes ikke passordet. AEB1 : Update Bruker AEB3 : Update Passord AEB4 : Hent avdelingid
 
     Private Sub AdminEndreBruker()
-        Dim EBInputSjekk As Boolean
-
 
         TxtAdminEBPassord.Text = SQLWhiteWash(TxtAdminEBPassord.Text)
         TxtAdminEBFornavn.Text = SQLWhiteWash(TxtAdminEBFornavn.Text)
@@ -1885,55 +1883,40 @@ Public Class Form1
     Private Sub AdminLastInnEndreBruker()
 
         TxtAdminEBBID.Text = SQLWhiteWash(TxtAdminEBBID.Text)
+        Dim EBSPString As String = ""
+        Dim AdminEBBIDTable As New DataTable
+        Dim AdminEBAvdelingID As String = ""
+        AdminEBBIDTable = SQLWhereSelect("brukere", "bruker_id", TxtAdminEBBID.Text)
+        Dim AdminEBBIDRow As DataRow
+        For Each AdminEBBIDRow In AdminEBBIDTable.Rows
 
-        Try
-            DBConnect()
-            Dim AdminEBBIDKommando As New MySqlCommand("Select * FROM brukere WHERE bruker_id =" & TxtAdminEBBID.Text & ";", tilkobling)
-            Dim AdminEBBIDAdapter As New MySqlDataAdapter
-            Dim AdminEBBIDTable As New DataTable
-            Dim AdminEBAvdelingID As String = ""
-            AdminEBBIDAdapter.SelectCommand = AdminEBBIDKommando
-            AdminEBBIDAdapter.Fill(AdminEBBIDTable)
-            DBDisconnect()
-            Dim EBSPString As String
-            Dim AdminEBBIDRow As DataRow
-            For Each AdminEBBIDRow In AdminEBBIDTable.Rows
-                TxtAdminEBFornavn.Text = AdminEBBIDRow("fornavn")
-                TxtAdminEBEtternavn.Text = AdminEBBIDRow("etternavn")
-                TxtAdminEBTime.Text = AdminEBBIDRow("timelonn")
-                TxtAdminEBEpost.Text = AdminEBBIDRow("epost")
-                TxtAdminEBTelefon.Text = AdminEBBIDRow("telefon")
-                CboAdminEBStilling.SelectedItem = AdminEBBIDRow("stilling")
-                EBSPString = AdminEBBIDRow("stilling_prosent")
-                CboAdminEBSP.SelectedItem = EBSPString
-                If AdminEBBIDRow("admin") = "1" Then
-                    ChkAdminEBAdmin.Checked = True
-                End If
-                AdminEBAvdelingID = AdminEBBIDRow("avdeling_id")
+            TxtAdminEBFornavn.Text = AdminEBBIDRow("fornavn")
+            TxtAdminEBEtternavn.Text = AdminEBBIDRow("etternavn")
+            TxtAdminEBTime.Text = AdminEBBIDRow("timelonn")
+            TxtAdminEBEpost.Text = AdminEBBIDRow("epost")
+            TxtAdminEBTelefon.Text = AdminEBBIDRow("telefon")
+            CboAdminEBStilling.SelectedItem = AdminEBBIDRow("stilling")
+            EBSPString = AdminEBBIDRow("stilling_prosent")
+            CboAdminEBSP.SelectedItem = EBSPString
+            If AdminEBBIDRow("admin") = "1" Then
+                ChkAdminEBAdmin.Checked = True
+            End If
+            AdminEBAvdelingID = AdminEBBIDRow("avdeling_id")
 
-            Next
+        Next
 
-            DBConnect()
-            Dim AdminEBAvdelingKom As New MySqlCommand("SELECT avd_navn FROM avdeling WHERE avdeling_id =" & AdminEBAvdelingID & ";", tilkobling)
-            Dim AdminEBAvdelingAdapter As New MySqlDataAdapter
-            Dim AdminEBAvdelingTable As New DataTable
-
-            AdminEBAvdelingAdapter.SelectCommand = AdminEBAvdelingKom
-            AdminEBAvdelingAdapter.Fill(AdminEBAvdelingTable)
-            DBDisconnect()
-
-            Dim AdminEBAvdelingRow As DataRow
+        Dim AdminEBAvdelingTable As New DataTable
+        AdminEBAvdelingTable = SQLWhereSelect("avdeling", "avdeling_id", AdminEBAvdelingID)
+        Dim AdminEBAvdelingRow As DataRow
 
             For Each AdminEBAvdelingRow In AdminEBAvdelingTable.Rows
                 CboAdminEBAvdeling.SelectedItem = AdminEBAvdelingRow("avd_navn")
             Next
 
-            If TxtAdminEBFornavn.Text = "" Then
-                MsgBox("Brukeren med ID: " & TxtAdminEBBID.Text & " eksisterer ikke.")
-            End If
-        Catch AdminSqlError7 As MySqlException
-            MsgBox("Man får ikke koble til databasen:  " & AdminSqlError7.Message)
-        End Try
+        If TxtAdminEBFornavn.Text = "" Then
+            MsgBox("Brukeren med ID: " & TxtAdminEBBID.Text & " eksisterer ikke.")
+        End If
+
     End Sub
 
     'Dette er en prosedyre som kjører på hvert lasting av Adminside og ved lagring av ny bruker.
