@@ -104,10 +104,22 @@ Public Class Form1
     Private Function SQLWhereSelect(ByVal TableString As String, WhereColumn As String, WhereEquals As String) As DataTable
         Try
             DBConnect()
-            Dim SqlWhereKommando As New MySqlCommand("SELECT * FROM " & TableString & " WHERE " & WhereColumn & "=" & WhereEquals, tilkobling)
+
+            Dim SqlWhereIntKommando As New MySqlCommand("SELECT * FROM " & TableString & " WHERE " & WhereColumn & "=" & WhereEquals, tilkobling)
+            Dim SqlWhereKommando As New MySqlCommand("SELECT * FROM " & TableString & " WHERE " & WhereColumn & "='" & WhereEquals & "'", tilkobling)
             Dim SqlWhereAdapter As New MySqlDataAdapter
             Dim SqlWhereTable As New DataTable
-            SqlWhereAdapter.SelectCommand = SqlWhereKommando
+
+            If IsNumeric(WhereEquals) Then
+
+                SqlWhereAdapter.SelectCommand = SqlWhereIntKommando
+
+            Else
+
+                SqlWhereAdapter.SelectCommand = SqlWhereKommando
+
+            End If
+
             SqlWhereAdapter.Fill(SqlWhereTable)
             DBDisconnect()
 
