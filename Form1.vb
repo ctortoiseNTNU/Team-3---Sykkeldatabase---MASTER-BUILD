@@ -1182,8 +1182,7 @@ Public Class Form1
                 Dim InvKategori, InvSubkategori, InvAvdelingNavn, InvProduktnavn, InvVarenummer,
                     InvInnkjopspris, InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandlerNavn,
                     InvStatus, InvSkadet, InvSavnet, InvForhandlerID, InvAvdelingID, InvSubKategoriID,
-                    InvRegistrerSporring, InvSykkelID, InvSisteID, InvRegKolonner, InvRegTabell,
-                    InvRegVerdier As String
+                    InvSykkelID, InvSisteID, InvRegKolonner, InvRegTabell, InvRegVerdier As String
 
                 Dim InvSqlRegistrer As MySqlCommand
                 Dim InvBekreftSykkelReg As DialogResult
@@ -1233,18 +1232,16 @@ Public Class Form1
 
                         'Registerer valgt utstyr på siste sykkelID
                         If ChkInvBarneHenger.Checked = True Then
-
                             SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 4)")
-                            'InvRegUtstyrSykkel(InvSykkelID, 4)
                         End If
                         If ChkInvBarnesete.Checked = True Then
-                            InvRegUtstyrSykkel(InvSykkelID, 3)
+                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 3)")
                         End If
                         If ChkInvLastehenger.Checked = True Then
-                            InvRegUtstyrSykkel(InvSykkelID, 5)
+                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 5)")
                         End If
                         If ChkInvSykkelveske.Checked = True Then
-                            InvRegUtstyrSykkel(InvSykkelID, 2)
+                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 2)")
                         End If
 
                         MsgBox("Registrering av sykkel vellykket")
@@ -1401,6 +1398,8 @@ Public Class Form1
 
             Dim InvResultatArray(12) As String
             Dim InvResultatObjekt As ListViewItem
+
+
 
             'Sender spørring for søk basert på innlagte data i skjema. Skriver ut returnerte rader til listview 
             Try
@@ -1641,18 +1640,21 @@ Public Class Form1
             Dim InvSpHentUtstyrKatSykkel As String = "SELECT utstyr_kat_id FROM sykkel_utstyr WHERE sykkel_id=" _
                 & InvAktivtProduktID
 
-            Try
-                DBConnect()
-                InvSqlCom = New MySqlCommand(InvSpHentSykkel, tilkobling)
-                InvSqlDA.SelectCommand = InvSqlCom
-                InvSqlDA.Fill(InvHentDaT)
-                InvSqlCom = New MySqlCommand(InvSpHentUtstyrKatSykkel, tilkobling)
-                InvSqlDA.SelectCommand = InvSqlCom
-                InvSqlDA.Fill(InvHentUtstyrKatDaT)
-                DBDisconnect()
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+            SQLSelect("sykler", "*", "sykkel_id ='" & InvAktivtProduktID & "';")
+            SQLSelect("sykkel_utstyr", "utstyr_kat_id", "sykkel_id=" & InvAktivtProduktID)
+
+            'Try
+            '    DBConnect()
+            '    InvSqlCom = New MySqlCommand(InvSpHentSykkel, tilkobling)
+            '    InvSqlDA.SelectCommand = InvSqlCom
+            '    InvSqlDA.Fill(InvHentDaT)
+            '    InvSqlCom = New MySqlCommand(InvSpHentUtstyrKatSykkel, tilkobling)
+            '    InvSqlDA.SelectCommand = InvSqlCom
+            '    InvSqlDA.Fill(InvHentUtstyrKatDaT)
+            '    DBDisconnect()
+            'Catch ex As Exception
+            '    MsgBox(ex.Message)
+            'End Try
 
             'Setter verdier i skjema basert på spørring. For fremmednøkler lagres ID for uthenting av navn.
             'Bool verdier lagres for setting av korrekt index i combobox i senere steg
@@ -1685,7 +1687,7 @@ Public Class Form1
                     End If
                 Next
             Catch ex As Exception
-                MsgBox("Innlegg av data i skjema: " & ex.Message)
+                MsgBox("Innlegg av data i skjema:   " & ex.Message)
             End Try
 
             InvSubkategoriNavn = InvHentSubkategoriNavn(InvSubkategoriID)
@@ -2113,7 +2115,7 @@ Public Class Form1
         Dim AdminAvdelingRow As DataRow
         Dim AdminAvdelingString As String
 
-        AdminAvdelingTable = SQLSelect(AdminAvdelingFString, AdminAvdelingFString, "1")
+        AdminAvdelingTable = SQLSelect(AdminAvdelingFString, "avd_navn", "1")
         CboAdminNBAvdeling.Items.Clear()
         CboAdminEBAvdeling.Items.Clear()
 
