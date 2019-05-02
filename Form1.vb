@@ -203,8 +203,10 @@ Public Class Form1
     'Husk kode kommentarer.
 
     'Utstyr tilgjengelig for valgt sykkel kan legges i combobox som populeres automatisk ?
+
     Dim UtlKndSok As Integer
 
+    'prosedyre for reset
     Private Sub UtleieTomFelt()
         CboUtlKat.SelectedIndex = -1
         CboUtlRabatt.SelectedIndex = -1
@@ -225,10 +227,11 @@ Public Class Form1
         LblUtleieKlokke.Text = Format(Now, "HH:mm:ss")
     End Sub
 
+    'kundesøk
     Private Sub BtnUtleieKundeSok_Click(sender As Object, e As EventArgs) Handles BtnUtleieKundeSok.Click
         LvUtleieKunde.Items.Clear()
 
-        If IsNumeric(TxtUtleieKundeSok.Text) And TxtUtleieKundeSok.Text <> "" And TxtUtleieKundeSok.Text.Length = 8 Then
+        If IsNumeric(TxtUtleieKundeSok.Text) And TxtUtleieKundeSok.Text <> "" And TxtUtleieKundeSok.Text.Length >= 8 Then
             UtlKndSok = SQLWhiteWash(TxtUtleieKundeSok.Text)
         Else
             MsgBox("Vennligst skriv inn et gyldig mobilnummer, 8 siffer")
@@ -256,7 +259,7 @@ Public Class Form1
             LvUtleieKunde.Items.Clear()
 
             ' sjekker om datatable gir et tomt svar. Gir beskjed om kunde ikke finnes fra før, og hopper til kundemenyen.
-            If UtleieSøkTable.Rows.Count = 0 Then
+            If UtleieSøkTable.Rows.Count = 0 And TxtUtleieKundeSok.Text <> "" Then
                 MsgBox("Ingen kunder med dette nummeret er registrert. Registrer ny kunde")
                 BtnUtleieNyKunde.PerformClick()
             Else
@@ -288,10 +291,124 @@ Public Class Form1
         HovedTab.SelectTab(KDTab)
         TxtKndTlf.Text = TxtUtleieKundeSok.Text
     End Sub
-
+    'tøm felt knappen
     Private Sub BtnUtlAbort_Click(sender As Object, e As EventArgs) Handles BtnUtlAbort.Click
         UtleieTomFelt()
     End Sub
+
+    'Fyller combobox med avdelinger som er registrert i database
+    Private Sub CboUtlAvd_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlAvd.DropDown
+        UtlAutoPopCbo(sender, "avdeling", "avd_navn")
+    End Sub
+
+    'autofyll av ramme boks fra database.
+    ' denne skal hente ramme fra valgt sykkeltype
+    Private Sub CboUtlRamme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
+        UtlAutoPopCbo(sender, "sykler", "sykkel_ramme")
+    End Sub
+
+    'autofyll av hjul combobox. 
+    'Denne skal hente ramme fra valgt sykkel og ramme kombinasjon.
+    Private Sub CboUtlHjulStr_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlHjulStr.DropDown
+        UtlAutoPopCbo(sender, "sykler", "hjul_str")
+    End Sub
+
+    'hva som skjer når hovedkategori endres
+    Private Sub CboUtlKat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlKat.SelectedIndexChanged
+        'Dropdownlisten Subkategori endrer kategorier (leses fra databasen) _
+        'basert på om det er sykkel eller utstyr som er valgt.
+        'ramme og hjul valg deaktiveres om det er valgt utstyr.
+
+        If CboUtlKat.SelectedItem = "Utstyr" Then
+
+            CboUtlRamme.Enabled = False
+            CboUtlHjulStr.Enabled = False
+            'LvUtlVarer.Columns.Clear()
+            CboUtlSubkat.Items.Clear()
+            CboUtlRamme.Items.Clear()
+            CboUtlHjulStr.Items.Clear()
+            UtlAutoPopUtstyr()
+        Else
+
+            'LvUtlVarer.Items.Clear()
+            CboUtlRamme.Enabled = True
+            CboUtlHjulStr.Enabled = True
+            CboUtlSubkat.Items.Clear()
+            CboUtlRamme.Items.Clear()
+            CboUtlHjulStr.Items.Clear()
+            UtlAutoPopSykkel()
+        End If
+    End Sub
+   
+
+    'Metode som fyller combobox (som kaller) med data fra database.
+    'Tabell og kolonne det skal leses fra må angis som argumenter.
+    Private Sub UtlAutoPopCbo(sender, tabell, kolonne)
+        Try
+            DBConnect()
+            Dim UtlSqlCom As New MySqlCommand("SELECT " & kolonne & " FROM " & tabell, tilkobling)
+            Dim UtlSqlDA As New MySqlDataAdapter
+            Dim UtlUtstyrComboDaT As New DataTable
+            UtlSqlDA.SelectCommand = UtlSqlCom
+            UtlSqlDA.Fill(UtlUtstyrComboDaT)
+            DBDisconnect()
+            sender.Items.Clear()
+            Dim UtlUtstyrRow As DataRow
+            Dim UtlUtstyrString As String
+            For Each UtlUtstyrRow In UtlUtstyrComboDaT.Rows
+                UtlUtstyrString = UtlUtstyrRow(kolonne)
+                sender.Items.Add(UtlUtstyrString)
+            Next
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av " & CStr(sender) & ": " & ex.Message)
+        End Try
+    End Sub
+
+    'Combobox Subkategori styres av indexchanged på combobox kategori. Dermed vil et kall på UtlCboPop fra _
+    'combobox for kategori føre til endringer i kategori og ikke subkategori som ønsket.
+    'Derfor egne autopopulate for sykkel og utstyr.
+    Private Sub UtlAutoPopUtstyr()
+        Try
+            DBConnect()
+            Dim UtlSqlCom As New MySqlCommand("SELECT utstyr_kat FROM utstyr_kategori", tilkobling)
+            Dim UtlSqlDA As New MySqlDataAdapter
+            Dim UtlUtstyrComboDaT As New DataTable
+            UtlSqlDA.SelectCommand = UtlSqlCom
+            UtlSqlDA.Fill(UtlUtstyrComboDaT)
+            DBDisconnect()
+            CboUtlSubkat.Items.Clear()
+            Dim UtlUtstyrRow As DataRow
+            Dim UtlUtstyrString As String
+            For Each UtlUtstyrRow In UtlUtstyrComboDaT.Rows
+                UtlUtstyrString = UtlUtstyrRow("utstyr_kat")
+                CboUtlSubkat.Items.Add(UtlUtstyrString)
+            Next
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub UtlAutoPopSykkel()
+        Try
+            DBConnect()
+            Dim UtlSqlCom As New MySqlCommand("SELECT kategori FROM sykkel_typer", tilkobling)
+            Dim UtlSqlDA As New MySqlDataAdapter
+            Dim UtlSykkelComboDaT As New DataTable
+            UtlSqlDA.SelectCommand = UtlSqlCom
+            UtlSqlDA.Fill(UtlSykkelComboDaT)
+            DBDisconnect()
+            CboUtlSubkat.Items.Clear()
+            Dim UtlSykkelRow As DataRow
+            Dim UtlSykkelString As String
+            For Each UtlSykkelRow In UtlSykkelComboDaT.Rows
+                UtlSykkelString = UtlSykkelRow("kategori")
+                CboUtlSubkat.Items.Add(UtlSykkelString)
+            Next
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av sykkelkategorier: " & ex.Message)
+        End Try
+    End Sub
+
 
 
 #End Region
@@ -2073,6 +2190,23 @@ Public Class Form1
 
         AdminEndreBruker()
     End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

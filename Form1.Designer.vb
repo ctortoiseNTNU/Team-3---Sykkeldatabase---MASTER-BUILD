@@ -48,6 +48,10 @@ Partial Class Form1
         Me.UtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
+        Me.CboUtlHjulStr = New System.Windows.Forms.ComboBox()
+        Me.CboUtlRamme = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblUtlRamme = New System.Windows.Forms.Label()
         Me.LblUtlInfo = New System.Windows.Forms.Label()
         Me.TxtUtlAntall = New System.Windows.Forms.TextBox()
         Me.RdbUtlUke = New System.Windows.Forms.RadioButton()
@@ -472,7 +476,7 @@ Partial Class Form1
         '
         'BtnUtlAbort
         '
-        Me.BtnUtlAbort.BackColor = System.Drawing.Color.OrangeRed
+        Me.BtnUtlAbort.BackColor = System.Drawing.Color.Coral
         Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
         Me.BtnUtlAbort.Location = New System.Drawing.Point(635, 539)
         Me.BtnUtlAbort.Name = "BtnUtlAbort"
@@ -600,6 +604,10 @@ Partial Class Form1
         '
         'GrpUtleieProdukter
         '
+        Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlHjulStr)
+        Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlRamme)
+        Me.GrpUtleieProdukter.Controls.Add(Me.Label1)
+        Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlRamme)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlInfo)
         Me.GrpUtleieProdukter.Controls.Add(Me.TxtUtlAntall)
         Me.GrpUtleieProdukter.Controls.Add(Me.RdbUtlUke)
@@ -625,6 +633,47 @@ Partial Class Form1
         Me.GrpUtleieProdukter.TabIndex = 4
         Me.GrpUtleieProdukter.TabStop = False
         Me.GrpUtleieProdukter.Text = "Produkter:"
+        '
+        'CboUtlHjulStr
+        '
+        Me.CboUtlHjulStr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboUtlHjulStr.Font = New System.Drawing.Font("Calibri", 11.25!)
+        Me.CboUtlHjulStr.FormattingEnabled = True
+        Me.CboUtlHjulStr.Location = New System.Drawing.Point(126, 152)
+        Me.CboUtlHjulStr.Name = "CboUtlHjulStr"
+        Me.CboUtlHjulStr.Size = New System.Drawing.Size(121, 26)
+        Me.CboUtlHjulStr.TabIndex = 59
+        '
+        'CboUtlRamme
+        '
+        Me.CboUtlRamme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboUtlRamme.Font = New System.Drawing.Font("Calibri", 11.25!)
+        Me.CboUtlRamme.FormattingEnabled = True
+        Me.CboUtlRamme.Items.AddRange(New Object() {"Teste hardcode"})
+        Me.CboUtlRamme.Location = New System.Drawing.Point(126, 112)
+        Me.CboUtlRamme.Name = "CboUtlRamme"
+        Me.CboUtlRamme.Size = New System.Drawing.Size(121, 26)
+        Me.CboUtlRamme.TabIndex = 58
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(6, 152)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(88, 18)
+        Me.Label1.TabIndex = 57
+        Me.Label1.Text = "Hjulstørrelse"
+        '
+        'LblUtlRamme
+        '
+        Me.LblUtlRamme.AutoSize = True
+        Me.LblUtlRamme.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtlRamme.Location = New System.Drawing.Point(6, 116)
+        Me.LblUtlRamme.Name = "LblUtlRamme"
+        Me.LblUtlRamme.Size = New System.Drawing.Size(59, 18)
+        Me.LblUtlRamme.TabIndex = 56
+        Me.LblUtlRamme.Text = "Ramme:"
         '
         'LblUtlInfo
         '
@@ -724,18 +773,20 @@ Partial Class Form1
         '
         'CboUtlRabatt
         '
+        Me.CboUtlRabatt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboUtlRabatt.Font = New System.Drawing.Font("Calibri", 11.25!)
         Me.CboUtlRabatt.FormattingEnabled = True
         Me.CboUtlRabatt.Items.AddRange(New Object() {"5%", "10%", "15%", "20%", "25%", "30%"})
-        Me.CboUtlRabatt.Location = New System.Drawing.Point(126, 114)
+        Me.CboUtlRabatt.Location = New System.Drawing.Point(340, 216)
         Me.CboUtlRabatt.Name = "CboUtlRabatt"
-        Me.CboUtlRabatt.Size = New System.Drawing.Size(121, 31)
+        Me.CboUtlRabatt.Size = New System.Drawing.Size(121, 26)
         Me.CboUtlRabatt.TabIndex = 42
         '
         'LblUtsRabatt
         '
         Me.LblUtsRabatt.AutoSize = True
         Me.LblUtsRabatt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtsRabatt.Location = New System.Drawing.Point(6, 114)
+        Me.LblUtsRabatt.Location = New System.Drawing.Point(337, 191)
         Me.LblUtsRabatt.Name = "LblUtsRabatt"
         Me.LblUtsRabatt.Size = New System.Drawing.Size(108, 18)
         Me.LblUtsRabatt.TabIndex = 41
@@ -755,7 +806,7 @@ Partial Class Form1
         '
         'BtnUtlAddVare
         '
-        Me.BtnUtlAddVare.BackColor = System.Drawing.Color.LawnGreen
+        Me.BtnUtlAddVare.BackColor = System.Drawing.Color.MediumTurquoise
         Me.BtnUtlAddVare.Location = New System.Drawing.Point(467, 191)
         Me.BtnUtlAddVare.Name = "BtnUtlAddVare"
         Me.BtnUtlAddVare.Size = New System.Drawing.Size(126, 56)
@@ -998,12 +1049,13 @@ Partial Class Form1
         'LblUtleieKlokke
         '
         Me.LblUtleieKlokke.AutoSize = True
-        Me.LblUtleieKlokke.BackColor = System.Drawing.Color.Fuchsia
+        Me.LblUtleieKlokke.BackColor = System.Drawing.Color.LightBlue
         Me.LblUtleieKlokke.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold)
         Me.LblUtleieKlokke.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.LblUtleieKlokke.Location = New System.Drawing.Point(75, 93)
         Me.LblUtleieKlokke.Name = "LblUtleieKlokke"
-        Me.LblUtleieKlokke.Size = New System.Drawing.Size(58, 23)
+        Me.LblUtleieKlokke.Padding = New System.Windows.Forms.Padding(1)
+        Me.LblUtleieKlokke.Size = New System.Drawing.Size(60, 25)
         Me.LblUtleieKlokke.TabIndex = 4
         Me.LblUtleieKlokke.Text = "TidTxt"
         '
@@ -3869,4 +3921,8 @@ Partial Class Form1
     Friend WithEvents LblUtlRabatt As Label
     Friend WithEvents LblUtleieSum As Label
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents CboUtlHjulStr As ComboBox
+    Friend WithEvents CboUtlRamme As ComboBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents LblUtlRamme As Label
 End Class
