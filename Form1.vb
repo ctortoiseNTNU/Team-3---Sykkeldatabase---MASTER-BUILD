@@ -93,13 +93,31 @@ Public Class Form1
 
             Return SqlAllTable
 
-        Catch AdminSqlError As MySqlException
-            MsgBox("Man får ikke koble til databasen: " & AdminSqlError.Message)
+        Catch GlobalSqlError As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & GlobalSqlError.Message)
             Return Nothing
         End Try
     End Function
 
 
+    'OBS OBS OBS, Da dette referers til må du huske på ' på slutten og starten av WhereEquals strengen HVIS SqlDataType er ikke INT.
+    Private Function SQLWhereSelect(ByVal TableString As String, WhereColumn As String, WhereEquals As String) As DataTable
+        Try
+            DBConnect()
+            Dim SqlWhereKommando As New MySqlCommand("SELECT * FROM " & TableString & " WHERE " & WhereColumn & "=" & WhereEquals, tilkobling)
+            Dim SqlWhereAdapter As New MySqlDataAdapter
+            Dim SqlWhereTable As New DataTable
+            SqlWhereAdapter.SelectCommand = SqlWhereKommando
+            SqlWhereAdapter.Fill(SqlWhereTable)
+            DBDisconnect()
+
+            Return SqlWhereTable
+
+        Catch GlobalSqlError As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & GlobalSqlError.Message)
+            Return Nothing
+        End Try
+    End Function
 
 #End Region
 
@@ -1933,28 +1951,22 @@ Public Class Form1
     'Dette er en prosedyre som populerer ComboBoksene til avdelingene. Dette gir muligheten å velge riktig avdelingsnavn.
     'Comboboksene er tatt i bruk for å ha best mulig information hygiene på plass.
     Private Sub AdminAvdelingPopulate()
-        Try
-            DBConnect()
-            Dim AdminAvdelingKommando As New MySqlCommand("SELECT * FROM avdeling", tilkobling)
-            Dim AdminAvdelingAdapter As New MySqlDataAdapter
-            Dim AdminAvdelingTable As New DataTable
-            AdminAvdelingAdapter.SelectCommand = AdminAvdelingKommando
-            AdminAvdelingAdapter.Fill(AdminAvdelingTable)
-            DBDisconnect()
-            CboAdminNBAvdeling.Items.Clear()
-            CboAdminEBAvdeling.Items.Clear()
-            Dim AdminAvdelingRow As DataRow
-            Dim AdminAvdelingString As String
-            For Each AdminAvdelingRow In AdminAvdelingTable.Rows
-                AdminAvdelingString = AdminAvdelingRow("avd_navn")
-                CboAdminNBAvdeling.Items.Add(AdminAvdelingString)
-                CboAdminEBAvdeling.Items.Add(AdminAvdelingString)
-            Next
 
-        Catch AdminSqlError1 As MySqlException
-            MsgBox("Man får ikke koble til databasen: " & AdminSqlError1.Message)
+        Dim AdminAvdelingFString As String = "avdeling"
+        Dim AdminAvdelingTable As New DataTable
+        Dim AdminAvdelingRow As DataRow
+        Dim AdminAvdelingString As String
 
-        End Try
+        AdminAvdelingTable = SQLAllSelect(AdminAvdelingFString)
+        CboAdminNBAvdeling.Items.Clear()
+        CboAdminEBAvdeling.Items.Clear()
+
+        For Each AdminAvdelingRow In AdminAvdelingTable.Rows
+            AdminAvdelingString = AdminAvdelingRow("avd_navn")
+            CboAdminNBAvdeling.Items.Add(AdminAvdelingString)
+            CboAdminEBAvdeling.Items.Add(AdminAvdelingString)
+
+        Next
     End Sub
 
     'Dette er søkeboksprosedyren.
