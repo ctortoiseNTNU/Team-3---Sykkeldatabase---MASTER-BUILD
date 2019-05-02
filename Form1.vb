@@ -81,55 +81,53 @@ Public Class Form1
         End If
     End Function
 
-    Private Function SQLAllSelect(ByVal TableString As String) As DataTable
+    ''' <summary>
+    ''' SQL Select spørring som returnerer DataTable basert på søkekriterier.
+    ''' </summary>
+    ''' <param name="WhereTable">Tabell det skal søkes i</param>
+    ''' <param name="WhereColumn">Kolonner som skal inkluderes i søkeresultat.
+    ''' String = "column1, coulmn2, ..."''' </param>
+    ''' <param name="WhereCriteria">Kriterier for søk. Angis med alle søkeparametre etter WHERE.
+    ''' "column1='value1' AND column2=' ..."value2'</param>
+    ''' <returns>DataTabell med søkeresultat fra spørringen</returns>
+    Private Function SQLSelect(ByVal WhereTable As String, WhereColumn As String, WhereCriteria As String)
         Try
             DBConnect()
-            Dim SqlAllKommando As New MySqlCommand("SELECT * FROM " & TableString, tilkobling)
-            Dim SqlAllAdapter As New MySqlDataAdapter
-            Dim SqlAllTable As New DataTable
-            SqlAllAdapter.SelectCommand = SqlAllKommando
-            SqlAllAdapter.Fill(SqlAllTable)
-            DBDisconnect()
-
-            Return SqlAllTable
-
-        Catch GlobalSqlError As MySqlException
-            MsgBox("Man får ikke koble til databasen: " & GlobalSqlError.Message)
-            Return Nothing
-        End Try
-    End Function
-
-
-
-    Private Function SQLWhereSelect(ByVal TableString As String, WhereColumn As String, WhereEquals As String) As DataTable
-        Try
-            DBConnect()
-
-            Dim SqlWhereIntKommando As New MySqlCommand("SELECT * FROM " & TableString & " WHERE " & WhereColumn & "=" & WhereEquals, tilkobling)
-            Dim SqlWhereKommando As New MySqlCommand("SELECT * FROM " & TableString & " WHERE " & WhereColumn & "='" & WhereEquals & "'", tilkobling)
+            Dim SqlWhereKommando As New MySqlCommand("SELECT " & WhereColumn & " FROM " & WhereTable & " WHERE " _
+                & WhereCriteria, tilkobling)
             Dim SqlWhereAdapter As New MySqlDataAdapter
             Dim SqlWhereTable As New DataTable
-
-            If IsNumeric(WhereEquals) Then
-
-                SqlWhereAdapter.SelectCommand = SqlWhereIntKommando
-
-            Else
-
-                SqlWhereAdapter.SelectCommand = SqlWhereKommando
-
-            End If
-
+            SqlWhereAdapter.SelectCommand = SqlWhereKommando
             SqlWhereAdapter.Fill(SqlWhereTable)
             DBDisconnect()
-
             Return SqlWhereTable
-
         Catch GlobalSqlError As MySqlException
             MsgBox("Man får ikke koble til databasen: " & GlobalSqlError.Message)
             Return Nothing
         End Try
     End Function
+
+    ''' <summary>
+    ''' SQL Insert spørring som legger til kolonne i valgt tabell
+    ''' </summary>
+    ''' <param name="InsertTable">Tabell det skal legges inn i</param>
+    ''' <param name="InsertColumn">Kolonner som skal legges inn. Angis med parantes.
+    ''' (column1, column2, ...)</param>
+    ''' <param name="InsertValues">De verdier hver kolonne skal tillegges. Angis med parantes.
+    ''' (value1, value2, ...)</param>
+    Private Sub SQLInsert(ByVal InsertTable As String, InsertColumn As String, InsertValues As String)
+        Try
+            DBConnect()
+            Dim SqlCom As New MySqlCommand("INSERT INTO " & InsertTable & InsertColumn & " VALUES " &
+                InsertValues, tilkobling)
+            SqlCom.ExecuteNonQuery()
+            DBDisconnect()
+            'MsgBox("Registrering vellykket.")
+        Catch ex As MySqlException
+            MsgBox("Feil med spørring mot database:" & vbNewLine & ex.Message)
+        End Try
+    End Sub
+
 
 #End Region
 
@@ -388,7 +386,7 @@ Public Class Form1
             UtlAutoPopSykkel()
         End If
     End Sub
-   
+
 
     'Metode som fyller combobox (som kaller) med data fra database.
     'Tabell og kolonne det skal leses fra må angis som argumenter.
@@ -851,21 +849,7 @@ Public Class Form1
     'Prosedyrene under, InvHent__ID og InvHent__Navn er for å hente ID basert på Navn, og motsatt, i database.
     'Dette i forbindelse med registrering og endring av fremmednøkler.
 
-    Private Function InvSQLSelect(kolonne, tabell, kriterier)
-        Try
-            DBConnect()
-            Dim SqlCom As New MySqlCommand("SELECT " & kolonne & " FROM " & tabell & " WHERE " _
-                & kriterier, tilkobling)
-            Dim SqlDA As New MySqlDataAdapter
-            Dim ReturTabell As New DataTable
-            SqlDA.SelectCommand = SqlCom
-            SqlDA.Fill(ReturTabell)
-            DBDisconnect()
-            Return ReturTabell
-        Catch ex As MySqlException
-            MsgBox("Feil med spørring mot database:" & vbNewLine & ex.Message)
-        End Try
-    End Function
+
 
     Private Function InvHentForhandlerID(forhandlernavn)
         Dim InvForhandlerID As String = ""
@@ -1195,11 +1179,14 @@ Public Class Form1
                 CboInvSkadet.SelectedIndex = -1 Or CboInvSavnet.SelectedIndex = -1 Then
                 MsgBox("Vennligst fyll inn alle felt")
             Else
-                Dim InvKategori, InvSubkategori, InvAvdelingNavn, InvProduktnavn, InvVarenummer, InvInnkjopspris,
-            InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandlerNavn, InvStatus, InvSkadet, InvSavnet,
-            InvForhandlerID, InvAvdelingID, InvSubKategoriID, InvRegistrerSporring, InvSykkelID As String
+                Dim InvKategori, InvSubkategori, InvAvdelingNavn, InvProduktnavn, InvVarenummer,
+                    InvInnkjopspris, InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandlerNavn,
+                    InvStatus, InvSkadet, InvSavnet, InvForhandlerID, InvAvdelingID, InvSubKategoriID,
+                    InvRegistrerSporring, InvSykkelID, InvSisteID, InvRegKolonner, InvRegTabell,
+                    InvRegVerdier As String
 
                 Dim InvSqlRegistrer As MySqlCommand
+                Dim InvBekreftSykkelReg As DialogResult
 
                 InvKategori = CboInvKategori.SelectedItem
                 InvSubkategori = CboInvSubkategori.SelectedItem
@@ -1219,24 +1206,22 @@ Public Class Form1
                 InvAvdelingID = InvHentAvdelingID(InvAvdelingNavn)
                 InvSubKategoriID = InvHentSubkategoriID(InvSubkategori)
 
-                Dim InvBekreftSykkelReg As DialogResult
                 InvBekreftSykkelReg = MsgBox("Bekreft registrering av sykkel", MsgBoxStyle.OkCancel)
                 If InvBekreftSykkelReg = DialogResult.OK Then
 
-                    InvRegistrerSporring = "INSERT INTO sykler (forhandler_id, type_id, avdeling_id, sykkel_navn, " &
-                    "sykkel_modell, sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)" _
-                    & "VALUES ('" + InvForhandlerID & "', '" & InvSubKategoriID & "', '" _
+
+                    InvRegKolonner = "(forhandler_id, type_id, avdeling_id, sykkel_navn, sykkel_modell, " &
+                        "sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)"
+                    InvRegTabell = "sykler"
+                    InvRegVerdier = "('" + InvForhandlerID & "', '" & InvSubKategoriID & "', '" _
                     & InvAvdelingID + "', '" & InvProduktnavn & "', '" & InvVarenummer & "', '" _
                     & InvInnkjopspris & "', '" & InvStatus & "', '" & InvHjulstorrlese & "', '" _
-                    & InvRamme & "', '" & InvGirsystem & "', '" & InvSavnet & "', '" & InvSkadet & "');"
-                    Try
-                        DBConnect()
-                        InvSqlRegistrer = New MySqlCommand(InvRegistrerSporring, tilkobling)
-                        InvSqlRegistrer.ExecuteNonQuery()
-                        DBDisconnect()
+                    & InvRamme & "', '" & InvGirsystem & "', '" & InvSavnet & "', '" & InvSkadet & "')"
 
+                    Try
+                        SQLInsert(InvRegTabell, InvRegKolonner, InvRegVerdier)
                         DBConnect()
-                        Dim InvSisteID As String = "SELECT LAST_INSERT_ID();"
+                        InvSisteID = "SELECT LAST_INSERT_ID();"
                         Dim InvSqlLeser As MySqlDataReader
                         InvSqlRegistrer = New MySqlCommand(InvSisteID, tilkobling)
                         InvSqlLeser = InvSqlRegistrer.ExecuteReader()
@@ -1248,7 +1233,9 @@ Public Class Form1
 
                         'Registerer valgt utstyr på siste sykkelID
                         If ChkInvBarneHenger.Checked = True Then
-                            InvRegUtstyrSykkel(InvSykkelID, 4)
+
+                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 4)")
+                            'InvRegUtstyrSykkel(InvSykkelID, 4)
                         End If
                         If ChkInvBarnesete.Checked = True Then
                             InvRegUtstyrSykkel(InvSykkelID, 3)
@@ -1265,7 +1252,6 @@ Public Class Form1
                     Catch ex As MySqlException
                         MsgBox("Feil ved registrering av sykkel:" & vbNewLine & ex.Message)
                     End Try
-
                 End If
             End If
 
@@ -1276,44 +1262,42 @@ Public Class Form1
                 TxtInvInnkjopspris.Text.Trim = "" Then
                 MsgBox("Vennligst fyll inn alle felt")
             Else
-                Dim InvKategori, InvSubkategori, InvProduktnavn, InvVarenummer, InvInnkjopspris,
-           InvForhandlerNavn, InvForhandlerID, InvSubKategoriID, InvRegistrerSporring, InvSpForhandlerID As String
+                Dim InvKategori, InvSubkategoriNavn, InvSubKategoriID, InvForhandlerNavn, InvForhandlerID,
+                    InvProduktnavn, InvVarenummer, InvInnkjopspris, InvSpForhandlerID, InvSpSubkategoriID,
+                    InvKolonnerUtstyr, InvVerdierUtstyr As String
 
-                Dim InvSqlRegistrer As MySqlCommand
+                Dim InvBekreftUtstyrReg As DialogResult
+                Dim InvSubkategoriIDTabell, InvForhandlerIDTabell As DataTable
 
                 InvKategori = CboInvKategori.SelectedItem
-                InvSubkategori = CboInvSubkategori.SelectedItem
+                InvSubkategoriNavn = CboInvSubkategori.SelectedItem
+                InvForhandlerNavn = CboInvForhandler.SelectedItem
                 InvProduktnavn = SQLWhiteWash(TxtInvProduktnavn.Text.Trim)
                 InvVarenummer = SQLWhiteWash(TxtInvVareNummer.Text.Trim)
                 InvInnkjopspris = SQLWhiteWash(TxtInvInnkjopspris.Text.Trim)
-                InvForhandlerNavn = CboInvForhandler.SelectedItem
+
                 InvSpForhandlerID = "forhandler_navn='" & InvForhandlerNavn & "'"
-                'InvForhandlerID = InvHentForhandlerID(InvForhandlerNavn)
-                InvSubKategoriID = InvHentUtstyrKategoriID(InvSubkategori)
+                InvSpSubkategoriID = "utstyr_kat='" & InvSubkategoriNavn & "'"
 
+                InvSubkategoriIDTabell = SQLSelect("utstyr_kat_id", "utstyr_kategori",
+                     InvSpSubkategoriID)
+                InvForhandlerIDTabell = SQLSelect("forhandler_id", "forhandler",
+                    InvSpForhandlerID)
 
-                Dim InvForhandlerIDTabell As DataTable = InvSQLSelect("forhandler_id", "forhandler", InvSpForhandlerID)
+                For Each i In InvSubkategoriIDTabell.Rows
+                    InvSubKategoriID = i("utstyr_kat_id")
+                Next
                 For Each i In InvForhandlerIDTabell.Rows
                     InvForhandlerID = i("forhandler_id")
                 Next
 
-
-                Dim InvBekreftUtstyrReg As DialogResult
                 InvBekreftUtstyrReg = MsgBox("Bekreft registrering av utstyr", MsgBoxStyle.OkCancel)
                 If InvBekreftUtstyrReg = DialogResult.OK Then
-                    InvRegistrerSporring = "INSERT INTO utstyr (utstyr_navn, varenummer, utstyr_pris, " _
-                        & "forhandler_id, utstyr_kat_id)" & " VALUES('" & InvProduktnavn & "' ,'" & InvVarenummer _
-                        & "', '" & InvInnkjopspris & "', '" & InvForhandlerID & "', '" & InvSubKategoriID & "');"
-                    Try
-                        DBConnect()
-                        InvSqlRegistrer = New MySqlCommand(InvRegistrerSporring, tilkobling)
-                        InvSqlRegistrer.ExecuteNonQuery()
-                        DBDisconnect()
-                        MsgBox("Registrering vellykket")
-                        InvTomFelt()
-                    Catch ex As MySqlException
-                        MsgBox("Feil ved registrering av utstyr:" & vbNewLine & ex.Message)
-                    End Try
+                    InvKolonnerUtstyr = "(utstyr_navn, varenummer, utstyr_pris, " _
+                        & "forhandler_id, utstyr_kat_id)"
+                    InvVerdierUtstyr = "('" & InvProduktnavn & "' ,'" & InvVarenummer _
+                        & "', '" & InvInnkjopspris & "', '" & InvForhandlerID & "', '" & InvSubKategoriID & "')"
+                    SQLInsert(InvKolonnerUtstyr, "utstyr", InvVerdierUtstyr)
                 End If
             End If
         Else
@@ -2063,7 +2047,7 @@ Public Class Form1
         Dim EBSPString As String = ""
         Dim AdminEBBIDTable As New DataTable
         Dim AdminEBAvdelingID As String = ""
-        AdminEBBIDTable = SQLWhereSelect("brukere", "bruker_id", TxtAdminEBBID.Text)
+        AdminEBBIDTable = SQLSelect("*", "brukere", "bruker_id='" & TxtAdminEBBID.Text & "'")
         Dim AdminEBBIDRow As DataRow
         For Each AdminEBBIDRow In AdminEBBIDTable.Rows
 
@@ -2083,7 +2067,7 @@ Public Class Form1
         Next
 
         Dim AdminEBAvdelingTable As New DataTable
-        AdminEBAvdelingTable = SQLWhereSelect("avdeling", "avdeling_id", AdminEBAvdelingID)
+        AdminEBAvdelingTable = SQLSelect("*", "avdeling", "avdeling_id='" & AdminEBAvdelingID & "'")
         Dim AdminEBAvdelingRow As DataRow
 
         For Each AdminEBAvdelingRow In AdminEBAvdelingTable.Rows
@@ -2129,7 +2113,7 @@ Public Class Form1
         Dim AdminAvdelingRow As DataRow
         Dim AdminAvdelingString As String
 
-        AdminAvdelingTable = SQLAllSelect(AdminAvdelingFString)
+        AdminAvdelingTable = SQLSelect(AdminAvdelingFString, AdminAvdelingFString, "1")
         CboAdminNBAvdeling.Items.Clear()
         CboAdminEBAvdeling.Items.Clear()
 
