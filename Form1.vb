@@ -732,6 +732,23 @@ Public Class Form1
 
     'Prosedyrene under, InvHent__ID og InvHent__Navn er for å hente ID basert på Navn, og motsatt, i database.
     'Dette i forbindelse med registrering og endring av fremmednøkler.
+
+    Private Function InvSQLSelect(kolonne, tabell, kriterier)
+        Try
+            DBConnect()
+            Dim SqlCom As New MySqlCommand("SELECT " & kolonne & " FROM " & tabell & " WHERE " _
+                & kriterier, tilkobling)
+            Dim SqlDA As New MySqlDataAdapter
+            Dim ReturTabell As New DataTable
+            SqlDA.SelectCommand = SqlCom
+            SqlDA.Fill(ReturTabell)
+            DBDisconnect()
+            Return ReturTabell
+        Catch ex As MySqlException
+            MsgBox("Feil med spørring mot database:" & vbNewLine & ex.Message)
+        End Try
+    End Function
+
     Private Function InvHentForhandlerID(forhandlernavn)
         Dim InvForhandlerID As String = ""
         Dim InvForhandlerIDSporring As String = "SELECT forhandler_id FROM forhandler " _
@@ -939,7 +956,8 @@ Public Class Form1
             ChkInvSykkelveske.Enabled = False
             LvInvSok.Items.Clear()
             LvInvSok.Columns.Clear()
-            LvInvSok.Columns.AddRange(InvLvKolonnerUtstyr())
+            LvInvSok.Columns.AddRange(New ColumnHeader() {ID, Me.Produktnavn, Me.Kategori,
+                Me.Varenummer, Me.Innkjøpspris, Me.Forhandler})
             CboInvSubkategori.Items.Clear()
             InvAutoPopUtstyr()
         Else
@@ -956,7 +974,11 @@ Public Class Form1
             ChkInvSykkelveske.Enabled = True
             LvInvSok.Items.Clear()
             LvInvSok.Columns.Clear()
-            LvInvSok.Columns.AddRange(InvLvKolonnerSykkel())
+            'LvInvSok.Columns.AddRange(InvLvKolonnerSykkel())
+            LvInvSok.Columns.AddRange(New ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer,
+                        Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling,
+                        Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet})
+
             CboInvSubkategori.Items.Clear()
             InvAutoPopSykkel()
         End If
@@ -973,17 +995,6 @@ Public Class Form1
         Handles CboInvAvdeling.DropDown
         InvAutoPopCbo(sender, "avdeling", "avd_navn")
     End Sub
-
-    Private Function InvLvKolonnerUtstyr() As ColumnHeader()
-        Return New ColumnHeader() {ID, Me.Produktnavn, Me.Kategori,
-                Me.Varenummer, Me.Innkjøpspris, Me.Forhandler}
-    End Function
-
-    Private Function InvLvKolonnerSykkel() As ColumnHeader()
-        Return New ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer,
-                        Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling,
-                        Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet}
-    End Function
 
     'Metode som fyller combobox (som kaller) med data fra database.
     'Tabell og kolonne det skal leses fra må angis som argumenter.
@@ -1052,7 +1063,6 @@ Public Class Form1
             MsgBox("Feil med autoutfylling av sykkelkategorier: " & ex.Message)
         End Try
     End Sub
-
 
     'SQLspørring med registrering av nytt produkt basert på innlagt data i skjema.
     Private Sub BtnInvRegistrer_Click(sender As Object, e As EventArgs) Handles BtnInvRegistrer.Click
@@ -1149,7 +1159,7 @@ Public Class Form1
                 MsgBox("Vennligst fyll inn alle felt")
             Else
                 Dim InvKategori, InvSubkategori, InvProduktnavn, InvVarenummer, InvInnkjopspris,
-           InvForhandlerNavn, InvForhandlerID, InvSubKategoriID, InvRegistrerSporring As String
+           InvForhandlerNavn, InvForhandlerID, InvSubKategoriID, InvRegistrerSporring, InvSpForhandlerID As String
 
                 Dim InvSqlRegistrer As MySqlCommand
 
@@ -1159,9 +1169,16 @@ Public Class Form1
                 InvVarenummer = SQLWhiteWash(TxtInvVareNummer.Text.Trim)
                 InvInnkjopspris = SQLWhiteWash(TxtInvInnkjopspris.Text.Trim)
                 InvForhandlerNavn = CboInvForhandler.SelectedItem
-
-                InvForhandlerID = InvHentForhandlerID(InvForhandlerNavn)
+                InvSpForhandlerID = "forhandler_navn='" & InvForhandlerNavn & "'"
+                'InvForhandlerID = InvHentForhandlerID(InvForhandlerNavn)
                 InvSubKategoriID = InvHentUtstyrKategoriID(InvSubkategori)
+
+
+                Dim InvForhandlerIDTabell As DataTable = InvSQLSelect("forhandler_id", "forhandler", InvSpForhandlerID)
+                For Each i In InvForhandlerIDTabell.Rows
+                    InvForhandlerID = i("forhandler_id")
+                Next
+
 
                 Dim InvBekreftUtstyrReg As DialogResult
                 InvBekreftUtstyrReg = MsgBox("Bekreft registrering av utstyr", MsgBoxStyle.OkCancel)
@@ -1491,23 +1508,6 @@ Public Class Form1
 
     End Sub
 
-    'Avbryter endring av produkt. Ved innhenting av produkt, knappen "Hent" settes
-    '"Registrer" knappen til inaktiv for å unngå feilaktig dobbelregistrering av produkt.
-    'Ved å avbryte nullstilles skjema og knappen for registrering aktiveres.
-    Private Sub BtnInvAvbrytEndre_Click(sender As Object, e As EventArgs) Handles BtnInvAvbrytEndre.Click
-        BtnInvRegistrer.Enabled = True
-        BtnInvSok.Enabled = True
-        BtnInvEndre.Enabled = False
-        InvAktivtProduktID = ""
-        InvTomFelt()
-        LblInvAktivProdukt.Text = "Ingen aktive produkt"
-    End Sub
-
-    'Tømmer alle felt i skjema
-    Private Sub BtnInvTom_Click(sender As Object, e As EventArgs) Handles BtnInvTom.Click
-        InvTomFelt()
-    End Sub
-
     'Henter data for objekt med inntastet ID fra database og legger i skjema
     Private Sub BtnInvHent_Click(sender As Object, e As EventArgs) Handles BtnInvHent.Click
 
@@ -1647,6 +1647,25 @@ Public Class Form1
             MsgBox("Velg kategori")
         End If
     End Sub
+
+    'Avbryter endring av produkt. Ved innhenting av produkt, knappen "Hent", settes "Registrer" _
+    'knappen til inaktiv For å unngå feilaktig dobbelregistrering av produkt.
+    'Ved å avbryte nullstilles skjema og knappen for registrering aktiveres.
+    Private Sub BtnInvAvbrytEndre_Click(sender As Object, e As EventArgs) Handles BtnInvAvbrytEndre.Click
+        BtnInvRegistrer.Enabled = True
+        BtnInvSok.Enabled = True
+        BtnInvEndre.Enabled = False
+        InvAktivtProduktID = ""
+        InvTomFelt()
+        LblInvAktivProdukt.Text = "Ingen aktive produkt"
+    End Sub
+
+    'Tømmer alle felt i skjema
+    Private Sub BtnInvTom_Click(sender As Object, e As EventArgs) Handles BtnInvTom.Click
+        InvTomFelt()
+    End Sub
+
+
 
 
     ' - ----------------------- TEST TEST TEST - --------------------
@@ -1909,9 +1928,9 @@ Public Class Form1
         AdminEBAvdelingTable = SQLWhereSelect("avdeling", "avdeling_id", AdminEBAvdelingID)
         Dim AdminEBAvdelingRow As DataRow
 
-            For Each AdminEBAvdelingRow In AdminEBAvdelingTable.Rows
-                CboAdminEBAvdeling.SelectedItem = AdminEBAvdelingRow("avd_navn")
-            Next
+        For Each AdminEBAvdelingRow In AdminEBAvdelingTable.Rows
+            CboAdminEBAvdeling.SelectedItem = AdminEBAvdelingRow("avd_navn")
+        Next
 
         If TxtAdminEBFornavn.Text = "" Then
             MsgBox("Brukeren med ID: " & TxtAdminEBBID.Text & " eksisterer ikke.")
