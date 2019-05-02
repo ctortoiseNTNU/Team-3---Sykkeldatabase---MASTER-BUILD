@@ -456,6 +456,27 @@ Public Class Form1
         End Try
     End Sub
 
+    'Private Sub UtlAutoPopRamme()
+    '    Try
+    '        DBConnect()
+    '        Dim UtlSqlCom As New MySqlCommand("SELECT sykkel_ramme FROM sykler ", tilkobling)
+    '        Dim UtlSqlDA As New MySqlDataAdapter
+    '        Dim UtlRammeComboDaT As New DataTable
+    '        UtlSqlDA.SelectCommand = UtlSqlCom
+    '        UtlSqlDA.Fill(UtlRammeComboDaT)
+    '        DBDisconnect()
+    '        CboUtlRamme.Items.Clear()
+    '        Dim UtlRammeRow As DataRow
+    '        Dim UtlRammeString As String
+    '        For Each UtlRammeRow In UtlRammeComboDaT.Rows
+    '            UtlRammeString = UtlRammeRow("utstyr_kat")
+    '            CboUtlSubkat.Items.Add(UtlRammeString)
+    '        Next
+    '    Catch ex As MySqlException
+    '        MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
+    '    End Try
+    'End Sub
+
 
 
 #End Region
@@ -2261,6 +2282,8 @@ Public Class Form1
 
         AdminEndreBruker()
     End Sub
+
+
 
 
 
