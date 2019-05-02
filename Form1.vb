@@ -129,10 +129,10 @@ Public Class Form1
     End Sub
 
 
-    Private Function HentIDNavn(tabell, inn, ut, verdi)
-        'Dim InvUtstyrKategoriNavn As String = ""
-        Dim InvUtstyrKategoriNavnSporring As String = "SELECT " & ut & " FROM " & tabell &
-            " WHERE " & inn & "='" & verdi & "';"
+    Private Function SQLHentIDNavn(Tabell, KolonneInn, KolonneUt, Verdi)
+        Dim InvUtstyrKategoriNavnSporring As String = "SELECT " & KolonneUt & " FROM " & Tabell &
+            " WHERE " & KolonneInn & "='" & Verdi & "';"
+        Dim Result As String
         Dim InvSqlHent As MySqlCommand
         Dim InvSqlLeser As MySqlDataReader
         Try
@@ -140,11 +140,11 @@ Public Class Form1
             InvSqlHent = New MySqlCommand(InvUtstyrKategoriNavnSporring, tilkobling)
             InvSqlLeser = InvSqlHent.ExecuteReader()
             While InvSqlLeser.Read()
-                ut = InvSqlLeser("utstyr_kat")
+                Result = InvSqlLeser(KolonneUt)
             End While
             InvSqlLeser.Close()
             DBDisconnect()
-            Return ut
+            Return Result
         Catch ex As MySqlException
             MsgBox("Feil ved henting av navn/ID:" & vbNewLine & ex.Message)
         End Try
@@ -1041,28 +1041,6 @@ Public Class Form1
         End Try
     End Function
 
-    Private Function HentIDNavn(tabell, inn, ut, verdi)
-        'Dim InvUtstyrKategoriNavn As String = ""
-        Dim InvUtstyrKategoriNavnSporring As String = "SELECT " & ut & " FROM " & tabell &
-            " WHERE " & inn & "='" & verdi & "';"
-        Dim InvSqlHent As MySqlCommand
-        Dim InvSqlLeser As MySqlDataReader
-        Try
-            DBConnect()
-            InvSqlHent = New MySqlCommand(InvUtstyrKategoriNavnSporring, tilkobling)
-            InvSqlLeser = InvSqlHent.ExecuteReader()
-            While InvSqlLeser.Read()
-                ut = InvSqlLeser("utstyr_kat")
-            End While
-            InvSqlLeser.Close()
-            DBDisconnect()
-            Return ut
-        Catch ex As MySqlException
-            MsgBox("Feil ved henting av navn/ID:" & vbNewLine & ex.Message)
-        End Try
-    End Function
-
-
 
     'Tillater kun inntasting av tall i textbox for innkjøpspris
     Private Sub TxtInvInnkjopspris_Keypress(ByVal sender As Object, ByVal e As KeyPressEventArgs) _
@@ -1531,14 +1509,14 @@ Public Class Form1
         BtnInvRegistrer.Enabled = True
         BtnInvSok.Enabled = True
 
-        Dim InvKategori, InvSubkategori, InvAvdelingNavn, InvProduktnavn, InvVarenummer, InvInnkjopspris,
+        Dim InvKategori, InvSubkategoriNavn, InvAvdelingNavn, InvProduktnavn, InvVarenummer, InvInnkjopspris,
             InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandlerNavn, InvStatus, InvSkadet, InvSavnet,
             InvForhandlerID, InvAvdelingID, InvSubKategoriID, InvEndreSporring As String
 
         Dim InvSqlEndre As MySqlCommand
 
         InvKategori = CboInvKategori.SelectedItem
-        InvSubkategori = CboInvSubkategori.SelectedItem
+        InvSubkategoriNavn = CboInvSubkategori.SelectedItem
         InvAvdelingNavn = CboInvAvdeling.SelectedItem
         InvProduktnavn = SQLWhiteWash(TxtInvProduktnavn.Text.Trim)
         InvVarenummer = SQLWhiteWash(TxtInvVareNummer.Text.Trim)
@@ -1565,7 +1543,9 @@ Public Class Form1
                 Dim InvBekreftSykkelReg As DialogResult
                 InvBekreftSykkelReg = MsgBox("Bekreft endring av sykkel", MsgBoxStyle.OkCancel)
                 If InvBekreftSykkelReg = DialogResult.OK Then
-                    InvSubKategoriID = InvHentSubkategoriID(InvSubkategori)
+
+                    'InvSubKategoriID = HentIDNavn("utstyr_kategori", "utstyr_kat", "utstyr_kat_id", InvSubkategoriNavn)
+                    InvSubKategoriID = InvHentSubkategoriID(InvSubkategoriNavn)
                     InvAvdelingID = InvHentAvdelingID(InvAvdelingNavn)
                     InvForhandlerID = InvHentForhandlerID(InvForhandlerNavn)
                     InvEndreSporring = "UPDATE sykler SET sykkel_navn='" & InvProduktnavn _
@@ -1639,7 +1619,9 @@ Public Class Form1
                 InvBekreftSykkelReg = MsgBox("Bekreft endring av utstyr", MsgBoxStyle.OkCancel)
                 If InvBekreftSykkelReg = DialogResult.OK Then
                     InvForhandlerID = InvHentForhandlerID(InvForhandlerNavn)
-                    InvSubKategoriID = InvHentUtstyrKategoriID(InvSubkategori)
+                    'InvSubKategoriID = InvHentUtstyrKategoriID(InvSubkategoriNavn)
+                    InvSubKategoriID = HentIDNavn("utstyr_kategori", "utstyr_kat", "utstyr_kat_id", InvSubkategoriNavn)
+
                     InvEndreSporring = "UPDATE utstyr SET utstyr_navn='" & InvProduktnavn & "', varenummer='" _
                     & InvVarenummer & "', utstyr_pris='" & InvInnkjopspris & "', forhandler_id='" _
                     & InvForhandlerID & "', utstyr_kat_id='" & InvSubKategoriID & "' WHERE utstyr_id='" _
