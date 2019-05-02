@@ -81,7 +81,23 @@ Public Class Form1
         End If
     End Function
 
+    Private Function SQLAllSelect(ByVal TableString As String) As DataTable
+        Try
+            DBConnect()
+            Dim SqlAllKommando As New MySqlCommand("SELECT * FROM " & TableString, tilkobling)
+            Dim SqlAllAdapter As New MySqlDataAdapter
+            Dim SqlAllTable As New DataTable
+            SqlAllAdapter.SelectCommand = SqlAllKommando
+            SqlAllAdapter.Fill(SqlAllTable)
+            DBDisconnect()
 
+            Return SqlAllTable
+
+        Catch AdminSqlError As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError.Message)
+            Return Nothing
+        End Try
+    End Function
 
 #End Region
 
