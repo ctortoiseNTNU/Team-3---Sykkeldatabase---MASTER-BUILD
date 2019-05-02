@@ -213,12 +213,8 @@ Partial Class Form1
         Me.StatTab = New System.Windows.Forms.TabPage()
         Me.GrbStaMestLeid = New System.Windows.Forms.GroupBox()
         Me.LvStaMestUtleid = New System.Windows.Forms.ListView()
-        Me.ColumnHeader16 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader17 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader18 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.BtnStaGo = New System.Windows.Forms.Button()
-        Me.CmbStaAvdeling2 = New System.Windows.Forms.ComboBox()
-        Me.LblStaVelgAvd2 = New System.Windows.Forms.Label()
         Me.GrbStaTilgjengelig = New System.Windows.Forms.GroupBox()
         Me.LblStaVelgType = New System.Windows.Forms.Label()
         Me.CmbStaType = New System.Windows.Forms.ComboBox()
@@ -2167,75 +2163,36 @@ Partial Class Form1
         'GrbStaMestLeid
         '
         Me.GrbStaMestLeid.Controls.Add(Me.LvStaMestUtleid)
-        Me.GrbStaMestLeid.Controls.Add(Me.BtnStaGo)
-        Me.GrbStaMestLeid.Controls.Add(Me.CmbStaAvdeling2)
-        Me.GrbStaMestLeid.Controls.Add(Me.LblStaVelgAvd2)
         Me.GrbStaMestLeid.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrbStaMestLeid.Location = New System.Drawing.Point(675, 3)
         Me.GrbStaMestLeid.Name = "GrbStaMestLeid"
-        Me.GrbStaMestLeid.Size = New System.Drawing.Size(455, 341)
+        Me.GrbStaMestLeid.Size = New System.Drawing.Size(247, 341)
         Me.GrbStaMestLeid.TabIndex = 25
         Me.GrbStaMestLeid.TabStop = False
         Me.GrbStaMestLeid.Text = "Mest Utleide Sykler"
         '
         'LvStaMestUtleid
         '
-        Me.LvStaMestUtleid.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader16, Me.ColumnHeader17, Me.ColumnHeader18})
+        Me.LvStaMestUtleid.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader17, Me.ColumnHeader18})
         Me.LvStaMestUtleid.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LvStaMestUtleid.Location = New System.Drawing.Point(3, 120)
+        Me.LvStaMestUtleid.Location = New System.Drawing.Point(6, 39)
         Me.LvStaMestUtleid.Name = "LvStaMestUtleid"
-        Me.LvStaMestUtleid.Size = New System.Drawing.Size(449, 207)
+        Me.LvStaMestUtleid.Size = New System.Drawing.Size(235, 288)
         Me.LvStaMestUtleid.TabIndex = 29
         Me.LvStaMestUtleid.UseCompatibleStateImageBehavior = False
         Me.LvStaMestUtleid.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader16
-        '
-        Me.ColumnHeader16.Text = "Avdeling"
-        Me.ColumnHeader16.Width = 211
         '
         'ColumnHeader17
         '
         Me.ColumnHeader17.Text = "Sykkel type"
         Me.ColumnHeader17.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ColumnHeader17.Width = 123
+        Me.ColumnHeader17.Width = 121
         '
         'ColumnHeader18
         '
         Me.ColumnHeader18.Text = "Ganger utleid"
         Me.ColumnHeader18.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnHeader18.Width = 110
-        '
-        'BtnStaGo
-        '
-        Me.BtnStaGo.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnStaGo.Location = New System.Drawing.Point(317, 39)
-        Me.BtnStaGo.Name = "BtnStaGo"
-        Me.BtnStaGo.Size = New System.Drawing.Size(69, 26)
-        Me.BtnStaGo.TabIndex = 28
-        Me.BtnStaGo.Text = "Go!"
-        Me.BtnStaGo.UseVisualStyleBackColor = True
-        '
-        'CmbStaAvdeling2
-        '
-        Me.CmbStaAvdeling2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CmbStaAvdeling2.FormattingEnabled = True
-        Me.CmbStaAvdeling2.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
-        Me.CmbStaAvdeling2.Location = New System.Drawing.Point(169, 39)
-        Me.CmbStaAvdeling2.Name = "CmbStaAvdeling2"
-        Me.CmbStaAvdeling2.Size = New System.Drawing.Size(121, 26)
-        Me.CmbStaAvdeling2.TabIndex = 26
-        Me.CmbStaAvdeling2.Text = "Velg"
-        '
-        'LblStaVelgAvd2
-        '
-        Me.LblStaVelgAvd2.AutoSize = True
-        Me.LblStaVelgAvd2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStaVelgAvd2.Location = New System.Drawing.Point(6, 42)
-        Me.LblStaVelgAvd2.Name = "LblStaVelgAvd2"
-        Me.LblStaVelgAvd2.Size = New System.Drawing.Size(95, 18)
-        Me.LblStaVelgAvd2.TabIndex = 1
-        Me.LblStaVelgAvd2.Text = "Velg avdeling:"
         '
         'GrbStaTilgjengelig
         '
@@ -3573,7 +3530,6 @@ Partial Class Form1
         Me.GrpInvRegistrerEndre.PerformLayout()
         Me.StatTab.ResumeLayout(False)
         Me.GrbStaMestLeid.ResumeLayout(False)
-        Me.GrbStaMestLeid.PerformLayout()
         Me.GrbStaTilgjengelig.ResumeLayout(False)
         Me.GrbStaTilgjengelig.PerformLayout()
         Me.AdminTab.ResumeLayout(False)
@@ -3866,12 +3822,8 @@ Partial Class Form1
     Friend WithEvents CmbStaType As ComboBox
     Friend WithEvents GrbStaMestLeid As GroupBox
     Friend WithEvents LvStaMestUtleid As ListView
-    Friend WithEvents ColumnHeader16 As ColumnHeader
     Friend WithEvents ColumnHeader17 As ColumnHeader
     Friend WithEvents ColumnHeader18 As ColumnHeader
-    Friend WithEvents BtnStaGo As Button
-    Friend WithEvents CmbStaAvdeling2 As ComboBox
-    Friend WithEvents LblStaVelgAvd2 As Label
     Friend WithEvents Verksted As ColumnHeader
     Friend WithEvents ChkInvLastehenger As CheckBox
     Friend WithEvents ChkInvBarneHenger As CheckBox

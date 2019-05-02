@@ -189,7 +189,7 @@ Public Class Form1
             Case 6 'Bestemmer det som skjer etter man har valgt Statistikkmeny.
                 MsgBox("Statistikkmeny")
                 CmbStaAvdeling.Items.Clear()
-                CmbStaAvdeling2.Items.Clear()
+
                 CmbStaType.Items.Clear()
 
                 Dim StaLokasjoner = New String() {"Haugastøl", "Finse", "Flåm", "Voss", "Myrdal"}
@@ -198,12 +198,12 @@ Public Class Form1
 
                 For i As Integer = 0 To StaLokasjoner.Length - 1
                     CmbStaAvdeling.Items.Add(StaLokasjoner(i))
-                    CmbStaAvdeling2.Items.Add(StaLokasjoner(i))
+
                 Next
                 For j As Integer = 0 To StaSykkeltype.Length - 1
                     CmbStaType.Items.Add(StaSykkeltype(j))
                 Next
-
+                StaMestPopulaer()
 
             Case 7 'Bestemmer det som skjer etter man har valgt Adminmeny.
                 MsgBox("AdminMeny")
@@ -1852,9 +1852,12 @@ Public Class Form1
         Try
             DBConnect()
 
-            Dim sporring As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Ledig'", tilkobling)
-            Dim sporring2 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Utleid'", tilkobling)
-            Dim sporring3 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Verksted'", tilkobling)
+            Dim sporring As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
+                                             & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Ledig'", tilkobling)
+            Dim sporring2 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
+                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Utleid'", tilkobling)
+            Dim sporring3 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
+                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Verksted'", tilkobling)
             outputAntallSyklerLedig = sporring.ExecuteScalar()
             outputAntallSyklerUtleid = sporring2.ExecuteScalar()
             outputAntallSyklerVerksted = sporring3.ExecuteScalar()
@@ -1864,19 +1867,56 @@ Public Class Form1
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
         End Try
 
-
         LvStaTilgjengelig.Items.Clear()
-
         LvStaTilgjengelig.Items.Add(New ListViewItem({StaValgtAvdeling, StaSykkelType, outputAntallSyklerLedig, outputAntallSyklerUtleid, outputAntallSyklerVerksted}))
-
-
-
-
     End Sub
 
+    Private Sub StaMestPopulaer()
+        Dim StaAntSyklTyp As Integer
+        Try
+            DBConnect()
+
+            Dim sporring As New MySqlCommand("SELECT COUNT(*) AS c FROM sykkel_typer", tilkobling)
+            Dim StaTempVarSporring2 = sporring.ExecuteReader()
+            While StaTempVarSporring2.Read
+                StaAntSyklTyp = StaTempVarSporring2("c")
+            End While
+            DBDisconnect()
+            MsgBox(StaAntSyklTyp)
+        Catch feilmelding As MySqlException
+            MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+        End Try
+
+        Dim StaAntSykler(StaAntSyklTyp) As Integer
+        Dim StaTypeSykkel(StaAntSyklTyp) As String
+
+        Dim StaInputCommand As String = "select sykkel_typer.kategori, count(*) AS c from sykkel_typer join " _
+            & "sykler as s on sykkel_typer.type_id=s.type_id join utleie on s.sykkel_id=utleie.sykkel_id group by sykkel_typer.kategori"
+
+        Try
+            DBConnect()
+            Dim sporring As New MySqlCommand(StaInputCommand, tilkobling)
+            Dim StatempVarSporring = sporring.ExecuteReader()
+            Dim i = 0
+            While StatempVarSporring.Read
+
+                StaAntSykler(i) = StatempVarSporring("c")
+                StaTypeSykkel(i) = StatempVarSporring("kategori")
+
+                i = i + 1
+            End While
+
+            DBDisconnect()
 
 
+            For j As Integer = 0 To StaAntSykler.Length - 1
+                LvStaMestUtleid.Items.Add(New ListViewItem({StaTypeSykkel(j), StaAntSykler(j)}))
+            Next
 
+        Catch feilmelding As MySqlException
+            MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+        End Try
+    End Sub
 
 #End Region
 
@@ -2235,6 +2275,8 @@ Public Class Form1
 
         AdminEndreBruker()
     End Sub
+
+
 
 
 
