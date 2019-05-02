@@ -2029,7 +2029,7 @@ Public Class Form1
         Dim EBSPString As String = ""
         Dim AdminEBBIDTable As New DataTable
         Dim AdminEBAvdelingID As String = ""
-        AdminEBBIDTable = SQLWhereSelect("brukere", "bruker_id", TxtAdminEBBID.Text)
+        AdminEBBIDTable = SQLSelect("*", "brukere", "bruker_id='" & TxtAdminEBBID.Text & "'")
         Dim AdminEBBIDRow As DataRow
         For Each AdminEBBIDRow In AdminEBBIDTable.Rows
 
@@ -2049,7 +2049,7 @@ Public Class Form1
         Next
 
         Dim AdminEBAvdelingTable As New DataTable
-        AdminEBAvdelingTable = SQLWhereSelect("avdeling", "avdeling_id", AdminEBAvdelingID)
+        AdminEBAvdelingTable = SQLSelect("*", "avdeling", "avdeling_id='" & AdminEBAvdelingID & "'")
         Dim AdminEBAvdelingRow As DataRow
 
         For Each AdminEBAvdelingRow In AdminEBAvdelingTable.Rows
@@ -2095,7 +2095,7 @@ Public Class Form1
         Dim AdminAvdelingRow As DataRow
         Dim AdminAvdelingString As String
 
-        AdminAvdelingTable = SQLAllSelect(AdminAvdelingFString)
+        AdminAvdelingTable = SQLSelect(AdminAvdelingFString, AdminAvdelingFString, "1")
         CboAdminNBAvdeling.Items.Clear()
         CboAdminEBAvdeling.Items.Clear()
 
