@@ -1561,6 +1561,7 @@ Partial Class Form1
         '
         'CmbKndSok
         '
+        Me.CmbKndSok.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbKndSok.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbKndSok.FormattingEnabled = True
         Me.CmbKndSok.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
@@ -2222,13 +2223,13 @@ Partial Class Form1
         '
         'CmbStaType
         '
+        Me.CmbStaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbStaType.Font = New System.Drawing.Font("Calibri", 11.25!)
         Me.CmbStaType.FormattingEnabled = True
         Me.CmbStaType.Location = New System.Drawing.Point(169, 71)
         Me.CmbStaType.Name = "CmbStaType"
         Me.CmbStaType.Size = New System.Drawing.Size(121, 26)
         Me.CmbStaType.TabIndex = 30
-        Me.CmbStaType.Text = "Velg"
         '
         'LvStaTilgjengelig
         '
@@ -2282,6 +2283,7 @@ Partial Class Form1
         '
         'CmbStaAvdeling
         '
+        Me.CmbStaAvdeling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbStaAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbStaAvdeling.FormattingEnabled = True
         Me.CmbStaAvdeling.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
@@ -2289,7 +2291,6 @@ Partial Class Form1
         Me.CmbStaAvdeling.Name = "CmbStaAvdeling"
         Me.CmbStaAvdeling.Size = New System.Drawing.Size(121, 26)
         Me.CmbStaAvdeling.TabIndex = 26
-        Me.CmbStaAvdeling.Text = "Velg"
         '
         'LblStaVelgAvd
         '
@@ -2406,6 +2407,7 @@ Partial Class Form1
         '
         'CboAdminBSEtter
         '
+        Me.CboAdminBSEtter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboAdminBSEtter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminBSEtter.FormattingEnabled = True
         Me.CboAdminBSEtter.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
@@ -2515,6 +2517,7 @@ Partial Class Form1
         '
         'CboAdminEBSP
         '
+        Me.CboAdminEBSP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboAdminEBSP.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminEBSP.FormattingEnabled = True
         Me.CboAdminEBSP.Items.AddRange(New Object() {"30", "40", "50", "60", "70", "80", "90", "100"})
@@ -2525,6 +2528,7 @@ Partial Class Form1
         '
         'CboAdminEBStilling
         '
+        Me.CboAdminEBStilling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboAdminEBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminEBStilling.FormattingEnabled = True
         Me.CboAdminEBStilling.Items.AddRange(New Object() {"Butikkmedarbeider", "King Kong"})
@@ -2535,6 +2539,7 @@ Partial Class Form1
         '
         'CboAdminEBAvdeling
         '
+        Me.CboAdminEBAvdeling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboAdminEBAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminEBAvdeling.FormattingEnabled = True
         Me.CboAdminEBAvdeling.Location = New System.Drawing.Point(123, 195)
@@ -2779,6 +2784,7 @@ Partial Class Form1
         '
         'CboAdminNBSP
         '
+        Me.CboAdminNBSP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboAdminNBSP.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminNBSP.FormattingEnabled = True
         Me.CboAdminNBSP.Items.AddRange(New Object() {"30", "40", "50", "60", "70", "80", "90", "100"})
@@ -2789,6 +2795,7 @@ Partial Class Form1
         '
         'CboAdminNBStilling
         '
+        Me.CboAdminNBStilling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboAdminNBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminNBStilling.FormattingEnabled = True
         Me.CboAdminNBStilling.Items.AddRange(New Object() {"Butikkmedarbeider", "King Kong"})
@@ -2799,6 +2806,7 @@ Partial Class Form1
         '
         'CboAdminNBAvdeling
         '
+        Me.CboAdminNBAvdeling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboAdminNBAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminNBAvdeling.FormattingEnabled = True
         Me.CboAdminNBAvdeling.Location = New System.Drawing.Point(123, 195)
@@ -3049,6 +3057,7 @@ Partial Class Form1
         '
         'ComboBox1
         '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"avdeling_id", "avd_navn", "avd_adresse", "landsdel", "type_id", "sykkelkategori", "utstyr_kat_id", "utstyr_kat"})
@@ -3284,6 +3293,7 @@ Partial Class Form1
         '
         'CboDBALandsdel
         '
+        Me.CboDBALandsdel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboDBALandsdel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboDBALandsdel.FormattingEnabled = True
         Me.CboDBALandsdel.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
