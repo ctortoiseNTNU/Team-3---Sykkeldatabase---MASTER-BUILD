@@ -81,7 +81,55 @@ Public Class Form1
         End If
     End Function
 
+    Private Function SQLAllSelect(ByVal TableString As String) As DataTable
+        Try
+            DBConnect()
+            Dim SqlAllKommando As New MySqlCommand("SELECT * FROM " & TableString, tilkobling)
+            Dim SqlAllAdapter As New MySqlDataAdapter
+            Dim SqlAllTable As New DataTable
+            SqlAllAdapter.SelectCommand = SqlAllKommando
+            SqlAllAdapter.Fill(SqlAllTable)
+            DBDisconnect()
 
+            Return SqlAllTable
+
+        Catch GlobalSqlError As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & GlobalSqlError.Message)
+            Return Nothing
+        End Try
+    End Function
+
+
+
+    Private Function SQLWhereSelect(ByVal TableString As String, WhereColumn As String, WhereEquals As String) As DataTable
+        Try
+            DBConnect()
+
+            Dim SqlWhereIntKommando As New MySqlCommand("SELECT * FROM " & TableString & " WHERE " & WhereColumn & "=" & WhereEquals, tilkobling)
+            Dim SqlWhereKommando As New MySqlCommand("SELECT * FROM " & TableString & " WHERE " & WhereColumn & "='" & WhereEquals & "'", tilkobling)
+            Dim SqlWhereAdapter As New MySqlDataAdapter
+            Dim SqlWhereTable As New DataTable
+
+            If IsNumeric(WhereEquals) Then
+
+                SqlWhereAdapter.SelectCommand = SqlWhereIntKommando
+
+            Else
+
+                SqlWhereAdapter.SelectCommand = SqlWhereKommando
+
+            End If
+
+            SqlWhereAdapter.Fill(SqlWhereTable)
+            DBDisconnect()
+
+            Return SqlWhereTable
+
+        Catch GlobalSqlError As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & GlobalSqlError.Message)
+            Return Nothing
+        End Try
+    End Function
 
 #End Region
 
@@ -801,6 +849,23 @@ Public Class Form1
 
     'Prosedyrene under, InvHent__ID og InvHent__Navn er for å hente ID basert på Navn, og motsatt, i database.
     'Dette i forbindelse med registrering og endring av fremmednøkler.
+
+    Private Function InvSQLSelect(kolonne, tabell, kriterier)
+        Try
+            DBConnect()
+            Dim SqlCom As New MySqlCommand("SELECT " & kolonne & " FROM " & tabell & " WHERE " _
+                & kriterier, tilkobling)
+            Dim SqlDA As New MySqlDataAdapter
+            Dim ReturTabell As New DataTable
+            SqlDA.SelectCommand = SqlCom
+            SqlDA.Fill(ReturTabell)
+            DBDisconnect()
+            Return ReturTabell
+        Catch ex As MySqlException
+            MsgBox("Feil med spørring mot database:" & vbNewLine & ex.Message)
+        End Try
+    End Function
+
     Private Function InvHentForhandlerID(forhandlernavn)
         Dim InvForhandlerID As String = ""
         Dim InvForhandlerIDSporring As String = "SELECT forhandler_id FROM forhandler " _
@@ -1008,7 +1073,8 @@ Public Class Form1
             ChkInvSykkelveske.Enabled = False
             LvInvSok.Items.Clear()
             LvInvSok.Columns.Clear()
-            LvInvSok.Columns.AddRange(InvLvKolonnerUtstyr())
+            LvInvSok.Columns.AddRange(New ColumnHeader() {ID, Me.Produktnavn, Me.Kategori,
+                Me.Varenummer, Me.Innkjøpspris, Me.Forhandler})
             CboInvSubkategori.Items.Clear()
             InvAutoPopUtstyr()
         Else
@@ -1025,7 +1091,11 @@ Public Class Form1
             ChkInvSykkelveske.Enabled = True
             LvInvSok.Items.Clear()
             LvInvSok.Columns.Clear()
-            LvInvSok.Columns.AddRange(InvLvKolonnerSykkel())
+            'LvInvSok.Columns.AddRange(InvLvKolonnerSykkel())
+            LvInvSok.Columns.AddRange(New ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer,
+                        Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling,
+                        Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet})
+
             CboInvSubkategori.Items.Clear()
             InvAutoPopSykkel()
         End If
@@ -1042,17 +1112,6 @@ Public Class Form1
         Handles CboInvAvdeling.DropDown
         InvAutoPopCbo(sender, "avdeling", "avd_navn")
     End Sub
-
-    Private Function InvLvKolonnerUtstyr() As ColumnHeader()
-        Return New ColumnHeader() {ID, Me.Produktnavn, Me.Kategori,
-                Me.Varenummer, Me.Innkjøpspris, Me.Forhandler}
-    End Function
-
-    Private Function InvLvKolonnerSykkel() As ColumnHeader()
-        Return New ColumnHeader() {Me.ID, Me.Produktnavn, Me.Varenummer,
-                        Me.Kategori, Me.Ramme, Me.Girsystem, Me.Hjulstørrelse, Me.Innkjøpspris, Me.Avdeling,
-                        Me.Forhandler, Me.Status, Me.Skadet, Me.Savnet}
-    End Function
 
     'Metode som fyller combobox (som kaller) med data fra database.
     'Tabell og kolonne det skal leses fra må angis som argumenter.
@@ -1121,7 +1180,6 @@ Public Class Form1
             MsgBox("Feil med autoutfylling av sykkelkategorier: " & ex.Message)
         End Try
     End Sub
-
 
     'SQLspørring med registrering av nytt produkt basert på innlagt data i skjema.
     Private Sub BtnInvRegistrer_Click(sender As Object, e As EventArgs) Handles BtnInvRegistrer.Click
@@ -1218,7 +1276,7 @@ Public Class Form1
                 MsgBox("Vennligst fyll inn alle felt")
             Else
                 Dim InvKategori, InvSubkategori, InvProduktnavn, InvVarenummer, InvInnkjopspris,
-           InvForhandlerNavn, InvForhandlerID, InvSubKategoriID, InvRegistrerSporring As String
+           InvForhandlerNavn, InvForhandlerID, InvSubKategoriID, InvRegistrerSporring, InvSpForhandlerID As String
 
                 Dim InvSqlRegistrer As MySqlCommand
 
@@ -1228,9 +1286,16 @@ Public Class Form1
                 InvVarenummer = SQLWhiteWash(TxtInvVareNummer.Text.Trim)
                 InvInnkjopspris = SQLWhiteWash(TxtInvInnkjopspris.Text.Trim)
                 InvForhandlerNavn = CboInvForhandler.SelectedItem
-
-                InvForhandlerID = InvHentForhandlerID(InvForhandlerNavn)
+                InvSpForhandlerID = "forhandler_navn='" & InvForhandlerNavn & "'"
+                'InvForhandlerID = InvHentForhandlerID(InvForhandlerNavn)
                 InvSubKategoriID = InvHentUtstyrKategoriID(InvSubkategori)
+
+
+                Dim InvForhandlerIDTabell As DataTable = InvSQLSelect("forhandler_id", "forhandler", InvSpForhandlerID)
+                For Each i In InvForhandlerIDTabell.Rows
+                    InvForhandlerID = i("forhandler_id")
+                Next
+
 
                 Dim InvBekreftUtstyrReg As DialogResult
                 InvBekreftUtstyrReg = MsgBox("Bekreft registrering av utstyr", MsgBoxStyle.OkCancel)
@@ -1560,23 +1625,6 @@ Public Class Form1
 
     End Sub
 
-    'Avbryter endring av produkt. Ved innhenting av produkt, knappen "Hent" settes
-    '"Registrer" knappen til inaktiv for å unngå feilaktig dobbelregistrering av produkt.
-    'Ved å avbryte nullstilles skjema og knappen for registrering aktiveres.
-    Private Sub BtnInvAvbrytEndre_Click(sender As Object, e As EventArgs) Handles BtnInvAvbrytEndre.Click
-        BtnInvRegistrer.Enabled = True
-        BtnInvSok.Enabled = True
-        BtnInvEndre.Enabled = False
-        InvAktivtProduktID = ""
-        InvTomFelt()
-        LblInvAktivProdukt.Text = "Ingen aktive produkt"
-    End Sub
-
-    'Tømmer alle felt i skjema
-    Private Sub BtnInvTom_Click(sender As Object, e As EventArgs) Handles BtnInvTom.Click
-        InvTomFelt()
-    End Sub
-
     'Henter data for objekt med inntastet ID fra database og legger i skjema
     Private Sub BtnInvHent_Click(sender As Object, e As EventArgs) Handles BtnInvHent.Click
 
@@ -1716,6 +1764,25 @@ Public Class Form1
             MsgBox("Velg kategori")
         End If
     End Sub
+
+    'Avbryter endring av produkt. Ved innhenting av produkt, knappen "Hent", settes "Registrer" _
+    'knappen til inaktiv For å unngå feilaktig dobbelregistrering av produkt.
+    'Ved å avbryte nullstilles skjema og knappen for registrering aktiveres.
+    Private Sub BtnInvAvbrytEndre_Click(sender As Object, e As EventArgs) Handles BtnInvAvbrytEndre.Click
+        BtnInvRegistrer.Enabled = True
+        BtnInvSok.Enabled = True
+        BtnInvEndre.Enabled = False
+        InvAktivtProduktID = ""
+        InvTomFelt()
+        LblInvAktivProdukt.Text = "Ingen aktive produkt"
+    End Sub
+
+    'Tømmer alle felt i skjema
+    Private Sub BtnInvTom_Click(sender As Object, e As EventArgs) Handles BtnInvTom.Click
+        InvTomFelt()
+    End Sub
+
+
 
 
     ' - ----------------------- TEST TEST TEST - --------------------
@@ -1888,8 +1955,6 @@ Public Class Form1
     'Hvis passordfeltet er tom, så byttes ikke passordet. AEB1 : Update Bruker AEB3 : Update Passord AEB4 : Hent avdelingid
 
     Private Sub AdminEndreBruker()
-        Dim EBInputSjekk As Boolean
-
 
         TxtAdminEBPassord.Text = SQLWhiteWash(TxtAdminEBPassord.Text)
         TxtAdminEBFornavn.Text = SQLWhiteWash(TxtAdminEBFornavn.Text)
@@ -1954,55 +2019,40 @@ Public Class Form1
     Private Sub AdminLastInnEndreBruker()
 
         TxtAdminEBBID.Text = SQLWhiteWash(TxtAdminEBBID.Text)
+        Dim EBSPString As String = ""
+        Dim AdminEBBIDTable As New DataTable
+        Dim AdminEBAvdelingID As String = ""
+        AdminEBBIDTable = SQLWhereSelect("brukere", "bruker_id", TxtAdminEBBID.Text)
+        Dim AdminEBBIDRow As DataRow
+        For Each AdminEBBIDRow In AdminEBBIDTable.Rows
 
-        Try
-            DBConnect()
-            Dim AdminEBBIDKommando As New MySqlCommand("Select * FROM brukere WHERE bruker_id =" & TxtAdminEBBID.Text & ";", tilkobling)
-            Dim AdminEBBIDAdapter As New MySqlDataAdapter
-            Dim AdminEBBIDTable As New DataTable
-            Dim AdminEBAvdelingID As String = ""
-            AdminEBBIDAdapter.SelectCommand = AdminEBBIDKommando
-            AdminEBBIDAdapter.Fill(AdminEBBIDTable)
-            DBDisconnect()
-            Dim EBSPString As String
-            Dim AdminEBBIDRow As DataRow
-            For Each AdminEBBIDRow In AdminEBBIDTable.Rows
-                TxtAdminEBFornavn.Text = AdminEBBIDRow("fornavn")
-                TxtAdminEBEtternavn.Text = AdminEBBIDRow("etternavn")
-                TxtAdminEBTime.Text = AdminEBBIDRow("timelonn")
-                TxtAdminEBEpost.Text = AdminEBBIDRow("epost")
-                TxtAdminEBTelefon.Text = AdminEBBIDRow("telefon")
-                CboAdminEBStilling.SelectedItem = AdminEBBIDRow("stilling")
-                EBSPString = AdminEBBIDRow("stilling_prosent")
-                CboAdminEBSP.SelectedItem = EBSPString
-                If AdminEBBIDRow("admin") = "1" Then
-                    ChkAdminEBAdmin.Checked = True
-                End If
-                AdminEBAvdelingID = AdminEBBIDRow("avdeling_id")
-
-            Next
-
-            DBConnect()
-            Dim AdminEBAvdelingKom As New MySqlCommand("SELECT avd_navn FROM avdeling WHERE avdeling_id =" & AdminEBAvdelingID & ";", tilkobling)
-            Dim AdminEBAvdelingAdapter As New MySqlDataAdapter
-            Dim AdminEBAvdelingTable As New DataTable
-
-            AdminEBAvdelingAdapter.SelectCommand = AdminEBAvdelingKom
-            AdminEBAvdelingAdapter.Fill(AdminEBAvdelingTable)
-            DBDisconnect()
-
-            Dim AdminEBAvdelingRow As DataRow
-
-            For Each AdminEBAvdelingRow In AdminEBAvdelingTable.Rows
-                CboAdminEBAvdeling.SelectedItem = AdminEBAvdelingRow("avd_navn")
-            Next
-
-            If TxtAdminEBFornavn.Text = "" Then
-                MsgBox("Brukeren med ID: " & TxtAdminEBBID.Text & " eksisterer ikke.")
+            TxtAdminEBFornavn.Text = AdminEBBIDRow("fornavn")
+            TxtAdminEBEtternavn.Text = AdminEBBIDRow("etternavn")
+            TxtAdminEBTime.Text = AdminEBBIDRow("timelonn")
+            TxtAdminEBEpost.Text = AdminEBBIDRow("epost")
+            TxtAdminEBTelefon.Text = AdminEBBIDRow("telefon")
+            CboAdminEBStilling.SelectedItem = AdminEBBIDRow("stilling")
+            EBSPString = AdminEBBIDRow("stilling_prosent")
+            CboAdminEBSP.SelectedItem = EBSPString
+            If AdminEBBIDRow("admin") = "1" Then
+                ChkAdminEBAdmin.Checked = True
             End If
-        Catch AdminSqlError7 As MySqlException
-            MsgBox("Man får ikke koble til databasen:  " & AdminSqlError7.Message)
-        End Try
+            AdminEBAvdelingID = AdminEBBIDRow("avdeling_id")
+
+        Next
+
+        Dim AdminEBAvdelingTable As New DataTable
+        AdminEBAvdelingTable = SQLWhereSelect("avdeling", "avdeling_id", AdminEBAvdelingID)
+        Dim AdminEBAvdelingRow As DataRow
+
+        For Each AdminEBAvdelingRow In AdminEBAvdelingTable.Rows
+            CboAdminEBAvdeling.SelectedItem = AdminEBAvdelingRow("avd_navn")
+        Next
+
+        If TxtAdminEBFornavn.Text = "" Then
+            MsgBox("Brukeren med ID: " & TxtAdminEBBID.Text & " eksisterer ikke.")
+        End If
+
     End Sub
 
     'Dette er en prosedyre som kjører på hvert lasting av Adminside og ved lagring av ny bruker.
@@ -2032,28 +2082,22 @@ Public Class Form1
     'Dette er en prosedyre som populerer ComboBoksene til avdelingene. Dette gir muligheten å velge riktig avdelingsnavn.
     'Comboboksene er tatt i bruk for å ha best mulig information hygiene på plass.
     Private Sub AdminAvdelingPopulate()
-        Try
-            DBConnect()
-            Dim AdminAvdelingKommando As New MySqlCommand("SELECT * FROM avdeling", tilkobling)
-            Dim AdminAvdelingAdapter As New MySqlDataAdapter
-            Dim AdminAvdelingTable As New DataTable
-            AdminAvdelingAdapter.SelectCommand = AdminAvdelingKommando
-            AdminAvdelingAdapter.Fill(AdminAvdelingTable)
-            DBDisconnect()
-            CboAdminNBAvdeling.Items.Clear()
-            CboAdminEBAvdeling.Items.Clear()
-            Dim AdminAvdelingRow As DataRow
-            Dim AdminAvdelingString As String
-            For Each AdminAvdelingRow In AdminAvdelingTable.Rows
-                AdminAvdelingString = AdminAvdelingRow("avd_navn")
-                CboAdminNBAvdeling.Items.Add(AdminAvdelingString)
-                CboAdminEBAvdeling.Items.Add(AdminAvdelingString)
-            Next
 
-        Catch AdminSqlError1 As MySqlException
-            MsgBox("Man får ikke koble til databasen: " & AdminSqlError1.Message)
+        Dim AdminAvdelingFString As String = "avdeling"
+        Dim AdminAvdelingTable As New DataTable
+        Dim AdminAvdelingRow As DataRow
+        Dim AdminAvdelingString As String
 
-        End Try
+        AdminAvdelingTable = SQLAllSelect(AdminAvdelingFString)
+        CboAdminNBAvdeling.Items.Clear()
+        CboAdminEBAvdeling.Items.Clear()
+
+        For Each AdminAvdelingRow In AdminAvdelingTable.Rows
+            AdminAvdelingString = AdminAvdelingRow("avd_navn")
+            CboAdminNBAvdeling.Items.Add(AdminAvdelingString)
+            CboAdminEBAvdeling.Items.Add(AdminAvdelingString)
+
+        Next
     End Sub
 
     'Dette er søkeboksprosedyren.
