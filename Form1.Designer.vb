@@ -476,7 +476,7 @@ Partial Class Form1
         '
         'BtnUtlAbort
         '
-        Me.BtnUtlAbort.BackColor = System.Drawing.Color.Coral
+        Me.BtnUtlAbort.BackColor = System.Drawing.Color.OrangeRed
         Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
         Me.BtnUtlAbort.Location = New System.Drawing.Point(635, 539)
         Me.BtnUtlAbort.Name = "BtnUtlAbort"
@@ -962,7 +962,7 @@ Partial Class Form1
         '
         'BtnUtleieNyKunde
         '
-        Me.BtnUtleieNyKunde.BackColor = System.Drawing.Color.Orange
+        Me.BtnUtleieNyKunde.BackColor = System.Drawing.Color.DarkOrange
         Me.BtnUtleieNyKunde.Font = New System.Drawing.Font("Calibri", 14.25!)
         Me.BtnUtleieNyKunde.Location = New System.Drawing.Point(181, 90)
         Me.BtnUtleieNyKunde.Name = "BtnUtleieNyKunde"

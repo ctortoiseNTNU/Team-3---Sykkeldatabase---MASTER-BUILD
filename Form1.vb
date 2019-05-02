@@ -252,13 +252,13 @@ Public Class Form1
 
     'Utstyr tilgjengelig for valgt sykkel kan legges i combobox som populeres automatisk ?
 
-    Dim UtlKndSok As Integer
-
     'prosedyre for reset
     Private Sub UtleieTomFelt()
         CboUtlKat.SelectedIndex = -1
         CboUtlRabatt.SelectedIndex = -1
         CboUtlSubkat.SelectedIndex = -1
+        CboUtlRamme.SelectedIndex = -1
+        CboUtlHjulStr.SelectedIndex = -1
         TxtUtlAntall.Text = ""
         TxtUtleieKundeSok.Text = ""
         RdbUtlTimer.Checked = False
@@ -267,6 +267,8 @@ Public Class Form1
         DtpUtleieFra.Value = Now
         DtpUtleieTil.Value = Now
         LvUtleieKunde.Items.Clear()
+        LvUtleieOrdre.Items.Clear()
+        LvUtlVarer.Items.Clear()
 
     End Sub
 
@@ -276,6 +278,7 @@ Public Class Form1
     End Sub
 
     'kundesøk
+    Dim UtlKndSok As Integer
     Private Sub BtnUtleieKundeSok_Click(sender As Object, e As EventArgs) Handles BtnUtleieKundeSok.Click
         LvUtleieKunde.Items.Clear()
 
@@ -292,8 +295,6 @@ Public Class Form1
         Try
             DBConnect()
             Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE telefon =" & UtlKndSok & "", tilkobling)
-
-
 
             Dim UtleieSøkAdapter As New MySqlDataAdapter
             Dim UtleieSøkTable As New DataTable
