@@ -2384,7 +2384,6 @@ Public Class Form1
         LogBool = True
         FornavnString = LoginFornavn
         EtternavnString = LoginEtternavn
-        MsgBox(LoginAdminCheck)
         LoginSuccess()
     End Sub
 
@@ -2417,6 +2416,10 @@ Public Class Form1
 
     Private Sub BtnLoginLogin_Click(sender As Object, e As EventArgs) Handles BtnLoginLogin.Click
         LoginCheck()
+    End Sub
+
+    Private Sub BtnLoginAvslutt_Click(sender As Object, e As EventArgs) Handles BtnLoginAvslutt.Click
+        End
     End Sub
 #End Region
 End Class
