@@ -7,11 +7,13 @@ Public Class Form1
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
     'Globale variabler som må sjekkes ved ønsket tilgang. LogBool settes til TRUE ved inlogging, AdminBool settes til TRUE hvis bruker er admin.
 
-    Dim LogBool As Boolean
-    Dim AdminBool As Boolean
+    Dim LogBool As Boolean = False
+    Dim AdminBool As Boolean = False
+    Dim FornavnString As String = ""
+    Dim EtternavnString As String = ""
     Dim Tilkobling As MySqlConnection
     Dim InvAktivtProduktID As String
-
+    Dim SecurityCounter As Integer = 0
 
 
 #End Region
@@ -221,7 +223,20 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        StartMOTDUpdate()
+        With HovedTab.TabPages
+
+            .Remove(StartTab)
+            .Remove(UtleieTab)
+            .Remove(KDTab)
+            .Remove(InventarTab)
+            .Remove(LogiTab)
+            .Remove(StatTab)
+            .Remove(AdminTab)
+            .Remove(DBAdminTab)
+            HovedTab.SelectedTab = LoginTab
+
+        End With
+
 
     End Sub
 
@@ -240,8 +255,8 @@ Public Class Form1
 
         Select Case HovedTabIndex
             Case 1 'Bestemmer det som skjer etter man har valgt startmeny.
-                MsgBox("Startmeny")
-                StartMOTDUpdate()
+                'MsgBox("Startmeny")
+                'StartMOTDUpdate()
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
 
                 'MsgBox("Utleiemeny")
@@ -415,8 +430,117 @@ Public Class Form1
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
 
         End Try
+    End Sub
+
+    Private Sub BtnUtlAddVare_Click(sender As Object, e As EventArgs) Handles BtnUtlAddVare.Click
+        LvUtlVarer.Items.Clear()
+        varehent()
+    End Sub
+
+
+    Private Sub varehent()
+
+        'fyller varelistv. med data fra valgte bokser.
+        '''''''''''''''''''''''''''FROM          WHERE         SELECT    =    
+        'String = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", verdi)
+
+        Dim UtlKategori As String = CboUtlKat.SelectedItem
+        Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
+        Dim UtlRamme As String = CboUtlRamme.SelectedItem
+        Dim UtlHjul As String = CboUtlHjulStr.SelectedItem
+        Dim UtlSubkatID, SykkelIdRamme, SykkelIdHjul As String
+        Dim SykkelSQLKolonner = New String() {"sykkel_modell", "sykkel_navn", "sykkel_status", "kategori",
+                                              "sykkel_kat_timepris", "sykkel_kat_døgnpris", "sykkel_kat_ukepris"}
+
+        'henter typeID fra sykler og utstyr etter data fra subkategori
+        'hente varenummer fra sykler med valgt ramme og hjul
+
+        If UtlKategori = "Sykkel" Then
+            UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
+            SykkelIdRamme = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
+            SykkelIdHjul = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
+
+            Try
+                DBConnect()
+                Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
+                                          FROM sykler s JOIN sykkel_typer st
+                                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " ORDER BY sykkel_status", tilkobling)
+
+                'Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
+                '                           FROM sykler s JOIN sykkel_typer st
+                '                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " AND st.type_id =" & SykkelIdRamme & "
+                '                           ORDER BY sykkel_status", tilkobling)
+
+                Dim VaresøkAdapter As New MySqlDataAdapter
+                Dim VareSøkTable As New DataTable
+                VaresøkAdapter.SelectCommand = varer
+                VaresøkAdapter.Fill(VareSøkTable)
+
+                DBDisconnect()
+
+                Dim VareRow As DataRow
+                Dim Varenummer, Varenavn, Tilgjengelig As String
+
+                For Each VareRow In VareSøkTable.Rows
+                    Varenummer = VareRow("sykkel_modell")
+                    Varenavn = VareRow("sykkel_navn")
+                    Tilgjengelig = VareRow("sykkel_status")
+
+
+                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn, Tilgjengelig}))
+                Next
+
+            Catch feilmelding As MySqlException
+                MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+
+            End Try
+
+        Else
+            UtlSubkatID = SQLHentIDNavn("utstyr_kategori", "utstyr_kat", "utstyr_kat_id", UtlSubKategori)
+
+            Try
+                DBConnect()
+                Dim varer As New MySqlCommand("SELECT varenummer, utstyr_navn, utstyr_status 
+                                           FROM utstyr WHERE utstyr_id =" & UtlSubkatID & "
+                                            ORDER BY utstyr_status", tilkobling)
+
+                Dim VaresøkAdapter As New MySqlDataAdapter
+                Dim VareSøkTable As New DataTable
+                VaresøkAdapter.SelectCommand = varer
+                VaresøkAdapter.Fill(VareSøkTable)
+
+                DBDisconnect()
+
+                Dim VareRow As DataRow
+                Dim Varenummer, Varenavn, Tilgjengelig As String
+
+                For Each VareRow In VareSøkTable.Rows
+                    Varenummer = VareRow("varenummer")
+                    Varenavn = VareRow("utstyr_navn")
+                    Tilgjengelig = VareRow("utstyr_status")
+
+                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn, Tilgjengelig}))
+                Next
+
+            Catch feilmelding As MySqlException
+                MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+
+            End Try
+        End If
+
+
+
+
+
+
+
+
 
     End Sub
+
+
+
+
 
     ' hopp til kundetab. og ta med telefonnr
     Private Sub BtnUtleieNyKunde_Click(sender As Object, e As EventArgs) Handles BtnUtleieNyKunde.Click
@@ -436,7 +560,7 @@ Public Class Form1
     'autofyll av ramme boks fra database.
     ' denne skal hente ramme fra valgt sykkeltype
     Private Sub CboUtlRamme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
-        UtlAutoPopCbo(sender, "sykler", "sykkel_ramme")
+        UtlAutoPopRamme()
     End Sub
 
     'autofyll av hjul combobox. 
@@ -460,6 +584,7 @@ Public Class Form1
             CboUtlRamme.Items.Clear()
             CboUtlHjulStr.Items.Clear()
             UtlAutoPopUtstyr()
+            'varehent()
         Else
 
             'LvUtlVarer.Items.Clear()
@@ -469,8 +594,29 @@ Public Class Form1
             CboUtlRamme.Items.Clear()
             CboUtlHjulStr.Items.Clear()
             UtlAutoPopSykkel()
+            'varehent()
         End If
+
     End Sub
+
+    'Hva skjer når rammeboks trykkes på.
+    Private Sub CboUtlRamme_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
+        'CboUtlRamme.Items.Clear()
+        CboUtlHjulStr.Items.Clear()
+        UtlAutoPopRamme()
+    End Sub
+
+    'resetter rammeboks om sykkel kategori endres.
+    Private Sub CboUtlSubkat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlSubkat.DropDown
+
+        If CboUtlSubkat.SelectedValue = "Sykkel" Then
+            CboUtlRamme.Items.Clear()
+            CboUtlHjulStr.Items.Clear()
+            UtlAutoPopRamme()
+        End If
+
+    End Sub
+
 
 
     'Metode som fyller combobox (som kaller) med data fra database.
@@ -541,26 +687,33 @@ Public Class Form1
         End Try
     End Sub
 
-    'Private Sub UtlAutoPopRamme()
-    '    Try
-    '        DBConnect()
-    '        Dim UtlSqlCom As New MySqlCommand("SELECT sykkel_ramme FROM sykler ", tilkobling)
-    '        Dim UtlSqlDA As New MySqlDataAdapter
-    '        Dim UtlRammeComboDaT As New DataTable
-    '        UtlSqlDA.SelectCommand = UtlSqlCom
-    '        UtlSqlDA.Fill(UtlRammeComboDaT)
-    '        DBDisconnect()
-    '        CboUtlRamme.Items.Clear()
-    '        Dim UtlRammeRow As DataRow
-    '        Dim UtlRammeString As String
-    '        For Each UtlRammeRow In UtlRammeComboDaT.Rows
-    '            UtlRammeString = UtlRammeRow("utstyr_kat")
-    '            CboUtlSubkat.Items.Add(UtlRammeString)
-    '        Next
-    '    Catch ex As MySqlException
-    '        MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
-    '    End Try
-    'End Sub
+    Private Sub UtlAutoPopRamme()
+
+        Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
+        Dim UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
+        Try
+            DBConnect()
+
+            Dim UtlSqlCom As New MySqlCommand("SELECT sykkel_ramme FROM sykler 
+                                                WHERE type_id =" & UtlSubkatID & "", tilkobling)
+            Dim UtlSqlDA As New MySqlDataAdapter
+            Dim UtlRammeComboDaT As New DataTable
+            UtlSqlDA.SelectCommand = UtlSqlCom
+            UtlSqlDA.Fill(UtlRammeComboDaT)
+            DBDisconnect()
+            CboUtlRamme.Items.Clear()
+            Dim UtlRammeRow As DataRow
+            Dim UtlRammeString As String
+            For Each UtlRammeRow In UtlRammeComboDaT.Rows
+                UtlRammeString = UtlRammeRow("sykkel_ramme")
+                CboUtlRamme.Items.Add(UtlRammeString)
+            Next
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
+        End Try
+    End Sub
+
+
 
 
 
@@ -805,6 +958,7 @@ Public Class Form1
             Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE " & KndSokSelectedTag _
                 & " LIKE '%" & KndSokInput & "%'", Tilkobling)
 
+
             Dim KndSearchAdapter As New MySqlDataAdapter
             Dim KndSearchTable As New DataTable
             KndSearchAdapter.SelectCommand = sporring
@@ -836,7 +990,15 @@ Public Class Form1
 
         Catch feilmelding As MySqlException
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+
         End Try
+
+        'SQL for søk 
+        'Select * from Kunder where kndsokselectedtag = kndsokInput
+        'Skriv ut til listbox i søk
+        'Legg kundeID i KndSokKundeID for bruk i endring
+
+
 
     End Sub
 
@@ -882,14 +1044,20 @@ Public Class Form1
             KndChangeValueHF = "0"
         End If
 
-        Dim part1 = "kunder"
-        Dim part2 = "kunde_fdato = '" & KnDFdato.ToString("yyyy-MM-dd") _
-                & "', kunde_fornavn = '" & KndChangeValueFN & "', kunde_etternavn = '" & KndChangeValueEN _
+        Try
+            DBConnect()
+            Dim sporring As New MySqlCommand("UPDATE kunder SET kunde_fdato='" & KnDFdato.ToString("yyyy-MM-dd") _
+                & " , kunde_fornavn = '" & KndChangeValueFN & "', kunde_etternavn = '" & KndChangeValueEN _
                 & "', adresse = '" & KndChangeValueAdr & "', telefon = " & KndChangeValueTlf & ", epost = '" _
-                & KndChangeValueEP & "', rabatt_id = " & KndChangeValueRbt & ", handlet_for = " & KndChangeValueHF
-        Dim part3 = "kunde_id = " & selectedKundeId
+                & KndChangeValueEP & "', rabatt_id = " & KndChangeValueRbt & ", handlet_for = " & KndChangeValueHF _
+                & " WHERE kunde_id = " & selectedKundeId, Tilkobling)
+            sporring.ExecuteNonQuery()
+            DBDisconnect()
+            MsgBox("Endring vellykket")
+        Catch feilmelding As MySqlException
+            MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
 
-        SQLUpdate(part1, part2, part3)
+        End Try
 
     End Sub
 
@@ -1680,6 +1848,7 @@ Public Class Form1
 
         Try
             DBConnect()
+
             Dim sporring As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Ledig'", Tilkobling)
             Dim sporring2 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
@@ -1700,7 +1869,6 @@ Public Class Form1
     End Sub
 
     Private Sub StaMestPopulaer()
-        LvStaMestUtleid.Items.Clear()
         Dim StaAntSyklTyp As Integer
 
         Dim StaSQLFinnAnt = SQLSelect("sykkel_typer", "COUNT(*) AS c", "1")
@@ -1712,25 +1880,37 @@ Public Class Form1
         Dim StaTypeSykkel(StaAntSyklTyp) As String
 
         Dim StaInputCommand As String = "select sykkel_typer.kategori, count(*) AS c from sykkel_typer join " _
-        & "sykler as s on sykkel_typer.type_id=s.type_id join utleie on s.sykkel_id=utleie.sykkel_id group by sykkel_typer.kategori"
+            & "sykler as s on sykkel_typer.type_id=s.type_id join utleie on s.sykkel_id=utleie.sykkel_id group by sykkel_typer.kategori"
 
-        Dim StaSQLPop1 As String = "sykkel_typer.kategori, count(*) As c"
-        Dim StaSQLPop2 As String = "sykkel_typer join sykler as s on sykkel_typer.type_id=s.type_id join utleie on s.sykkel_id=utleie.sykkel_id"
-        Dim StaSQLPop3 As String = "1 group by sykkel_typer.kategori"
+        Dim part1 As String = "select sykkel_typer.kategori, count(*) As c"
+        Dim part2 As String = "from sykkel_typer join sykler as s on sykkel_typer.type_id=s.type_id join utleie on s.sykkel_id=utleie.sykkel_id group by sykkel_typer.kategori"
+        Dim part3 As String = "1"
 
-        Dim StaSQLSporringPop = SQLSelect(StaSQLPop2, StaSQLPop1, StaSQLPop3)
-        Dim StaCountingVar = 0
-        Dim StaDataRow As DataRow
-        For Each StaDataRow In StaSQLSporringPop.Rows
-            StaTypeSykkel(StaCountingVar) = StaDataRow("kategori")
-            StaAntSykler(StaCountingVar) = StaDataRow("c")
+        ' Dim tretest123 = SQLSelect(part1, part2, part3)
 
-            StaCountingVar = StaCountingVar + 1
-        Next
+        Try
+            DBConnect()
+            Dim sporring As New MySqlCommand(StaInputCommand, Tilkobling)
+            Dim StatempVarSporring = sporring.ExecuteReader()
+            Dim i = 0
+            While StatempVarSporring.Read
 
-        For j As Integer = 0 To StaTypeSykkel.Length - 1
-            LvStaMestUtleid.Items.Add(New ListViewItem({StaTypeSykkel(j), StaAntSykler(j)}))
-        Next
+                StaAntSykler(i) = StatempVarSporring("c")
+                StaTypeSykkel(i) = StatempVarSporring("kategori")
+
+                i = i + 1
+            End While
+
+            DBDisconnect()
+
+
+            For j As Integer = 0 To StaAntSykler.Length - 1
+                LvStaMestUtleid.Items.Add(New ListViewItem({StaTypeSykkel(j), StaAntSykler(j)}))
+            Next
+
+        Catch feilmelding As MySqlException
+            MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+        End Try
     End Sub
 
 #End Region
@@ -2137,5 +2317,109 @@ Public Class Form1
 
 
 
+
+
+
+
+
+#End Region
+
+#Region "LoginTab"
+
+    Public Sub LoginCheck()
+
+        Dim LoginBrukerTabell As New DataTable
+        Dim LoginPassordTabell As New DataTable
+        Dim LoginBrukerCheck As String = ""
+        Dim LoginPassordCheck As String = ""
+        Dim LoginAdminCheck As Integer = 0
+        Dim LoginFornavn As String = ""
+        Dim LoginEtternavn As String = ""
+        Dim LoginBrukerTabellRow As DataRow
+        Dim LoginPassordTabellRow As DataRow
+
+        If SecurityCounter = 3 Then
+            MsgBox("Du har blitt låst ut grunnet for mange feilforsøk.")
+            Exit Sub
+        End If
+
+        If IsNumeric(TxtLoginBrukerID.Text) Then
+        Else
+            MsgBox("Vennligst tast inn gyldig BrukerID.")
+            Exit Sub
+        End If
+        TxtLoginBrukerID.Text = SQLWhiteWash(TxtLoginBrukerID.Text)
+        TxtLoginPassord.Text = SQLWhiteWash(TxtLoginPassord.Text)
+
+        LoginBrukerTabell = SQLSelect("brukere", "*", "bruker_id=" & TxtLoginBrukerID.Text)
+        LoginPassordTabell = SQLSelect("passord", "*", "pwd='" & TxtLoginPassord.Text & "' AND passord_id=" & TxtLoginBrukerID.Text)
+
+        For Each LoginBrukerTabellRow In LoginBrukerTabell.Rows
+            LoginBrukerCheck = LoginBrukerTabellRow("bruker_id")
+            LoginFornavn = LoginBrukerTabellRow("fornavn")
+            LoginEtternavn = LoginBrukerTabellRow("etternavn")
+            LoginAdminCheck = LoginBrukerTabellRow("admin")
+        Next
+
+        For Each LoginPassordTabellRow In LoginPassordTabell.Rows
+            LoginPassordCheck = LoginPassordTabellRow("pwd")
+        Next
+
+        If TxtLoginBrukerID.Text = LoginBrukerCheck And TxtLoginPassord.Text = LoginPassordCheck Then
+
+        Else
+            SecurityCounter = SecurityCounter + 1
+
+            If SecurityCounter = 3 Then
+                MsgBox("BrukerID, Passord eller begge er feil. Du har blitt låst ut grunnet for mange feilforsøk.")
+            Else
+                MsgBox("BrukerID, Passord eller begge er feil. Vennligst prøv igjen. Du har " & (3 - SecurityCounter) & " forsøk igjen.")
+            End If
+            Exit Sub
+        End If
+
+        If LoginAdminCheck <> 0 Then
+            AdminBool = True
+        End If
+        LogBool = True
+        FornavnString = LoginFornavn
+        EtternavnString = LoginEtternavn
+        LoginSuccess()
+    End Sub
+
+    Public Sub LoginSuccess()
+        With HovedTab.TabPages
+            .Insert(0, StartTab)
+            .Insert(1, UtleieTab)
+            .Insert(2, KDTab)
+            .Insert(3, InventarTab)
+            .Insert(4, LogiTab)
+            .Insert(5, StatTab)
+            .Remove(LoginTab)
+
+        End With
+        If AdminBool = True Then
+            With HovedTab.TabPages
+                .Insert(6, AdminTab)
+                .Insert(7, DBAdminTab)
+            End With
+            StartRettigheterLabel.Text = "Brukerrettigheter: Admin"
+        Else
+            StartRettigheterLabel.Text = "Brukerrettigheter: Bruker"
+        End If
+
+        HovedTab.SelectedTab = StartTab
+
+        StartVelkommenLabel.Text = "Velkommen, " & FornavnString & " " & EtternavnString
+        StartMOTDUpdate()
+    End Sub
+
+    Private Sub BtnLoginLogin_Click(sender As Object, e As EventArgs) Handles BtnLoginLogin.Click
+        LoginCheck()
+    End Sub
+
+    Private Sub BtnLoginAvslutt_Click(sender As Object, e As EventArgs) Handles BtnLoginAvslutt.Click
+        End
+    End Sub
 #End Region
 End Class
