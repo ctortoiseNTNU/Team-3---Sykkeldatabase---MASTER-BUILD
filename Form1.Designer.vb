@@ -1850,6 +1850,7 @@ Partial Class Form1
         '
         Me.TxtInvHentID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtInvHentID.Location = New System.Drawing.Point(183, 546)
+        Me.TxtInvHentID.MaxLength = 20
         Me.TxtInvHentID.Name = "TxtInvHentID"
         Me.TxtInvHentID.Size = New System.Drawing.Size(84, 26)
         Me.TxtInvHentID.TabIndex = 20
@@ -1964,6 +1965,7 @@ Partial Class Form1
         '
         Me.TxtInvGirsystem.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtInvGirsystem.Location = New System.Drawing.Point(104, 369)
+        Me.TxtInvGirsystem.MaxLength = 20
         Me.TxtInvGirsystem.Name = "TxtInvGirsystem"
         Me.TxtInvGirsystem.Size = New System.Drawing.Size(121, 26)
         Me.TxtInvGirsystem.TabIndex = 9
@@ -1972,6 +1974,7 @@ Partial Class Form1
         '
         Me.TxtInvHjulstorrelse.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtInvHjulstorrelse.Location = New System.Drawing.Point(104, 327)
+        Me.TxtInvHjulstorrelse.MaxLength = 11
         Me.TxtInvHjulstorrelse.Name = "TxtInvHjulstorrelse"
         Me.TxtInvHjulstorrelse.Size = New System.Drawing.Size(121, 26)
         Me.TxtInvHjulstorrelse.TabIndex = 8
@@ -1980,6 +1983,7 @@ Partial Class Form1
         '
         Me.TxtInvRamme.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtInvRamme.Location = New System.Drawing.Point(104, 285)
+        Me.TxtInvRamme.MaxLength = 20
         Me.TxtInvRamme.Name = "TxtInvRamme"
         Me.TxtInvRamme.Size = New System.Drawing.Size(121, 26)
         Me.TxtInvRamme.TabIndex = 7
@@ -2040,6 +2044,7 @@ Partial Class Form1
         '
         Me.TxtInvInnkjopspris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtInvInnkjopspris.Location = New System.Drawing.Point(104, 243)
+        Me.TxtInvInnkjopspris.MaxLength = 10
         Me.TxtInvInnkjopspris.Name = "TxtInvInnkjopspris"
         Me.TxtInvInnkjopspris.Size = New System.Drawing.Size(121, 26)
         Me.TxtInvInnkjopspris.TabIndex = 6
@@ -2069,6 +2074,7 @@ Partial Class Form1
         '
         Me.TxtInvVareNummer.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtInvVareNummer.Location = New System.Drawing.Point(104, 201)
+        Me.TxtInvVareNummer.MaxLength = 30
         Me.TxtInvVareNummer.Name = "TxtInvVareNummer"
         Me.TxtInvVareNummer.Size = New System.Drawing.Size(121, 26)
         Me.TxtInvVareNummer.TabIndex = 5
@@ -2077,6 +2083,7 @@ Partial Class Form1
         '
         Me.TxtInvProduktnavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtInvProduktnavn.Location = New System.Drawing.Point(104, 159)
+        Me.TxtInvProduktnavn.MaxLength = 20
         Me.TxtInvProduktnavn.Name = "TxtInvProduktnavn"
         Me.TxtInvProduktnavn.Size = New System.Drawing.Size(121, 26)
         Me.TxtInvProduktnavn.TabIndex = 4
