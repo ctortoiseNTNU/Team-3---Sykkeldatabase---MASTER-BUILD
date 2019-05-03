@@ -9,7 +9,7 @@ Public Class Form1
 
     Dim LogBool As Boolean
     Dim AdminBool As Boolean
-    Dim tilkobling As MySqlConnection
+    Dim Tilkobling As MySqlConnection
     Dim InvAktivtProduktID As String
 
 
@@ -35,18 +35,14 @@ Public Class Form1
     End Sub
 
     Private Sub DBDisconnect()
-
-        tilkobling.Close()
-        tilkobling.Dispose()
-
+        Tilkobling.Close()
+        Tilkobling.Dispose()
     End Sub
 
     Private Function SQLWhiteWash(ByVal StartString As String) As String
-
         Dim EndString As String
         EndString = StartString.Replace("'", "\'")
         Return EndString
-
     End Function
 
     Private Function CheckVarChar20(ByVal CheckString As String) As Boolean
@@ -82,33 +78,33 @@ Public Class Form1
     End Function
 
     ''' <summary>
-    ''' SQL Select spørring som returnerer DataTable basert på søkekriterier.
+    ''' SQL SELECT spørring som returnerer DataTable basert på søkekriterier.
     ''' </summary>
     ''' <param name="WhereTable">Tabell det skal søkes i</param>
     ''' <param name="WhereColumn">Kolonner som skal inkluderes i søkeresultat.
     ''' String = "column1, coulmn2, ..."''' </param>
     ''' <param name="WhereCriteria">Kriterier for søk. Angis med alle søkeparametre etter WHERE.
-    ''' "column1='value1' AND column2=' ..."value2'</param>
+    ''' column1='value1' AND column2='value2' ...</param>
     ''' <returns>DataTabell med søkeresultat fra spørringen</returns>
     Private Function SQLSelect(ByVal WhereTable As String, WhereColumn As String, WhereCriteria As String)
+        DBConnect()
+        Dim SqlWhereKommando As New MySqlCommand("SELECT " & WhereColumn & " FROM " & WhereTable & " WHERE " _
+                & WhereCriteria, Tilkobling)
+        Dim SqlWhereAdapter As New MySqlDataAdapter
+        Dim SqlWhereTable As New DataTable
         Try
-            DBConnect()
-            Dim SqlWhereKommando As New MySqlCommand("SELECT " & WhereColumn & " FROM " & WhereTable & " WHERE " _
-                & WhereCriteria, tilkobling)
-            Dim SqlWhereAdapter As New MySqlDataAdapter
-            Dim SqlWhereTable As New DataTable
             SqlWhereAdapter.SelectCommand = SqlWhereKommando
             SqlWhereAdapter.Fill(SqlWhereTable)
-            DBDisconnect()
             Return SqlWhereTable
-        Catch GlobalSqlError As MySqlException
-            MsgBox("Man får ikke koble til databasen: " & GlobalSqlError.Message)
+        Catch SQLex As MySqlException
+            MsgBox("Feil ved søk i database:" & SQLex.Message)
             Return Nothing
         End Try
+        DBDisconnect()
     End Function
 
     ''' <summary>
-    ''' SQL Insert spørring som legger til kolonne i valgt tabell
+    ''' SQL INSERT spørring som legger til tuppel i valgt tabell
     ''' </summary>
     ''' <param name="InsertTable">Tabell det skal legges inn i</param>
     ''' <param name="InsertColumn">Kolonner som skal legges inn. Angis med parantes.
@@ -122,37 +118,85 @@ Public Class Form1
                 InsertValues, tilkobling)
             SqlCom.ExecuteNonQuery()
             DBDisconnect()
-            'MsgBox("Registrering vellykket.")
-        Catch ex As MySqlException
-            MsgBox("Feil med spørring mot database:" & vbNewLine & ex.Message)
+        Catch SQLex As MySqlException
+            MsgBox("Feil ved innlegg i database:" & vbNewLine & SQLex.Message)
         End Try
     End Sub
 
+    ''' <summary>
+    ''' SQL UDATE spørring som oppdaterer tuppler i tabell
+    ''' </summary>
+    ''' <param name="UpdateTable">Tabell som skal oppdateres</param>
+    ''' <param name="UpdateValues">Kolonner og verdier som skal legges inn i valgte kolonner.
+    ''' column1='value1', column2='value2', ...</param>
+    ''' <param name="UpdateCriteria">Kriterier for oppdateringen. Alt som kommer etter WHERE.
+    ''' column1=ID_number ...</param>
+    Public Sub SQLUpdate(ByVal UpdateTable As String, UpdateValues As String, UpdateCriteria As String)
+        DBConnect()
+        Dim SqlCom As New MySqlCommand("UPDATE " & UpdateTable & " SET " & UpdateValues & " WHERE " _
+                                       & UpdateCriteria, Tilkobling)
+        Try
+            SqlCom.ExecuteNonQuery()
+        Catch SQLex As Exception
+            MsgBox("Feil ved oppdatering database:" & vbNewLine & SQLex.Message)
+        End Try
+        DBDisconnect()
+    End Sub
 
-    Private Function SQLHentIDNavn(Tabell, KolonneInn, KolonneUt, Verdi)
-        Dim InvUtstyrKategoriNavnSporring As String = "SELECT " & KolonneUt & " FROM " & Tabell &
-            " WHERE " & KolonneInn & "='" & Verdi & "';"
-        Dim Result As String
-        Dim InvSqlHent As MySqlCommand
-        Dim InvSqlLeser As MySqlDataReader
+    ''' <summary>
+    ''' SQL DELETE spørring som sletter data fra tabell ut i fra valgte kriterier
+    ''' </summary>
+    ''' <param name="DeleteTable">Tabell det skal slettes fra</param>
+    ''' <param name="DeleteCriteria">Kriterier for slettingen. Alt etter WHERE.
+    ''' coulmn1='ID_number' AND column1='value1' ...</param>
+    Public Sub SQLDelete(ByVal DeleteTable As String, DeleteCriteria As String)
+        DBConnect()
+        Dim SqlCom As New MySqlCommand("DELETE FROM " & DeleteTable & " WHERE " & DeleteCriteria, Tilkobling)
+        Try
+            SqlCom.ExecuteNonQuery()
+        Catch SQLex As Exception
+            MsgBox("Feil ved sletting i database:" & vbNewLine & SQLex.Message)
+        End Try
+        DBDisconnect()
+    End Sub
+
+    ''' <summary>
+    ''' SQL spørring for å hente ut navn ut i fra ID, og motsatt, for fremmednøkler i tabeller.
+    ''' </summary>
+    ''' <param name="Tabell">Tabellen det skal FRA</param>
+    ''' <param name="KolonneInn">Navn eller ID (kolonne) det skal hentes FRA</param>
+    ''' <param name="KolonneUt">Navn eller ID (kolonne) som skal hentes UT</param>
+    ''' <param name="VerdiInn">Navn eller ID på tuppel som det gjelder</param>
+    ''' <returns>Navn eller ID</returns>
+    Private Function SQLHentIDNavn(ByVal Tabell As String, KolonneInn As String, KolonneUt As String, VerdiInn As String)
+        Dim SqlCom As MySqlCommand
         Try
             DBConnect()
-            InvSqlHent = New MySqlCommand(InvUtstyrKategoriNavnSporring, tilkobling)
-            InvSqlLeser = InvSqlHent.ExecuteReader()
-            While InvSqlLeser.Read()
-                Result = InvSqlLeser(KolonneUt)
+            Dim Result As String
+            SqlCom = New MySqlCommand("SELECT " & KolonneUt & " FROM " & Tabell &
+            " WHERE " & KolonneInn & "='" & VerdiInn & "'", Tilkobling)
+            Dim SqlRead As MySqlDataReader
+            SqlRead = SqlCom.ExecuteReader
+            While SqlRead.Read()
+                Result = SqlRead(KolonneUt)
             End While
-            InvSqlLeser.Close()
+            SqlRead.Close()
             DBDisconnect()
             Return Result
         Catch ex As MySqlException
             MsgBox("Feil ved henting av navn/ID:" & vbNewLine & ex.Message)
+            Return Nothing
         End Try
     End Function
 
-    'Metode som fyller combobox (som kaller) med data fra database.
-    'Tabell og kolonne det skal leses fra må angis som argumenter.
-    Private Sub AutoPopCbo(sender, Tabell, Kolonne)
+
+    ''' <summary>
+    ''' Autopopulasjon av ComboBox. Elementer hentes fra kolonne i database.
+    ''' </summary>
+    ''' <param name="sender">Combobox som sender forespørsel. ... ComboBox1(_sender_ As Object...</param>
+    ''' <param name="Tabell">Tabell kolonnen befinner seg i</param>
+    ''' <param name="Kolonne">Kolonnen som skal fylle ComboBoxen</param>
+    Private Sub AutoPopCbo(ByVal sender As Object, Tabell As String, Kolonne As String)
         Try
             DBConnect()
             Dim InvSqlCom As New MySqlCommand("SELECT " & Kolonne & " FROM " & Tabell, tilkobling)
@@ -162,11 +206,8 @@ Public Class Form1
             InvSqlDA.Fill(InvUtstyrComboDaT)
             DBDisconnect()
             sender.Items.Clear()
-            'Dim InvUtstyrRow As DataRow
-            Dim InvUtstyrString As String
             For Each r In InvUtstyrComboDaT.Rows
-                InvUtstyrString = r(Kolonne)
-                sender.Items.Add(InvUtstyrString)
+                sender.Items.Add(r(Kolonne))
             Next
         Catch ex As MySqlException
             MsgBox("Feil med autoutfylling av " & CStr(sender) & ": " & ex.Message)
@@ -1053,10 +1094,10 @@ Public Class Form1
 
     'Endrer status på felt i skjema avhengig om det er sykkel eller utstyr som skal registreres.
     'Med kategori "Sykkel" valgt vil alle felt være tilgjengelig.
-    'For "Utstyr" vil kun felt som er relevant, altså de som er en kolonne i tabellen for utstyr, være aktivert.
-    'Dropdownlisten Subkategori endrer kategorier (leses fra databasen) basert på om det er sykkel eller _
+    'For "Utstyr" vil kun felt som er en kolonne i tabellen for utstyr være aktivert.
+    'Innhold i Combobox Subkategori endrer innhold (leses fra databasen) basert på om det er sykkel eller _
     'utstyr som er valgt.
-    'Også kolonner i listview (LvInvSok) endres avhengig av kategori
+    'Også kolonner i listview (LvInvSok) endres avhengig av valgt kategori (sykkel eller utstyr)
     Private Sub CboInvKategori_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles CboInvKategori.SelectedIndexChanged
         If CboInvKategori.SelectedItem = "Utstyr" Then
@@ -1115,193 +1156,192 @@ Public Class Form1
 
     'Combobox Subkategori styres av indexchanged på combobox kategori. Dermed vil et kall på InvCboPop fra _
     'combobox for kategori føre til endringer i kategori og ikke subkategori som ønsket.
-    'Derfor egne autopopulate for sykkel og utstyr.
+    'Derfor egne autopopulate for sykkel og utstyr. Disse kalles fra combobox for kategori og endrer _
+    'innhold i subkategori.
     Private Sub InvAutoPopUtstyr()
+        Dim InvUtstyrComboDaT As New DataTable
+        InvUtstyrComboDaT = SQLSelect("utstyr_kategori", "utstyr_kat", "1")
+        CboInvSubkategori.Items.Clear()
         Try
-            DBConnect()
-            Dim InvSqlCom As New MySqlCommand("SELECT utstyr_kat FROM utstyr_kategori", tilkobling)
-            Dim InvSqlDA As New MySqlDataAdapter
-            Dim InvUtstyrComboDaT As New DataTable
-            InvSqlDA.SelectCommand = InvSqlCom
-            InvSqlDA.Fill(InvUtstyrComboDaT)
-            DBDisconnect()
-            CboInvSubkategori.Items.Clear()
-            'Dim InvUtstyrRow As DataRow
-            Dim InvUtstyrString As String
             For Each r In InvUtstyrComboDaT.Rows
-                InvUtstyrString = r("utstyr_kat")
-                CboInvSubkategori.Items.Add(InvUtstyrString)
+                CboInvSubkategori.Items.Add(r("utstyr_kat"))
             Next
-        Catch ex As MySqlException
-            MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
+        Catch ex As Exception
+            MsgBox("Feil med autoutfylling av utstyrskategorier fra datatabell: " & ex.Message)
         End Try
     End Sub
 
     Private Sub InvAutoPopSykkel()
+        Dim InvSykkelComboDaT As New DataTable
+        InvSykkelComboDaT = SQLSelect("sykkel_typer", "kategori", "1")
+        CboInvSubkategori.Items.Clear()
         Try
-            DBConnect()
-            Dim InvSqlCom As New MySqlCommand("SELECT kategori FROM sykkel_typer", tilkobling)
-            Dim InvSqlDA As New MySqlDataAdapter
-            Dim InvUtstyrComboDaT As New DataTable
-            InvSqlDA.SelectCommand = InvSqlCom
-            InvSqlDA.Fill(InvUtstyrComboDaT)
-            DBDisconnect()
-            CboInvSubkategori.Items.Clear()
-            'Dim InvUtstyrRow As DataRow
-            Dim InvUtstyrString As String
-            For Each e In InvUtstyrComboDaT.Rows
-                InvUtstyrString = e("kategori")
-                CboInvSubkategori.Items.Add(InvUtstyrString)
+            For Each r In InvSykkelComboDaT.Rows
+                CboInvSubkategori.Items.Add(r("kategori"))
             Next
-        Catch ex As MySqlException
-            MsgBox("Feil med autoutfylling av sykkelkategorier: " & ex.Message)
+        Catch ex As Exception
+            MsgBox("Feil med autoutfylling av sykkelkategorier fra datatabell: " & ex.Message)
         End Try
     End Sub
 
-    'SQLspørring med registrering av nytt produkt basert på innlagt data i skjema.
-    Private Sub BtnInvRegistrer_Click(sender As Object, e As EventArgs) Handles BtnInvRegistrer.Click
-
-        'SQLspørring for innlegging av sykkel i database. Data hentes fra felt
-        If CboInvKategori.SelectedItem = "Sykkel" Then
-            If CboInvAvdeling.SelectedIndex = -1 Or CboInvForhandler.SelectedIndex = -1 Or
+    Private Sub InvRegistrerSykkel()
+        If CboInvAvdeling.SelectedIndex = -1 Or CboInvForhandler.SelectedIndex = -1 Or
                 CboInvSubkategori.SelectedIndex = -1 Or TxtInvProduktnavn.Text.Trim = "" Or
                 TxtInvVareNummer.Text.Trim = "" Or TxtInvInnkjopspris.Text.Trim = "" Or
                 TxtInvRamme.Text.Trim = "" Or TxtInvHjulstorrelse.Text.Trim = "" Or
                 TxtInvGirsystem.Text.Trim = "" Or CboInvStatus.SelectedIndex = -1 Or
                 CboInvSkadet.SelectedIndex = -1 Or CboInvSavnet.SelectedIndex = -1 Then
-                MsgBox("Vennligst fyll inn alle felt")
-            Else
-                Dim InvKategori, InvSubkategoriNavn, InvAvdelingNavn, InvProduktnavn, InvVarenummer,
-                    InvInnkjopspris, InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandlerNavn,
-                    InvStatus, InvSkadet, InvSavnet, InvForhandlerID, InvAvdelingID, InvSubKategoriID,
-                    InvSykkelID, InvSisteID, InvRegKolonner, InvRegTabell, InvRegVerdier As String
 
-                Dim InvSqlRegistrer As MySqlCommand
-                Dim InvBekreftSykkelReg As DialogResult
+            MsgBox("Vennligst fyll inn alle felt")
 
-                InvKategori = CboInvKategori.SelectedItem
-                InvSubkategoriNavn = CboInvSubkategori.SelectedItem
-                InvAvdelingNavn = CboInvAvdeling.SelectedItem
-                InvProduktnavn = SQLWhiteWash(TxtInvProduktnavn.Text.Trim)
-                InvVarenummer = SQLWhiteWash(TxtInvVareNummer.Text.Trim)
-                InvInnkjopspris = SQLWhiteWash(TxtInvInnkjopspris.Text.Trim)
-                InvRamme = SQLWhiteWash(TxtInvRamme.Text.Trim)
-                InvHjulstorrlese = SQLWhiteWash(TxtInvHjulstorrelse.Text.Trim)
-                InvGirsystem = SQLWhiteWash(TxtInvGirsystem.Text.Trim)
-                InvForhandlerNavn = CboInvForhandler.SelectedItem
-                InvStatus = CboInvStatus.SelectedItem
-                InvSkadet = CboInvSkadet.SelectedIndex
-                InvSavnet = CboInvSavnet.SelectedIndex
-                InvForhandlerID = SQLHentIDNavn("forhandler", "forhandler_navn",
-                        "forhandler_id", InvForhandlerNavn)
-                InvSubKategoriID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", InvSubkategoriNavn)
-                InvAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", InvAvdelingNavn)
-
-                InvBekreftSykkelReg = MsgBox("Bekreft registrering av sykkel", MsgBoxStyle.OkCancel)
-                If InvBekreftSykkelReg = DialogResult.OK Then
-                    InvRegKolonner = "(forhandler_id, type_id, avdeling_id, sykkel_navn, sykkel_modell, " &
-                        "sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)"
-                    InvRegTabell = "sykler"
-                    InvRegVerdier = "('" + InvForhandlerID & "', '" & InvSubKategoriID & "', '" _
-                    & InvAvdelingID + "', '" & InvProduktnavn & "', '" & InvVarenummer & "', '" _
-                    & InvInnkjopspris & "', '" & InvStatus & "', '" & InvHjulstorrlese & "', '" _
-                    & InvRamme & "', '" & InvGirsystem & "', '" & InvSavnet & "', '" & InvSkadet & "')"
-
-                    Try
-                        SQLInsert(InvRegTabell, InvRegKolonner, InvRegVerdier)
-                        DBConnect()
-                        InvSisteID = "SELECT LAST_INSERT_ID();"
-                        Dim InvSqlLeser As MySqlDataReader
-                        InvSqlRegistrer = New MySqlCommand(InvSisteID, tilkobling)
-                        InvSqlLeser = InvSqlRegistrer.ExecuteReader()
-                        While InvSqlLeser.Read()
-                            InvSykkelID = InvSqlLeser(0)
-                        End While
-                        InvSqlLeser.Close()
-                        DBDisconnect()
-
-                        'Registerer valgt utstyr på siste sykkelID
-                        If ChkInvBarneHenger.Checked = True Then
-                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 4)")
-                        End If
-                        If ChkInvBarnesete.Checked = True Then
-                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 3)")
-                        End If
-                        If ChkInvLastehenger.Checked = True Then
-                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 5)")
-                        End If
-                        If ChkInvSykkelveske.Checked = True Then
-                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 2)")
-                        End If
-
-                        MsgBox("Registrering av sykkel vellykket")
-                        InvTomFelt()
-                    Catch ex As MySqlException
-                        MsgBox("Feil ved registrering av sykkel:" & vbNewLine & ex.Message)
-                    End Try
-                End If
-            End If
-
-            'SQLspørring for innlegging av utstyr i database. Data hentes fra felt
-        ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
-            If CboInvForhandler.SelectedIndex = -1 Or CboInvSubkategori.SelectedIndex = -1 Or
-                TxtInvProduktnavn.Text.Trim = "" Or TxtInvVareNummer.Text.Trim = "" Or
-                TxtInvInnkjopspris.Text.Trim = "" Then
-                MsgBox("Vennligst fyll inn alle felt")
-            Else
-                Dim InvKategori, InvSubkategoriNavn, InvSubKategoriID, InvForhandlerNavn, InvForhandlerID,
-                    InvProduktnavn, InvVarenummer, InvInnkjopspris, InvSpForhandlerID, InvSpSubkategoriID,
-                    InvKolonnerUtstyr, InvVerdierUtstyr As String
-
-                Dim InvBekreftUtstyrReg As DialogResult
-                Dim InvSubkategoriIDTabell, InvForhandlerIDTabell As DataTable
-
-                InvKategori = CboInvKategori.SelectedItem
-                InvSubkategoriNavn = CboInvSubkategori.SelectedItem
-                InvForhandlerNavn = CboInvForhandler.SelectedItem
-                InvProduktnavn = SQLWhiteWash(TxtInvProduktnavn.Text.Trim)
-                InvVarenummer = SQLWhiteWash(TxtInvVareNummer.Text.Trim)
-                InvInnkjopspris = SQLWhiteWash(TxtInvInnkjopspris.Text.Trim)
-
-                InvSpForhandlerID = "forhandler_navn='" & InvForhandlerNavn & "'"
-                InvSpSubkategoriID = "utstyr_kat='" & InvSubkategoriNavn & "'"
-
-                InvSubkategoriIDTabell = SQLSelect("utstyr_kat_id", "utstyr_kategori",
-                     InvSpSubkategoriID)
-                InvForhandlerIDTabell = SQLSelect("forhandler_id", "forhandler",
-                    InvSpForhandlerID)
-
-                For Each i In InvSubkategoriIDTabell.Rows
-                    InvSubKategoriID = i("utstyr_kat_id")
-                Next
-                For Each i In InvForhandlerIDTabell.Rows
-                    InvForhandlerID = i("forhandler_id")
-                Next
-
-                InvBekreftUtstyrReg = MsgBox("Bekreft registrering av utstyr", MsgBoxStyle.OkCancel)
-                If InvBekreftUtstyrReg = DialogResult.OK Then
-                    Try
-                        InvKolonnerUtstyr = "(utstyr_navn, varenummer, utstyr_pris, " _
-                        & "forhandler_id, utstyr_kat_id)"
-                        InvVerdierUtstyr = "('" & InvProduktnavn & "' ,'" & InvVarenummer _
-                            & "', '" & InvInnkjopspris & "', '" & InvForhandlerID & "', '" & InvSubKategoriID & "')"
-                        SQLInsert(InvKolonnerUtstyr, "utstyr", InvVerdierUtstyr)
-                        MsgBox("Registrering av utstyr vellykket.")
-                    Catch ex As Exception
-                        MsgBox("Feil ved registrering av utstyr." & vbNewLine & ex.Message)
-                    End Try
-                End If
-            End If
         Else
-            MsgBox("Velg kategori")
-        End If
 
+            Dim InvKategori, InvSubkategoriNavn, InvAvdelingNavn, InvProduktnavn, InvVarenummer,
+                InvInnkjopspris, InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandlerNavn,
+                InvStatus, InvSkadet, InvSavnet, InvForhandlerID, InvAvdelingID, InvSubKategoriID,
+                InvSykkelID, InvSisteID, InvRegKolonner, InvRegTabell, InvRegVerdier As String
+
+            Dim InvSqlLeser As MySqlDataReader
+            Dim InvBekreftSykkelReg As DialogResult
+
+            InvKategori = CboInvKategori.SelectedItem
+            InvSubkategoriNavn = CboInvSubkategori.SelectedItem
+            InvAvdelingNavn = CboInvAvdeling.SelectedItem
+            InvProduktnavn = SQLWhiteWash(TxtInvProduktnavn.Text.Trim)
+            InvVarenummer = SQLWhiteWash(TxtInvVareNummer.Text.Trim)
+            InvInnkjopspris = SQLWhiteWash(TxtInvInnkjopspris.Text.Trim)
+            InvRamme = SQLWhiteWash(TxtInvRamme.Text.Trim)
+            InvHjulstorrlese = SQLWhiteWash(TxtInvHjulstorrelse.Text.Trim)
+            InvGirsystem = SQLWhiteWash(TxtInvGirsystem.Text.Trim)
+            InvForhandlerNavn = CboInvForhandler.SelectedItem
+            InvStatus = CboInvStatus.SelectedItem
+            InvSkadet = CboInvSkadet.SelectedIndex
+            InvSavnet = CboInvSavnet.SelectedIndex
+            InvForhandlerID = SQLHentIDNavn("forhandler", "forhandler_navn",
+                    "forhandler_id", InvForhandlerNavn)
+            InvSubKategoriID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", InvSubkategoriNavn)
+            InvAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", InvAvdelingNavn)
+
+            InvBekreftSykkelReg = MsgBox("Bekreft registrering av sykkel", MsgBoxStyle.OkCancel)
+            If InvBekreftSykkelReg = DialogResult.OK Then
+
+                InvRegKolonner = "(forhandler_id, type_id, avdeling_id, sykkel_navn, sykkel_modell, " &
+                    "sykkel_pris, sykkel_status, hjul_str, sykkel_ramme, girsystem, savnet, skadet)"
+                InvRegTabell = "sykler"
+                InvRegVerdier = "('" + InvForhandlerID & "', '" & InvSubKategoriID & "', '" _
+                & InvAvdelingID + "', '" & InvProduktnavn & "', '" & InvVarenummer & "', '" _
+                & InvInnkjopspris & "', '" & InvStatus & "', '" & InvHjulstorrlese & "', '" _
+                & InvRamme & "', '" & InvGirsystem & "', '" & InvSavnet & "', '" & InvSkadet & "')"
+
+                SQLInsert(InvRegTabell, InvRegKolonner, InvRegVerdier)
+
+                Try
+                    DBConnect()
+                    InvSisteID = "SELECT LAST_INSERT_ID();"
+                    Dim InvSqlSisteID As New MySqlCommand(InvSisteID, Tilkobling)
+                    InvSqlLeser = InvSqlSisteID.ExecuteReader()
+                    While InvSqlLeser.Read()
+                        InvSykkelID = InvSqlLeser(0)
+                    End While
+                    InvSqlLeser.Close()
+                    DBDisconnect()
+                    InvTomFelt()
+                Catch ex As MySqlException
+                    MsgBox("Feil ved henting av siste ID:" & vbNewLine & ex.Message)
+                End Try
+
+                'Registerer valgt utstyr på siste sykkelID
+                If ChkInvBarneHenger.Checked = True Then
+                    SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 4)")
+                End If
+                If ChkInvBarnesete.Checked = True Then
+                    SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 3)")
+                End If
+                If ChkInvLastehenger.Checked = True Then
+                    SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 5)")
+                End If
+                If ChkInvSykkelveske.Checked = True Then
+                    SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvSykkelID & ", 2)")
+                End If
+            End If
+        End If
     End Sub
 
-    'SQLspørring med søk på valgte verdier i søkefelt
-    Private Sub BtnInvSok_Click(sender As Object, e As EventArgs) Handles BtnInvSok.Click
+    Private Sub InvRegistrerUtstyr()
+        If CboInvForhandler.SelectedIndex = -1 Or CboInvSubkategori.SelectedIndex = -1 Or
+            TxtInvProduktnavn.Text.Trim = "" Or TxtInvVareNummer.Text.Trim = "" Or
+            TxtInvInnkjopspris.Text.Trim = "" Then
 
-        LvInvSok.Items.Clear()
+            MsgBox("Vennligst fyll inn alle felt")
+
+        Else
+
+            Dim InvKategori, InvSubkategoriNavn, InvSubKategoriID, InvForhandlerNavn, InvForhandlerID,
+                InvProduktnavn, InvVarenummer, InvInnkjopspris, InvSpForhandlerID, InvSpSubkategoriID,
+                InvKolonnerUtstyr, InvVerdierUtstyr As String
+
+            Dim InvBekreftUtstyrReg As DialogResult
+            Dim InvSubkategoriIDTabell, InvForhandlerIDTabell As DataTable
+
+            InvKategori = CboInvKategori.SelectedItem
+            InvSubkategoriNavn = CboInvSubkategori.SelectedItem
+            InvForhandlerNavn = CboInvForhandler.SelectedItem
+            InvProduktnavn = SQLWhiteWash(TxtInvProduktnavn.Text.Trim)
+            InvVarenummer = SQLWhiteWash(TxtInvVareNummer.Text.Trim)
+            InvInnkjopspris = SQLWhiteWash(TxtInvInnkjopspris.Text.Trim)
+
+            InvSpForhandlerID = "forhandler_navn='" & InvForhandlerNavn & "'"
+            InvSpSubkategoriID = "utstyr_kat='" & InvSubkategoriNavn & "'"
+
+            InvSubkategoriIDTabell = SQLSelect("utstyr_kategori", "utstyr_kat_id",
+                 InvSpSubkategoriID)
+            InvForhandlerIDTabell = SQLSelect("forhandler", "forhandler_id",
+                InvSpForhandlerID)
+
+            For Each i In InvSubkategoriIDTabell.Rows
+                InvSubKategoriID = i("utstyr_kat_id")
+            Next
+            For Each i In InvForhandlerIDTabell.Rows
+                InvForhandlerID = i("forhandler_id")
+            Next
+
+            InvBekreftUtstyrReg = MsgBox("Bekreft registrering av utstyr", MsgBoxStyle.OkCancel)
+            If InvBekreftUtstyrReg = DialogResult.OK Then
+
+                InvKolonnerUtstyr = "(utstyr_navn, varenummer, utstyr_pris, " _
+                    & "forhandler_id, utstyr_kat_id)"
+                InvVerdierUtstyr = "('" & InvProduktnavn & "' ,'" & InvVarenummer _
+                        & "', '" & InvInnkjopspris & "', '" & InvForhandlerID & "', '" & InvSubKategoriID & "')"
+                SQLInsert(InvKolonnerUtstyr, "utstyr", InvVerdierUtstyr)
+
+            End If
+        End If
+    End Sub
+
+    Private Sub InvSokSykkel()
+
+        'Oppbygging av SQL spørring
+        Dim InvSpInit As String = "SELECT s.sykkel_id, s.sykkel_navn, s.sykkel_modell, " _
+                & "sykkel_typer.kategori, s.sykkel_ramme, s.girsystem, s.hjul_str, " _
+                & "s.sykkel_pris, avdeling.avd_navn, forhandler.forhandler_navn, s.sykkel_status, " _
+                & "s.skadet, s.savnet FROM sykler AS s LEFT JOIN avdeling ON " _
+                & "s.avdeling_id=avdeling.avdeling_id LEFT JOIN forhandler ON " _
+                & "s.forhandler_id=forhandler.forhandler_id LEFT JOIN sykkel_typer ON " _
+                & "s.type_id=sykkel_typer.type_id "
+        Dim InvSpUtstyrJoin As String = "INNER JOIN sykkel_utstyr AS su ON s.sykkel_id=su.sykkel_id " _
+                & "INNER JOIN utstyr_kategori AS uk ON su.utstyr_kat_id=uk.utstyr_kat_id "
+        Dim InvSpSykkelNavn As String = "sykkel_navn LIKE '%" & SQLWhiteWash(TxtInvProduktnavn.Text.Trim) & "%'"
+        Dim InvSpsykkelModell As String = "kategori LIKE '%" & CboInvSubkategori.SelectedItem & "%'"
+        Dim InvSpTypeid As String = "sykkel_modell LIKE '%" & SQLWhiteWash(TxtInvVareNummer.Text.Trim) & "%'"
+        Dim InvSpSykkelRamme As String = "sykkel_ramme LIKE '%" & SQLWhiteWash(TxtInvRamme.Text.Trim) & "%'"
+        Dim InvSpGirsystem As String = "girsystem LIKE '%" & SQLWhiteWash(TxtInvGirsystem.Text.Trim) & "%'"
+        Dim InvSpHjulstorrelse As String = "hjul_str LIKE '%" & SQLWhiteWash(TxtInvHjulstorrelse.Text.Trim) & "%'"
+        Dim InvSpSykkelPris As String = "sykkel_pris LIKE '%" & SQLWhiteWash(TxtInvInnkjopspris.Text.Trim) & "%'"
+        Dim InvSpAvdeling As String = "avd_navn LIKE '%" & CboInvAvdeling.SelectedItem & "%'"
+        Dim InvSpForhandlerID As String = "forhandler_navn LIKE '%" & CboInvForhandler.SelectedItem & "%'"
+        Dim InvSpSykkelStatus As String = "sykkel_status LIKE '%" & CboInvStatus.SelectedItem & "%'"
+        Dim InvSpSykkelUtstyr As String = ""
+        Dim InvSpUtstyrAntall As Integer = -1
 
         Dim InvSpSkadet As String
         Dim InvSpSavnet As String
@@ -1309,185 +1349,149 @@ Public Class Form1
         Dim InvSqlSok As MySqlCommand
         Dim invSqlLeser As MySqlDataReader
 
-        'Søk på sykkel basert på innlagt data i skjema
-        If CboInvKategori.SelectedItem = "Sykkel" Then
-
-            'Oppbygging av SQL spørring
-            Dim InvSpInit As String = "SELECT s.sykkel_id, s.sykkel_navn, s.sykkel_modell, " _
-                & "sykkel_typer.kategori, s.sykkel_ramme, s.girsystem, s.hjul_str, " _
-                & "s.sykkel_pris, avdeling.avd_navn, forhandler.forhandler_navn, s.sykkel_status, " _
-                & "s.skadet, s.savnet FROM sykler AS s LEFT JOIN avdeling ON " _
-                & "s.avdeling_id=avdeling.avdeling_id LEFT JOIN forhandler ON " _
-                & "s.forhandler_id=forhandler.forhandler_id LEFT JOIN sykkel_typer ON " _
-                & "s.type_id=sykkel_typer.type_id "
-            Dim InvSpUtstyrJoin As String = "INNER JOIN sykkel_utstyr AS su ON s.sykkel_id=su.sykkel_id " _
-                & "INNER JOIN utstyr_kategori AS uk ON su.utstyr_kat_id=uk.utstyr_kat_id "
-            Dim InvSpSykkelNavn As String = "sykkel_navn LIKE '%" & SQLWhiteWash(TxtInvProduktnavn.Text.Trim) & "%'"
-            Dim InvSpsykkelModell As String = "kategori LIKE '%" & CboInvSubkategori.SelectedItem & "%'"
-            Dim InvSpTypeid As String = "sykkel_modell LIKE '%" & SQLWhiteWash(TxtInvVareNummer.Text.Trim) & "%'"
-            Dim InvSpSykkelRamme As String = "sykkel_ramme LIKE '%" & SQLWhiteWash(TxtInvRamme.Text.Trim) & "%'"
-            Dim InvSpGirsystem As String = "girsystem LIKE '%" & SQLWhiteWash(TxtInvGirsystem.Text.Trim) & "%'"
-            Dim InvSpHjulstorrelse As String = "hjul_str LIKE '%" & SQLWhiteWash(TxtInvHjulstorrelse.Text.Trim) & "%'"
-            Dim InvSpSykkelPris As String = "sykkel_pris LIKE '%" & SQLWhiteWash(TxtInvInnkjopspris.Text.Trim) & "%'"
-            Dim InvSpAvdeling As String = "avd_navn LIKE '%" & CboInvAvdeling.SelectedItem & "%'"
-            Dim InvSpForhandlerID As String = "forhandler_navn LIKE '%" & CboInvForhandler.SelectedItem & "%'"
-            Dim InvSpSykkelStatus As String = "sykkel_status LIKE '%" & CboInvStatus.SelectedItem & "%'"
-            Dim InvSpSykkelUtstyr As String = ""
-            Dim InvSpUtstyrAntall As Integer = -1
-
-            'Denne if-else biten sørger for at kun sykler med valgte utstyrskategorier (checkbokser) _
-            'tas med i resultatet
-            If ChkInvSykkelveske.Checked = True Or ChkInvBarnesete.Checked = True _
+        'Denne if-else biten sørger for at kun sykler med valgte utstyrskategorier (checkbokser) _
+        'tas med i resultatet
+        If ChkInvSykkelveske.Checked = True Or ChkInvBarnesete.Checked = True _
                 Or ChkInvBarneHenger.Checked = True Or ChkInvLastehenger.Checked = True Then
-                InvSpInit = InvSpInit + InvSpUtstyrJoin
-                If ChkInvSykkelveske.Checked = True Then
-                    InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=2"
-                    InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+            InvSpInit = InvSpInit + InvSpUtstyrJoin
+            If ChkInvSykkelveske.Checked = True Then
+                InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=2"
+                InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+            End If
+            If ChkInvBarnesete.Checked = True Then
+                If InvSpUtstyrAntall = -1 Then
+                    InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=3"
+                Else
+                    InvSpSykkelUtstyr = InvSpSykkelUtstyr + " OR su.utstyr_kat_id=3"
                 End If
-                If ChkInvBarnesete.Checked = True Then
-                    If InvSpUtstyrAntall = -1 Then
-                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=3"
-                    Else
-                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " OR su.utstyr_kat_id=3"
-                    End If
-                    InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+                InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+            End If
+            If ChkInvBarneHenger.Checked = True Then
+                If InvSpUtstyrAntall = -1 Then
+                    InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=4"
+                Else
+                    InvSpSykkelUtstyr = InvSpSykkelUtstyr + " OR su.utstyr_kat_id=4"
                 End If
-                If ChkInvBarneHenger.Checked = True Then
-                    If InvSpUtstyrAntall = -1 Then
-                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=4"
-                    Else
-                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " OR su.utstyr_kat_id=4"
-                    End If
-                    InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+                InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+            End If
+            If ChkInvLastehenger.Checked = True Then
+                If InvSpUtstyrAntall = -1 Then
+                    InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=5"
+                Else
+                    InvSpSykkelUtstyr = InvSpSykkelUtstyr + " OR su.utstyr_kat_id=5"
                 End If
-                If ChkInvLastehenger.Checked = True Then
-                    If InvSpUtstyrAntall = -1 Then
-                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " AND(su.utstyr_kat_id=5"
-                    Else
-                        InvSpSykkelUtstyr = InvSpSykkelUtstyr + " OR su.utstyr_kat_id=5"
-                    End If
-                    InvSpUtstyrAntall = InvSpUtstyrAntall + 1
-                End If
-                InvSpSykkelUtstyr = InvSpSykkelUtstyr & ")" & " GROUP by s.sykkel_id HAVING COUNT(su.sykkel_id) > " _
+                InvSpUtstyrAntall = InvSpUtstyrAntall + 1
+            End If
+            InvSpSykkelUtstyr = InvSpSykkelUtstyr & ")" & " GROUP by s.sykkel_id HAVING COUNT(su.sykkel_id) > " _
                     & InvSpUtstyrAntall
-            End If
+        End If
 
-            'Unngår NULL verdi fra combobox skadet og savnet og dermed søk uten resultat.
-            If CboInvSkadet.SelectedIndex = 0 Or CboInvSkadet.SelectedIndex = 1 Then
-                InvSpSkadet = "skadet LIKE '%" & CboInvSkadet.SelectedIndex & "%'"
-            Else
-                InvSpSkadet = "skadet LIKE '%%'"
-            End If
+        'Unngår NULL verdi fra combobox skadet og savnet og dermed søk uten resultat.
+        If CboInvSkadet.SelectedIndex = 0 Or CboInvSkadet.SelectedIndex = 1 Then
+            InvSpSkadet = "skadet LIKE '%" & CboInvSkadet.SelectedIndex & "%'"
+        Else
+            InvSpSkadet = "skadet LIKE '%%'"
+        End If
 
-            If CboInvSavnet.SelectedIndex = 0 Or CboInvSavnet.SelectedIndex = 1 Then
-                InvSpSavnet = "savnet LIKE '%" & CboInvSavnet.SelectedIndex & "%'"
-            Else
-                InvSpSavnet = "savnet LIKE '%%'"
-            End If
+        If CboInvSavnet.SelectedIndex = 0 Or CboInvSavnet.SelectedIndex = 1 Then
+            InvSpSavnet = "savnet LIKE '%" & CboInvSavnet.SelectedIndex & "%'"
+        Else
+            InvSpSavnet = "savnet LIKE '%%'"
+        End If
 
-            Dim InvSokSporring As String
-            InvSokSporring = InvSpInit & " WHERE " & InvSpSykkelNavn & " AND " & InvSpsykkelModell & " AND " &
+        Dim InvSokSporring As String
+        InvSokSporring = InvSpInit & " WHERE " & InvSpSykkelNavn & " AND " & InvSpsykkelModell & " AND " &
                 InvSpTypeid & " AND " & InvSpSykkelRamme & " AND " & InvSpGirsystem & " AND " &
                 InvSpHjulstorrelse & " AND " & InvSpSykkelPris & " AND " & InvSpAvdeling & " AND " &
                 InvSpForhandlerID & " AND " & InvSpSykkelStatus & " AND " & InvSpSkadet & " AND " &
                 InvSpSavnet & InvSpSykkelUtstyr & ";"
 
-            Dim InvResultatArray(12) As String
-            Dim InvResultatObjekt As ListViewItem
+        Dim InvResultatArray(12) As String
+        Dim InvResultatObjekt As ListViewItem
 
+        'Sender spørring for søk basert på innlagte data i skjema. Skriver ut returnerte rader til listview 
+        Try
+            DBConnect()
+            InvSqlSok = New MySqlCommand(InvSokSporring, Tilkobling)
+            invSqlLeser = InvSqlSok.ExecuteReader()
 
-
-            'Sender spørring for søk basert på innlagte data i skjema. Skriver ut returnerte rader til listview 
-            Try
-                DBConnect()
-                InvSqlSok = New MySqlCommand(InvSokSporring, tilkobling)
-                invSqlLeser = InvSqlSok.ExecuteReader()
-
-                'For hver kolonne les inn verdi 0-12 og legg i listview
-                While invSqlLeser.Read()
-                    For i = 0 To invSqlLeser.FieldCount - 1
-                        If i = 11 Or i = 12 Then
-                            If invSqlLeser(i) = False Then
-                                InvResultatArray(i) = "Nei"
-                            Else
-                                InvResultatArray(i) = "Ja"
-                            End If
+            'For hver kolonne les inn verdi 0-12 og legg i listview
+            While invSqlLeser.Read()
+                For i = 0 To invSqlLeser.FieldCount - 1
+                    If i = 11 Or i = 12 Then
+                        If invSqlLeser(i) = False Then
+                            InvResultatArray(i) = "Nei"
                         Else
-                            InvResultatArray(i) = invSqlLeser(i)
+                            InvResultatArray(i) = "Ja"
                         End If
-                    Next
-                    InvResultatObjekt = New ListViewItem(InvResultatArray)
-                    LvInvSok.Items.Add(InvResultatObjekt)
-                End While
-                invSqlLeser.Close()
-                DBDisconnect()
-
-            Catch ex As MySqlException
-                MsgBox("Feil ved søk i sykkeldatabase:" & vbNewLine & ex.Message)
-            End Try
-
-            'Søk på utstyr basert på innlagt data i skjema
-        ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
-
-            Dim InvSpInit As String = "SELECT utstyr.utstyr_id, utstyr.utstyr_navn, utstyr_kategori.utstyr_kat, " _
-                & "utstyr.varenummer, utstyr.utstyr_pris, forhandler.forhandler_navn " _
-                & "FROM utstyr LEFT JOIN forhandler ON utstyr.forhandler_id=forhandler.forhandler_id " _
-                & "LEFT JOIN utstyr_kategori ON utstyr.utstyr_kat_id=utstyr_kategori.utstyr_kat_id WHERE "
-
-            Dim InvSpUtstyrNavn As String = "utstyr_navn LIKE '%" & SQLWhiteWash(TxtInvProduktnavn.Text.Trim) & "%'"
-            Dim InvSpVarenummer As String = "varenummer LIKE '%" & SQLWhiteWash(TxtInvVareNummer.Text.Trim) & "%'"
-            Dim InvSpUtstyrPris As String = "utstyr_pris LIKE '%" & SQLWhiteWash(TxtInvInnkjopspris.Text.Trim) & "%'"
-            Dim InvSpForhandlerNavn As String = "forhandler_navn LIKE '%" & CboInvForhandler.SelectedItem & "%'"
-            Dim InvSpUtstyrkategori As String = "utstyr_kat LIKE '%" & CboInvSubkategori.SelectedItem & "%'"
-
-            Dim InvSokSporring As String
-            InvSokSporring = InvSpInit & InvSpUtstyrNavn & " AND " & InvSpUtstyrkategori & " AND " _
-                & InvSpVarenummer & " AND " & InvSpUtstyrPris & " AND " & InvSpForhandlerNavn & ";"
-
-            Dim InvResultatArray(5) As String
-            Dim InvResultatObjekt As ListViewItem
-
-            'Sender spørring for søk basert på innlagte data i skjema. Skriver ut returnerte rader til listview 
-            Try
-                DBConnect()
-                InvSqlSok = New MySqlCommand(InvSokSporring, tilkobling)
-                invSqlLeser = InvSqlSok.ExecuteReader()
-
-                'For hver kolonne les inn verdi 1 til n og legg i listview
-                While invSqlLeser.Read()
-                    For i = 0 To invSqlLeser.FieldCount - 1
-                        If TypeOf invSqlLeser(i) Is DBNull Then
-                        Else
-                            InvResultatArray(i) = invSqlLeser(i)
-                        End If
-                    Next
-                    InvResultatObjekt = New ListViewItem(InvResultatArray)
-                    LvInvSok.Items.Add(InvResultatObjekt)
-                End While
-                invSqlLeser.Close()
-                DBDisconnect()
-
-            Catch ex As MySqlException
-                MsgBox("Feil ved søk i utstyrdatabase:" & vbNewLine & ex.Message)
-            End Try
-        Else
-            MsgBox("Velg en kategori")
-        End If
-
+                    Else
+                        InvResultatArray(i) = invSqlLeser(i)
+                    End If
+                Next
+                InvResultatObjekt = New ListViewItem(InvResultatArray)
+                LvInvSok.Items.Add(InvResultatObjekt)
+            End While
+            invSqlLeser.Close()
+            DBDisconnect()
+        Catch ex As MySqlException
+            MsgBox("Feil ved søk i sykkeldatabase:" & vbNewLine & ex.Message)
+        End Try
 
     End Sub
 
-    'SQLspørring med endering av data for valgt produkt med ID fra valgt produkt i søkefelt
-    Private Sub BtnInvEndre_Click(sender As Object, e As EventArgs) Handles BtnInvEndre.Click
+    Private Sub InvSokUtstyr()
 
-        BtnInvRegistrer.Enabled = True
-        BtnInvSok.Enabled = True
+        Dim InvSpInit As String = "SELECT utstyr.utstyr_id, utstyr.utstyr_navn, utstyr_kategori.utstyr_kat, " _
+               & "utstyr.varenummer, utstyr.utstyr_pris, forhandler.forhandler_navn " _
+               & "FROM utstyr LEFT JOIN forhandler ON utstyr.forhandler_id=forhandler.forhandler_id " _
+               & "LEFT JOIN utstyr_kategori ON utstyr.utstyr_kat_id=utstyr_kategori.utstyr_kat_id WHERE "
+
+        Dim InvSpUtstyrNavn As String = "utstyr_navn LIKE '%" & SQLWhiteWash(TxtInvProduktnavn.Text.Trim) & "%'"
+        Dim InvSpVarenummer As String = "varenummer LIKE '%" & SQLWhiteWash(TxtInvVareNummer.Text.Trim) & "%'"
+        Dim InvSpUtstyrPris As String = "utstyr_pris LIKE '%" & SQLWhiteWash(TxtInvInnkjopspris.Text.Trim) & "%'"
+        Dim InvSpForhandlerNavn As String = "forhandler_navn LIKE '%" & CboInvForhandler.SelectedItem & "%'"
+        Dim InvSpUtstyrkategori As String = "utstyr_kat LIKE '%" & CboInvSubkategori.SelectedItem & "%'"
+
+        Dim InvSokSporring As String
+        InvSokSporring = InvSpInit & InvSpUtstyrNavn & " AND " & InvSpUtstyrkategori & " AND " _
+            & InvSpVarenummer & " AND " & InvSpUtstyrPris & " AND " & InvSpForhandlerNavn & ";"
+
+        Dim InvResultatArray(5) As String
+        Dim InvResultatObjekt As ListViewItem
+        Dim InvSqlSok As MySqlCommand
+        Dim invSqlLeser As MySqlDataReader
+
+        'Sender spørring for søk basert på innlagte data i skjema. Skriver ut returnerte rader til listview 
+        Try
+            DBConnect()
+            InvSqlSok = New MySqlCommand(InvSokSporring, Tilkobling)
+            invSqlLeser = InvSqlSok.ExecuteReader()
+
+            'For hver kolonne les inn verdi 1 til n og legg i listview
+            While invSqlLeser.Read()
+                For i = 0 To invSqlLeser.FieldCount - 1
+                    If TypeOf invSqlLeser(i) Is DBNull Then
+                    Else
+                        InvResultatArray(i) = invSqlLeser(i)
+                    End If
+                Next
+                InvResultatObjekt = New ListViewItem(InvResultatArray)
+                LvInvSok.Items.Add(InvResultatObjekt)
+            End While
+            invSqlLeser.Close()
+            DBDisconnect()
+
+        Catch ex As MySqlException
+            MsgBox("Feil ved søk i utstyrdatabase:" & vbNewLine & ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub InvEndreSykkel()
 
         Dim InvKategori, InvSubkategoriNavn, InvAvdelingNavn, InvProduktnavn, InvVarenummer, InvInnkjopspris,
             InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandlerNavn, InvStatus, InvSkadet, InvSavnet,
-            InvForhandlerID, InvAvdelingID, InvSubKategoriID, InvEndreSporring As String
-
-        Dim InvSqlEndre As MySqlCommand
+            InvForhandlerID, InvAvdelingID, InvSubKategoriID, InvEndreVerdier As String
 
         InvKategori = CboInvKategori.SelectedItem
         InvSubkategoriNavn = CboInvSubkategori.SelectedItem
@@ -1503,119 +1507,147 @@ Public Class Form1
         InvSkadet = CboInvSkadet.SelectedIndex
         InvSavnet = CboInvSavnet.SelectedIndex
 
-        'SQLspørring for endring av sykkel i database. Data hentes fra felt
+        If CboInvAvdeling.SelectedIndex = -1 Or CboInvForhandler.SelectedIndex = -1 Or
+              CboInvSubkategori.SelectedIndex = -1 Or TxtInvProduktnavn.Text.Trim = "" Or
+              TxtInvVareNummer.Text.Trim = "" Or TxtInvInnkjopspris.Text.Trim = "" Or
+              TxtInvRamme.Text.Trim = "" Or TxtInvHjulstorrelse.Text.Trim = "" Or
+              TxtInvGirsystem.Text.Trim = "" Or CboInvStatus.SelectedIndex = -1 Or
+              CboInvSkadet.SelectedIndex = -1 Or CboInvSavnet.SelectedIndex = -1 Then
+
+            MsgBox("Vennligst fyll inn alle felt")
+
+        Else
+
+            Dim InvBekreftSykkelReg As DialogResult
+            InvBekreftSykkelReg = MsgBox("Bekreft endring av sykkel", MsgBoxStyle.OkCancel)
+            If InvBekreftSykkelReg = DialogResult.OK Then
+
+                InvForhandlerID = SQLHentIDNavn("forhandler", "forhandler_navn",
+                    "forhandler_id", InvForhandlerNavn)
+                InvSubKategoriID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", InvSubkategoriNavn)
+                InvAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", InvAvdelingNavn)
+                InvEndreVerdier = "sykkel_navn='" & InvProduktnavn & "', sykkel_modell='" & InvVarenummer _
+                    & "', type_id='" & InvSubKategoriID & "', sykkel_ramme='" & InvRamme & "', girsystem='" _
+                    & InvGirsystem & "', hjul_str='" & InvHjulstorrlese & "', sykkel_pris='" &
+                    InvInnkjopspris & "', avdeling_id='" & InvAvdelingID & "', forhandler_id='" _
+                    & InvForhandlerID & "', sykkel_status='" & InvStatus & "', skadet='" & InvSkadet _
+                    & "', savnet='" & InvSavnet & "'"
+
+                SQLUpdate("sykler", InvEndreVerdier, "sykkel_id='" & InvAktivtProduktID & "';")
+                SQLDelete("sykkel_utstyr", "sykkel_id='" & InvAktivtProduktID & "';")
+
+                If ChkInvBarneHenger.Checked = True Then
+                    SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvAktivtProduktID & ", 4);")
+                End If
+                If ChkInvBarnesete.Checked = True Then
+                    SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvAktivtProduktID & ", 3);")
+                End If
+                If ChkInvLastehenger.Checked = True Then
+                    SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvAktivtProduktID & ", 5)")
+                End If
+                If ChkInvSykkelveske.Checked = True Then
+                    SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvAktivtProduktID & ", 2)")
+                End If
+
+
+            End If
+        End If
+
+    End Sub
+
+    Private Sub InvEndreUtstyr()
+
+
+
+        Dim InvKategori, InvSubkategoriNavn, InvAvdelingNavn, InvProduktnavn, InvVarenummer, InvInnkjopspris,
+            InvForhandlerNavn, InvForhandlerID, InvSubKategoriID, InvEndreVerdier As String
+
+        InvKategori = CboInvKategori.SelectedItem
+        InvSubkategoriNavn = CboInvSubkategori.SelectedItem
+        InvAvdelingNavn = CboInvAvdeling.SelectedItem
+        InvProduktnavn = SQLWhiteWash(TxtInvProduktnavn.Text.Trim)
+        InvVarenummer = SQLWhiteWash(TxtInvVareNummer.Text.Trim)
+        InvInnkjopspris = SQLWhiteWash(TxtInvInnkjopspris.Text.Trim)
+        InvForhandlerNavn = CboInvForhandler.SelectedItem
+
+        If CboInvForhandler.SelectedIndex = -1 Or CboInvSubkategori.SelectedIndex = -1 _
+             Or TxtInvProduktnavn.Text.Trim = "" Or TxtInvVareNummer.Text.Trim = "" _
+             Or TxtInvInnkjopspris.Text.Trim = "" Then
+
+            MsgBox("Vennligst fyll inn alle felt")
+
+        Else
+
+            Dim InvBekreftSykkelReg As DialogResult
+            InvBekreftSykkelReg = MsgBox("Bekreft endring av utstyr", MsgBoxStyle.OkCancel)
+            If InvBekreftSykkelReg = DialogResult.OK Then
+
+                InvForhandlerID = SQLHentIDNavn("forhandler", "forhandler_navn", "forhandler_id", InvForhandlerNavn)
+                InvSubKategoriID = SQLHentIDNavn("utstyr_kategori", "utstyr_kat",
+                    "utstyr_kat_id", InvSubkategoriNavn)
+                InvEndreVerdier = "utstyr_navn='" & InvProduktnavn & "', varenummer='" _
+                & InvVarenummer & "', utstyr_pris='" & InvInnkjopspris & "', forhandler_id='" _
+                & InvForhandlerID & "', utstyr_kat_id='" & InvSubKategoriID & "'"
+
+                SQLUpdate("utstyr", InvEndreVerdier, "utstyr_id='" & InvAktivtProduktID & "'")
+
+            End If
+        End If
+
+    End Sub
+
+
+    'SQLspørring med registrering av nytt produkt basert på innlagt data i skjema.
+    Private Sub BtnInvRegistrer_Click(sender As Object, e As EventArgs) Handles BtnInvRegistrer.Click
+
         If CboInvKategori.SelectedItem = "Sykkel" Then
-
-            If CboInvAvdeling.SelectedIndex = -1 Or CboInvForhandler.SelectedIndex = -1 Or
-                CboInvSubkategori.SelectedIndex = -1 Or TxtInvProduktnavn.Text.Trim = "" Or
-                TxtInvVareNummer.Text.Trim = "" Or TxtInvInnkjopspris.Text.Trim = "" Or
-                TxtInvRamme.Text.Trim = "" Or TxtInvHjulstorrelse.Text.Trim = "" Or
-                TxtInvGirsystem.Text.Trim = "" Or CboInvStatus.SelectedIndex = -1 Or
-                CboInvSkadet.SelectedIndex = -1 Or CboInvSavnet.SelectedIndex = -1 Then
-                MsgBox("Vennligst fyll inn alle felt")
-
-            Else
-
-                Dim InvBekreftSykkelReg As DialogResult
-                InvBekreftSykkelReg = MsgBox("Bekreft endring av sykkel", MsgBoxStyle.OkCancel)
-                If InvBekreftSykkelReg = DialogResult.OK Then
-
-                    InvForhandlerID = SQLHentIDNavn("forhandler", "forhandler_navn",
-                        "forhandler_id", InvForhandlerNavn)
-                    InvSubKategoriID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", InvSubkategoriNavn)
-                    InvAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", InvAvdelingNavn)
-
-                    InvEndreSporring = "UPDATE sykler SET sykkel_navn='" & InvProduktnavn _
-                    & "', sykkel_modell='" & InvVarenummer & "', type_id='" & InvSubKategoriID & "', sykkel_ramme='" _
-                    & InvRamme & "', girsystem='" & InvGirsystem & "', hjul_str='" & InvHjulstorrlese _
-                    & "', sykkel_pris='" & InvInnkjopspris & "', avdeling_id='" & InvAvdelingID & "', forhandler_id='" _
-                    & InvForhandlerID & "', sykkel_status='" & InvStatus & "', skadet='" & InvSkadet & "', savnet='" _
-                    & InvSavnet & "' WHERE sykkel_id='" & InvAktivtProduktID & "';"
-
-                    Try
-                        DBConnect()
-                        InvSqlEndre = New MySqlCommand(InvEndreSporring, tilkobling)
-                        InvSqlEndre.ExecuteNonQuery()
-                        DBDisconnect()
-
-                        'Sletter alle tidligere rader med AktivtProduktID fra sykkel_utstyr tabellen
-                        InvEndreSporring = "DELETE FROM sykkel_utstyr WHERE sykkel_id=" _
-                            & InvAktivtProduktID
-
-                        DBConnect()
-                        InvSqlEndre = New MySqlCommand(InvEndreSporring, tilkobling)
-                        InvSqlEndre.ExecuteNonQuery()
-                        DBDisconnect()
-
-                        'Registerer valgt utstyr på AktivtProduktID
-                        If ChkInvBarneHenger.Checked = True Then
-                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvAktivtProduktID & ", 4)")
-                        End If
-                        If ChkInvBarnesete.Checked = True Then
-                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvAktivtProduktID & ", 3)")
-                        End If
-                        If ChkInvLastehenger.Checked = True Then
-                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvAktivtProduktID & ", 5)")
-                        End If
-                        If ChkInvSykkelveske.Checked = True Then
-                            SQLInsert("sykkel_utstyr", "(sykkel_id, utstyr_kat_id)", "(" & InvAktivtProduktID & ", 2)")
-                        End If
-
-                        MsgBox("Endring av sykkel med ID " & InvAktivtProduktID & " vellykket.")
-                        InvAktivtProduktID = ""
-                        LblInvAktivProdukt.Text = "Ingen aktive produkt."
-                        BtnInvEndre.Enabled = False
-                    Catch ex As MySqlException
-                        MsgBox("Feil ved endring av sykkel:" & vbNewLine & ex.Message)
-                    End Try
-
-                End If
-            End If
-
-            'SQLspørring for endring av utstyr i database. Data hentes fra felt
+            InvRegistrerSykkel()
         ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
-
-            If CboInvForhandler.SelectedIndex = -1 Or CboInvSubkategori.SelectedIndex = -1 _
-                Or TxtInvProduktnavn.Text.Trim = "" Or TxtInvVareNummer.Text.Trim = "" _
-                Or TxtInvInnkjopspris.Text.Trim = "" Then
-                MsgBox("Vennligst fyll inn alle felt")
-            Else
-                Dim InvBekreftSykkelReg As DialogResult
-                InvBekreftSykkelReg = MsgBox("Bekreft endring av utstyr", MsgBoxStyle.OkCancel)
-                If InvBekreftSykkelReg = DialogResult.OK Then
-                    InvForhandlerID = SQLHentIDNavn("forhandler", "forhandler_navn",
-                        "forhandler_id", InvForhandlerNavn)
-                    InvSubKategoriID = SQLHentIDNavn("utstyr_kategori", "utstyr_kat",
-                        "utstyr_kat_id", InvSubkategoriNavn)
-                    InvEndreSporring = "UPDATE utstyr SET utstyr_navn='" & InvProduktnavn & "', varenummer='" _
-                    & InvVarenummer & "', utstyr_pris='" & InvInnkjopspris & "', forhandler_id='" _
-                    & InvForhandlerID & "', utstyr_kat_id='" & InvSubKategoriID & "' WHERE utstyr_id='" _
-                    & InvAktivtProduktID & "';"
-
-                    Try
-                        DBConnect()
-                        InvSqlEndre = New MySqlCommand(InvEndreSporring, tilkobling)
-                        InvSqlEndre.ExecuteNonQuery()
-                        DBDisconnect()
-                        MsgBox("Endring av utstyr med ID " & InvAktivtProduktID & " vellykket.")
-                        InvAktivtProduktID = ""
-                        BtnInvEndre.Enabled = False
-                    Catch ex As MySqlException
-                        MsgBox("Feil ved endring av utstyr:" & vbNewLine & ex.Message)
-                    End Try
-
-                End If
-            End If
+            InvRegistrerUtstyr()
         Else
             MsgBox("Velg kategori")
         End If
 
     End Sub
 
+    'SQLspørring med søk på valgte verdier i søkefelt
+    Private Sub BtnInvSok_Click(sender As Object, e As EventArgs) Handles BtnInvSok.Click
+
+        LvInvSok.Items.Clear()
+
+        If CboInvKategori.SelectedItem = "Sykkel" Then
+            InvSokSykkel()
+        ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
+            InvSokUtstyr()
+        Else
+            MsgBox("Velg en kategori")
+        End If
+
+    End Sub
+
+    'SQLspørring med endering av data for valgt produkt med ID fra valgt produkt i søkefelt
+    Private Sub BtnInvEndre_Click(sender As Object, e As EventArgs) Handles BtnInvEndre.Click
+
+        BtnInvRegistrer.Enabled = True
+        BtnInvSok.Enabled = True
+
+        If CboInvKategori.SelectedItem = "Sykkel" Then
+            InvEndreSykkel()
+        ElseIf CboInvKategori.SelectedItem = "Utstyr" Then
+            InvEndreUtstyr()
+        Else
+            MsgBox("Velg kategori")
+        End If
+
+        InvAktivtProduktID = ""
+        LblInvAktivProdukt.Text = "Ingen aktive produkt."
+        BtnInvEndre.Enabled = False
+
+    End Sub
+
     'Henter data for objekt med inntastet ID fra database og legger i skjema
     Private Sub BtnInvHent_Click(sender As Object, e As EventArgs) Handles BtnInvHent.Click
 
-        'BtnInvSok.Enabled = False
         BtnInvRegistrer.Enabled = False
         BtnInvEndre.Enabled = True
 
@@ -1624,12 +1656,11 @@ Public Class Form1
 
         Dim InvSkadetBol, InvSavnetBol As Boolean
 
-        Dim InvSqlCom As MySqlCommand
-        Dim InvSqlDA As New MySqlDataAdapter
         Dim InvHentDaT As New DataTable
         Dim InvHentUtstyrKatDaT As New DataTable
 
         If TxtInvHentID.Text = "" Then
+
             MsgBox("Skriv inn et ID nummer")
 
             'Spørring for å hente sykkel fra database basert på inntastet ID og legge det inn i skjema
@@ -1669,7 +1700,7 @@ Public Class Form1
                     End If
                 Next
             Catch ex As Exception
-                MsgBox("Feil ved innlegg av data i skjema:" & ex.Message)
+                MsgBox("Feil ved innlegging av data i skjema:" & ex.Message)
             End Try
 
             InvForhandlerNavn = SQLHentIDNavn("forhandler",
@@ -1711,16 +1742,16 @@ Public Class Form1
                     InvForhandlerID = r("forhandler_id").ToString
                 Next
             Catch ex As Exception
-                MsgBox("Innlegg av data i skjema: " & ex.Message)
+                MsgBox("Feil ved innlegging av data i skjema: " & ex.Message)
             End Try
+
+            InvForhandlerNavn = SQLHentIDNavn("forhandler", "forhandler_id", "forhandler_navn", InvForhandlerID)
+            InvSubkategoriNavn = SQLHentIDNavn("utstyr_kategori", "utstyr_kat_id", "utstyr_kat", InvSubkategoriID)
+
             CboInvKategori.SelectedIndex = 1
-
-            InvForhandlerNavn = SQLHentIDNavn("forhandler",
-                        "forhandler_id", "forhandler_navn", InvForhandlerID)
-            InvSubkategoriNavn = SQLHentIDNavn("sykkel_typer", "type_id", "kategori", InvSubkategoriID)
-
             CboInvForhandler.SelectedItem = InvForhandlerNavn
             CboInvSubkategori.SelectedItem = InvSubkategoriNavn
+
         Else
             MsgBox("Velg kategori")
         End If
@@ -1744,8 +1775,6 @@ Public Class Form1
     End Sub
 
 
-
-
     ' - ----------------------- TEST TEST TEST - --------------------
     'Private Sub BtnInvTest_Click(sender As Object, e As EventArgs) Handles BtnInvTest.Click
     '    Dim testdato As Date
@@ -1763,13 +1792,6 @@ Public Class Form1
     'End Sub
 
 
-#End Region
-
-
-#Region "InventarSearchTab"
-    'Her plasseres kode som er relevant til Inventar Search Tab.
-    'Variabler som brukes her skal begynne med Search. Dette er for å unngå klasj.
-    'Husk kode kommentarer.
 #End Region
 
 
@@ -2156,17 +2178,17 @@ Public Class Form1
 
         NBInputSjekk = CheckVarChar30(TxtAdminNBPassord.Text)
         If NBInputSjekk = False Then
-            MsgBox("Vennligst tast inn gyldig passord. (Mindre enn 30 char)")
+            MsgBox("Vennligst tast inn gyldig passord. (Mindre enn 30 tegn)")
             Exit Sub
         End If
         NBInputSjekk = CheckVarChar20(TxtAdminNBFornavn.Text)
         If NBInputSjekk = False Then
-            MsgBox("Vennligst tast inn gyldig fornavn. (Mindre enn 20 char)")
+            MsgBox("Vennligst tast inn gyldig fornavn. (Mindre enn 20 tegn)")
             Exit Sub
         End If
         NBInputSjekk = CheckVarChar30(TxtAdminNBEtternavn.Text)
         If NBInputSjekk = False Then
-            MsgBox("Vennligst tast inn gyldig etternavn. (Mindre enn 30 char)")
+            MsgBox("Vennligst tast inn gyldig etternavn. (Mindre enn 30 tegn)")
             Exit Sub
         End If
         NBInputSjekk = CheckIntValue(TxtAdminNBTime.Text)
@@ -2176,12 +2198,12 @@ Public Class Form1
         End If
         NBInputSjekk = CheckVarChar30(TxtAdminNBEpost.Text)
         If NBInputSjekk = False Then
-            MsgBox("Vennligst tast inn gyldig epost. (Mindre enn 30 char)")
+            MsgBox("Vennligst tast inn gyldig epost. (Mindre enn 30 tegn)")
             Exit Sub
         End If
         NBInputSjekk = CheckVarChar15(TxtAdminNBTelefon.Text)
         If NBInputSjekk = False Then
-            MsgBox("Vennligst tast inn gyldig passord. (Mindre enn 30 char)")
+            MsgBox("Vennligst tast inn gyldig passord. (Mindre enn 30 tegn)")
             Exit Sub
         End If
 
