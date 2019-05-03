@@ -69,9 +69,6 @@ Partial Class Form1
         Me.LvUtlVarer = New System.Windows.Forms.ListView()
         Me.UtlVare = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtlVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtleieTPris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtlDPris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtlUPris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtlAntall = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LblUtlSubKat = New System.Windows.Forms.Label()
         Me.CboUtlKat = New System.Windows.Forms.ComboBox()
@@ -812,7 +809,7 @@ Partial Class Form1
         '
         'LvUtlVarer
         '
-        Me.LvUtlVarer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.UtlVare, Me.UtlVareNavn, Me.UtleieTPris, Me.UtlDPris, Me.UtlUPris, Me.UtlAntall})
+        Me.LvUtlVarer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.UtlVare, Me.UtlVareNavn, Me.UtlAntall})
         Me.LvUtlVarer.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtlVarer.Location = New System.Drawing.Point(6, 253)
         Me.LvUtlVarer.Name = "LvUtlVarer"
@@ -831,28 +828,10 @@ Partial Class Form1
         Me.UtlVareNavn.Text = "Varenavn"
         Me.UtlVareNavn.Width = 202
         '
-        'UtleieTPris
-        '
-        Me.UtleieTPris.DisplayIndex = 3
-        Me.UtleieTPris.Text = "Timepris"
-        Me.UtleieTPris.Width = 75
-        '
-        'UtlDPris
-        '
-        Me.UtlDPris.DisplayIndex = 4
-        Me.UtlDPris.Text = "Døgnpris"
-        Me.UtlDPris.Width = 74
-        '
-        'UtlUPris
-        '
-        Me.UtlUPris.DisplayIndex = 5
-        Me.UtlUPris.Text = "Ukepris"
-        '
         'UtlAntall
         '
-        Me.UtlAntall.DisplayIndex = 2
-        Me.UtlAntall.Text = "Tilgjengelig"
-        Me.UtlAntall.Width = 77
+        Me.UtlAntall.Text = "Tilgjengelighet"
+        Me.UtlAntall.Width = 97
         '
         'LblUtlSubKat
         '
@@ -3859,9 +3838,6 @@ Partial Class Form1
     Friend WithEvents LvUtlVarer As ListView
     Friend WithEvents UtlVare As ColumnHeader
     Friend WithEvents UtlVareNavn As ColumnHeader
-    Friend WithEvents UtleieTPris As ColumnHeader
-    Friend WithEvents UtlDPris As ColumnHeader
-    Friend WithEvents UtlUPris As ColumnHeader
     Friend WithEvents CboUtlSubkat As ComboBox
     Friend WithEvents LblUtsRabatt As Label
     Friend WithEvents UtlRabatt As ColumnHeader

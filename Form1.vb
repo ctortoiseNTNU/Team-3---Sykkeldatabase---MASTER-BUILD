@@ -374,8 +374,117 @@ Public Class Form1
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
 
         End Try
+    End Sub
+
+    Private Sub BtnUtlAddVare_Click(sender As Object, e As EventArgs) Handles BtnUtlAddVare.Click
+        LvUtlVarer.Items.Clear()
+        varehent()
+    End Sub
+
+
+    Private Sub varehent()
+
+        'fyller varelistv. med data fra valgte bokser.
+        '''''''''''''''''''''''''''FROM          WHERE         SELECT    =    
+        'String = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", verdi)
+
+        Dim UtlKategori As String = CboUtlKat.SelectedItem
+        Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
+        Dim UtlRamme As String = CboUtlRamme.SelectedItem
+        Dim UtlHjul As String = CboUtlHjulStr.SelectedItem
+        Dim UtlSubkatID, SykkelIdRamme, SykkelIdHjul As String
+        Dim SykkelSQLKolonner = New String() {"sykkel_modell", "sykkel_navn", "sykkel_status", "kategori",
+                                              "sykkel_kat_timepris", "sykkel_kat_døgnpris", "sykkel_kat_ukepris"}
+
+        'henter typeID fra sykler og utstyr etter data fra subkategori
+        'hente varenummer fra sykler med valgt ramme og hjul
+
+        If UtlKategori = "Sykkel" Then
+            UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
+            SykkelIdRamme = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
+            SykkelIdHjul = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
+
+            Try
+                DBConnect()
+                Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
+                                          FROM sykler s JOIN sykkel_typer st
+                                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " ORDER BY sykkel_status", tilkobling)
+
+                'Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
+                '                           FROM sykler s JOIN sykkel_typer st
+                '                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " AND st.type_id =" & SykkelIdRamme & "
+                '                           ORDER BY sykkel_status", tilkobling)
+
+                Dim VaresøkAdapter As New MySqlDataAdapter
+                Dim VareSøkTable As New DataTable
+                VaresøkAdapter.SelectCommand = varer
+                VaresøkAdapter.Fill(VareSøkTable)
+
+                DBDisconnect()
+
+                Dim VareRow As DataRow
+                Dim Varenummer, Varenavn, Tilgjengelig As String
+
+                For Each VareRow In VareSøkTable.Rows
+                    Varenummer = VareRow("sykkel_modell")
+                    Varenavn = VareRow("sykkel_navn")
+                    Tilgjengelig = VareRow("sykkel_status")
+
+
+                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn, Tilgjengelig}))
+                Next
+
+            Catch feilmelding As MySqlException
+                MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+
+            End Try
+
+        Else
+            UtlSubkatID = SQLHentIDNavn("utstyr_kategori", "utstyr_kat", "utstyr_kat_id", UtlSubKategori)
+
+            Try
+                DBConnect()
+                Dim varer As New MySqlCommand("SELECT varenummer, utstyr_navn, utstyr_status 
+                                           FROM utstyr WHERE utstyr_id =" & UtlSubkatID & "
+                                            ORDER BY utstyr_status", tilkobling)
+
+                Dim VaresøkAdapter As New MySqlDataAdapter
+                Dim VareSøkTable As New DataTable
+                VaresøkAdapter.SelectCommand = varer
+                VaresøkAdapter.Fill(VareSøkTable)
+
+                DBDisconnect()
+
+                Dim VareRow As DataRow
+                Dim Varenummer, Varenavn, Tilgjengelig As String
+
+                For Each VareRow In VareSøkTable.Rows
+                    Varenummer = VareRow("varenummer")
+                    Varenavn = VareRow("utstyr_navn")
+                    Tilgjengelig = VareRow("utstyr_status")
+
+                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn, Tilgjengelig}))
+                Next
+
+            Catch feilmelding As MySqlException
+                MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+
+            End Try
+        End If
+
+
+
+
+
+
+
+
 
     End Sub
+
+
+
+
 
     ' hopp til kundetab. og ta med telefonnr
     Private Sub BtnUtleieNyKunde_Click(sender As Object, e As EventArgs) Handles BtnUtleieNyKunde.Click
@@ -395,7 +504,7 @@ Public Class Form1
     'autofyll av ramme boks fra database.
     ' denne skal hente ramme fra valgt sykkeltype
     Private Sub CboUtlRamme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
-        UtlAutoPopCbo(sender, "sykler", "sykkel_ramme")
+        UtlAutoPopRamme()
     End Sub
 
     'autofyll av hjul combobox. 
@@ -419,6 +528,7 @@ Public Class Form1
             CboUtlRamme.Items.Clear()
             CboUtlHjulStr.Items.Clear()
             UtlAutoPopUtstyr()
+            'varehent()
         Else
 
             'LvUtlVarer.Items.Clear()
@@ -428,8 +538,29 @@ Public Class Form1
             CboUtlRamme.Items.Clear()
             CboUtlHjulStr.Items.Clear()
             UtlAutoPopSykkel()
+            'varehent()
         End If
+
     End Sub
+
+    'Hva skjer når rammeboks trykkes på.
+    Private Sub CboUtlRamme_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
+        'CboUtlRamme.Items.Clear()
+        CboUtlHjulStr.Items.Clear()
+        UtlAutoPopRamme()
+    End Sub
+
+    'resetter rammeboks om sykkel kategori endres.
+    Private Sub CboUtlSubkat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlSubkat.DropDown
+
+        If CboUtlSubkat.SelectedValue = "Sykkel" Then
+            CboUtlRamme.Items.Clear()
+            CboUtlHjulStr.Items.Clear()
+            UtlAutoPopRamme()
+        End If
+
+    End Sub
+
 
 
     'Metode som fyller combobox (som kaller) med data fra database.
@@ -500,26 +631,33 @@ Public Class Form1
         End Try
     End Sub
 
-    'Private Sub UtlAutoPopRamme()
-    '    Try
-    '        DBConnect()
-    '        Dim UtlSqlCom As New MySqlCommand("SELECT sykkel_ramme FROM sykler ", tilkobling)
-    '        Dim UtlSqlDA As New MySqlDataAdapter
-    '        Dim UtlRammeComboDaT As New DataTable
-    '        UtlSqlDA.SelectCommand = UtlSqlCom
-    '        UtlSqlDA.Fill(UtlRammeComboDaT)
-    '        DBDisconnect()
-    '        CboUtlRamme.Items.Clear()
-    '        Dim UtlRammeRow As DataRow
-    '        Dim UtlRammeString As String
-    '        For Each UtlRammeRow In UtlRammeComboDaT.Rows
-    '            UtlRammeString = UtlRammeRow("utstyr_kat")
-    '            CboUtlSubkat.Items.Add(UtlRammeString)
-    '        Next
-    '    Catch ex As MySqlException
-    '        MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
-    '    End Try
-    'End Sub
+    Private Sub UtlAutoPopRamme()
+
+        Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
+        Dim UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
+        Try
+            DBConnect()
+
+            Dim UtlSqlCom As New MySqlCommand("SELECT sykkel_ramme FROM sykler 
+                                                WHERE type_id =" & UtlSubkatID & "", tilkobling)
+            Dim UtlSqlDA As New MySqlDataAdapter
+            Dim UtlRammeComboDaT As New DataTable
+            UtlSqlDA.SelectCommand = UtlSqlCom
+            UtlSqlDA.Fill(UtlRammeComboDaT)
+            DBDisconnect()
+            CboUtlRamme.Items.Clear()
+            Dim UtlRammeRow As DataRow
+            Dim UtlRammeString As String
+            For Each UtlRammeRow In UtlRammeComboDaT.Rows
+                UtlRammeString = UtlRammeRow("sykkel_ramme")
+                CboUtlRamme.Items.Add(UtlRammeString)
+            Next
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
+        End Try
+    End Sub
+
+
 
 
 
@@ -2095,6 +2233,11 @@ Public Class Form1
 
         AdminEndreBruker()
     End Sub
+
+
+
+
+
 
 
 
