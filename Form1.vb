@@ -7,11 +7,13 @@ Public Class Form1
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
     'Globale variabler som må sjekkes ved ønsket tilgang. LogBool settes til TRUE ved inlogging, AdminBool settes til TRUE hvis bruker er admin.
 
-    Dim LogBool As Boolean
-    Dim AdminBool As Boolean
+    Dim LogBool As Boolean = False
+    Dim AdminBool As Boolean = False
+    Dim FornavnString As String = ""
+    Dim EtternavnString As String = ""
     Dim Tilkobling As MySqlConnection
     Dim InvAktivtProduktID As String
-
+    Dim SecurityCounter As Integer = 0
 
 
 #End Region
@@ -22,13 +24,13 @@ Public Class Form1
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
 
     Private Sub DBConnect()
-        tilkobling = New MySqlConnection(
+        Tilkobling = New MySqlConnection(
         "Server=mysql-ait.stud.idi.ntnu.no;" _
         & "Database=colinft;" _
         & "Uid=colinft;" _
         & "Pwd=BJhYR1HS;")
         Try
-            tilkobling.Open()
+            Tilkobling.Open()
         Catch ex As MySqlException
             MsgBox(ex)
         End Try
@@ -115,7 +117,7 @@ Public Class Form1
         Try
             DBConnect()
             Dim SqlCom As New MySqlCommand("INSERT INTO " & InsertTable & InsertColumn & " VALUES " &
-                InsertValues, tilkobling)
+                InsertValues, Tilkobling)
             SqlCom.ExecuteNonQuery()
             DBDisconnect()
         Catch SQLex As MySqlException
@@ -199,7 +201,7 @@ Public Class Form1
     Private Sub AutoPopCbo(ByVal sender As Object, Tabell As String, Kolonne As String)
         Try
             DBConnect()
-            Dim InvSqlCom As New MySqlCommand("SELECT " & Kolonne & " FROM " & Tabell, tilkobling)
+            Dim InvSqlCom As New MySqlCommand("SELECT " & Kolonne & " FROM " & Tabell, Tilkobling)
             Dim InvSqlDA As New MySqlDataAdapter
             Dim InvUtstyrComboDaT As New DataTable
             InvSqlDA.SelectCommand = InvSqlCom
@@ -309,7 +311,7 @@ Public Class Form1
     Private Sub StartMOTDUpdate()
         Try
             DBConnect()
-            Dim StartMOTDKommando As New MySqlCommand("Select * FROM message_of_the_day WHERE message_id = 1", tilkobling)
+            Dim StartMOTDKommando As New MySqlCommand("Select * FROM message_of_the_day WHERE message_id = 1", Tilkobling)
             Dim StartMOTDAdapter As New MySqlDataAdapter
             Dim StartMOTDTable As New DataTable
             StartMOTDAdapter.SelectCommand = StartMOTDKommando
@@ -377,7 +379,7 @@ Public Class Form1
 
         Try
             DBConnect()
-            Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE telefon =" & UtlKndSok & "", tilkobling)
+            Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE telefon =" & UtlKndSok & "", Tilkobling)
 
             Dim UtleieSøkAdapter As New MySqlDataAdapter
             Dim UtleieSøkTable As New DataTable
@@ -478,7 +480,7 @@ Public Class Form1
     Private Sub UtlAutoPopCbo(sender, tabell, kolonne)
         Try
             DBConnect()
-            Dim UtlSqlCom As New MySqlCommand("SELECT " & kolonne & " FROM " & tabell, tilkobling)
+            Dim UtlSqlCom As New MySqlCommand("SELECT " & kolonne & " FROM " & tabell, Tilkobling)
             Dim UtlSqlDA As New MySqlDataAdapter
             Dim UtlUtstyrComboDaT As New DataTable
             UtlSqlDA.SelectCommand = UtlSqlCom
@@ -502,7 +504,7 @@ Public Class Form1
     Private Sub UtlAutoPopUtstyr()
         Try
             DBConnect()
-            Dim UtlSqlCom As New MySqlCommand("SELECT utstyr_kat FROM utstyr_kategori", tilkobling)
+            Dim UtlSqlCom As New MySqlCommand("SELECT utstyr_kat FROM utstyr_kategori", Tilkobling)
             Dim UtlSqlDA As New MySqlDataAdapter
             Dim UtlUtstyrComboDaT As New DataTable
             UtlSqlDA.SelectCommand = UtlSqlCom
@@ -523,7 +525,7 @@ Public Class Form1
     Private Sub UtlAutoPopSykkel()
         Try
             DBConnect()
-            Dim UtlSqlCom As New MySqlCommand("SELECT kategori FROM sykkel_typer", tilkobling)
+            Dim UtlSqlCom As New MySqlCommand("SELECT kategori FROM sykkel_typer", Tilkobling)
             Dim UtlSqlDA As New MySqlDataAdapter
             Dim UtlSykkelComboDaT As New DataTable
             UtlSqlDA.SelectCommand = UtlSqlCom
@@ -708,7 +710,7 @@ Public Class Form1
             Dim sporring As New MySqlCommand("INSERT INTO kunder (kunde_fdato, kunde_fornavn, " _
                 & "kunde_etternavn, adresse, telefon, epost, rabatt_id, handlet_for) VALUES('" _
                 & KnDFdato.ToString("yyyy-MM-dd") & "', '" & KndFornavn & "', '" & KndEtternavn _
-                & "', '" & KndAdresse & "', " & KndTlf & ", '" & KndEpost & "', 1, 0)", tilkobling)
+                & "', '" & KndAdresse & "', " & KndTlf & ", '" & KndEpost & "', 1, 0)", Tilkobling)
             sporring.ExecuteNonQuery()
             DBDisconnect()
             MsgBox("Innlegging var vellykket")
@@ -741,7 +743,7 @@ Public Class Form1
 
         Try
             DBConnect()
-            Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE kunde_id = " & KndSokKundeID, tilkobling)
+            Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE kunde_id = " & KndSokKundeID, Tilkobling)
             Dim tempVarSporring = sporring.ExecuteReader
 
             While tempVarSporring.Read
@@ -803,7 +805,7 @@ Public Class Form1
         Try
             DBConnect()
             Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE " & KndSokSelectedTag _
-                & " LIKE '%" & KndSokInput & "%'", tilkobling)
+                & " LIKE '%" & KndSokInput & "%'", Tilkobling)
 
 
             Dim KndSearchAdapter As New MySqlDataAdapter
@@ -897,7 +899,7 @@ Public Class Form1
                 & " , kunde_fornavn = '" & KndChangeValueFN & "', kunde_etternavn = '" & KndChangeValueEN _
                 & "', adresse = '" & KndChangeValueAdr & "', telefon = " & KndChangeValueTlf & ", epost = '" _
                 & KndChangeValueEP & "', rabatt_id = " & KndChangeValueRbt & ", handlet_for = " & KndChangeValueHF _
-                & " WHERE kunde_id = " & selectedKundeId, tilkobling)
+                & " WHERE kunde_id = " & selectedKundeId, Tilkobling)
             sporring.ExecuteNonQuery()
             DBDisconnect()
             MsgBox("Endring vellykket")
@@ -1697,11 +1699,11 @@ Public Class Form1
             DBConnect()
 
             Dim sporring As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
-                                             & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Ledig'", tilkobling)
+                                             & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Ledig'", Tilkobling)
             Dim sporring2 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
-                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Utleid'", tilkobling)
+                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Utleid'", Tilkobling)
             Dim sporring3 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
-                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Verksted'", tilkobling)
+                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Verksted'", Tilkobling)
             outputAntallSyklerLedig = sporring.ExecuteScalar()
             outputAntallSyklerUtleid = sporring2.ExecuteScalar()
             outputAntallSyklerVerksted = sporring3.ExecuteScalar()
@@ -1737,7 +1739,7 @@ Public Class Form1
 
         Try
             DBConnect()
-            Dim sporring As New MySqlCommand(StaInputCommand, tilkobling)
+            Dim sporring As New MySqlCommand(StaInputCommand, Tilkobling)
             Dim StatempVarSporring = sporring.ExecuteReader()
             Dim i = 0
             While StatempVarSporring.Read
@@ -1792,9 +1794,9 @@ Public Class Form1
             TxtAdminNBEpost.Text = SQLWhiteWash(TxtAdminNBEpost.Text)
             TxtAdminNBTelefon.Text = SQLWhiteWash(TxtAdminNBTelefon.Text)
 
-            Dim AdminNyBruker2 As New MySqlCommand("INSERT INTO passord (passord_id, pwd, bruker_id) VALUES (" & LblBrukerIDNBVis.Text & ", '" & TxtAdminNBPassord.Text & "'," & LblBrukerIDNBVis.Text & ");", tilkobling)
-            Dim AdminNyBruker3 As New MySqlCommand("UPDATE brukere SET passord_id = " & LblBrukerIDNBVis.Text & " WHERE bruker_id = " & LblBrukerIDNBVis.Text & ";", tilkobling)
-            Dim AdminNyBruker4 As New MySqlCommand("SELECT avdeling_id FROM avdeling WHERE avd_navn ='" & CboAdminNBAvdeling.Text & "';", tilkobling)
+            Dim AdminNyBruker2 As New MySqlCommand("INSERT INTO passord (passord_id, pwd, bruker_id) VALUES (" & LblBrukerIDNBVis.Text & ", '" & TxtAdminNBPassord.Text & "'," & LblBrukerIDNBVis.Text & ");", Tilkobling)
+            Dim AdminNyBruker3 As New MySqlCommand("UPDATE brukere SET passord_id = " & LblBrukerIDNBVis.Text & " WHERE bruker_id = " & LblBrukerIDNBVis.Text & ";", Tilkobling)
+            Dim AdminNyBruker4 As New MySqlCommand("SELECT avdeling_id FROM avdeling WHERE avd_navn ='" & CboAdminNBAvdeling.Text & "';", Tilkobling)
 
             Dim AdminNyBrukerIDAdapter As New MySqlDataAdapter
             Dim AdminNyBrukerIDTable As New DataTable
@@ -1809,7 +1811,7 @@ Public Class Form1
             Next
 
             Dim AdminNyBruker1 As New MySqlCommand("INSERT INTO brukere (bruker_id, avdeling_id, stilling, fornavn, etternavn, timelonn, telefon, epost, stilling_prosent, admin) VALUES (" & LblBrukerIDNBVis.Text & "," & AdminAvdelingNavn & ",'" & CboAdminNBStilling.Text & "','" & TxtAdminNBFornavn.Text & "','" & TxtAdminNBEtternavn.Text & "'," _
-                                                   & TxtAdminNBTime.Text & ",'" & TxtAdminNBTelefon.Text & "', '" & TxtAdminNBEpost.Text & "'," & CboAdminNBSP.Text & "," & AdminAdminStatus & ");", tilkobling)
+                                                   & TxtAdminNBTime.Text & ",'" & TxtAdminNBTelefon.Text & "', '" & TxtAdminNBEpost.Text & "'," & CboAdminNBSP.Text & "," & AdminAdminStatus & ");", Tilkobling)
 
             AdminNyBruker1.ExecuteNonQuery()
             AdminNyBruker2.ExecuteNonQuery()
@@ -1854,8 +1856,8 @@ Public Class Form1
                 AdminAdminStatus = 1
             End If
 
-            Dim AdminEndreBruker3 As New MySqlCommand("UPDATE passord SET pwd ='" & TxtAdminEBPassord.Text & "' WHERE bruker_id = " & TxtAdminEBBID.Text & ";", tilkobling)
-            Dim AdminEndreBruker4 As New MySqlCommand("SELECT avdeling_id FROM avdeling WHERE avd_navn ='" & CboAdminEBAvdeling.Text & "';", tilkobling)
+            Dim AdminEndreBruker3 As New MySqlCommand("UPDATE passord SET pwd ='" & TxtAdminEBPassord.Text & "' WHERE bruker_id = " & TxtAdminEBBID.Text & ";", Tilkobling)
+            Dim AdminEndreBruker4 As New MySqlCommand("SELECT avdeling_id FROM avdeling WHERE avd_navn ='" & CboAdminEBAvdeling.Text & "';", Tilkobling)
 
             Dim AdminEndreBrukerIDAdapter As New MySqlDataAdapter
             Dim AdminEndreBrukerIDTable As New DataTable
@@ -1869,7 +1871,7 @@ Public Class Form1
                 AdminAvdelingNavn = AdminNyBrukerRow("avdeling_id")
             Next
 
-            Dim AdminEndreBruker1 As New MySqlCommand("UPDATE brukere SET avdeling_id=" & AdminAvdelingNavn & ", stilling='" & CboAdminEBStilling.Text & "', fornavn='" & TxtAdminEBFornavn.Text & "', etternavn='" & TxtAdminEBEtternavn.Text & "', timelonn=" & TxtAdminEBTime.Text & ", telefon='" & TxtAdminEBTelefon.Text & "', epost='" & TxtAdminEBEpost.Text & "', stilling_prosent=" & CboAdminEBSP.Text & ", admin=" & AdminAdminStatus & " WHERE bruker_id=" & TxtAdminEBBID.Text & ";", tilkobling)
+            Dim AdminEndreBruker1 As New MySqlCommand("UPDATE brukere SET avdeling_id=" & AdminAvdelingNavn & ", stilling='" & CboAdminEBStilling.Text & "', fornavn='" & TxtAdminEBFornavn.Text & "', etternavn='" & TxtAdminEBEtternavn.Text & "', timelonn=" & TxtAdminEBTime.Text & ", telefon='" & TxtAdminEBTelefon.Text & "', epost='" & TxtAdminEBEpost.Text & "', stilling_prosent=" & CboAdminEBSP.Text & ", admin=" & AdminAdminStatus & " WHERE bruker_id=" & TxtAdminEBBID.Text & ";", Tilkobling)
 
             AdminEndreBruker1.ExecuteNonQuery()
 
@@ -1943,7 +1945,7 @@ Public Class Form1
     Private Sub AdminBrukerIDCalc()
         Try
             DBConnect()
-            Dim AdminBrukerIDKommando As New MySqlCommand("Select COUNT(bruker_id) FROM brukere", tilkobling)
+            Dim AdminBrukerIDKommando As New MySqlCommand("Select COUNT(bruker_id) FROM brukere", Tilkobling)
             Dim AdminBrukerIDAdapter As New MySqlDataAdapter
             Dim AdminBrukerIDTable As New DataTable
             AdminBrukerIDAdapter.SelectCommand = AdminBrukerIDKommando
@@ -1994,7 +1996,7 @@ Public Class Form1
 
         Try
             DBConnect()
-            Dim AdminBrukerSearch As New MySqlCommand("SELECT * FROM brukere WHERE " & AdminSoekekategori & " LIKE '%" & AdminSoekefelt & "%'", tilkobling)
+            Dim AdminBrukerSearch As New MySqlCommand("SELECT * FROM brukere WHERE " & AdminSoekekategori & " LIKE '%" & AdminSoekefelt & "%'", Tilkobling)
             Dim AdminSearchAdapter As New MySqlDataAdapter
             Dim AdminSearchTable As New DataTable
             AdminSearchAdapter.SelectCommand = AdminBrukerSearch
@@ -2024,7 +2026,7 @@ Public Class Form1
 
         Try
             DBConnect()
-            Dim AdminMOTDSet As New MySqlCommand("UPDATE message_of_the_day SET message = '" & TxtAdminMOTD.Text & "' WHERE message_id = 1;", tilkobling)
+            Dim AdminMOTDSet As New MySqlCommand("UPDATE message_of_the_day SET message = '" & TxtAdminMOTD.Text & "' WHERE message_id = 1;", Tilkobling)
             AdminMOTDSet.ExecuteNonQuery()
             DBDisconnect()
             TxtAdminMOTD.Text = ""
@@ -2164,5 +2166,78 @@ Public Class Form1
 
 
 
+#End Region
+
+#Region "LoginTab"
+
+    Public Sub LoginCheck()
+
+        Dim LoginBrukerTabell As New DataTable
+        Dim LoginPassordTabell As New DataTable
+        Dim LoginBrukerCheck As String = ""
+        Dim LoginPassordCheck As String = ""
+        Dim LoginAdminCheck As String = ""
+        Dim LoginFornavn As String = ""
+        Dim LoginEtternavn As String = ""
+        Dim LoginBrukerTabellRow As DataRow
+        Dim LoginPassordTabellRow As DataRow
+
+        TxtLoginBrukerID.Text = SQLWhiteWash(TxtLoginBrukerID.Text)
+        TxtLoginPassord.Text = SQLWhiteWash(TxtLoginPassord.Text)
+
+        LoginBrukerTabell = SQLSelect("*", "brukere", "bruker_id=" & TxtLoginBrukerID.Text)
+        LoginPassordTabell = SQLSelect("*", "passord", "pwd=" & TxtLoginPassord.Text & " AND passord_id=" & TxtLoginBrukerID.Text)
+
+        For Each LoginBrukerTabellRow In LoginBrukerTabell.Rows
+            LoginBrukerCheck = LoginBrukerTabellRow("bruker_id")
+            LoginFornavn = LoginBrukerTabellRow("fornavn")
+            LoginEtternavn = LoginBrukerTabellRow("etternavn")
+            LoginAdminCheck = LoginBrukerTabellRow("admin")
+        Next
+
+        For Each LoginPassordTabellRow In LoginPassordTabell.Rows
+            LoginPassordCheck = LoginPassordTabellRow("pwd")
+        Next
+
+        If TxtLoginBrukerID.Text = LoginBrukerCheck And TxtLoginPassord.Text = LoginPassordCheck Then
+
+        Else
+            SecurityCounter = SecurityCounter + 1
+
+            If SecurityCounter = 3 Then
+                MsgBox("BrukerID, Passord eller begge er feil. Du har blitt låst ut grunnet for mange feilforsøk.")
+            Else
+                MsgBox("BrukerID, Passord eller begge er feil. Vennligst prøv igjen. Du har " & (3 - SecurityCounter) & " forsøk igjen.")
+            End If
+            Exit Sub
+        End If
+
+        If LoginAdminCheck = "1" Then
+            AdminBool = True
+        End If
+        LogBool = True
+        LoginSuccess()
+    End Sub
+
+    Public Sub LoginSuccess()
+        With HovedTab.TabPages
+            .Insert(0, StartTab)
+            .Insert(1, UtleieTab)
+            .Insert(2, KDTab)
+            .Insert(3, InventarTab)
+            .Insert(4, LogiTab)
+            .Insert(5, StatTab)
+            .Remove(LoginTab)
+
+        End With
+        If AdminBool = True Then
+            With HovedTab.TabPages
+                .Insert(6, AdminTab)
+                .Insert(7, DBAdminTab)
+            End With
+        End If
+
+        HovedTab.SelectedTab = StartTab
+    End Sub
 #End Region
 End Class
