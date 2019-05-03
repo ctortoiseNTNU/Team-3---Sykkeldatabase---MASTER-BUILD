@@ -223,19 +223,19 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        With HovedTab.TabPages
+        'With HovedTab.TabPages
 
-            .Remove(StartTab)
-            .Remove(UtleieTab)
-            .Remove(KDTab)
-            .Remove(InventarTab)
-            .Remove(LogiTab)
-            .Remove(StatTab)
-            .Remove(AdminTab)
-            .Remove(DBAdminTab)
-            HovedTab.SelectedTab = LoginTab
+        '    .Remove(StartTab)
+        '    .Remove(UtleieTab)
+        '    .Remove(KDTab)
+        '    .Remove(InventarTab)
+        '    .Remove(LogiTab)
+        '    .Remove(StatTab)
+        '    .Remove(AdminTab)
+        '    .Remove(DBAdminTab)
+        '    HovedTab.SelectedTab = LoginTab
 
-        End With
+        'End With
 
 
     End Sub
@@ -273,6 +273,8 @@ Public Class Form1
 
             Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
                 CmbKndSok.Items.Clear()
+
+                'AutoPopCbo()
                 Dim innhold = New String() {"ID", "Fornavn", "Etternavn", "Adresse", "Telefon", "Epost", "Rabatt Tier", "Handlet For"}
 
                 For i As Integer = 0 To innhold.Length - 1
@@ -389,7 +391,6 @@ Public Class Form1
 
         Dim KndSQLKolonner = New String() {"kunde_id", "kunde_fornavn", "kunde_etternavn", "adresse", "telefon", "epost", "rabatt_id"}
 
-
         Try
             DBConnect()
             Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE telefon =" & UtlKndSok & "", Tilkobling)
@@ -425,11 +426,10 @@ Public Class Form1
 
             End If
 
-
         Catch feilmelding As MySqlException
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
-
         End Try
+
     End Sub
 
     Private Sub BtnUtlAddVare_Click(sender As Object, e As EventArgs) Handles BtnUtlAddVare.Click
@@ -464,7 +464,7 @@ Public Class Form1
                 DBConnect()
                 Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
                                           FROM sykler s JOIN sykkel_typer st
-                                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " ORDER BY sykkel_status", tilkobling)
+                                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " ORDER BY sykkel_status", Tilkobling)
 
                 'Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
                 '                           FROM sykler s JOIN sykkel_typer st
@@ -502,7 +502,7 @@ Public Class Form1
                 DBConnect()
                 Dim varer As New MySqlCommand("SELECT varenummer, utstyr_navn, utstyr_status 
                                            FROM utstyr WHERE utstyr_id =" & UtlSubkatID & "
-                                            ORDER BY utstyr_status", tilkobling)
+                                            ORDER BY utstyr_status", Tilkobling)
 
                 Dim VaresøkAdapter As New MySqlDataAdapter
                 Dim VareSøkTable As New DataTable
@@ -695,7 +695,7 @@ Public Class Form1
             DBConnect()
 
             Dim UtlSqlCom As New MySqlCommand("SELECT sykkel_ramme FROM sykler 
-                                                WHERE type_id =" & UtlSubkatID & "", tilkobling)
+                                                WHERE type_id =" & UtlSubkatID & "", Tilkobling)
             Dim UtlSqlDA As New MySqlDataAdapter
             Dim UtlRammeComboDaT As New DataTable
             UtlSqlDA.SelectCommand = UtlSqlCom
@@ -1120,7 +1120,7 @@ Public Class Form1
             TxtInvRamme.Enabled = False
             TxtInvHjulstorrelse.Enabled = False
             TxtInvGirsystem.Enabled = False
-            CboInvStatus.Enabled = False
+            'CboInvStatus.Enabled = False
             CboInvSkadet.Enabled = False
             CboInvSavnet.Enabled = False
             ChkInvBarneHenger.Enabled = False
@@ -1138,7 +1138,7 @@ Public Class Form1
             TxtInvRamme.Enabled = True
             TxtInvHjulstorrelse.Enabled = True
             TxtInvGirsystem.Enabled = True
-            CboInvStatus.Enabled = True
+            'CboInvStatus.Enabled = True
             CboInvSkadet.Enabled = True
             CboInvSavnet.Enabled = True
             ChkInvBarneHenger.Enabled = True
@@ -1293,7 +1293,7 @@ Public Class Form1
 
             Dim InvKategori, InvSubkategoriNavn, InvSubKategoriID, InvForhandlerNavn, InvForhandlerID,
                 InvProduktnavn, InvVarenummer, InvInnkjopspris, InvSpForhandlerID, InvSpSubkategoriID,
-                InvKolonnerUtstyr, InvVerdierUtstyr As String
+                InvKolonnerUtstyr, InvVerdierUtstyr, InvStatusUtstyr As String
 
             Dim InvBekreftUtstyrReg As DialogResult
             Dim InvSubkategoriIDTabell, InvForhandlerIDTabell As DataTable
@@ -1301,6 +1301,7 @@ Public Class Form1
             InvKategori = CboInvKategori.SelectedItem
             InvSubkategoriNavn = CboInvSubkategori.SelectedItem
             InvForhandlerNavn = CboInvForhandler.SelectedItem
+            InvStatusUtstyr = CboInvStatus.SelectedItem
             InvProduktnavn = SQLWhiteWash(TxtInvProduktnavn.Text.Trim)
             InvVarenummer = SQLWhiteWash(TxtInvVareNummer.Text.Trim)
             InvInnkjopspris = SQLWhiteWash(TxtInvInnkjopspris.Text.Trim)
@@ -1324,10 +1325,12 @@ Public Class Form1
             If InvBekreftUtstyrReg = DialogResult.OK Then
 
                 InvKolonnerUtstyr = "(utstyr_navn, varenummer, utstyr_pris, " _
-                    & "forhandler_id, utstyr_kat_id)"
+                    & "forhandler_id, utstyr_kat_id, utstyr_status)"
                 InvVerdierUtstyr = "('" & InvProduktnavn & "' ,'" & InvVarenummer _
-                        & "', '" & InvInnkjopspris & "', '" & InvForhandlerID & "', '" & InvSubKategoriID & "')"
-                SQLInsert(InvKolonnerUtstyr, "utstyr", InvVerdierUtstyr)
+                        & "', '" & InvInnkjopspris & "', '" & InvForhandlerID & "', '" & InvSubKategoriID & "', '" _
+                        & InvStatusUtstyr & "');"
+
+                SQLInsert("utstyr", InvKolonnerUtstyr, InvVerdierUtstyr)
 
             End If
         End If
