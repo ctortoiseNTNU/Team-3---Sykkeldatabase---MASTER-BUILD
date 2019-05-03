@@ -223,7 +223,20 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        StartMOTDUpdate()
+        With HovedTab.TabPages
+
+            .Remove(StartTab)
+            .Remove(UtleieTab)
+            .Remove(KDTab)
+            .Remove(InventarTab)
+            .Remove(LogiTab)
+            .Remove(StatTab)
+            .Remove(AdminTab)
+            .Remove(DBAdminTab)
+            HovedTab.SelectedTab = LoginTab
+
+        End With
+
 
     End Sub
 
@@ -242,8 +255,8 @@ Public Class Form1
 
         Select Case HovedTabIndex
             Case 1 'Bestemmer det som skjer etter man har valgt startmeny.
-                MsgBox("Startmeny")
-                StartMOTDUpdate()
+                'MsgBox("Startmeny")
+                'StartMOTDUpdate()
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
 
                 'MsgBox("Utleiemeny")
@@ -2319,17 +2332,27 @@ Public Class Form1
         Dim LoginPassordTabell As New DataTable
         Dim LoginBrukerCheck As String = ""
         Dim LoginPassordCheck As String = ""
-        Dim LoginAdminCheck As String = ""
+        Dim LoginAdminCheck As Integer = 0
         Dim LoginFornavn As String = ""
         Dim LoginEtternavn As String = ""
         Dim LoginBrukerTabellRow As DataRow
         Dim LoginPassordTabellRow As DataRow
 
+        If SecurityCounter = 3 Then
+            MsgBox("Du har blitt låst ut grunnet for mange feilforsøk.")
+            Exit Sub
+        End If
+
+        If IsNumeric(TxtLoginBrukerID.Text) Then
+        Else
+            MsgBox("Vennligst tast inn gyldig BrukerID.")
+            Exit Sub
+        End If
         TxtLoginBrukerID.Text = SQLWhiteWash(TxtLoginBrukerID.Text)
         TxtLoginPassord.Text = SQLWhiteWash(TxtLoginPassord.Text)
 
-        LoginBrukerTabell = SQLSelect("*", "brukere", "bruker_id=" & TxtLoginBrukerID.Text)
-        LoginPassordTabell = SQLSelect("*", "passord", "pwd=" & TxtLoginPassord.Text & " AND passord_id=" & TxtLoginBrukerID.Text)
+        LoginBrukerTabell = SQLSelect("brukere", "*", "bruker_id=" & TxtLoginBrukerID.Text)
+        LoginPassordTabell = SQLSelect("passord", "*", "pwd='" & TxtLoginPassord.Text & "' AND passord_id=" & TxtLoginBrukerID.Text)
 
         For Each LoginBrukerTabellRow In LoginBrukerTabell.Rows
             LoginBrukerCheck = LoginBrukerTabellRow("bruker_id")
@@ -2355,10 +2378,13 @@ Public Class Form1
             Exit Sub
         End If
 
-        If LoginAdminCheck = "1" Then
+        If LoginAdminCheck <> 0 Then
             AdminBool = True
         End If
         LogBool = True
+        FornavnString = LoginFornavn
+        EtternavnString = LoginEtternavn
+        MsgBox(LoginAdminCheck)
         LoginSuccess()
     End Sub
 
@@ -2378,9 +2404,19 @@ Public Class Form1
                 .Insert(6, AdminTab)
                 .Insert(7, DBAdminTab)
             End With
+            StartRettigheterLabel.Text = "Brukerrettigheter: Admin"
+        Else
+            StartRettigheterLabel.Text = "Brukerrettigheter: Bruker"
         End If
 
         HovedTab.SelectedTab = StartTab
+
+        StartVelkommenLabel.Text = "Velkommen, " & FornavnString & " " & EtternavnString
+        StartMOTDUpdate()
+    End Sub
+
+    Private Sub BtnLoginLogin_Click(sender As Object, e As EventArgs) Handles BtnLoginLogin.Click
+        LoginCheck()
     End Sub
 #End Region
 End Class
