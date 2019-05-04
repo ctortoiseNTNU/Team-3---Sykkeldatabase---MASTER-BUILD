@@ -2347,10 +2347,22 @@ Public Class Form1
 
     Public Sub DBANyUtstyrskategori()
 
+        SQLInsert("utstyr_kategori", "(utstyr_kat)", "('" & TxtDBAKnavn.Text & "')")
+
     End Sub
 
     Public Sub DBANySykkelType()
+        Dim DBALandTable As New DataTable
+        Dim DBALandRow As DataRow
+        Dim LandString As String = ""
 
+        DBALandTable = SQLSelect("landsdel", "landsdel_id", "landsdel_navn='" & CboDBALandsdel.Text & "'")
+
+        For Each DBALandRow In DBALandTable.Rows
+            LandString = DBALandRow("landsdel_id")
+        Next
+
+        SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
     End Sub
 
     Public Sub DBAEndreAvdeling()
