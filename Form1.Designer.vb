@@ -48,9 +48,7 @@ Partial Class Form1
         Me.UtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
-        Me.CboUtlHjulStr = New System.Windows.Forms.ComboBox()
         Me.CboUtlRamme = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.LblUtlRamme = New System.Windows.Forms.Label()
         Me.LblUtlInfo = New System.Windows.Forms.Label()
         Me.TxtUtlAntall = New System.Windows.Forms.TextBox()
@@ -579,31 +577,26 @@ Partial Class Form1
         '
         'UtleieRabatt
         '
-        Me.UtleieRabatt.DisplayIndex = 5
         Me.UtleieRabatt.Text = "Rabatt"
         Me.UtleieRabatt.Width = 55
         '
         'UtleiePris
         '
-        Me.UtleiePris.DisplayIndex = 6
         Me.UtleiePris.Text = "Pris"
         Me.UtleiePris.Width = 58
         '
         'UtleieDag
         '
-        Me.UtleieDag.DisplayIndex = 3
         Me.UtleieDag.Text = "Dager"
         Me.UtleieDag.Width = 56
         '
         'UtleieUke
         '
-        Me.UtleieUke.DisplayIndex = 4
         Me.UtleieUke.Text = "Uker"
         Me.UtleieUke.Width = 53
         '
         'UtlTime
         '
-        Me.UtlTime.DisplayIndex = 2
         Me.UtlTime.Text = "Timer"
         '
         'UtlAvdeling
@@ -624,9 +617,7 @@ Partial Class Form1
         '
         'GrpUtleieProdukter
         '
-        Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlHjulStr)
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlRamme)
-        Me.GrpUtleieProdukter.Controls.Add(Me.Label1)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlRamme)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlInfo)
         Me.GrpUtleieProdukter.Controls.Add(Me.TxtUtlAntall)
@@ -654,16 +645,6 @@ Partial Class Form1
         Me.GrpUtleieProdukter.TabStop = False
         Me.GrpUtleieProdukter.Text = "Produkter:"
         '
-        'CboUtlHjulStr
-        '
-        Me.CboUtlHjulStr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CboUtlHjulStr.Font = New System.Drawing.Font("Calibri", 11.25!)
-        Me.CboUtlHjulStr.FormattingEnabled = True
-        Me.CboUtlHjulStr.Location = New System.Drawing.Point(126, 152)
-        Me.CboUtlHjulStr.Name = "CboUtlHjulStr"
-        Me.CboUtlHjulStr.Size = New System.Drawing.Size(121, 26)
-        Me.CboUtlHjulStr.TabIndex = 59
-        '
         'CboUtlRamme
         '
         Me.CboUtlRamme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -674,16 +655,6 @@ Partial Class Form1
         Me.CboUtlRamme.Name = "CboUtlRamme"
         Me.CboUtlRamme.Size = New System.Drawing.Size(121, 26)
         Me.CboUtlRamme.TabIndex = 58
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(6, 152)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(88, 18)
-        Me.Label1.TabIndex = 57
-        Me.Label1.Text = "Hjulstørrelse"
         '
         'LblUtlRamme
         '
@@ -831,7 +802,7 @@ Partial Class Form1
         Me.BtnUtlAddVare.Name = "BtnUtlAddVare"
         Me.BtnUtlAddVare.Size = New System.Drawing.Size(126, 56)
         Me.BtnUtlAddVare.TabIndex = 39
-        Me.BtnUtlAddVare.Text = "Legg til vare"
+        Me.BtnUtlAddVare.Text = "Søk etter vare"
         Me.BtnUtlAddVare.UseVisualStyleBackColor = False
         '
         'LvUtlVarer
@@ -4134,9 +4105,7 @@ Partial Class Form1
     Friend WithEvents LblUtlRabatt As Label
     Friend WithEvents LblUtleieSum As Label
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents CboUtlHjulStr As ComboBox
     Friend WithEvents CboUtlRamme As ComboBox
-    Friend WithEvents Label1 As Label
     Friend WithEvents LblUtlRamme As Label
     Friend WithEvents GrpLogistikk As GroupBox
     Friend WithEvents Label6 As Label
