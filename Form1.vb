@@ -2347,8 +2347,7 @@ Public Class Form1
 
         SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
 
-        TxtDBAAvdNavn.Text = ""
-        TxtDBAAvdAdr.Text = ""
+
 
     End Sub
 
@@ -2380,14 +2379,56 @@ Public Class Form1
     End Sub
 
     Public Sub DBAEndreAvdeling()
+        Dim DBALandTable As New DataTable
+        Dim DBALandRow As DataRow
+        Dim LandString As String = ""
+
+        SQLWhiteWash(TxtDBAAvdelingID.Text)
+        TxtDBAAvdNavn.Text = SQLWhiteWash(TxtDBAAvdNavn.Text)
+        TxtDBAAvdAdr.Text = SQLWhiteWash(TxtDBAAvdAdr.Text)
+
+        DBALandTable = SQLSelect("landsdel", "landsdel_id", "landsdel_navn='" & CboDBALandsdel.Text & "'")
+
+        For Each DBALandRow In DBALandTable.Rows
+            LandString = DBALandRow("landsdel_id")
+        Next
+
+        SQLUpdate("avdeling", "avd_navn='" & TxtDBAAvdNavn.Text & "', avd_adresse='" & TxtDBAAvdAdr.Text & "', landsdel_id='" & LandString & "'", "avdeling_id='" & TxtDBAAvdelingID.Text & "'")
+
+        TxtDBAAvdelingID.Text = ""
+        TxtDBAAvdNavn.Text = ""
+        TxtDBAAvdAdr.Text = ""
 
     End Sub
 
     Public Sub DBAEndreUtstyrskategori()
 
+        TxtDBAKID.Text = SQLWhiteWash(TxtDBAKID.Text)
+        TxtDBAKnavn.Text = SQLWhiteWash(TxtDBAKnavn.Text)
+
+        SQLInsert("utstyr_kategori", "(utstyr_kat)", "('" & TxtDBAKnavn.Text & "')")
+        SQLUpdate("utstyr_kategori", "utstyr_kat='" & TxtDBAKnavn.Text & "'", "utstyr_kat_id='" & TxtDBAKID.Text & "'")
+
+        TxtDBAKID.Text = ""
+        TxtDBAKnavn.Text = ""
+
     End Sub
 
     Public Sub DBAEndreSykkelType()
+
+        TxtDBATypeID.Text = SQLWhiteWash(TxtDBATypeID.Text)
+        TxtDBATypeNavn.Text = SQLWhiteWash(TxtDBATypeNavn.Text)
+        TxtDBATimepris.Text = SQLWhiteWash(TxtDBATimepris.Text)
+        TxtDBADognpris.Text = SQLWhiteWash(TxtDBADognpris.Text)
+        TxtDBAUkepris.Text = SQLWhiteWash(TxtDBAUkepris.Text)
+
+        SQLUpdate("sykkel_typer", "kategori='" & TxtDBATypeNavn.Text & "', sykkel_kat_timepris='" & TxtDBATimepris.Text & "', sykkel_kat_døgnpris='" & TxtDBADognpris.Text & "', sykkel_kat_ukepris='" & TxtDBAUkepris.Text & "'", "type_id='" & TxtDBATypeID.Text & "'")
+
+        TxtDBATypeID.Text = ""
+        TxtDBATypeNavn.Text = ""
+        TxtDBATimepris.Text = ""
+        TxtDBADognpris.Text = ""
+        TxtDBAUkepris.Text = ""
 
     End Sub
 
@@ -2401,6 +2442,10 @@ Public Class Form1
 
     Private Sub BtnDBAUKNy_Click(sender As Object, e As EventArgs) Handles BtnDBAUKNy.Click
         DBANyUtstyrskategori()
+    End Sub
+
+    Private Sub BtnDBAAvdEndre_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdEndre.Click
+        DBAEndreAvdeling()
     End Sub
 #End Region
 End Class
