@@ -48,9 +48,7 @@ Partial Class Form1
         Me.UtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
-        Me.CboUtlHjulStr = New System.Windows.Forms.ComboBox()
         Me.CboUtlRamme = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.LblUtlRamme = New System.Windows.Forms.Label()
         Me.LblUtlInfo = New System.Windows.Forms.Label()
         Me.TxtUtlAntall = New System.Windows.Forms.TextBox()
@@ -365,6 +363,12 @@ Partial Class Form1
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.TxtDBATimepris = New System.Windows.Forms.TextBox()
+        Me.TxtDBADognpris = New System.Windows.Forms.TextBox()
+        Me.TxtDBAUkepris = New System.Windows.Forms.TextBox()
+        Me.LblDBAUkepris = New System.Windows.Forms.Label()
+        Me.LblDBADognpris = New System.Windows.Forms.Label()
+        Me.LblDBATimepris = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -579,31 +583,26 @@ Partial Class Form1
         '
         'UtleieRabatt
         '
-        Me.UtleieRabatt.DisplayIndex = 5
         Me.UtleieRabatt.Text = "Rabatt"
         Me.UtleieRabatt.Width = 55
         '
         'UtleiePris
         '
-        Me.UtleiePris.DisplayIndex = 6
         Me.UtleiePris.Text = "Pris"
         Me.UtleiePris.Width = 58
         '
         'UtleieDag
         '
-        Me.UtleieDag.DisplayIndex = 3
         Me.UtleieDag.Text = "Dager"
         Me.UtleieDag.Width = 56
         '
         'UtleieUke
         '
-        Me.UtleieUke.DisplayIndex = 4
         Me.UtleieUke.Text = "Uker"
         Me.UtleieUke.Width = 53
         '
         'UtlTime
         '
-        Me.UtlTime.DisplayIndex = 2
         Me.UtlTime.Text = "Timer"
         '
         'UtlAvdeling
@@ -624,9 +623,7 @@ Partial Class Form1
         '
         'GrpUtleieProdukter
         '
-        Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlHjulStr)
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlRamme)
-        Me.GrpUtleieProdukter.Controls.Add(Me.Label1)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlRamme)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlInfo)
         Me.GrpUtleieProdukter.Controls.Add(Me.TxtUtlAntall)
@@ -654,16 +651,6 @@ Partial Class Form1
         Me.GrpUtleieProdukter.TabStop = False
         Me.GrpUtleieProdukter.Text = "Produkter:"
         '
-        'CboUtlHjulStr
-        '
-        Me.CboUtlHjulStr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CboUtlHjulStr.Font = New System.Drawing.Font("Calibri", 11.25!)
-        Me.CboUtlHjulStr.FormattingEnabled = True
-        Me.CboUtlHjulStr.Location = New System.Drawing.Point(126, 152)
-        Me.CboUtlHjulStr.Name = "CboUtlHjulStr"
-        Me.CboUtlHjulStr.Size = New System.Drawing.Size(121, 26)
-        Me.CboUtlHjulStr.TabIndex = 59
-        '
         'CboUtlRamme
         '
         Me.CboUtlRamme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -674,16 +661,6 @@ Partial Class Form1
         Me.CboUtlRamme.Name = "CboUtlRamme"
         Me.CboUtlRamme.Size = New System.Drawing.Size(121, 26)
         Me.CboUtlRamme.TabIndex = 58
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(6, 152)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(88, 18)
-        Me.Label1.TabIndex = 57
-        Me.Label1.Text = "Hjulstørrelse"
         '
         'LblUtlRamme
         '
@@ -831,7 +808,7 @@ Partial Class Form1
         Me.BtnUtlAddVare.Name = "BtnUtlAddVare"
         Me.BtnUtlAddVare.Size = New System.Drawing.Size(126, 56)
         Me.BtnUtlAddVare.TabIndex = 39
-        Me.BtnUtlAddVare.Text = "Legg til vare"
+        Me.BtnUtlAddVare.Text = "Søk etter vare"
         Me.BtnUtlAddVare.UseVisualStyleBackColor = False
         '
         'LvUtlVarer
@@ -3429,6 +3406,12 @@ Partial Class Form1
         '
         'GrpDBANyST
         '
+        Me.GrpDBANyST.Controls.Add(Me.LblDBATimepris)
+        Me.GrpDBANyST.Controls.Add(Me.LblDBADognpris)
+        Me.GrpDBANyST.Controls.Add(Me.LblDBAUkepris)
+        Me.GrpDBANyST.Controls.Add(Me.TxtDBAUkepris)
+        Me.GrpDBANyST.Controls.Add(Me.TxtDBADognpris)
+        Me.GrpDBANyST.Controls.Add(Me.TxtDBATimepris)
         Me.GrpDBANyST.Controls.Add(Me.TxtDBATypeNavn)
         Me.GrpDBANyST.Controls.Add(Me.TxtDBATypeID)
         Me.GrpDBANyST.Controls.Add(Me.BtnDBASTLast)
@@ -3546,7 +3529,7 @@ Partial Class Form1
         Me.CboDBALandsdel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboDBALandsdel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboDBALandsdel.FormattingEnabled = True
-        Me.CboDBALandsdel.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
+        Me.CboDBALandsdel.Items.AddRange(New Object() {"Trøndelag"})
         Me.CboDBALandsdel.Location = New System.Drawing.Point(148, 170)
         Me.CboDBALandsdel.Name = "CboDBALandsdel"
         Me.CboDBALandsdel.Size = New System.Drawing.Size(121, 26)
@@ -3749,6 +3732,60 @@ Partial Class Form1
         '
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
+        '
+        'TxtDBATimepris
+        '
+        Me.TxtDBATimepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBATimepris.Location = New System.Drawing.Point(144, 134)
+        Me.TxtDBATimepris.Name = "TxtDBATimepris"
+        Me.TxtDBATimepris.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBATimepris.TabIndex = 38
+        '
+        'TxtDBADognpris
+        '
+        Me.TxtDBADognpris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBADognpris.Location = New System.Drawing.Point(144, 165)
+        Me.TxtDBADognpris.Name = "TxtDBADognpris"
+        Me.TxtDBADognpris.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBADognpris.TabIndex = 39
+        '
+        'TxtDBAUkepris
+        '
+        Me.TxtDBAUkepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBAUkepris.Location = New System.Drawing.Point(144, 201)
+        Me.TxtDBAUkepris.Name = "TxtDBAUkepris"
+        Me.TxtDBAUkepris.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBAUkepris.TabIndex = 40
+        '
+        'LblDBAUkepris
+        '
+        Me.LblDBAUkepris.AutoSize = True
+        Me.LblDBAUkepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBAUkepris.Location = New System.Drawing.Point(18, 204)
+        Me.LblDBAUkepris.Name = "LblDBAUkepris"
+        Me.LblDBAUkepris.Size = New System.Drawing.Size(59, 18)
+        Me.LblDBAUkepris.TabIndex = 41
+        Me.LblDBAUkepris.Text = "Ukepris:"
+        '
+        'LblDBADognpris
+        '
+        Me.LblDBADognpris.AutoSize = True
+        Me.LblDBADognpris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBADognpris.Location = New System.Drawing.Point(18, 168)
+        Me.LblDBADognpris.Name = "LblDBADognpris"
+        Me.LblDBADognpris.Size = New System.Drawing.Size(67, 18)
+        Me.LblDBADognpris.TabIndex = 42
+        Me.LblDBADognpris.Text = "Døgnpris:"
+        '
+        'LblDBATimepris
+        '
+        Me.LblDBATimepris.AutoSize = True
+        Me.LblDBATimepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBATimepris.Location = New System.Drawing.Point(18, 137)
+        Me.LblDBATimepris.Name = "LblDBATimepris"
+        Me.LblDBATimepris.Size = New System.Drawing.Size(66, 18)
+        Me.LblDBATimepris.TabIndex = 43
+        Me.LblDBATimepris.Text = "Timepris:"
         '
         'Form1
         '
@@ -4133,9 +4170,7 @@ Partial Class Form1
     Friend WithEvents LblUtlRabatt As Label
     Friend WithEvents LblUtleieSum As Label
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents CboUtlHjulStr As ComboBox
     Friend WithEvents CboUtlRamme As ComboBox
-    Friend WithEvents Label1 As Label
     Friend WithEvents LblUtlRamme As Label
     Friend WithEvents GrpLogistikk As GroupBox
     Friend WithEvents Label6 As Label
@@ -4162,4 +4197,10 @@ Partial Class Form1
     Friend WithEvents LvColLogiDato As ColumnHeader
     Friend WithEvents LvColLogiStatus As ColumnHeader
     Friend WithEvents CboKndSok As ComboBox
+    Friend WithEvents LblDBATimepris As Label
+    Friend WithEvents LblDBADognpris As Label
+    Friend WithEvents LblDBAUkepris As Label
+    Friend WithEvents TxtDBAUkepris As TextBox
+    Friend WithEvents TxtDBADognpris As TextBox
+    Friend WithEvents TxtDBATimepris As TextBox
 End Class

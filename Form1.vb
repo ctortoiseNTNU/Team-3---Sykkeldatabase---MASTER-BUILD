@@ -352,7 +352,6 @@ Public Class Form1
         CboUtlRabatt.SelectedIndex = -1
         CboUtlSubkat.SelectedIndex = -1
         CboUtlRamme.SelectedIndex = -1
-        CboUtlHjulStr.SelectedIndex = -1
         TxtUtlAntall.Text = ""
         TxtUtleieKundeSok.Text = ""
         RdbUtlTimer.Checked = False
@@ -433,6 +432,16 @@ Public Class Form1
         varehent()
     End Sub
 
+    'trykk for å kopiere varer fra vareliste til ordre liste
+    Private Sub LvUtlVarer_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LvUtlVarer.MouseClick
+        LvUtleieOrdre.Items.Add(LvUtlVarer.SelectedItems(0).Clone())
+    End Sub
+
+    ' trykk for å fjerne linjer fra ordre
+    Private Sub LvUtlOrdre_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LvUtleieOrdre.MouseClick
+        LvUtleieOrdre.Items.RemoveAt(LvUtleieOrdre.SelectedIndices(0))
+    End Sub
+
 
     Private Sub varehent()
 
@@ -443,7 +452,7 @@ Public Class Form1
         Dim UtlKategori As String = CboUtlKat.SelectedItem
         Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
         Dim UtlRamme As String = CboUtlRamme.SelectedItem
-        Dim UtlHjul As String = CboUtlHjulStr.SelectedItem
+        'Dim UtlHjul As String = CboUtlHjulStr.SelectedItem
         Dim UtlSubkatID, SykkelIdRamme, SykkelIdHjul As String
         Dim SykkelSQLKolonner = New String() {"sykkel_modell", "sykkel_navn", "sykkel_status", "kategori",
                                               "sykkel_kat_timepris", "sykkel_kat_døgnpris", "sykkel_kat_ukepris"}
@@ -525,17 +534,7 @@ Public Class Form1
         End If
 
 
-
-
-
-
-
-
-
     End Sub
-
-
-
 
 
     ' hopp til kundetab. og ta med telefonnr
@@ -556,14 +555,10 @@ Public Class Form1
     'autofyll av ramme boks fra database.
     ' denne skal hente ramme fra valgt sykkeltype
     Private Sub CboUtlRamme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
+        CboUtlRamme.SelectedIndex = -1
         UtlAutoPopRamme()
     End Sub
 
-    'autofyll av hjul combobox. 
-    'Denne skal hente ramme fra valgt sykkel og ramme kombinasjon.
-    Private Sub CboUtlHjulStr_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlHjulStr.DropDown
-        UtlAutoPopCbo(sender, "sykler", "hjul_str")
-    End Sub
 
     'hva som skjer når hovedkategori endres
     Private Sub CboUtlKat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlKat.SelectedIndexChanged
@@ -574,40 +569,32 @@ Public Class Form1
         If CboUtlKat.SelectedItem = "Utstyr" Then
 
             CboUtlRamme.Enabled = False
-            CboUtlHjulStr.Enabled = False
+
             'LvUtlVarer.Columns.Clear()
             CboUtlSubkat.Items.Clear()
             CboUtlRamme.Items.Clear()
-            CboUtlHjulStr.Items.Clear()
+
             UtlAutoPopUtstyr()
             'varehent()
         Else
 
             'LvUtlVarer.Items.Clear()
             CboUtlRamme.Enabled = True
-            CboUtlHjulStr.Enabled = True
+
             CboUtlSubkat.Items.Clear()
             CboUtlRamme.Items.Clear()
-            CboUtlHjulStr.Items.Clear()
             UtlAutoPopSykkel()
             'varehent()
         End If
 
     End Sub
 
-    'Hva skjer når rammeboks trykkes på.
-    Private Sub CboUtlRamme_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
-        'CboUtlRamme.Items.Clear()
-        CboUtlHjulStr.Items.Clear()
-        UtlAutoPopRamme()
-    End Sub
 
     'resetter rammeboks om sykkel kategori endres.
     Private Sub CboUtlSubkat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlSubkat.DropDown
 
         If CboUtlSubkat.SelectedValue = "Sykkel" Then
             CboUtlRamme.Items.Clear()
-            CboUtlHjulStr.Items.Clear()
             UtlAutoPopRamme()
         End If
 
@@ -2333,21 +2320,49 @@ Public Class Form1
 
 
 
+
+
+
+
+
+
 #End Region
 
 
 #Region "AdminDB"
 
     Public Sub DBANyAvdeling()
+        Dim DBALandTable As New DataTable
+        Dim DBALandRow As DataRow
+        Dim LandString As String = ""
 
+        DBALandTable = SQLSelect("landsdel", "landsdel_id", "landsdel_navn='" & CboDBALandsdel.Text & "'")
+
+        For Each DBALandRow In DBALandTable.Rows
+            LandString = DBALandRow("landsdel_id")
+        Next
+
+        SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
     End Sub
 
     Public Sub DBANyUtstyrskategori()
 
+        SQLInsert("utstyr_kategori", "(utstyr_kat)", "('" & TxtDBAKnavn.Text & "')")
+
     End Sub
 
     Public Sub DBANySykkelType()
+        Dim DBALandTable As New DataTable
+        Dim DBALandRow As DataRow
+        Dim LandString As String = ""
 
+        DBALandTable = SQLSelect("landsdel", "landsdel_id", "landsdel_navn='" & CboDBALandsdel.Text & "'")
+
+        For Each DBALandRow In DBALandTable.Rows
+            LandString = DBALandRow("landsdel_id")
+        Next
+
+        SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
     End Sub
 
     Public Sub DBAEndreAvdeling()
@@ -2360,6 +2375,10 @@ Public Class Form1
 
     Public Sub DBAEndreSykkelType()
 
+    End Sub
+
+    Private Sub BtnDBAAvdNy_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdNy.Click
+        DBANyAvdeling()
     End Sub
 #End Region
 End Class
