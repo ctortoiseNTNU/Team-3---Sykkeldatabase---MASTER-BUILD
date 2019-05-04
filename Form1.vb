@@ -14,8 +14,9 @@ Public Class Form1
     Dim Tilkobling As MySqlConnection
     Dim InvAktivtProduktID As String
     Dim SecurityCounter As Integer = 0
-
-
+    Dim StaTotalUtstyrKostnad As Integer = 0
+    Dim StaTotalSykkelKostnad As Integer = 0
+    Dim StaTotalUtleieInntekt As Integer = 0
 #End Region
 
 
@@ -258,13 +259,9 @@ Public Class Form1
 
         Select Case HovedTabIndex
             Case 1 'Bestemmer det som skjer etter man har valgt startmeny.
-                'MsgBox("Startmeny")
                 'StartMOTDUpdate()
 
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
-
-                'MsgBox("Utleiemeny")
-
                 Dim dato As Date = Date.Today
 
                 LblUtleieDatoTxt.Text = dato
@@ -274,23 +271,19 @@ Public Class Form1
             Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
                 CboKndSok.Items.Clear()
 
-                'AutoPopCbo()
                 Dim innhold = New String() {"ID", "Fornavn", "Etternavn", "Adresse", "Telefon", "Epost", "Rabatt Tier", "Handlet For"}
 
                 For i As Integer = 0 To innhold.Length - 1
                     CboKndSok.Items.Add(innhold(i))
                 Next
-                'MsgBox("KDBmeny")
                 BtnKndEndre.Enabled = False
 
             Case 4 'Bestemmer det som skjer etter man har valgt Inventarmeny.
-                'MsgBox("Inventarmeny")
                 AutoPopCbo(CboInvForhandler, "forhandler", "forhandler_navn")
                 AutoPopCbo(CboInvAvdeling, "avdeling", "avd_navn")
 
 
             Case 5 'Bestemmer det som skjer etter man har valgt Logistikkmeny.
-                MsgBox("Logistikkmeny")
 
             Case 6 'Bestemmer det som skjer etter man har valgt Statistikkmeny.
                 AutoPopCbo(CboStaAvdeling, "avdeling", "avd_navn")
@@ -298,6 +291,9 @@ Public Class Form1
                 AutoPopCbo(CboStaType, "sykkel_typer", "kategori")
                 CboStaType.Items.Add("")
                 StaMestPopulaer()
+                StaTotalSykkelPris()
+                StaTotalUtsyrPris()
+                StaTotalAvanse()
 
             Case 7 'Bestemmer det som skjer etter man har valgt Adminmeny.
                 MsgBox("AdminMeny")
@@ -1725,6 +1721,52 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Stat. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
+
+
+    Private Sub StaTotalSykkelPris()
+
+        Dim StaTotalSykkelKostnadDT As DataTable
+        'Dim StaTotalSykkelKostnad As String
+
+        StaTotalSykkelKostnadDT = SQLSelect("sykler", "SUM(sykkel_pris)", "1")
+        For Each r In StaTotalSykkelKostnadDT.Rows
+            StaTotalSykkelKostnad = r("SUM(sykkel_pris)")
+        Next
+
+        LblStaTotalSykkelVerdi.Text = CStr(StaTotalSykkelKostnad) & " Kr"
+    End Sub
+
+    Private Sub StaTotalUtsyrPris()
+
+        Dim StaTotalUtstyrKostnadDT As DataTable
+        'Dim StaTotalUtstyrKostnad As String
+
+        StaTotalUtstyrKostnadDT = SQLSelect("utstyr", "SUM(utstyr_pris)", "1")
+        For Each r In StaTotalUtstyrKostnadDT.Rows
+            StaTotalUtstyrKostnad = r("SUM(utstyr_pris)")
+        Next
+
+        LblStaTotalUtstyrVerdi.Text = CStr(StaTotalUtstyrKostnad) & " Kr"
+    End Sub
+
+    'Private Sub StaTotalUtleieInntekt()
+
+    '    Dim StaTotalUtleieInntektDT As DataTable
+    '    Dim StaTotalUtleieInntekt As String
+
+    '    StaTotalUtleieInntektDT = SQLSelect("utleie", "SUM(utleie_pris)", "1")
+    '    For Each r In StaTotalUtleieInntektDT.Rows
+    '        StaTotalUtleieInntekt = r("sum(utleie_pris)")
+    '    Next
+
+    '    LblStaTotalUtstyrVerdi.Text = StaTotalUtleieInntekt
+    'End Sub
+
+    Private Sub StaTotalAvanse()
+        Dim StaTotalResultat As Integer = StaTotalUtleieInntekt - StaTotalUtstyrKostnad - StaTotalSykkelKostnad
+        LblStaTotalSumVerdi.Text = CStr(StaTotalResultat) & " Kr"
+    End Sub
+
     Private Sub BtnStaSok_Click(sender As Object, e As EventArgs) Handles BtnStaSok.Click
 
         Dim StaValgtAvdeling = CboStaAvdeling.SelectedItem
@@ -1811,10 +1853,6 @@ Public Class Form1
         'LvStaTilgjengelig.Items.Add(New ListViewItem({CboStaAvdeling.SelectedItem, CboStaType.SelectedItem, outputAntallSyklerUtleid,
         '    outputAntallSyklerVerksted, outputAntallSyklerLedig}))
 
-
-
-
-
     End Sub
 
     Private Sub StaMestPopulaer()
@@ -1848,6 +1886,8 @@ Public Class Form1
                 i = i + 1
             End While
             DBDisconnect()
+            LvStaMestUtleid.Items.Clear()
+
             For j As Integer = 0 To StaAntSykler.Length - 1
                 LvStaMestUtleid.Items.Add(New ListViewItem({StaTypeSykkel(j), StaAntSykler(j)}))
             Next
