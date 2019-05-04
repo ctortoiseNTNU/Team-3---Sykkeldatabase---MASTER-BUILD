@@ -452,8 +452,7 @@ Public Class Form1
         Dim UtlKategori As String = CboUtlKat.SelectedItem
         Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
         Dim UtlRamme As String = CboUtlRamme.SelectedItem
-        'Dim UtlHjul As String = CboUtlHjulStr.SelectedItem
-        Dim UtlSubkatID, SykkelIdRamme, SykkelIdHjul As String
+        Dim UtlSubkatID, SykkelIdRamme As String
         Dim SykkelSQLKolonner = New String() {"sykkel_modell", "sykkel_navn", "sykkel_status", "kategori",
                                               "sykkel_kat_timepris", "sykkel_kat_døgnpris", "sykkel_kat_ukepris"}
 
@@ -463,13 +462,17 @@ Public Class Form1
         If UtlKategori = "Sykkel" Then
             UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
             SykkelIdRamme = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
-            SykkelIdHjul = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
+            'SykkelIdHjul = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
 
             Try
                 DBConnect()
-                Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
+                'Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
+                '                          FROM sykler s JOIN sykkel_typer st
+                '                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " ORDER BY sykkel_status", Tilkobling)
+
+                Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn
                                           FROM sykler s JOIN sykkel_typer st
-                                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " ORDER BY sykkel_status", Tilkobling)
+                                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " AND sykkel_status = 'Ledig'", Tilkobling)
 
                 'Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
                 '                           FROM sykler s JOIN sykkel_typer st
@@ -484,15 +487,19 @@ Public Class Form1
                 DBDisconnect()
 
                 Dim VareRow As DataRow
-                Dim Varenummer, Varenavn, Tilgjengelig As String
+                Dim Varenummer, Varenavn As String
 
                 For Each VareRow In VareSøkTable.Rows
                     Varenummer = VareRow("sykkel_modell")
                     Varenavn = VareRow("sykkel_navn")
-                    Tilgjengelig = VareRow("sykkel_status")
+                    'Tilgjengelig = VareRow("sykkel_status")
 
+                    'If VareSøkTable.Rows.Count = 0 Then
+                    '    LvUtlVarer.Items.Add(New ListViewItem("Ingen ledige sykler i denne kategorien"))
+                    'Else
+                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn}))
+                    'End If
 
-                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn, Tilgjengelig}))
                 Next
 
             Catch feilmelding As MySqlException
@@ -505,9 +512,8 @@ Public Class Form1
 
             Try
                 DBConnect()
-                Dim varer As New MySqlCommand("SELECT varenummer, utstyr_navn, utstyr_status 
-                                           FROM utstyr WHERE utstyr_id =" & UtlSubkatID & "
-                                            ORDER BY utstyr_status", Tilkobling)
+                Dim varer As New MySqlCommand("SELECT varenummer, utstyr_navn 
+                                           FROM utstyr WHERE utstyr_id =" & UtlSubkatID & "", Tilkobling)
 
                 Dim VaresøkAdapter As New MySqlDataAdapter
                 Dim VareSøkTable As New DataTable
@@ -517,14 +523,14 @@ Public Class Form1
                 DBDisconnect()
 
                 Dim VareRow As DataRow
-                Dim Varenummer, Varenavn, Tilgjengelig As String
+                Dim Varenummer, Varenavn As String
 
                 For Each VareRow In VareSøkTable.Rows
                     Varenummer = VareRow("varenummer")
                     Varenavn = VareRow("utstyr_navn")
-                    Tilgjengelig = VareRow("utstyr_status")
+                    'Tilgjengelig = VareRow("utstyr_status")
 
-                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn, Tilgjengelig}))
+                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn}))
                 Next
 
             Catch feilmelding As MySqlException
@@ -553,10 +559,11 @@ Public Class Form1
     End Sub
 
     'autofyll av ramme boks fra database.
-    ' denne skal hente ramme fra valgt sykkeltype
+    ' denne henter ramme fra valgt sykkeltype
     Private Sub CboUtlRamme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
         CboUtlRamme.SelectedIndex = -1
         UtlAutoPopRamme()
+
     End Sub
 
 
