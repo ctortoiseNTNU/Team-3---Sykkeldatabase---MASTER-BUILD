@@ -766,65 +766,37 @@ Public Class Form1
     Private Sub TxtKndFornavn_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndFornavn.KeyPress
         Dim KndTegn As String = "-"
         KndSjekkInputBokstav(e, KndTegn)
-        'If Not (Asc(e.KeyChar) = 8) Then
-        '    Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå -"
-        '    If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-        '        e.KeyChar = ChrW(0)
-        '        e.Handled = True
-        '    End If
-        'End If
     End Sub
 
     Private Sub TxtKndEtternavn_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndEtternavn.KeyPress
         Dim KndTegn As String = "-"
         KndSjekkInputBokstav(e, KndTegn)
-        'If Not (Asc(e.KeyChar) = 8) Then
-        '    Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå -"
-        '    If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-        '        e.KeyChar = ChrW(0)
-        '        e.Handled = True
-        '    End If
-        'End If
     End Sub
 
     Private Sub TxtKndAdresse_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndAdresse.KeyPress
         Dim KndTegn As String = "-."
         KndSjekkInputBokstavTall(e, KndTegn)
-        'If Not (Asc(e.KeyChar) = 8) Then
-        '    Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå1234567890"
-        '    If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-        '        e.KeyChar = ChrW(0)
-        '        e.Handled = True
-        '    End If
-        'End If
     End Sub
 
     Private Sub TxtKndEpost_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndEpost.KeyPress
         Dim KndTegn As String = "-.@_"
         KndSjekkInputBokstavTall(e, KndTegn)
-        'If Not (Asc(e.KeyChar) = 8) Then
-        '    Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyzæøå1234567890@!#$%&'*+-/=?^_`{|}~;."
-        '    If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-        '        e.KeyChar = ChrW(0)
-        '        e.Handled = True
-        '    End If
-        'End If
     End Sub
 
     Private Sub TxtKndTlf_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndTlf.KeyPress
         KndSjekkInputTall(e)
-        'If Not (Asc(e.KeyChar) = 8) Then
-        '    Dim allowedChars As String = "1234567890"
-        '    If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-        '        e.KeyChar = ChrW(0)
-        '        e.Handled = True
-        '    End If
-        'End If
     End Sub
 
 
     'LEGG INN NYE KUNDER
     Private Sub BtnKndRegistrer_Click(sender As Object, e As EventArgs) Handles BtnKndRegistrer.Click
+
+        Dim KndFornavn As String
+        Dim KndEtternavn As String
+        Dim KndAdresse As String
+        Dim KndFodselsar As Date
+        Dim KndTlf As String
+        Dim KndEpost As String
 
         Dim KnDFdato As Date = DateKndReg.Value
         KndFornavn = TxtKndFornavn.Text
@@ -858,11 +830,11 @@ Public Class Form1
 
         Try
             DBConnect()
-            Dim sporring As New MySqlCommand("INSERT INTO kunder (kunde_fdato, kunde_fornavn, " _
+            Dim Kndsporring As New MySqlCommand("INSERT INTO kunder (kunde_fdato, kunde_fornavn, " _
                 & "kunde_etternavn, adresse, telefon, epost, rabatt_id, handlet_for) VALUES('" _
                 & KnDFdato.ToString("yyyy-MM-dd") & "', '" & KndFornavn & "', '" & KndEtternavn _
                 & "', '" & KndAdresse & "', " & KndTlf & ", '" & KndEpost & "', 1, 0)", Tilkobling)
-            sporring.ExecuteNonQuery()
+            Kndsporring.ExecuteNonQuery()
             DBDisconnect()
             MsgBox("Innlegging var vellykket")
         Catch feilmelding As MySqlException
@@ -871,20 +843,21 @@ Public Class Form1
 
     End Sub
 
-    Dim KndSokKundeID
 
-    Dim KndFornavnSelected
-    Dim KndEtternavnSelected
-    Dim KndAdresseSelected
-    Dim KndTlfSelected
-    Dim KndEpostSelected
-    Dim KndRabattSelected
-    Dim KndHandletSelected
-    Dim KndFdatoSelected As Date
 
 
     'ENDRE FANE
     Private Sub BtnKndKundeID_Click(sender As Object, e As EventArgs) Handles BtnKndKundeID.Click
+
+        Dim KndSokKundeID
+        Dim KndFornavnSelected
+        Dim KndEtternavnSelected
+        Dim KndAdresseSelected
+        Dim KndTlfSelected
+        Dim KndEpostSelected
+        Dim KndRabattSelected
+        Dim KndHandletSelected
+        Dim KndFdatoSelected As Date
 
         KndSokKundeID = TxtKndKundeID.Text
         If KndSokKundeID = "" Then
@@ -894,21 +867,21 @@ Public Class Form1
 
         Try
             DBConnect()
-            Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE kunde_id = " & KndSokKundeID, Tilkobling)
-            Dim tempVarSporring = sporring.ExecuteReader
+            Dim Kndsporring As New MySqlCommand("SELECT * FROM kunder WHERE kunde_id = " & KndSokKundeID, Tilkobling)
+            Dim KndtempVarSporring = Kndsporring.ExecuteReader
 
-            While tempVarSporring.Read
-                KndFornavnSelected = tempVarSporring("kunde_fornavn")
-                KndEtternavnSelected = tempVarSporring("kunde_etternavn")
-                KndAdresseSelected = tempVarSporring("adresse")
-                KndTlfSelected = tempVarSporring("telefon")
-                KndEpostSelected = tempVarSporring("epost")
-                KndRabattSelected = tempVarSporring("rabatt_id")
-                KndHandletSelected = tempVarSporring("handlet_for")
-                KndFdatoSelected = tempVarSporring("kunde_fdato")
+            While KndtempVarSporring.Read
+                KndFornavnSelected = KndtempVarSporring("kunde_fornavn")
+                KndEtternavnSelected = KndtempVarSporring("kunde_etternavn")
+                KndAdresseSelected = KndtempVarSporring("adresse")
+                KndTlfSelected = KndtempVarSporring("telefon")
+                KndEpostSelected = KndtempVarSporring("epost")
+                KndRabattSelected = KndtempVarSporring("rabatt_id")
+                KndHandletSelected = KndtempVarSporring("handlet_for")
+                KndFdatoSelected = KndtempVarSporring("kunde_fdato")
             End While
 
-            tempVarSporring.Close()
+            KndtempVarSporring.Close()
             DBDisconnect()
 
             TxtKndEndreFN.Text = KndFornavnSelected
@@ -933,10 +906,13 @@ Public Class Form1
 
     End Sub
 
-    Dim KndSokInput
-    Dim KndSokSelectedTag
+
 
     Private Sub BtnKndSok_Click(sender As Object, e As EventArgs) Handles BtnKndSok.Click
+
+        Dim KndSokInput
+        Dim KndSokSelectedTag
+
         KndSokInput = TxtKndSok.Text
         Dim KndTempVar = CmbKndSok.SelectedIndex
 
