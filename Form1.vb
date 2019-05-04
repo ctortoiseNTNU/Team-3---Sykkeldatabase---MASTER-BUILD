@@ -2352,7 +2352,17 @@ Public Class Form1
 #Region "AdminDB"
 
     Public Sub DBANyAvdeling()
+        Dim DBALandTable As New DataTable
+        Dim DBALandRow As DataRow
+        Dim LandString As String = ""
 
+        DBALandTable = SQLSelect("landsdel", "landsdel_id", "landsdel_navn='" & CboDBALandsdel.Text & "'")
+
+        For Each DBALandRow In DBALandTable.Rows
+            LandString = DBALandRow("landsdel_id")
+        Next
+
+        SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
     End Sub
 
     Public Sub DBANyUtstyrskategori()
@@ -2373,6 +2383,10 @@ Public Class Form1
 
     Public Sub DBAEndreSykkelType()
 
+    End Sub
+
+    Private Sub BtnDBAAvdNy_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdNy.Click
+        DBANyAvdeling()
     End Sub
 #End Region
 End Class

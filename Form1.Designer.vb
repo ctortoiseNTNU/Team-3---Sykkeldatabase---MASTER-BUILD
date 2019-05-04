@@ -3547,7 +3547,7 @@ Partial Class Form1
         Me.CboDBALandsdel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboDBALandsdel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboDBALandsdel.FormattingEnabled = True
-        Me.CboDBALandsdel.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
+        Me.CboDBALandsdel.Items.AddRange(New Object() {"Trøndelag"})
         Me.CboDBALandsdel.Location = New System.Drawing.Point(148, 170)
         Me.CboDBALandsdel.Name = "CboDBALandsdel"
         Me.CboDBALandsdel.Size = New System.Drawing.Size(121, 26)
