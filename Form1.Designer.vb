@@ -236,7 +236,7 @@ Partial Class Form1
         Me.ColumnHeader18 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GrbStaTilgjengelig = New System.Windows.Forms.GroupBox()
         Me.LblStaVelgType = New System.Windows.Forms.Label()
-        Me.CmbStaType = New System.Windows.Forms.ComboBox()
+        Me.CboStaType = New System.Windows.Forms.ComboBox()
         Me.LvStaTilgjengelig = New System.Windows.Forms.ListView()
         Me.ColumnHeader11 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader13 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -244,7 +244,7 @@ Partial Class Form1
         Me.ColumnHeader15 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Verksted = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnStaSok = New System.Windows.Forms.Button()
-        Me.CmbStaAvdeling = New System.Windows.Forms.ComboBox()
+        Me.CboStaAvdeling = New System.Windows.Forms.ComboBox()
         Me.LblStaVelgAvd = New System.Windows.Forms.Label()
         Me.AdminTab = New System.Windows.Forms.TabPage()
         Me.AdminMOTDGroup = New System.Windows.Forms.GroupBox()
@@ -2420,10 +2420,10 @@ Partial Class Form1
         'GrbStaTilgjengelig
         '
         Me.GrbStaTilgjengelig.Controls.Add(Me.LblStaVelgType)
-        Me.GrbStaTilgjengelig.Controls.Add(Me.CmbStaType)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.CboStaType)
         Me.GrbStaTilgjengelig.Controls.Add(Me.LvStaTilgjengelig)
         Me.GrbStaTilgjengelig.Controls.Add(Me.BtnStaSok)
-        Me.GrbStaTilgjengelig.Controls.Add(Me.CmbStaAvdeling)
+        Me.GrbStaTilgjengelig.Controls.Add(Me.CboStaAvdeling)
         Me.GrbStaTilgjengelig.Controls.Add(Me.LblStaVelgAvd)
         Me.GrbStaTilgjengelig.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrbStaTilgjengelig.Location = New System.Drawing.Point(3, 3)
@@ -2443,15 +2443,15 @@ Partial Class Form1
         Me.LblStaVelgType.TabIndex = 31
         Me.LblStaVelgType.Text = "Velg Sykkelmodell:"
         '
-        'CmbStaType
+        'CboStaType
         '
-        Me.CmbStaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbStaType.Font = New System.Drawing.Font("Calibri", 11.25!)
-        Me.CmbStaType.FormattingEnabled = True
-        Me.CmbStaType.Location = New System.Drawing.Point(169, 71)
-        Me.CmbStaType.Name = "CmbStaType"
-        Me.CmbStaType.Size = New System.Drawing.Size(121, 26)
-        Me.CmbStaType.TabIndex = 30
+        Me.CboStaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboStaType.Font = New System.Drawing.Font("Calibri", 11.25!)
+        Me.CboStaType.FormattingEnabled = True
+        Me.CboStaType.Location = New System.Drawing.Point(169, 71)
+        Me.CboStaType.Name = "CboStaType"
+        Me.CboStaType.Size = New System.Drawing.Size(121, 26)
+        Me.CboStaType.TabIndex = 30
         '
         'LvStaTilgjengelig
         '
@@ -2503,16 +2503,15 @@ Partial Class Form1
         Me.BtnStaSok.Text = "Søk!"
         Me.BtnStaSok.UseVisualStyleBackColor = True
         '
-        'CmbStaAvdeling
+        'CboStaAvdeling
         '
-        Me.CmbStaAvdeling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbStaAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CmbStaAvdeling.FormattingEnabled = True
-        Me.CmbStaAvdeling.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
-        Me.CmbStaAvdeling.Location = New System.Drawing.Point(169, 39)
-        Me.CmbStaAvdeling.Name = "CmbStaAvdeling"
-        Me.CmbStaAvdeling.Size = New System.Drawing.Size(121, 26)
-        Me.CmbStaAvdeling.TabIndex = 26
+        Me.CboStaAvdeling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboStaAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboStaAvdeling.FormattingEnabled = True
+        Me.CboStaAvdeling.Location = New System.Drawing.Point(169, 39)
+        Me.CboStaAvdeling.Name = "CboStaAvdeling"
+        Me.CboStaAvdeling.Size = New System.Drawing.Size(121, 26)
+        Me.CboStaAvdeling.TabIndex = 26
         '
         'LblStaVelgAvd
         '
@@ -3518,7 +3517,7 @@ Partial Class Form1
         Me.CboDBALandsdel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboDBALandsdel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboDBALandsdel.FormattingEnabled = True
-        Me.CboDBALandsdel.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
+        Me.CboDBALandsdel.Items.AddRange(New Object() {"Trøndelag"})
         Me.CboDBALandsdel.Location = New System.Drawing.Point(148, 170)
         Me.CboDBALandsdel.Name = "CboDBALandsdel"
         Me.CboDBALandsdel.Size = New System.Drawing.Size(121, 26)
@@ -4051,10 +4050,10 @@ Partial Class Form1
     Friend WithEvents ColumnHeader14 As ColumnHeader
     Friend WithEvents ColumnHeader15 As ColumnHeader
     Friend WithEvents BtnStaSok As Button
-    Friend WithEvents CmbStaAvdeling As ComboBox
+    Friend WithEvents CboStaAvdeling As ComboBox
     Friend WithEvents LblStaVelgAvd As Label
     Friend WithEvents LblStaVelgType As Label
-    Friend WithEvents CmbStaType As ComboBox
+    Friend WithEvents CboStaType As ComboBox
     Friend WithEvents GrbStaMestLeid As GroupBox
     Friend WithEvents LvStaMestUtleid As ListView
     Friend WithEvents ColumnHeader17 As ColumnHeader
