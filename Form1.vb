@@ -2336,6 +2336,9 @@ Public Class Form1
         Dim DBALandRow As DataRow
         Dim LandString As String = ""
 
+        TxtDBAAvdNavn.Text = SQLWhiteWash(TxtDBAAvdNavn.Text)
+        TxtDBAAvdAdr.Text = SQLWhiteWash(TxtDBAAvdAdr.Text)
+
         DBALandTable = SQLSelect("landsdel", "landsdel_id", "landsdel_navn='" & CboDBALandsdel.Text & "'")
 
         For Each DBALandRow In DBALandTable.Rows
@@ -2343,17 +2346,37 @@ Public Class Form1
         Next
 
         SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
+
+        TxtDBAAvdNavn.Text = ""
+        TxtDBAAvdAdr.Text = ""
+
     End Sub
 
     Public Sub DBANyUtstyrskategori()
 
+        TxtDBAKnavn.Text = SQLWhiteWash(TxtDBAKnavn.Text)
+
         SQLInsert("utstyr_kategori", "(utstyr_kat)", "('" & TxtDBAKnavn.Text & "')")
+
+        TxtDBAKnavn.Text = ""
 
     End Sub
 
     Public Sub DBANySykkelType()
 
+        TxtDBATypeNavn.Text = SQLWhiteWash(TxtDBATypeNavn.Text)
+        TxtDBATimepris.Text = SQLWhiteWash(TxtDBATimepris.Text)
+        TxtDBADognpris.Text = SQLWhiteWash(TxtDBADognpris.Text)
+        TxtDBAUkepris.Text = SQLWhiteWash(TxtDBAUkepris.Text)
+
         SQLInsert("sykkel_typer", "(kategori, sykkel_kat_timepris, sykkel_kat_døgnpris, sykkel_kat_ukepris)", "('" & TxtDBATypeNavn.Text & "', '" & TxtDBATimepris.Text & "', '" & TxtDBADognpris.Text & "', '" & TxtDBAUkepris.Text & "')")
+
+        TxtDBATypeNavn.Text = ""
+        TxtDBATimepris.Text = ""
+        TxtDBADognpris.Text = ""
+        TxtDBAUkepris.Text = ""
+
+
     End Sub
 
     Public Sub DBAEndreAvdeling()
