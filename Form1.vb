@@ -293,9 +293,10 @@ Public Class Form1
                 MsgBox("Logistikkmeny")
 
             Case 6 'Bestemmer det som skjer etter man har valgt Statistikkmeny.
-
                 AutoPopCbo(CboStaAvdeling, "avdeling", "avd_navn")
+                CboStaAvdeling.Items.Add("")
                 AutoPopCbo(CboStaType, "sykkel_typer", "kategori")
+                CboStaType.Items.Add("")
                 StaMestPopulaer()
 
             Case 7 'Bestemmer det som skjer etter man har valgt Adminmeny.
@@ -1719,9 +1720,6 @@ Public Class Form1
 
     Private Sub BtnStaSok_Click(sender As Object, e As EventArgs) Handles BtnStaSok.Click
 
-        Dim StaValgtAvdTilgj As String
-        Dim StaValgtTypTilgj As String
-
         Dim StaValgtAvdeling = CboStaAvdeling.SelectedItem
         Dim StaSykkelType = CboStaType.SelectedItem
 
@@ -1734,36 +1732,82 @@ Public Class Form1
             Exit Sub
         End If
 
-        Dim outputAntallSyklerLedig, outputAntallSyklerUtleid, outputAntallSyklerVerksted As Integer
-        Dim StaSykkeltypeValue = New Integer() {9999, 10000, 10001, 10002, 10003, 10004, 10005, 10006}
-        Dim StaAvdelingValue = New Integer() {10000, 10001, 10002, 10003, 10004}
-        StaValgtAvdTilgj = StaAvdelingValue(CboStaAvdeling.SelectedIndex)
-        StaValgtTypTilgj = StaSykkeltypeValue(CboStaType.SelectedIndex)
+        Dim StaAvdID As String = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", CboStaAvdeling.SelectedItem)
+        Dim StaTypeID As String = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", CboStaType.SelectedItem)
+        Dim StaLedigDT, StaVerkstedDT, StaUtleidDT As DataTable
+        Dim StaLedig, StaVerksted, StaUtleid As String
 
-        Try
-            DBConnect()
+        StaLedigDT = SQLSelect("sykler", "COUNT(sykkel_status)", "avdeling_id='" & StaAvdID _
+                                        & "' AND type_id='" & StaTypeID & "' AND sykkel_status='Ledig' GROUP BY sykkel_status")
+        StaVerkstedDT = SQLSelect("sykler", "COUNT(sykkel_status)", "avdeling_id='" & StaAvdID _
+                                        & "' AND type_id='" & StaTypeID & "' AND sykkel_status='Verksted' GROUP BY sykkel_status")
+        StaUtleidDT = SQLSelect("sykler", "COUNT(sykkel_status)", "avdeling_id='" & StaAvdID _
+                                        & "' AND type_id='" & StaTypeID & "' AND sykkel_status='Utleid' GROUP BY sykkel_status")
 
-            Dim sporring As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
-                                             & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj _
-                                             & "' AND sykkel_status = 'Ledig'", Tilkobling)
-            Dim sporring2 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
-                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj _
-                                              & "' AND sykkel_status = 'Utleid'", Tilkobling)
-            Dim sporring3 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
-                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj _
-                                              & "' AND sykkel_status = 'Verksted'", Tilkobling)
-            outputAntallSyklerLedig = sporring.ExecuteScalar()
-            outputAntallSyklerUtleid = sporring2.ExecuteScalar()
-            outputAntallSyklerVerksted = sporring3.ExecuteScalar()
+        For Each r In StaLedigDT.Rows
+            StaLedig = r("COUNT(sykkel_status)")
+        Next
+        For Each r In StaVerkstedDT.Rows
+            StaVerksted = r("COUNT(sykkel_status)")
+        Next
+        For Each r In StaUtleidDT.Rows
+            StaUtleid = r("COUNT(sykkel_status)")
+        Next
 
-            DBDisconnect()
-        Catch feilmelding As MySqlException
-            MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
-        End Try
+        If StaLedig = "" Then
+            StaLedig = 0
+        End If
+        If StaVerksted = "" Then
+            StaVerksted = 0
+        End If
+        If StaUtleid = "" Then
+            StaUtleid = 0
+        End If
 
         LvStaTilgjengelig.Items.Clear()
-        LvStaTilgjengelig.Items.Add(New ListViewItem({StaValgtAvdeling, StaSykkelType, outputAntallSyklerLedig,
-            outputAntallSyklerUtleid, outputAntallSyklerVerksted}))
+        LvStaTilgjengelig.Items.Add(New ListViewItem({CboStaAvdeling.SelectedItem, CboStaType.SelectedItem,
+        StaUtleid, StaLedig, StaVerksted}))
+
+        'Dim StaValgtAvdTilgj As String
+        'Dim StaValgtTypTilgj As String
+        'Dim outputAntallSyklerLedig, outputAntallSyklerUtleid, outputAntallSyklerVerksted As Integer
+        'Dim StaSykkeltypeValue = New Integer() {9999, 10000, 10001, 10002, 10003, 10004, 10005, 10006}
+        'Dim StaAvdelingValue = New Integer() {10000, 10001, 10002, 10003, 10004}
+        'StaValgtAvdTilgj = StaAvdelingValue(CboStaAvdeling.SelectedIndex)
+        'StaValgtTypTilgj = StaSykkeltypeValue(CboStaType.SelectedIndex)
+
+        'Try
+        'DBConnect()
+
+        'Dim sporring As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
+        '                                 & StaAvdID & "' AND type_id = '" & StaTypeID _
+        '                                 & "' AND sykkel_status = 'Ledig'", Tilkobling)
+        'Dim sporring2 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
+        '                                  & StaAvdID & "' AND type_id = '" & StaTypeID _
+        '                                  & "' AND sykkel_status = 'Utleid'", Tilkobling)
+        'Dim sporring3 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
+        '                                  & StaAvdID & "' AND type_id = '" & StaTypeID _
+        '                                  & "' AND sykkel_status = 'Verksted' group by sykkel_modell", Tilkobling)
+        'outputAntallSyklerLedig = sporring.ExecuteScalar()
+        'outputAntallSyklerUtleid = sporring2.ExecuteScalar()
+        'outputAntallSyklerVerksted = sporring3.ExecuteNonQuery()
+
+        'StaTilgjengeligData = SQLSelect("sykler", "sykkel_status, COUNT(sykkel_status)", "avdeling_id='" & StaAvdID _
+        '                                & "' AND type_id='" & StaTypeID & "' GROUP BY sykkel_status")
+
+        'DBDisconnect()
+        'Catch feilmelding As MySqlException
+        'MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+        'End Try
+
+        'LvStaTilgjengelig.Items.Clear()
+        'LvStaTilgjengelig.Items.Add(New ListViewItem({CboStaAvdeling.SelectedItem, CboStaType.SelectedItem, outputAntallSyklerUtleid,
+        '    outputAntallSyklerVerksted, outputAntallSyklerLedig}))
+
+
+
+
+
     End Sub
 
     Private Sub StaMestPopulaer()
