@@ -260,6 +260,7 @@ Public Class Form1
             Case 1 'Bestemmer det som skjer etter man har valgt startmeny.
                 'MsgBox("Startmeny")
                 'StartMOTDUpdate()
+
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
 
                 'MsgBox("Utleiemeny")
@@ -281,35 +282,30 @@ Public Class Form1
                 Next
                 'MsgBox("KDBmeny")
                 BtnKndEndre.Enabled = False
+
             Case 4 'Bestemmer det som skjer etter man har valgt Inventarmeny.
                 'MsgBox("Inventarmeny")
+                AutoPopCbo(CboInvForhandler, "forhandler", "forhandler_navn")
+                AutoPopCbo(CboInvAvdeling, "avdeling", "avd_navn")
+
+
             Case 5 'Bestemmer det som skjer etter man har valgt Logistikkmeny.
                 MsgBox("Logistikkmeny")
+
             Case 6 'Bestemmer det som skjer etter man har valgt Statistikkmeny.
-                MsgBox("Statistikkmeny")
-                CmbStaAvdeling.Items.Clear()
 
-                CmbStaType.Items.Clear()
-
-                Dim StaLokasjoner = New String() {"Haugastøl", "Finse", "Flåm", "Voss", "Myrdal"}
-                Dim StaSykkeltype = New String() {"Barnesykker", "Terrengsykkel", "Downhill", "Racer", "Bysykkel", "Elsykkel", "Tandem"}
-
-
-                For i As Integer = 0 To StaLokasjoner.Length - 1
-                    CmbStaAvdeling.Items.Add(StaLokasjoner(i))
-
-                Next
-                For j As Integer = 0 To StaSykkeltype.Length - 1
-                    CmbStaType.Items.Add(StaSykkeltype(j))
-                Next
+                AutoPopCbo(CboStaAvdeling, "avdeling", "avd_navn")
+                AutoPopCbo(CboStaType, "sykkel_typer", "kategori")
                 StaMestPopulaer()
 
             Case 7 'Bestemmer det som skjer etter man har valgt Adminmeny.
                 MsgBox("AdminMeny")
                 AdminAvdelingPopulate()
                 AdminBrukerIDCalc()
+
             Case 8 'Bestemmer det som skjer etter man har valgt AdminDBmeny.
                 MsgBox("AdminDBMeny")
+
         End Select
     End Sub
 
@@ -338,7 +334,6 @@ Public Class Form1
 
         Catch StartSqlError1 As MySqlException
             MsgBox("Man får ikke koble til databasen: " & StartSqlError1.Message)
-
         End Try
     End Sub
 #End Region
@@ -904,6 +899,7 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Inv. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
+
     'Prosedyre for tømming av alle felt i skjema
     Private Sub InvTomFelt()
         CboInvKategori.SelectedIndex = -1
@@ -925,6 +921,7 @@ Public Class Form1
         ChkInvSykkelveske.Checked = False
     End Sub
 
+
     'Tillater kun inntasting av tall i textbox for innkjøpspris
     Private Sub TxtInvInnkjopspris_Keypress(ByVal sender As Object, ByVal e As KeyPressEventArgs) _
         Handles TxtInvInnkjopspris.KeyPress
@@ -933,6 +930,7 @@ Public Class Form1
         End If
     End Sub
 
+
     'Tillater kun inntasting av tall i textbox for hjulstørrelse
     Private Sub TxtInvHjulstorrelse_Keypress(ByVal sender As Object, ByVal e As KeyPressEventArgs) _
         Handles TxtInvHjulstorrelse.KeyPress
@@ -940,6 +938,7 @@ Public Class Form1
             e.Handled = True
         End If
     End Sub
+
 
     'Endrer status på felt i skjema avhengig om det er sykkel eller utstyr som skal registreres.
     'Med kategori "Sykkel" valgt vil alle felt være tilgjengelig.
@@ -991,17 +990,6 @@ Public Class Form1
         End If
     End Sub
 
-    'Fyller combobox med forhandlere som er registrert i database
-    Private Sub CboInvForhandler_SelectedIndexChanged(sender As Object, e As EventArgs) _
-        Handles CboInvForhandler.DropDown
-        AutoPopCbo(sender, "forhandler", "forhandler_navn")
-    End Sub
-
-    'Fyller combobox med avdelinger som er registrert i database
-    Private Sub CboInvAvdeling_SelectedIndexChanged(sender As Object, e As EventArgs) _
-        Handles CboInvAvdeling.DropDown
-        AutoPopCbo(sender, "avdeling", "avd_navn")
-    End Sub
 
     'Combobox Subkategori styres av indexchanged på combobox kategori. Dermed vil et kall på InvCboPop fra _
     'combobox for kategori føre til endringer i kategori og ikke subkategori som ønsket.
@@ -1020,6 +1008,7 @@ Public Class Form1
         End Try
     End Sub
 
+
     Private Sub InvAutoPopSykkel()
         Dim InvSykkelComboDaT As New DataTable
         InvSykkelComboDaT = SQLSelect("sykkel_typer", "kategori", "1")
@@ -1032,6 +1021,7 @@ Public Class Form1
             MsgBox("Feil med autoutfylling av sykkelkategorier fra datatabell: " & ex.Message)
         End Try
     End Sub
+
 
     Private Sub InvRegistrerSykkel()
         If CboInvAvdeling.SelectedIndex = -1 Or CboInvForhandler.SelectedIndex = -1 Or
@@ -1116,6 +1106,7 @@ Public Class Form1
         End If
     End Sub
 
+
     Private Sub InvRegistrerUtstyr()
         If CboInvForhandler.SelectedIndex = -1 Or CboInvSubkategori.SelectedIndex = -1 Or
             TxtInvProduktnavn.Text.Trim = "" Or TxtInvVareNummer.Text.Trim = "" Or
@@ -1169,6 +1160,7 @@ Public Class Form1
             End If
         End If
     End Sub
+
 
     Private Sub InvSokSykkel()
 
@@ -1329,6 +1321,7 @@ Public Class Form1
 
     End Sub
 
+
     Private Sub InvSokUtstyr()
 
         Dim InvSpInit As String = "SELECT utstyr.utstyr_id, utstyr.utstyr_navn, utstyr_kategori.utstyr_kat, " _
@@ -1376,6 +1369,7 @@ Public Class Form1
         End Try
 
     End Sub
+
 
     Private Sub InvEndreSykkel()
 
@@ -1445,6 +1439,7 @@ Public Class Form1
 
     End Sub
 
+
     Private Sub InvEndreUtstyr()
 
 
@@ -1500,6 +1495,7 @@ Public Class Form1
 
     End Sub
 
+
     'SQLspørring med søk på valgte verdier i søkefelt
     Private Sub BtnInvSok_Click(sender As Object, e As EventArgs) Handles BtnInvSok.Click
 
@@ -1514,6 +1510,7 @@ Public Class Form1
         End If
 
     End Sub
+
 
     'SQLspørring med endering av data for valgt produkt med ID fra valgt produkt i søkefelt
     Private Sub BtnInvEndre_Click(sender As Object, e As EventArgs) Handles BtnInvEndre.Click
@@ -1534,6 +1531,7 @@ Public Class Form1
         BtnInvEndre.Enabled = False
 
     End Sub
+
 
     'Henter data for objekt med inntastet ID fra database og legger i skjema
     Private Sub BtnInvHent_Click(sender As Object, e As EventArgs) Handles BtnInvHent.Click
@@ -1647,6 +1645,7 @@ Public Class Form1
         End If
     End Sub
 
+
     'Avbryter endring av produkt. Ved innhenting av produkt, knappen "Hent", settes "Registrer" _
     'knappen til inaktiv For å unngå feilaktig dobbelregistrering av produkt.
     'Ved å avbryte nullstilles skjema og knappen for registrering aktiveres.
@@ -1659,27 +1658,11 @@ Public Class Form1
         LblInvAktivProdukt.Text = "Ingen aktive produkt"
     End Sub
 
+
     'Tømmer alle felt i skjema
     Private Sub BtnInvTom_Click(sender As Object, e As EventArgs) Handles BtnInvTom.Click
         InvTomFelt()
     End Sub
-
-
-    ' - ----------------------- TEST TEST TEST - --------------------
-    'Private Sub BtnInvTest_Click(sender As Object, e As EventArgs) Handles BtnInvTest.Click
-    '    Dim testdato As Date
-    '    Dim testsp As String = "select kunde_fdato from kunder where kunde_etternavn='faug'"
-    '    Dim sql As MySqlCommand
-    '    Dim leser As MySqlDataReader
-    '    DBConnect()
-    '    sql = New MySqlCommand(testsp, tilkobling)
-    '    leser = sql.ExecuteReader()
-    '    While leser.Read()
-    '        testdato = leser(0)
-    '    End While
-    '    leser.Close()
-    '    LblInvAktivProdukt.Text = CStr(testdato)
-    'End Sub
 
 
 #End Region
@@ -1744,12 +1727,13 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Stat. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
-    Dim StaValgtAvdTilgj As String
-    Dim StaValgtTypTilgj As String
-
     Private Sub BtnStaSok_Click(sender As Object, e As EventArgs) Handles BtnStaSok.Click
-        Dim StaValgtAvdeling = CmbStaAvdeling.SelectedItem
-        Dim StaSykkelType = CmbStaType.SelectedItem
+
+        Dim StaValgtAvdTilgj As String
+        Dim StaValgtTypTilgj As String
+
+        Dim StaValgtAvdeling = CboStaAvdeling.SelectedItem
+        Dim StaSykkelType = CboStaType.SelectedItem
 
         If StaValgtAvdeling = "" Then
             MsgBox("Vennligst velg avdeling")
@@ -1760,23 +1744,24 @@ Public Class Form1
             Exit Sub
         End If
 
-
         Dim outputAntallSyklerLedig, outputAntallSyklerUtleid, outputAntallSyklerVerksted As Integer
         Dim StaSykkeltypeValue = New Integer() {9999, 10000, 10001, 10002, 10003, 10004, 10005, 10006}
         Dim StaAvdelingValue = New Integer() {10000, 10001, 10002, 10003, 10004}
-        StaValgtAvdTilgj = StaAvdelingValue(CmbStaAvdeling.SelectedIndex)
-        StaValgtTypTilgj = StaSykkeltypeValue(CmbStaType.SelectedIndex)
-
+        StaValgtAvdTilgj = StaAvdelingValue(CboStaAvdeling.SelectedIndex)
+        StaValgtTypTilgj = StaSykkeltypeValue(CboStaType.SelectedIndex)
 
         Try
             DBConnect()
 
             Dim sporring As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
-                                             & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Ledig'", Tilkobling)
+                                             & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj _
+                                             & "' AND sykkel_status = 'Ledig'", Tilkobling)
             Dim sporring2 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
-                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Utleid'", Tilkobling)
+                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj _
+                                              & "' AND sykkel_status = 'Utleid'", Tilkobling)
             Dim sporring3 As New MySqlCommand("SELECT COUNT(sykkel_modell) FROM sykler WHERE avdeling_id = '" _
-                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj & "' AND sykkel_status = 'Verksted'", Tilkobling)
+                                              & StaValgtAvdTilgj & "' AND type_id = '" & StaValgtTypTilgj _
+                                              & "' AND sykkel_status = 'Verksted'", Tilkobling)
             outputAntallSyklerLedig = sporring.ExecuteScalar()
             outputAntallSyklerUtleid = sporring2.ExecuteScalar()
             outputAntallSyklerVerksted = sporring3.ExecuteScalar()
@@ -1787,7 +1772,8 @@ Public Class Form1
         End Try
 
         LvStaTilgjengelig.Items.Clear()
-        LvStaTilgjengelig.Items.Add(New ListViewItem({StaValgtAvdeling, StaSykkelType, outputAntallSyklerLedig, outputAntallSyklerUtleid, outputAntallSyklerVerksted}))
+        LvStaTilgjengelig.Items.Add(New ListViewItem({StaValgtAvdeling, StaSykkelType, outputAntallSyklerLedig,
+            outputAntallSyklerUtleid, outputAntallSyklerVerksted}))
     End Sub
 
     Private Sub StaMestPopulaer()
@@ -1808,8 +1794,6 @@ Public Class Form1
         Dim part2 As String = "from sykkel_typer join sykler as s on sykkel_typer.type_id=s.type_id join utleie on s.sykkel_id=utleie.sykkel_id group by sykkel_typer.kategori"
         Dim part3 As String = "1"
 
-        ' Dim tretest123 = SQLSelect(part1, part2, part3)
-
         Try
             DBConnect()
             Dim sporring As New MySqlCommand(StaInputCommand, Tilkobling)
@@ -1822,14 +1806,10 @@ Public Class Form1
 
                 i = i + 1
             End While
-
             DBDisconnect()
-
-
             For j As Integer = 0 To StaAntSykler.Length - 1
                 LvStaMestUtleid.Items.Add(New ListViewItem({StaTypeSykkel(j), StaAntSykler(j)}))
             Next
-
         Catch feilmelding As MySqlException
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
         End Try
