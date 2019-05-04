@@ -145,7 +145,7 @@ Partial Class Form1
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnKndSok = New System.Windows.Forms.Button()
-        Me.CmbKndSok = New System.Windows.Forms.ComboBox()
+        Me.CboKndSok = New System.Windows.Forms.ComboBox()
         Me.LblKndSokEtter = New System.Windows.Forms.Label()
         Me.TxtKndSok = New System.Windows.Forms.TextBox()
         Me.LblKndSokInput = New System.Windows.Forms.Label()
@@ -1165,6 +1165,7 @@ Partial Class Form1
         '
         Me.TxtKndEndreHF.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndEndreHF.Location = New System.Drawing.Point(123, 367)
+        Me.TxtKndEndreHF.MaxLength = 11
         Me.TxtKndEndreHF.Name = "TxtKndEndreHF"
         Me.TxtKndEndreHF.Size = New System.Drawing.Size(162, 26)
         Me.TxtKndEndreHF.TabIndex = 27
@@ -1173,6 +1174,7 @@ Partial Class Form1
         '
         Me.TxtKndEndreRbt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndEndreRbt.Location = New System.Drawing.Point(123, 324)
+        Me.TxtKndEndreRbt.MaxLength = 11
         Me.TxtKndEndreRbt.Name = "TxtKndEndreRbt"
         Me.TxtKndEndreRbt.Size = New System.Drawing.Size(162, 26)
         Me.TxtKndEndreRbt.TabIndex = 26
@@ -1221,6 +1223,7 @@ Partial Class Form1
         '
         Me.TxtKndKundeID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndKundeID.Location = New System.Drawing.Point(123, 33)
+        Me.TxtKndKundeID.MaxLength = 11
         Me.TxtKndKundeID.Name = "TxtKndKundeID"
         Me.TxtKndKundeID.Size = New System.Drawing.Size(100, 26)
         Me.TxtKndKundeID.TabIndex = 21
@@ -1229,6 +1232,7 @@ Partial Class Form1
         '
         Me.TxtKndEndreEP.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndEndreEP.Location = New System.Drawing.Point(123, 279)
+        Me.TxtKndEndreEP.MaxLength = 30
         Me.TxtKndEndreEP.Name = "TxtKndEndreEP"
         Me.TxtKndEndreEP.Size = New System.Drawing.Size(162, 26)
         Me.TxtKndEndreEP.TabIndex = 17
@@ -1237,6 +1241,7 @@ Partial Class Form1
         '
         Me.TxtKndEndreTlf.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndEndreTlf.Location = New System.Drawing.Point(123, 240)
+        Me.TxtKndEndreTlf.MaxLength = 15
         Me.TxtKndEndreTlf.Name = "TxtKndEndreTlf"
         Me.TxtKndEndreTlf.Size = New System.Drawing.Size(162, 26)
         Me.TxtKndEndreTlf.TabIndex = 16
@@ -1245,6 +1250,7 @@ Partial Class Form1
         '
         Me.TxtKndEndreAdr.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndEndreAdr.Location = New System.Drawing.Point(123, 195)
+        Me.TxtKndEndreAdr.MaxLength = 30
         Me.TxtKndEndreAdr.Name = "TxtKndEndreAdr"
         Me.TxtKndEndreAdr.Size = New System.Drawing.Size(162, 26)
         Me.TxtKndEndreAdr.TabIndex = 15
@@ -1253,6 +1259,7 @@ Partial Class Form1
         '
         Me.TxtKndEndreEN.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndEndreEN.Location = New System.Drawing.Point(123, 153)
+        Me.TxtKndEndreEN.MaxLength = 30
         Me.TxtKndEndreEN.Name = "TxtKndEndreEN"
         Me.TxtKndEndreEN.Size = New System.Drawing.Size(162, 26)
         Me.TxtKndEndreEN.TabIndex = 14
@@ -1261,6 +1268,7 @@ Partial Class Form1
         '
         Me.TxtKndEndreFN.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndEndreFN.Location = New System.Drawing.Point(123, 114)
+        Me.TxtKndEndreFN.MaxLength = 20
         Me.TxtKndEndreFN.Name = "TxtKndEndreFN"
         Me.TxtKndEndreFN.Size = New System.Drawing.Size(162, 26)
         Me.TxtKndEndreFN.TabIndex = 13
@@ -1392,6 +1400,7 @@ Partial Class Form1
         '
         Me.TxtKndEpost.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndEpost.Location = New System.Drawing.Point(123, 237)
+        Me.TxtKndEpost.MaxLength = 30
         Me.TxtKndEpost.Name = "TxtKndEpost"
         Me.TxtKndEpost.Size = New System.Drawing.Size(172, 26)
         Me.TxtKndEpost.TabIndex = 17
@@ -1400,6 +1409,7 @@ Partial Class Form1
         '
         Me.TxtKndTlf.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndTlf.Location = New System.Drawing.Point(123, 198)
+        Me.TxtKndTlf.MaxLength = 15
         Me.TxtKndTlf.Name = "TxtKndTlf"
         Me.TxtKndTlf.Size = New System.Drawing.Size(172, 26)
         Me.TxtKndTlf.TabIndex = 16
@@ -1408,6 +1418,7 @@ Partial Class Form1
         '
         Me.TxtKndAdresse.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndAdresse.Location = New System.Drawing.Point(123, 153)
+        Me.TxtKndAdresse.MaxLength = 30
         Me.TxtKndAdresse.Name = "TxtKndAdresse"
         Me.TxtKndAdresse.Size = New System.Drawing.Size(172, 26)
         Me.TxtKndAdresse.TabIndex = 15
@@ -1416,6 +1427,7 @@ Partial Class Form1
         '
         Me.TxtKndEtternavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndEtternavn.Location = New System.Drawing.Point(123, 111)
+        Me.TxtKndEtternavn.MaxLength = 30
         Me.TxtKndEtternavn.Name = "TxtKndEtternavn"
         Me.TxtKndEtternavn.Size = New System.Drawing.Size(172, 26)
         Me.TxtKndEtternavn.TabIndex = 14
@@ -1424,6 +1436,7 @@ Partial Class Form1
         '
         Me.TxtKndFornavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndFornavn.Location = New System.Drawing.Point(123, 72)
+        Me.TxtKndFornavn.MaxLength = 20
         Me.TxtKndFornavn.Name = "TxtKndFornavn"
         Me.TxtKndFornavn.Size = New System.Drawing.Size(172, 26)
         Me.TxtKndFornavn.TabIndex = 13
@@ -1492,7 +1505,7 @@ Partial Class Form1
         '
         Me.GrbKndSok.Controls.Add(Me.LvKndSok)
         Me.GrbKndSok.Controls.Add(Me.BtnKndSok)
-        Me.GrbKndSok.Controls.Add(Me.CmbKndSok)
+        Me.GrbKndSok.Controls.Add(Me.CboKndSok)
         Me.GrbKndSok.Controls.Add(Me.LblKndSokEtter)
         Me.GrbKndSok.Controls.Add(Me.TxtKndSok)
         Me.GrbKndSok.Controls.Add(Me.LblKndSokInput)
@@ -1565,16 +1578,16 @@ Partial Class Form1
         Me.BtnKndSok.Text = "Søk!"
         Me.BtnKndSok.UseVisualStyleBackColor = True
         '
-        'CmbKndSok
+        'CboKndSok
         '
-        Me.CmbKndSok.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbKndSok.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CmbKndSok.FormattingEnabled = True
-        Me.CmbKndSok.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
-        Me.CmbKndSok.Location = New System.Drawing.Point(101, 72)
-        Me.CmbKndSok.Name = "CmbKndSok"
-        Me.CmbKndSok.Size = New System.Drawing.Size(121, 26)
-        Me.CmbKndSok.TabIndex = 26
+        Me.CboKndSok.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboKndSok.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboKndSok.FormattingEnabled = True
+        Me.CboKndSok.Items.AddRange(New Object() {"bruker_id", "fornavn", "etternavn", "avd_navn", "stilling", "timelonn", "stilling_prosent", "telefon", "epost", "admin"})
+        Me.CboKndSok.Location = New System.Drawing.Point(101, 72)
+        Me.CboKndSok.Name = "CboKndSok"
+        Me.CboKndSok.Size = New System.Drawing.Size(121, 26)
+        Me.CboKndSok.TabIndex = 26
         '
         'LblKndSokEtter
         '
@@ -1590,6 +1603,7 @@ Partial Class Form1
         '
         Me.TxtKndSok.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndSok.Location = New System.Drawing.Point(101, 33)
+        Me.TxtKndSok.MaxLength = 30
         Me.TxtKndSok.Name = "TxtKndSok"
         Me.TxtKndSok.Size = New System.Drawing.Size(191, 26)
         Me.TxtKndSok.TabIndex = 22
@@ -3646,7 +3660,7 @@ Partial Class Form1
         Me.LoginTab.Controls.Add(Me.PicLoginLogo)
         Me.LoginTab.Location = New System.Drawing.Point(4, 32)
         Me.LoginTab.Name = "LoginTab"
-        Me.LoginTab.Size = New System.Drawing.Size(1491, 645)
+        Me.LoginTab.Size = New System.Drawing.Size(1340, 645)
         Me.LoginTab.TabIndex = 9
         Me.LoginTab.Text = "Login"
         Me.LoginTab.UseVisualStyleBackColor = True
@@ -3961,7 +3975,6 @@ Partial Class Form1
     Friend WithEvents ColumnHeader7 As ColumnHeader
     Friend WithEvents ColumnHeader8 As ColumnHeader
     Friend WithEvents BtnKndSok As Button
-    Friend WithEvents CmbKndSok As ComboBox
     Friend WithEvents LblKndSokEtter As Label
     Friend WithEvents TxtKndSok As TextBox
     Friend WithEvents LblKndSokInput As Label
@@ -4149,4 +4162,5 @@ Partial Class Form1
     Friend WithEvents LvColLogiReturlokasjon As ColumnHeader
     Friend WithEvents LvColLogiDato As ColumnHeader
     Friend WithEvents LvColLogiStatus As ColumnHeader
+    Friend WithEvents CboKndSok As ComboBox
 End Class
