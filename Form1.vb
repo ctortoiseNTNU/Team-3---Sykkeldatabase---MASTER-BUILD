@@ -453,8 +453,7 @@ Public Class Form1
         Dim UtlKategori As String = CboUtlKat.SelectedItem
         Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
         Dim UtlRamme As String = CboUtlRamme.SelectedItem
-        'Dim UtlHjul As String = CboUtlHjulStr.SelectedItem
-        Dim UtlSubkatID, SykkelIdRamme, SykkelIdHjul As String
+        Dim UtlSubkatID, SykkelIdRamme As String
         Dim SykkelSQLKolonner = New String() {"sykkel_modell", "sykkel_navn", "sykkel_status", "kategori",
                                               "sykkel_kat_timepris", "sykkel_kat_døgnpris", "sykkel_kat_ukepris"}
 
@@ -464,13 +463,17 @@ Public Class Form1
         If UtlKategori = "Sykkel" Then
             UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
             SykkelIdRamme = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
-            SykkelIdHjul = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
+            'SykkelIdHjul = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
 
             Try
                 DBConnect()
-                Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
+                'Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
+                '                          FROM sykler s JOIN sykkel_typer st
+                '                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " ORDER BY sykkel_status", Tilkobling)
+
+                Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn
                                           FROM sykler s JOIN sykkel_typer st
-                                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " ORDER BY sykkel_status", Tilkobling)
+                                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " AND sykkel_status = 'Ledig'", Tilkobling)
 
                 'Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
                 '                           FROM sykler s JOIN sykkel_typer st
@@ -485,15 +488,19 @@ Public Class Form1
                 DBDisconnect()
 
                 Dim VareRow As DataRow
-                Dim Varenummer, Varenavn, Tilgjengelig As String
+                Dim Varenummer, Varenavn As String
 
                 For Each VareRow In VareSøkTable.Rows
                     Varenummer = VareRow("sykkel_modell")
                     Varenavn = VareRow("sykkel_navn")
-                    Tilgjengelig = VareRow("sykkel_status")
+                    'Tilgjengelig = VareRow("sykkel_status")
 
+                    'If VareSøkTable.Rows.Count = 0 Then
+                    '    LvUtlVarer.Items.Add(New ListViewItem("Ingen ledige sykler i denne kategorien"))
+                    'Else
+                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn}))
+                    'End If
 
-                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn, Tilgjengelig}))
                 Next
 
             Catch feilmelding As MySqlException
@@ -506,9 +513,8 @@ Public Class Form1
 
             Try
                 DBConnect()
-                Dim varer As New MySqlCommand("SELECT varenummer, utstyr_navn, utstyr_status 
-                                           FROM utstyr WHERE utstyr_id =" & UtlSubkatID & "
-                                            ORDER BY utstyr_status", Tilkobling)
+                Dim varer As New MySqlCommand("SELECT varenummer, utstyr_navn 
+                                           FROM utstyr WHERE utstyr_id =" & UtlSubkatID & "", Tilkobling)
 
                 Dim VaresøkAdapter As New MySqlDataAdapter
                 Dim VareSøkTable As New DataTable
@@ -518,14 +524,14 @@ Public Class Form1
                 DBDisconnect()
 
                 Dim VareRow As DataRow
-                Dim Varenummer, Varenavn, Tilgjengelig As String
+                Dim Varenummer, Varenavn As String
 
                 For Each VareRow In VareSøkTable.Rows
                     Varenummer = VareRow("varenummer")
                     Varenavn = VareRow("utstyr_navn")
-                    Tilgjengelig = VareRow("utstyr_status")
+                    'Tilgjengelig = VareRow("utstyr_status")
 
-                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn, Tilgjengelig}))
+                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn}))
                 Next
 
             Catch feilmelding As MySqlException
@@ -554,10 +560,11 @@ Public Class Form1
     End Sub
 
     'autofyll av ramme boks fra database.
-    ' denne skal hente ramme fra valgt sykkeltype
+    ' denne henter ramme fra valgt sykkeltype
     Private Sub CboUtlRamme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
         CboUtlRamme.SelectedIndex = -1
         UtlAutoPopRamme()
+
     End Sub
 
 
@@ -2380,6 +2387,9 @@ Public Class Form1
         Dim DBALandRow As DataRow
         Dim LandString As String = ""
 
+        TxtDBAAvdNavn.Text = SQLWhiteWash(TxtDBAAvdNavn.Text)
+        TxtDBAAvdAdr.Text = SQLWhiteWash(TxtDBAAvdAdr.Text)
+
         DBALandTable = SQLSelect("landsdel", "landsdel_id", "landsdel_navn='" & CboDBALandsdel.Text & "'")
 
         For Each DBALandRow In DBALandTable.Rows
@@ -2387,26 +2397,37 @@ Public Class Form1
         Next
 
         SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
+
+        TxtDBAAvdNavn.Text = ""
+        TxtDBAAvdAdr.Text = ""
+
     End Sub
 
     Public Sub DBANyUtstyrskategori()
 
+        TxtDBAKnavn.Text = SQLWhiteWash(TxtDBAKnavn.Text)
+
         SQLInsert("utstyr_kategori", "(utstyr_kat)", "('" & TxtDBAKnavn.Text & "')")
+
+        TxtDBAKnavn.Text = ""
 
     End Sub
 
     Public Sub DBANySykkelType()
-        Dim DBALandTable As New DataTable
-        Dim DBALandRow As DataRow
-        Dim LandString As String = ""
 
-        DBALandTable = SQLSelect("landsdel", "landsdel_id", "landsdel_navn='" & CboDBALandsdel.Text & "'")
+        TxtDBATypeNavn.Text = SQLWhiteWash(TxtDBATypeNavn.Text)
+        TxtDBATimepris.Text = SQLWhiteWash(TxtDBATimepris.Text)
+        TxtDBADognpris.Text = SQLWhiteWash(TxtDBADognpris.Text)
+        TxtDBAUkepris.Text = SQLWhiteWash(TxtDBAUkepris.Text)
 
-        For Each DBALandRow In DBALandTable.Rows
-            LandString = DBALandRow("landsdel_id")
-        Next
+        SQLInsert("sykkel_typer", "(kategori, sykkel_kat_timepris, sykkel_kat_døgnpris, sykkel_kat_ukepris)", "('" & TxtDBATypeNavn.Text & "', '" & TxtDBATimepris.Text & "', '" & TxtDBADognpris.Text & "', '" & TxtDBAUkepris.Text & "')")
 
-        SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
+        TxtDBATypeNavn.Text = ""
+        TxtDBATimepris.Text = ""
+        TxtDBADognpris.Text = ""
+        TxtDBAUkepris.Text = ""
+
+
     End Sub
 
     Public Sub DBAEndreAvdeling()
@@ -2423,6 +2444,14 @@ Public Class Form1
 
     Private Sub BtnDBAAvdNy_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdNy.Click
         DBANyAvdeling()
+    End Sub
+
+    Private Sub BtnDBASTNy_Click(sender As Object, e As EventArgs) Handles BtnDBASTNy.Click
+        DBANySykkelType()
+    End Sub
+
+    Private Sub BtnDBAUKNy_Click(sender As Object, e As EventArgs) Handles BtnDBAUKNy.Click
+        DBANyUtstyrskategori()
     End Sub
 #End Region
 End Class

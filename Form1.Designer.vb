@@ -3431,7 +3431,7 @@ Partial Class Form1
         '
         Me.LblDBATimepris.AutoSize = True
         Me.LblDBATimepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblDBATimepris.Location = New System.Drawing.Point(18, 129)
+        Me.LblDBATimepris.Location = New System.Drawing.Point(18, 137)
         Me.LblDBATimepris.Name = "LblDBATimepris"
         Me.LblDBATimepris.Size = New System.Drawing.Size(66, 18)
         Me.LblDBATimepris.TabIndex = 43
@@ -3441,7 +3441,7 @@ Partial Class Form1
         '
         Me.LblDBADognpris.AutoSize = True
         Me.LblDBADognpris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblDBADognpris.Location = New System.Drawing.Point(18, 166)
+        Me.LblDBADognpris.Location = New System.Drawing.Point(18, 168)
         Me.LblDBADognpris.Name = "LblDBADognpris"
         Me.LblDBADognpris.Size = New System.Drawing.Size(67, 18)
         Me.LblDBADognpris.TabIndex = 42
@@ -3451,7 +3451,7 @@ Partial Class Form1
         '
         Me.LblDBAUkepris.AutoSize = True
         Me.LblDBAUkepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblDBAUkepris.Location = New System.Drawing.Point(18, 203)
+        Me.LblDBAUkepris.Location = New System.Drawing.Point(18, 204)
         Me.LblDBAUkepris.Name = "LblDBAUkepris"
         Me.LblDBAUkepris.Size = New System.Drawing.Size(59, 18)
         Me.LblDBAUkepris.TabIndex = 41
@@ -3460,7 +3460,7 @@ Partial Class Form1
         'TxtDBAUkepris
         '
         Me.TxtDBAUkepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtDBAUkepris.Location = New System.Drawing.Point(144, 200)
+        Me.TxtDBAUkepris.Location = New System.Drawing.Point(144, 201)
         Me.TxtDBAUkepris.Name = "TxtDBAUkepris"
         Me.TxtDBAUkepris.Size = New System.Drawing.Size(131, 26)
         Me.TxtDBAUkepris.TabIndex = 40
@@ -3468,7 +3468,7 @@ Partial Class Form1
         'TxtDBADognpris
         '
         Me.TxtDBADognpris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtDBADognpris.Location = New System.Drawing.Point(144, 163)
+        Me.TxtDBADognpris.Location = New System.Drawing.Point(144, 165)
         Me.TxtDBADognpris.Name = "TxtDBADognpris"
         Me.TxtDBADognpris.Size = New System.Drawing.Size(131, 26)
         Me.TxtDBADognpris.TabIndex = 39
@@ -3476,7 +3476,7 @@ Partial Class Form1
         'TxtDBATimepris
         '
         Me.TxtDBATimepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtDBATimepris.Location = New System.Drawing.Point(144, 126)
+        Me.TxtDBATimepris.Location = New System.Drawing.Point(144, 134)
         Me.TxtDBATimepris.Name = "TxtDBATimepris"
         Me.TxtDBATimepris.Size = New System.Drawing.Size(131, 26)
         Me.TxtDBATimepris.TabIndex = 38
@@ -3484,7 +3484,7 @@ Partial Class Form1
         'TxtDBATypeNavn
         '
         Me.TxtDBATypeNavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtDBATypeNavn.Location = New System.Drawing.Point(144, 89)
+        Me.TxtDBATypeNavn.Location = New System.Drawing.Point(144, 95)
         Me.TxtDBATypeNavn.Name = "TxtDBATypeNavn"
         Me.TxtDBATypeNavn.Size = New System.Drawing.Size(131, 26)
         Me.TxtDBATypeNavn.TabIndex = 37
@@ -3541,7 +3541,7 @@ Partial Class Form1
         '
         Me.LblDBATypenavn.AutoSize = True
         Me.LblDBATypenavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblDBATypenavn.Location = New System.Drawing.Point(18, 92)
+        Me.LblDBATypenavn.Location = New System.Drawing.Point(18, 98)
         Me.LblDBATypenavn.Name = "LblDBATypenavn"
         Me.LblDBATypenavn.Size = New System.Drawing.Size(71, 18)
         Me.LblDBATypenavn.TabIndex = 4
