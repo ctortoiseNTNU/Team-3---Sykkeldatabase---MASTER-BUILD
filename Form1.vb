@@ -2329,4 +2329,30 @@ Public Class Form1
 
 #End Region
 
+#Region "AdminDB"
+
+    Public Sub DBANyAvdeling()
+
+    End Sub
+
+    Public Sub DBANyUtstyrskategori()
+
+    End Sub
+
+    Public Sub DBANySykkelType()
+
+    End Sub
+
+    Public Sub DBAEndreAvdeling()
+
+    End Sub
+
+    Public Sub DBAEndreUtstyrskategori()
+
+    End Sub
+
+    Public Sub DBAEndreSykkelType()
+
+    End Sub
+#End Region
 End Class
