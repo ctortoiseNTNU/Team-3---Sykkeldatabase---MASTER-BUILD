@@ -2345,17 +2345,8 @@ Public Class Form1
     End Sub
 
     Public Sub DBANySykkelType()
-        Dim DBALandTable As New DataTable
-        Dim DBALandRow As DataRow
-        Dim LandString As String = ""
 
-        DBALandTable = SQLSelect("landsdel", "landsdel_id", "landsdel_navn='" & CboDBALandsdel.Text & "'")
-
-        For Each DBALandRow In DBALandTable.Rows
-            LandString = DBALandRow("landsdel_id")
-        Next
-
-        SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
+        SQLInsert("sykkel_typer", "(kategori, sykkel_kat_timepris, sykkel_kat_døgnpris, sykkel_kat_ukepris)", "('" & TxtDBATypeNavn.Text & "', '" & TxtDBATimepris.Text & "', '" & TxtDBADognpris.Text & "', '" & TxtDBAUkepris.Text & "')")
     End Sub
 
     Public Sub DBAEndreAvdeling()
@@ -2372,6 +2363,14 @@ Public Class Form1
 
     Private Sub BtnDBAAvdNy_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdNy.Click
         DBANyAvdeling()
+    End Sub
+
+    Private Sub BtnDBASTNy_Click(sender As Object, e As EventArgs) Handles BtnDBASTNy.Click
+        DBANySykkelType()
+    End Sub
+
+    Private Sub BtnDBAUKNy_Click(sender As Object, e As EventArgs) Handles BtnDBAUKNy.Click
+        DBANyUtstyrskategori()
     End Sub
 #End Region
 End Class

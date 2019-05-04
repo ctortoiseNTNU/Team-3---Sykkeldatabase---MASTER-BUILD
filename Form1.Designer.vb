@@ -332,6 +332,12 @@ Partial Class Form1
         Me.LblDBAKID = New System.Windows.Forms.Label()
         Me.LblDBAKnavn = New System.Windows.Forms.Label()
         Me.GrpDBANyST = New System.Windows.Forms.GroupBox()
+        Me.LblDBATimepris = New System.Windows.Forms.Label()
+        Me.LblDBADognpris = New System.Windows.Forms.Label()
+        Me.LblDBAUkepris = New System.Windows.Forms.Label()
+        Me.TxtDBAUkepris = New System.Windows.Forms.TextBox()
+        Me.TxtDBADognpris = New System.Windows.Forms.TextBox()
+        Me.TxtDBATimepris = New System.Windows.Forms.TextBox()
         Me.TxtDBATypeNavn = New System.Windows.Forms.TextBox()
         Me.TxtDBATypeID = New System.Windows.Forms.TextBox()
         Me.BtnDBASTLast = New System.Windows.Forms.Button()
@@ -363,12 +369,6 @@ Partial Class Form1
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.TxtDBATimepris = New System.Windows.Forms.TextBox()
-        Me.TxtDBADognpris = New System.Windows.Forms.TextBox()
-        Me.TxtDBAUkepris = New System.Windows.Forms.TextBox()
-        Me.LblDBAUkepris = New System.Windows.Forms.Label()
-        Me.LblDBADognpris = New System.Windows.Forms.Label()
-        Me.LblDBATimepris = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -3427,6 +3427,60 @@ Partial Class Form1
         Me.GrpDBANyST.TabStop = False
         Me.GrpDBANyST.Text = "Sykkeltype"
         '
+        'LblDBATimepris
+        '
+        Me.LblDBATimepris.AutoSize = True
+        Me.LblDBATimepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBATimepris.Location = New System.Drawing.Point(18, 137)
+        Me.LblDBATimepris.Name = "LblDBATimepris"
+        Me.LblDBATimepris.Size = New System.Drawing.Size(66, 18)
+        Me.LblDBATimepris.TabIndex = 43
+        Me.LblDBATimepris.Text = "Timepris:"
+        '
+        'LblDBADognpris
+        '
+        Me.LblDBADognpris.AutoSize = True
+        Me.LblDBADognpris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBADognpris.Location = New System.Drawing.Point(18, 168)
+        Me.LblDBADognpris.Name = "LblDBADognpris"
+        Me.LblDBADognpris.Size = New System.Drawing.Size(67, 18)
+        Me.LblDBADognpris.TabIndex = 42
+        Me.LblDBADognpris.Text = "Døgnpris:"
+        '
+        'LblDBAUkepris
+        '
+        Me.LblDBAUkepris.AutoSize = True
+        Me.LblDBAUkepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDBAUkepris.Location = New System.Drawing.Point(18, 204)
+        Me.LblDBAUkepris.Name = "LblDBAUkepris"
+        Me.LblDBAUkepris.Size = New System.Drawing.Size(59, 18)
+        Me.LblDBAUkepris.TabIndex = 41
+        Me.LblDBAUkepris.Text = "Ukepris:"
+        '
+        'TxtDBAUkepris
+        '
+        Me.TxtDBAUkepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBAUkepris.Location = New System.Drawing.Point(144, 201)
+        Me.TxtDBAUkepris.Name = "TxtDBAUkepris"
+        Me.TxtDBAUkepris.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBAUkepris.TabIndex = 40
+        '
+        'TxtDBADognpris
+        '
+        Me.TxtDBADognpris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBADognpris.Location = New System.Drawing.Point(144, 165)
+        Me.TxtDBADognpris.Name = "TxtDBADognpris"
+        Me.TxtDBADognpris.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBADognpris.TabIndex = 39
+        '
+        'TxtDBATimepris
+        '
+        Me.TxtDBATimepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDBATimepris.Location = New System.Drawing.Point(144, 134)
+        Me.TxtDBATimepris.Name = "TxtDBATimepris"
+        Me.TxtDBATimepris.Size = New System.Drawing.Size(131, 26)
+        Me.TxtDBATimepris.TabIndex = 38
+        '
         'TxtDBATypeNavn
         '
         Me.TxtDBATypeNavn.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -3732,60 +3786,6 @@ Partial Class Form1
         '
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
-        '
-        'TxtDBATimepris
-        '
-        Me.TxtDBATimepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtDBATimepris.Location = New System.Drawing.Point(144, 134)
-        Me.TxtDBATimepris.Name = "TxtDBATimepris"
-        Me.TxtDBATimepris.Size = New System.Drawing.Size(131, 26)
-        Me.TxtDBATimepris.TabIndex = 38
-        '
-        'TxtDBADognpris
-        '
-        Me.TxtDBADognpris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtDBADognpris.Location = New System.Drawing.Point(144, 165)
-        Me.TxtDBADognpris.Name = "TxtDBADognpris"
-        Me.TxtDBADognpris.Size = New System.Drawing.Size(131, 26)
-        Me.TxtDBADognpris.TabIndex = 39
-        '
-        'TxtDBAUkepris
-        '
-        Me.TxtDBAUkepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtDBAUkepris.Location = New System.Drawing.Point(144, 201)
-        Me.TxtDBAUkepris.Name = "TxtDBAUkepris"
-        Me.TxtDBAUkepris.Size = New System.Drawing.Size(131, 26)
-        Me.TxtDBAUkepris.TabIndex = 40
-        '
-        'LblDBAUkepris
-        '
-        Me.LblDBAUkepris.AutoSize = True
-        Me.LblDBAUkepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblDBAUkepris.Location = New System.Drawing.Point(18, 204)
-        Me.LblDBAUkepris.Name = "LblDBAUkepris"
-        Me.LblDBAUkepris.Size = New System.Drawing.Size(59, 18)
-        Me.LblDBAUkepris.TabIndex = 41
-        Me.LblDBAUkepris.Text = "Ukepris:"
-        '
-        'LblDBADognpris
-        '
-        Me.LblDBADognpris.AutoSize = True
-        Me.LblDBADognpris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblDBADognpris.Location = New System.Drawing.Point(18, 168)
-        Me.LblDBADognpris.Name = "LblDBADognpris"
-        Me.LblDBADognpris.Size = New System.Drawing.Size(67, 18)
-        Me.LblDBADognpris.TabIndex = 42
-        Me.LblDBADognpris.Text = "Døgnpris:"
-        '
-        'LblDBATimepris
-        '
-        Me.LblDBATimepris.AutoSize = True
-        Me.LblDBATimepris.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblDBATimepris.Location = New System.Drawing.Point(18, 137)
-        Me.LblDBATimepris.Name = "LblDBATimepris"
-        Me.LblDBATimepris.Size = New System.Drawing.Size(66, 18)
-        Me.LblDBATimepris.TabIndex = 43
-        Me.LblDBATimepris.Text = "Timepris:"
         '
         'Form1
         '
