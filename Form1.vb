@@ -385,6 +385,8 @@ Public Class Form1
 
         Dim KndSQLKolonner = New String() {"kunde_id", "kunde_fornavn", "kunde_etternavn", "adresse", "telefon", "epost", "rabatt_id"}
 
+        Dim KndSpKolonne = "kunde_id, kunde_fornavn, kunde_etternavn, adresse, telefon, epost, rabatt_id"
+
         Try
             DBConnect()
             Dim sporring As New MySqlCommand("SELECT * FROM kunder WHERE telefon =" & UtlKndSok & "", Tilkobling)
@@ -864,6 +866,7 @@ Public Class Form1
         End Try
 
     End Sub
+
 
     Private Sub BtnKndEndre_Click(sender As Object, e As EventArgs) Handles BtnKndEndre.Click
 
@@ -1830,7 +1833,6 @@ Public Class Form1
     'Vi henter først AvdelingsIDen til Avdelingen som har blitt valgt vha MySQL som leser Avd_navn og skriver tilsvarende avdelings id til variabel.
     'Da kjører vi insert sql i 3 stadier - insert bruker, insert passord, update bruker. Dette er slik at vi får lenket opp passord fk og bruker fk med hverandre
     'ANB1 : Insert ny bruker ANB2 : Insert ny passord ANB3 : Update bruker for å knytte passord fk ANB4 : laster inn tilsvarende avdelings id.
-
     Private Sub AdminNyBruker()
         Try
             DBConnect()
@@ -1884,14 +1886,15 @@ Public Class Form1
         Catch AdminSqlError6 As MySqlException
             MsgBox("Man får ikke koble til databasen:  " & AdminSqlError6.Message)
         End Try
+
     End Sub
+
 
     'Prosedyre som brukes til endring av ekisterende bruker i SQLdatabasen.
     'Veldig lik den som brukes til ny bruker, men noen forandringer:
     'Som før så hentes tilsvarende avdeling id slik at FK til brukeren kan oppdateres riktig.
     'Da er det SQL update for å bytte bruker detaljene.
     'Hvis passordfeltet er tom, så byttes ikke passordet. AEB1 : Update Bruker AEB3 : Update Passord AEB4 : Hent avdelingid
-
     Private Sub AdminEndreBruker()
 
         TxtAdminEBPassord.Text = SQLWhiteWash(TxtAdminEBPassord.Text)
@@ -1932,7 +1935,6 @@ Public Class Form1
             Else
                 AdminEndreBruker3.ExecuteNonQuery()
             End If
-
 
             DBDisconnect()
             TxtAdminEBPassord.Text = ""
@@ -1993,9 +1995,11 @@ Public Class Form1
 
     End Sub
 
+
     'Dette er en prosedyre som kjører på hvert lasting av Adminside og ved lagring av ny bruker.
     'Den kalkulerer neste bruker ID automatisk. Dette er gjort fordi det fjerner muligheten for menneskefeil iht bruker id.
     Private Sub AdminBrukerIDCalc()
+
         Try
             DBConnect()
             Dim AdminBrukerIDKommando As New MySqlCommand("Select COUNT(bruker_id) FROM brukere", Tilkobling)
@@ -2013,9 +2017,10 @@ Public Class Form1
 
         Catch AdminSqlError3 As MySqlException
             MsgBox("Man får ikke koble til databasen: " & AdminSqlError3.Message)
-
         End Try
+
     End Sub
+
 
     'Dette er en prosedyre som populerer ComboBoksene til avdelingene. Dette gir muligheten å velge riktig avdelingsnavn.
     'Comboboksene er tatt i bruk for å ha best mulig information hygiene på plass.
@@ -2034,18 +2039,17 @@ Public Class Form1
             AdminAvdelingString = AdminAvdelingRow("avd_navn")
             CboAdminNBAvdeling.Items.Add(AdminAvdelingString)
             CboAdminEBAvdeling.Items.Add(AdminAvdelingString)
-
         Next
     End Sub
+
 
     'Dette er søkeboksprosedyren.
     'Den søker vha et select command som gjør at søkefeltet er kolonnen som blir søket på. Vi bruker også LIKE sql commando som gjør at vi får partial matching.
     Private Sub AdminBSSokB_Click(sender As Object, e As EventArgs) Handles AdminBSSokB.Click
+
         Dim AdminSoekefelt, AdminSoekekategori As String
         AdminSoekefelt = SQLWhiteWash(TxtAdminBSFelt.Text)
         AdminSoekekategori = CboAdminBSEtter.Text
-
-
 
         Try
             DBConnect()
@@ -2071,6 +2075,7 @@ Public Class Form1
 
     End Sub
 
+
     'Dette oppdaterer MOTD i databasen og reflekterer det som vises på fremsiden. Man klikker på knappen for å kjøre koden.
     'Den kjører også en tilleggsprosydre som oppdaterer på start siden også.
     Private Sub AdminMOTDEndreB_Click(sender As Object, e As EventArgs) Handles AdminMOTDEndreB.Click
@@ -2088,7 +2093,9 @@ Public Class Form1
         Catch AdminSqlError4 As MySqlException
             MsgBox("Man får ikke koble til databasen: " & AdminSqlError4.Message)
         End Try
+
     End Sub
+
 
     Private Sub AdminNBOpprettB_Click(sender As Object, e As EventArgs) Handles AdminNBOpprettB.Click
         Dim NBInputSjekk As Boolean
@@ -2128,12 +2135,10 @@ Public Class Form1
         AdminBrukerIDCalc()
     End Sub
 
+
     Private Sub AdminEBLastInnB_Click(sender As Object, e As EventArgs) Handles AdminEBLastInnB.Click
         AdminLastInnEndreBruker()
-
-
     End Sub
-
 
 
     Private Sub AdminEBEndreB_Click(sender As Object, e As EventArgs) Handles AdminEBEndreB.Click
@@ -2171,6 +2176,7 @@ Public Class Form1
         End If
 
         AdminEndreBruker()
+
     End Sub
 
 
@@ -2328,6 +2334,7 @@ Public Class Form1
 
 
 #End Region
+
 
 #Region "AdminDB"
 
