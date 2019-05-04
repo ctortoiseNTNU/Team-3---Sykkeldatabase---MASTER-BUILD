@@ -863,6 +863,7 @@ Public Class Form1
                 Kunde_HF = KundeRow("handlet_for")
                 LvKndSok.Items.Add(New ListViewItem({Kunde_ID, Kunde_Fornavn, Kunde_Etternavn,
                     Kunde_Adresse, Kunde_Tlf, Kunde_Epost, Kunde_rabatt, Kunde_HF}))
+            Next
         Catch feilmelding As MySqlException
             MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
         End Try
@@ -1179,6 +1180,7 @@ Public Class Form1
                 & "s.avdeling_id=avdeling.avdeling_id LEFT JOIN forhandler ON " _
                 & "s.forhandler_id=forhandler.forhandler_id LEFT JOIN sykkel_typer ON " _
                 & "s.type_id=sykkel_typer.type_id "
+
         Dim InvSpUtstyrJoin As String = "INNER JOIN sykkel_utstyr AS su ON s.sykkel_id=su.sykkel_id " _
                 & "INNER JOIN utstyr_kategori AS uk ON su.utstyr_kat_id=uk.utstyr_kat_id "
         Dim InvSpSykkelNavn As String = "sykkel_navn LIKE '%" & SQLWhiteWash(TxtInvProduktnavn.Text.Trim) & "%'"
@@ -1287,6 +1289,43 @@ Public Class Form1
         Catch ex As MySqlException
             MsgBox("Feil ved søk i sykkeldatabase:" & vbNewLine & ex.Message)
         End Try
+
+
+        '----------------------T E S T-------------------------
+        'Dim InvSpInit As String = "s.sykkel_id, s.sykkel_navn, s.sykkel_modell, " _
+        '        & "sykkel_typer.kategori, s.sykkel_ramme, s.girsystem, s.hjul_str, " _
+        '        & "s.sykkel_pris, avdeling.avd_navn, forhandler.forhandler_navn, s.sykkel_status, " _
+        '        & "s.skadet, s.savnet FROM sykler AS s LEFT JOIN avdeling ON " _
+        '        & "s.avdeling_id=avdeling.avdeling_id LEFT JOIN forhandler ON " _
+        '        & "s.forhandler_id=forhandler.forhandler_id LEFT JOIN sykkel_typer ON " _
+        '        & "s.type_id=sykkel_typer.type_id "
+
+        'InvSokSporring = InvSpSykkelNavn & " AND " & InvSpsykkelModell & " AND " &
+        '        InvSpTypeid & " AND " & InvSpSykkelRamme & " AND " & InvSpGirsystem & " AND " &
+        '        InvSpHjulstorrelse & " AND " & InvSpSykkelPris & " AND " & InvSpAvdeling & " AND " &
+        '        InvSpForhandlerID & " AND " & InvSpSykkelStatus & " AND " & InvSpSkadet & " AND " &
+        '        InvSpSavnet & InvSpSykkelUtstyr ' & ";"
+
+        'Dim test As String = InvSpInit & InvSpUtstyrJoin
+        'Dim invtesttabell As DataTable
+        'invtesttabell = SQLSelect("sykler", test, InvSokSporring)
+        'Dim invLvSavnet, invLvSkadet As String
+
+        'For Each r In invtesttabell.Rows
+        '    If r("s.skadet") = 0 Then
+        '        invLvSkadet = "Nei"
+        '    Else
+        '        invLvSkadet = "Ja"
+        '    End If
+        '    If r("s.savnet") = 0 Then
+        '        invLvSavnet = "Nei"
+        '    Else
+        '        invLvSavnet = "Ja"
+        '    End If
+        '    LvInvSok.Items.Add(New ListViewItem({r("s.sykkel_id"), r("s.sykkel_navn"), r("s.sykkel_modell"),
+        '        r("sykkel_typer.kategori"), r("s.sykkel_ramme"), r("s.girsystem"), r("s.hjul_str"), r("s.sykkel_pris"),
+        '        r("avdeling.avd_navn"), r("forhandler.forhandler_navn"), r("s.status"), invLvSkadet, invLvSavnet}))
+        'Next
 
     End Sub
 
