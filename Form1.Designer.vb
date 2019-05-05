@@ -58,8 +58,8 @@ Partial Class Form1
         Me.LblUtleieAnt = New System.Windows.Forms.Label()
         Me.LblUtleieTil = New System.Windows.Forms.Label()
         Me.LblUtleieFra = New System.Windows.Forms.Label()
-        Me.DtpUtleieTil = New System.Windows.Forms.DateTimePicker()
-        Me.DtpUtleieFra = New System.Windows.Forms.DateTimePicker()
+        Me.UtlDtpUtleieTil = New System.Windows.Forms.DateTimePicker()
+        Me.UtlDtpUtleieFra = New System.Windows.Forms.DateTimePicker()
         Me.CboUtlRabatt = New System.Windows.Forms.ComboBox()
         Me.LblUtsRabatt = New System.Windows.Forms.Label()
         Me.CboUtlSubkat = New System.Windows.Forms.ComboBox()
@@ -579,7 +579,7 @@ Partial Class Form1
         'LvUtleieOrdre
         '
         Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtleieVareId, Me.UtleieVareNavn, Me.UtleieRabatt, Me.UtleiePris, Me.UtleieDag, Me.UtleieUke, Me.UtlTime, Me.UtlAvdeling})
-        Me.LvUtleieOrdre.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvUtleieOrdre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtleieOrdre.Location = New System.Drawing.Point(6, 30)
         Me.LvUtleieOrdre.Name = "LvUtleieOrdre"
         Me.LvUtleieOrdre.Size = New System.Drawing.Size(692, 351)
@@ -650,8 +650,8 @@ Partial Class Form1
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtleieAnt)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtleieTil)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtleieFra)
-        Me.GrpUtleieProdukter.Controls.Add(Me.DtpUtleieTil)
-        Me.GrpUtleieProdukter.Controls.Add(Me.DtpUtleieFra)
+        Me.GrpUtleieProdukter.Controls.Add(Me.UtlDtpUtleieTil)
+        Me.GrpUtleieProdukter.Controls.Add(Me.UtlDtpUtleieFra)
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlRabatt)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtsRabatt)
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlSubkat)
@@ -773,28 +773,28 @@ Partial Class Form1
         Me.LblUtleieFra.TabIndex = 45
         Me.LblUtleieFra.Text = "Fra dato:"
         '
-        'DtpUtleieTil
+        'UtlDtpUtleieTil
         '
-        Me.DtpUtleieTil.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DtpUtleieTil.Location = New System.Drawing.Point(321, 66)
-        Me.DtpUtleieTil.Name = "DtpUtleieTil"
-        Me.DtpUtleieTil.Size = New System.Drawing.Size(164, 27)
-        Me.DtpUtleieTil.TabIndex = 44
+        Me.UtlDtpUtleieTil.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.UtlDtpUtleieTil.Location = New System.Drawing.Point(321, 66)
+        Me.UtlDtpUtleieTil.Name = "UtlDtpUtleieTil"
+        Me.UtlDtpUtleieTil.Size = New System.Drawing.Size(164, 27)
+        Me.UtlDtpUtleieTil.TabIndex = 44
         '
-        'DtpUtleieFra
+        'UtlDtpUtleieFra
         '
-        Me.DtpUtleieFra.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DtpUtleieFra.Location = New System.Drawing.Point(321, 21)
-        Me.DtpUtleieFra.Name = "DtpUtleieFra"
-        Me.DtpUtleieFra.Size = New System.Drawing.Size(164, 27)
-        Me.DtpUtleieFra.TabIndex = 43
+        Me.UtlDtpUtleieFra.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.UtlDtpUtleieFra.Location = New System.Drawing.Point(321, 21)
+        Me.UtlDtpUtleieFra.Name = "UtlDtpUtleieFra"
+        Me.UtlDtpUtleieFra.Size = New System.Drawing.Size(164, 27)
+        Me.UtlDtpUtleieFra.TabIndex = 43
         '
         'CboUtlRabatt
         '
         Me.CboUtlRabatt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboUtlRabatt.Font = New System.Drawing.Font("Calibri", 11.25!)
         Me.CboUtlRabatt.FormattingEnabled = True
-        Me.CboUtlRabatt.Items.AddRange(New Object() {"5%", "10%", "15%", "20%", "25%", "30%"})
+        Me.CboUtlRabatt.Items.AddRange(New Object() {"5", "10", "15", "20", "25", "30"})
         Me.CboUtlRabatt.Location = New System.Drawing.Point(321, 150)
         Me.CboUtlRabatt.Name = "CboUtlRabatt"
         Me.CboUtlRabatt.Size = New System.Drawing.Size(121, 26)
@@ -806,9 +806,9 @@ Partial Class Form1
         Me.LblUtsRabatt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblUtsRabatt.Location = New System.Drawing.Point(243, 153)
         Me.LblUtsRabatt.Name = "LblUtsRabatt"
-        Me.LblUtsRabatt.Size = New System.Drawing.Size(52, 18)
+        Me.LblUtsRabatt.Size = New System.Drawing.Size(66, 18)
         Me.LblUtsRabatt.TabIndex = 41
-        Me.LblUtsRabatt.Text = "Rabatt:"
+        Me.LblUtsRabatt.Text = "Rabatt %:"
         '
         'CboUtlSubkat
         '
@@ -836,7 +836,7 @@ Partial Class Form1
         'LvUtlVarer
         '
         Me.LvUtlVarer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtlID, Me.LvColUtlVareNavn, Me.LvColUtlRamme, Me.LvColUtlHjulStr, Me.LvColUtlStatus, Me.LvVolUtlAvdeling})
-        Me.LvUtlVarer.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvUtlVarer.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtlVarer.Location = New System.Drawing.Point(6, 229)
         Me.LvUtlVarer.Name = "LvUtlVarer"
         Me.LvUtlVarer.Size = New System.Drawing.Size(584, 243)
@@ -904,7 +904,7 @@ Partial Class Form1
         'LvUtleieKunde
         '
         Me.LvUtleieKunde.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.KundeID, Me.Fornavn, Me.Etternavn, Me.Adresse, Me.Tlf, Me.Epost, Me.UtlRabatt})
-        Me.LvUtleieKunde.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvUtleieKunde.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtleieKunde.Location = New System.Drawing.Point(6, 24)
         Me.LvUtleieKunde.Name = "LvUtleieKunde"
         Me.LvUtleieKunde.Size = New System.Drawing.Size(583, 105)
@@ -4304,11 +4304,11 @@ Partial Class Form1
     Friend WithEvents UtlRabatt As ColumnHeader
     Friend WithEvents CboUtlRabatt As ComboBox
     Friend WithEvents BtnUtlAbort As Button
-    Friend WithEvents DtpUtleieFra As DateTimePicker
+    Friend WithEvents UtlDtpUtleieFra As DateTimePicker
     Friend WithEvents UtlTime As ColumnHeader
     Friend WithEvents LblUtleieTil As Label
     Friend WithEvents LblUtleieFra As Label
-    Friend WithEvents DtpUtleieTil As DateTimePicker
+    Friend WithEvents UtlDtpUtleieTil As DateTimePicker
     Friend WithEvents TxtUtlAntall As TextBox
     Friend WithEvents RdbUtlUke As RadioButton
     Friend WithEvents RdbUtlDager As RadioButton

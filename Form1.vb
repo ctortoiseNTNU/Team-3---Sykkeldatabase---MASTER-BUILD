@@ -373,8 +373,8 @@ Public Class Form1
         RdbUtlTimer.Checked = False
         RdbUtlDager.Checked = False
         RdbUtlUke.Checked = False
-        DtpUtleieFra.Value = Now
-        DtpUtleieTil.Value = Now
+        UtlDtpUtleieFra.Value = Now
+        UtlDtpUtleieTil.Value = Now
         LvUtleieKunde.Items.Clear()
         LvUtleieOrdre.Items.Clear()
         LvUtlVarer.Items.Clear()
@@ -443,6 +443,48 @@ Public Class Form1
 
         'Registrer utleietabell
 
+        Dim UtlAvdelingID, UtlBetalingsType, UtlKundeID, UtlRabattID, UtlPris, UtlDatoSlutt, UtlDatoStart,
+            UtlLeieLengde, UtlSykkelKatPris As String
+        'Dim UtlLeieLengde As Integer
+
+
+
+        'pris = sykkel_kat from sykkel_id , and pris_dag if dag pris_uke if uke etc
+        UtlAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", CboUtlAvd.SelectedItem)
+        UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
+        UtlRabattID = CboUtlRabatt.SelectedItem
+        UtlDatoSlutt = UtlDtpUtleieFra.Value  '.ToString("yyyy-MM-dd")  ' ikke legg det til her
+        UtlDatoStart = UtlDtpUtleieTil.Value  '.ToString("yyyy-MM-dd")
+        UtlPris = 0 'antall dager * utleiekategori for sykkel for hver sykkel
+
+        UtlLeieLengde = UtlDtpUtleieFra.Value.Subtract(UtlDtpUtleieTil.Value).ToString("%d")
+
+        Dim UtlKatPris
+        For i = 0 To UtlValgteSyklerID.Count - 1
+
+            UtlKatPris = SQLSelect("sykkel_typer join sykler as s on sykkel_typer.type_id=s.type_id",
+                "sykkel_kat_timepris, sykkel_kat_dognpris, sykkel_kat_ukepris", "s.sykkel_id='" & UtlValgteSyklerID(i) & "'")
+            For Each r In UtlKatPris.rows
+                If RdbUtlTimer.Checked Then
+                    UtlPris += r("sykkel_kat_timepris")
+                ElseIf RdbUtlDager.Checked Then
+                    UtlPris += r("sykkel_kat_dognpris")
+                ElseIf RdbUtlUke.Checked Then
+                    UtlPris += r("sykkel_kat_ukepris")
+                Else
+                    MsgBox("velg leietid")
+                End If
+            Next
+            'select uke/dag/timepris fra sykkel_kat where id = idvalgt join kategori
+            'antall utstysr * 50kr
+            'pris = pris + kat_pris*leietid
+        Next
+
+
+        '-----------TEST-------------
+        'UtlTESTlbl.Text = CStr(UtlPris)
+
+
         'Henter ID for utleie som er registrert. Til bruk for registrering av sykler tilknyttet utleie i tabellen utleie_sykkel
         Dim UtlSqlSisteID As New MySqlCommand(UtlSisteUtleieID, Tilkobling)
         Dim UtlSqlLeser As MySqlDataReader
@@ -463,10 +505,10 @@ Public Class Form1
 
         UtlSisteUtleieID = "1000" ' ----------TEST-----------------
 
-        For i = 0 To UtlValgteSyklerID.Count - 1
-            SQLInsert("utleie_sykkel", "(utleie_id, sykkel_id)", "('" & UtlSisteUtleieID & "', '" & UtlValgteSyklerID(i) & "')")
-            SQLUpdate("sykler", "sykkel_status='Utleid'", "sykkel_id='" & UtlValgteSyklerID(i) & "'")
-        Next
+        'For i = 0 To UtlValgteSyklerID.Count - 1
+        '    SQLInsert("utleie_sykkel", "(utleie_id, sykkel_id)", "('" & UtlSisteUtleieID & "', '" & UtlValgteSyklerID(i) & "')")
+        '    SQLUpdate("sykler", "sykkel_status='Utleid'", "sykkel_id='" & UtlValgteSyklerID(i) & "'")
+        'Next
 
 
     End Sub
@@ -485,12 +527,32 @@ Public Class Form1
 
     '----------------TEST------------------
     Private Sub UtlTESTlbl_Click(sender As Object, e As EventArgs) Handles UtlTESTlbl.Click
-        UtlTESTlbl.Text = ""
-        Dim testlabel As String
-        For i = 0 To UtlValgteSyklerID.Count - 1
-            testlabel = testlabel & " " & UtlValgteSyklerID(i)
-        Next
-        UtlTESTlbl.Text = testlabel
+
+        '--------sykkelID array test
+        'UtlTESTlbl.Text = ""
+        'Dim testlabel As String
+        'For i = 0 To UtlValgteSyklerID.Count - 1
+        '    testlabel = testlabel & " " & UtlValgteSyklerID(i)
+        'Next
+        'UtlTESTlbl.Text = testlabel
+
+        '-----------------henting av kunde_id
+        'UtlTESTlbl.Text = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
+        Dim lengde As String
+        Dim UtlLeieLengde
+        Dim date1, date2 As Date
+        date1 = UtlDtpUtleieFra.Value
+        date2 = UtlDtpUtleieTil.Value
+
+
+
+        Dim aaa = date2 - date1
+        'lengde = String.Format("%d", aaa)
+        UtlLeieLengde = UtlDtpUtleieFra.Value.Subtract(UtlDtpUtleieTil.Value).ToString("%d")
+        'date1 -date2
+        UtlTESTlbl.Text = UtlLeieLengde
+        'UtlTESTlbl.Text = lengde
+
 
     End Sub
 
