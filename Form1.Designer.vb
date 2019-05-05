@@ -48,6 +48,7 @@ Partial Class Form1
         Me.UtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
+        Me.UtlTESTlbl = New System.Windows.Forms.Label()
         Me.CboUtlRamme = New System.Windows.Forms.ComboBox()
         Me.LblUtlRamme = New System.Windows.Forms.Label()
         Me.LblUtlInfo = New System.Windows.Forms.Label()
@@ -67,7 +68,10 @@ Partial Class Form1
         Me.LvUtlVarer = New System.Windows.Forms.ListView()
         Me.LvColUtlID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColUtlVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlRamme = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlHjulStr = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColUtlStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvVolUtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LblUtlSubKat = New System.Windows.Forms.Label()
         Me.CboUtlKat = New System.Windows.Forms.ComboBox()
         Me.LblUtleieKategori = New System.Windows.Forms.Label()
@@ -323,12 +327,12 @@ Partial Class Form1
         Me.LblAdminNBBID = New System.Windows.Forms.Label()
         Me.DBAdminTab = New System.Windows.Forms.TabPage()
         Me.GrpDBADBS = New System.Windows.Forms.GroupBox()
-        Me.ListView2 = New System.Windows.Forms.ListView()
+        Me.LvDBASokboks = New System.Windows.Forms.ListView()
         Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader10 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader12 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnDBASok = New System.Windows.Forms.Button()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.CboDBASokeetter = New System.Windows.Forms.ComboBox()
         Me.LblDBASoketter = New System.Windows.Forms.Label()
         Me.TxtDBASokefelt = New System.Windows.Forms.TextBox()
         Me.LblDBASokefelt = New System.Windows.Forms.Label()
@@ -379,10 +383,6 @@ Partial Class Form1
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.UtlTESTlbl = New System.Windows.Forms.Label()
-        Me.LvColUtlRamme = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvColUtlHjulStr = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvVolUtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -668,6 +668,15 @@ Partial Class Form1
         Me.GrpUtleieProdukter.TabStop = False
         Me.GrpUtleieProdukter.Text = "Produkter:"
         '
+        'UtlTESTlbl
+        '
+        Me.UtlTESTlbl.AutoSize = True
+        Me.UtlTESTlbl.Location = New System.Drawing.Point(404, 199)
+        Me.UtlTESTlbl.Name = "UtlTESTlbl"
+        Me.UtlTESTlbl.Size = New System.Drawing.Size(60, 23)
+        Me.UtlTESTlbl.TabIndex = 59
+        Me.UtlTESTlbl.Text = "Label1"
+        '
         'CboUtlRamme
         '
         Me.CboUtlRamme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -854,10 +863,24 @@ Partial Class Form1
         Me.LvColUtlVareNavn.Text = "Varenavn"
         Me.LvColUtlVareNavn.Width = 152
         '
+        'LvColUtlRamme
+        '
+        Me.LvColUtlRamme.Text = "Ramme"
+        '
+        'LvColUtlHjulStr
+        '
+        Me.LvColUtlHjulStr.Text = "Hjulstørrelse"
+        Me.LvColUtlHjulStr.Width = 100
+        '
         'LvColUtlStatus
         '
         Me.LvColUtlStatus.Text = "Tilgjengelighet"
         Me.LvColUtlStatus.Width = 110
+        '
+        'LvVolUtlAvdeling
+        '
+        Me.LvVolUtlAvdeling.Text = "Avdeling"
+        Me.LvVolUtlAvdeling.Width = 74
         '
         'LblUtlSubKat
         '
@@ -3354,9 +3377,9 @@ Partial Class Form1
         '
         'GrpDBADBS
         '
-        Me.GrpDBADBS.Controls.Add(Me.ListView2)
+        Me.GrpDBADBS.Controls.Add(Me.LvDBASokboks)
         Me.GrpDBADBS.Controls.Add(Me.BtnDBASok)
-        Me.GrpDBADBS.Controls.Add(Me.ComboBox1)
+        Me.GrpDBADBS.Controls.Add(Me.CboDBASokeetter)
         Me.GrpDBADBS.Controls.Add(Me.LblDBASoketter)
         Me.GrpDBADBS.Controls.Add(Me.TxtDBASokefelt)
         Me.GrpDBADBS.Controls.Add(Me.LblDBASokefelt)
@@ -3368,16 +3391,16 @@ Partial Class Form1
         Me.GrpDBADBS.TabStop = False
         Me.GrpDBADBS.Text = "DB Søk"
         '
-        'ListView2
+        'LvDBASokboks
         '
-        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader9, Me.ColumnHeader10, Me.ColumnHeader12})
-        Me.ListView2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView2.Location = New System.Drawing.Point(0, 114)
-        Me.ListView2.Name = "ListView2"
-        Me.ListView2.Size = New System.Drawing.Size(482, 485)
-        Me.ListView2.TabIndex = 29
-        Me.ListView2.UseCompatibleStateImageBehavior = False
-        Me.ListView2.View = System.Windows.Forms.View.Details
+        Me.LvDBASokboks.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader9, Me.ColumnHeader10, Me.ColumnHeader12})
+        Me.LvDBASokboks.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvDBASokboks.Location = New System.Drawing.Point(0, 114)
+        Me.LvDBASokboks.Name = "LvDBASokboks"
+        Me.LvDBASokboks.Size = New System.Drawing.Size(482, 485)
+        Me.LvDBASokboks.TabIndex = 29
+        Me.LvDBASokboks.UseCompatibleStateImageBehavior = False
+        Me.LvDBASokboks.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader9
         '
@@ -3406,16 +3429,16 @@ Partial Class Form1
         Me.BtnDBASok.Text = "Søk!"
         Me.BtnDBASok.UseVisualStyleBackColor = True
         '
-        'ComboBox1
+        'CboDBASokeetter
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"avdeling_id", "avd_navn", "avd_adresse", "landsdel", "type_id", "sykkelkategori", "utstyr_kat_id", "utstyr_kat"})
-        Me.ComboBox1.Location = New System.Drawing.Point(101, 72)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 26)
-        Me.ComboBox1.TabIndex = 26
+        Me.CboDBASokeetter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboDBASokeetter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboDBASokeetter.FormattingEnabled = True
+        Me.CboDBASokeetter.Items.AddRange(New Object() {"avdeling_id", "avd_navn", "avd_adresse", "type_id", "sykkelkategori", "utstyr_kat_id", "utstyr_kat"})
+        Me.CboDBASokeetter.Location = New System.Drawing.Point(101, 72)
+        Me.CboDBASokeetter.Name = "CboDBASokeetter"
+        Me.CboDBASokeetter.Size = New System.Drawing.Size(121, 26)
+        Me.CboDBASokeetter.TabIndex = 26
         '
         'LblDBASoketter
         '
@@ -3911,29 +3934,6 @@ Partial Class Form1
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
-        'UtlTESTlbl
-        '
-        Me.UtlTESTlbl.AutoSize = True
-        Me.UtlTESTlbl.Location = New System.Drawing.Point(404, 199)
-        Me.UtlTESTlbl.Name = "UtlTESTlbl"
-        Me.UtlTESTlbl.Size = New System.Drawing.Size(60, 23)
-        Me.UtlTESTlbl.TabIndex = 59
-        Me.UtlTESTlbl.Text = "Label1"
-        '
-        'LvColUtlRamme
-        '
-        Me.LvColUtlRamme.Text = "Ramme"
-        '
-        'LvColUtlHjulStr
-        '
-        Me.LvColUtlHjulStr.Text = "Hjulstørrelse"
-        Me.LvColUtlHjulStr.Width = 100
-        '
-        'LvVolUtlAvdeling
-        '
-        Me.LvVolUtlAvdeling.Text = "Avdeling"
-        Me.LvVolUtlAvdeling.Width = 74
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4225,12 +4225,12 @@ Partial Class Form1
     Friend WithEvents GrpDBANyUK As GroupBox
     Friend WithEvents GrpDBANyST As GroupBox
     Friend WithEvents GrpDBADBS As GroupBox
-    Friend WithEvents ListView2 As ListView
+    Friend WithEvents LvDBASokboks As ListView
     Friend WithEvents ColumnHeader9 As ColumnHeader
     Friend WithEvents ColumnHeader10 As ColumnHeader
     Friend WithEvents ColumnHeader12 As ColumnHeader
     Friend WithEvents BtnDBASok As Button
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents CboDBASokeetter As ComboBox
     Friend WithEvents LblDBASoketter As Label
     Friend WithEvents TxtDBASokefelt As TextBox
     Friend WithEvents LblDBASokefelt As Label

@@ -2589,12 +2589,12 @@ Public Class Form1
 #Region "AdminDB"
 
 
-    Private Sub LvAdminListview2_Sort(sender As Object, e As EventArgs) Handles ListView2.ColumnClick
+    Private Sub LvAdminListview2_Sort(sender As Object, e As EventArgs) Handles LvDBASokboks.ColumnClick
         ColumnClick(sender, e)
     End Sub
 
 
-    Public Sub DBANyAvdeling()
+    Private Sub DBANyAvdeling()
         Dim DBALandTable As New DataTable
         Dim DBALandRow As DataRow
         Dim LandString As String = ""
@@ -2615,7 +2615,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBANyUtstyrskategori()
+    Private Sub DBANyUtstyrskategori()
 
         TxtDBAKnavn.Text = SQLWhiteWash(TxtDBAKnavn.Text)
 
@@ -2625,7 +2625,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBANySykkelType()
+    Private Sub DBANySykkelType()
 
         TxtDBATypeNavn.Text = SQLWhiteWash(TxtDBATypeNavn.Text)
         TxtDBATimepris.Text = SQLWhiteWash(TxtDBATimepris.Text)
@@ -2642,15 +2642,159 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBAEndreAvdeling()
+    Private Sub DBAEndreAvdeling()
+        Dim DBALandTable As New DataTable
+        Dim DBALandRow As DataRow
+        Dim LandString As String = ""
+
+        SQLWhiteWash(TxtDBAAvdelingID.Text)
+        TxtDBAAvdNavn.Text = SQLWhiteWash(TxtDBAAvdNavn.Text)
+        TxtDBAAvdAdr.Text = SQLWhiteWash(TxtDBAAvdAdr.Text)
+
+        DBALandTable = SQLSelect("landsdel", "landsdel_id", "landsdel_navn='" & CboDBALandsdel.Text & "'")
+
+        For Each DBALandRow In DBALandTable.Rows
+            LandString = DBALandRow("landsdel_id")
+        Next
+
+        SQLUpdate("avdeling", "avd_navn='" & TxtDBAAvdNavn.Text & "', avd_adresse='" & TxtDBAAvdAdr.Text & "', landsdel_id='" & LandString & "'", "avdeling_id='" & TxtDBAAvdelingID.Text & "'")
+
+        TxtDBAAvdelingID.Text = ""
+        TxtDBAAvdNavn.Text = ""
+        TxtDBAAvdAdr.Text = ""
 
     End Sub
 
-    Public Sub DBAEndreUtstyrskategori()
+    Private Sub DBAEndreUtstyrskategori()
+
+        TxtDBAKID.Text = SQLWhiteWash(TxtDBAKID.Text)
+        TxtDBAKnavn.Text = SQLWhiteWash(TxtDBAKnavn.Text)
+
+        SQLInsert("utstyr_kategori", "(utstyr_kat)", "('" & TxtDBAKnavn.Text & "')")
+        SQLUpdate("utstyr_kategori", "utstyr_kat='" & TxtDBAKnavn.Text & "'", "utstyr_kat_id='" & TxtDBAKID.Text & "'")
+
+        TxtDBAKID.Text = ""
+        TxtDBAKnavn.Text = ""
 
     End Sub
 
-    Public Sub DBAEndreSykkelType()
+    Private Sub DBAEndreSykkelType()
+
+        TxtDBATypeID.Text = SQLWhiteWash(TxtDBATypeID.Text)
+        TxtDBATypeNavn.Text = SQLWhiteWash(TxtDBATypeNavn.Text)
+        TxtDBATimepris.Text = SQLWhiteWash(TxtDBATimepris.Text)
+        TxtDBADognpris.Text = SQLWhiteWash(TxtDBADognpris.Text)
+        TxtDBAUkepris.Text = SQLWhiteWash(TxtDBAUkepris.Text)
+
+        SQLUpdate("sykkel_typer", "kategori='" & TxtDBATypeNavn.Text & "', sykkel_kat_timepris='" & TxtDBATimepris.Text & "', sykkel_kat_døgnpris='" & TxtDBADognpris.Text & "', sykkel_kat_ukepris='" & TxtDBAUkepris.Text & "'", "type_id='" & TxtDBATypeID.Text & "'")
+
+        TxtDBATypeID.Text = ""
+        TxtDBATypeNavn.Text = ""
+        TxtDBATimepris.Text = ""
+        TxtDBADognpris.Text = ""
+        TxtDBAUkepris.Text = ""
+
+    End Sub
+
+    Private Sub DBALastInnSykkelType()
+
+        Dim DBASTTable As New DataTable
+        Dim DBASTRow As DataRow
+
+
+        TxtDBATypeID.Text = SQLWhiteWash(TxtDBATypeID.Text)
+
+        DBASTTable = SQLSelect("sykkel_typer", "*", "type_id='" & TxtDBATypeID.Text & "'")
+
+        For Each DBASTRow In DBASTTable.Rows
+            TxtDBAUkepris.Text = DBASTRow("sykkel_kat_ukepris")
+
+            TxtDBATimepris.Text = DBASTRow("sykkel_kat_timepris")
+            TxtDBATypeNavn.Text = DBASTRow("kategori")
+        Next
+
+    End Sub
+
+    Private Sub DBALastInnUtstyrskategori()
+
+        Dim DBAUKTable As New DataTable
+        Dim DBAUKRow As DataRow
+
+
+        TxtDBAKID.Text = SQLWhiteWash(TxtDBAKID.Text)
+
+        DBAUKTable = SQLSelect("utstyr_kategori", "*", "utstyr_kat_id='" & TxtDBAKID.Text & "'")
+
+        For Each DBAUKRow In DBAUKTable.Rows
+            TxtDBAKnavn.Text = DBAUKRow("utstyr_kat")
+        Next
+
+    End Sub
+
+    Private Sub DBALastInnAvdeling()
+
+        Dim DBAAvdelingTable As New DataTable
+        Dim DBAAvdelingRow As DataRow
+        Dim DBAAvdelingLandRow As DataRow
+        Dim LandString As String = ""
+
+        TxtDBAAvdelingID.Text = SQLWhiteWash(TxtDBAAvdelingID.Text)
+
+        DBAAvdelingTable = SQLSelect("avdeling", "*", "avdeling_id='" & TxtDBAAvdelingID.Text & "'")
+
+        For Each DBAAvdelingRow In DBAAvdelingTable.Rows
+            TxtDBAAvdNavn.Text = DBAAvdelingRow("avd_navn")
+            TxtDBAAvdAdr.Text = DBAAvdelingRow("avd_adresse")
+            LandString = DBAAvdelingRow("landsdel_id")
+        Next
+
+        DBAAvdelingTable = SQLSelect("landsdel", "landsdel_navn", "landsdel_id='" & LandString & "'")
+
+        For Each DBAAvdelingLandRow In DBAAvdelingTable.Rows
+            CboDBALandsdel.SelectedItem = DBAAvdelingLandRow("landsdel_navn")
+        Next
+
+    End Sub
+
+    Private Sub DBASokefelt()
+
+        Dim DBASoekefelt, DBASoekekategori, DBATableChoose, DBAIDChoose, DBANameChoose As String
+        DBASoekefelt = SQLWhiteWash(TxtDBASokefelt.Text)
+        DBASoekekategori = CboDBASokeetter.Text
+
+
+        If DBASoekekategori = "avdeling_id" Or DBASoekekategori = "avd_navn" Or DBASoekekategori = "avd_adresse" Or DBASoekekategori = "landsdel" Then
+            DBATableChoose = "avdeling"
+            DBAIDChoose = "avdeling_id"
+            DBANameChoose = "avd_navn"
+        ElseIf DBASoekekategori = "type_id" Or DBASoekekategori = "sykkelkategori" Then
+            DBATableChoose = "sykkel_typer"
+            DBAIDChoose = "type_id"
+            DBANameChoose = "sykkelkategori"
+        Else
+            DBATableChoose = "utstyr_kategori"
+            DBAIDChoose = "utstyr_kat_id"
+            DBANameChoose = "utstyr_kat"
+        End If
+
+        Try
+            DBConnect()
+            Dim DBASearch As New MySqlCommand("SELECT * FROM " & DBATableChoose & " WHERE " & DBASoekekategori & " LIKE '%" & DBASoekefelt & "%'", Tilkobling)
+            Dim DBASearchAdapter As New MySqlDataAdapter
+            Dim DBASearchTable As New DataTable
+            DBASearchAdapter.SelectCommand = DBASearch
+            DBASearchAdapter.Fill(DBASearchTable)
+            DBDisconnect()
+            Dim DBARow As DataRow
+
+            LvAdminBS.Items.Clear()
+            For Each DBARow In DBASearchTable.Rows
+
+                LvDBASokboks.Items.Add(New ListViewItem({DBARow(DBAIDChoose), DBARow(DBANameChoose), DBARow(DBASoekekategori)}))
+            Next
+        Catch AdminSqlError2 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError2.Message)
+        End Try
 
     End Sub
 
@@ -2662,7 +2806,35 @@ Public Class Form1
         DBANySykkelType()
     End Sub
 
+    Private Sub BtnDBASTEndre_Click(sender As Object, e As EventArgs) Handles BtnDBASTEndre.Click
+        DBAEndreSykkelType()
+    End Sub
 
+    Private Sub BtnDBAAvdLast_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdLast.Click
+
+        DBALastInnAvdeling()
+
+    End Sub
+
+    Private Sub UKLast_Click(sender As Object, e As EventArgs) Handles UKLast.Click
+        DBALastInnUtstyrskategori()
+    End Sub
+
+    Private Sub BtnDBAUKEndre_Click(sender As Object, e As EventArgs) Handles BtnDBAUKEndre.Click
+        DBAEndreUtstyrskategori()
+    End Sub
+
+    Private Sub BtnDBAAvdEndre_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdEndre.Click
+        DBAEndreAvdeling()
+    End Sub
+
+    Private Sub BtnDBASTLast_Click(sender As Object, e As EventArgs) Handles BtnDBASTLast.Click
+        DBALastInnSykkelType()
+    End Sub
+
+    Private Sub BtnDBASok_Click(sender As Object, e As EventArgs) Handles BtnDBASok.Click
+        DBASokefelt()
+    End Sub
 
     Private Sub BtnDBAUKNy_Click(sender As Object, e As EventArgs) Handles BtnDBAUKNy.Click
         DBANyUtstyrskategori()
