@@ -38,7 +38,7 @@ Partial Class Form1
         Me.LblUtleieSum = New System.Windows.Forms.Label()
         Me.GrpUtleieOrdre = New System.Windows.Forms.GroupBox()
         Me.LvUtleieOrdre = New System.Windows.Forms.ListView()
-        Me.UtleieVareId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtleieVareId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtleieVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtleieRabatt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UtleiePris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -65,9 +65,9 @@ Partial Class Form1
         Me.CboUtlSubkat = New System.Windows.Forms.ComboBox()
         Me.BtnUtlAddVare = New System.Windows.Forms.Button()
         Me.LvUtlVarer = New System.Windows.Forms.ListView()
-        Me.UtlVare = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtlVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtlAntall = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LblUtlSubKat = New System.Windows.Forms.Label()
         Me.CboUtlKat = New System.Windows.Forms.ComboBox()
         Me.LblUtleieKategori = New System.Windows.Forms.Label()
@@ -230,6 +230,15 @@ Partial Class Form1
         Me.LvColLogiDato = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColLogiStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.StatTab = New System.Windows.Forms.TabPage()
+        Me.GrpStaOkonomi = New System.Windows.Forms.GroupBox()
+        Me.LblStaTotalSykkelVerdi = New System.Windows.Forms.Label()
+        Me.LblStaTotalUtstyrVerdi = New System.Windows.Forms.Label()
+        Me.LblStaTotalUtleieVerdi = New System.Windows.Forms.Label()
+        Me.LblStaTotalSumVerdi = New System.Windows.Forms.Label()
+        Me.LblStaTotalSum = New System.Windows.Forms.Label()
+        Me.LblStaTotalUtleie = New System.Windows.Forms.Label()
+        Me.LblStaTotalUtstyr = New System.Windows.Forms.Label()
+        Me.LblStaTotalSykkel = New System.Windows.Forms.Label()
         Me.GrbStaMestLeid = New System.Windows.Forms.GroupBox()
         Me.LvStaMestUtleid = New System.Windows.Forms.ListView()
         Me.ColumnHeader17 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -369,6 +378,11 @@ Partial Class Form1
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.UtlTESTlbl = New System.Windows.Forms.Label()
+        Me.LvColUtlRamme = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlHjulStr = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvVolUtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -391,6 +405,7 @@ Partial Class Form1
         Me.GrpLogistikk.SuspendLayout()
         Me.GrpLogistikkSok.SuspendLayout()
         Me.StatTab.SuspendLayout()
+        Me.GrpStaOkonomi.SuspendLayout()
         Me.GrbStaMestLeid.SuspendLayout()
         Me.GrbStaTilgjengelig.SuspendLayout()
         Me.AdminTab.SuspendLayout()
@@ -405,6 +420,7 @@ Partial Class Form1
         Me.GrpDBAAvdeling.SuspendLayout()
         Me.LoginTab.SuspendLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'HovedTab
@@ -500,19 +516,19 @@ Partial Class Form1
         '
         'BtnUtlAbort
         '
-        Me.BtnUtlAbort.BackColor = System.Drawing.Color.OrangeRed
-        Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.BtnUtlAbort.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtlAbort.Location = New System.Drawing.Point(635, 539)
         Me.BtnUtlAbort.Name = "BtnUtlAbort"
-        Me.BtnUtlAbort.Size = New System.Drawing.Size(90, 79)
+        Me.BtnUtlAbort.Size = New System.Drawing.Size(100, 40)
         Me.BtnUtlAbort.TabIndex = 9
-        Me.BtnUtlAbort.Text = "Avbryt/ Tøm Skjema"
+        Me.BtnUtlAbort.Text = "Avbryt og tøm Skjema"
         Me.BtnUtlAbort.UseVisualStyleBackColor = False
         '
         'GrpUtlRabatt
         '
         Me.GrpUtlRabatt.Controls.Add(Me.LblUtlRabatt)
-        Me.GrpUtlRabatt.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
+        Me.GrpUtlRabatt.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrpUtlRabatt.Location = New System.Drawing.Point(740, 539)
         Me.GrpUtlRabatt.Name = "GrpUtlRabatt"
         Me.GrpUtlRabatt.Size = New System.Drawing.Size(190, 85)
@@ -525,14 +541,14 @@ Partial Class Form1
         Me.LblUtlRabatt.AutoSize = True
         Me.LblUtlRabatt.Location = New System.Drawing.Point(39, 35)
         Me.LblUtlRabatt.Name = "LblUtlRabatt"
-        Me.LblUtlRabatt.Size = New System.Drawing.Size(105, 23)
+        Me.LblUtlRabatt.Size = New System.Drawing.Size(93, 19)
         Me.LblUtlRabatt.TabIndex = 0
         Me.LblUtlRabatt.Text = "-Rabatt Text-"
         '
         'GrpUtleieSum
         '
         Me.GrpUtleieSum.Controls.Add(Me.LblUtleieSum)
-        Me.GrpUtleieSum.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
+        Me.GrpUtleieSum.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrpUtleieSum.Location = New System.Drawing.Point(932, 539)
         Me.GrpUtleieSum.Name = "GrpUtleieSum"
         Me.GrpUtleieSum.Size = New System.Drawing.Size(190, 85)
@@ -545,7 +561,7 @@ Partial Class Form1
         Me.LblUtleieSum.AutoSize = True
         Me.LblUtleieSum.Location = New System.Drawing.Point(35, 35)
         Me.LblUtleieSum.Name = "LblUtleieSum"
-        Me.LblUtleieSum.Size = New System.Drawing.Size(81, 23)
+        Me.LblUtleieSum.Size = New System.Drawing.Size(69, 19)
         Me.LblUtleieSum.TabIndex = 0
         Me.LblUtleieSum.Text = "-Sum Txt-"
         '
@@ -562,7 +578,7 @@ Partial Class Form1
         '
         'LvUtleieOrdre
         '
-        Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.UtleieVareId, Me.UtleieVareNavn, Me.UtleieRabatt, Me.UtleiePris, Me.UtleieDag, Me.UtleieUke, Me.UtlTime, Me.UtlAvdeling})
+        Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtleieVareId, Me.UtleieVareNavn, Me.UtleieRabatt, Me.UtleiePris, Me.UtleieDag, Me.UtleieUke, Me.UtlTime, Me.UtlAvdeling})
         Me.LvUtleieOrdre.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtleieOrdre.Location = New System.Drawing.Point(6, 30)
         Me.LvUtleieOrdre.Name = "LvUtleieOrdre"
@@ -571,10 +587,10 @@ Partial Class Form1
         Me.LvUtleieOrdre.UseCompatibleStateImageBehavior = False
         Me.LvUtleieOrdre.View = System.Windows.Forms.View.Details
         '
-        'UtleieVareId
+        'LvColUtleieVareId
         '
-        Me.UtleieVareId.Text = "Varenummer"
-        Me.UtleieVareId.Width = 90
+        Me.LvColUtleieVareId.Text = "Varenummer"
+        Me.LvColUtleieVareId.Width = 90
         '
         'UtleieVareNavn
         '
@@ -612,17 +628,18 @@ Partial Class Form1
         '
         'BtnUtleieFullfør
         '
-        Me.BtnUtleieFullfør.BackColor = System.Drawing.Color.DodgerBlue
-        Me.BtnUtleieFullfør.Font = New System.Drawing.Font("Calibri", 25.0!, System.Drawing.FontStyle.Bold)
-        Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1128, 539)
+        Me.BtnUtleieFullfør.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtleieFullfør.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1169, 539)
         Me.BtnUtleieFullfør.Name = "BtnUtleieFullfør"
-        Me.BtnUtleieFullfør.Size = New System.Drawing.Size(193, 85)
+        Me.BtnUtleieFullfør.Size = New System.Drawing.Size(143, 79)
         Me.BtnUtleieFullfør.TabIndex = 5
         Me.BtnUtleieFullfør.Text = "Fullfør"
         Me.BtnUtleieFullfør.UseVisualStyleBackColor = False
         '
         'GrpUtleieProdukter
         '
+        Me.GrpUtleieProdukter.Controls.Add(Me.UtlTESTlbl)
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlRamme)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlRamme)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlInfo)
@@ -657,7 +674,7 @@ Partial Class Form1
         Me.CboUtlRamme.Font = New System.Drawing.Font("Calibri", 11.25!)
         Me.CboUtlRamme.FormattingEnabled = True
         Me.CboUtlRamme.Items.AddRange(New Object() {"Teste hardcode"})
-        Me.CboUtlRamme.Location = New System.Drawing.Point(126, 112)
+        Me.CboUtlRamme.Location = New System.Drawing.Point(105, 112)
         Me.CboUtlRamme.Name = "CboUtlRamme"
         Me.CboUtlRamme.Size = New System.Drawing.Size(121, 26)
         Me.CboUtlRamme.TabIndex = 58
@@ -675,24 +692,26 @@ Partial Class Form1
         'LblUtlInfo
         '
         Me.LblUtlInfo.AutoSize = True
-        Me.LblUtlInfo.Location = New System.Drawing.Point(6, 227)
+        Me.LblUtlInfo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtlInfo.Location = New System.Drawing.Point(5, 203)
         Me.LblUtlInfo.Name = "LblUtlInfo"
-        Me.LblUtlInfo.Size = New System.Drawing.Size(181, 23)
+        Me.LblUtlInfo.Size = New System.Drawing.Size(158, 19)
         Me.LblUtlInfo.TabIndex = 55
         Me.LblUtlInfo.Text = "Tilgjengelige modeller:"
         '
         'TxtUtlAntall
         '
-        Me.TxtUtlAntall.Location = New System.Drawing.Point(321, 101)
+        Me.TxtUtlAntall.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtUtlAntall.Location = New System.Drawing.Point(321, 108)
         Me.TxtUtlAntall.Name = "TxtUtlAntall"
-        Me.TxtUtlAntall.Size = New System.Drawing.Size(60, 31)
+        Me.TxtUtlAntall.Size = New System.Drawing.Size(60, 27)
         Me.TxtUtlAntall.TabIndex = 54
         '
         'RdbUtlUke
         '
         Me.RdbUtlUke.AutoSize = True
         Me.RdbUtlUke.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.RdbUtlUke.Location = New System.Drawing.Point(531, 112)
+        Me.RdbUtlUke.Location = New System.Drawing.Point(540, 110)
         Me.RdbUtlUke.Name = "RdbUtlUke"
         Me.RdbUtlUke.Size = New System.Drawing.Size(50, 22)
         Me.RdbUtlUke.TabIndex = 53
@@ -704,7 +723,7 @@ Partial Class Form1
         '
         Me.RdbUtlDager.AutoSize = True
         Me.RdbUtlDager.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.RdbUtlDager.Location = New System.Drawing.Point(467, 112)
+        Me.RdbUtlDager.Location = New System.Drawing.Point(476, 110)
         Me.RdbUtlDager.Name = "RdbUtlDager"
         Me.RdbUtlDager.Size = New System.Drawing.Size(58, 22)
         Me.RdbUtlDager.TabIndex = 52
@@ -716,7 +735,7 @@ Partial Class Form1
         '
         Me.RdbUtlTimer.AutoSize = True
         Me.RdbUtlTimer.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
-        Me.RdbUtlTimer.Location = New System.Drawing.Point(399, 110)
+        Me.RdbUtlTimer.Location = New System.Drawing.Point(408, 110)
         Me.RdbUtlTimer.Name = "RdbUtlTimer"
         Me.RdbUtlTimer.Size = New System.Drawing.Size(62, 22)
         Me.RdbUtlTimer.TabIndex = 51
@@ -728,7 +747,7 @@ Partial Class Form1
         '
         Me.LblUtleieAnt.AutoSize = True
         Me.LblUtleieAnt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtleieAnt.Location = New System.Drawing.Point(262, 114)
+        Me.LblUtleieAnt.Location = New System.Drawing.Point(243, 112)
         Me.LblUtleieAnt.Name = "LblUtleieAnt"
         Me.LblUtleieAnt.Size = New System.Drawing.Size(49, 18)
         Me.LblUtleieAnt.TabIndex = 47
@@ -738,7 +757,7 @@ Partial Class Form1
         '
         Me.LblUtleieTil.AutoSize = True
         Me.LblUtleieTil.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtleieTil.Location = New System.Drawing.Point(253, 67)
+        Me.LblUtleieTil.Location = New System.Drawing.Point(243, 73)
         Me.LblUtleieTil.Name = "LblUtleieTil"
         Me.LblUtleieTil.Size = New System.Drawing.Size(58, 18)
         Me.LblUtleieTil.TabIndex = 46
@@ -748,7 +767,7 @@ Partial Class Form1
         '
         Me.LblUtleieFra.AutoSize = True
         Me.LblUtleieFra.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtleieFra.Location = New System.Drawing.Point(253, 30)
+        Me.LblUtleieFra.Location = New System.Drawing.Point(243, 28)
         Me.LblUtleieFra.Name = "LblUtleieFra"
         Me.LblUtleieFra.Size = New System.Drawing.Size(62, 18)
         Me.LblUtleieFra.TabIndex = 45
@@ -756,16 +775,18 @@ Partial Class Form1
         '
         'DtpUtleieTil
         '
-        Me.DtpUtleieTil.Location = New System.Drawing.Point(321, 54)
+        Me.DtpUtleieTil.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DtpUtleieTil.Location = New System.Drawing.Point(321, 66)
         Me.DtpUtleieTil.Name = "DtpUtleieTil"
-        Me.DtpUtleieTil.Size = New System.Drawing.Size(272, 31)
+        Me.DtpUtleieTil.Size = New System.Drawing.Size(164, 27)
         Me.DtpUtleieTil.TabIndex = 44
         '
         'DtpUtleieFra
         '
-        Me.DtpUtleieFra.Location = New System.Drawing.Point(321, 17)
+        Me.DtpUtleieFra.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DtpUtleieFra.Location = New System.Drawing.Point(321, 21)
         Me.DtpUtleieFra.Name = "DtpUtleieFra"
-        Me.DtpUtleieFra.Size = New System.Drawing.Size(272, 31)
+        Me.DtpUtleieFra.Size = New System.Drawing.Size(164, 27)
         Me.DtpUtleieFra.TabIndex = 43
         '
         'CboUtlRabatt
@@ -774,7 +795,7 @@ Partial Class Form1
         Me.CboUtlRabatt.Font = New System.Drawing.Font("Calibri", 11.25!)
         Me.CboUtlRabatt.FormattingEnabled = True
         Me.CboUtlRabatt.Items.AddRange(New Object() {"5%", "10%", "15%", "20%", "25%", "30%"})
-        Me.CboUtlRabatt.Location = New System.Drawing.Point(340, 216)
+        Me.CboUtlRabatt.Location = New System.Drawing.Point(321, 150)
         Me.CboUtlRabatt.Name = "CboUtlRabatt"
         Me.CboUtlRabatt.Size = New System.Drawing.Size(121, 26)
         Me.CboUtlRabatt.TabIndex = 42
@@ -783,11 +804,11 @@ Partial Class Form1
         '
         Me.LblUtsRabatt.AutoSize = True
         Me.LblUtsRabatt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtsRabatt.Location = New System.Drawing.Point(337, 191)
+        Me.LblUtsRabatt.Location = New System.Drawing.Point(243, 153)
         Me.LblUtsRabatt.Name = "LblUtsRabatt"
-        Me.LblUtsRabatt.Size = New System.Drawing.Size(108, 18)
+        Me.LblUtsRabatt.Size = New System.Drawing.Size(52, 18)
         Me.LblUtsRabatt.TabIndex = 41
-        Me.LblUtsRabatt.Text = "Overstyr Rabatt:"
+        Me.LblUtsRabatt.Text = "Rabatt:"
         '
         'CboUtlSubkat
         '
@@ -796,46 +817,47 @@ Partial Class Form1
         Me.CboUtlSubkat.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboUtlSubkat.FormattingEnabled = True
         Me.CboUtlSubkat.Items.AddRange(New Object() {"Barnesykkel", "Bysykkel", "Downhill", "Elsykkel", "Racer", "Tandem", "Terrengsykkel"})
-        Me.CboUtlSubkat.Location = New System.Drawing.Point(126, 75)
+        Me.CboUtlSubkat.Location = New System.Drawing.Point(105, 75)
         Me.CboUtlSubkat.Name = "CboUtlSubkat"
         Me.CboUtlSubkat.Size = New System.Drawing.Size(121, 26)
         Me.CboUtlSubkat.TabIndex = 40
         '
         'BtnUtlAddVare
         '
-        Me.BtnUtlAddVare.BackColor = System.Drawing.Color.MediumTurquoise
-        Me.BtnUtlAddVare.Location = New System.Drawing.Point(467, 191)
+        Me.BtnUtlAddVare.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtlAddVare.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUtlAddVare.Location = New System.Drawing.Point(105, 150)
         Me.BtnUtlAddVare.Name = "BtnUtlAddVare"
-        Me.BtnUtlAddVare.Size = New System.Drawing.Size(126, 56)
+        Me.BtnUtlAddVare.Size = New System.Drawing.Size(100, 40)
         Me.BtnUtlAddVare.TabIndex = 39
         Me.BtnUtlAddVare.Text = "Søk etter vare"
         Me.BtnUtlAddVare.UseVisualStyleBackColor = False
         '
         'LvUtlVarer
         '
-        Me.LvUtlVarer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.UtlVare, Me.UtlVareNavn, Me.UtlAntall})
+        Me.LvUtlVarer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtlID, Me.LvColUtlVareNavn, Me.LvColUtlRamme, Me.LvColUtlHjulStr, Me.LvColUtlStatus, Me.LvVolUtlAvdeling})
         Me.LvUtlVarer.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LvUtlVarer.Location = New System.Drawing.Point(6, 253)
+        Me.LvUtlVarer.Location = New System.Drawing.Point(6, 229)
         Me.LvUtlVarer.Name = "LvUtlVarer"
-        Me.LvUtlVarer.Size = New System.Drawing.Size(584, 219)
+        Me.LvUtlVarer.Size = New System.Drawing.Size(584, 243)
         Me.LvUtlVarer.TabIndex = 3
         Me.LvUtlVarer.UseCompatibleStateImageBehavior = False
         Me.LvUtlVarer.View = System.Windows.Forms.View.Details
         '
-        'UtlVare
+        'LvColUtlID
         '
-        Me.UtlVare.Text = "Varenummer"
-        Me.UtlVare.Width = 81
+        Me.LvColUtlID.Text = "Vare ID"
+        Me.LvColUtlID.Width = 81
         '
-        'UtlVareNavn
+        'LvColUtlVareNavn
         '
-        Me.UtlVareNavn.Text = "Varenavn"
-        Me.UtlVareNavn.Width = 202
+        Me.LvColUtlVareNavn.Text = "Varenavn"
+        Me.LvColUtlVareNavn.Width = 152
         '
-        'UtlAntall
+        'LvColUtlStatus
         '
-        Me.UtlAntall.Text = "Tilgjengelighet"
-        Me.UtlAntall.Width = 97
+        Me.LvColUtlStatus.Text = "Tilgjengelighet"
+        Me.LvColUtlStatus.Width = 110
         '
         'LblUtlSubKat
         '
@@ -853,7 +875,7 @@ Partial Class Form1
         Me.CboUtlKat.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboUtlKat.FormattingEnabled = True
         Me.CboUtlKat.Items.AddRange(New Object() {"Sykkel", "Utstyr"})
-        Me.CboUtlKat.Location = New System.Drawing.Point(126, 34)
+        Me.CboUtlKat.Location = New System.Drawing.Point(105, 34)
         Me.CboUtlKat.Name = "CboUtlKat"
         Me.CboUtlKat.Size = New System.Drawing.Size(121, 26)
         Me.CboUtlKat.TabIndex = 3
@@ -941,31 +963,33 @@ Partial Class Form1
         '
         'BtnUtleieNyKunde
         '
-        Me.BtnUtleieNyKunde.BackColor = System.Drawing.Color.DarkOrange
-        Me.BtnUtleieNyKunde.Font = New System.Drawing.Font("Calibri", 14.25!)
+        Me.BtnUtleieNyKunde.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtleieNyKunde.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtleieNyKunde.Location = New System.Drawing.Point(181, 90)
         Me.BtnUtleieNyKunde.Name = "BtnUtleieNyKunde"
-        Me.BtnUtleieNyKunde.Size = New System.Drawing.Size(101, 39)
+        Me.BtnUtleieNyKunde.Size = New System.Drawing.Size(100, 40)
         Me.BtnUtleieNyKunde.TabIndex = 3
         Me.BtnUtleieNyKunde.Text = "Ny kunde?"
         Me.BtnUtleieNyKunde.UseVisualStyleBackColor = False
         '
         'BtnUtleieKundeSok
         '
-        Me.BtnUtleieKundeSok.BackColor = System.Drawing.Color.Yellow
-        Me.BtnUtleieKundeSok.Font = New System.Drawing.Font("Calibri", 14.25!)
+        Me.BtnUtleieKundeSok.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtleieKundeSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtleieKundeSok.Location = New System.Drawing.Point(181, 52)
         Me.BtnUtleieKundeSok.Name = "BtnUtleieKundeSok"
-        Me.BtnUtleieKundeSok.Size = New System.Drawing.Size(101, 32)
+        Me.BtnUtleieKundeSok.Size = New System.Drawing.Size(100, 40)
         Me.BtnUtleieKundeSok.TabIndex = 2
-        Me.BtnUtleieKundeSok.Text = "SØK"
+        Me.BtnUtleieKundeSok.Text = "Søk"
         Me.BtnUtleieKundeSok.UseVisualStyleBackColor = False
         '
         'TxtUtleieKundeSok
         '
+        Me.TxtUtleieKundeSok.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtUtleieKundeSok.Location = New System.Drawing.Point(9, 56)
+        Me.TxtUtleieKundeSok.MaxLength = 20
         Me.TxtUtleieKundeSok.Name = "TxtUtleieKundeSok"
-        Me.TxtUtleieKundeSok.Size = New System.Drawing.Size(157, 31)
+        Me.TxtUtleieKundeSok.Size = New System.Drawing.Size(157, 27)
         Me.TxtUtleieKundeSok.TabIndex = 1
         '
         'LblUtleieKundesok
@@ -992,9 +1016,10 @@ Partial Class Form1
         'LblUtleieSelger
         '
         Me.LblUtleieSelger.AutoSize = True
+        Me.LblUtleieSelger.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblUtleieSelger.Location = New System.Drawing.Point(46, 43)
         Me.LblUtleieSelger.Name = "LblUtleieSelger"
-        Me.LblUtleieSelger.Size = New System.Drawing.Size(79, 23)
+        Me.LblUtleieSelger.Size = New System.Drawing.Size(68, 19)
         Me.LblUtleieSelger.TabIndex = 0
         Me.LblUtleieSelger.Text = "SelgerTxt"
         '
@@ -1028,13 +1053,13 @@ Partial Class Form1
         'LblUtleieKlokke
         '
         Me.LblUtleieKlokke.AutoSize = True
-        Me.LblUtleieKlokke.BackColor = System.Drawing.Color.LightBlue
-        Me.LblUtleieKlokke.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.LblUtleieKlokke.BackColor = System.Drawing.Color.Bisque
+        Me.LblUtleieKlokke.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblUtleieKlokke.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.LblUtleieKlokke.Location = New System.Drawing.Point(75, 93)
+        Me.LblUtleieKlokke.Location = New System.Drawing.Point(75, 97)
         Me.LblUtleieKlokke.Name = "LblUtleieKlokke"
         Me.LblUtleieKlokke.Padding = New System.Windows.Forms.Padding(1)
-        Me.LblUtleieKlokke.Size = New System.Drawing.Size(60, 25)
+        Me.LblUtleieKlokke.Size = New System.Drawing.Size(50, 21)
         Me.LblUtleieKlokke.TabIndex = 4
         Me.LblUtleieKlokke.Text = "TidTxt"
         '
@@ -1051,10 +1076,10 @@ Partial Class Form1
         'LblUtleieDatoTxt
         '
         Me.LblUtleieDatoTxt.AutoSize = True
-        Me.LblUtleieDatoTxt.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.LblUtleieDatoTxt.Location = New System.Drawing.Point(75, 62)
+        Me.LblUtleieDatoTxt.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieDatoTxt.Location = New System.Drawing.Point(75, 61)
         Me.LblUtleieDatoTxt.Name = "LblUtleieDatoTxt"
-        Me.LblUtleieDatoTxt.Size = New System.Drawing.Size(55, 18)
+        Me.LblUtleieDatoTxt.Size = New System.Drawing.Size(59, 19)
         Me.LblUtleieDatoTxt.TabIndex = 2
         Me.LblUtleieDatoTxt.Text = "DatoTxt"
         '
@@ -1218,7 +1243,7 @@ Partial Class Form1
         '
         Me.TxtKndEndreTlf.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndEndreTlf.Location = New System.Drawing.Point(123, 240)
-        Me.TxtKndEndreTlf.MaxLength = 15
+        Me.TxtKndEndreTlf.MaxLength = 20
         Me.TxtKndEndreTlf.Name = "TxtKndEndreTlf"
         Me.TxtKndEndreTlf.Size = New System.Drawing.Size(162, 26)
         Me.TxtKndEndreTlf.TabIndex = 16
@@ -1386,7 +1411,7 @@ Partial Class Form1
         '
         Me.TxtKndTlf.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtKndTlf.Location = New System.Drawing.Point(123, 198)
-        Me.TxtKndTlf.MaxLength = 15
+        Me.TxtKndTlf.MaxLength = 20
         Me.TxtKndTlf.Name = "TxtKndTlf"
         Me.TxtKndTlf.Size = New System.Drawing.Size(172, 26)
         Me.TxtKndTlf.TabIndex = 16
@@ -2380,6 +2405,7 @@ Partial Class Form1
         '
         'StatTab
         '
+        Me.StatTab.Controls.Add(Me.GrpStaOkonomi)
         Me.StatTab.Controls.Add(Me.GrbStaMestLeid)
         Me.StatTab.Controls.Add(Me.GrbStaTilgjengelig)
         Me.StatTab.Location = New System.Drawing.Point(4, 32)
@@ -2388,6 +2414,104 @@ Partial Class Form1
         Me.StatTab.TabIndex = 6
         Me.StatTab.Text = "Statistikk"
         Me.StatTab.UseVisualStyleBackColor = True
+        '
+        'GrpStaOkonomi
+        '
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSykkelVerdi)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtstyrVerdi)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtleieVerdi)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSumVerdi)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSum)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtleie)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtstyr)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSykkel)
+        Me.GrpStaOkonomi.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpStaOkonomi.Location = New System.Drawing.Point(928, 3)
+        Me.GrpStaOkonomi.Name = "GrpStaOkonomi"
+        Me.GrpStaOkonomi.Size = New System.Drawing.Size(405, 327)
+        Me.GrpStaOkonomi.TabIndex = 26
+        Me.GrpStaOkonomi.TabStop = False
+        Me.GrpStaOkonomi.Text = "Økonomi"
+        '
+        'LblStaTotalSykkelVerdi
+        '
+        Me.LblStaTotalSykkelVerdi.AutoSize = True
+        Me.LblStaTotalSykkelVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalSykkelVerdi.Location = New System.Drawing.Point(163, 39)
+        Me.LblStaTotalSykkelVerdi.Name = "LblStaTotalSykkelVerdi"
+        Me.LblStaTotalSykkelVerdi.Size = New System.Drawing.Size(10, 13)
+        Me.LblStaTotalSykkelVerdi.TabIndex = 9
+        Me.LblStaTotalSykkelVerdi.Text = "-"
+        '
+        'LblStaTotalUtstyrVerdi
+        '
+        Me.LblStaTotalUtstyrVerdi.AutoSize = True
+        Me.LblStaTotalUtstyrVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalUtstyrVerdi.Location = New System.Drawing.Point(163, 71)
+        Me.LblStaTotalUtstyrVerdi.Name = "LblStaTotalUtstyrVerdi"
+        Me.LblStaTotalUtstyrVerdi.Size = New System.Drawing.Size(10, 13)
+        Me.LblStaTotalUtstyrVerdi.TabIndex = 8
+        Me.LblStaTotalUtstyrVerdi.Text = "-"
+        '
+        'LblStaTotalUtleieVerdi
+        '
+        Me.LblStaTotalUtleieVerdi.AutoSize = True
+        Me.LblStaTotalUtleieVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalUtleieVerdi.Location = New System.Drawing.Point(163, 109)
+        Me.LblStaTotalUtleieVerdi.Name = "LblStaTotalUtleieVerdi"
+        Me.LblStaTotalUtleieVerdi.Size = New System.Drawing.Size(10, 13)
+        Me.LblStaTotalUtleieVerdi.TabIndex = 7
+        Me.LblStaTotalUtleieVerdi.Text = "-"
+        '
+        'LblStaTotalSumVerdi
+        '
+        Me.LblStaTotalSumVerdi.AutoSize = True
+        Me.LblStaTotalSumVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalSumVerdi.Location = New System.Drawing.Point(163, 147)
+        Me.LblStaTotalSumVerdi.Name = "LblStaTotalSumVerdi"
+        Me.LblStaTotalSumVerdi.Size = New System.Drawing.Size(10, 13)
+        Me.LblStaTotalSumVerdi.TabIndex = 6
+        Me.LblStaTotalSumVerdi.Text = "-"
+        '
+        'LblStaTotalSum
+        '
+        Me.LblStaTotalSum.AutoSize = True
+        Me.LblStaTotalSum.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalSum.Location = New System.Drawing.Point(6, 147)
+        Me.LblStaTotalSum.Name = "LblStaTotalSum"
+        Me.LblStaTotalSum.Size = New System.Drawing.Size(39, 18)
+        Me.LblStaTotalSum.TabIndex = 5
+        Me.LblStaTotalSum.Text = "Sum:"
+        '
+        'LblStaTotalUtleie
+        '
+        Me.LblStaTotalUtleie.AutoSize = True
+        Me.LblStaTotalUtleie.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalUtleie.Location = New System.Drawing.Point(6, 109)
+        Me.LblStaTotalUtleie.Name = "LblStaTotalUtleie"
+        Me.LblStaTotalUtleie.Size = New System.Drawing.Size(110, 18)
+        Me.LblStaTotalUtleie.TabIndex = 4
+        Me.LblStaTotalUtleie.Text = "Inntekter utleie:"
+        '
+        'LblStaTotalUtstyr
+        '
+        Me.LblStaTotalUtstyr.AutoSize = True
+        Me.LblStaTotalUtstyr.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalUtstyr.Location = New System.Drawing.Point(6, 71)
+        Me.LblStaTotalUtstyr.Name = "LblStaTotalUtstyr"
+        Me.LblStaTotalUtstyr.Size = New System.Drawing.Size(114, 18)
+        Me.LblStaTotalUtstyr.TabIndex = 3
+        Me.LblStaTotalUtstyr.Text = "Kostnader utstyr:"
+        '
+        'LblStaTotalSykkel
+        '
+        Me.LblStaTotalSykkel.AutoSize = True
+        Me.LblStaTotalSykkel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalSykkel.Location = New System.Drawing.Point(6, 39)
+        Me.LblStaTotalSykkel.Name = "LblStaTotalSykkel"
+        Me.LblStaTotalSykkel.Size = New System.Drawing.Size(117, 18)
+        Me.LblStaTotalSykkel.TabIndex = 2
+        Me.LblStaTotalSykkel.Text = "Kostnader sykkel:"
         '
         'GrbStaMestLeid
         '
@@ -3787,6 +3911,29 @@ Partial Class Form1
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
+        'UtlTESTlbl
+        '
+        Me.UtlTESTlbl.AutoSize = True
+        Me.UtlTESTlbl.Location = New System.Drawing.Point(404, 199)
+        Me.UtlTESTlbl.Name = "UtlTESTlbl"
+        Me.UtlTESTlbl.Size = New System.Drawing.Size(60, 23)
+        Me.UtlTESTlbl.TabIndex = 59
+        Me.UtlTESTlbl.Text = "Label1"
+        '
+        'LvColUtlRamme
+        '
+        Me.LvColUtlRamme.Text = "Ramme"
+        '
+        'LvColUtlHjulStr
+        '
+        Me.LvColUtlHjulStr.Text = "Hjulstørrelse"
+        Me.LvColUtlHjulStr.Width = 100
+        '
+        'LvVolUtlAvdeling
+        '
+        Me.LvVolUtlAvdeling.Text = "Avdeling"
+        Me.LvVolUtlAvdeling.Width = 74
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3830,6 +3977,8 @@ Partial Class Form1
         Me.GrpLogistikk.PerformLayout()
         Me.GrpLogistikkSok.ResumeLayout(False)
         Me.StatTab.ResumeLayout(False)
+        Me.GrpStaOkonomi.ResumeLayout(False)
+        Me.GrpStaOkonomi.PerformLayout()
         Me.GrbStaMestLeid.ResumeLayout(False)
         Me.GrbStaTilgjengelig.ResumeLayout(False)
         Me.GrbStaTilgjengelig.PerformLayout()
@@ -3854,6 +4003,7 @@ Partial Class Form1
         Me.LoginTab.ResumeLayout(False)
         Me.LoginTab.PerformLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4132,7 +4282,7 @@ Partial Class Form1
     Friend WithEvents GrpUtleieSum As GroupBox
     Friend WithEvents GrpUtleieOrdre As GroupBox
     Friend WithEvents LvUtleieOrdre As ListView
-    Friend WithEvents UtleieVareId As ColumnHeader
+    Friend WithEvents LvColUtleieVareId As ColumnHeader
     Friend WithEvents UtleieVareNavn As ColumnHeader
     Friend WithEvents UtleieRabatt As ColumnHeader
     Friend WithEvents UtleiePris As ColumnHeader
@@ -4147,8 +4297,8 @@ Partial Class Form1
     Friend WithEvents GrpUtlRabatt As GroupBox
     Friend WithEvents BtnUtlAddVare As Button
     Friend WithEvents LvUtlVarer As ListView
-    Friend WithEvents UtlVare As ColumnHeader
-    Friend WithEvents UtlVareNavn As ColumnHeader
+    Friend WithEvents LvColUtlID As ColumnHeader
+    Friend WithEvents LvColUtlVareNavn As ColumnHeader
     Friend WithEvents CboUtlSubkat As ComboBox
     Friend WithEvents LblUtsRabatt As Label
     Friend WithEvents UtlRabatt As ColumnHeader
@@ -4165,7 +4315,7 @@ Partial Class Form1
     Friend WithEvents RdbUtlTimer As RadioButton
     Friend WithEvents LblUtleieAnt As Label
     Friend WithEvents LblUtlInfo As Label
-    Friend WithEvents UtlAntall As ColumnHeader
+    Friend WithEvents LvColUtlStatus As ColumnHeader
     Friend WithEvents UtlAvdeling As ColumnHeader
     Friend WithEvents LblUtlRabatt As Label
     Friend WithEvents LblUtleieSum As Label
@@ -4203,4 +4353,18 @@ Partial Class Form1
     Friend WithEvents TxtDBAUkepris As TextBox
     Friend WithEvents TxtDBADognpris As TextBox
     Friend WithEvents TxtDBATimepris As TextBox
+    Friend WithEvents GrpStaOkonomi As GroupBox
+    Friend WithEvents LblStaTotalSykkelVerdi As Label
+    Friend WithEvents LblStaTotalUtstyrVerdi As Label
+    Friend WithEvents LblStaTotalUtleieVerdi As Label
+    Friend WithEvents LblStaTotalSumVerdi As Label
+    Friend WithEvents LblStaTotalSum As Label
+    Friend WithEvents LblStaTotalUtleie As Label
+    Friend WithEvents LblStaTotalUtstyr As Label
+    Friend WithEvents LblStaTotalSykkel As Label
+    Friend WithEvents BindingSource1 As BindingSource
+    Friend WithEvents UtlTESTlbl As Label
+    Friend WithEvents LvColUtlRamme As ColumnHeader
+    Friend WithEvents LvColUtlHjulStr As ColumnHeader
+    Friend WithEvents LvVolUtlAvdeling As ColumnHeader
 End Class
