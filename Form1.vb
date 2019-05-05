@@ -19,8 +19,8 @@ Public Class Form1
     Dim StaTotalUtleieInntekt As Integer = 0
     Dim StaTotalResultat As Integer = 0
     Dim UtlAktivtUtleieID As String
-    Dim UtlSisteUtleieID, UtlSykkelID As String
-    Dim UtlValgteSyklerID As New ArrayList
+    Dim UtlSisteUtleieID, UtlSykkelID, UtlKundeID As String
+    Dim UtlValgteSyklerID, UtlValgtUtstyrID As New ArrayList
 
 
 
@@ -40,7 +40,7 @@ Public Class Form1
         Try
             Tilkobling.Open()
         Catch ex As MySqlException
-            MsgBox(ex)
+            MsgBox("Feil med tilkobling:" & ex.Message)
         End Try
     End Sub
 
@@ -107,7 +107,7 @@ Public Class Form1
             SqlWhereAdapter.Fill(SqlWhereTable)
             Return SqlWhereTable
         Catch SQLex As MySqlException
-            MsgBox("Feil ved søk i database:" & SQLex.Message)
+            MsgBox("Feil ved søk (SELECT) i database:" & SQLex.Message)
 
             Return Nothing
         End Try
@@ -131,7 +131,7 @@ Public Class Form1
             DBDisconnect()
             MsgBox("Registrering vellykket")
         Catch SQLex As MySqlException
-            MsgBox("Feil ved innlegg i database:" & vbNewLine & SQLex.Message)
+            MsgBox("Feil ved innlegg (INSERT) i database:" & vbNewLine & SQLex.Message)
         End Try
     End Sub
 
@@ -151,7 +151,7 @@ Public Class Form1
             SqlCom.ExecuteNonQuery()
             MsgBox("Oppdatering vellykket.")
         Catch SQLex As Exception
-            MsgBox("Feil ved oppdatering database:" & vbNewLine & SQLex.Message)
+            MsgBox("Feil ved oppdatering (UPDATE) database:" & vbNewLine & SQLex.Message)
         End Try
         DBDisconnect()
     End Sub
@@ -168,7 +168,7 @@ Public Class Form1
         Try
             SqlCom.ExecuteNonQuery()
         Catch SQLex As Exception
-            MsgBox("Feil ved sletting i database:" & vbNewLine & SQLex.Message)
+            MsgBox("Feil ved sletting (DELETE) i database:" & vbNewLine & SQLex.Message)
         End Try
         DBDisconnect()
     End Sub
@@ -352,7 +352,9 @@ Public Class Form1
 
     'Utstyr tilgjengelig for valgt sykkel kan legges i combobox som populeres automatisk ?
 
-
+    Private Sub LvUtleieKunde_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LvUtleieKunde.SelectedIndexChanged
+        UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
+    End Sub
 
     Private Sub LvUtlVarer_Sort(sender As Object, e As EventArgs) Handles LvUtlVarer.ColumnClick
         ColumnClick(sender, e)
@@ -446,14 +448,18 @@ Public Class Form1
         Dim UtlAvdelingID, UtlBetalingsType, UtlKundeID, UtlRabattID, UtlPris, UtlDatoSlutt, UtlDatoStart,
             UtlLeieLengde, UtlSykkelKatPris As String
         'Dim UtlLeieLengde As Integer
+        Dim UtlRabattIDDT As DataTable
 
 
 
         'pris = sykkel_kat from sykkel_id , and pris_dag if dag pris_uke if uke etc
         UtlAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", CboUtlAvd.SelectedItem)
-        UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
-        UtlRabattID = CboUtlRabatt.SelectedItem
-        UtlDatoSlutt = UtlDtpUtleieFra.Value  '.ToString("yyyy-MM-dd")  ' ikke legg det til her
+        UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text 'bytt med onclick og lagrei i var
+        UtlRabattIDDT = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
+        For Each r In UtlRabattIDDT.Rows
+            UtlRabattID = r("rabatt_id")
+        Next
+        UtlDatoSlutt = UtlDtpUtleieFra.Value  '.ToString("yyyy-MM-dd")  ' ikke legg dette til her
         UtlDatoStart = UtlDtpUtleieTil.Value  '.ToString("yyyy-MM-dd")
         UtlPris = 0 'antall dager * utleiekategori for sykkel for hver sykkel
 
@@ -476,13 +482,23 @@ Public Class Form1
                 End If
             Next
             'select uke/dag/timepris fra sykkel_kat where id = idvalgt join kategori
-            'antall utstysr * 50kr
+            'antall utstyr * 50kr * antall dager timer etc
             'pris = pris + kat_pris*leietid
         Next
 
+        'Hardkodet pris som bør være en variabel hentet fra database, _ 
+        'med mulighet for endring i programmet som admin.
+        UtlPris += UtlValgtUtstyrID.Count * 50
+        UtlPris = UtlPris * UtlLeieLengde
+
 
         '-----------TEST-------------
-        'UtlTESTlbl.Text = CStr(UtlPris)
+        UtlTESTlbl.Text = CStr(UtlPris)
+
+
+        SQLInsert("utleie", "(avdeling_id, kunde_id, rabatt_id, utleie_pris, utleie_slutt, utleie_start)",
+                  "('" & UtlAvdelingID & "', '" & UtlKundeID & "', '" & UtlRabattID & "', '" & UtlPris & "', '" &
+                  UtlDtpUtleieTil.Value.ToString("yyyy-MM-dd") & "', '" & UtlDtpUtleieFra.Value.ToString("yyyy-MM-dd") & "')")
 
 
         'Henter ID for utleie som er registrert. Til bruk for registrering av sykler tilknyttet utleie i tabellen utleie_sykkel
@@ -503,12 +519,18 @@ Public Class Form1
             MsgBox("Feil ved henting av siste ID:" & vbNewLine & ex.Message)
         End Try
 
-        UtlSisteUtleieID = "1000" ' ----------TEST-----------------
+        'UtlSisteUtleieID = "1000" ' ----------TEST-----------------
 
-        'For i = 0 To UtlValgteSyklerID.Count - 1
-        '    SQLInsert("utleie_sykkel", "(utleie_id, sykkel_id)", "('" & UtlSisteUtleieID & "', '" & UtlValgteSyklerID(i) & "')")
-        '    SQLUpdate("sykler", "sykkel_status='Utleid'", "sykkel_id='" & UtlValgteSyklerID(i) & "'")
-        'Next
+        For i = 0 To UtlValgtUtstyrID.Count - 1
+            SQLInsert("utleie_utstyr", "(utleie_id, utstyr_id)", "('" & UtlSisteUtleieID & "', '" & UtlValgtUtstyrID(i) & "')")
+            SQLUpdate("utstyr", "utstyr_status='Utleid'", "utstyr_id='" & UtlValgteSyklerID(i) & "'")
+        Next
+
+
+        For i = 0 To UtlValgteSyklerID.Count - 1
+            SQLInsert("utleie_sykkel", "(utleie_id, sykkel_id)", "('" & UtlSisteUtleieID & "', '" & UtlValgteSyklerID(i) & "')")
+            SQLUpdate("sykler", "sykkel_status='Utleid'", "sykkel_id='" & UtlValgteSyklerID(i) & "'")
+        Next
 
 
     End Sub
@@ -521,7 +543,17 @@ Public Class Form1
     Private Sub LvUtlVarer_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LvUtlVarer.MouseClick
 
         LvUtleieOrdre.Items.Add(LvUtlVarer.SelectedItems(0).Clone())
-        UtlValgteSyklerID.Add(LvUtlVarer.Items(LvUtlVarer.FocusedItem.Index).SubItems(0).Text)
+        If CboUtlKat.SelectedItem = "Sykkel" Then
+
+            UtlValgteSyklerID.Add(LvUtlVarer.Items(LvUtlVarer.FocusedItem.Index).SubItems(0).Text)
+
+        ElseIf CboUtlKat.SelectedItem = "utstyr" Then
+
+            UtlValgtUtstyrID.Add(LvUtlVarer.Items(LvUtlVarer.FocusedItem.Index).SubItems(0).Text)
+
+        Else
+            MsgBox("velg kategori")
+        End If
 
     End Sub
 
@@ -532,7 +564,7 @@ Public Class Form1
         'UtlTESTlbl.Text = ""
         'Dim testlabel As String
         'For i = 0 To UtlValgteSyklerID.Count - 1
-        '    testlabel = testlabel & " " & UtlValgteSyklerID(i)
+        '    testlabel = testlabel & "Then " & UtlValgteSyklerID(i)
         'Next
         'UtlTESTlbl.Text = testlabel
 
@@ -566,6 +598,8 @@ Public Class Form1
         UtlTESTlbl.Text = UtlFjernID   'TESTLABEL
 
 
+
+        'If Kategori utstyr Then remove from utstyr else from sykkel
         UtlValgteSyklerID.Remove(UtlFjernID)
         LvUtleieOrdre.Items.RemoveAt(LvUtleieOrdre.SelectedIndices(0))
 
@@ -2831,6 +2865,8 @@ Public Class Form1
     Private Sub BtnDBASTLast_Click(sender As Object, e As EventArgs) Handles BtnDBASTLast.Click
         DBALastInnSykkelType()
     End Sub
+
+
 
     Private Sub BtnDBASok_Click(sender As Object, e As EventArgs) Handles BtnDBASok.Click
         DBASokefelt()
