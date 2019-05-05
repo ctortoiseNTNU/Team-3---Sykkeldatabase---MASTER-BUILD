@@ -2636,9 +2636,36 @@ Public Class Form1
 
     Public Sub DBALastInnSykkelType()
 
+        Dim DBASTTable As New DataTable
+        Dim DBASTRow As DataRow
+
+
+        TxtDBATypeID.Text = SQLWhiteWash(TxtDBATypeID.Text)
+
+        DBASTTable = SQLSelect("sykkel_typer", "*", "type_id='" & TxtDBATypeID.Text & "'")
+
+        For Each DBASTRow In DBASTTable.Rows
+            TxtDBAUkepris.Text = DBASTRow("sykkel_kat_ukepris")
+
+            TxtDBATimepris.Text = DBASTRow("sykkel_kat_timepris")
+            TxtDBATypeNavn.Text = DBASTRow("kategori")
+        Next
+
     End Sub
 
     Public Sub DBALastInnUtstyrskategori()
+
+        Dim DBAUKTable As New DataTable
+        Dim DBAUKRow As DataRow
+
+
+        TxtDBAKID.Text = SQLWhiteWash(TxtDBAKID.Text)
+
+        DBAUKTable = SQLSelect("utstyr_kategori", "*", "utstyr_kat_id='" & TxtDBAKID.Text & "'")
+
+        For Each DBAUKRow In DBAUKTable.Rows
+            TxtDBAKnavn.Text = DBAUKRow("utstyr_kat")
+        Next
 
     End Sub
 
@@ -2686,7 +2713,7 @@ Public Class Form1
     End Sub
 
     Private Sub UKLast_Click(sender As Object, e As EventArgs) Handles UKLast.Click
-
+        DBALastInnUtstyrskategori()
     End Sub
 
     Private Sub BtnDBAUKEndre_Click(sender As Object, e As EventArgs) Handles BtnDBAUKEndre.Click
@@ -2695,6 +2722,10 @@ Public Class Form1
 
     Private Sub BtnDBAAvdEndre_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdEndre.Click
         DBAEndreAvdeling()
+    End Sub
+
+    Private Sub BtnDBASTLast_Click(sender As Object, e As EventArgs) Handles BtnDBASTLast.Click
+        DBALastInnSykkelType()
     End Sub
 
     Private Sub BtnDBAUKNy_Click(sender As Object, e As EventArgs) Handles BtnDBAUKNy.Click
