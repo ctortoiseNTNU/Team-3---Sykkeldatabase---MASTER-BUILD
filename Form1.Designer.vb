@@ -230,6 +230,15 @@ Partial Class Form1
         Me.LvColLogiDato = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColLogiStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.StatTab = New System.Windows.Forms.TabPage()
+        Me.GrpStaOkonomi = New System.Windows.Forms.GroupBox()
+        Me.LblStaTotalSykkelVerdi = New System.Windows.Forms.Label()
+        Me.LblStaTotalUtstyrVerdi = New System.Windows.Forms.Label()
+        Me.LblStaTotalUtleieVerdi = New System.Windows.Forms.Label()
+        Me.LblStaTotalSumVerdi = New System.Windows.Forms.Label()
+        Me.LblStaTotalSum = New System.Windows.Forms.Label()
+        Me.LblStaTotalUtleie = New System.Windows.Forms.Label()
+        Me.LblStaTotalUtstyr = New System.Windows.Forms.Label()
+        Me.LblStaTotalSykkel = New System.Windows.Forms.Label()
         Me.GrbStaMestLeid = New System.Windows.Forms.GroupBox()
         Me.LvStaMestUtleid = New System.Windows.Forms.ListView()
         Me.ColumnHeader17 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -369,15 +378,7 @@ Partial Class Form1
         Me.LblLoginTittel = New System.Windows.Forms.Label()
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.GrpStaOkonomi = New System.Windows.Forms.GroupBox()
-        Me.LblStaTotalSykkel = New System.Windows.Forms.Label()
-        Me.LblStaTotalUtstyr = New System.Windows.Forms.Label()
-        Me.LblStaTotalUtleie = New System.Windows.Forms.Label()
-        Me.LblStaTotalSum = New System.Windows.Forms.Label()
-        Me.LblStaTotalSumVerdi = New System.Windows.Forms.Label()
-        Me.LblStaTotalUtleieVerdi = New System.Windows.Forms.Label()
-        Me.LblStaTotalUtstyrVerdi = New System.Windows.Forms.Label()
-        Me.LblStaTotalSykkelVerdi = New System.Windows.Forms.Label()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -400,6 +401,7 @@ Partial Class Form1
         Me.GrpLogistikk.SuspendLayout()
         Me.GrpLogistikkSok.SuspendLayout()
         Me.StatTab.SuspendLayout()
+        Me.GrpStaOkonomi.SuspendLayout()
         Me.GrbStaMestLeid.SuspendLayout()
         Me.GrbStaTilgjengelig.SuspendLayout()
         Me.AdminTab.SuspendLayout()
@@ -414,7 +416,7 @@ Partial Class Form1
         Me.GrpDBAAvdeling.SuspendLayout()
         Me.LoginTab.SuspendLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GrpStaOkonomi.SuspendLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'HovedTab
@@ -2400,6 +2402,104 @@ Partial Class Form1
         Me.StatTab.Text = "Statistikk"
         Me.StatTab.UseVisualStyleBackColor = True
         '
+        'GrpStaOkonomi
+        '
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSykkelVerdi)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtstyrVerdi)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtleieVerdi)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSumVerdi)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSum)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtleie)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtstyr)
+        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSykkel)
+        Me.GrpStaOkonomi.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpStaOkonomi.Location = New System.Drawing.Point(928, 3)
+        Me.GrpStaOkonomi.Name = "GrpStaOkonomi"
+        Me.GrpStaOkonomi.Size = New System.Drawing.Size(405, 327)
+        Me.GrpStaOkonomi.TabIndex = 26
+        Me.GrpStaOkonomi.TabStop = False
+        Me.GrpStaOkonomi.Text = "Økonomi"
+        '
+        'LblStaTotalSykkelVerdi
+        '
+        Me.LblStaTotalSykkelVerdi.AutoSize = True
+        Me.LblStaTotalSykkelVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalSykkelVerdi.Location = New System.Drawing.Point(163, 39)
+        Me.LblStaTotalSykkelVerdi.Name = "LblStaTotalSykkelVerdi"
+        Me.LblStaTotalSykkelVerdi.Size = New System.Drawing.Size(10, 13)
+        Me.LblStaTotalSykkelVerdi.TabIndex = 9
+        Me.LblStaTotalSykkelVerdi.Text = "-"
+        '
+        'LblStaTotalUtstyrVerdi
+        '
+        Me.LblStaTotalUtstyrVerdi.AutoSize = True
+        Me.LblStaTotalUtstyrVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalUtstyrVerdi.Location = New System.Drawing.Point(163, 71)
+        Me.LblStaTotalUtstyrVerdi.Name = "LblStaTotalUtstyrVerdi"
+        Me.LblStaTotalUtstyrVerdi.Size = New System.Drawing.Size(10, 13)
+        Me.LblStaTotalUtstyrVerdi.TabIndex = 8
+        Me.LblStaTotalUtstyrVerdi.Text = "-"
+        '
+        'LblStaTotalUtleieVerdi
+        '
+        Me.LblStaTotalUtleieVerdi.AutoSize = True
+        Me.LblStaTotalUtleieVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalUtleieVerdi.Location = New System.Drawing.Point(163, 109)
+        Me.LblStaTotalUtleieVerdi.Name = "LblStaTotalUtleieVerdi"
+        Me.LblStaTotalUtleieVerdi.Size = New System.Drawing.Size(10, 13)
+        Me.LblStaTotalUtleieVerdi.TabIndex = 7
+        Me.LblStaTotalUtleieVerdi.Text = "-"
+        '
+        'LblStaTotalSumVerdi
+        '
+        Me.LblStaTotalSumVerdi.AutoSize = True
+        Me.LblStaTotalSumVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalSumVerdi.Location = New System.Drawing.Point(163, 147)
+        Me.LblStaTotalSumVerdi.Name = "LblStaTotalSumVerdi"
+        Me.LblStaTotalSumVerdi.Size = New System.Drawing.Size(10, 13)
+        Me.LblStaTotalSumVerdi.TabIndex = 6
+        Me.LblStaTotalSumVerdi.Text = "-"
+        '
+        'LblStaTotalSum
+        '
+        Me.LblStaTotalSum.AutoSize = True
+        Me.LblStaTotalSum.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalSum.Location = New System.Drawing.Point(6, 147)
+        Me.LblStaTotalSum.Name = "LblStaTotalSum"
+        Me.LblStaTotalSum.Size = New System.Drawing.Size(39, 18)
+        Me.LblStaTotalSum.TabIndex = 5
+        Me.LblStaTotalSum.Text = "Sum:"
+        '
+        'LblStaTotalUtleie
+        '
+        Me.LblStaTotalUtleie.AutoSize = True
+        Me.LblStaTotalUtleie.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalUtleie.Location = New System.Drawing.Point(6, 109)
+        Me.LblStaTotalUtleie.Name = "LblStaTotalUtleie"
+        Me.LblStaTotalUtleie.Size = New System.Drawing.Size(110, 18)
+        Me.LblStaTotalUtleie.TabIndex = 4
+        Me.LblStaTotalUtleie.Text = "Inntekter utleie:"
+        '
+        'LblStaTotalUtstyr
+        '
+        Me.LblStaTotalUtstyr.AutoSize = True
+        Me.LblStaTotalUtstyr.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalUtstyr.Location = New System.Drawing.Point(6, 71)
+        Me.LblStaTotalUtstyr.Name = "LblStaTotalUtstyr"
+        Me.LblStaTotalUtstyr.Size = New System.Drawing.Size(114, 18)
+        Me.LblStaTotalUtstyr.TabIndex = 3
+        Me.LblStaTotalUtstyr.Text = "Kostnader utstyr:"
+        '
+        'LblStaTotalSykkel
+        '
+        Me.LblStaTotalSykkel.AutoSize = True
+        Me.LblStaTotalSykkel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStaTotalSykkel.Location = New System.Drawing.Point(6, 39)
+        Me.LblStaTotalSykkel.Name = "LblStaTotalSykkel"
+        Me.LblStaTotalSykkel.Size = New System.Drawing.Size(117, 18)
+        Me.LblStaTotalSykkel.TabIndex = 2
+        Me.LblStaTotalSykkel.Text = "Kostnader sykkel:"
+        '
         'GrbStaMestLeid
         '
         Me.GrbStaMestLeid.Controls.Add(Me.LvStaMestUtleid)
@@ -3798,104 +3898,6 @@ Partial Class Form1
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
-        'GrpStaOkonomi
-        '
-        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSykkelVerdi)
-        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtstyrVerdi)
-        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtleieVerdi)
-        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSumVerdi)
-        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSum)
-        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtleie)
-        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalUtstyr)
-        Me.GrpStaOkonomi.Controls.Add(Me.LblStaTotalSykkel)
-        Me.GrpStaOkonomi.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpStaOkonomi.Location = New System.Drawing.Point(928, 3)
-        Me.GrpStaOkonomi.Name = "GrpStaOkonomi"
-        Me.GrpStaOkonomi.Size = New System.Drawing.Size(405, 327)
-        Me.GrpStaOkonomi.TabIndex = 26
-        Me.GrpStaOkonomi.TabStop = False
-        Me.GrpStaOkonomi.Text = "Økonomi"
-        '
-        'LblStaTotalSykkel
-        '
-        Me.LblStaTotalSykkel.AutoSize = True
-        Me.LblStaTotalSykkel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStaTotalSykkel.Location = New System.Drawing.Point(6, 39)
-        Me.LblStaTotalSykkel.Name = "LblStaTotalSykkel"
-        Me.LblStaTotalSykkel.Size = New System.Drawing.Size(117, 18)
-        Me.LblStaTotalSykkel.TabIndex = 2
-        Me.LblStaTotalSykkel.Text = "Kostnader sykkel:"
-        '
-        'LblStaTotalUtstyr
-        '
-        Me.LblStaTotalUtstyr.AutoSize = True
-        Me.LblStaTotalUtstyr.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStaTotalUtstyr.Location = New System.Drawing.Point(6, 71)
-        Me.LblStaTotalUtstyr.Name = "LblStaTotalUtstyr"
-        Me.LblStaTotalUtstyr.Size = New System.Drawing.Size(114, 18)
-        Me.LblStaTotalUtstyr.TabIndex = 3
-        Me.LblStaTotalUtstyr.Text = "Kostnader utstyr:"
-        '
-        'LblStaTotalUtleie
-        '
-        Me.LblStaTotalUtleie.AutoSize = True
-        Me.LblStaTotalUtleie.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStaTotalUtleie.Location = New System.Drawing.Point(6, 109)
-        Me.LblStaTotalUtleie.Name = "LblStaTotalUtleie"
-        Me.LblStaTotalUtleie.Size = New System.Drawing.Size(110, 18)
-        Me.LblStaTotalUtleie.TabIndex = 4
-        Me.LblStaTotalUtleie.Text = "Inntekter utleie:"
-        '
-        'LblStaTotalSum
-        '
-        Me.LblStaTotalSum.AutoSize = True
-        Me.LblStaTotalSum.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStaTotalSum.Location = New System.Drawing.Point(6, 147)
-        Me.LblStaTotalSum.Name = "LblStaTotalSum"
-        Me.LblStaTotalSum.Size = New System.Drawing.Size(39, 18)
-        Me.LblStaTotalSum.TabIndex = 5
-        Me.LblStaTotalSum.Text = "Sum:"
-        '
-        'LblStaTotalSumVerdi
-        '
-        Me.LblStaTotalSumVerdi.AutoSize = True
-        Me.LblStaTotalSumVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStaTotalSumVerdi.Location = New System.Drawing.Point(163, 147)
-        Me.LblStaTotalSumVerdi.Name = "LblStaTotalSumVerdi"
-        Me.LblStaTotalSumVerdi.Size = New System.Drawing.Size(10, 13)
-        Me.LblStaTotalSumVerdi.TabIndex = 6
-        Me.LblStaTotalSumVerdi.Text = "-"
-        '
-        'LblStaTotalUtleieVerdi
-        '
-        Me.LblStaTotalUtleieVerdi.AutoSize = True
-        Me.LblStaTotalUtleieVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStaTotalUtleieVerdi.Location = New System.Drawing.Point(163, 109)
-        Me.LblStaTotalUtleieVerdi.Name = "LblStaTotalUtleieVerdi"
-        Me.LblStaTotalUtleieVerdi.Size = New System.Drawing.Size(10, 13)
-        Me.LblStaTotalUtleieVerdi.TabIndex = 7
-        Me.LblStaTotalUtleieVerdi.Text = "-"
-        '
-        'LblStaTotalUtstyrVerdi
-        '
-        Me.LblStaTotalUtstyrVerdi.AutoSize = True
-        Me.LblStaTotalUtstyrVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStaTotalUtstyrVerdi.Location = New System.Drawing.Point(163, 71)
-        Me.LblStaTotalUtstyrVerdi.Name = "LblStaTotalUtstyrVerdi"
-        Me.LblStaTotalUtstyrVerdi.Size = New System.Drawing.Size(10, 13)
-        Me.LblStaTotalUtstyrVerdi.TabIndex = 8
-        Me.LblStaTotalUtstyrVerdi.Text = "-"
-        '
-        'LblStaTotalSykkelVerdi
-        '
-        Me.LblStaTotalSykkelVerdi.AutoSize = True
-        Me.LblStaTotalSykkelVerdi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStaTotalSykkelVerdi.Location = New System.Drawing.Point(163, 39)
-        Me.LblStaTotalSykkelVerdi.Name = "LblStaTotalSykkelVerdi"
-        Me.LblStaTotalSykkelVerdi.Size = New System.Drawing.Size(10, 13)
-        Me.LblStaTotalSykkelVerdi.TabIndex = 9
-        Me.LblStaTotalSykkelVerdi.Text = "-"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3939,6 +3941,8 @@ Partial Class Form1
         Me.GrpLogistikk.PerformLayout()
         Me.GrpLogistikkSok.ResumeLayout(False)
         Me.StatTab.ResumeLayout(False)
+        Me.GrpStaOkonomi.ResumeLayout(False)
+        Me.GrpStaOkonomi.PerformLayout()
         Me.GrbStaMestLeid.ResumeLayout(False)
         Me.GrbStaTilgjengelig.ResumeLayout(False)
         Me.GrbStaTilgjengelig.PerformLayout()
@@ -3963,8 +3967,7 @@ Partial Class Form1
         Me.LoginTab.ResumeLayout(False)
         Me.LoginTab.PerformLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GrpStaOkonomi.ResumeLayout(False)
-        Me.GrpStaOkonomi.PerformLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4323,4 +4326,5 @@ Partial Class Form1
     Friend WithEvents LblStaTotalUtleie As Label
     Friend WithEvents LblStaTotalUtstyr As Label
     Friend WithEvents LblStaTotalSykkel As Label
+    Friend WithEvents BindingSource1 As BindingSource
 End Class

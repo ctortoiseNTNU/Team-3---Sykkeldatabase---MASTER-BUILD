@@ -17,6 +17,9 @@ Public Class Form1
     Dim StaTotalUtstyrKostnad As Integer = 0
     Dim StaTotalSykkelKostnad As Integer = 0
     Dim StaTotalUtleieInntekt As Integer = 0
+    Dim StaTotalResultat As Integer = 0
+
+
 #End Region
 
 
@@ -293,7 +296,9 @@ Public Class Form1
                 StaMestPopulaer()
                 StaTotalSykkelPris()
                 StaTotalUtsyrPris()
+                StaTotalUtleie()
                 StaTotalAvanse()
+
 
             Case 7 'Bestemmer det som skjer etter man har valgt Adminmeny.
                 MsgBox("AdminMeny")
@@ -342,6 +347,16 @@ Public Class Form1
     'Husk kode kommentarer.
 
     'Utstyr tilgjengelig for valgt sykkel kan legges i combobox som populeres automatisk ?
+
+    Private Sub LvUtlVarer_Sort(sender As Object, e As EventArgs) Handles LvUtlVarer.ColumnClick
+        ColumnClick(sender, e)
+    End Sub
+
+    Private Sub LvUtleieOrdre_Sort(sender As Object, e As EventArgs) Handles LvUtleieOrdre.ColumnClick
+        ColumnClick(sender, e)
+    End Sub
+
+
 
     'prosedyre for reset
     Private Sub UtleieTomFelt()
@@ -712,6 +727,10 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Kunde. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
+    Private Sub LvKndSok_Sort(sender As Object, e As EventArgs) Handles LvKndSok.ColumnClick
+        ColumnClick(sender, e)
+    End Sub
+
     Private Sub TxtKndTlf_TextChanged(sender As Object, e As KeyPressEventArgs) Handles TxtKndTlf.KeyPress
         If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
@@ -892,6 +911,10 @@ Public Class Form1
     'Her plasseres kode som er relevant til Inventar Tab.
     'Variabler som brukes her skal begynne med Inv. Dette er for å unngå klasj.
     'Husk kode kommentarer.
+
+    Private Sub LvInvSok_Sort(sender As Object, e As EventArgs) Handles LvInvSok.ColumnClick
+        ColumnClick(sender, e)
+    End Sub
 
 
     'Prosedyre for tømming av alle felt i skjema
@@ -1722,50 +1745,87 @@ Public Class Form1
     'Husk kode kommentarer.
 
 
+    Private Sub LvStaTilgjengelig_Sort(sender As Object, e As EventArgs) Handles LvStaTilgjengelig.ColumnClick
+        ColumnClick(sender, e)
+    End Sub
+
+    Private Sub LvStaMestUtleid_Sort(sender As Object, e As EventArgs) Handles LvStaMestUtleid.ColumnClick
+        ColumnClick(sender, e)
+    End Sub
+
+
+    Dim sortColumn As Integer = -1
+
+    Private Sub ColumnClick(sender As Object, e As ColumnClickEventArgs)
+
+        ' If current column is not the previously clicked column
+        ' Add
+        If Not e.Column = sortColumn Then
+
+            ' Set the sort column to the new column
+            sortColumn = e.Column
+
+            'Default to ascending sort order
+            sender.Sorting = SortOrder.Ascending
+
+        Else
+
+            'Flip the sort order
+            If sender.Sorting = SortOrder.Ascending Then
+                sender.Sorting = SortOrder.Descending
+            Else
+                sender.Sorting = SortOrder.Ascending
+            End If
+        End If
+
+        'Set the ListviewItemSorter property to a new ListviewItemComparer object
+        sender.ListViewItemSorter = New ListViewItemComparer(e.Column, sender.Sorting)
+
+        ' Call the sort method to manually sort
+        sender.Sort()
+
+    End Sub
+
+
+
+
+
+
 
     Private Sub StaTotalSykkelPris()
-
         Dim StaTotalSykkelKostnadDT As DataTable
-        'Dim StaTotalSykkelKostnad As String
-
         StaTotalSykkelKostnadDT = SQLSelect("sykler", "SUM(sykkel_pris)", "1")
         For Each r In StaTotalSykkelKostnadDT.Rows
             StaTotalSykkelKostnad = r("SUM(sykkel_pris)")
         Next
-
         LblStaTotalSykkelVerdi.Text = CStr(StaTotalSykkelKostnad) & " Kr"
     End Sub
 
     Private Sub StaTotalUtsyrPris()
-
         Dim StaTotalUtstyrKostnadDT As DataTable
-        'Dim StaTotalUtstyrKostnad As String
-
         StaTotalUtstyrKostnadDT = SQLSelect("utstyr", "SUM(utstyr_pris)", "1")
         For Each r In StaTotalUtstyrKostnadDT.Rows
             StaTotalUtstyrKostnad = r("SUM(utstyr_pris)")
         Next
-
         LblStaTotalUtstyrVerdi.Text = CStr(StaTotalUtstyrKostnad) & " Kr"
     End Sub
 
-    'Private Sub StaTotalUtleieInntekt()
 
-    '    Dim StaTotalUtleieInntektDT As DataTable
-    '    Dim StaTotalUtleieInntekt As String
+    Private Sub StaTotalUtleie()
+        Dim StaTotalUtleieInntektDT As DataTable
+        StaTotalUtleieInntektDT = SQLSelect("utleie", "SUM(utleie_pris)", "1")
+        For Each r In StaTotalUtleieInntektDT.Rows
+            StaTotalUtleieInntekt = r("sum(utleie_pris)")
+        Next
+        LblStaTotalUtleieVerdi.Text = CStr(StaTotalUtleieInntekt) & " Kr"
+    End Sub
 
-    '    StaTotalUtleieInntektDT = SQLSelect("utleie", "SUM(utleie_pris)", "1")
-    '    For Each r In StaTotalUtleieInntektDT.Rows
-    '        StaTotalUtleieInntekt = r("sum(utleie_pris)")
-    '    Next
-
-    '    LblStaTotalUtstyrVerdi.Text = StaTotalUtleieInntekt
-    'End Sub
 
     Private Sub StaTotalAvanse()
-        Dim StaTotalResultat As Integer = StaTotalUtleieInntekt - StaTotalUtstyrKostnad - StaTotalSykkelKostnad
+        StaTotalResultat = StaTotalUtleieInntekt - (StaTotalUtstyrKostnad + StaTotalSykkelKostnad)
         LblStaTotalSumVerdi.Text = CStr(StaTotalResultat) & " Kr"
     End Sub
+
 
     Private Sub BtnStaSok_Click(sender As Object, e As EventArgs) Handles BtnStaSok.Click
 
@@ -1911,6 +1971,11 @@ Public Class Form1
     'Vi henter først AvdelingsIDen til Avdelingen som har blitt valgt vha MySQL som leser Avd_navn og skriver tilsvarende avdelings id til variabel.
     'Da kjører vi insert sql i 3 stadier - insert bruker, insert passord, update bruker. Dette er slik at vi får lenket opp passord fk og bruker fk med hverandre
     'ANB1 : Insert ny bruker ANB2 : Insert ny passord ANB3 : Update bruker for å knytte passord fk ANB4 : laster inn tilsvarende avdelings id.
+
+    Private Sub LvAdminBS_Sort(sender As Object, e As EventArgs) Handles LvAdminBS.ColumnClick
+        ColumnClick(sender, e)
+    End Sub
+
     Private Sub AdminNyBruker()
         Try
             DBConnect()
@@ -2422,6 +2487,12 @@ Public Class Form1
 
 #Region "AdminDB"
 
+
+    Private Sub LvAdminListview2_Sort(sender As Object, e As EventArgs) Handles ListView2.ColumnClick
+        ColumnClick(sender, e)
+    End Sub
+
+
     Public Sub DBANyAvdeling()
         Dim DBALandTable As New DataTable
         Dim DBALandRow As DataRow
@@ -2493,5 +2564,10 @@ Public Class Form1
     Private Sub BtnDBAUKNy_Click(sender As Object, e As EventArgs) Handles BtnDBAUKNy.Click
         DBANyUtstyrskategori()
     End Sub
+
+
+
+
+
 #End Region
 End Class
