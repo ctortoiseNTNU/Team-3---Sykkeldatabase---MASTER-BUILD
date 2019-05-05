@@ -2696,16 +2696,23 @@ Public Class Form1
 
     Private Sub DBASokefelt()
 
-        Dim DBASoekefelt, DBASoekekategori, DBATableChoose As String
+        Dim DBASoekefelt, DBASoekekategori, DBATableChoose, DBAIDChoose, DBANameChoose As String
         DBASoekefelt = SQLWhiteWash(TxtDBASokefelt.Text)
         DBASoekekategori = CboDBASokeetter.Text
 
-        If DBASoekekategori = "avdeling_id" Or "avd_navn" Or "avd_adresse" Or "landsdel" Then
+
+        If DBASoekekategori = "avdeling_id" Or DBASoekekategori = "avd_navn" Or DBASoekekategori = "avd_adresse" Or DBASoekekategori = "landsdel" Then
             DBATableChoose = "avdeling"
-        ElseIf DBASoekekategori = "type_id" Or "sykkelkategori" Then
+            DBAIDChoose = "avdeling_id"
+            DBANameChoose = "avd_navn"
+        ElseIf DBASoekekategori = "type_id" Or DBASoekekategori = "sykkelkategori" Then
             DBATableChoose = "sykkel_typer"
+            DBAIDChoose = "type_id"
+            DBANameChoose = "sykkelkategori"
         Else
             DBATableChoose = "utstyr_kategori"
+            DBAIDChoose = "utstyr_kat_id"
+            DBANameChoose = "utstyr_kat"
         End If
 
         Try
@@ -2719,12 +2726,9 @@ Public Class Form1
             Dim DBARow As DataRow
 
             LvAdminBS.Items.Clear()
-            For Each AdminRow In AdminSearchTable.Rows
-                AdminBSbruker_id = AdminRow("bruker_id")
-                AdminBSfornavn = AdminRow("fornavn")
-                AdminBSetternavn = AdminRow("etternavn")
-                AdminBSsoekefelt = AdminRow(AdminSoekekategori)
-                LvAdminBS.Items.Add(New ListViewItem({AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt}))
+            For Each DBARow In DBASearchTable.Rows
+
+                LvDBASokboks.Items.Add(New ListViewItem({DBARow(DBAIDChoose), DBARow(DBANameChoose), DBARow(DBASoekekategori)}))
             Next
         Catch AdminSqlError2 As MySqlException
             MsgBox("Man får ikke koble til databasen: " & AdminSqlError2.Message)
@@ -2764,6 +2768,10 @@ Public Class Form1
 
     Private Sub BtnDBASTLast_Click(sender As Object, e As EventArgs) Handles BtnDBASTLast.Click
         DBALastInnSykkelType()
+    End Sub
+
+    Private Sub BtnDBASok_Click(sender As Object, e As EventArgs) Handles BtnDBASok.Click
+        DBASokefelt()
     End Sub
 
     Private Sub BtnDBAUKNy_Click(sender As Object, e As EventArgs) Handles BtnDBAUKNy.Click
