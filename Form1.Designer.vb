@@ -327,7 +327,7 @@ Partial Class Form1
         Me.LblAdminNBBID = New System.Windows.Forms.Label()
         Me.DBAdminTab = New System.Windows.Forms.TabPage()
         Me.GrpDBADBS = New System.Windows.Forms.GroupBox()
-        Me.ListView2 = New System.Windows.Forms.ListView()
+        Me.LvDBASokboks = New System.Windows.Forms.ListView()
         Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader10 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader12 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -3377,7 +3377,7 @@ Partial Class Form1
         '
         'GrpDBADBS
         '
-        Me.GrpDBADBS.Controls.Add(Me.ListView2)
+        Me.GrpDBADBS.Controls.Add(Me.LvDBASokboks)
         Me.GrpDBADBS.Controls.Add(Me.BtnDBASok)
         Me.GrpDBADBS.Controls.Add(Me.CboDBASokeetter)
         Me.GrpDBADBS.Controls.Add(Me.LblDBASoketter)
@@ -3391,16 +3391,16 @@ Partial Class Form1
         Me.GrpDBADBS.TabStop = False
         Me.GrpDBADBS.Text = "DB Søk"
         '
-        'ListView2
+        'LvDBASokboks
         '
-        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader9, Me.ColumnHeader10, Me.ColumnHeader12})
-        Me.ListView2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView2.Location = New System.Drawing.Point(0, 114)
-        Me.ListView2.Name = "ListView2"
-        Me.ListView2.Size = New System.Drawing.Size(482, 485)
-        Me.ListView2.TabIndex = 29
-        Me.ListView2.UseCompatibleStateImageBehavior = False
-        Me.ListView2.View = System.Windows.Forms.View.Details
+        Me.LvDBASokboks.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader9, Me.ColumnHeader10, Me.ColumnHeader12})
+        Me.LvDBASokboks.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvDBASokboks.Location = New System.Drawing.Point(0, 114)
+        Me.LvDBASokboks.Name = "LvDBASokboks"
+        Me.LvDBASokboks.Size = New System.Drawing.Size(482, 485)
+        Me.LvDBASokboks.TabIndex = 29
+        Me.LvDBASokboks.UseCompatibleStateImageBehavior = False
+        Me.LvDBASokboks.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader9
         '
@@ -4225,7 +4225,7 @@ Partial Class Form1
     Friend WithEvents GrpDBANyUK As GroupBox
     Friend WithEvents GrpDBANyST As GroupBox
     Friend WithEvents GrpDBADBS As GroupBox
-    Friend WithEvents ListView2 As ListView
+    Friend WithEvents LvDBASokboks As ListView
     Friend WithEvents ColumnHeader9 As ColumnHeader
     Friend WithEvents ColumnHeader10 As ColumnHeader
     Friend WithEvents ColumnHeader12 As ColumnHeader

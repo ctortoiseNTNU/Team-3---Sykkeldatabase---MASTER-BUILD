@@ -2527,7 +2527,7 @@ Public Class Form1
 #Region "AdminDB"
 
 
-    Private Sub LvAdminListview2_Sort(sender As Object, e As EventArgs) Handles ListView2.ColumnClick
+    Private Sub LvAdminListview2_Sort(sender As Object, e As EventArgs) Handles LvDBASokboks.ColumnClick
         ColumnClick(sender, e)
     End Sub
 
@@ -2696,20 +2696,28 @@ Public Class Form1
 
     Private Sub DBASokefelt()
 
-        Dim DBASoekefelt, DBASoekekategori As String
+        Dim DBASoekefelt, DBASoekekategori, DBATableChoose As String
         DBASoekefelt = SQLWhiteWash(TxtDBASokefelt.Text)
         DBASoekekategori = CboDBASokeetter.Text
 
+        If DBASoekekategori = "avdeling_id" Or "avd_navn" Or "avd_adresse" Or "landsdel" Then
+            DBATableChoose = "avdeling"
+        ElseIf DBASoekekategori = "type_id" Or "sykkelkategori" Then
+            DBATableChoose = "sykkel_typer"
+        Else
+            DBATableChoose = "utstyr_kategori"
+        End If
+
         Try
             DBConnect()
-            Dim AdminBrukerSearch As New MySqlCommand("SELECT * FROM brukere WHERE " & AdminSoekekategori & " LIKE '%" & AdminSoekefelt & "%'", Tilkobling)
-            Dim AdminSearchAdapter As New MySqlDataAdapter
-            Dim AdminSearchTable As New DataTable
-            AdminSearchAdapter.SelectCommand = AdminBrukerSearch
-            AdminSearchAdapter.Fill(AdminSearchTable)
+            Dim DBASearch As New MySqlCommand("SELECT * FROM " & DBATableChoose & " WHERE " & DBASoekekategori & " LIKE '%" & DBASoekefelt & "%'", Tilkobling)
+            Dim DBASearchAdapter As New MySqlDataAdapter
+            Dim DBASearchTable As New DataTable
+            DBASearchAdapter.SelectCommand = DBASearch
+            DBASearchAdapter.Fill(DBASearchTable)
             DBDisconnect()
-            Dim AdminRow As DataRow
-            Dim AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt As String
+            Dim DBARow As DataRow
+
             LvAdminBS.Items.Clear()
             For Each AdminRow In AdminSearchTable.Rows
                 AdminBSbruker_id = AdminRow("bruker_id")
