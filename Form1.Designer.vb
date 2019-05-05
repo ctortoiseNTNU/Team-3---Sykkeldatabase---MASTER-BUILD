@@ -48,6 +48,8 @@ Partial Class Form1
         Me.UtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.UtlTESTlbl = New System.Windows.Forms.Label()
         Me.CboUtlRamme = New System.Windows.Forms.ComboBox()
         Me.LblUtlRamme = New System.Windows.Forms.Label()
@@ -495,7 +497,7 @@ Partial Class Form1
         '
         'UtleieTab
         '
-        Me.UtleieTab.BackColor = System.Drawing.Color.Bisque
+        Me.UtleieTab.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.UtleieTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.UtleieTab.Controls.Add(Me.BtnUtlAbort)
         Me.UtleieTab.Controls.Add(Me.GrpUtlRabatt)
@@ -518,9 +520,9 @@ Partial Class Form1
         '
         Me.BtnUtlAbort.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUtlAbort.Location = New System.Drawing.Point(635, 539)
+        Me.BtnUtlAbort.Location = New System.Drawing.Point(632, 559)
         Me.BtnUtlAbort.Name = "BtnUtlAbort"
-        Me.BtnUtlAbort.Size = New System.Drawing.Size(100, 40)
+        Me.BtnUtlAbort.Size = New System.Drawing.Size(100, 50)
         Me.BtnUtlAbort.TabIndex = 9
         Me.BtnUtlAbort.Text = "Avbryt og tøm Skjema"
         Me.BtnUtlAbort.UseVisualStyleBackColor = False
@@ -529,7 +531,7 @@ Partial Class Form1
         '
         Me.GrpUtlRabatt.Controls.Add(Me.LblUtlRabatt)
         Me.GrpUtlRabatt.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpUtlRabatt.Location = New System.Drawing.Point(740, 539)
+        Me.GrpUtlRabatt.Location = New System.Drawing.Point(766, 539)
         Me.GrpUtlRabatt.Name = "GrpUtlRabatt"
         Me.GrpUtlRabatt.Size = New System.Drawing.Size(190, 85)
         Me.GrpUtlRabatt.TabIndex = 8
@@ -549,7 +551,7 @@ Partial Class Form1
         '
         Me.GrpUtleieSum.Controls.Add(Me.LblUtleieSum)
         Me.GrpUtleieSum.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpUtleieSum.Location = New System.Drawing.Point(932, 539)
+        Me.GrpUtleieSum.Location = New System.Drawing.Point(990, 539)
         Me.GrpUtleieSum.Name = "GrpUtleieSum"
         Me.GrpUtleieSum.Size = New System.Drawing.Size(190, 85)
         Me.GrpUtleieSum.TabIndex = 7
@@ -589,7 +591,7 @@ Partial Class Form1
         '
         'LvColUtleieVareId
         '
-        Me.LvColUtleieVareId.Text = "Varenummer"
+        Me.LvColUtleieVareId.Text = "Vare ID"
         Me.LvColUtleieVareId.Width = 90
         '
         'UtleieVareNavn
@@ -630,15 +632,17 @@ Partial Class Form1
         '
         Me.BtnUtleieFullfør.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnUtleieFullfør.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1169, 539)
+        Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1214, 557)
         Me.BtnUtleieFullfør.Name = "BtnUtleieFullfør"
-        Me.BtnUtleieFullfør.Size = New System.Drawing.Size(143, 79)
+        Me.BtnUtleieFullfør.Size = New System.Drawing.Size(100, 50)
         Me.BtnUtleieFullfør.TabIndex = 5
         Me.BtnUtleieFullfør.Text = "Fullfør"
         Me.BtnUtleieFullfør.UseVisualStyleBackColor = False
         '
         'GrpUtleieProdukter
         '
+        Me.GrpUtleieProdukter.Controls.Add(Me.Label7)
+        Me.GrpUtleieProdukter.Controls.Add(Me.Label1)
         Me.GrpUtleieProdukter.Controls.Add(Me.UtlTESTlbl)
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlRamme)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlRamme)
@@ -668,14 +672,32 @@ Partial Class Form1
         Me.GrpUtleieProdukter.TabStop = False
         Me.GrpUtleieProdukter.Text = "Produkter:"
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(458, 200)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(60, 23)
+        Me.Label7.TabIndex = 61
+        Me.Label7.Text = "Label7"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(350, 199)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(60, 23)
+        Me.Label1.TabIndex = 60
+        Me.Label1.Text = "Label1"
+        '
         'UtlTESTlbl
         '
         Me.UtlTESTlbl.AutoSize = True
-        Me.UtlTESTlbl.Location = New System.Drawing.Point(404, 199)
+        Me.UtlTESTlbl.Location = New System.Drawing.Point(262, 199)
         Me.UtlTESTlbl.Name = "UtlTESTlbl"
-        Me.UtlTESTlbl.Size = New System.Drawing.Size(60, 23)
+        Me.UtlTESTlbl.Size = New System.Drawing.Size(39, 23)
         Me.UtlTESTlbl.TabIndex = 59
-        Me.UtlTESTlbl.Text = "Label1"
+        Me.UtlTESTlbl.Text = "test"
         '
         'CboUtlRamme
         '
@@ -712,6 +734,7 @@ Partial Class Form1
         '
         Me.TxtUtlAntall.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtUtlAntall.Location = New System.Drawing.Point(321, 108)
+        Me.TxtUtlAntall.MaxLength = 3
         Me.TxtUtlAntall.Name = "TxtUtlAntall"
         Me.TxtUtlAntall.Size = New System.Drawing.Size(60, 27)
         Me.TxtUtlAntall.TabIndex = 54
@@ -1076,7 +1099,7 @@ Partial Class Form1
         'LblUtleieKlokke
         '
         Me.LblUtleieKlokke.AutoSize = True
-        Me.LblUtleieKlokke.BackColor = System.Drawing.Color.Bisque
+        Me.LblUtleieKlokke.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.LblUtleieKlokke.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblUtleieKlokke.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.LblUtleieKlokke.Location = New System.Drawing.Point(75, 97)
@@ -4367,4 +4390,6 @@ Partial Class Form1
     Friend WithEvents LvColUtlRamme As ColumnHeader
     Friend WithEvents LvColUtlHjulStr As ColumnHeader
     Friend WithEvents LvVolUtlAvdeling As ColumnHeader
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label1 As Label
 End Class
