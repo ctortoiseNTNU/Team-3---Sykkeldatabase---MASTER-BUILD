@@ -38,14 +38,14 @@ Partial Class Form1
         Me.LblUtleieSum = New System.Windows.Forms.Label()
         Me.GrpUtleieOrdre = New System.Windows.Forms.GroupBox()
         Me.LvUtleieOrdre = New System.Windows.Forms.ListView()
-        Me.LvColUtleieVareId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtleieVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtleieRabatt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtleiePris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtleieDag = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtleieUke = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtlTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtleieVareIdValgt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtleieVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtleieRabatt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtleiePris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtleieDag = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtleieUke = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -385,6 +385,8 @@ Partial Class Form1
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.LblUtlKundeInfo = New System.Windows.Forms.Label()
+        Me.LblUtlAktivKundeID = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -580,7 +582,7 @@ Partial Class Form1
         '
         'LvUtleieOrdre
         '
-        Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtleieVareId, Me.UtleieVareNavn, Me.UtleieRabatt, Me.UtleiePris, Me.UtleieDag, Me.UtleieUke, Me.UtlTime, Me.UtlAvdeling})
+        Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtleieVareIdValgt, Me.LvColUtleieVareNavn, Me.LvColUtleieRabatt, Me.LvColUtleiePris, Me.LvColUtleieDag, Me.LvColUtleieUke, Me.LvColUtlTime, Me.LvColUtlAvdeling})
         Me.LvUtleieOrdre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtleieOrdre.Location = New System.Drawing.Point(6, 30)
         Me.LvUtleieOrdre.Name = "LvUtleieOrdre"
@@ -589,44 +591,44 @@ Partial Class Form1
         Me.LvUtleieOrdre.UseCompatibleStateImageBehavior = False
         Me.LvUtleieOrdre.View = System.Windows.Forms.View.Details
         '
-        'LvColUtleieVareId
+        'LvColUtleieVareIdValgt
         '
-        Me.LvColUtleieVareId.Text = "Vare ID"
-        Me.LvColUtleieVareId.Width = 90
+        Me.LvColUtleieVareIdValgt.Text = "Vare ID"
+        Me.LvColUtleieVareIdValgt.Width = 90
         '
-        'UtleieVareNavn
+        'LvColUtleieVareNavn
         '
-        Me.UtleieVareNavn.Text = "Varenavn"
-        Me.UtleieVareNavn.Width = 212
+        Me.LvColUtleieVareNavn.Text = "Varenavn"
+        Me.LvColUtleieVareNavn.Width = 212
         '
-        'UtleieRabatt
+        'LvColUtleieRabatt
         '
-        Me.UtleieRabatt.Text = "Rabatt"
-        Me.UtleieRabatt.Width = 55
+        Me.LvColUtleieRabatt.Text = "Rabatt"
+        Me.LvColUtleieRabatt.Width = 55
         '
-        'UtleiePris
+        'LvColUtleiePris
         '
-        Me.UtleiePris.Text = "Pris"
-        Me.UtleiePris.Width = 58
+        Me.LvColUtleiePris.Text = "Pris"
+        Me.LvColUtleiePris.Width = 58
         '
-        'UtleieDag
+        'LvColUtleieDag
         '
-        Me.UtleieDag.Text = "Dager"
-        Me.UtleieDag.Width = 56
+        Me.LvColUtleieDag.Text = "Dager"
+        Me.LvColUtleieDag.Width = 56
         '
-        'UtleieUke
+        'LvColUtleieUke
         '
-        Me.UtleieUke.Text = "Uker"
-        Me.UtleieUke.Width = 53
+        Me.LvColUtleieUke.Text = "Uker"
+        Me.LvColUtleieUke.Width = 53
         '
-        'UtlTime
+        'LvColUtlTime
         '
-        Me.UtlTime.Text = "Timer"
+        Me.LvColUtlTime.Text = "Timer"
         '
-        'UtlAvdeling
+        'LvColUtlAvdeling
         '
-        Me.UtlAvdeling.Text = "Avdeling"
-        Me.UtlAvdeling.Width = 99
+        Me.LvColUtlAvdeling.Text = "Avdeling"
+        Me.LvColUtlAvdeling.Width = 99
         '
         'BtnUtleieFullfør
         '
@@ -938,6 +940,8 @@ Partial Class Form1
         '
         'GrpUtleieKundeInfo
         '
+        Me.GrpUtleieKundeInfo.Controls.Add(Me.LblUtlAktivKundeID)
+        Me.GrpUtleieKundeInfo.Controls.Add(Me.LblUtlKundeInfo)
         Me.GrpUtleieKundeInfo.Controls.Add(Me.LvUtleieKunde)
         Me.GrpUtleieKundeInfo.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
         Me.GrpUtleieKundeInfo.Location = New System.Drawing.Point(309, 2)
@@ -953,7 +957,7 @@ Partial Class Form1
         Me.LvUtleieKunde.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtleieKunde.Location = New System.Drawing.Point(6, 24)
         Me.LvUtleieKunde.Name = "LvUtleieKunde"
-        Me.LvUtleieKunde.Size = New System.Drawing.Size(583, 105)
+        Me.LvUtleieKunde.Size = New System.Drawing.Size(583, 68)
         Me.LvUtleieKunde.TabIndex = 1
         Me.LvUtleieKunde.UseCompatibleStateImageBehavior = False
         Me.LvUtleieKunde.View = System.Windows.Forms.View.Details
@@ -3957,6 +3961,26 @@ Partial Class Form1
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
+        'LblUtlKundeInfo
+        '
+        Me.LblUtlKundeInfo.AutoSize = True
+        Me.LblUtlKundeInfo.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtlKundeInfo.Location = New System.Drawing.Point(6, 101)
+        Me.LblUtlKundeInfo.Name = "LblUtlKundeInfo"
+        Me.LblUtlKundeInfo.Size = New System.Drawing.Size(246, 18)
+        Me.LblUtlKundeInfo.TabIndex = 48
+        Me.LblUtlKundeInfo.Text = "Klikk på kunde-ID for å aktivere kunde."
+        '
+        'LblUtlAktivKundeID
+        '
+        Me.LblUtlAktivKundeID.AutoSize = True
+        Me.LblUtlAktivKundeID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtlAktivKundeID.Location = New System.Drawing.Point(320, 101)
+        Me.LblUtlAktivKundeID.Name = "LblUtlAktivKundeID"
+        Me.LblUtlAktivKundeID.Size = New System.Drawing.Size(104, 18)
+        Me.LblUtlAktivKundeID.TabIndex = 49
+        Me.LblUtlAktivKundeID.Text = "Aktiv Kunde-ID:"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3979,6 +4003,7 @@ Partial Class Form1
         Me.GrpUtleieProdukter.ResumeLayout(False)
         Me.GrpUtleieProdukter.PerformLayout()
         Me.GrpUtleieKundeInfo.ResumeLayout(False)
+        Me.GrpUtleieKundeInfo.PerformLayout()
         Me.GrpUtleieKunde.ResumeLayout(False)
         Me.GrpUtleieKunde.PerformLayout()
         Me.GrpUtleieSelger.ResumeLayout(False)
@@ -4305,12 +4330,12 @@ Partial Class Form1
     Friend WithEvents GrpUtleieSum As GroupBox
     Friend WithEvents GrpUtleieOrdre As GroupBox
     Friend WithEvents LvUtleieOrdre As ListView
-    Friend WithEvents LvColUtleieVareId As ColumnHeader
-    Friend WithEvents UtleieVareNavn As ColumnHeader
-    Friend WithEvents UtleieRabatt As ColumnHeader
-    Friend WithEvents UtleiePris As ColumnHeader
-    Friend WithEvents UtleieDag As ColumnHeader
-    Friend WithEvents UtleieUke As ColumnHeader
+    Friend WithEvents LvColUtleieVareIdValgt As ColumnHeader
+    Friend WithEvents LvColUtleieVareNavn As ColumnHeader
+    Friend WithEvents LvColUtleieRabatt As ColumnHeader
+    Friend WithEvents LvColUtleiePris As ColumnHeader
+    Friend WithEvents LvColUtleieDag As ColumnHeader
+    Friend WithEvents LvColUtleieUke As ColumnHeader
     Friend WithEvents BtnUtleieFullfør As Button
     Friend WithEvents GrpUtleieProdukter As GroupBox
     Friend WithEvents CboUtlKat As ComboBox
@@ -4328,7 +4353,7 @@ Partial Class Form1
     Friend WithEvents CboUtlRabatt As ComboBox
     Friend WithEvents BtnUtlAbort As Button
     Friend WithEvents UtlDtpUtleieFra As DateTimePicker
-    Friend WithEvents UtlTime As ColumnHeader
+    Friend WithEvents LvColUtlTime As ColumnHeader
     Friend WithEvents LblUtleieTil As Label
     Friend WithEvents LblUtleieFra As Label
     Friend WithEvents UtlDtpUtleieTil As DateTimePicker
@@ -4339,7 +4364,7 @@ Partial Class Form1
     Friend WithEvents LblUtleieAnt As Label
     Friend WithEvents LblUtlInfo As Label
     Friend WithEvents LvColUtlStatus As ColumnHeader
-    Friend WithEvents UtlAvdeling As ColumnHeader
+    Friend WithEvents LvColUtlAvdeling As ColumnHeader
     Friend WithEvents LblUtlRabatt As Label
     Friend WithEvents LblUtleieSum As Label
     Friend WithEvents Timer1 As Timer
@@ -4392,4 +4417,6 @@ Partial Class Form1
     Friend WithEvents LvVolUtlAvdeling As ColumnHeader
     Friend WithEvents Label7 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents LblUtlAktivKundeID As Label
+    Friend WithEvents LblUtlKundeInfo As Label
 End Class
