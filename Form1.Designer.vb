@@ -48,6 +48,7 @@ Partial Class Form1
         Me.UtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
+        Me.UtlTESTlbl = New System.Windows.Forms.Label()
         Me.CboUtlRamme = New System.Windows.Forms.ComboBox()
         Me.LblUtlRamme = New System.Windows.Forms.Label()
         Me.LblUtlInfo = New System.Windows.Forms.Label()
@@ -67,7 +68,10 @@ Partial Class Form1
         Me.LvUtlVarer = New System.Windows.Forms.ListView()
         Me.LvColUtlID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColUtlVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlRamme = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlHjulStr = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColUtlStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvVolUtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LblUtlSubKat = New System.Windows.Forms.Label()
         Me.CboUtlKat = New System.Windows.Forms.ComboBox()
         Me.LblUtleieKategori = New System.Windows.Forms.Label()
@@ -379,10 +383,6 @@ Partial Class Form1
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.UtlTESTlbl = New System.Windows.Forms.Label()
-        Me.LvColUtlRamme = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvColUtlHjulStr = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvVolUtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -668,6 +668,15 @@ Partial Class Form1
         Me.GrpUtleieProdukter.TabStop = False
         Me.GrpUtleieProdukter.Text = "Produkter:"
         '
+        'UtlTESTlbl
+        '
+        Me.UtlTESTlbl.AutoSize = True
+        Me.UtlTESTlbl.Location = New System.Drawing.Point(404, 199)
+        Me.UtlTESTlbl.Name = "UtlTESTlbl"
+        Me.UtlTESTlbl.Size = New System.Drawing.Size(60, 23)
+        Me.UtlTESTlbl.TabIndex = 59
+        Me.UtlTESTlbl.Text = "Label1"
+        '
         'CboUtlRamme
         '
         Me.CboUtlRamme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -854,10 +863,24 @@ Partial Class Form1
         Me.LvColUtlVareNavn.Text = "Varenavn"
         Me.LvColUtlVareNavn.Width = 152
         '
+        'LvColUtlRamme
+        '
+        Me.LvColUtlRamme.Text = "Ramme"
+        '
+        'LvColUtlHjulStr
+        '
+        Me.LvColUtlHjulStr.Text = "Hjulstørrelse"
+        Me.LvColUtlHjulStr.Width = 100
+        '
         'LvColUtlStatus
         '
         Me.LvColUtlStatus.Text = "Tilgjengelighet"
         Me.LvColUtlStatus.Width = 110
+        '
+        'LvVolUtlAvdeling
+        '
+        Me.LvVolUtlAvdeling.Text = "Avdeling"
+        Me.LvVolUtlAvdeling.Width = 74
         '
         'LblUtlSubKat
         '
@@ -3910,29 +3933,6 @@ Partial Class Form1
         '
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
-        '
-        'UtlTESTlbl
-        '
-        Me.UtlTESTlbl.AutoSize = True
-        Me.UtlTESTlbl.Location = New System.Drawing.Point(404, 199)
-        Me.UtlTESTlbl.Name = "UtlTESTlbl"
-        Me.UtlTESTlbl.Size = New System.Drawing.Size(60, 23)
-        Me.UtlTESTlbl.TabIndex = 59
-        Me.UtlTESTlbl.Text = "Label1"
-        '
-        'LvColUtlRamme
-        '
-        Me.LvColUtlRamme.Text = "Ramme"
-        '
-        'LvColUtlHjulStr
-        '
-        Me.LvColUtlHjulStr.Text = "Hjulstørrelse"
-        Me.LvColUtlHjulStr.Width = 100
-        '
-        'LvVolUtlAvdeling
-        '
-        Me.LvVolUtlAvdeling.Text = "Avdeling"
-        Me.LvVolUtlAvdeling.Width = 74
         '
         'Form1
         '

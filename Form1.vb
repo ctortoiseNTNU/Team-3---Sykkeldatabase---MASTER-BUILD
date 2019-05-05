@@ -2642,7 +2642,25 @@ Public Class Form1
         DBANySykkelType()
     End Sub
 
+    Private Sub BtnDBASTEndre_Click(sender As Object, e As EventArgs) Handles BtnDBASTEndre.Click
+        DBAEndreSykkelType()
+    End Sub
 
+    Private Sub BtnDBAAvdLast_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdLast.Click
+
+    End Sub
+
+    Private Sub UKLast_Click(sender As Object, e As EventArgs) Handles UKLast.Click
+
+    End Sub
+
+    Private Sub BtnDBAUKEndre_Click(sender As Object, e As EventArgs) Handles BtnDBAUKEndre.Click
+        DBAEndreUtstyrskategori()
+    End Sub
+
+    Private Sub BtnDBAAvdEndre_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdEndre.Click
+        DBAEndreAvdeling()
+    End Sub
 
     Private Sub BtnDBAUKNy_Click(sender As Object, e As EventArgs) Handles BtnDBAUKNy.Click
         DBANyUtstyrskategori()
