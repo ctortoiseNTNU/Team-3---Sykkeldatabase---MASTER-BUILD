@@ -3434,7 +3434,7 @@ Partial Class Form1
         Me.CboDBASokeetter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboDBASokeetter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboDBASokeetter.FormattingEnabled = True
-        Me.CboDBASokeetter.Items.AddRange(New Object() {"avdeling_id", "avd_navn", "avd_adresse", "landsdel", "type_id", "sykkelkategori", "utstyr_kat_id", "utstyr_kat"})
+        Me.CboDBASokeetter.Items.AddRange(New Object() {"avdeling_id", "avd_navn", "avd_adresse", "type_id", "sykkelkategori", "utstyr_kat_id", "utstyr_kat"})
         Me.CboDBASokeetter.Location = New System.Drawing.Point(101, 72)
         Me.CboDBASokeetter.Name = "CboDBASokeetter"
         Me.CboDBASokeetter.Size = New System.Drawing.Size(121, 26)
