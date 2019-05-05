@@ -225,18 +225,36 @@ Public Class Form1
     Private Sub AutoPopCbo(ByVal sender As Object, Tabell As String, Kolonne As String)
         Try
             DBConnect()
-            Dim InvSqlCom As New MySqlCommand("SELECT " & Kolonne & " FROM " & Tabell, Tilkobling)
-            Dim InvSqlDA As New MySqlDataAdapter
-            Dim InvUtstyrComboDaT As New DataTable
-            InvSqlDA.SelectCommand = InvSqlCom
-            InvSqlDA.Fill(InvUtstyrComboDaT)
+            Dim SqlCom As New MySqlCommand("SELECT " & Kolonne & " FROM " & Tabell & " WHERE 1", Tilkobling)
+            Dim SqlDA As New MySqlDataAdapter
+            Dim ComboDaT As New DataTable
+            SqlDA.SelectCommand = SqlCom
+            SqlDA.Fill(ComboDaT)
             DBDisconnect()
             sender.Items.Clear()
-            For Each r In InvUtstyrComboDaT.Rows
+            For Each r In ComboDaT.Rows
                 sender.Items.Add(r(Kolonne))
             Next
         Catch ex As MySqlException
-            MsgBox("Feil med autoutfylling av " & CStr(sender) & ": " & ex.Message)
+            MsgBox("Feil med autoutfylling av combobox" & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub AutoPopCboSpesific(ByVal sender As Object, Tabell As String, Kolonne As String, combo As Object)
+        Try
+            DBConnect()
+            Dim SqlCom As New MySqlCommand("SELECT " & Kolonne & " FROM " & Tabell & " WHERE 1", Tilkobling)
+            Dim SqlDA As New MySqlDataAdapter
+            Dim ComboDaT As New DataTable
+            SqlDA.SelectCommand = SqlCom
+            SqlDA.Fill(ComboDaT)
+            DBDisconnect()
+            combo.Items.Clear()
+            For Each r In ComboDaT.Rows
+                combo.Items.Add(r(Kolonne))
+            Next
+        Catch ex As MySqlException
+            MsgBox("Feil med autoutfylling av " & CStr(combo) & ": " & ex.Message)
         End Try
     End Sub
 
@@ -367,14 +385,30 @@ Public Class Form1
     'If Kategori utstyr Then remove from utstyr else from sykkel  - overføring tilfra Lv
 
 
-    Private Sub LvUtleieKunde_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LvUtleieKunde.SelectedIndexChanged
-        UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
+    '----------------TEST------------------
+    Private Sub UtlTESTlbl_Click(sender As Object, e As EventArgs) Handles UtlTESTlbl.Click
+
+        'UtlTESTlbl.Text = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
+        Dim UtlLeieLengde
+
+        'Dim lengde = String.Format("%d", aaa)
+        UtlLeieLengde = UtlDtpUtleieFra.Value.Subtract(UtlDtpUtleieTil.Value).ToString("%d")
+        UtlTESTlbl.Text = UtlLeieLengde
+
     End Sub
 
+    'Setter kundeID for bestilling
+    Private Sub LvUtleieKunde_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LvUtleieKunde.SelectedIndexChanged
+        UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
+        LblUtlAktivKundeID.Text = "Aktiv Kunde-ID: " & UtlKundeID
+    End Sub
+
+    'Sorterer listview etter kolonne som klikkes
     Private Sub LvUtlVarer_Sort(sender As Object, e As EventArgs) Handles LvUtlVarer.ColumnClick
         ColumnClick(sender, e)
     End Sub
 
+    'Sorterer listview etter kolonne som klikkes
     Private Sub LvUtleieOrdre_Sort(sender As Object, e As EventArgs) Handles LvUtleieOrdre.ColumnClick
         ColumnClick(sender, e)
     End Sub
@@ -395,7 +429,8 @@ Public Class Form1
         LvUtleieKunde.Items.Clear()
         LvUtleieOrdre.Items.Clear()
         LvUtlVarer.Items.Clear()
-
+        LblUtlAktivKundeID.Text = "Aktiv Kunde-ID: "
+        LblUtlAktivKundeID = Nothing
     End Sub
 
     'Klokke
@@ -451,7 +486,7 @@ Public Class Form1
 
     End Sub
 
-
+    'Søker på varer
     Private Sub BtnUtlAddVare_Click(sender As Object, e As EventArgs) Handles BtnUtlAddVare.Click
         LvUtlVarer.Items.Clear()
         varehent()
@@ -459,19 +494,22 @@ Public Class Form1
 
     Private Sub UtleieFullfør()
 
-        Dim UtlAvdelingID, UtlBetalingsType, UtlKundeID, UtlRabattID, UtlPris, UtlDatoSlutt, UtlDatoStart,
+        Dim UtlAvdelingID, UtlBetalingsType, UtlRabattID, UtlPris, UtlDatoSlutt, UtlDatoStart,
                 UtlRabatt, UtlSisteUtleieID, UtlUtstyrPris, UtlLeieLengde As String
         Dim UtlAvgittRabatt, UtlAntall As Integer
-        Dim UtlRabattDT, UtlKatPris As DataTable
+        Dim UtlRabattDT, UtlKatPris, UtlRabattIDDT As DataTable
 
         'pris = sykkel_kat from sykkel_id , and pris_dag if dag pris_uke if uke etc
         UtlAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", CboUtlAvd.SelectedItem)
         UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text 'bytt med onclick og lagrei i var
-        UtlRabattID = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
+        UtlRabattIDDT = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
+        For Each r In UtlRabattIDDT.Rows
+            UtlRabattID = r("rabatt_id")
+        Next
         UtlRabattDT = SQLSelect("rabatter join kunder as k on rabatter.rabatt_id=k.rabatt_id", "rabatt_prosenter", "k.kunde_id='" _
                                 & UtlKundeID & "'")
         For Each r In UtlRabattDT.Rows
-            UtlRabatt = r("rabatt_id")
+            UtlRabatt = r("rabatt_prosenter")
         Next
         UtlDatoSlutt = UtlDtpUtleieTil.Value
         UtlDatoStart = UtlDtpUtleieFra.Value
@@ -503,55 +541,45 @@ Public Class Form1
         UtlPris = (UtlPris * UtlAntall) * ((100 - UtlRabatt) / 100)
         UtlAvgittRabatt = UtlPris * (UtlRabatt / 100)
 
-        LblUtleieSum.Text = UtlPris
-        LblUtlRabatt.Text = UtlAvgittRabatt
+        If UtlKundeID = "" Or UtlAvdelingID = "" Or UtlRabattID = "" Or UtlValgteSyklerID.Count < 1 _
+            And UtlValgtUtstyrID.Count < 1 Then
+            MsgBox("Vennligst ferdigstill bestillingsinfo.")
+            Exit Sub
+        Else
+            LblUtleieSum.Text = UtlPris
+            LblUtlRabatt.Text = UtlAvgittRabatt
+            UtlSisteUtleieID = SQLInsert("utleie", "(utleie_id, avdeling_id, kunde_id, rabatt_id, utleie_pris, utleie_slutt, " _
+                                   & "utleie_start, betalings_type)", "(DEFAULT, '" & UtlAvdelingID & "', '" & UtlKundeID _
+                                   & "', '" & UtlRabattID & "', '" & UtlPris & "', '" _
+                                   & UtlDtpUtleieTil.Value.ToString("yyyy-MM-dd") & "', '" _
+                                   & UtlDtpUtleieFra.Value.ToString("yyyy-MM-dd") & "', '" & UtlBetalingsType & "')")
 
-        UtlSisteUtleieID = SQLInsert("utleie", "(utleie_id, avdeling_id, kunde_id, rabatt_id, utleie_pris, utleie_slutt, " _
-                                     & "utleie_start, betalings_type)", "(DEFAULT, '" & UtlAvdelingID & "', '" & UtlKundeID _
-                                     & "', '" & UtlRabattID & "', '" & UtlPris & "', '" _
-                                     & UtlDtpUtleieTil.Value.ToString("yyyy-MM-dd") & "', '" _
-                                     & UtlDtpUtleieFra.Value.ToString("yyyy-MM-dd") & "', '" & UtlBetalingsType & "')")
-
-        Label1.Text = UtlSisteUtleieID '--------------TEST-------------
-
-        For i = 0 To UtlValgtUtstyrID.Count - 1
-            SQLInsert("utleie_utstyr", "(utleie_utstyr_id, utleie_id, utstyr_id)", "(DEFAULT, '" & UtlSisteUtleieID _
-                      & "', '" & UtlValgtUtstyrID(i) & "')")
-            SQLUpdate("utstyr", "utstyr_status='Utleid'", "utstyr_id='" & UtlValgteSyklerID(i) & "'")
-        Next
-        For i = 0 To UtlValgteSyklerID.Count - 1
-            SQLInsert("utleie_sykkel", "(utleie_sykkel_id, utleie_id, sykkel_id)", "(DEFAULT, '" & UtlSisteUtleieID _
-                      & "', '" & UtlValgteSyklerID(i) & "')")
-            SQLUpdate("sykler", "sykkel_status='Utleid'", "sykkel_id='" & UtlValgteSyklerID(i) & "'")
-        Next
+            For i = 0 To UtlValgtUtstyrID.Count - 1
+                SQLInsert("utleie_utstyr", "(utleie_utstyr_id, utleie_id, utstyr_id)", "(DEFAULT, '" & UtlSisteUtleieID _
+                          & "', '" & UtlValgtUtstyrID(i) & "')")
+                SQLUpdate("utstyr", "utstyr_status='Utleid'", "utstyr_id='" & UtlValgteSyklerID(i) & "'")
+            Next
+            For i = 0 To UtlValgteSyklerID.Count - 1
+                SQLInsert("utleie_sykkel", "(utleie_sykkel_id, utleie_id, sykkel_id)", "(DEFAULT, '" & UtlSisteUtleieID _
+                          & "', '" & UtlValgteSyklerID(i) & "')")
+                SQLUpdate("sykler", "sykkel_status='Utleid'", "sykkel_id='" & UtlValgteSyklerID(i) & "'")
+            Next
+        End If
 
     End Sub
 
     Private Sub BtnUtleieFullfør_Click(sender As Object, e As EventArgs) Handles BtnUtleieFullfør.Click
-        UtleieFullfør()
+        Dim UtlBekreftUtleie As New MsgBoxResult
+        UtlBekreftUtleie = MsgBox("Bekreft bestilling.", MsgBoxStyle.OkCancel)
+
+        If UtlBekreftUtleie = DialogResult.OK Then
+            UtleieFullfør()
+        Else
+            Exit Sub
+        End If
+
     End Sub
 
-    '----------------TEST------------------
-    Private Sub UtlTESTlbl_Click(sender As Object, e As EventArgs) Handles UtlTESTlbl.Click
-
-        'UtlTESTlbl.Text = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
-        Dim UtlLeieLengde
-
-        'lengde = String.Format("%d", aaa)
-        UtlLeieLengde = UtlDtpUtleieFra.Value.Subtract(UtlDtpUtleieTil.Value).ToString("%d")
-        UtlTESTlbl.Text = UtlLeieLengde
-
-        UtlTESTlbl.Text = UtlKundeID
-    End Sub
-
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-        Label1.Text = CStr(0)
-    End Sub
-
-    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
-        Label1.Text = CStr(0)
-    End Sub
 
     'trykk for å kopiere varer fra vareliste til ordre liste
     Private Sub LvUtlVarer_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LvUtlVarer.MouseClick
@@ -572,7 +600,6 @@ Public Class Form1
     End Sub
 
 
-
     ' trykk for å fjerne linjer fra ordre
     Private Sub LvUtlOrdre_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LvUtleieOrdre.MouseClick
 
@@ -581,8 +608,11 @@ Public Class Form1
         UtlTESTlbl.Text = UtlFjernID   'TESTLABEL
 
         'If Kategori utstyr Then remove from utstyr else from sykkel
+        'if colonne kategori(utstyr/sykkel) = utstyr/sykkel then remove from utstyr/sykkel
         UtlValgteSyklerID.Remove(UtlFjernID)
         LvUtleieOrdre.Items.RemoveAt(LvUtleieOrdre.SelectedIndices(0))
+
+
 
     End Sub
 
@@ -597,101 +627,73 @@ Public Class Form1
         Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
         Dim UtlRamme As String = CboUtlRamme.SelectedItem
         Dim UtlHjulStr As String = ""  'combobox select
-        Dim UtlSubkatID, SykkelIdRamme As String
-        Dim SykkelSQLKolonner = New String() {"sykkel_modell", "sykkel_navn", "sykkel_status", "kategori",
-                                              "sykkel_kat_timepris", "sykkel_kat_døgnpris", "sykkel_kat_ukepris"}
+        Dim UtlSubkatID, UtlSykkelIDRamme As String
+        'Dim SykkelSQLKolonner = New String() {"sykkel_modell", "sykkel_navn", "sykkel_status", "kategori",
+        ' "sykkel_kat_timepris", "sykkel_kat_døgnpris", "sykkel_kat_ukepris"}
 
         'henter typeID fra sykler og utstyr etter data fra subkategori
         'hente varenummer fra sykler med valgt ramme og hjul
 
         If UtlKategori = "Sykkel" Then
             UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
-            SykkelIdRamme = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
+            UtlSykkelIDRamme = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)   '?????
             'SykkelIdHjul = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)
-
 
             Dim VareSokTable As New DataTable
 
             'for søk på ramme og hjulstr
-            VareSokTable = SQLSelect("sykler", "*", "type_id =" & UtlSubkatID & " AND hjul_str LIKE'%" _
-                & UtlHjulStr & "%' AND sykkel_ramme LIKE '%" & UtlRamme & "%' AND NOT skadet='1' AND NOT savnet='1'")
+            VareSokTable = SQLSelect("sykler join avdeling as a on sykler.avdeling_id=a.avdeling_id",
+                                     "sykler.*, a.avd_navn", "type_id LIKE '%" & UtlSubkatID & "%' AND hjul_str LIKE'%" _
+                                     & UtlHjulStr & "%' AND sykkel_ramme LIKE '%" & UtlRamme & "%' AND sykkel_status='ledig' " _
+                                     & "AND NOT skadet='1' AND NOT savnet='1'")
 
-
-            'DBConnect()
-            'Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
-            '                          FROM sykler s JOIN sykkel_typer st
-            '                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " ORDER BY sykkel_status", Tilkobling)
-
-            'Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn
-            '                          FROM sykler s JOIN sykkel_typer st
-            '                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " AND sykkel_status = 'Ledig'", Tilkobling)
-
-            'Dim varer As New MySqlCommand("SELECT sykkel_modell, sykkel_navn, sykkel_status 
-            '                           FROM sykler s JOIN sykkel_typer st
-            '                           ON s.type_id = st.type_id WHERE s.type_id =" & UtlSubkatID & " AND st.type_id =" & SykkelIdRamme & "
-            '                           ORDER BY sykkel_status", tilkobling)
-
-            'Dim VaresøkAdapter As New MySqlDataAdapter
-            ''Dim VareSøkTable As New DataTable
-            'VaresøkAdapter.SelectCommand = varer
-            'VaresøkAdapter.Fill(VareSøkTable)
-
-            'DBDisconnect()
-
-            Dim UtlSokVareID, UtlSokVarenavn, UtlSokRamme, UtlSokHjulStr, UtlSokTilgjengelig, UtlSokAvdeling As String
+            Dim UtlSokVareID, UtlSokVarenavn, UtlSokRamme, UtlSokHjulStr, UtlSokTilgjengelig, UtlSokAvdelingID,
+                UtlSokAvdelingNavn As String
             Try
                 For Each r In VareSokTable.Rows
                     If VareSokTable.Rows.Count = 0 Then
-                        LvUtlVarer.Items.Add(New ListViewItem("Ingen ledige sykler i denne kategorien"))
+                        MsgBox("Ingen ledige sykler for dette søket.")
                     Else
                         UtlSokVareID = r("sykkel_id")
                         UtlSokVarenavn = r("sykkel_navn")
                         UtlSokRamme = r("sykkel_ramme")
                         UtlSokHjulStr = r("hjul_str")
                         UtlSokTilgjengelig = r("sykkel_status")
-                        UtlSokAvdeling = r("avdeling_id")
+                        UtlSokAvdelingID = r("avdeling_id")
+                        UtlSokAvdelingNavn = r("avd_navn")
+
                         LvUtlVarer.Items.Add(New ListViewItem({UtlSokVareID, UtlSokVarenavn, UtlSokRamme,
-                             UtlSokHjulStr, UtlSokTilgjengelig, UtlSokAvdeling}))
+                             UtlSokHjulStr, UtlSokTilgjengelig, UtlSokAvdelingNavn, UtlKategori}))
                     End If
-
                 Next
-
             Catch ex As Exception
-                MsgBox("Feil med tabell: " & ex.Message)
+                MsgBox("Feil med varetabell: " & ex.Message)
+            End Try
+
+        ElseIf UtlKategori = "Utstyr" Then
+
+            UtlSubkatID = SQLHentIDNavn("utstyr_kategori", "utstyr_kat", "utstyr_kat_id", UtlSubKategori)
+
+            Dim UtlUtstyrID, UtlUtstyrNavn, UtlUtstyrStatus As String
+            Dim UtlVareSokDT As DataTable
+            UtlVareSokDT = SQLSelect("utstyr", "utstyr_id, utstyr_navn, utstyr_status", "utstyr_id='" _
+                                     & UtlSubkatID & "'")
+
+            Try
+                For Each r In UtlVareSokDT.Rows
+                    UtlUtstyrID = r("utstyr_id")
+                    UtlUtstyrNavn = r("utstyr_navn")
+                    UtlUtstyrStatus = r("utstyr_status")
+                    LvUtlVarer.Items.Add(New ListViewItem({UtlUtstyrID, UtlUtstyrNavn, "", "", UtlUtstyrStatus, "", "Utstyr"}))
+                Next
+            Catch ex As Exception
+                MsgBox("Feil ved henting av data for utstyr fra datatabell." & vbNewLine & ex.Message)
             End Try
 
         Else
-            UtlSubkatID = SQLHentIDNavn("utstyr_kategori", "utstyr_kat", "utstyr_kat_id", UtlSubKategori)
-
-            Try
-                DBConnect()
-                Dim varer As New MySqlCommand("SELECT varenummer, utstyr_navn 
-                                           FROM utstyr WHERE utstyr_id =" & UtlSubkatID & "", Tilkobling)
-
-                Dim VaresøkAdapter As New MySqlDataAdapter
-                Dim VareSøkTable As New DataTable
-                VaresøkAdapter.SelectCommand = varer
-                VaresøkAdapter.Fill(VareSøkTable)
-
-                DBDisconnect()
-
-                Dim VareRow As DataRow
-                Dim Varenummer, Varenavn As String
-
-                For Each VareRow In VareSøkTable.Rows
-                    Varenummer = VareRow("varenummer")
-                    Varenavn = VareRow("utstyr_navn")
-                    'Tilgjengelig = VareRow("utstyr_status")
-
-                    LvUtlVarer.Items.Add(New ListViewItem({Varenummer, Varenavn}))
-                Next
-
-            Catch feilmelding As MySqlException
-                MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
-
-            End Try
+            MsgBox("Du har ikke valgt gategori din luring.")
+            Exit Sub
         End If
-
 
     End Sub
 
@@ -704,154 +706,162 @@ Public Class Form1
     'tøm felt knappen
     Private Sub BtnUtlAbort_Click(sender As Object, e As EventArgs) Handles BtnUtlAbort.Click
         UtleieTomFelt()
-        'UtlValgtSykkelID
     End Sub
 
     'Fyller combobox med avdelinger som er registrert i database
     Private Sub CboUtlAvd_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlAvd.DropDown
-        UtlAutoPopCbo(sender, "avdeling", "avd_navn")
+        AutoPopCbo(sender, "avdeling", "avd_navn")
     End Sub
 
-    'autofyll av ramme boks fra database.
-    'denne henter ramme fra valgt sykkeltype
-    Private Sub CboUtlRamme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
-        CboUtlRamme.SelectedIndex = -1
-        UtlAutoPopRamme()
+    'Autofyll av ramme combobox fra database.
+    'Denne henter ramme fra valgt sykkeltype
+    'Private Sub CboUtlRamme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.SelectedIndexChanged
+    '    CboUtlRamme.SelectedIndex = -1
+    '    UtlAutoPopRamme()
 
-    End Sub
+    'End Sub
 
-    'hva som skjer når hovedkategori endres
+    'Endrer innhold i combobox for subkategori og ramme avhenging om det er sykkel eller utstyr som er valgt.
     Private Sub CboUtlKat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlKat.SelectedIndexChanged
         'Dropdownlisten Subkategori endrer kategorier (leses fra databasen) _
         'basert på om det er sykkel eller utstyr som er valgt.
         'ramme og hjul valg deaktiveres om det er valgt utstyr.
 
         If CboUtlKat.SelectedItem = "Utstyr" Then
-
             CboUtlRamme.Enabled = False
-
-            'LvUtlVarer.Columns.Clear()
             CboUtlSubkat.Items.Clear()
             CboUtlRamme.Items.Clear()
+            'UtlAutoPopUtstyr()
+            AutoPopCbo(CboUtlSubkat, "utstyr_kategori", "utstyr_kat")
+        Else
+            CboUtlRamme.Enabled = True
+            CboUtlSubkat.Items.Clear()
+            CboUtlRamme.Items.Clear()
+            AutoPopCbo(CboUtlSubkat, "sykkel_typer", "kategori")
+            AutoPopCbo(CboUtlRamme, "sykler", "sykkel_ramme")
 
-            UtlAutoPopUtstyr()
-            'varehent()
+            'UtlAutoPopSykkel()
+        End If
+
+    End Sub
+
+    'Resetter combobox for ramme om sykkel kategori endres.
+    Private Sub CboUtlSubkat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.Click
+
+
+        '    Private Sub CboLogiHentested_SelectedIndexChanged(sender As Object, e As EventArgs) _
+        '    Handles CboLogiHentested.SelectedIndexChanged
+        '    AutoPopCbo(sender, "avdeling", "avd_navn")
+        '    End Sub
+
+
+
+        If CboUtlKat.SelectedItem = "Sykkel" Then
+
+            'finn alle rammer på kategori og grupper de
+            CboUtlRamme.Items.Clear()
+            AutoPopCbo(sender, "sykler", "sykkel_ramme")
         Else
 
-            'LvUtlVarer.Items.Clear()
-            CboUtlRamme.Enabled = True
-
-            CboUtlSubkat.Items.Clear()
-            CboUtlRamme.Items.Clear()
-            UtlAutoPopSykkel()
-            'varehent()
         End If
 
     End Sub
 
-    'resetter rammeboks om sykkel kategori endres.
-    Private Sub CboUtlSubkat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlSubkat.DropDown
-
-        If CboUtlSubkat.SelectedValue = "Sykkel" Then
-            CboUtlRamme.Items.Clear()
-            UtlAutoPopRamme()
-        End If
-
-    End Sub
-
-    'Metode som fyller combobox (som kaller) med data fra database.
+    'Metode som fyller combobox (som kaller) med data fra database. ----------OVerflødig
     'Tabell og kolonne det skal leses fra må angis som argumenter.
-    Private Sub UtlAutoPopCbo(sender, tabell, kolonne)
-        Try
-            DBConnect()
-            Dim UtlSqlCom As New MySqlCommand("SELECT " & kolonne & " FROM " & tabell, Tilkobling)
-            Dim UtlSqlDA As New MySqlDataAdapter
-            Dim UtlUtstyrComboDaT As New DataTable
-            UtlSqlDA.SelectCommand = UtlSqlCom
-            UtlSqlDA.Fill(UtlUtstyrComboDaT)
-            DBDisconnect()
-            sender.Items.Clear()
-            Dim UtlUtstyrRow As DataRow
-            Dim UtlUtstyrString As String
-            For Each UtlUtstyrRow In UtlUtstyrComboDaT.Rows
-                UtlUtstyrString = UtlUtstyrRow(kolonne)
-                sender.Items.Add(UtlUtstyrString)
-            Next
-        Catch ex As MySqlException
-            MsgBox("Feil med autoutfylling av " & CStr(sender) & ": " & ex.Message)
-        End Try
-    End Sub
+    'Private Sub UtlAutoPopCbo(sender, tabell, kolonne)
+
+    '    Try
+    '        DBConnect()
+    '        Dim UtlSqlCom As New MySqlCommand("SELECT " & kolonne & " FROM " & tabell, Tilkobling)
+    '        Dim UtlSqlDA As New MySqlDataAdapter
+    '        Dim UtlUtstyrComboDaT As New DataTable
+    '        UtlSqlDA.SelectCommand = UtlSqlCom
+    '        UtlSqlDA.Fill(UtlUtstyrComboDaT)
+    '        DBDisconnect()
+    '        sender.Items.Clear()
+    '        Dim UtlUtstyrRow As DataRow
+    '        Dim UtlUtstyrString As String
+    '        For Each UtlUtstyrRow In UtlUtstyrComboDaT.Rows
+    '            UtlUtstyrString = UtlUtstyrRow(kolonne)
+    '            sender.Items.Add(UtlUtstyrString)
+    '        Next
+    '    Catch ex As MySqlException
+    '        MsgBox("Feil med autoutfylling av " & CStr(sender) & ": " & ex.Message)
+    '    End Try
+    'End Sub
 
     'Combobox Subkategori styres av indexchanged på combobox kategori. Dermed vil et kall på UtlCboPop fra _
     'combobox for kategori føre til endringer i kategori og ikke subkategori som ønsket.
     'Derfor egne autopopulate for sykkel og utstyr.
-    Private Sub UtlAutoPopUtstyr()
-        Try
-            DBConnect()
-            Dim UtlSqlCom As New MySqlCommand("SELECT utstyr_kat FROM utstyr_kategori", Tilkobling)
-            Dim UtlSqlDA As New MySqlDataAdapter
-            Dim UtlUtstyrComboDaT As New DataTable
-            UtlSqlDA.SelectCommand = UtlSqlCom
-            UtlSqlDA.Fill(UtlUtstyrComboDaT)
-            DBDisconnect()
-            CboUtlSubkat.Items.Clear()
-            Dim UtlUtstyrRow As DataRow
-            Dim UtlUtstyrString As String
-            For Each UtlUtstyrRow In UtlUtstyrComboDaT.Rows
-                UtlUtstyrString = UtlUtstyrRow("utstyr_kat")
-                CboUtlSubkat.Items.Add(UtlUtstyrString)
-            Next
-        Catch ex As MySqlException
-            MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
-        End Try
-    End Sub
 
-    Private Sub UtlAutoPopSykkel()
-        Try
-            DBConnect()
-            Dim UtlSqlCom As New MySqlCommand("SELECT kategori FROM sykkel_typer", Tilkobling)
-            Dim UtlSqlDA As New MySqlDataAdapter
-            Dim UtlSykkelComboDaT As New DataTable
-            UtlSqlDA.SelectCommand = UtlSqlCom
-            UtlSqlDA.Fill(UtlSykkelComboDaT)
-            DBDisconnect()
-            CboUtlSubkat.Items.Clear()
-            Dim UtlSykkelRow As DataRow
-            Dim UtlSykkelString As String
-            For Each UtlSykkelRow In UtlSykkelComboDaT.Rows
-                UtlSykkelString = UtlSykkelRow("kategori")
-                CboUtlSubkat.Items.Add(UtlSykkelString)
-            Next
-        Catch ex As MySqlException
-            MsgBox("Feil med autoutfylling av sykkelkategorier: " & ex.Message)
-        End Try
-    End Sub
+    'Private Sub UtlAutoPopUtstyr()
+    '    Try
+    '        DBConnect()
+    '        Dim UtlSqlCom As New MySqlCommand("SELECT utstyr_kat FROM utstyr_kategori", Tilkobling)
+    '        Dim UtlSqlDA As New MySqlDataAdapter
+    '        Dim UtlUtstyrComboDaT As New DataTable
+    '        UtlSqlDA.SelectCommand = UtlSqlCom
+    '        UtlSqlDA.Fill(UtlUtstyrComboDaT)
+    '        DBDisconnect()
+    '        CboUtlSubkat.Items.Clear()
+    '        Dim UtlUtstyrRow As DataRow
+    '        Dim UtlUtstyrString As String
+    '        For Each UtlUtstyrRow In UtlUtstyrComboDaT.Rows
+    '            UtlUtstyrString = UtlUtstyrRow("utstyr_kat")
+    '            CboUtlSubkat.Items.Add(UtlUtstyrString)
+    '        Next
+    '    Catch ex As MySqlException
+    '        MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
+    '    End Try
+    'End Sub
 
-    Private Sub UtlAutoPopRamme()
+    'Private Sub UtlAutoPopSykkel()
+    '    Try
+    '        DBConnect()
+    '        Dim UtlSqlCom As New MySqlCommand("SELECT kategori FROM sykkel_typer", Tilkobling)
+    '        Dim UtlSqlDA As New MySqlDataAdapter
+    '        Dim UtlSykkelComboDaT As New DataTable
+    '        UtlSqlDA.SelectCommand = UtlSqlCom
+    '        UtlSqlDA.Fill(UtlSykkelComboDaT)
+    '        DBDisconnect()
+    '        CboUtlSubkat.Items.Clear()
+    '        Dim UtlSykkelRow As DataRow
+    '        Dim UtlSykkelString As String
+    '        For Each UtlSykkelRow In UtlSykkelComboDaT.Rows
+    '            UtlSykkelString = UtlSykkelRow("kategori")
+    '            CboUtlSubkat.Items.Add(UtlSykkelString)
+    '        Next
+    '    Catch ex As MySqlException
+    '        MsgBox("Feil med autoutfylling av sykkelkategorier: " & ex.Message)
+    '    End Try
+    'End Sub
 
-        Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
-        Dim UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
-        Try
-            DBConnect()
+    'Private Sub UtlAutoPopRamme()
 
-            Dim UtlSqlCom As New MySqlCommand("SELECT sykkel_ramme FROM sykler 
-                                                WHERE type_id =" & UtlSubkatID & "", Tilkobling)
-            Dim UtlSqlDA As New MySqlDataAdapter
-            Dim UtlRammeComboDaT As New DataTable
-            UtlSqlDA.SelectCommand = UtlSqlCom
-            UtlSqlDA.Fill(UtlRammeComboDaT)
-            DBDisconnect()
-            CboUtlRamme.Items.Clear()
-            Dim UtlRammeRow As DataRow
-            Dim UtlRammeString As String
-            For Each UtlRammeRow In UtlRammeComboDaT.Rows
-                UtlRammeString = UtlRammeRow("sykkel_ramme")
-                CboUtlRamme.Items.Add(UtlRammeString)
-            Next
-        Catch ex As MySqlException
-            MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
-        End Try
-    End Sub
+    '    Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
+    '    Dim UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
+    '    Try
+    '        DBConnect()
+
+    '        Dim UtlSqlCom As New MySqlCommand("SELECT sykkel_ramme FROM sykler 
+    '                                            WHERE type_id =" & UtlSubkatID & "", Tilkobling)
+    '        Dim UtlSqlDA As New MySqlDataAdapter
+    '        Dim UtlRammeComboDaT As New DataTable
+    '        UtlSqlDA.SelectCommand = UtlSqlCom
+    '        UtlSqlDA.Fill(UtlRammeComboDaT)
+    '        DBDisconnect()
+    '        CboUtlRamme.Items.Clear()
+    '        Dim UtlRammeRow As DataRow
+    '        Dim UtlRammeString As String
+    '        For Each UtlRammeRow In UtlRammeComboDaT.Rows
+    '            UtlRammeString = UtlRammeRow("sykkel_ramme")
+    '            CboUtlRamme.Items.Add(UtlRammeString)
+    '        Next
+    '    Catch ex As MySqlException
+    '        MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
+    '    End Try
+    'End Sub
 
 
 #End Region
@@ -1183,9 +1193,8 @@ Public Class Form1
             Dim InvKategori, InvSubkategoriNavn, InvAvdelingNavn, InvProduktnavn, InvVarenummer,
                 InvInnkjopspris, InvRamme, InvHjulstorrlese, InvGirsystem, InvForhandlerNavn,
                 InvStatus, InvSkadet, InvSavnet, InvForhandlerID, InvAvdelingID, InvSubKategoriID,
-                InvSykkelID, InvSpSisteID, InvRegKolonner, InvRegTabell, InvRegVerdier As String
+                InvSykkelID, InvRegKolonner, InvRegTabell, InvRegVerdier As String
 
-            Dim InvSqlLeser As MySqlDataReader
             Dim InvBekreftSykkelReg As DialogResult
 
             InvKategori = CboInvKategori.SelectedItem
@@ -1218,21 +1227,6 @@ Public Class Form1
                 & InvRamme & "', '" & InvGirsystem & "', '" & InvSavnet & "', '" & InvSkadet & "')"
 
                 InvSykkelID = SQLInsert(InvRegTabell, InvRegKolonner, InvRegVerdier)
-
-                'Try
-                '    DBConnect()
-                '    InvSpSisteID = "SELECT LAST_INSERT_ID();"
-                '    Dim InvSqlSisteID As New MySqlCommand(InvSpSisteID, Tilkobling)
-                '    InvSqlLeser = InvSqlSisteID.ExecuteReader()
-                '    While InvSqlLeser.Read()
-                '        InvSykkelID = InvSqlLeser(0)
-                '    End While
-                '    InvSqlLeser.Close()
-                '    DBDisconnect()
-                '    InvTomFelt()
-                'Catch ex As MySqlException
-                '    MsgBox("Feil ved henting av siste ID:" & vbNewLine & ex.Message)
-                'End Try
 
                 'Registerer valgt utstyr på siste sykkelID
                 If ChkInvBarneHenger.Checked = True Then

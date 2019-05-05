@@ -48,9 +48,6 @@ Partial Class Form1
         Me.LvColUtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.UtlTESTlbl = New System.Windows.Forms.Label()
         Me.CboUtlRamme = New System.Windows.Forms.ComboBox()
         Me.LblUtlRamme = New System.Windows.Forms.Label()
         Me.LblUtlInfo = New System.Windows.Forms.Label()
@@ -74,10 +71,13 @@ Partial Class Form1
         Me.LvColUtlHjulStr = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColUtlStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvVolUtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlKategori = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LblUtlSubKat = New System.Windows.Forms.Label()
         Me.CboUtlKat = New System.Windows.Forms.ComboBox()
         Me.LblUtleieKategori = New System.Windows.Forms.Label()
         Me.GrpUtleieKundeInfo = New System.Windows.Forms.GroupBox()
+        Me.LblUtlAktivKundeID = New System.Windows.Forms.Label()
+        Me.LblUtlKundeInfo = New System.Windows.Forms.Label()
         Me.LvUtleieKunde = New System.Windows.Forms.ListView()
         Me.KundeID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Fornavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -92,6 +92,7 @@ Partial Class Form1
         Me.TxtUtleieKundeSok = New System.Windows.Forms.TextBox()
         Me.LblUtleieKundesok = New System.Windows.Forms.Label()
         Me.GrpUtleieSelger = New System.Windows.Forms.GroupBox()
+        Me.UtlTESTlbl = New System.Windows.Forms.Label()
         Me.LblUtleieSelger = New System.Windows.Forms.Label()
         Me.GrpUtleieAvd = New System.Windows.Forms.GroupBox()
         Me.CboUtlAvd = New System.Windows.Forms.ComboBox()
@@ -385,8 +386,6 @@ Partial Class Form1
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.LblUtlKundeInfo = New System.Windows.Forms.Label()
-        Me.LblUtlAktivKundeID = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -522,7 +521,7 @@ Partial Class Form1
         '
         Me.BtnUtlAbort.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUtlAbort.Location = New System.Drawing.Point(632, 559)
+        Me.BtnUtlAbort.Location = New System.Drawing.Point(660, 558)
         Me.BtnUtlAbort.Name = "BtnUtlAbort"
         Me.BtnUtlAbort.Size = New System.Drawing.Size(100, 50)
         Me.BtnUtlAbort.TabIndex = 9
@@ -533,7 +532,7 @@ Partial Class Form1
         '
         Me.GrpUtlRabatt.Controls.Add(Me.LblUtlRabatt)
         Me.GrpUtlRabatt.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpUtlRabatt.Location = New System.Drawing.Point(766, 539)
+        Me.GrpUtlRabatt.Location = New System.Drawing.Point(787, 538)
         Me.GrpUtlRabatt.Name = "GrpUtlRabatt"
         Me.GrpUtlRabatt.Size = New System.Drawing.Size(190, 85)
         Me.GrpUtlRabatt.TabIndex = 8
@@ -553,7 +552,7 @@ Partial Class Form1
         '
         Me.GrpUtleieSum.Controls.Add(Me.LblUtleieSum)
         Me.GrpUtleieSum.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpUtleieSum.Location = New System.Drawing.Point(990, 539)
+        Me.GrpUtleieSum.Location = New System.Drawing.Point(1004, 538)
         Me.GrpUtleieSum.Name = "GrpUtleieSum"
         Me.GrpUtleieSum.Size = New System.Drawing.Size(190, 85)
         Me.GrpUtleieSum.TabIndex = 7
@@ -573,9 +572,9 @@ Partial Class Form1
         '
         Me.GrpUtleieOrdre.Controls.Add(Me.LvUtleieOrdre)
         Me.GrpUtleieOrdre.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
-        Me.GrpUtleieOrdre.Location = New System.Drawing.Point(617, 146)
+        Me.GrpUtleieOrdre.Location = New System.Drawing.Point(660, 146)
         Me.GrpUtleieOrdre.Name = "GrpUtleieOrdre"
-        Me.GrpUtleieOrdre.Size = New System.Drawing.Size(704, 387)
+        Me.GrpUtleieOrdre.Size = New System.Drawing.Size(661, 387)
         Me.GrpUtleieOrdre.TabIndex = 6
         Me.GrpUtleieOrdre.TabStop = False
         Me.GrpUtleieOrdre.Text = "Utleiedetaljer:"
@@ -584,9 +583,9 @@ Partial Class Form1
         '
         Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtleieVareIdValgt, Me.LvColUtleieVareNavn, Me.LvColUtleieRabatt, Me.LvColUtleiePris, Me.LvColUtleieDag, Me.LvColUtleieUke, Me.LvColUtlTime, Me.LvColUtlAvdeling})
         Me.LvUtleieOrdre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LvUtleieOrdre.Location = New System.Drawing.Point(6, 30)
+        Me.LvUtleieOrdre.Location = New System.Drawing.Point(8, 28)
         Me.LvUtleieOrdre.Name = "LvUtleieOrdre"
-        Me.LvUtleieOrdre.Size = New System.Drawing.Size(692, 351)
+        Me.LvUtleieOrdre.Size = New System.Drawing.Size(647, 351)
         Me.LvUtleieOrdre.TabIndex = 2
         Me.LvUtleieOrdre.UseCompatibleStateImageBehavior = False
         Me.LvUtleieOrdre.View = System.Windows.Forms.View.Details
@@ -634,7 +633,7 @@ Partial Class Form1
         '
         Me.BtnUtleieFullfør.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnUtleieFullfør.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1214, 557)
+        Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1221, 556)
         Me.BtnUtleieFullfør.Name = "BtnUtleieFullfør"
         Me.BtnUtleieFullfør.Size = New System.Drawing.Size(100, 50)
         Me.BtnUtleieFullfør.TabIndex = 5
@@ -643,9 +642,6 @@ Partial Class Form1
         '
         'GrpUtleieProdukter
         '
-        Me.GrpUtleieProdukter.Controls.Add(Me.Label7)
-        Me.GrpUtleieProdukter.Controls.Add(Me.Label1)
-        Me.GrpUtleieProdukter.Controls.Add(Me.UtlTESTlbl)
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlRamme)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlRamme)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlInfo)
@@ -669,44 +665,16 @@ Partial Class Form1
         Me.GrpUtleieProdukter.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
         Me.GrpUtleieProdukter.Location = New System.Drawing.Point(12, 146)
         Me.GrpUtleieProdukter.Name = "GrpUtleieProdukter"
-        Me.GrpUtleieProdukter.Size = New System.Drawing.Size(599, 478)
+        Me.GrpUtleieProdukter.Size = New System.Drawing.Size(642, 478)
         Me.GrpUtleieProdukter.TabIndex = 4
         Me.GrpUtleieProdukter.TabStop = False
         Me.GrpUtleieProdukter.Text = "Produkter:"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(458, 200)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(60, 23)
-        Me.Label7.TabIndex = 61
-        Me.Label7.Text = "Label7"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(350, 199)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(60, 23)
-        Me.Label1.TabIndex = 60
-        Me.Label1.Text = "Label1"
-        '
-        'UtlTESTlbl
-        '
-        Me.UtlTESTlbl.AutoSize = True
-        Me.UtlTESTlbl.Location = New System.Drawing.Point(262, 199)
-        Me.UtlTESTlbl.Name = "UtlTESTlbl"
-        Me.UtlTESTlbl.Size = New System.Drawing.Size(39, 23)
-        Me.UtlTESTlbl.TabIndex = 59
-        Me.UtlTESTlbl.Text = "test"
         '
         'CboUtlRamme
         '
         Me.CboUtlRamme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboUtlRamme.Font = New System.Drawing.Font("Calibri", 11.25!)
         Me.CboUtlRamme.FormattingEnabled = True
-        Me.CboUtlRamme.Items.AddRange(New Object() {"Teste hardcode"})
         Me.CboUtlRamme.Location = New System.Drawing.Point(105, 112)
         Me.CboUtlRamme.Name = "CboUtlRamme"
         Me.CboUtlRamme.Size = New System.Drawing.Size(121, 26)
@@ -869,11 +837,11 @@ Partial Class Form1
         '
         'LvUtlVarer
         '
-        Me.LvUtlVarer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtlID, Me.LvColUtlVareNavn, Me.LvColUtlRamme, Me.LvColUtlHjulStr, Me.LvColUtlStatus, Me.LvVolUtlAvdeling})
+        Me.LvUtlVarer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtlID, Me.LvColUtlVareNavn, Me.LvColUtlRamme, Me.LvColUtlHjulStr, Me.LvColUtlStatus, Me.LvVolUtlAvdeling, Me.LvColUtlKategori})
         Me.LvUtlVarer.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtlVarer.Location = New System.Drawing.Point(6, 229)
         Me.LvUtlVarer.Name = "LvUtlVarer"
-        Me.LvUtlVarer.Size = New System.Drawing.Size(584, 243)
+        Me.LvUtlVarer.Size = New System.Drawing.Size(630, 243)
         Me.LvUtlVarer.TabIndex = 3
         Me.LvUtlVarer.UseCompatibleStateImageBehavior = False
         Me.LvUtlVarer.View = System.Windows.Forms.View.Details
@@ -881,31 +849,37 @@ Partial Class Form1
         'LvColUtlID
         '
         Me.LvColUtlID.Text = "Vare ID"
-        Me.LvColUtlID.Width = 81
+        Me.LvColUtlID.Width = 58
         '
         'LvColUtlVareNavn
         '
         Me.LvColUtlVareNavn.Text = "Varenavn"
-        Me.LvColUtlVareNavn.Width = 152
+        Me.LvColUtlVareNavn.Width = 180
         '
         'LvColUtlRamme
         '
         Me.LvColUtlRamme.Text = "Ramme"
+        Me.LvColUtlRamme.Width = 115
         '
         'LvColUtlHjulStr
         '
-        Me.LvColUtlHjulStr.Text = "Hjulstørrelse"
-        Me.LvColUtlHjulStr.Width = 100
+        Me.LvColUtlHjulStr.Text = "Hjulstr."
+        Me.LvColUtlHjulStr.Width = 54
         '
         'LvColUtlStatus
         '
-        Me.LvColUtlStatus.Text = "Tilgjengelighet"
-        Me.LvColUtlStatus.Width = 110
+        Me.LvColUtlStatus.Text = "Status"
+        Me.LvColUtlStatus.Width = 67
         '
         'LvVolUtlAvdeling
         '
         Me.LvVolUtlAvdeling.Text = "Avdeling"
-        Me.LvVolUtlAvdeling.Width = 74
+        Me.LvVolUtlAvdeling.Width = 89
+        '
+        'LvColUtlKategori
+        '
+        Me.LvColUtlKategori.Text = "Kategori"
+        Me.LvColUtlKategori.Width = 63
         '
         'LblUtlSubKat
         '
@@ -950,6 +924,26 @@ Partial Class Form1
         Me.GrpUtleieKundeInfo.TabIndex = 3
         Me.GrpUtleieKundeInfo.TabStop = False
         Me.GrpUtleieKundeInfo.Text = "Kundeinfo:"
+        '
+        'LblUtlAktivKundeID
+        '
+        Me.LblUtlAktivKundeID.AutoSize = True
+        Me.LblUtlAktivKundeID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtlAktivKundeID.Location = New System.Drawing.Point(320, 101)
+        Me.LblUtlAktivKundeID.Name = "LblUtlAktivKundeID"
+        Me.LblUtlAktivKundeID.Size = New System.Drawing.Size(104, 18)
+        Me.LblUtlAktivKundeID.TabIndex = 49
+        Me.LblUtlAktivKundeID.Text = "Aktiv Kunde-ID:"
+        '
+        'LblUtlKundeInfo
+        '
+        Me.LblUtlKundeInfo.AutoSize = True
+        Me.LblUtlKundeInfo.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtlKundeInfo.Location = New System.Drawing.Point(6, 101)
+        Me.LblUtlKundeInfo.Name = "LblUtlKundeInfo"
+        Me.LblUtlKundeInfo.Size = New System.Drawing.Size(246, 18)
+        Me.LblUtlKundeInfo.TabIndex = 48
+        Me.LblUtlKundeInfo.Text = "Klikk på kunde-ID for å aktivere kunde."
         '
         'LvUtleieKunde
         '
@@ -1054,6 +1048,7 @@ Partial Class Form1
         '
         'GrpUtleieSelger
         '
+        Me.GrpUtleieSelger.Controls.Add(Me.UtlTESTlbl)
         Me.GrpUtleieSelger.Controls.Add(Me.LblUtleieSelger)
         Me.GrpUtleieSelger.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
         Me.GrpUtleieSelger.Location = New System.Drawing.Point(942, 2)
@@ -1062,6 +1057,15 @@ Partial Class Form1
         Me.GrpUtleieSelger.TabIndex = 1
         Me.GrpUtleieSelger.TabStop = False
         Me.GrpUtleieSelger.Text = "Selger:"
+        '
+        'UtlTESTlbl
+        '
+        Me.UtlTESTlbl.AutoSize = True
+        Me.UtlTESTlbl.Location = New System.Drawing.Point(44, 101)
+        Me.UtlTESTlbl.Name = "UtlTESTlbl"
+        Me.UtlTESTlbl.Size = New System.Drawing.Size(39, 23)
+        Me.UtlTESTlbl.TabIndex = 59
+        Me.UtlTESTlbl.Text = "test"
         '
         'LblUtleieSelger
         '
@@ -3961,26 +3965,6 @@ Partial Class Form1
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
-        'LblUtlKundeInfo
-        '
-        Me.LblUtlKundeInfo.AutoSize = True
-        Me.LblUtlKundeInfo.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtlKundeInfo.Location = New System.Drawing.Point(6, 101)
-        Me.LblUtlKundeInfo.Name = "LblUtlKundeInfo"
-        Me.LblUtlKundeInfo.Size = New System.Drawing.Size(246, 18)
-        Me.LblUtlKundeInfo.TabIndex = 48
-        Me.LblUtlKundeInfo.Text = "Klikk på kunde-ID for å aktivere kunde."
-        '
-        'LblUtlAktivKundeID
-        '
-        Me.LblUtlAktivKundeID.AutoSize = True
-        Me.LblUtlAktivKundeID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtlAktivKundeID.Location = New System.Drawing.Point(320, 101)
-        Me.LblUtlAktivKundeID.Name = "LblUtlAktivKundeID"
-        Me.LblUtlAktivKundeID.Size = New System.Drawing.Size(104, 18)
-        Me.LblUtlAktivKundeID.TabIndex = 49
-        Me.LblUtlAktivKundeID.Text = "Aktiv Kunde-ID:"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4415,8 +4399,7 @@ Partial Class Form1
     Friend WithEvents LvColUtlRamme As ColumnHeader
     Friend WithEvents LvColUtlHjulStr As ColumnHeader
     Friend WithEvents LvVolUtlAvdeling As ColumnHeader
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label1 As Label
     Friend WithEvents LblUtlAktivKundeID As Label
     Friend WithEvents LblUtlKundeInfo As Label
+    Friend WithEvents LvColUtlKategori As ColumnHeader
 End Class
