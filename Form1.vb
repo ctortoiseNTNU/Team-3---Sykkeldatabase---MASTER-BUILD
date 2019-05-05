@@ -2532,7 +2532,7 @@ Public Class Form1
     End Sub
 
 
-    Public Sub DBANyAvdeling()
+    Private Sub DBANyAvdeling()
         Dim DBALandTable As New DataTable
         Dim DBALandRow As DataRow
         Dim LandString As String = ""
@@ -2553,7 +2553,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBANyUtstyrskategori()
+    Private Sub DBANyUtstyrskategori()
 
         TxtDBAKnavn.Text = SQLWhiteWash(TxtDBAKnavn.Text)
 
@@ -2563,7 +2563,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBANySykkelType()
+    Private Sub DBANySykkelType()
 
         TxtDBATypeNavn.Text = SQLWhiteWash(TxtDBATypeNavn.Text)
         TxtDBATimepris.Text = SQLWhiteWash(TxtDBATimepris.Text)
@@ -2580,7 +2580,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBAEndreAvdeling()
+    Private Sub DBAEndreAvdeling()
         Dim DBALandTable As New DataTable
         Dim DBALandRow As DataRow
         Dim LandString As String = ""
@@ -2603,7 +2603,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBAEndreUtstyrskategori()
+    Private Sub DBAEndreUtstyrskategori()
 
         TxtDBAKID.Text = SQLWhiteWash(TxtDBAKID.Text)
         TxtDBAKnavn.Text = SQLWhiteWash(TxtDBAKnavn.Text)
@@ -2616,7 +2616,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBAEndreSykkelType()
+    Private Sub DBAEndreSykkelType()
 
         TxtDBATypeID.Text = SQLWhiteWash(TxtDBATypeID.Text)
         TxtDBATypeNavn.Text = SQLWhiteWash(TxtDBATypeNavn.Text)
@@ -2634,7 +2634,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBALastInnSykkelType()
+    Private Sub DBALastInnSykkelType()
 
         Dim DBASTTable As New DataTable
         Dim DBASTRow As DataRow
@@ -2653,7 +2653,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBALastInnUtstyrskategori()
+    Private Sub DBALastInnUtstyrskategori()
 
         Dim DBAUKTable As New DataTable
         Dim DBAUKRow As DataRow
@@ -2669,7 +2669,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub DBALastInnAvdeling()
+    Private Sub DBALastInnAvdeling()
 
         Dim DBAAvdelingTable As New DataTable
         Dim DBAAvdelingRow As DataRow
@@ -2691,6 +2691,36 @@ Public Class Form1
         For Each DBAAvdelingLandRow In DBAAvdelingTable.Rows
             CboDBALandsdel.SelectedItem = DBAAvdelingLandRow("landsdel_navn")
         Next
+
+    End Sub
+
+    Private Sub DBASokefelt()
+
+        Dim DBASoekefelt, DBASoekekategori As String
+        DBASoekefelt = SQLWhiteWash(TxtDBASokefelt.Text)
+        AdminSoekekategori = CboDBASok.Text
+
+        Try
+            DBConnect()
+            Dim AdminBrukerSearch As New MySqlCommand("SELECT * FROM brukere WHERE " & AdminSoekekategori & " LIKE '%" & AdminSoekefelt & "%'", Tilkobling)
+            Dim AdminSearchAdapter As New MySqlDataAdapter
+            Dim AdminSearchTable As New DataTable
+            AdminSearchAdapter.SelectCommand = AdminBrukerSearch
+            AdminSearchAdapter.Fill(AdminSearchTable)
+            DBDisconnect()
+            Dim AdminRow As DataRow
+            Dim AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt As String
+            LvAdminBS.Items.Clear()
+            For Each AdminRow In AdminSearchTable.Rows
+                AdminBSbruker_id = AdminRow("bruker_id")
+                AdminBSfornavn = AdminRow("fornavn")
+                AdminBSetternavn = AdminRow("etternavn")
+                AdminBSsoekefelt = AdminRow(AdminSoekekategori)
+                LvAdminBS.Items.Add(New ListViewItem({AdminBSbruker_id, AdminBSfornavn, AdminBSetternavn, AdminBSsoekefelt}))
+            Next
+        Catch AdminSqlError2 As MySqlException
+            MsgBox("Man får ikke koble til databasen: " & AdminSqlError2.Message)
+        End Try
 
     End Sub
 
