@@ -2634,6 +2634,39 @@ Public Class Form1
 
     End Sub
 
+    Public Sub DBALastInnSykkelType()
+
+    End Sub
+
+    Public Sub DBALastInnUtstyrskategori()
+
+    End Sub
+
+    Public Sub DBALastInnAvdeling()
+
+        Dim DBAAvdelingTable As New DataTable
+        Dim DBAAvdelingRow As DataRow
+        Dim DBAAvdelingLandRow As DataRow
+        Dim LandString As String = ""
+
+        TxtDBAAvdelingID.Text = SQLWhiteWash(TxtDBAAvdelingID.Text)
+
+        DBAAvdelingTable = SQLSelect("avdeling", "*", "avdeling_id='" & TxtDBAAvdelingID.Text & "'")
+
+        For Each DBAAvdelingRow In DBAAvdelingTable.Rows
+            TxtDBAAvdNavn.Text = DBAAvdelingRow("avd_navn")
+            TxtDBAAvdAdr.Text = DBAAvdelingRow("avd_adresse")
+            LandString = DBAAvdelingRow("landsdel_id")
+        Next
+
+        DBAAvdelingTable = SQLSelect("landsdel", "landsdel_navn", "landsdel_id='" & LandString & "'")
+
+        For Each DBAAvdelingLandRow In DBAAvdelingTable.Rows
+            CboDBALandsdel.SelectedItem = DBAAvdelingLandRow("landsdel_navn")
+        Next
+
+    End Sub
+
     Private Sub BtnDBAAvdNy_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdNy.Click
         DBANyAvdeling()
     End Sub
@@ -2647,6 +2680,8 @@ Public Class Form1
     End Sub
 
     Private Sub BtnDBAAvdLast_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdLast.Click
+
+        DBALastInnAvdeling()
 
     End Sub
 
