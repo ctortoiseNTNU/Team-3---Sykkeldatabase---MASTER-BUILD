@@ -332,7 +332,7 @@ Partial Class Form1
         Me.ColumnHeader10 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader12 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnDBASok = New System.Windows.Forms.Button()
-        Me.DBASokeetter = New System.Windows.Forms.ComboBox()
+        Me.CboDBASokeetter = New System.Windows.Forms.ComboBox()
         Me.LblDBASoketter = New System.Windows.Forms.Label()
         Me.TxtDBASokefelt = New System.Windows.Forms.TextBox()
         Me.LblDBASokefelt = New System.Windows.Forms.Label()
@@ -3379,7 +3379,7 @@ Partial Class Form1
         '
         Me.GrpDBADBS.Controls.Add(Me.ListView2)
         Me.GrpDBADBS.Controls.Add(Me.BtnDBASok)
-        Me.GrpDBADBS.Controls.Add(Me.DBASokeetter)
+        Me.GrpDBADBS.Controls.Add(Me.CboDBASokeetter)
         Me.GrpDBADBS.Controls.Add(Me.LblDBASoketter)
         Me.GrpDBADBS.Controls.Add(Me.TxtDBASokefelt)
         Me.GrpDBADBS.Controls.Add(Me.LblDBASokefelt)
@@ -3429,16 +3429,16 @@ Partial Class Form1
         Me.BtnDBASok.Text = "Søk!"
         Me.BtnDBASok.UseVisualStyleBackColor = True
         '
-        'DBASokeetter
+        'CboDBASokeetter
         '
-        Me.DBASokeetter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.DBASokeetter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DBASokeetter.FormattingEnabled = True
-        Me.DBASokeetter.Items.AddRange(New Object() {"avdeling_id", "avd_navn", "avd_adresse", "landsdel", "type_id", "sykkelkategori", "utstyr_kat_id", "utstyr_kat"})
-        Me.DBASokeetter.Location = New System.Drawing.Point(101, 72)
-        Me.DBASokeetter.Name = "DBASokeetter"
-        Me.DBASokeetter.Size = New System.Drawing.Size(121, 26)
-        Me.DBASokeetter.TabIndex = 26
+        Me.CboDBASokeetter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboDBASokeetter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboDBASokeetter.FormattingEnabled = True
+        Me.CboDBASokeetter.Items.AddRange(New Object() {"avdeling_id", "avd_navn", "avd_adresse", "landsdel", "type_id", "sykkelkategori", "utstyr_kat_id", "utstyr_kat"})
+        Me.CboDBASokeetter.Location = New System.Drawing.Point(101, 72)
+        Me.CboDBASokeetter.Name = "CboDBASokeetter"
+        Me.CboDBASokeetter.Size = New System.Drawing.Size(121, 26)
+        Me.CboDBASokeetter.TabIndex = 26
         '
         'LblDBASoketter
         '
@@ -4230,7 +4230,7 @@ Partial Class Form1
     Friend WithEvents ColumnHeader10 As ColumnHeader
     Friend WithEvents ColumnHeader12 As ColumnHeader
     Friend WithEvents BtnDBASok As Button
-    Friend WithEvents DBASokeetter As ComboBox
+    Friend WithEvents CboDBASokeetter As ComboBox
     Friend WithEvents LblDBASoketter As Label
     Friend WithEvents TxtDBASokefelt As TextBox
     Friend WithEvents LblDBASokefelt As Label

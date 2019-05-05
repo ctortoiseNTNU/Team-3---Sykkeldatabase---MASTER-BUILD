@@ -2698,7 +2698,7 @@ Public Class Form1
 
         Dim DBASoekefelt, DBASoekekategori As String
         DBASoekefelt = SQLWhiteWash(TxtDBASokefelt.Text)
-        AdminSoekekategori = CboDBASok.Text
+        DBASoekekategori = CboDBASokeetter.Text
 
         Try
             DBConnect()
