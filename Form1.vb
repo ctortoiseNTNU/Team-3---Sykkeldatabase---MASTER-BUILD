@@ -739,32 +739,30 @@ Public Class Form1
             CboUtlRamme.Items.Clear()
             AutoPopCbo(CboUtlSubkat, "sykkel_typer", "kategori")
             AutoPopCbo(CboUtlRamme, "sykler", "sykkel_ramme")
-
             'UtlAutoPopSykkel()
         End If
 
     End Sub
 
-    'Resetter combobox for ramme om sykkel kategori endres.
-    Private Sub CboUtlSubkat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.Click
-
-
-        '    Private Sub CboLogiHentested_SelectedIndexChanged(sender As Object, e As EventArgs) _
-        '    Handles CboLogiHentested.SelectedIndexChanged
-        '    AutoPopCbo(sender, "avdeling", "avd_navn")
-        '    End Sub
-
-
-
+    'Fyller combobox for ramme etter valgt kategori
+    Private Sub CboUtlSubkat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.DropDown
         If CboUtlKat.SelectedItem = "Sykkel" Then
-
-            'finn alle rammer på kategori og grupper de
+            Dim sykkelkatnavn = CboUtlSubkat.SelectedItem
+            Dim sykkelkatID As String = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", sykkelkatnavn)
             CboUtlRamme.Items.Clear()
-            AutoPopCbo(sender, "sykler", "sykkel_ramme")
-        Else
-
+            Dim rammedat As DataTable
+            If CboUtlSubkat.SelectedIndex = -1 Then
+                rammedat = SQLSelect("sykler", "DISTINCT sykkel_ramme", "1")
+            Else
+                rammedat = SQLSelect("sykler", "DISTINCT sykkel_ramme", "type_id='" & sykkelkatID & "'") '"type_id='" & sykkelkatID & "'")
+            End If
+            If rammedat IsNot Nothing AndAlso rammedat.Rows.Count > 0 Then
+                For Each r In rammedat.Rows
+                    CboUtlRamme.Items.Add(r("sykkel_ramme"))
+                Next
+            Else
+            End If
         End If
-
     End Sub
 
     'Metode som fyller combobox (som kaller) med data fra database. ----------OVerflødig
