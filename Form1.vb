@@ -647,12 +647,10 @@ Public Class Form1
         Dim UtlRamme As String = CboUtlRamme.SelectedItem
         Dim UtlHjulStr As String = ""  'combobox select
         Dim UtlSubkatID, UtlSykkelIDRamme As String
-        'Dim SykkelSQLKolonner = New String() {"sykkel_modell", "sykkel_navn", "sykkel_status", "kategori",
-        ' "sykkel_kat_timepris", "sykkel_kat_døgnpris", "sykkel_kat_ukepris"}
+
 
         'henter typeID fra sykler og utstyr etter data fra subkategori
         'hente varenummer fra sykler med valgt ramme og hjul
-
         If UtlKategori = "Sykkel" Then
             UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
             UtlSykkelIDRamme = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)   '?????
@@ -732,25 +730,14 @@ Public Class Form1
         AutoPopCbo(sender, "avdeling", "avd_navn")
     End Sub
 
-    'Autofyll av ramme combobox fra database.
-    'Denne henter ramme fra valgt sykkeltype
-    'Private Sub CboUtlRamme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlRamme.SelectedIndexChanged
-    '    CboUtlRamme.SelectedIndex = -1
-    '    UtlAutoPopRamme()
-
-    'End Sub
-
     'Endrer innhold i combobox for subkategori og ramme avhenging om det er sykkel eller utstyr som er valgt.
     Private Sub CboUtlKat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlKat.SelectedIndexChanged
-        'Dropdownlisten Subkategori endrer kategorier (leses fra databasen) _
-        'basert på om det er sykkel eller utstyr som er valgt.
-        'ramme og hjul valg deaktiveres om det er valgt utstyr.
+
 
         If CboUtlKat.SelectedItem = "Utstyr" Then
             CboUtlRamme.Enabled = False
             CboUtlSubkat.Items.Clear()
             CboUtlRamme.Items.Clear()
-            'UtlAutoPopUtstyr()
             AutoPopCbo(CboUtlSubkat, "utstyr_kategori", "utstyr_kat")
         Else
             CboUtlRamme.Enabled = True
@@ -758,7 +745,6 @@ Public Class Form1
             CboUtlRamme.Items.Clear()
             AutoPopCbo(CboUtlSubkat, "sykkel_typer", "kategori")
             AutoPopCbo(CboUtlRamme, "sykler", "sykkel_ramme")
-            'UtlAutoPopSykkel()
         End If
 
     End Sub
@@ -773,7 +759,7 @@ Public Class Form1
             If CboUtlSubkat.SelectedIndex = -1 Then
                 rammedat = SQLSelect("sykler", "DISTINCT sykkel_ramme", "1")
             Else
-                rammedat = SQLSelect("sykler", "DISTINCT sykkel_ramme", "type_id='" & sykkelkatID & "'") '"type_id='" & sykkelkatID & "'")
+                rammedat = SQLSelect("sykler", "DISTINCT sykkel_ramme", "type_id='" & sykkelkatID & "'")
             End If
             If rammedat IsNot Nothing AndAlso rammedat.Rows.Count > 0 Then
                 For Each r In rammedat.Rows
@@ -783,102 +769,6 @@ Public Class Form1
             End If
         End If
     End Sub
-
-    'Metode som fyller combobox (som kaller) med data fra database. ----------OVerflødig
-    'Tabell og kolonne det skal leses fra må angis som argumenter.
-    'Private Sub UtlAutoPopCbo(sender, tabell, kolonne)
-
-    '    Try
-    '        DBConnect()
-    '        Dim UtlSqlCom As New MySqlCommand("SELECT " & kolonne & " FROM " & tabell, Tilkobling)
-    '        Dim UtlSqlDA As New MySqlDataAdapter
-    '        Dim UtlUtstyrComboDaT As New DataTable
-    '        UtlSqlDA.SelectCommand = UtlSqlCom
-    '        UtlSqlDA.Fill(UtlUtstyrComboDaT)
-    '        DBDisconnect()
-    '        sender.Items.Clear()
-    '        Dim UtlUtstyrRow As DataRow
-    '        Dim UtlUtstyrString As String
-    '        For Each UtlUtstyrRow In UtlUtstyrComboDaT.Rows
-    '            UtlUtstyrString = UtlUtstyrRow(kolonne)
-    '            sender.Items.Add(UtlUtstyrString)
-    '        Next
-    '    Catch ex As MySqlException
-    '        MsgBox("Feil med autoutfylling av " & CStr(sender) & ": " & ex.Message)
-    '    End Try
-    'End Sub
-
-    'Combobox Subkategori styres av indexchanged på combobox kategori. Dermed vil et kall på UtlCboPop fra _
-    'combobox for kategori føre til endringer i kategori og ikke subkategori som ønsket.
-    'Derfor egne autopopulate for sykkel og utstyr.
-
-    'Private Sub UtlAutoPopUtstyr()
-    '    Try
-    '        DBConnect()
-    '        Dim UtlSqlCom As New MySqlCommand("SELECT utstyr_kat FROM utstyr_kategori", Tilkobling)
-    '        Dim UtlSqlDA As New MySqlDataAdapter
-    '        Dim UtlUtstyrComboDaT As New DataTable
-    '        UtlSqlDA.SelectCommand = UtlSqlCom
-    '        UtlSqlDA.Fill(UtlUtstyrComboDaT)
-    '        DBDisconnect()
-    '        CboUtlSubkat.Items.Clear()
-    '        Dim UtlUtstyrRow As DataRow
-    '        Dim UtlUtstyrString As String
-    '        For Each UtlUtstyrRow In UtlUtstyrComboDaT.Rows
-    '            UtlUtstyrString = UtlUtstyrRow("utstyr_kat")
-    '            CboUtlSubkat.Items.Add(UtlUtstyrString)
-    '        Next
-    '    Catch ex As MySqlException
-    '        MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
-    '    End Try
-    'End Sub
-
-    'Private Sub UtlAutoPopSykkel()
-    '    Try
-    '        DBConnect()
-    '        Dim UtlSqlCom As New MySqlCommand("SELECT kategori FROM sykkel_typer", Tilkobling)
-    '        Dim UtlSqlDA As New MySqlDataAdapter
-    '        Dim UtlSykkelComboDaT As New DataTable
-    '        UtlSqlDA.SelectCommand = UtlSqlCom
-    '        UtlSqlDA.Fill(UtlSykkelComboDaT)
-    '        DBDisconnect()
-    '        CboUtlSubkat.Items.Clear()
-    '        Dim UtlSykkelRow As DataRow
-    '        Dim UtlSykkelString As String
-    '        For Each UtlSykkelRow In UtlSykkelComboDaT.Rows
-    '            UtlSykkelString = UtlSykkelRow("kategori")
-    '            CboUtlSubkat.Items.Add(UtlSykkelString)
-    '        Next
-    '    Catch ex As MySqlException
-    '        MsgBox("Feil med autoutfylling av sykkelkategorier: " & ex.Message)
-    '    End Try
-    'End Sub
-
-    'Private Sub UtlAutoPopRamme()
-
-    '    Dim UtlSubKategori As String = CboUtlSubkat.SelectedItem
-    '    Dim UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
-    '    Try
-    '        DBConnect()
-
-    '        Dim UtlSqlCom As New MySqlCommand("SELECT sykkel_ramme FROM sykler 
-    '                                            WHERE type_id =" & UtlSubkatID & "", Tilkobling)
-    '        Dim UtlSqlDA As New MySqlDataAdapter
-    '        Dim UtlRammeComboDaT As New DataTable
-    '        UtlSqlDA.SelectCommand = UtlSqlCom
-    '        UtlSqlDA.Fill(UtlRammeComboDaT)
-    '        DBDisconnect()
-    '        CboUtlRamme.Items.Clear()
-    '        Dim UtlRammeRow As DataRow
-    '        Dim UtlRammeString As String
-    '        For Each UtlRammeRow In UtlRammeComboDaT.Rows
-    '            UtlRammeString = UtlRammeRow("sykkel_ramme")
-    '            CboUtlRamme.Items.Add(UtlRammeString)
-    '        Next
-    '    Catch ex As MySqlException
-    '        MsgBox("Feil med autoutfylling av utstyrskategorier: " & ex.Message)
-    '    End Try
-    'End Sub
 
 
 #End Region
@@ -1915,11 +1805,6 @@ Public Class Form1
     End Sub
 
 
-
-
-
-
-
     Private Sub StaTotalSykkelPris()
         Dim StaTotalSykkelKostnadDT As DataTable
         StaTotalSykkelKostnadDT = SQLSelect("sykler", "SUM(sykkel_pris)", "1")
@@ -2055,7 +1940,7 @@ Public Class Form1
         Dim StaTypeSykkel(StaAntSyklTyp) As String
 
         Dim StaInputCommand As String = "select sykkel_typer.kategori, count(*) AS c from sykkel_typer join " _
-            & "sykler as s on sykkel_typer.type_id=s.type_id join utleie on s.sykkel_id=utleie.sykkel_id group by sykkel_typer.kategori"
+            & "sykler as s on sykkel_typer.type_id=s.type_id join utleie_sykkel on s.sykkel_id=utleie_sykkel.sykkel_id group by sykkel_typer.kategori"
 
         Dim part1 As String = "select sykkel_typer.kategori, count(*) As c"
         Dim part2 As String = "from sykkel_typer join sykler as s on sykkel_typer.type_id=s.type_id join utleie on s.sykkel_id=utleie.sykkel_id group by sykkel_typer.kategori"
