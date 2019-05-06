@@ -52,6 +52,7 @@ Partial Class Form1
         Me.LvColUtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
+        Me.ChkUtlRabatOverstyr = New System.Windows.Forms.CheckBox()
         Me.CboUtlRamme = New System.Windows.Forms.ComboBox()
         Me.LblUtlRamme = New System.Windows.Forms.Label()
         Me.LblUtlInfo = New System.Windows.Forms.Label()
@@ -391,7 +392,6 @@ Partial Class Form1
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.TmStartLoggUt = New System.Windows.Forms.Timer(Me.components)
-        Me.ChkUtlRabatOverstyr = New System.Windows.Forms.CheckBox()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -724,6 +724,17 @@ Partial Class Form1
         Me.GrpUtleieProdukter.TabIndex = 4
         Me.GrpUtleieProdukter.TabStop = False
         Me.GrpUtleieProdukter.Text = "Produkter:"
+        '
+        'ChkUtlRabatOverstyr
+        '
+        Me.ChkUtlRabatOverstyr.AutoSize = True
+        Me.ChkUtlRabatOverstyr.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkUtlRabatOverstyr.Location = New System.Drawing.Point(464, 154)
+        Me.ChkUtlRabatOverstyr.Name = "ChkUtlRabatOverstyr"
+        Me.ChkUtlRabatOverstyr.Size = New System.Drawing.Size(110, 19)
+        Me.ChkUtlRabatOverstyr.TabIndex = 59
+        Me.ChkUtlRabatOverstyr.Text = "Overstyr rabatt"
+        Me.ChkUtlRabatOverstyr.UseVisualStyleBackColor = True
         '
         'CboUtlRamme
         '
@@ -4022,18 +4033,7 @@ Partial Class Form1
         '
         'TmStartLoggUt
         '
-        Me.TmStartLoggUt.Interval = 300000
-        '
-        'ChkUtlRabatOverstyr
-        '
-        Me.ChkUtlRabatOverstyr.AutoSize = True
-        Me.ChkUtlRabatOverstyr.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkUtlRabatOverstyr.Location = New System.Drawing.Point(464, 154)
-        Me.ChkUtlRabatOverstyr.Name = "ChkUtlRabatOverstyr"
-        Me.ChkUtlRabatOverstyr.Size = New System.Drawing.Size(110, 19)
-        Me.ChkUtlRabatOverstyr.TabIndex = 59
-        Me.ChkUtlRabatOverstyr.Text = "Overstyr rabatt"
-        Me.ChkUtlRabatOverstyr.UseVisualStyleBackColor = True
+        Me.TmStartLoggUt.Interval = 600000
         '
         'Form1
         '
