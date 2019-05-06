@@ -32,6 +32,9 @@ Partial Class Form1
         Me.StartVelkommenLabel = New System.Windows.Forms.Label()
         Me.StartLogo = New System.Windows.Forms.PictureBox()
         Me.UtleieTab = New System.Windows.Forms.TabPage()
+        Me.BtnUtlBeregnPris = New System.Windows.Forms.Button()
+        Me.GrpUltOrdinærPris = New System.Windows.Forms.GroupBox()
+        Me.LblUtlOrdinærpris = New System.Windows.Forms.Label()
         Me.BtnUtlAbort = New System.Windows.Forms.Button()
         Me.GrpUtlRabatt = New System.Windows.Forms.GroupBox()
         Me.LblUtlRabatt = New System.Windows.Forms.Label()
@@ -41,11 +44,11 @@ Partial Class Form1
         Me.LvUtleieOrdre = New System.Windows.Forms.ListView()
         Me.LvColUtleieVareIdValgt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColUtleieVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvColUtleieRabatt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvColUtleiePris = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlKategori2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtleieSubKat = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColUtlTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColUtleieDag = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColUtleieUke = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvColUtlTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColUtlAvdeling = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnUtleieFullfør = New System.Windows.Forms.Button()
         Me.GrpUtleieProdukter = New System.Windows.Forms.GroupBox()
@@ -64,7 +67,7 @@ Partial Class Form1
         Me.CboUtlRabatt = New System.Windows.Forms.ComboBox()
         Me.LblUtsRabatt = New System.Windows.Forms.Label()
         Me.CboUtlSubkat = New System.Windows.Forms.ComboBox()
-        Me.BtnUtlAddVare = New System.Windows.Forms.Button()
+        Me.BtnUtlSokVare = New System.Windows.Forms.Button()
         Me.LvUtlVarer = New System.Windows.Forms.ListView()
         Me.LvColUtlID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColUtlVareNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -388,12 +391,11 @@ Partial Class Form1
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.TmStartLoggUt = New System.Windows.Forms.Timer(Me.components)
-        Me.GrpUltOrdinærPris = New System.Windows.Forms.GroupBox()
-        Me.LblUtlOrdinærpris = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.UtleieTab.SuspendLayout()
+        Me.GrpUltOrdinærPris.SuspendLayout()
         Me.GrpUtlRabatt.SuspendLayout()
         Me.GrpUtleieSum.SuspendLayout()
         Me.GrpUtleieOrdre.SuspendLayout()
@@ -428,7 +430,6 @@ Partial Class Form1
         Me.LoginTab.SuspendLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GrpUltOrdinærPris.SuspendLayout()
         Me.SuspendLayout()
         '
         'HovedTab
@@ -515,6 +516,7 @@ Partial Class Form1
         '
         Me.UtleieTab.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.UtleieTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UtleieTab.Controls.Add(Me.BtnUtlBeregnPris)
         Me.UtleieTab.Controls.Add(Me.GrpUltOrdinærPris)
         Me.UtleieTab.Controls.Add(Me.BtnUtlAbort)
         Me.UtleieTab.Controls.Add(Me.GrpUtlRabatt)
@@ -533,13 +535,45 @@ Partial Class Form1
         Me.UtleieTab.TabIndex = 1
         Me.UtleieTab.Text = "Utleie"
         '
+        'BtnUtlBeregnPris
+        '
+        Me.BtnUtlBeregnPris.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtlBeregnPris.Enabled = False
+        Me.BtnUtlBeregnPris.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUtlBeregnPris.Location = New System.Drawing.Point(660, 548)
+        Me.BtnUtlBeregnPris.Name = "BtnUtlBeregnPris"
+        Me.BtnUtlBeregnPris.Size = New System.Drawing.Size(100, 37)
+        Me.BtnUtlBeregnPris.TabIndex = 10
+        Me.BtnUtlBeregnPris.Text = "Beregn pris"
+        Me.BtnUtlBeregnPris.UseVisualStyleBackColor = False
+        '
+        'GrpUltOrdinærPris
+        '
+        Me.GrpUltOrdinærPris.Controls.Add(Me.LblUtlOrdinærpris)
+        Me.GrpUltOrdinærPris.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpUltOrdinærPris.Location = New System.Drawing.Point(782, 543)
+        Me.GrpUltOrdinærPris.Name = "GrpUltOrdinærPris"
+        Me.GrpUltOrdinærPris.Size = New System.Drawing.Size(116, 85)
+        Me.GrpUltOrdinærPris.TabIndex = 8
+        Me.GrpUltOrdinærPris.TabStop = False
+        Me.GrpUltOrdinærPris.Text = "Ordinær pris:"
+        '
+        'LblUtlOrdinærpris
+        '
+        Me.LblUtlOrdinærpris.AutoSize = True
+        Me.LblUtlOrdinærpris.Location = New System.Drawing.Point(35, 35)
+        Me.LblUtlOrdinærpris.Name = "LblUtlOrdinærpris"
+        Me.LblUtlOrdinærpris.Size = New System.Drawing.Size(36, 19)
+        Me.LblUtlOrdinærpris.TabIndex = 0
+        Me.LblUtlOrdinærpris.Text = "Sum"
+        '
         'BtnUtlAbort
         '
         Me.BtnUtlAbort.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUtlAbort.Location = New System.Drawing.Point(660, 558)
+        Me.BtnUtlAbort.Location = New System.Drawing.Point(660, 591)
         Me.BtnUtlAbort.Name = "BtnUtlAbort"
-        Me.BtnUtlAbort.Size = New System.Drawing.Size(100, 50)
+        Me.BtnUtlAbort.Size = New System.Drawing.Size(100, 37)
         Me.BtnUtlAbort.TabIndex = 9
         Me.BtnUtlAbort.Text = "Tøm Skjema"
         Me.BtnUtlAbort.UseVisualStyleBackColor = False
@@ -597,7 +631,7 @@ Partial Class Form1
         '
         'LvUtleieOrdre
         '
-        Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtleieVareIdValgt, Me.LvColUtleieVareNavn, Me.LvColUtleieRabatt, Me.LvColUtleiePris, Me.LvColUtleieDag, Me.LvColUtleieUke, Me.LvColUtlTime, Me.LvColUtlAvdeling})
+        Me.LvUtleieOrdre.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColUtleieVareIdValgt, Me.LvColUtleieVareNavn, Me.LvColUtlKategori2, Me.LvColUtleieSubKat, Me.LvColUtlTime, Me.LvColUtleieDag, Me.LvColUtleieUke, Me.LvColUtlAvdeling})
         Me.LvUtleieOrdre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvUtleieOrdre.Location = New System.Drawing.Point(8, 28)
         Me.LvUtleieOrdre.Name = "LvUtleieOrdre"
@@ -609,22 +643,26 @@ Partial Class Form1
         'LvColUtleieVareIdValgt
         '
         Me.LvColUtleieVareIdValgt.Text = "Vare ID"
-        Me.LvColUtleieVareIdValgt.Width = 90
+        Me.LvColUtleieVareIdValgt.Width = 56
         '
         'LvColUtleieVareNavn
         '
         Me.LvColUtleieVareNavn.Text = "Varenavn"
-        Me.LvColUtleieVareNavn.Width = 212
+        Me.LvColUtleieVareNavn.Width = 173
         '
-        'LvColUtleieRabatt
+        'LvColUtlKategori2
         '
-        Me.LvColUtleieRabatt.Text = "Rabatt"
-        Me.LvColUtleieRabatt.Width = 55
+        Me.LvColUtlKategori2.Text = "Kategori"
+        Me.LvColUtlKategori2.Width = 65
         '
-        'LvColUtleiePris
+        'LvColUtleieSubKat
         '
-        Me.LvColUtleiePris.Text = "Pris"
-        Me.LvColUtleiePris.Width = 58
+        Me.LvColUtleieSubKat.Text = "Subkategori"
+        Me.LvColUtleieSubKat.Width = 97
+        '
+        'LvColUtlTime
+        '
+        Me.LvColUtlTime.Text = "Timer"
         '
         'LvColUtleieDag
         '
@@ -636,14 +674,10 @@ Partial Class Form1
         Me.LvColUtleieUke.Text = "Uker"
         Me.LvColUtleieUke.Width = 53
         '
-        'LvColUtlTime
-        '
-        Me.LvColUtlTime.Text = "Timer"
-        '
         'LvColUtlAvdeling
         '
         Me.LvColUtlAvdeling.Text = "Avdeling"
-        Me.LvColUtlAvdeling.Width = 99
+        Me.LvColUtlAvdeling.Width = 83
         '
         'BtnUtleieFullfør
         '
@@ -673,7 +707,7 @@ Partial Class Form1
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlRabatt)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtsRabatt)
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlSubkat)
-        Me.GrpUtleieProdukter.Controls.Add(Me.BtnUtlAddVare)
+        Me.GrpUtleieProdukter.Controls.Add(Me.BtnUtlSokVare)
         Me.GrpUtleieProdukter.Controls.Add(Me.LvUtlVarer)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlSubKat)
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlKat)
@@ -839,16 +873,16 @@ Partial Class Form1
         Me.CboUtlSubkat.Size = New System.Drawing.Size(121, 26)
         Me.CboUtlSubkat.TabIndex = 40
         '
-        'BtnUtlAddVare
+        'BtnUtlSokVare
         '
-        Me.BtnUtlAddVare.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnUtlAddVare.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUtlAddVare.Location = New System.Drawing.Point(105, 150)
-        Me.BtnUtlAddVare.Name = "BtnUtlAddVare"
-        Me.BtnUtlAddVare.Size = New System.Drawing.Size(100, 40)
-        Me.BtnUtlAddVare.TabIndex = 39
-        Me.BtnUtlAddVare.Text = "Søk etter vare"
-        Me.BtnUtlAddVare.UseVisualStyleBackColor = False
+        Me.BtnUtlSokVare.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtlSokVare.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUtlSokVare.Location = New System.Drawing.Point(105, 150)
+        Me.BtnUtlSokVare.Name = "BtnUtlSokVare"
+        Me.BtnUtlSokVare.Size = New System.Drawing.Size(100, 40)
+        Me.BtnUtlSokVare.TabIndex = 39
+        Me.BtnUtlSokVare.Text = "Søk etter vare"
+        Me.BtnUtlSokVare.UseVisualStyleBackColor = False
         '
         'LvUtlVarer
         '
@@ -3984,26 +4018,6 @@ Partial Class Form1
         '
         Me.TmStartLoggUt.Interval = 300000
         '
-        'GrpUltOrdinærPris
-        '
-        Me.GrpUltOrdinærPris.Controls.Add(Me.LblUtlOrdinærpris)
-        Me.GrpUltOrdinærPris.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpUltOrdinærPris.Location = New System.Drawing.Point(782, 543)
-        Me.GrpUltOrdinærPris.Name = "GrpUltOrdinærPris"
-        Me.GrpUltOrdinærPris.Size = New System.Drawing.Size(116, 85)
-        Me.GrpUltOrdinærPris.TabIndex = 8
-        Me.GrpUltOrdinærPris.TabStop = False
-        Me.GrpUltOrdinærPris.Text = "Ordresum:"
-        '
-        'LblUtlOrdinærpris
-        '
-        Me.LblUtlOrdinærpris.AutoSize = True
-        Me.LblUtlOrdinærpris.Location = New System.Drawing.Point(35, 35)
-        Me.LblUtlOrdinærpris.Name = "LblUtlOrdinærpris"
-        Me.LblUtlOrdinærpris.Size = New System.Drawing.Size(36, 19)
-        Me.LblUtlOrdinærpris.TabIndex = 0
-        Me.LblUtlOrdinærpris.Text = "Sum"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4018,6 +4032,8 @@ Partial Class Form1
         Me.StartTab.PerformLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.UtleieTab.ResumeLayout(False)
+        Me.GrpUltOrdinærPris.ResumeLayout(False)
+        Me.GrpUltOrdinærPris.PerformLayout()
         Me.GrpUtlRabatt.ResumeLayout(False)
         Me.GrpUtlRabatt.PerformLayout()
         Me.GrpUtleieSum.ResumeLayout(False)
@@ -4075,8 +4091,6 @@ Partial Class Form1
         Me.LoginTab.PerformLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GrpUltOrdinærPris.ResumeLayout(False)
-        Me.GrpUltOrdinærPris.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4357,8 +4371,7 @@ Partial Class Form1
     Friend WithEvents LvUtleieOrdre As ListView
     Friend WithEvents LvColUtleieVareIdValgt As ColumnHeader
     Friend WithEvents LvColUtleieVareNavn As ColumnHeader
-    Friend WithEvents LvColUtleieRabatt As ColumnHeader
-    Friend WithEvents LvColUtleiePris As ColumnHeader
+    Friend WithEvents LvColUtleieSubKat As ColumnHeader
     Friend WithEvents LvColUtleieDag As ColumnHeader
     Friend WithEvents LvColUtleieUke As ColumnHeader
     Friend WithEvents BtnUtleieFullfør As Button
@@ -4368,7 +4381,7 @@ Partial Class Form1
     Friend WithEvents LblUtlSubKat As Label
     Friend WithEvents CboUtlAvd As ComboBox
     Friend WithEvents GrpUtlRabatt As GroupBox
-    Friend WithEvents BtnUtlAddVare As Button
+    Friend WithEvents BtnUtlSokVare As Button
     Friend WithEvents LvUtlVarer As ListView
     Friend WithEvents LvColUtlID As ColumnHeader
     Friend WithEvents LvColUtlVareNavn As ColumnHeader
@@ -4447,4 +4460,6 @@ Partial Class Form1
     Friend WithEvents TmStartLoggUt As Timer
     Friend WithEvents GrpUltOrdinærPris As GroupBox
     Friend WithEvents LblUtlOrdinærpris As Label
+    Friend WithEvents LvColUtlKategori2 As ColumnHeader
+    Friend WithEvents BtnUtlBeregnPris As Button
 End Class
