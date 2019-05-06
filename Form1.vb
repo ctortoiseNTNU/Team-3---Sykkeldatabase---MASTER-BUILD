@@ -265,19 +265,19 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'With HovedTab.TabPages
+        With HovedTab.TabPages
 
-        '    .Remove(StartTab)
-        '    .Remove(UtleieTab)
-        '    .Remove(KDTab)
-        '    .Remove(InventarTab)
-        '    .Remove(LogiTab)
-        '    .Remove(StatTab)
-        '    .Remove(AdminTab)
-        '    .Remove(DBAdminTab)
-        '    HovedTab.SelectedTab = LoginTab
+            .Remove(StartTab)
+            .Remove(UtleieTab)
+            .Remove(KDTab)
+            .Remove(InventarTab)
+            .Remove(LogiTab)
+            .Remove(StatTab)
+            .Remove(AdminTab)
+            .Remove(DBAdminTab)
+            HovedTab.SelectedTab = LoginTab
 
-        'End With
+        End With
 
 
     End Sub
@@ -2487,7 +2487,7 @@ Public Class Form1
 
 #Region "LoginTab"
 
-    Public Sub LoginCheck()
+    Private Sub LoginCheck()
 
         Dim LoginBrukerTabell As New DataTable
         Dim LoginPassordTabell As New DataTable
@@ -2548,7 +2548,7 @@ Public Class Form1
         LoginSuccess()
     End Sub
 
-    Public Sub LoginSuccess()
+    Private Sub LoginSuccess()
         With HovedTab.TabPages
             .Insert(0, StartTab)
             .Insert(1, UtleieTab)
@@ -2570,9 +2570,34 @@ Public Class Form1
         End If
 
         HovedTab.SelectedTab = StartTab
-
+        SecurityCounter = 0
         StartVelkommenLabel.Text = "Velkommen, " & FornavnString & " " & EtternavnString
         StartMOTDUpdate()
+    End Sub
+
+    Private Sub LoggUt()
+        With HovedTab.TabPages
+            .Remove(StartTab)
+            .Remove(UtleieTab)
+            .Remove(KDTab)
+            .Remove(InventarTab)
+            .Remove(LogiTab)
+            .Remove(StatTab)
+            .Add(LoginTab)
+        End With
+
+        If AdminBool = True Then
+            With HovedTab.TabPages
+                .Remove(AdminTab)
+                .Remove(DBAdminTab)
+            End With
+        End If
+
+        HovedTab.SelectedTab = LoginTab
+        AdminBool = False
+        LogBool = False
+
+        MsgBox("Du har blitt logget ut!")
     End Sub
 
     Private Sub BtnLoginLogin_Click(sender As Object, e As EventArgs) Handles BtnLoginLogin.Click
