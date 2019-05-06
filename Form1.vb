@@ -2656,7 +2656,7 @@ Public Class Form1
         Dim DBALandTable As New DataTable
         Dim DBALandRow As DataRow
         Dim LandString As String = ""
-
+        Dim DBAAvdelingIDString As String
         TxtDBAAvdNavn.Text = SQLWhiteWash(TxtDBAAvdNavn.Text)
         TxtDBAAvdAdr.Text = SQLWhiteWash(TxtDBAAvdAdr.Text)
 
@@ -2666,7 +2666,7 @@ Public Class Form1
             LandString = DBALandRow("landsdel_id")
         Next
 
-        SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
+        DBAAvdelingIDString = SQLInsert("avdeling", "(avd_navn, avd_adresse, landsdel_id)", "('" & TxtDBAAvdNavn.Text & "', '" & TxtDBAAvdAdr.Text & "', '" & LandString & "')")
 
         TxtDBAAvdNavn.Text = ""
         TxtDBAAvdAdr.Text = ""
@@ -2674,23 +2674,24 @@ Public Class Form1
     End Sub
 
     Private Sub DBANyUtstyrskategori()
+        Dim DBAUtstyrIDStreng As String = ""
 
         TxtDBAKnavn.Text = SQLWhiteWash(TxtDBAKnavn.Text)
 
-        SQLInsert("utstyr_kategori", "(utstyr_kat)", "('" & TxtDBAKnavn.Text & "')")
+        DBAUtstyrIDStreng = SQLInsert("utstyr_kategori", "(utstyr_kat)", "('" & TxtDBAKnavn.Text & "')")
 
         TxtDBAKnavn.Text = ""
 
     End Sub
 
     Private Sub DBANySykkelType()
-
+        Dim DBASykkelIDStreng As String = ""
         TxtDBATypeNavn.Text = SQLWhiteWash(TxtDBATypeNavn.Text)
         TxtDBATimepris.Text = SQLWhiteWash(TxtDBATimepris.Text)
         TxtDBADognpris.Text = SQLWhiteWash(TxtDBADognpris.Text)
         TxtDBAUkepris.Text = SQLWhiteWash(TxtDBAUkepris.Text)
 
-        SQLInsert("sykkel_typer", "(kategori, sykkel_kat_timepris, sykkel_kat_døgnpris, sykkel_kat_ukepris)", "('" & TxtDBATypeNavn.Text & "', '" & TxtDBATimepris.Text & "', '" & TxtDBADognpris.Text & "', '" & TxtDBAUkepris.Text & "')")
+        DBASykkelIDStreng = SQLInsert("sykkel_typer", "(kategori, sykkel_kat_timepris, sykkel_kat_døgnpris, sykkel_kat_ukepris)", "('" & TxtDBATypeNavn.Text & "', '" & TxtDBATimepris.Text & "', '" & TxtDBADognpris.Text & "', '" & TxtDBAUkepris.Text & "')")
 
         TxtDBATypeNavn.Text = ""
         TxtDBATimepris.Text = ""
@@ -2857,18 +2858,89 @@ Public Class Form1
     End Sub
 
     Private Sub BtnDBAAvdNy_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdNy.Click
+        Dim InputCheck As Boolean = False
+
+        InputCheck = CheckVarChar20(TxtDBAAvdNavn.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Navn Input - 20 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckVarChar30(TxtDBAAvdAdr.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Adresse Input - 30 Char Maks")
+            Exit Sub
+        End If
         DBANyAvdeling()
     End Sub
 
     Private Sub BtnDBASTNy_Click(sender As Object, e As EventArgs) Handles BtnDBASTNy.Click
+        Dim InputCheck As Boolean = False
+
+        InputCheck = CheckVarChar15(TxtDBATypeNavn.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Navn Input - 15 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckIntValue(TxtDBAUkepris.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Ukepris Input - Tall med 11 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckIntValue(TxtDBADognpris.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Dognpris Input - Tall med 11 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckIntValue(TxtDBATimepris.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Timepris Input - Tall med 11 Char Maks")
+            Exit Sub
+        End If
+
         DBANySykkelType()
     End Sub
 
     Private Sub BtnDBASTEndre_Click(sender As Object, e As EventArgs) Handles BtnDBASTEndre.Click
+        Dim InputCheck As Boolean = False
+
+        InputCheck = CheckIntValue(TxtDBATypeID.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig ID Input - Tall med 11 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckVarChar15(TxtDBATypeNavn.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Navn Input - 15 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckIntValue(TxtDBAUkepris.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Ukepris Input - Tall med 11 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckIntValue(TxtDBADognpris.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Dognpris Input - Tall med 11 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckIntValue(TxtDBATimepris.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Timepris Input - Tall med 11 Char Maks")
+            Exit Sub
+        End If
         DBAEndreSykkelType()
     End Sub
 
     Private Sub BtnDBAAvdLast_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdLast.Click
+        Dim InputCheck As Boolean = False
 
         DBALastInnAvdeling()
 
@@ -2879,10 +2951,44 @@ Public Class Form1
     End Sub
 
     Private Sub BtnDBAUKEndre_Click(sender As Object, e As EventArgs) Handles BtnDBAUKEndre.Click
+        Dim InputCheck As Boolean = False
+
+        InputCheck = CheckIntValue(TxtDBAKID.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig ID Input - Tall med 11 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckVarChar20(TxtDBAKnavn.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Navn Input - 20 Char Maks")
+            Exit Sub
+        End If
+
         DBAEndreUtstyrskategori()
     End Sub
 
     Private Sub BtnDBAAvdEndre_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdEndre.Click
+        Dim InputCheck As Boolean = False
+
+        InputCheck = CheckIntValue(TxtDBAAvdelingID.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig ID Input - Tall med 11 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckVarChar20(TxtDBAAvdNavn.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Navn Input - 20 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckVarChar30(TxtDBAAvdAdr.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Adresse Input - 30 Char Maks")
+            Exit Sub
+        End If
+
         DBAEndreAvdeling()
     End Sub
 
@@ -2899,6 +3005,21 @@ Public Class Form1
     End Sub
 
     Private Sub BtnDBAUKNy_Click(sender As Object, e As EventArgs) Handles BtnDBAUKNy.Click
+
+        Dim InputCheck As Boolean = False
+
+        InputCheck = CheckIntValue(TxtDBAKID.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig ID Input - Tall med 11 Char Maks")
+            Exit Sub
+        End If
+
+        InputCheck = CheckVarChar20(TxtDBAKnavn.Text)
+        If InputCheck = False Then
+            MsgBox("Ugyldig Navn Input - 20 Char Maks")
+            Exit Sub
+        End If
+
         DBANyUtstyrskategori()
     End Sub
 
