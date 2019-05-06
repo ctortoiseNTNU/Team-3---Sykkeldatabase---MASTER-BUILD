@@ -520,7 +520,13 @@ Public Class Form1
 
         'pris = sykkel_kat from sykkel_id , and pris_dag if dag pris_uke if uke etc
         UtlAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", CboUtlAvd.SelectedItem)
-        UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text 'bytt med onclick og lagrei i var
+        If LvUtleieKunde.Items.Count > 0 Then
+            UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
+        Else
+            MsgBox("Det er ikke valg kunde")
+            Exit Sub
+        End If
+
         UtlRabattIDDT = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
         For Each r In UtlRabattIDDT.Rows
             UtlRabattID = r("rabatt_id")
@@ -534,7 +540,7 @@ Public Class Form1
         UtlDatoStart = UtlDtpUtleieFra.Value
         UtlPris = 0
         UtlBetalingsType = "Vipps"
-        UtlAntall = TxtUtlAntall.Text.Trim
+        UtlAntall = CInt(TxtUtlAntall.Text.Trim)
 
         'UtlLeieLengde = UtlDtpUtleieTil.Value.Subtract(UtlDtpUtleieFra.Value).ToString("%d") 
 
@@ -630,8 +636,6 @@ Public Class Form1
         'if colonne kategori(utstyr/sykkel) = utstyr/sykkel then remove from utstyr/sykkel
         UtlValgteSyklerID.Remove(UtlFjernID)
         LvUtleieOrdre.Items.RemoveAt(LvUtleieOrdre.SelectedIndices(0))
-
-
 
     End Sub
 
@@ -822,21 +826,13 @@ Public Class Form1
         End If
 
         Try
-            'DBConnect()
-            'Dim Kndsporring As New MySqlCommand("INSERT INTO kunder (kunde_fdato, kunde_fornavn, " _
-            '    & "kunde_etternavn, adresse, telefon, epost, rabatt_id, handlet_for) VALUES('" _
-            '    & KnDFdato.ToString("yyyy-MM-dd") & "', '" & KndFornavn & "', '" & KndEtternavn _
-            '    & "', '" & KndAdresse & "', " & KndTlf & ", '" & KndEpost & "', 1, 0)", Tilkobling)
 
             SQLInsert("kunder", "(kunde_fdato, kunde_fornavn, " & "kunde_etternavn, adresse, telefon, " &
                       "epost, rabatt_id, handlet_for)", "('" & KnDFdato.ToString("yyyy-MM-dd") & "', '" & KndFornavn _
                 & "', '" & KndEtternavn & "', '" & KndAdresse & "', '" & KndTlf & "', '" & KndEpost & "', 1, 0)")
 
-            'Kndsporring.ExecuteNonQuery()
-            'DBDisconnect()
-            'MsgBox("Innlegging var vellykket")
         Catch feilmelding As MySqlException
-            MsgBox("Feil ved tilkobling til databasen: " & feilmelding.Message)
+            MsgBox("Feil ved innlegg av kunde" & feilmelding.Message)
         End Try
 
     End Sub
@@ -941,7 +937,6 @@ Public Class Form1
         Dim KndChangeValueEP = TxtKndEndreEP.Text
         Dim KndChangeValueRbt = TxtKndEndreRbt.Text
         Dim KndChangeValueHF = TxtKndEndreHF.Text
-
 
         If selectedKundeId = "" Or KndChangeValueFN = "" Or KndChangeValueEN = "" Or KndChangeValueAdr = "" _
             Or KndChangeValueTlf = "" Or KndChangeValueEP = "" Or KndChangeValueRbt = "" Or KndChangeValueHF = "" Then
@@ -2519,9 +2514,11 @@ Public Class Form1
     End Sub
 
 
-
-
-
+    Private Sub TxtLoginPassord_Keypress(sender As Object, e As KeyPressEventArgs) Handles TxtLoginPassord.KeyPress
+        If e.KeyChar = ChrW(Keys.Return) Then
+            LoginCheck()
+        End If
+    End Sub
 
 
 
@@ -2876,6 +2873,7 @@ Public Class Form1
 
         DBAEndreAvdeling()
     End Sub
+
 
 
 
