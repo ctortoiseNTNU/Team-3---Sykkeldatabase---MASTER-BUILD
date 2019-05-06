@@ -725,10 +725,10 @@ Public Class Form1
             Dim UtlSokVareID, UtlSokVarenavn, UtlSokRamme, UtlSokHjulStr, UtlSokTilgjengelig, UtlSokAvdelingID,
                 UtlSokAvdelingNavn As String
             Try
-                For Each r In UtlVareSokTable.Rows
-                    If UtlVareSokTable.Rows.Count = 0 Then
-                        MsgBox("Ingen ledige sykler for dette søket.")
-                    Else
+                If UtlVareSokTable.Rows.Count = 0 Then
+                    MsgBox("Ingen ledige sykler for dette søket.")
+                Else
+                    For Each r In UtlVareSokTable.Rows
                         UtlSokVareID = r("sykkel_id")
                         UtlSokVarenavn = r("sykkel_navn")
                         UtlSokRamme = r("sykkel_ramme")
@@ -738,9 +738,12 @@ Public Class Form1
                         UtlSokAvdelingNavn = r("avd_navn")
 
                         LvUtlVarer.Items.Add(New ListViewItem({UtlSokVareID, UtlSokVarenavn, UtlSokRamme,
-                             UtlSokHjulStr, UtlSokTilgjengelig, UtlSokAvdelingNavn, UtlKategori}))
-                    End If
-                Next
+                                 UtlSokHjulStr, UtlSokTilgjengelig, UtlSokAvdelingNavn, UtlKategori}))
+                    Next
+                End If
+
+
+
             Catch ex As Exception
                 MsgBox("Feil med varetabell: " & ex.Message)
             End Try
