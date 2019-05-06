@@ -391,6 +391,7 @@ Partial Class Form1
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.TmStartLoggUt = New System.Windows.Forms.Timer(Me.components)
+        Me.ChkUtlRabatOverstyr = New System.Windows.Forms.CheckBox()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -539,7 +540,7 @@ Partial Class Form1
         '
         Me.BtnUtlBeregnPris.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnUtlBeregnPris.Enabled = False
-        Me.BtnUtlBeregnPris.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUtlBeregnPris.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtlBeregnPris.Location = New System.Drawing.Point(660, 548)
         Me.BtnUtlBeregnPris.Name = "BtnUtlBeregnPris"
         Me.BtnUtlBeregnPris.Size = New System.Drawing.Size(100, 37)
@@ -551,9 +552,9 @@ Partial Class Form1
         '
         Me.GrpUltOrdinærPris.Controls.Add(Me.LblUtlOrdinærpris)
         Me.GrpUltOrdinærPris.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpUltOrdinærPris.Location = New System.Drawing.Point(782, 543)
+        Me.GrpUltOrdinærPris.Location = New System.Drawing.Point(792, 543)
         Me.GrpUltOrdinærPris.Name = "GrpUltOrdinærPris"
-        Me.GrpUltOrdinærPris.Size = New System.Drawing.Size(116, 85)
+        Me.GrpUltOrdinærPris.Size = New System.Drawing.Size(110, 85)
         Me.GrpUltOrdinærPris.TabIndex = 8
         Me.GrpUltOrdinærPris.TabStop = False
         Me.GrpUltOrdinærPris.Text = "Ordinær pris:"
@@ -561,6 +562,7 @@ Partial Class Form1
         'LblUtlOrdinærpris
         '
         Me.LblUtlOrdinærpris.AutoSize = True
+        Me.LblUtlOrdinærpris.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblUtlOrdinærpris.Location = New System.Drawing.Point(35, 35)
         Me.LblUtlOrdinærpris.Name = "LblUtlOrdinærpris"
         Me.LblUtlOrdinærpris.Size = New System.Drawing.Size(36, 19)
@@ -570,7 +572,7 @@ Partial Class Form1
         'BtnUtlAbort
         '
         Me.BtnUtlAbort.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtlAbort.Location = New System.Drawing.Point(660, 591)
         Me.BtnUtlAbort.Name = "BtnUtlAbort"
         Me.BtnUtlAbort.Size = New System.Drawing.Size(100, 37)
@@ -582,9 +584,9 @@ Partial Class Form1
         '
         Me.GrpUtlRabatt.Controls.Add(Me.LblUtlRabatt)
         Me.GrpUtlRabatt.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpUtlRabatt.Location = New System.Drawing.Point(925, 543)
+        Me.GrpUtlRabatt.Location = New System.Drawing.Point(934, 543)
         Me.GrpUtlRabatt.Name = "GrpUtlRabatt"
-        Me.GrpUtlRabatt.Size = New System.Drawing.Size(115, 85)
+        Me.GrpUtlRabatt.Size = New System.Drawing.Size(110, 85)
         Me.GrpUtlRabatt.TabIndex = 8
         Me.GrpUtlRabatt.TabStop = False
         Me.GrpUtlRabatt.Text = "Avgitt rabatt:"
@@ -592,6 +594,7 @@ Partial Class Form1
         'LblUtlRabatt
         '
         Me.LblUtlRabatt.AutoSize = True
+        Me.LblUtlRabatt.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblUtlRabatt.Location = New System.Drawing.Point(32, 35)
         Me.LblUtlRabatt.Name = "LblUtlRabatt"
         Me.LblUtlRabatt.Size = New System.Drawing.Size(52, 19)
@@ -602,9 +605,9 @@ Partial Class Form1
         '
         Me.GrpUtleieSum.Controls.Add(Me.LblUtlUtleieSum)
         Me.GrpUtleieSum.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpUtleieSum.Location = New System.Drawing.Point(1067, 543)
+        Me.GrpUtleieSum.Location = New System.Drawing.Point(1076, 543)
         Me.GrpUtleieSum.Name = "GrpUtleieSum"
-        Me.GrpUtleieSum.Size = New System.Drawing.Size(116, 85)
+        Me.GrpUtleieSum.Size = New System.Drawing.Size(110, 85)
         Me.GrpUtleieSum.TabIndex = 7
         Me.GrpUtleieSum.TabStop = False
         Me.GrpUtleieSum.Text = "Ordresum:"
@@ -612,6 +615,7 @@ Partial Class Form1
         'LblUtlUtleieSum
         '
         Me.LblUtlUtleieSum.AutoSize = True
+        Me.LblUtlUtleieSum.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblUtlUtleieSum.Location = New System.Drawing.Point(35, 35)
         Me.LblUtlUtleieSum.Name = "LblUtlUtleieSum"
         Me.LblUtlUtleieSum.Size = New System.Drawing.Size(36, 19)
@@ -683,15 +687,16 @@ Partial Class Form1
         '
         Me.BtnUtleieFullfør.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnUtleieFullfør.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1221, 556)
+        Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1218, 548)
         Me.BtnUtleieFullfør.Name = "BtnUtleieFullfør"
-        Me.BtnUtleieFullfør.Size = New System.Drawing.Size(100, 50)
+        Me.BtnUtleieFullfør.Size = New System.Drawing.Size(100, 80)
         Me.BtnUtleieFullfør.TabIndex = 5
         Me.BtnUtleieFullfør.Text = "Fullfør"
         Me.BtnUtleieFullfør.UseVisualStyleBackColor = False
         '
         'GrpUtleieProdukter
         '
+        Me.GrpUtleieProdukter.Controls.Add(Me.ChkUtlRabatOverstyr)
         Me.GrpUtleieProdukter.Controls.Add(Me.CboUtlRamme)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlRamme)
         Me.GrpUtleieProdukter.Controls.Add(Me.LblUtlInfo)
@@ -843,6 +848,7 @@ Partial Class Form1
         'CboUtlRabatt
         '
         Me.CboUtlRabatt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboUtlRabatt.Enabled = False
         Me.CboUtlRabatt.Font = New System.Drawing.Font("Calibri", 11.25!)
         Me.CboUtlRabatt.FormattingEnabled = True
         Me.CboUtlRabatt.Items.AddRange(New Object() {"5", "10", "15", "20", "25", "30"})
@@ -876,12 +882,12 @@ Partial Class Form1
         'BtnUtlSokVare
         '
         Me.BtnUtlSokVare.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnUtlSokVare.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUtlSokVare.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtlSokVare.Location = New System.Drawing.Point(105, 150)
         Me.BtnUtlSokVare.Name = "BtnUtlSokVare"
         Me.BtnUtlSokVare.Size = New System.Drawing.Size(100, 40)
         Me.BtnUtlSokVare.TabIndex = 39
-        Me.BtnUtlSokVare.Text = "Søk etter vare"
+        Me.BtnUtlSokVare.Text = "Søk"
         Me.BtnUtlSokVare.UseVisualStyleBackColor = False
         '
         'LvUtlVarer
@@ -1057,7 +1063,7 @@ Partial Class Form1
         'BtnUtleieNyKunde
         '
         Me.BtnUtleieNyKunde.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnUtleieNyKunde.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUtleieNyKunde.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtleieNyKunde.Location = New System.Drawing.Point(181, 90)
         Me.BtnUtleieNyKunde.Name = "BtnUtleieNyKunde"
         Me.BtnUtleieNyKunde.Size = New System.Drawing.Size(100, 40)
@@ -1068,7 +1074,7 @@ Partial Class Form1
         'BtnUtleieKundeSok
         '
         Me.BtnUtleieKundeSok.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnUtleieKundeSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUtleieKundeSok.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtleieKundeSok.Location = New System.Drawing.Point(181, 52)
         Me.BtnUtleieKundeSok.Name = "BtnUtleieKundeSok"
         Me.BtnUtleieKundeSok.Size = New System.Drawing.Size(100, 40)
@@ -4018,6 +4024,17 @@ Partial Class Form1
         '
         Me.TmStartLoggUt.Interval = 300000
         '
+        'ChkUtlRabatOverstyr
+        '
+        Me.ChkUtlRabatOverstyr.AutoSize = True
+        Me.ChkUtlRabatOverstyr.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkUtlRabatOverstyr.Location = New System.Drawing.Point(464, 154)
+        Me.ChkUtlRabatOverstyr.Name = "ChkUtlRabatOverstyr"
+        Me.ChkUtlRabatOverstyr.Size = New System.Drawing.Size(110, 19)
+        Me.ChkUtlRabatOverstyr.TabIndex = 59
+        Me.ChkUtlRabatOverstyr.Text = "Overstyr rabatt"
+        Me.ChkUtlRabatOverstyr.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4462,4 +4479,5 @@ Partial Class Form1
     Friend WithEvents LblUtlOrdinærpris As Label
     Friend WithEvents LvColUtlKategori2 As ColumnHeader
     Friend WithEvents BtnUtlBeregnPris As Button
+    Friend WithEvents ChkUtlRabatOverstyr As CheckBox
 End Class

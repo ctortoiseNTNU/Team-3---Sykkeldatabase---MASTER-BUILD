@@ -597,23 +597,26 @@ Public Class Form1
 
 
         'Rabattsjekk
-        UtlRabattIDDT = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
-        If UtlRabattIDDT.Rows.Count > 0 Then
-            For Each r In UtlRabattIDDT.Rows
-                UtlRabattID = r("rabatt_id")
-            Next
-            UtlRabattDT = SQLSelect("rabatter join kunder as k on rabatter.rabatt_id=k.rabatt_id", "rabatt_prosenter", "k.kunde_id='" _
-                                & UtlKundeID & "'")
-            For Each r In UtlRabattDT.Rows
-                UtlRabatt = r("rabatt_prosenter")
-            Next
-        ElseIf CboUtlRabatt.SelectedIndex > -1 Then
+        If ChkUtlRabatOverstyr.Checked = True Then
             UtlRabatt = CboUtlRabatt.SelectedItem
         Else
-            MsgBox("Kunde er ikke registert med rabatt. Venligst velg rabatt manuelt")
-            Exit Sub
+            UtlRabattIDDT = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
+            If UtlRabattIDDT.Rows.Count > 0 Then
+                For Each r In UtlRabattIDDT.Rows
+                    UtlRabattID = r("rabatt_id")
+                Next
+                UtlRabattDT = SQLSelect("rabatter join kunder as k on rabatter.rabatt_id=k.rabatt_id", "rabatt_prosenter", "k.kunde_id='" _
+                                    & UtlKundeID & "'")
+                For Each r In UtlRabattDT.Rows
+                    UtlRabatt = r("rabatt_prosenter")
+                Next
+            ElseIf CboUtlRabatt.SelectedIndex > -1 Then
+                UtlRabatt = CboUtlRabatt.SelectedItem
+            Else
+                MsgBox("Kunde er ikke registert med rabatt. Venligst velg rabatt manuelt")
+                Exit Sub
+            End If
         End If
-
 
 
         'Finner pris per sykkel avhenging om det er valgt time, dag eller ukepris
@@ -663,7 +666,6 @@ Public Class Form1
                                       & "Total pris: " & UtlPrisRabattert & " kr", MsgBoxStyle.OkCancel)
 
             If UtlBekreftUtleie = DialogResult.OK Then
-
                 Try
                     UtlSisteUtleieID = SQLInsert("utleie", "(utleie_id, avdeling_id, kunde_id, rabatt_id, utleie_pris, utleie_slutt, " _
                                       & "utleie_start, betalings_type)", "(DEFAULT, '" & UtlAvdelingID & "', '" & UtlKundeID _
@@ -688,7 +690,6 @@ Public Class Form1
             Else
                 Exit Sub
             End If
-
         End If
 
     End Sub
@@ -802,6 +803,13 @@ Public Class Form1
         UtleieReset()
     End Sub
 
+    Private Sub ChkUtlRabatOverstyr_CheckedChanged(sender As Object, e As EventArgs) Handles ChkUtlRabatOverstyr.CheckedChanged
+        If ChkUtlRabatOverstyr.Checked = True Then
+            CboUtlRabatt.Enabled = True
+        ElseIf ChkUtlRabatOverstyr.Checked = False Then
+            CboUtlRabatt.Enabled = False
+        End If
+    End Sub
 
     'Button for a forhåndsberegne pris -------OBS beregner dobbel pris. Enabled = False. funksjon ikke debugget
     Private Sub BtnUtlBeregnPris_Click(sender As Object, e As EventArgs) Handles BtnUtlBeregnPris.Click
