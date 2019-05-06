@@ -26,6 +26,7 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.HovedTab = New System.Windows.Forms.TabControl()
         Me.StartTab = New System.Windows.Forms.TabPage()
+        Me.BtnStartLoggut = New System.Windows.Forms.Button()
         Me.LblStartMOTD = New System.Windows.Forms.Label()
         Me.StartRettigheterLabel = New System.Windows.Forms.Label()
         Me.StartVelkommenLabel = New System.Windows.Forms.Label()
@@ -386,7 +387,7 @@ Partial Class Form1
         Me.PicLoginLogo = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.BtnStartLoggut = New System.Windows.Forms.Button()
+        Me.TmStartLoggUt = New System.Windows.Forms.Timer(Me.components)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -460,6 +461,15 @@ Partial Class Form1
         Me.StartTab.TabIndex = 0
         Me.StartTab.Text = "Start"
         Me.StartTab.UseVisualStyleBackColor = True
+        '
+        'BtnStartLoggut
+        '
+        Me.BtnStartLoggut.Location = New System.Drawing.Point(550, 522)
+        Me.BtnStartLoggut.Name = "BtnStartLoggut"
+        Me.BtnStartLoggut.Size = New System.Drawing.Size(111, 34)
+        Me.BtnStartLoggut.TabIndex = 4
+        Me.BtnStartLoggut.Text = "Logg Ut"
+        Me.BtnStartLoggut.UseVisualStyleBackColor = True
         '
         'LblStartMOTD
         '
@@ -3967,14 +3977,9 @@ Partial Class Form1
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
-        'BtnStartLoggut
+        'TmStartLoggUt
         '
-        Me.BtnStartLoggut.Location = New System.Drawing.Point(550, 522)
-        Me.BtnStartLoggut.Name = "BtnStartLoggut"
-        Me.BtnStartLoggut.Size = New System.Drawing.Size(111, 34)
-        Me.BtnStartLoggut.TabIndex = 4
-        Me.BtnStartLoggut.Text = "Logg Ut"
-        Me.BtnStartLoggut.UseVisualStyleBackColor = True
+        Me.TmStartLoggUt.Interval = 300000
         '
         'Form1
         '
@@ -4414,4 +4419,5 @@ Partial Class Form1
     Friend WithEvents LblUtlKundeInfo As Label
     Friend WithEvents LvColUtlKategori As ColumnHeader
     Friend WithEvents BtnStartLoggut As Button
+    Friend WithEvents TmStartLoggUt As Timer
 End Class

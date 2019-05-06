@@ -261,7 +261,7 @@ Public Class Form1
 #End Region
 
 
-#Region "Form Load og Login"
+#Region "Form Load"
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -282,6 +282,20 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Form1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
+
+        TmStartLoggUt.Stop()
+        TmStartLoggUt.Start()
+
+    End Sub
+
+
+    Private Sub Form1_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
+
+        TmStartLoggUt.Stop()
+        TmStartLoggUt.Start()
+
+    End Sub
 
 #End Region
 
@@ -373,6 +387,11 @@ Public Class Form1
             MsgBox("Man får ikke koble til databasen: " & StartSqlError1.Message)
         End Try
     End Sub
+
+    Private Sub BtnStartLoggut_Click(sender As Object, e As EventArgs) Handles BtnStartLoggut.Click
+        LoggUt()
+    End Sub
+
 #End Region
 
 
@@ -2569,6 +2588,7 @@ Public Class Form1
             StartRettigheterLabel.Text = "Brukerrettigheter: Bruker"
         End If
 
+        TmStartLoggUt.Start()
         HovedTab.SelectedTab = StartTab
         SecurityCounter = 0
         StartVelkommenLabel.Text = "Velkommen, " & FornavnString & " " & EtternavnString
@@ -2596,8 +2616,13 @@ Public Class Form1
         HovedTab.SelectedTab = LoginTab
         AdminBool = False
         LogBool = False
+        TmStartLoggUt.Stop()
 
         MsgBox("Du har blitt logget ut!")
+    End Sub
+
+    Private Sub TmStartLoggUt_Tick(sender As Object, e As EventArgs) Handles TmStartLoggUt.Tick
+        LoggUt()
     End Sub
 
     Private Sub BtnLoginLogin_Click(sender As Object, e As EventArgs) Handles BtnLoginLogin.Click
@@ -2860,6 +2885,7 @@ Public Class Form1
     Private Sub BtnDBAAvdEndre_Click(sender As Object, e As EventArgs) Handles BtnDBAAvdEndre.Click
         DBAEndreAvdeling()
     End Sub
+
 
 
     Private Sub BtnDBASTLast_Click(sender As Object, e As EventArgs) Handles BtnDBASTLast.Click
