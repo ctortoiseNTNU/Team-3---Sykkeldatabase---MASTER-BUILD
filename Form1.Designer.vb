@@ -97,7 +97,6 @@ Partial Class Form1
         Me.TxtUtleieKundeSok = New System.Windows.Forms.TextBox()
         Me.LblUtleieKundesok = New System.Windows.Forms.Label()
         Me.GrpUtleieSelger = New System.Windows.Forms.GroupBox()
-        Me.UtlTESTlbl = New System.Windows.Forms.Label()
         Me.LblUtleieSelger = New System.Windows.Forms.Label()
         Me.GrpUtleieAvd = New System.Windows.Forms.GroupBox()
         Me.CboUtlAvd = New System.Windows.Forms.ComboBox()
@@ -759,12 +758,12 @@ Partial Class Form1
         'LblUtlInfo
         '
         Me.LblUtlInfo.AutoSize = True
-        Me.LblUtlInfo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtlInfo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblUtlInfo.Location = New System.Drawing.Point(5, 203)
         Me.LblUtlInfo.Name = "LblUtlInfo"
-        Me.LblUtlInfo.Size = New System.Drawing.Size(158, 19)
+        Me.LblUtlInfo.Size = New System.Drawing.Size(423, 19)
         Me.LblUtlInfo.TabIndex = 55
-        Me.LblUtlInfo.Text = "Tilgjengelige modeller:"
+        Me.LblUtlInfo.Text = "Tilgjengelige modeller. Klikk på vareID for å legge til i bestilling."
         '
         'TxtUtlAntall
         '
@@ -1114,7 +1113,6 @@ Partial Class Form1
         '
         'GrpUtleieSelger
         '
-        Me.GrpUtleieSelger.Controls.Add(Me.UtlTESTlbl)
         Me.GrpUtleieSelger.Controls.Add(Me.LblUtleieSelger)
         Me.GrpUtleieSelger.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
         Me.GrpUtleieSelger.Location = New System.Drawing.Point(942, 2)
@@ -1123,15 +1121,6 @@ Partial Class Form1
         Me.GrpUtleieSelger.TabIndex = 1
         Me.GrpUtleieSelger.TabStop = False
         Me.GrpUtleieSelger.Text = "Selger:"
-        '
-        'UtlTESTlbl
-        '
-        Me.UtlTESTlbl.AutoSize = True
-        Me.UtlTESTlbl.Location = New System.Drawing.Point(44, 101)
-        Me.UtlTESTlbl.Name = "UtlTESTlbl"
-        Me.UtlTESTlbl.Size = New System.Drawing.Size(39, 23)
-        Me.UtlTESTlbl.TabIndex = 59
-        Me.UtlTESTlbl.Text = "test"
         '
         'LblUtleieSelger
         '
@@ -4466,7 +4455,6 @@ Partial Class Form1
     Friend WithEvents LblStaTotalUtstyr As Label
     Friend WithEvents LblStaTotalSykkel As Label
     Friend WithEvents BindingSource1 As BindingSource
-    Friend WithEvents UtlTESTlbl As Label
     Friend WithEvents LvColUtlRamme As ColumnHeader
     Friend WithEvents LvColUtlHjulStr As ColumnHeader
     Friend WithEvents LvVolUtlAvdeling As ColumnHeader

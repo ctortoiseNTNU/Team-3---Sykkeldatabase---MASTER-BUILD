@@ -407,20 +407,6 @@ Public Class Form1
     'If Kategori utstyr Then remove from utstyr else from sykkel  - overføring tilfra Lv
 
 
-    '----------------TEST------------------
-    Private Sub UtlTESTlbl_Click(sender As Object, e As EventArgs)
-
-        'UtlTESTlbl.Text = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
-        Dim UtlLeieLengde
-
-        'Dim lengde = String.Format("%d", aaa)
-        UtlLeieLengde = UtlDtpUtleieFra.Value.Subtract(UtlDtpUtleieTil.Value).ToString("%d")
-        UtlTESTlbl.Text = UtlLeieLengde
-
-    End Sub
-
-
-
     'Metode som tømmer alle felt, kundeid og datatabeller for utstyr og sykler
     Private Sub UtleieReset()
         CboUtlKat.SelectedIndex = -1
@@ -442,6 +428,8 @@ Public Class Form1
         UtlValgtUtstyrID.Clear()
         UtlKundeID = ""
         RdbUtlTimer.Checked = True
+        ChkUtlRabatOverstyr.Checked = False
+        CboUtlRabatt.Enabled = False
     End Sub
 
 
@@ -599,6 +587,7 @@ Public Class Form1
         'Rabattsjekk
         If ChkUtlRabatOverstyr.Checked = True Then
             UtlRabatt = CboUtlRabatt.SelectedItem
+            UtlRabattID = SQLHentIDNavn("kunder", "kunde_id", "rabatt_id", UtlKundeID)
         Else
             UtlRabattIDDT = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
             If UtlRabattIDDT.Rows.Count > 0 Then
@@ -763,7 +752,7 @@ Public Class Form1
             Dim UtlUtstyrID, UtlUtstyrNavn, UtlUtstyrStatus As String
             Dim UtlVareSokDT As DataTable
             UtlVareSokDT = SQLSelect("utstyr", "utstyr_id, utstyr_navn, utstyr_status", "utstyr_id LIKE '%" _
-                                     & UtlSubkatID & "%'")
+                                     & UtlSubkatID & "%' AND utstyr_status='ledig'")
 
             Try
                 For Each r In UtlVareSokDT.Rows
@@ -936,8 +925,6 @@ Public Class Form1
     Private Sub LvUtlOrdre_MouseClick(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles LvUtleieOrdre.MouseClick
 
         Dim UtlFjernID As String = LvUtleieOrdre.Items(LvUtleieOrdre.FocusedItem.Index).SubItems(0).Text
-
-        UtlTESTlbl.Text = LvUtleieOrdre.Items(LvUtleieOrdre.FocusedItem.Index).SubItems(2).Text  '--------TEST-----------
 
         'if colonne kategori(utstyr/sykkel) = utstyr/sykkel then remove from utstyr/sykkel
         If LvUtleieOrdre.Items(LvUtleieOrdre.FocusedItem.Index).SubItems(2).Text = "Utstyr" Then
