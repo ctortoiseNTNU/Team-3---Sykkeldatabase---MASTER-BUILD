@@ -21,6 +21,8 @@ Public Class Form1
     'Dim UtlAktivtUtleieID As String
     Dim UtlSisteUtleieID, UtlSykkelID, UtlKundeID As String
     Dim UtlValgteSyklerID, UtlValgtUtstyrID As New ArrayList
+    Dim UtlUtstyrPris As Integer = 50
+    Dim UtlUtstyrPrisFaktorUke As Integer = 4
 
 
 
@@ -265,19 +267,19 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        With HovedTab.TabPages
+        'With HovedTab.TabPages
 
-            .Remove(StartTab)
-            .Remove(UtleieTab)
-            .Remove(KDTab)
-            .Remove(InventarTab)
-            .Remove(LogiTab)
-            .Remove(StatTab)
-            .Remove(AdminTab)
-            .Remove(DBAdminTab)
-            HovedTab.SelectedTab = LoginTab
+        '    .Remove(StartTab)
+        '    .Remove(UtleieTab)
+        '    .Remove(KDTab)
+        '    .Remove(InventarTab)
+        '    .Remove(LogiTab)
+        '    .Remove(StatTab)
+        '    .Remove(AdminTab)
+        '    .Remove(DBAdminTab)
+        '    HovedTab.SelectedTab = LoginTab
 
-        End With
+        'End With
 
 
     End Sub
@@ -348,7 +350,6 @@ Public Class Form1
                 StaTotalUtleie()
                 StaTotalAvanse()
 
-
             Case 7 'Bestemmer det som skjer etter man har valgt Adminmeny.
 
                 AdminAvdelingPopulate()
@@ -416,11 +417,6 @@ Public Class Form1
 
     End Sub
 
-    'Setter kundeID for bestilling
-    Private Sub LvUtleieKunde_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LvUtleieKunde.SelectedIndexChanged
-        UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
-        LblUtlAktivKundeID.Text = "Aktiv Kunde-ID: " & UtlKundeID
-    End Sub
 
     'Sorterer listview etter kolonne som klikkes
     Private Sub LvUtlVarer_Sort(sender As Object, e As EventArgs) Handles LvUtlVarer.ColumnClick
@@ -450,11 +446,20 @@ Public Class Form1
         LvUtlVarer.Items.Clear()
         LblUtlAktivKundeID.Text = "Aktiv Kunde-ID: "
         LblUtlAktivKundeID = Nothing
+        UtlValgteSyklerID.Clear()
+        UtlValgtUtstyrID.Clear()
+
     End Sub
 
     'Klokke
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         LblUtleieKlokke.Text = Format(Now, "HH:mm:ss")
+    End Sub
+
+    'Setter kundeID for bestilling
+    Private Sub LvUtleieKunde_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LvUtleieKunde.SelectedIndexChanged
+        UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
+        LblUtlAktivKundeID.Text = "Aktiv Kunde-ID: " & UtlKundeID
     End Sub
 
     'Kundesøk
@@ -513,37 +518,66 @@ Public Class Form1
 
     Private Sub UtleieFullfør()
 
-        Dim UtlAvdelingID, UtlBetalingsType, UtlRabattID, UtlPris, UtlDatoSlutt, UtlDatoStart,
-                UtlRabatt, UtlSisteUtleieID, UtlUtstyrPris, UtlLeieLengde As String
-        Dim UtlAvgittRabatt, UtlAntall As Integer
+        Dim UtlAvdelingID, UtlBetalingsType, UtlRabattID, UtlDatoSlutt, UtlDatoStart, UtlSisteUtleieID As String
+        Dim UtlAvgittRabatt, UtlLeieLengde, UtlPrisRabattert, UtlUtstyrPrisSum, UtlPris, UtlRabatt As Integer
         Dim UtlRabattDT, UtlKatPris, UtlRabattIDDT As DataTable
 
-        'pris = sykkel_kat from sykkel_id , and pris_dag if dag pris_uke if uke etc
-        UtlAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", CboUtlAvd.SelectedItem)
-        If LvUtleieKunde.Items.Count > 0 Then
-            UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
+        UtlDatoSlutt = UtlDtpUtleieTil.Value
+        UtlDatoStart = UtlDtpUtleieFra.Value
+        'UtlLeieLengde = UtlDtpUtleieTil.Value.Subtract(UtlDtpUtleieFra.Value).ToString("%d") 
+
+        UtlPris = 0
+        UtlBetalingsType = "Vipps"
+
+
+        'Avedlingsjekk
+        If CboUtlAvd.SelectedIndex = -1 Then
+            MsgBox("Vennligst velg avdeling")
+            Exit Sub
         Else
+            UtlAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", CboUtlAvd.SelectedItem)
+        End If
+
+
+        'KundeIDsjekk
+        Try
+            UtlKundeID = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
+        Catch ex As Exception
             MsgBox("Det er ikke valg kunde")
+            Exit Sub
+        End Try
+
+
+        'Leietidsjekk
+        If TxtUtlAntall.Text = "" Then
+            MsgBox("Vennligst fyll inn leietid")
+            Exit Sub
+        Else
+            UtlLeieLengde = TxtUtlAntall.Text
+        End If
+
+
+        'Rabattsjekk
+        UtlRabattIDDT = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
+        If UtlRabattIDDT.Rows.Count > 0 Then
+            For Each r In UtlRabattIDDT.Rows
+                UtlRabattID = r("rabatt_id")
+            Next
+            UtlRabattDT = SQLSelect("rabatter join kunder as k on rabatter.rabatt_id=k.rabatt_id", "rabatt_prosenter", "k.kunde_id='" _
+                                & UtlKundeID & "'")
+            For Each r In UtlRabattDT.Rows
+                UtlRabatt = r("rabatt_prosenter")
+            Next
+        ElseIf CboUtlRabatt.SelectedIndex > -1 Then
+            UtlRabatt = CboUtlRabatt.SelectedItem
+        Else
+            MsgBox("Kunde er ikke registert med rabatt. Venligst velg rabatt manuelt")
             Exit Sub
         End If
 
-        UtlRabattIDDT = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
-        For Each r In UtlRabattIDDT.Rows
-            UtlRabattID = r("rabatt_id")
-        Next
-        UtlRabattDT = SQLSelect("rabatter join kunder as k on rabatter.rabatt_id=k.rabatt_id", "rabatt_prosenter", "k.kunde_id='" _
-                                & UtlKundeID & "'")
-        For Each r In UtlRabattDT.Rows
-            UtlRabatt = r("rabatt_prosenter")
-        Next
-        UtlDatoSlutt = UtlDtpUtleieTil.Value
-        UtlDatoStart = UtlDtpUtleieFra.Value
-        UtlPris = 0
-        UtlBetalingsType = "Vipps"
-        UtlAntall = CInt(TxtUtlAntall.Text.Trim)
 
-        'UtlLeieLengde = UtlDtpUtleieTil.Value.Subtract(UtlDtpUtleieFra.Value).ToString("%d") 
 
+        'Finner pris per sykkel avhenging om det er valgt time, dag eller ukepris
         For i = 0 To UtlValgteSyklerID.Count - 1
             UtlKatPris = SQLSelect("sykkel_typer join sykler as s on sykkel_typer.type_id=s.type_id",
                 "sykkel_kat_timepris, sykkel_kat_dognpris, sykkel_kat_ukepris", "s.sykkel_id='" & UtlValgteSyklerID(i) & "'")
@@ -555,58 +589,79 @@ Public Class Form1
                 ElseIf RdbUtlUke.Checked Then
                     UtlPris += r("sykkel_kat_ukepris")
                 Else
-                    MsgBox("velg leietid")
+                    MsgBox("Velg leietid?")   '??????????
                 End If
             Next
         Next
 
-        'Hardkodet pris på utstyr som bør være en variabel hentet fra database, med mulighet for endring i programmet som admin.
-        UtlUtstyrPris = 50
-        UtlPris += UtlValgtUtstyrID.Count * UtlUtstyrPris
-        UtlPris = (UtlPris * UtlAntall) * ((100 - UtlRabatt) / 100)
-        UtlAvgittRabatt = UtlPris * (UtlRabatt / 100)
 
-        If UtlKundeID = "" Or UtlAvdelingID = "" Or UtlRabattID = "" Or UtlValgteSyklerID.Count < 1 _
-            And UtlValgtUtstyrID.Count < 1 Then
-            MsgBox("Vennligst ferdigstill bestillingsinfo.")
+
+
+        If UtlValgteSyklerID.Count < 1 And UtlValgtUtstyrID.Count < 1 Then
+            MsgBox("Vennligst velg sykkel eller utstyr som skal leies.")
             Exit Sub
         Else
-            LblUtleieSum.Text = UtlPris
-            LblUtlRabatt.Text = UtlAvgittRabatt
-            UtlSisteUtleieID = SQLInsert("utleie", "(utleie_id, avdeling_id, kunde_id, rabatt_id, utleie_pris, utleie_slutt, " _
-                                   & "utleie_start, betalings_type)", "(DEFAULT, '" & UtlAvdelingID & "', '" & UtlKundeID _
-                                   & "', '" & UtlRabattID & "', '" & UtlPris & "', '" _
-                                   & UtlDtpUtleieTil.Value.ToString("yyyy-MM-dd") & "', '" _
-                                   & UtlDtpUtleieFra.Value.ToString("yyyy-MM-dd") & "', '" & UtlBetalingsType & "')")
 
-            For i = 0 To UtlValgtUtstyrID.Count - 1
-                SQLInsert("utleie_utstyr", "(utleie_utstyr_id, utleie_id, utstyr_id)", "(DEFAULT, '" & UtlSisteUtleieID _
-                          & "', '" & UtlValgtUtstyrID(i) & "')")
-                SQLUpdate("utstyr", "utstyr_status='Utleid'", "utstyr_id='" & UtlValgteSyklerID(i) & "'")
-            Next
-            For i = 0 To UtlValgteSyklerID.Count - 1
-                SQLInsert("utleie_sykkel", "(utleie_sykkel_id, utleie_id, sykkel_id)", "(DEFAULT, '" & UtlSisteUtleieID _
-                          & "', '" & UtlValgteSyklerID(i) & "')")
-                SQLUpdate("sykler", "sykkel_status='Utleid'", "sykkel_id='" & UtlValgteSyklerID(i) & "'")
-            Next
+            'Hardkodet pris på utstyr bør være en variabel hentet fra database, med mulighet for endring i programmet som admin.
+            'Alternativt kan utstyr får pris i tabell og beregnes på samme måte som sykler.
+
+            If RdbUtlTimer.Checked Then
+                UtlUtstyrPrisSum = UtlValgtUtstyrID.Count * UtlUtstyrPris
+            ElseIf RdbUtlDager.Checked Then
+                UtlUtstyrPrisSum = UtlValgtUtstyrID.Count * UtlUtstyrPris * UtlLeieLengde
+            ElseIf RdbUtlUke.Checked Then
+                UtlUtstyrPrisSum = UtlValgtUtstyrID.Count * UtlUtstyrPris * UtlLeieLengde * UtlUtstyrPrisFaktorUke
+            End If
+
+            UtlPris = UtlLeieLengde * UtlPris
+            UtlPris += UtlUtstyrPrisSum
+            LblUtlOrdinærpris.Text = UtlPris
+            UtlPrisRabattert = ((100 - UtlRabatt) / 100) * (UtlPris)
+            LblUtlUtleieSum.Text = UtlPris
+            UtlAvgittRabatt = (UtlRabatt / 100) * UtlPris
+            LblUtlRabatt.Text = UtlAvgittRabatt
+
+            Dim UtlBekreftUtleie As New MsgBoxResult
+            UtlBekreftUtleie = MsgBox("Bekreft bestilling." & vbNewLine & "Leiepris: " & UtlPris & " kr" & vbNewLine _
+                                      & "Rabatt: " & UtlAvgittRabatt & " kr" & vbNewLine _
+                                      & "Total pris: " & UtlPrisRabattert & " kr", MsgBoxStyle.OkCancel)
+
+            If UtlBekreftUtleie = DialogResult.OK Then
+
+                UtlSisteUtleieID = SQLInsert("utleie", "(utleie_id, avdeling_id, kunde_id, rabatt_id, utleie_pris, utleie_slutt, " _
+                                  & "utleie_start, betalings_type)", "(DEFAULT, '" & UtlAvdelingID & "', '" & UtlKundeID _
+                                  & "', '" & UtlRabattID & "', '" & UtlPrisRabattert & "', '" _
+                                  & UtlDtpUtleieTil.Value.ToString("yyyy-MM-dd") & "', '" _
+                                  & UtlDtpUtleieFra.Value.ToString("yyyy-MM-dd") & "', '" & UtlBetalingsType & "')")
+
+                For i = 0 To UtlValgtUtstyrID.Count - 1
+                    SQLInsert("utleie_utstyr", "(utleie_utstyr_id, utleie_id, utstyr_id)", "(DEFAULT, '" & UtlSisteUtleieID _
+                              & "', '" & UtlValgtUtstyrID(i) & "')")
+                    SQLUpdate("utstyr", "utstyr_status='Utleid'", "utstyr_id='" & UtlValgteSyklerID(i) & "'")
+                Next
+                For i = 0 To UtlValgteSyklerID.Count - 1
+                    SQLInsert("utleie_sykkel", "(utleie_sykkel_id, utleie_id, sykkel_id)", "(DEFAULT, '" & UtlSisteUtleieID _
+                              & "', '" & UtlValgteSyklerID(i) & "')")
+                    SQLUpdate("sykler", "sykkel_status='Utleid'", "sykkel_id='" & UtlValgteSyklerID(i) & "'")
+                Next
+
+            Else
+                Exit Sub
+            End If
+
+
         End If
 
     End Sub
 
     Private Sub BtnUtleieFullfør_Click(sender As Object, e As EventArgs) Handles BtnUtleieFullfør.Click
-        Dim UtlBekreftUtleie As New MsgBoxResult
-        UtlBekreftUtleie = MsgBox("Bekreft bestilling.", MsgBoxStyle.OkCancel)
 
-        If UtlBekreftUtleie = DialogResult.OK Then
-            UtleieFullfør()
-        Else
-            Exit Sub
-        End If
+        UtleieFullfør()
 
     End Sub
 
 
-    'trykk for å kopiere varer fra vareliste til ordre liste
+    'Kopierer varer fra vareliste til ordre liste
     Private Sub LvUtlVarer_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LvUtlVarer.MouseClick
 
         LvUtleieOrdre.Items.Add(LvUtlVarer.SelectedItems(0).Clone())
@@ -614,7 +669,7 @@ Public Class Form1
 
             UtlValgteSyklerID.Add(LvUtlVarer.Items(LvUtlVarer.FocusedItem.Index).SubItems(0).Text)
 
-        ElseIf CboUtlKat.SelectedItem = "utstyr" Then
+        ElseIf CboUtlKat.SelectedItem = "Utstyr" Then
 
             UtlValgtUtstyrID.Add(LvUtlVarer.Items(LvUtlVarer.FocusedItem.Index).SubItems(0).Text)
 
@@ -625,7 +680,7 @@ Public Class Form1
     End Sub
 
 
-    ' trykk for å fjerne linjer fra ordre
+    'Fjerne linjer fra ordre
     Private Sub LvUtlOrdre_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LvUtleieOrdre.MouseClick
 
         Dim UtlFjernID As String = LvUtleieOrdre.Items(LvUtleieOrdre.FocusedItem.Index).SubItems(0).Text
@@ -653,8 +708,8 @@ Public Class Form1
         Dim UtlSubkatID, UtlSykkelIDRamme As String
 
 
-        'henter typeID fra sykler og utstyr etter data fra subkategori
-        'hente varenummer fra sykler med valgt ramme og hjul
+        'Henter typeID fra sykler og utstyr etter data fra subkategori
+        'Henter varenummer fra sykler med valgt ramme og hjul
         If UtlKategori = "Sykkel" Then
             UtlSubkatID = SQLHentIDNavn("sykkel_typer", "kategori", "type_id", UtlSubKategori)
             UtlSykkelIDRamme = SQLHentIDNavn("sykler", "type_id", "sykkel_id", UtlSubkatID)   '?????
@@ -736,7 +791,6 @@ Public Class Form1
 
     'Endrer innhold i combobox for subkategori og ramme avhenging om det er sykkel eller utstyr som er valgt.
     Private Sub CboUtlKat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboUtlKat.SelectedIndexChanged
-
 
         If CboUtlKat.SelectedItem = "Utstyr" Then
             CboUtlRamme.Enabled = False
@@ -2874,8 +2928,11 @@ Public Class Form1
         DBAEndreAvdeling()
     End Sub
 
-
-
+    Private Sub TxtUtlAntall_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtUtlAntall.KeyPress
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
 
     Private Sub BtnDBASTLast_Click(sender As Object, e As EventArgs) Handles BtnDBASTLast.Click
         DBALastInnSykkelType()

@@ -36,7 +36,7 @@ Partial Class Form1
         Me.GrpUtlRabatt = New System.Windows.Forms.GroupBox()
         Me.LblUtlRabatt = New System.Windows.Forms.Label()
         Me.GrpUtleieSum = New System.Windows.Forms.GroupBox()
-        Me.LblUtleieSum = New System.Windows.Forms.Label()
+        Me.LblUtlUtleieSum = New System.Windows.Forms.Label()
         Me.GrpUtleieOrdre = New System.Windows.Forms.GroupBox()
         Me.LvUtleieOrdre = New System.Windows.Forms.ListView()
         Me.LvColUtleieVareIdValgt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -388,6 +388,8 @@ Partial Class Form1
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.TmStartLoggUt = New System.Windows.Forms.Timer(Me.components)
+        Me.GrpUltOrdinærPris = New System.Windows.Forms.GroupBox()
+        Me.LblUtlOrdinærpris = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -426,6 +428,7 @@ Partial Class Form1
         Me.LoginTab.SuspendLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GrpUltOrdinærPris.SuspendLayout()
         Me.SuspendLayout()
         '
         'HovedTab
@@ -512,6 +515,7 @@ Partial Class Form1
         '
         Me.UtleieTab.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.UtleieTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UtleieTab.Controls.Add(Me.GrpUltOrdinærPris)
         Me.UtleieTab.Controls.Add(Me.BtnUtlAbort)
         Me.UtleieTab.Controls.Add(Me.GrpUtlRabatt)
         Me.UtleieTab.Controls.Add(Me.GrpUtleieSum)
@@ -537,16 +541,16 @@ Partial Class Form1
         Me.BtnUtlAbort.Name = "BtnUtlAbort"
         Me.BtnUtlAbort.Size = New System.Drawing.Size(100, 50)
         Me.BtnUtlAbort.TabIndex = 9
-        Me.BtnUtlAbort.Text = "Avbryt og tøm Skjema"
+        Me.BtnUtlAbort.Text = "Tøm Skjema"
         Me.BtnUtlAbort.UseVisualStyleBackColor = False
         '
         'GrpUtlRabatt
         '
         Me.GrpUtlRabatt.Controls.Add(Me.LblUtlRabatt)
         Me.GrpUtlRabatt.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpUtlRabatt.Location = New System.Drawing.Point(787, 538)
+        Me.GrpUtlRabatt.Location = New System.Drawing.Point(925, 543)
         Me.GrpUtlRabatt.Name = "GrpUtlRabatt"
-        Me.GrpUtlRabatt.Size = New System.Drawing.Size(190, 85)
+        Me.GrpUtlRabatt.Size = New System.Drawing.Size(115, 85)
         Me.GrpUtlRabatt.TabIndex = 8
         Me.GrpUtlRabatt.TabStop = False
         Me.GrpUtlRabatt.Text = "Avgitt rabatt:"
@@ -554,31 +558,31 @@ Partial Class Form1
         'LblUtlRabatt
         '
         Me.LblUtlRabatt.AutoSize = True
-        Me.LblUtlRabatt.Location = New System.Drawing.Point(39, 35)
+        Me.LblUtlRabatt.Location = New System.Drawing.Point(32, 35)
         Me.LblUtlRabatt.Name = "LblUtlRabatt"
-        Me.LblUtlRabatt.Size = New System.Drawing.Size(93, 19)
+        Me.LblUtlRabatt.Size = New System.Drawing.Size(52, 19)
         Me.LblUtlRabatt.TabIndex = 0
-        Me.LblUtlRabatt.Text = "-Rabatt Text-"
+        Me.LblUtlRabatt.Text = "Rabatt"
         '
         'GrpUtleieSum
         '
-        Me.GrpUtleieSum.Controls.Add(Me.LblUtleieSum)
+        Me.GrpUtleieSum.Controls.Add(Me.LblUtlUtleieSum)
         Me.GrpUtleieSum.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpUtleieSum.Location = New System.Drawing.Point(1004, 538)
+        Me.GrpUtleieSum.Location = New System.Drawing.Point(1067, 543)
         Me.GrpUtleieSum.Name = "GrpUtleieSum"
-        Me.GrpUtleieSum.Size = New System.Drawing.Size(190, 85)
+        Me.GrpUtleieSum.Size = New System.Drawing.Size(116, 85)
         Me.GrpUtleieSum.TabIndex = 7
         Me.GrpUtleieSum.TabStop = False
         Me.GrpUtleieSum.Text = "Ordresum:"
         '
-        'LblUtleieSum
+        'LblUtlUtleieSum
         '
-        Me.LblUtleieSum.AutoSize = True
-        Me.LblUtleieSum.Location = New System.Drawing.Point(35, 35)
-        Me.LblUtleieSum.Name = "LblUtleieSum"
-        Me.LblUtleieSum.Size = New System.Drawing.Size(69, 19)
-        Me.LblUtleieSum.TabIndex = 0
-        Me.LblUtleieSum.Text = "-Sum Txt-"
+        Me.LblUtlUtleieSum.AutoSize = True
+        Me.LblUtlUtleieSum.Location = New System.Drawing.Point(35, 35)
+        Me.LblUtlUtleieSum.Name = "LblUtlUtleieSum"
+        Me.LblUtlUtleieSum.Size = New System.Drawing.Size(36, 19)
+        Me.LblUtlUtleieSum.TabIndex = 0
+        Me.LblUtlUtleieSum.Text = "Sum"
         '
         'GrpUtleieOrdre
         '
@@ -729,7 +733,6 @@ Partial Class Form1
         Me.RdbUtlUke.Name = "RdbUtlUke"
         Me.RdbUtlUke.Size = New System.Drawing.Size(50, 22)
         Me.RdbUtlUke.TabIndex = 53
-        Me.RdbUtlUke.TabStop = True
         Me.RdbUtlUke.Text = "Uke"
         Me.RdbUtlUke.UseVisualStyleBackColor = True
         '
@@ -741,13 +744,13 @@ Partial Class Form1
         Me.RdbUtlDager.Name = "RdbUtlDager"
         Me.RdbUtlDager.Size = New System.Drawing.Size(58, 22)
         Me.RdbUtlDager.TabIndex = 52
-        Me.RdbUtlDager.TabStop = True
         Me.RdbUtlDager.Text = "Døgn"
         Me.RdbUtlDager.UseVisualStyleBackColor = True
         '
         'RdbUtlTimer
         '
         Me.RdbUtlTimer.AutoSize = True
+        Me.RdbUtlTimer.Checked = True
         Me.RdbUtlTimer.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline)
         Me.RdbUtlTimer.Location = New System.Drawing.Point(408, 110)
         Me.RdbUtlTimer.Name = "RdbUtlTimer"
@@ -3981,6 +3984,26 @@ Partial Class Form1
         '
         Me.TmStartLoggUt.Interval = 300000
         '
+        'GrpUltOrdinærPris
+        '
+        Me.GrpUltOrdinærPris.Controls.Add(Me.LblUtlOrdinærpris)
+        Me.GrpUltOrdinærPris.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GrpUltOrdinærPris.Location = New System.Drawing.Point(782, 543)
+        Me.GrpUltOrdinærPris.Name = "GrpUltOrdinærPris"
+        Me.GrpUltOrdinærPris.Size = New System.Drawing.Size(116, 85)
+        Me.GrpUltOrdinærPris.TabIndex = 8
+        Me.GrpUltOrdinærPris.TabStop = False
+        Me.GrpUltOrdinærPris.Text = "Ordresum:"
+        '
+        'LblUtlOrdinærpris
+        '
+        Me.LblUtlOrdinærpris.AutoSize = True
+        Me.LblUtlOrdinærpris.Location = New System.Drawing.Point(35, 35)
+        Me.LblUtlOrdinærpris.Name = "LblUtlOrdinærpris"
+        Me.LblUtlOrdinærpris.Size = New System.Drawing.Size(36, 19)
+        Me.LblUtlOrdinærpris.TabIndex = 0
+        Me.LblUtlOrdinærpris.Text = "Sum"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4052,6 +4075,8 @@ Partial Class Form1
         Me.LoginTab.PerformLayout()
         CType(Me.PicLoginLogo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GrpUltOrdinærPris.ResumeLayout(False)
+        Me.GrpUltOrdinærPris.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4366,7 +4391,7 @@ Partial Class Form1
     Friend WithEvents LvColUtlStatus As ColumnHeader
     Friend WithEvents LvColUtlAvdeling As ColumnHeader
     Friend WithEvents LblUtlRabatt As Label
-    Friend WithEvents LblUtleieSum As Label
+    Friend WithEvents LblUtlUtleieSum As Label
     Friend WithEvents Timer1 As Timer
     Friend WithEvents CboUtlRamme As ComboBox
     Friend WithEvents LblUtlRamme As Label
@@ -4420,4 +4445,6 @@ Partial Class Form1
     Friend WithEvents LvColUtlKategori As ColumnHeader
     Friend WithEvents BtnStartLoggut As Button
     Friend WithEvents TmStartLoggUt As Timer
+    Friend WithEvents GrpUltOrdinærPris As GroupBox
+    Friend WithEvents LblUtlOrdinærpris As Label
 End Class
