@@ -408,7 +408,7 @@ Public Class Form1
 
 
     '----------------TEST------------------
-    Private Sub UtlTESTlbl_Click(sender As Object, e As EventArgs) Handles UtlTESTlbl.Click
+    Private Sub UtlTESTlbl_Click(sender As Object, e As EventArgs)
 
         'UtlTESTlbl.Text = LvUtleieKunde.Items(LvUtleieKunde.FocusedItem.Index).SubItems(0).Text
         Dim UtlLeieLengde
@@ -438,10 +438,10 @@ Public Class Form1
         LvUtleieOrdre.Items.Clear()
         LvUtlVarer.Items.Clear()
         LblUtlAktivKundeID.Text = "Aktiv Kunde-ID: "
-        LblUtlAktivKundeID = Nothing
         UtlValgteSyklerID.Clear()
         UtlValgtUtstyrID.Clear()
-
+        UtlKundeID = ""
+        RdbUtlTimer.Checked = True
     End Sub
 
 
@@ -611,7 +611,7 @@ Public Class Form1
                     UtlRabatt = r("rabatt_prosenter")
                 Next
             ElseIf CboUtlRabatt.SelectedIndex > -1 Then
-                UtlRabatt = CboUtlRabatt.SelectedItem
+                UtlRabatt = CboUtlRabatt.SelectedItem.ToString
             Else
                 MsgBox("Kunde er ikke registert med rabatt. Venligst velg rabatt manuelt")
                 Exit Sub
@@ -673,20 +673,29 @@ Public Class Form1
                                       & UtlDtpUtleieTil.Value.ToString("yyyy-MM-dd") & "', '" _
                                       & UtlDtpUtleieFra.Value.ToString("yyyy-MM-dd") & "', '" & UtlBetalingsType & "')")
 
-                    For i = 0 To UtlValgtUtstyrID.Count - 1
-                        SQLInsert("utleie_utstyr", "(utleie_utstyr_id, utleie_id, utstyr_id)", "(DEFAULT, '" & UtlSisteUtleieID _
-                                  & "', '" & UtlValgtUtstyrID(i) & "')")
-                        SQLUpdate("utstyr", "utstyr_status='Utleid'", "utstyr_id='" & UtlValgteSyklerID(i) & "'")
-                    Next
-                    For i = 0 To UtlValgteSyklerID.Count - 1
-                        SQLInsert("utleie_sykkel", "(utleie_sykkel_id, utleie_id, sykkel_id)", "(DEFAULT, '" & UtlSisteUtleieID _
-                                  & "', '" & UtlValgteSyklerID(i) & "')")
-                        SQLUpdate("sykler", "sykkel_status='Utleid'", "sykkel_id='" & UtlValgteSyklerID(i) & "'")
-                    Next
-                Catch ex As Exception
+                    If UtlValgtUtstyrID.Count > 0 Then
+                        For i = 0 To UtlValgtUtstyrID.Count - 1
+                            SQLInsert("utleie_utstyr", "(utleie_utstyr_id, utleie_id, utstyr_id)", "(DEFAULT, '" & UtlSisteUtleieID _
+                                      & "', '" & UtlValgtUtstyrID(i) & "')")
+                            SQLUpdate("utstyr", "utstyr_status='Utleid'", "utstyr_id='" & UtlValgtUtstyrID(i) & "'")
+                        Next
+                    End If
+
+                    If UtlValgteSyklerID.Count > 0 Then
+                        For i = 0 To UtlValgteSyklerID.Count - 1
+                            SQLInsert("utleie_sykkel", "(utleie_sykkel_id, utleie_id, sykkel_id)", "(DEFAULT, '" & UtlSisteUtleieID _
+                                      & "', '" & UtlValgteSyklerID(i) & "')")
+                            SQLUpdate("sykler", "sykkel_status='Utleid'", "sykkel_id='" & UtlValgteSyklerID(i) & "'")
+                        Next
+                    End If
+
+                    UtleieReset()
+
+
+                Catch ex As IndexOutOfRangeException
                     MsgBox("Noe gikk galt ved registrering av utleie" & vbNewLine & ex.Message)
                 End Try
-                UtleieReset()
+
             Else
                 Exit Sub
             End If
@@ -794,6 +803,16 @@ Public Class Form1
     'Button for varesøk
     Private Sub BtnUtlSokVare_Click(sender As Object, e As EventArgs) Handles BtnUtlSokVare.Click
         LvUtlVarer.Items.Clear()
+        If CboUtlKat.SelectedItem = "Sykkel" Then
+            LvUtlVarer.Columns(2).Text = "Ramme"
+            LvUtlVarer.Columns(3).Text = "Hjulstr."
+            LvUtlVarer.Columns(5).Text = "Avdeling"
+        ElseIf CboUtlKat.SelectedItem = "Utstyr" Then
+            LvUtlVarer.Columns(2).Text = "Ustyrkategori"
+            LvUtlVarer.Columns(3).Text = ""
+            LvUtlVarer.Columns(5).Text = ""
+        Else
+        End If
         VareSok()
     End Sub
 
@@ -818,7 +837,7 @@ Public Class Form1
 
 
     'Kopierer varer fra vareliste til ordre liste ved trykk på ID nummer i listview
-    Private Sub LvUtlVarer_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LvUtlVarer.MouseClick
+    Private Sub LvUtlVarer_MouseClick(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles LvUtlVarer.MouseClick
 
         'LvUtleieOrdre.Items.Add(LvUtlVarer.SelectedItems(0).Clone())
         'UtlValgteSyklerID.Add(LvUtlVarer.Items(LvUtlVarer.FocusedItem.Index).SubItems(0).Text)
@@ -914,7 +933,7 @@ Public Class Form1
 
 
     'Fjerner linjer fra ordre ved trykk på ID nummer i listview
-    Private Sub LvUtlOrdre_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LvUtleieOrdre.MouseClick
+    Private Sub LvUtlOrdre_MouseClick(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles LvUtleieOrdre.MouseClick
 
         Dim UtlFjernID As String = LvUtleieOrdre.Items(LvUtleieOrdre.FocusedItem.Index).SubItems(0).Text
 
