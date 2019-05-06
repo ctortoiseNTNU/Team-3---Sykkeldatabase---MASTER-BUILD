@@ -311,7 +311,7 @@ Public Class Form1
 
         Select Case HovedTabIndex
             Case 1 'Bestemmer det som skjer etter man har valgt startmeny.
-                'StartMOTDUpdate()
+
 
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
                 Dim dato As Date = Date.Today
@@ -350,12 +350,12 @@ Public Class Form1
 
 
             Case 7 'Bestemmer det som skjer etter man har valgt Adminmeny.
-                MsgBox("AdminMeny")
+
                 AdminAvdelingPopulate()
                 AdminBrukerIDCalc()
 
             Case 8 'Bestemmer det som skjer etter man har valgt AdminDBmeny.
-                MsgBox("AdminDBMeny")
+
 
         End Select
     End Sub
