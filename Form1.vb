@@ -322,7 +322,7 @@ Public Class Form1
                 LblUtleieSelger.Text = FornavnString & " " & EtternavnString
                 LblUtleieDatoTxt.Text = dato
                 'LblUtleieKlokke.Text = TimeOfDay
-                Me.CboUtlAvd.SelectedIndex = 2
+                CboUtlAvd.SelectedIndex = 2
 
             Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
                 CboKndSok.Items.Clear()
