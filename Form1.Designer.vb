@@ -293,7 +293,6 @@ Partial Class Form1
         Me.TxtAdminEBEtternavn = New System.Windows.Forms.TextBox()
         Me.TxtAdminEBFornavn = New System.Windows.Forms.TextBox()
         Me.TxtAdminEBPassord = New System.Windows.Forms.TextBox()
-        Me.ChkAdminEBTime = New System.Windows.Forms.CheckBox()
         Me.ChkAdminEBAdmin = New System.Windows.Forms.CheckBox()
         Me.LblAdminEBAdmin = New System.Windows.Forms.Label()
         Me.LblAdminEBEpost = New System.Windows.Forms.Label()
@@ -318,7 +317,6 @@ Partial Class Form1
         Me.TxtAdminNBEtternavn = New System.Windows.Forms.TextBox()
         Me.TxtAdminNBFornavn = New System.Windows.Forms.TextBox()
         Me.TxtAdminNBPassord = New System.Windows.Forms.TextBox()
-        Me.ChkAdminNBTime = New System.Windows.Forms.CheckBox()
         Me.ChkAdminNBAdmin = New System.Windows.Forms.CheckBox()
         Me.LblAdminNBAdmin = New System.Windows.Forms.Label()
         Me.LblAdminNBEpost = New System.Windows.Forms.Label()
@@ -2291,7 +2289,7 @@ Partial Class Form1
         Me.InnleveringTab.Name = "InnleveringTab"
         Me.InnleveringTab.Size = New System.Drawing.Size(1340, 645)
         Me.InnleveringTab.TabIndex = 5
-        Me.InnleveringTab.Text = "InnleveringTab"
+        Me.InnleveringTab.Text = "Innlevering"
         '
         'GrpLogiKunde
         '
@@ -2886,7 +2884,6 @@ Partial Class Form1
         Me.AdminEndreBrukerGroup.Controls.Add(Me.TxtAdminEBEtternavn)
         Me.AdminEndreBrukerGroup.Controls.Add(Me.TxtAdminEBFornavn)
         Me.AdminEndreBrukerGroup.Controls.Add(Me.TxtAdminEBPassord)
-        Me.AdminEndreBrukerGroup.Controls.Add(Me.ChkAdminEBTime)
         Me.AdminEndreBrukerGroup.Controls.Add(Me.ChkAdminEBAdmin)
         Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBAdmin)
         Me.AdminEndreBrukerGroup.Controls.Add(Me.LblAdminEBEpost)
@@ -2910,7 +2907,7 @@ Partial Class Form1
         'TxtAdminEBTime
         '
         Me.TxtAdminEBTime.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtAdminEBTime.Location = New System.Drawing.Point(166, 279)
+        Me.TxtAdminEBTime.Location = New System.Drawing.Point(123, 279)
         Me.TxtAdminEBTime.Name = "TxtAdminEBTime"
         Me.TxtAdminEBTime.Size = New System.Drawing.Size(100, 26)
         Me.TxtAdminEBTime.TabIndex = 25
@@ -2959,10 +2956,10 @@ Partial Class Form1
         Me.CboAdminEBStilling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboAdminEBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminEBStilling.FormattingEnabled = True
-        Me.CboAdminEBStilling.Items.AddRange(New Object() {"Butikkmedarbeider", "King Kong"})
+        Me.CboAdminEBStilling.Items.AddRange(New Object() {"Butikkmedarbeider", "Mekanikker", "Avdelingsansvarlig", "Administrasjon", "Logistikkteam", "Dagligleder"})
         Me.CboAdminEBStilling.Location = New System.Drawing.Point(123, 237)
         Me.CboAdminEBStilling.Name = "CboAdminEBStilling"
-        Me.CboAdminEBStilling.Size = New System.Drawing.Size(121, 26)
+        Me.CboAdminEBStilling.Size = New System.Drawing.Size(172, 26)
         Me.CboAdminEBStilling.TabIndex = 19
         '
         'CboAdminEBAvdeling
@@ -3015,17 +3012,6 @@ Partial Class Form1
         Me.TxtAdminEBPassord.Size = New System.Drawing.Size(100, 26)
         Me.TxtAdminEBPassord.TabIndex = 13
         Me.TxtAdminEBPassord.UseSystemPasswordChar = True
-        '
-        'ChkAdminEBTime
-        '
-        Me.ChkAdminEBTime.AutoSize = True
-        Me.ChkAdminEBTime.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkAdminEBTime.Location = New System.Drawing.Point(123, 282)
-        Me.ChkAdminEBTime.Name = "ChkAdminEBTime"
-        Me.ChkAdminEBTime.Size = New System.Drawing.Size(39, 22)
-        Me.ChkAdminEBTime.TabIndex = 12
-        Me.ChkAdminEBTime.Text = "Ja"
-        Me.ChkAdminEBTime.UseVisualStyleBackColor = True
         '
         'ChkAdminEBAdmin
         '
@@ -3161,7 +3147,6 @@ Partial Class Form1
         Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBEtternavn)
         Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBFornavn)
         Me.AdminNyBrukerGroup.Controls.Add(Me.TxtAdminNBPassord)
-        Me.AdminNyBrukerGroup.Controls.Add(Me.ChkAdminNBTime)
         Me.AdminNyBrukerGroup.Controls.Add(Me.ChkAdminNBAdmin)
         Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBAdmin)
         Me.AdminNyBrukerGroup.Controls.Add(Me.LblAdminNBEpost)
@@ -3185,7 +3170,7 @@ Partial Class Form1
         'TxtAdminNBTime
         '
         Me.TxtAdminNBTime.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtAdminNBTime.Location = New System.Drawing.Point(168, 279)
+        Me.TxtAdminNBTime.Location = New System.Drawing.Point(123, 279)
         Me.TxtAdminNBTime.Name = "TxtAdminNBTime"
         Me.TxtAdminNBTime.Size = New System.Drawing.Size(100, 26)
         Me.TxtAdminNBTime.TabIndex = 24
@@ -3226,10 +3211,10 @@ Partial Class Form1
         Me.CboAdminNBStilling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboAdminNBStilling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboAdminNBStilling.FormattingEnabled = True
-        Me.CboAdminNBStilling.Items.AddRange(New Object() {"Butikkmedarbeider", "King Kong"})
+        Me.CboAdminNBStilling.Items.AddRange(New Object() {"Butikkmedarbeider", "Mekanikker", "Avdelingsansvarlig", "Administrasjon", "Logistikkteam", "Dagligleder"})
         Me.CboAdminNBStilling.Location = New System.Drawing.Point(123, 237)
         Me.CboAdminNBStilling.Name = "CboAdminNBStilling"
-        Me.CboAdminNBStilling.Size = New System.Drawing.Size(121, 26)
+        Me.CboAdminNBStilling.Size = New System.Drawing.Size(172, 26)
         Me.CboAdminNBStilling.TabIndex = 19
         '
         'CboAdminNBAvdeling
@@ -3282,17 +3267,6 @@ Partial Class Form1
         Me.TxtAdminNBPassord.Size = New System.Drawing.Size(100, 26)
         Me.TxtAdminNBPassord.TabIndex = 13
         Me.TxtAdminNBPassord.UseSystemPasswordChar = True
-        '
-        'ChkAdminNBTime
-        '
-        Me.ChkAdminNBTime.AutoSize = True
-        Me.ChkAdminNBTime.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkAdminNBTime.Location = New System.Drawing.Point(123, 282)
-        Me.ChkAdminNBTime.Name = "ChkAdminNBTime"
-        Me.ChkAdminNBTime.Size = New System.Drawing.Size(39, 22)
-        Me.ChkAdminNBTime.TabIndex = 12
-        Me.ChkAdminNBTime.Text = "Ja"
-        Me.ChkAdminNBTime.UseVisualStyleBackColor = True
         '
         'ChkAdminNBAdmin
         '
@@ -3784,7 +3758,7 @@ Partial Class Form1
         Me.CboDBALandsdel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CboDBALandsdel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CboDBALandsdel.FormattingEnabled = True
-        Me.CboDBALandsdel.Items.AddRange(New Object() {"Trøndelag"})
+        Me.CboDBALandsdel.Items.AddRange(New Object() {"Nord Norge", "Trøndelag", "Vestlandet", "Østlandet", "Sørlandet"})
         Me.CboDBALandsdel.Location = New System.Drawing.Point(148, 170)
         Me.CboDBALandsdel.Name = "CboDBALandsdel"
         Me.CboDBALandsdel.Size = New System.Drawing.Size(121, 26)
@@ -4107,7 +4081,6 @@ Partial Class Form1
     Friend WithEvents TxtAdminEBEtternavn As TextBox
     Friend WithEvents TxtAdminEBFornavn As TextBox
     Friend WithEvents TxtAdminEBPassord As TextBox
-    Friend WithEvents ChkAdminEBTime As CheckBox
     Friend WithEvents ChkAdminEBAdmin As CheckBox
     Friend WithEvents LblAdminEBAdmin As Label
     Friend WithEvents LblAdminEBEpost As Label
@@ -4132,7 +4105,6 @@ Partial Class Form1
     Friend WithEvents TxtAdminNBEtternavn As TextBox
     Friend WithEvents TxtAdminNBFornavn As TextBox
     Friend WithEvents TxtAdminNBPassord As TextBox
-    Friend WithEvents ChkAdminNBTime As CheckBox
     Friend WithEvents ChkAdminNBAdmin As CheckBox
     Friend WithEvents LblAdminNBAdmin As Label
     Friend WithEvents LblAdminNBEpost As Label
