@@ -1947,17 +1947,9 @@ Public Class Form1
     'Husk kode kommentarer.
 
 
-    Private Sub TxtLogiUtleieID_Keypress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles TxtLogiUtleieID.KeyPress
-        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
-            e.Handled = True
-        End If
-    End Sub
-
-    Private Sub CboLogiAvdeling_DropDown(sender As Object, e As EventArgs) Handles CboLogiAvdeling.DropDown
-        AutoPopCbo(sender, "avdeling", "avd_navn")
-    End Sub
-
     Private Sub LogiSokUtleie()
+
+
 
         If TxtLogiUtleieID.Text.Trim = "" Then
             MsgBox("Skriv inn utleieID")
@@ -1966,7 +1958,13 @@ Public Class Form1
 
         Dim LogiUtleieID As String = SQLWhiteWash(TxtLogiUtleieID.Text.Trim)
 
-            Dim LogiUtleieDT As DataTable = SQLSelect("utleie", "*", "utleie_id='" & LogiUtleieID & "'")
+        'Lager en datatabell med colonner fra utleiet som ble funnet
+        Dim LogiUtleieDT As DataTable = SQLSelect("utleie", "*", "utleie_id='" & LogiUtleieID & "'")
+
+        If LogiUtleieDT.Rows.Count < 1 Then
+            MsgBox("Ingen leieforhold med den ID'en")
+            Exit Sub
+        End If
 
         Dim LogiLeikelokasjonID As String
         Dim LogiStartDato, LogiSluttDato As Date
@@ -1976,16 +1974,17 @@ Public Class Form1
             LogiSluttDato = r("utleie_slutt")
         Next
 
+        'Finner sykler og utstyr knyttet til utleieID
         Dim LogiSyklerDT As DataTable = SQLSelect("utleie_sykkel join utleie as u on utleie_sykkel.utleie_id=u.utleie_id",
                                                   "sykkel_id", "u.utleie_id='" & LogiUtleieID & "'")
-
         Dim LogiUtstyrDT As DataTable = SQLSelect("utleie_utstyr join utleie as u on utleie_utstyr.utleie_id=u.utleie_id",
                                                   "utstyr_id", "u.utleie_id='" & LogiUtleieID & "'")
 
         Dim LogiSykkelID, LogiSykkelNavn, LogiUtstyrID, LogiUtstyrNavn, LogiSykkelStatus, LogiUtstyrStatus As String
 
-        For Each r In LogiSyklerDT.Rows
 
+        'Legger verdier for funnet sykler og utstyr i listview
+        For Each r In LogiSyklerDT.Rows
             LogiSykkelStatus = SQLHentIDNavn("sykler", "sykkel_id", "sykkel_status", r("sykkel_id"))
             LogiSykkelNavn = SQLHentIDNavn("sykler", "sykkel_id", "sykkel_navn", r("sykkel_id"))
             LvLogiUtleieSokResultat.Items.Add(New ListViewItem({LogiUtleieID, r("sykkel_id"), LogiSykkelNavn,
@@ -2005,13 +2004,6 @@ Public Class Form1
         Next
     End Sub
 
-    Private Sub BtnLogiSokUtleie_Click(sender As Object, e As EventArgs) Handles BtnLogiSokUtleie.Click
-
-        LvLogiUtleieSokResultat.Items.Clear()
-        LogiSokUtleie()
-
-    End Sub
-
     Private Sub LogiInnlevering()
         If CboLogiAvdeling.SelectedIndex = -1 Then
             MsgBox("Velg avdeling")
@@ -2020,6 +2012,8 @@ Public Class Form1
 
         Dim LogiAvdelingLevering As String = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", CboLogiAvdeling.SelectedItem)
 
+        'Itererer gjennom listene med sykkel og utstyrID og markerer alle som ledig, _
+        'samt endrer avdeling_id til valgt avdeling i combobox
         Dim LogiBekreftLevering As MsgBoxResult
         LogiBekreftLevering = MsgBox("Bekreft innlevering.", MsgBoxStyle.OkCancel)
         If LogiBekreftLevering = DialogResult.OK Then
@@ -2030,17 +2024,38 @@ Public Class Form1
                 SQLUpdate("sykler", "sykkel_status='Ledig', avdeling_id='" & LogiAvdelingLevering & "'", "sykkel_id='" & r & "'")
             Next
         End If
-        LogiUtstyrLeveres.Clear()
-        LogiSykkelLeveres.Clear()
+
 
     End Sub
+
+
+    Private Sub TxtLogiUtleieID_Keypress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles TxtLogiUtleieID.KeyPress
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub CboLogiAvdeling_DropDown(sender As Object, e As EventArgs) Handles CboLogiAvdeling.DropDown
+        AutoPopCbo(sender, "avdeling", "avd_navn")
+    End Sub
+
+
+    Private Sub BtnLogiSokUtleie_Click(sender As Object, e As EventArgs) Handles BtnLogiSokUtleie.Click
+        LogiUtstyrLeveres.Clear()
+        LogiSykkelLeveres.Clear()
+        LvLogiUtleieSokResultat.Items.Clear()
+        LogiSokUtleie()
+
+    End Sub
+
 
     Private Sub BtnLogiInnlevert_Click(sender As Object, e As EventArgs) Handles BtnLogiInnlevert.Click
 
         LogiInnlevering()
         LvLogiUtleieSokResultat.Items.Clear()
         LogiSokUtleie()
-
+        LogiUtstyrLeveres.Clear()
+        LogiSykkelLeveres.Clear()
     End Sub
 
 
