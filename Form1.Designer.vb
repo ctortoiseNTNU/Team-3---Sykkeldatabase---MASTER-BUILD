@@ -217,6 +217,7 @@ Partial Class Form1
         Me.LblInvKategori = New System.Windows.Forms.Label()
         Me.InnleveringTab = New System.Windows.Forms.TabPage()
         Me.GrpLogiKunde = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.ListView3 = New System.Windows.Forms.ListView()
         Me.ColumnHeader24 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader28 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -236,6 +237,7 @@ Partial Class Form1
         Me.LvColLogiLeielokasjon = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColLogiFraDato = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColLogiTilDato = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColLogiStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.CboLogiAvdeling = New System.Windows.Forms.ComboBox()
         Me.StatTab = New System.Windows.Forms.TabPage()
         Me.GrpStaOkonomi = New System.Windows.Forms.GroupBox()
@@ -388,8 +390,6 @@ Partial Class Form1
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.TmStartLoggUt = New System.Windows.Forms.Timer(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.LvColLogiStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2289,7 +2289,7 @@ Partial Class Form1
         Me.InnleveringTab.Name = "InnleveringTab"
         Me.InnleveringTab.Size = New System.Drawing.Size(1340, 645)
         Me.InnleveringTab.TabIndex = 5
-        Me.InnleveringTab.Text = "Innlevering"
+        Me.InnleveringTab.Text = "InnleveringTab"
         '
         'GrpLogiKunde
         '
@@ -2303,6 +2303,16 @@ Partial Class Form1
         Me.GrpLogiKunde.TabIndex = 56
         Me.GrpLogiKunde.TabStop = False
         Me.GrpLogiKunde.Text = "Søk på leieforhold"
+        '
+        'Button1
+        '
+        Me.Button1.Enabled = False
+        Me.Button1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(317, 50)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(121, 23)
+        Me.Button1.TabIndex = 56
+        Me.Button1.Text = "Innlevert"
         '
         'ListView3
         '
@@ -2453,6 +2463,10 @@ Partial Class Form1
         Me.LvColLogiTilDato.Text = "Til Dato"
         Me.LvColLogiTilDato.Width = 83
         '
+        'LvColLogiStatus
+        '
+        Me.LvColLogiStatus.Text = "Status"
+        '
         'CboLogiAvdeling
         '
         Me.CboLogiAvdeling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -2466,6 +2480,7 @@ Partial Class Form1
         '
         'StatTab
         '
+        Me.StatTab.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.StatTab.Controls.Add(Me.GrpStaOkonomi)
         Me.StatTab.Controls.Add(Me.GrbStaMestLeid)
         Me.StatTab.Controls.Add(Me.GrbStaTilgjengelig)
@@ -2474,7 +2489,6 @@ Partial Class Form1
         Me.StatTab.Size = New System.Drawing.Size(1340, 645)
         Me.StatTab.TabIndex = 6
         Me.StatTab.Text = "Statistikk"
-        Me.StatTab.UseVisualStyleBackColor = True
         '
         'GrpStaOkonomi
         '
@@ -3975,20 +3989,6 @@ Partial Class Form1
         'TmStartLoggUt
         '
         Me.TmStartLoggUt.Interval = 600000
-        '
-        'Button1
-        '
-        Me.Button1.Enabled = False
-        Me.Button1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(317, 50)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(121, 23)
-        Me.Button1.TabIndex = 56
-        Me.Button1.Text = "Innlevert"
-        '
-        'LvColLogiStatus
-        '
-        Me.LvColLogiStatus.Text = "Status"
         '
         'Form1
         '

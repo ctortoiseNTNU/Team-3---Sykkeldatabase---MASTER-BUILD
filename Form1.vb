@@ -245,25 +245,6 @@ Public Class Form1
     End Sub
 
 
-    '--------------TEST---------------
-    Private Sub AutoPopCboSpesific(ByVal sender As Object, Tabell As String, Kolonne As String, combo As Object)
-        Try
-            DBConnect()
-            Dim SqlCom As New MySqlCommand("SELECT " & Kolonne & " FROM " & Tabell & " WHERE 1", Tilkobling)
-            Dim SqlDA As New MySqlDataAdapter
-            Dim ComboDaT As New DataTable
-            SqlDA.SelectCommand = SqlCom
-            SqlDA.Fill(ComboDaT)
-            DBDisconnect()
-            combo.Items.Clear()
-            For Each r In ComboDaT.Rows
-                combo.Items.Add(r(Kolonne))
-            Next
-        Catch ex As MySqlException
-            MsgBox("Feil med autoutfylling av " & CStr(combo) & ": " & ex.Message)
-        End Try
-    End Sub
-
 #End Region
 
 
@@ -271,19 +252,19 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'With HovedTab.TabPages
+        With HovedTab.TabPages
 
-        '    .Remove(StartTab)
-        '    .Remove(UtleieTab)
-        '    .Remove(KDTab)
-        '    .Remove(InventarTab)
-        '    .Remove(LogiTab)
-        '    .Remove(StatTab)
-        '    .Remove(AdminTab)
-        '    .Remove(DBAdminTab)
-        '    HovedTab.SelectedTab = LoginTab
+            .Remove(StartTab)
+            .Remove(UtleieTab)
+            .Remove(KDTab)
+            .Remove(InventarTab)
+            .Remove(InnleveringTab)
+            .Remove(StatTab)
+            .Remove(AdminTab)
+            .Remove(DBAdminTab)
+            HovedTab.SelectedTab = LoginTab
 
-        'End With
+        End With
 
 
     End Sub
