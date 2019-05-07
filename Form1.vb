@@ -302,7 +302,8 @@ Public Class Form1
 
             Case 2 'Bestemmer det som skjer etter man har valgt Utleiemeny.
                 Dim dato As Date = Date.Today
-                LblUtleieSelger.Text = FornavnString & " " & EtternavnString
+                LblUtleieSelgerF.Text = FornavnString
+                LblUtleieSelgerE.Text = EtternavnString
                 LblUtleieDatoTxt.Text = dato
                 'LblUtleieKlokke.Text = TimeOfDay
                 CboUtlAvd.SelectedIndex = 2

@@ -97,7 +97,7 @@ Partial Class Form1
         Me.TxtUtleieKundeSok = New System.Windows.Forms.TextBox()
         Me.LblUtleieKundesok = New System.Windows.Forms.Label()
         Me.GrpUtleieSelger = New System.Windows.Forms.GroupBox()
-        Me.LblUtleieSelger = New System.Windows.Forms.Label()
+        Me.LblUtleieSelgerF = New System.Windows.Forms.Label()
         Me.GrpUtleieAvd = New System.Windows.Forms.GroupBox()
         Me.CboUtlAvd = New System.Windows.Forms.ComboBox()
         Me.LblUtleieKlokke = New System.Windows.Forms.Label()
@@ -390,6 +390,7 @@ Partial Class Form1
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.TmStartLoggUt = New System.Windows.Forms.Timer(Me.components)
+        Me.LblUtleieSelgerE = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1113,7 +1114,8 @@ Partial Class Form1
         '
         'GrpUtleieSelger
         '
-        Me.GrpUtleieSelger.Controls.Add(Me.LblUtleieSelger)
+        Me.GrpUtleieSelger.Controls.Add(Me.LblUtleieSelgerE)
+        Me.GrpUtleieSelger.Controls.Add(Me.LblUtleieSelgerF)
         Me.GrpUtleieSelger.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline)
         Me.GrpUtleieSelger.Location = New System.Drawing.Point(942, 2)
         Me.GrpUtleieSelger.Name = "GrpUtleieSelger"
@@ -1122,15 +1124,15 @@ Partial Class Form1
         Me.GrpUtleieSelger.TabStop = False
         Me.GrpUtleieSelger.Text = "Selger:"
         '
-        'LblUtleieSelger
+        'LblUtleieSelgerF
         '
-        Me.LblUtleieSelger.AutoSize = True
-        Me.LblUtleieSelger.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtleieSelger.Location = New System.Drawing.Point(46, 43)
-        Me.LblUtleieSelger.Name = "LblUtleieSelger"
-        Me.LblUtleieSelger.Size = New System.Drawing.Size(68, 19)
-        Me.LblUtleieSelger.TabIndex = 0
-        Me.LblUtleieSelger.Text = "SelgerTxt"
+        Me.LblUtleieSelgerF.AutoSize = True
+        Me.LblUtleieSelgerF.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieSelgerF.Location = New System.Drawing.Point(34, 42)
+        Me.LblUtleieSelgerF.Name = "LblUtleieSelgerF"
+        Me.LblUtleieSelgerF.Size = New System.Drawing.Size(74, 23)
+        Me.LblUtleieSelgerF.TabIndex = 0
+        Me.LblUtleieSelgerF.Text = "Fornavn"
         '
         'GrpUtleieAvd
         '
@@ -3990,6 +3992,16 @@ Partial Class Form1
         '
         Me.TmStartLoggUt.Interval = 600000
         '
+        'LblUtleieSelgerE
+        '
+        Me.LblUtleieSelgerE.AutoSize = True
+        Me.LblUtleieSelgerE.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieSelgerE.Location = New System.Drawing.Point(34, 73)
+        Me.LblUtleieSelgerE.Name = "LblUtleieSelgerE"
+        Me.LblUtleieSelgerE.Size = New System.Drawing.Size(85, 23)
+        Me.LblUtleieSelgerE.TabIndex = 1
+        Me.LblUtleieSelgerE.Text = "Etternavn"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4253,7 +4265,7 @@ Partial Class Form1
     Friend WithEvents TxtUtleieKundeSok As TextBox
     Friend WithEvents LblUtleieKundesok As Label
     Friend WithEvents GrpUtleieSelger As GroupBox
-    Friend WithEvents LblUtleieSelger As Label
+    Friend WithEvents LblUtleieSelgerF As Label
     Friend WithEvents GrpUtleieAvd As GroupBox
     Friend WithEvents LblUtleieDatoTxt As Label
     Friend WithEvents LblUtleieDato As Label
@@ -4436,4 +4448,5 @@ Partial Class Form1
     Friend WithEvents BtnLogiInnlevert As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents LvColLogiStatus As ColumnHeader
+    Friend WithEvents LblUtleieSelgerE As Label
 End Class
