@@ -215,31 +215,39 @@ Partial Class Form1
         Me.LblInvProduktnavn = New System.Windows.Forms.Label()
         Me.LblInvAvdeling = New System.Windows.Forms.Label()
         Me.LblInvKategori = New System.Windows.Forms.Label()
-        Me.LogiTab = New System.Windows.Forms.TabPage()
-        Me.GrpLogistikk = New System.Windows.Forms.GroupBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.CboLogiLeveringsSted = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.BtnLogiHentetLevert = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.TxtLogiID = New System.Windows.Forms.TextBox()
-        Me.BtnLogiSok = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.DateLogiLevert = New System.Windows.Forms.DateTimePicker()
-        Me.CboLogiKategori = New System.Windows.Forms.ComboBox()
+        Me.InnleveringTab = New System.Windows.Forms.TabPage()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ListView3 = New System.Windows.Forms.ListView()
+        Me.ColumnHeader24 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader25 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader26 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader27 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader28 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader29 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.LblLogiHentested = New System.Windows.Forms.Label()
-        Me.CboLogiHentested = New System.Windows.Forms.ComboBox()
-        Me.GrpLogistikkSok = New System.Windows.Forms.GroupBox()
-        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.GrpLogiSokUtleie = New System.Windows.Forms.GroupBox()
+        Me.BtnLogiSokUtleie = New System.Windows.Forms.Button()
+        Me.LblLogiUtleieID = New System.Windows.Forms.Label()
+        Me.TxtLogiUtleieID = New System.Windows.Forms.TextBox()
+        Me.GrpLogiSokLeieResultat = New System.Windows.Forms.GroupBox()
+        Me.ListView2 = New System.Windows.Forms.ListView()
+        Me.ColumnHeader16 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader19 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader20 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader21 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader22 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader23 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BtnLogiInnlevert = New System.Windows.Forms.Button()
+        Me.LvLogiUtleieSokResultat = New System.Windows.Forms.ListView()
         Me.LvColLogiLeieID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvColLogiSykkel = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColLogiObjektID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColLogiNavn = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LvColLogiLeielokasjon = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvColLogiReturlokasjon = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvColLogiDato = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LvColLogiStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColLogiFraDato = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LvColLogiTilDato = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.CboLogiAvdeling = New System.Windows.Forms.ComboBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.StatTab = New System.Windows.Forms.TabPage()
         Me.GrpStaOkonomi = New System.Windows.Forms.GroupBox()
         Me.LblStaTotalSykkelVerdi = New System.Windows.Forms.Label()
@@ -410,9 +418,10 @@ Partial Class Form1
         Me.GrbKndSok.SuspendLayout()
         Me.InventarTab.SuspendLayout()
         Me.GrpInvRegistrerEndre.SuspendLayout()
-        Me.LogiTab.SuspendLayout()
-        Me.GrpLogistikk.SuspendLayout()
-        Me.GrpLogistikkSok.SuspendLayout()
+        Me.InnleveringTab.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GrpLogiSokUtleie.SuspendLayout()
+        Me.GrpLogiSokLeieResultat.SuspendLayout()
         Me.StatTab.SuspendLayout()
         Me.GrpStaOkonomi.SuspendLayout()
         Me.GrbStaMestLeid.SuspendLayout()
@@ -438,7 +447,7 @@ Partial Class Form1
         Me.HovedTab.Controls.Add(Me.UtleieTab)
         Me.HovedTab.Controls.Add(Me.KDTab)
         Me.HovedTab.Controls.Add(Me.InventarTab)
-        Me.HovedTab.Controls.Add(Me.LogiTab)
+        Me.HovedTab.Controls.Add(Me.InnleveringTab)
         Me.HovedTab.Controls.Add(Me.StatTab)
         Me.HovedTab.Controls.Add(Me.AdminTab)
         Me.HovedTab.Controls.Add(Me.DBAdminTab)
@@ -2279,238 +2288,256 @@ Partial Class Form1
         Me.LblInvKategori.TabIndex = 1
         Me.LblInvKategori.Text = "Kategori:"
         '
-        'LogiTab
+        'InnleveringTab
         '
-        Me.LogiTab.Controls.Add(Me.GrpLogistikk)
-        Me.LogiTab.Controls.Add(Me.GrpLogistikkSok)
-        Me.LogiTab.Location = New System.Drawing.Point(4, 32)
-        Me.LogiTab.Name = "LogiTab"
-        Me.LogiTab.Size = New System.Drawing.Size(1340, 645)
-        Me.LogiTab.TabIndex = 5
-        Me.LogiTab.Text = "Logistikk"
-        Me.LogiTab.UseVisualStyleBackColor = True
+        Me.InnleveringTab.Controls.Add(Me.GroupBox2)
+        Me.InnleveringTab.Controls.Add(Me.GrpLogiSokUtleie)
+        Me.InnleveringTab.Controls.Add(Me.GrpLogiSokLeieResultat)
+        Me.InnleveringTab.Location = New System.Drawing.Point(4, 32)
+        Me.InnleveringTab.Name = "InnleveringTab"
+        Me.InnleveringTab.Size = New System.Drawing.Size(1340, 645)
+        Me.InnleveringTab.TabIndex = 5
+        Me.InnleveringTab.Text = "Innlevering"
+        Me.InnleveringTab.UseVisualStyleBackColor = True
         '
-        'GrpLogistikk
+        'GroupBox2
         '
-        Me.GrpLogistikk.Controls.Add(Me.Label6)
-        Me.GrpLogistikk.Controls.Add(Me.CboLogiLeveringsSted)
-        Me.GrpLogistikk.Controls.Add(Me.Label5)
-        Me.GrpLogistikk.Controls.Add(Me.Button3)
-        Me.GrpLogistikk.Controls.Add(Me.BtnLogiHentetLevert)
-        Me.GrpLogistikk.Controls.Add(Me.Label4)
-        Me.GrpLogistikk.Controls.Add(Me.CheckBox1)
-        Me.GrpLogistikk.Controls.Add(Me.TxtLogiID)
-        Me.GrpLogistikk.Controls.Add(Me.BtnLogiSok)
-        Me.GrpLogistikk.Controls.Add(Me.Label3)
-        Me.GrpLogistikk.Controls.Add(Me.DateLogiLevert)
-        Me.GrpLogistikk.Controls.Add(Me.CboLogiKategori)
-        Me.GrpLogistikk.Controls.Add(Me.Label2)
-        Me.GrpLogistikk.Controls.Add(Me.LblLogiHentested)
-        Me.GrpLogistikk.Controls.Add(Me.CboLogiHentested)
-        Me.GrpLogistikk.Location = New System.Drawing.Point(7, 3)
-        Me.GrpLogistikk.Name = "GrpLogistikk"
-        Me.GrpLogistikk.Size = New System.Drawing.Size(377, 631)
-        Me.GrpLogistikk.TabIndex = 1
-        Me.GrpLogistikk.TabStop = False
-        Me.GrpLogistikk.Text = "Logistikk"
+        Me.GroupBox2.Controls.Add(Me.ListView3)
+        Me.GroupBox2.Controls.Add(Me.Label2)
+        Me.GroupBox2.Controls.Add(Me.TextBox1)
+        Me.GroupBox2.Location = New System.Drawing.Point(7, 292)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(459, 336)
+        Me.GroupBox2.TabIndex = 56
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "GroupBox2"
         '
-        'Label6
+        'ListView3
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(12, 233)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(98, 18)
-        Me.Label6.TabIndex = 61
-        Me.Label6.Text = "Leveringssted:"
+        Me.ListView3.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader24, Me.ColumnHeader25, Me.ColumnHeader26, Me.ColumnHeader27, Me.ColumnHeader28, Me.ColumnHeader29})
+        Me.ListView3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListView3.Location = New System.Drawing.Point(41, 142)
+        Me.ListView3.Name = "ListView3"
+        Me.ListView3.Size = New System.Drawing.Size(316, 139)
+        Me.ListView3.TabIndex = 57
+        Me.ListView3.UseCompatibleStateImageBehavior = False
+        Me.ListView3.View = System.Windows.Forms.View.Details
         '
-        'CboLogiLeveringsSted
+        'ColumnHeader24
         '
-        Me.CboLogiLeveringsSted.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CboLogiLeveringsSted.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboLogiLeveringsSted.FormattingEnabled = True
-        Me.CboLogiLeveringsSted.Location = New System.Drawing.Point(116, 230)
-        Me.CboLogiLeveringsSted.Name = "CboLogiLeveringsSted"
-        Me.CboLogiLeveringsSted.Size = New System.Drawing.Size(121, 26)
-        Me.CboLogiLeveringsSted.TabIndex = 60
+        Me.ColumnHeader24.Text = "Leie ID"
+        Me.ColumnHeader24.Width = 69
         '
-        'Label5
+        'ColumnHeader25
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(69, 323)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(41, 18)
-        Me.Label5.TabIndex = 59
-        Me.Label5.Text = "Dato:"
+        Me.ColumnHeader25.Text = "Sykkel/Utstyr ID"
+        Me.ColumnHeader25.Width = 103
         '
-        'Button3
+        'ColumnHeader26
         '
-        Me.Button3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(116, 549)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(85, 23)
-        Me.Button3.TabIndex = 58
-        Me.Button3.Text = "Søk"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.ColumnHeader26.Text = "Navn"
+        Me.ColumnHeader26.Width = 173
         '
-        'BtnLogiHentetLevert
+        'ColumnHeader27
         '
-        Me.BtnLogiHentetLevert.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnLogiHentetLevert.Location = New System.Drawing.Point(116, 361)
-        Me.BtnLogiHentetLevert.Name = "BtnLogiHentetLevert"
-        Me.BtnLogiHentetLevert.Size = New System.Drawing.Size(121, 45)
-        Me.BtnLogiHentetLevert.TabIndex = 57
-        Me.BtnLogiHentetLevert.Text = "Marker som hentet og levert"
-        Me.BtnLogiHentetLevert.UseVisualStyleBackColor = True
+        Me.ColumnHeader27.Text = "Leielokasjon"
+        Me.ColumnHeader27.Width = 113
         '
-        'Label4
+        'ColumnHeader28
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(85, 278)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(25, 18)
-        Me.Label4.TabIndex = 56
-        Me.Label4.Text = "ID:"
+        Me.ColumnHeader28.Text = "Fra Dato"
+        Me.ColumnHeader28.Width = 103
         '
-        'CheckBox1
+        'ColumnHeader29
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(72, 578)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(93, 18)
-        Me.CheckBox1.TabIndex = 55
-        Me.CheckBox1.Text = "Lastehenger"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'TxtLogiID
-        '
-        Me.TxtLogiID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtLogiID.Location = New System.Drawing.Point(116, 275)
-        Me.TxtLogiID.MaxLength = 20
-        Me.TxtLogiID.Name = "TxtLogiID"
-        Me.TxtLogiID.Size = New System.Drawing.Size(121, 26)
-        Me.TxtLogiID.TabIndex = 52
-        '
-        'BtnLogiSok
-        '
-        Me.BtnLogiSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnLogiSok.Location = New System.Drawing.Point(116, 92)
-        Me.BtnLogiSok.Name = "BtnLogiSok"
-        Me.BtnLogiSok.Size = New System.Drawing.Size(121, 23)
-        Me.BtnLogiSok.TabIndex = 51
-        Me.BtnLogiSok.Text = "Søk"
-        Me.BtnLogiSok.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(46, 188)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(64, 18)
-        Me.Label3.TabIndex = 50
-        Me.Label3.Text = "Kategori:"
-        '
-        'DateLogiLevert
-        '
-        Me.DateLogiLevert.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateLogiLevert.Location = New System.Drawing.Point(116, 320)
-        Me.DateLogiLevert.Name = "DateLogiLevert"
-        Me.DateLogiLevert.Size = New System.Drawing.Size(172, 22)
-        Me.DateLogiLevert.TabIndex = 49
-        '
-        'CboLogiKategori
-        '
-        Me.CboLogiKategori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CboLogiKategori.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboLogiKategori.FormattingEnabled = True
-        Me.CboLogiKategori.Items.AddRange(New Object() {"Sykkel", "Utstyr"})
-        Me.CboLogiKategori.Location = New System.Drawing.Point(116, 185)
-        Me.CboLogiKategori.Name = "CboLogiKategori"
-        Me.CboLogiKategori.Size = New System.Drawing.Size(121, 26)
-        Me.CboLogiKategori.TabIndex = 48
+        Me.ColumnHeader29.Text = "Til Dato"
+        Me.ColumnHeader29.Width = 83
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(46, 477)
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(6, 52)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(139, 18)
-        Me.Label2.TabIndex = 47
-        Me.Label2.Text = "Ingen aktive produkt."
+        Me.Label2.Size = New System.Drawing.Size(91, 18)
+        Me.Label2.TabIndex = 8
+        Me.Label2.Text = "Produktnavn:"
         '
-        'LblLogiHentested
+        'TextBox1
         '
-        Me.LblLogiHentested.AutoSize = True
-        Me.LblLogiHentested.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblLogiHentested.Location = New System.Drawing.Point(33, 53)
-        Me.LblLogiHentested.Name = "LblLogiHentested"
-        Me.LblLogiHentested.Size = New System.Drawing.Size(77, 18)
-        Me.LblLogiHentested.TabIndex = 46
-        Me.LblLogiHentested.Text = "Hentested:"
+        Me.TextBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(115, 49)
+        Me.TextBox1.MaxLength = 20
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(121, 26)
+        Me.TextBox1.TabIndex = 7
         '
-        'CboLogiHentested
+        'GrpLogiSokUtleie
         '
-        Me.CboLogiHentested.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CboLogiHentested.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CboLogiHentested.FormattingEnabled = True
-        Me.CboLogiHentested.Location = New System.Drawing.Point(116, 50)
-        Me.CboLogiHentested.Name = "CboLogiHentested"
-        Me.CboLogiHentested.Size = New System.Drawing.Size(121, 26)
-        Me.CboLogiHentested.TabIndex = 2
+        Me.GrpLogiSokUtleie.Controls.Add(Me.BtnLogiSokUtleie)
+        Me.GrpLogiSokUtleie.Controls.Add(Me.LblLogiUtleieID)
+        Me.GrpLogiSokUtleie.Controls.Add(Me.TxtLogiUtleieID)
+        Me.GrpLogiSokUtleie.Location = New System.Drawing.Point(7, 3)
+        Me.GrpLogiSokUtleie.Name = "GrpLogiSokUtleie"
+        Me.GrpLogiSokUtleie.Size = New System.Drawing.Size(459, 283)
+        Me.GrpLogiSokUtleie.TabIndex = 55
+        Me.GrpLogiSokUtleie.TabStop = False
+        Me.GrpLogiSokUtleie.Text = "Søk på utleie"
         '
-        'GrpLogistikkSok
+        'BtnLogiSokUtleie
         '
-        Me.GrpLogistikkSok.Controls.Add(Me.ListView1)
-        Me.GrpLogistikkSok.Location = New System.Drawing.Point(484, 3)
-        Me.GrpLogistikkSok.Name = "GrpLogistikkSok"
-        Me.GrpLogistikkSok.Size = New System.Drawing.Size(849, 631)
-        Me.GrpLogistikkSok.TabIndex = 0
-        Me.GrpLogistikkSok.TabStop = False
-        Me.GrpLogistikkSok.Text = "Søkeresultat"
+        Me.BtnLogiSokUtleie.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnLogiSokUtleie.Location = New System.Drawing.Point(276, 48)
+        Me.BtnLogiSokUtleie.Name = "BtnLogiSokUtleie"
+        Me.BtnLogiSokUtleie.Size = New System.Drawing.Size(121, 23)
+        Me.BtnLogiSokUtleie.TabIndex = 54
+        Me.BtnLogiSokUtleie.Text = "Søk"
         '
-        'ListView1
+        'LblLogiUtleieID
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColLogiLeieID, Me.LvColLogiSykkel, Me.LvColLogiLeielokasjon, Me.LvColLogiReturlokasjon, Me.LvColLogiDato, Me.LvColLogiStatus})
-        Me.ListView1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView1.Location = New System.Drawing.Point(6, 30)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(837, 595)
-        Me.ListView1.TabIndex = 0
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.LblLogiUtleieID.AutoSize = True
+        Me.LblLogiUtleieID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblLogiUtleieID.Location = New System.Drawing.Point(6, 49)
+        Me.LblLogiUtleieID.Name = "LblLogiUtleieID"
+        Me.LblLogiUtleieID.Size = New System.Drawing.Size(66, 18)
+        Me.LblLogiUtleieID.TabIndex = 6
+        Me.LblLogiUtleieID.Text = "Utleie ID:"
+        '
+        'TxtLogiUtleieID
+        '
+        Me.TxtLogiUtleieID.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtLogiUtleieID.Location = New System.Drawing.Point(115, 46)
+        Me.TxtLogiUtleieID.MaxLength = 20
+        Me.TxtLogiUtleieID.Name = "TxtLogiUtleieID"
+        Me.TxtLogiUtleieID.Size = New System.Drawing.Size(121, 26)
+        Me.TxtLogiUtleieID.TabIndex = 5
+        '
+        'GrpLogiSokLeieResultat
+        '
+        Me.GrpLogiSokLeieResultat.Controls.Add(Me.ListView2)
+        Me.GrpLogiSokLeieResultat.Controls.Add(Me.BtnLogiInnlevert)
+        Me.GrpLogiSokLeieResultat.Controls.Add(Me.LvLogiUtleieSokResultat)
+        Me.GrpLogiSokLeieResultat.Controls.Add(Me.CboLogiAvdeling)
+        Me.GrpLogiSokLeieResultat.Controls.Add(Me.CheckBox1)
+        Me.GrpLogiSokLeieResultat.Location = New System.Drawing.Point(484, 3)
+        Me.GrpLogiSokLeieResultat.Name = "GrpLogiSokLeieResultat"
+        Me.GrpLogiSokLeieResultat.Size = New System.Drawing.Size(849, 631)
+        Me.GrpLogiSokLeieResultat.TabIndex = 0
+        Me.GrpLogiSokLeieResultat.TabStop = False
+        Me.GrpLogiSokLeieResultat.Text = "Søkeresultat"
+        '
+        'ListView2
+        '
+        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader16, Me.ColumnHeader19, Me.ColumnHeader20, Me.ColumnHeader21, Me.ColumnHeader22, Me.ColumnHeader23})
+        Me.ListView2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListView2.Location = New System.Drawing.Point(205, 381)
+        Me.ListView2.Name = "ListView2"
+        Me.ListView2.Size = New System.Drawing.Size(518, 139)
+        Me.ListView2.TabIndex = 56
+        Me.ListView2.UseCompatibleStateImageBehavior = False
+        Me.ListView2.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader16
+        '
+        Me.ColumnHeader16.Text = "Leie ID"
+        Me.ColumnHeader16.Width = 69
+        '
+        'ColumnHeader19
+        '
+        Me.ColumnHeader19.Text = "Sykkel/Utstyr ID"
+        Me.ColumnHeader19.Width = 103
+        '
+        'ColumnHeader20
+        '
+        Me.ColumnHeader20.Text = "Navn"
+        Me.ColumnHeader20.Width = 173
+        '
+        'ColumnHeader21
+        '
+        Me.ColumnHeader21.Text = "Leielokasjon"
+        Me.ColumnHeader21.Width = 113
+        '
+        'ColumnHeader22
+        '
+        Me.ColumnHeader22.Text = "Fra Dato"
+        Me.ColumnHeader22.Width = 103
+        '
+        'ColumnHeader23
+        '
+        Me.ColumnHeader23.Text = "Til Dato"
+        Me.ColumnHeader23.Width = 83
+        '
+        'BtnLogiInnlevert
+        '
+        Me.BtnLogiInnlevert.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnLogiInnlevert.Location = New System.Drawing.Point(205, 303)
+        Me.BtnLogiInnlevert.Name = "BtnLogiInnlevert"
+        Me.BtnLogiInnlevert.Size = New System.Drawing.Size(121, 23)
+        Me.BtnLogiInnlevert.TabIndex = 55
+        Me.BtnLogiInnlevert.Text = "Innlevert"
+        '
+        'LvLogiUtleieSokResultat
+        '
+        Me.LvLogiUtleieSokResultat.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.LvColLogiLeieID, Me.LvColLogiObjektID, Me.LvColLogiNavn, Me.LvColLogiLeielokasjon, Me.LvColLogiFraDato, Me.LvColLogiTilDato})
+        Me.LvLogiUtleieSokResultat.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvLogiUtleieSokResultat.Location = New System.Drawing.Point(6, 30)
+        Me.LvLogiUtleieSokResultat.Name = "LvLogiUtleieSokResultat"
+        Me.LvLogiUtleieSokResultat.Size = New System.Drawing.Size(837, 253)
+        Me.LvLogiUtleieSokResultat.TabIndex = 0
+        Me.LvLogiUtleieSokResultat.UseCompatibleStateImageBehavior = False
+        Me.LvLogiUtleieSokResultat.View = System.Windows.Forms.View.Details
         '
         'LvColLogiLeieID
         '
         Me.LvColLogiLeieID.Text = "Leie ID"
         Me.LvColLogiLeieID.Width = 69
         '
-        'LvColLogiSykkel
+        'LvColLogiObjektID
         '
-        Me.LvColLogiSykkel.Text = "Sykkel ID"
-        Me.LvColLogiSykkel.Width = 77
+        Me.LvColLogiObjektID.Text = "Sykkel/Utstyr ID"
+        Me.LvColLogiObjektID.Width = 103
+        '
+        'LvColLogiNavn
+        '
+        Me.LvColLogiNavn.Text = "Navn"
+        Me.LvColLogiNavn.Width = 173
         '
         'LvColLogiLeielokasjon
         '
         Me.LvColLogiLeielokasjon.Text = "Leielokasjon"
         Me.LvColLogiLeielokasjon.Width = 113
         '
-        'LvColLogiReturlokasjon
+        'LvColLogiFraDato
         '
-        Me.LvColLogiReturlokasjon.Text = "Returlokasjon"
-        Me.LvColLogiReturlokasjon.Width = 104
+        Me.LvColLogiFraDato.Text = "Fra Dato"
+        Me.LvColLogiFraDato.Width = 103
         '
-        'LvColLogiDato
+        'LvColLogiTilDato
         '
-        Me.LvColLogiDato.Text = "Dato"
+        Me.LvColLogiTilDato.Text = "Til Dato"
+        Me.LvColLogiTilDato.Width = 83
         '
-        'LvColLogiStatus
+        'CboLogiAvdeling
         '
-        Me.LvColLogiStatus.Text = "Status"
+        Me.CboLogiAvdeling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboLogiAvdeling.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboLogiAvdeling.FormattingEnabled = True
+        Me.CboLogiAvdeling.Items.AddRange(New Object() {"Ledig", "Utleid", "Verksted"})
+        Me.CboLogiAvdeling.Location = New System.Drawing.Point(50, 301)
+        Me.CboLogiAvdeling.Name = "CboLogiAvdeling"
+        Me.CboLogiAvdeling.Size = New System.Drawing.Size(121, 26)
+        Me.CboLogiAvdeling.TabIndex = 12
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox1.Location = New System.Drawing.Point(78, 460)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(82, 18)
+        Me.CheckBox1.TabIndex = 53
+        Me.CheckBox1.Text = "Barnesete"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'StatTab
         '
@@ -4065,10 +4092,13 @@ Partial Class Form1
         Me.InventarTab.ResumeLayout(False)
         Me.GrpInvRegistrerEndre.ResumeLayout(False)
         Me.GrpInvRegistrerEndre.PerformLayout()
-        Me.LogiTab.ResumeLayout(False)
-        Me.GrpLogistikk.ResumeLayout(False)
-        Me.GrpLogistikk.PerformLayout()
-        Me.GrpLogistikkSok.ResumeLayout(False)
+        Me.InnleveringTab.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GrpLogiSokUtleie.ResumeLayout(False)
+        Me.GrpLogiSokUtleie.PerformLayout()
+        Me.GrpLogiSokLeieResultat.ResumeLayout(False)
+        Me.GrpLogiSokLeieResultat.PerformLayout()
         Me.StatTab.ResumeLayout(False)
         Me.GrpStaOkonomi.ResumeLayout(False)
         Me.GrpStaOkonomi.PerformLayout()
@@ -4106,7 +4136,7 @@ Partial Class Form1
     Friend WithEvents UtleieTab As TabPage
     Friend WithEvents KDTab As TabPage
     Friend WithEvents InventarTab As TabPage
-    Friend WithEvents LogiTab As TabPage
+    Friend WithEvents InnleveringTab As TabPage
     Friend WithEvents StatTab As TabPage
     Friend WithEvents AdminTab As TabPage
     Friend WithEvents LblStartMOTD As Label
@@ -4414,30 +4444,13 @@ Partial Class Form1
     Friend WithEvents Timer1 As Timer
     Friend WithEvents CboUtlRamme As ComboBox
     Friend WithEvents LblUtlRamme As Label
-    Friend WithEvents GrpLogistikk As GroupBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents CboLogiLeveringsSted As ComboBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Button3 As Button
-    Friend WithEvents BtnLogiHentetLevert As Button
-    Friend WithEvents Label4 As Label
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents TxtLogiID As TextBox
-    Friend WithEvents BtnLogiSok As Button
-    Friend WithEvents Label3 As Label
-    Friend WithEvents DateLogiLevert As DateTimePicker
-    Friend WithEvents CboLogiKategori As ComboBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents LblLogiHentested As Label
-    Friend WithEvents CboLogiHentested As ComboBox
-    Friend WithEvents GrpLogistikkSok As GroupBox
-    Friend WithEvents ListView1 As ListView
+    Friend WithEvents GrpLogiSokLeieResultat As GroupBox
+    Friend WithEvents LvLogiUtleieSokResultat As ListView
     Friend WithEvents LvColLogiLeieID As ColumnHeader
-    Friend WithEvents LvColLogiSykkel As ColumnHeader
+    Friend WithEvents LvColLogiObjektID As ColumnHeader
     Friend WithEvents LvColLogiLeielokasjon As ColumnHeader
-    Friend WithEvents LvColLogiReturlokasjon As ColumnHeader
-    Friend WithEvents LvColLogiDato As ColumnHeader
-    Friend WithEvents LvColLogiStatus As ColumnHeader
+    Friend WithEvents LvColLogiFraDato As ColumnHeader
+    Friend WithEvents LvColLogiTilDato As ColumnHeader
     Friend WithEvents CboKndSok As ComboBox
     Friend WithEvents LblDBATimepris As Label
     Friend WithEvents LblDBADognpris As Label
@@ -4468,4 +4481,29 @@ Partial Class Form1
     Friend WithEvents LvColUtlKategori2 As ColumnHeader
     Friend WithEvents BtnUtlBeregnPris As Button
     Friend WithEvents ChkUtlRabatOverstyr As CheckBox
+    Friend WithEvents GrpLogiSokUtleie As GroupBox
+    Friend WithEvents BtnLogiSokUtleie As Button
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents CboLogiAvdeling As ComboBox
+    Friend WithEvents LblLogiUtleieID As Label
+    Friend WithEvents TxtLogiUtleieID As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents LvColLogiNavn As ColumnHeader
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents ListView3 As ListView
+    Friend WithEvents ColumnHeader24 As ColumnHeader
+    Friend WithEvents ColumnHeader25 As ColumnHeader
+    Friend WithEvents ColumnHeader26 As ColumnHeader
+    Friend WithEvents ColumnHeader27 As ColumnHeader
+    Friend WithEvents ColumnHeader28 As ColumnHeader
+    Friend WithEvents ColumnHeader29 As ColumnHeader
+    Friend WithEvents ListView2 As ListView
+    Friend WithEvents ColumnHeader16 As ColumnHeader
+    Friend WithEvents ColumnHeader19 As ColumnHeader
+    Friend WithEvents ColumnHeader20 As ColumnHeader
+    Friend WithEvents ColumnHeader21 As ColumnHeader
+    Friend WithEvents ColumnHeader22 As ColumnHeader
+    Friend WithEvents ColumnHeader23 As ColumnHeader
+    Friend WithEvents BtnLogiInnlevert As Button
 End Class

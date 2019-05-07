@@ -23,6 +23,8 @@ Public Class Form1
     Dim UtlValgteSyklerID, UtlValgtUtstyrID As New ArrayList
     Dim UtlUtstyrPris As Integer = 50
     Dim UtlUtstyrPrisFaktorUke As Integer = 4
+    Dim LogiUtstyrLeveres, LogiSykkelLeveres As New ArrayList
+
 
 
 
@@ -741,9 +743,6 @@ Public Class Form1
                                  UtlSokHjulStr, UtlSokTilgjengelig, UtlSokAvdelingNavn, UtlKategori}))
                     Next
                 End If
-
-
-
             Catch ex As Exception
                 MsgBox("Feil med varetabell: " & ex.Message)
             End Try
@@ -1942,53 +1941,104 @@ Public Class Form1
 #End Region
 
 
-#Region "LogistikkTab"
+#Region "InnleveringTab"
     'Her plasseres kode som er relevant til Logistikk Tab.
     'Variabler som brukes her skal begynne med Logi. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
 
-    Private Sub TxtLogiID_Keypress(ByVal sender As Object, ByVal e As KeyPressEventArgs) _
-        Handles TxtLogiID.KeyPress
+    Private Sub TxtLogiUtleieID_Keypress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles TxtLogiUtleieID.KeyPress
         If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub CboLogiHentested_SelectedIndexChanged(sender As Object, e As EventArgs) _
-        Handles CboLogiHentested.SelectedIndexChanged
+
+    Private Sub CboLogiAvdeling_DropDown(sender As Object, e As EventArgs) Handles CboLogiAvdeling.DropDown
         AutoPopCbo(sender, "avdeling", "avd_navn")
     End Sub
 
-    Private Sub CboLogiLeveringsSted_SelectedIndexChanged(sender As Object, e As EventArgs) _
-        Handles CboLogiLeveringsSted.SelectedIndexChanged
-        AutoPopCbo(sender, "avdeling", "avd_navn")
+
+    Private Sub BtnLogiSokUtleie_Click(sender As Object, e As EventArgs) Handles BtnLogiSokUtleie.Click
+        Dim LogiUtleieID As String = TxtLogiUtleieID.Text
+
+        Dim LogiUtleieDT As DataTable = SQLSelect("utleie", "*", "utleie_id='" & LogiUtleieID & "'")
+
+        Dim LogiLeikelokasjonID As String
+        Dim LogiStartDato, LogiSluttDato As Date
+        For Each r In LogiUtleieDT.Rows
+            LogiLeikelokasjonID = r("avdeling_id")
+            LogiStartDato = r("utleie_start")
+            LogiSluttDato = r("utleie_slutt")
+        Next
+
+        Dim LogiSyklerDT As DataTable = SQLSelect("utleie_sykkel join utleie as u on utleie_sykkel.utleie_id=u.utleie_id",
+                                                  "sykkel_id", "u.utleie_id='" & LogiUtleieID & "'")
+
+        Dim LogiUtstyrDT As DataTable = SQLSelect("utleie_utstyr join utleie as u on utleie_utstyr.utleie_id=u.utleie_id",
+                                                  "utstyr_id", "u.utleie_id='" & LogiUtleieID & "'")
+
+        Dim LogiSykkelID, LogiSykkelNavn, LogiUtstyrID, LogiUtstyrNavn As String
+
+        For Each r In LogiSyklerDT.Rows
+
+            LogiSykkelNavn = SQLHentIDNavn("sykler", "sykkel_id", "sykkel_navn", r("sykkel_id"))
+            LvLogiUtleieSokResultat.Items.Add(New ListViewItem({LogiUtleieID, r("sykkel_id"), LogiSykkelNavn,
+                                                               LogiLeikelokasjonID, LogiStartDato.ToString("dd_MM-yyyy"),
+                                                               LogiSluttDato.ToString("dd_MM-yyyy")}))
+            LogiSykkelLeveres.Add(r("sykkel_id"))
+        Next
+
+        For Each r In LogiUtstyrDT.Rows
+
+            LogiUtstyrNavn = SQLHentIDNavn("utstyr", "utstyr_id", "utstyr_navn", r("utstyr_id"))
+            LvLogiUtleieSokResultat.Items.Add(New ListViewItem({LogiUtleieID, r("utstyr_id"), LogiUtstyrNavn,
+                                                               LogiLeikelokasjonID, LogiStartDato.ToString("dd_MM-yyyy"),
+                                                               LogiSluttDato.ToString("dd_MM-yyyy")}))
+            LogiUtstyrLeveres.Add(r("utstyr_id"))
+        Next
+
     End Sub
 
-    Private Sub BtnLogiSok_Click(sender As Object, e As EventArgs) Handles BtnLogiSok.Click
+
+    Private Sub BtnLogiInnlevert_Click(sender As Object, e As EventArgs) Handles BtnLogiInnlevert.Click
+
+        Dim LogiBekreftLevering As MsgBoxResult
+
+        LogiBekreftLevering = MsgBox("Bekreft innlevering.", MsgBoxStyle.OkCancel)
+        If LogiBekreftLevering = DialogResult.OK Then
+            For Each r In LogiUtstyrLeveres
+                SQLUpdate("utstyr", "utstyr_status='Ledig'", "utstyr_id='" & r & "'")
+            Next
+            For Each r In LogiSykkelLeveres
+                SQLUpdate("sykler", "sykkel_status='Ledig'", "sykkel_id='" & r & "'")
+            Next
+        End If
+        LogiUtstyrLeveres.Clear()
+        LogiSykkelLeveres.Clear()
 
     End Sub
 
-    Private Sub BtnLogiHentetLevert_Click(sender As Object, e As EventArgs) Handles BtnLogiHentetLevert.Click
+    Private Sub BtnLogiHentetLevert_Click(sender As Object, e As EventArgs)
         'Siden det ikke er noen tabell for henting og levering for sykkel så trengs strengt tatt ikke _
         'denne fanen.Sykkel. 
 
 
-        Dim LogiHenteDato As Date
-        Dim LogiAktivID
-        Dim LogiHenteAvdeling, LogiLeveringsAvdeling, LogiAvdelingID, LogiLeieID, LogiProduktID As String
+        'Dim LogiHenteDato As Date
+        'Dim LogiAktivID
+        'Dim LogiHenteAvdeling, LogiLeveringsAvdeling, LogiAvdelingID, LogiLeieID, LogiProduktID As String
 
-        LogiHenteAvdeling = CboLogiHentested.SelectedItem
-        LogiLeveringsAvdeling = CboLogiLeveringsSted.SelectedItem
-        LogiHenteDato = DateLogiLevert.Value.ToString("yyyy-MM-dd")
-        LogiProduktID = SQLWhiteWash(TxtLogiID.Text.Trim)
-        LogiAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", LogiLeveringsAvdeling)
+        'LogiHenteAvdeling = CboLogiHentested.SelectedItem
+        'LogiLeveringsAvdeling = CboLogiLeveringsSted.SelectedItem
+        'LogiHenteDato = DateLogiLevert.Value.ToString("yyyy-MM-dd")
+        'LogiProduktID = SQLWhiteWash(TxtLogiID.Text.Trim)
+        'LogiAvdelingID = SQLHentIDNavn("avdeling", "avd_navn", "avdeling_id", LogiLeveringsAvdeling)
 
-        'Oppdaterer avdelingen til sykkel med valg ID til stedet der sykkelen er levert
-        SQLUpdate("sykler", "avdeling_id='" & LogiLeveringsAvdeling & "'", "sykkel_id='" & LogiProduktID & "'")
+        ''Oppdaterer avdelingen til sykkel med valg ID til stedet der sykkelen er levert
+        'SQLUpdate("sykler", "avdeling_id='" & LogiLeveringsAvdeling & "'", "sykkel_id='" & LogiProduktID & "'")
 
-        'Dato er satt inn etter kravspesisfikasjon.
-        'Usikker på bruken av den siden vi ikke har 
+        ''Dato er satt inn etter kravspesisfikasjon.
+        ''Usikker på bruken av den siden vi ikke har 
 
     End Sub
 
@@ -2697,7 +2747,7 @@ Public Class Form1
             .Insert(1, UtleieTab)
             .Insert(2, KDTab)
             .Insert(3, InventarTab)
-            .Insert(4, LogiTab)
+            .Insert(4, InnleveringTab)
             .Insert(5, StatTab)
             .Remove(LoginTab)
 
@@ -2725,7 +2775,7 @@ Public Class Form1
             .Remove(UtleieTab)
             .Remove(KDTab)
             .Remove(InventarTab)
-            .Remove(LogiTab)
+            .Remove(InnleveringTab)
             .Remove(StatTab)
             .Add(LoginTab)
         End With
@@ -3117,6 +3167,7 @@ Public Class Form1
 
         DBAEndreAvdeling()
     End Sub
+
 
     Private Sub TxtUtlAntall_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtUtlAntall.KeyPress
         If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
