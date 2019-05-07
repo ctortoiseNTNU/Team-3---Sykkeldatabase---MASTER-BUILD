@@ -89,6 +89,20 @@ Public Class Form1
         End If
     End Function
 
+    Private Function CheckPassordKompleksitet(ByVal passord As String) As Boolean
+
+        Dim storbokstav As New System.Text.RegularExpressions.Regex("[A-Z]")
+        Dim litenbokstav As New System.Text.RegularExpressions.Regex("[a-z]")
+        Dim tall As New System.Text.RegularExpressions.Regex("[0-9]")
+        Dim symbol As New System.Text.RegularExpressions.Regex("[^a-zA-Z0-9]")
+
+        If Len(passord) < 8 Then Return False
+        If storbokstav.Matches(passord).Count < 1 And litenbokstav.Matches(passord).Count < 1 Then Return False
+        If tall.Matches(passord).Count < 1 Then Return False
+        If symbol.Matches(passord).Count < 1 Then Return False
+
+        Return True
+    End Function
     ''' <summary>
     ''' SQL SELECT spørring som returnerer DataTable basert på søkekriterier.
     ''' </summary>
@@ -2578,6 +2592,11 @@ Public Class Form1
             MsgBox("Vennligst tast inn gyldig passord. (Mindre enn 30 tegn)")
             Exit Sub
         End If
+        NBInputSjekk = CheckPassordKompleksitet(TxtAdminNBPassord.Text)
+        If NBInputSjekk = False Then
+            MsgBox("Vennligst tast inn gyldig passord. (Minst 8 tegn med minst 1 bokstav, symbol og tall)")
+            Exit Sub
+        End If
         NBInputSjekk = CheckVarChar20(TxtAdminNBFornavn.Text)
         If NBInputSjekk = False Then
             MsgBox("Vennligst tast inn gyldig fornavn. (Mindre enn 20 tegn)")
@@ -2622,7 +2641,14 @@ Public Class Form1
             MsgBox("Vennligst tast inn gyldig Bruker ID. (Tall mindre enn 12 char)")
             Exit Sub
         End If
-        EBInputSjekk = CheckVarChar20(TxtAdminEBFornavn.Text)
+        If TxtAdminEBPassord.Text <> "" Then
+            EBInputSjekk = CheckPassordKompleksitet(TxtAdminEBPassord.Text)
+            If EBInputSjekk = False Then
+                MsgBox("Vennligst tast inn gyldig passord. (Minst 8 tegn med minst 1 bokstav, symbol og tall)")
+                Exit Sub
+            End If
+        End If
+            EBInputSjekk = CheckVarChar20(TxtAdminEBFornavn.Text)
         If EBInputSjekk = False Then
             MsgBox("Vennligst tast inn gyldig fornavn. (Mindre enn 20 char)")
             Exit Sub
