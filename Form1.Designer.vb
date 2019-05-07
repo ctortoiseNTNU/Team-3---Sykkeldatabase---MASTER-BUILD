@@ -452,6 +452,7 @@ Partial Class Form1
         '
         'StartTab
         '
+        Me.StartTab.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.StartTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.StartTab.Controls.Add(Me.BtnStartLoggut)
         Me.StartTab.Controls.Add(Me.LblStartMOTD)
@@ -464,7 +465,6 @@ Partial Class Form1
         Me.StartTab.Size = New System.Drawing.Size(1340, 645)
         Me.StartTab.TabIndex = 0
         Me.StartTab.Text = "Start"
-        Me.StartTab.UseVisualStyleBackColor = True
         '
         'BtnStartLoggut
         '
@@ -1214,6 +1214,7 @@ Partial Class Form1
         '
         'KDTab
         '
+        Me.KDTab.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.KDTab.Controls.Add(Me.GrbKndEndre)
         Me.KDTab.Controls.Add(Me.GrbKndNyKunde)
         Me.KDTab.Controls.Add(Me.GrbKndSok)
@@ -1222,7 +1223,6 @@ Partial Class Form1
         Me.KDTab.Size = New System.Drawing.Size(1340, 645)
         Me.KDTab.TabIndex = 2
         Me.KDTab.Text = "Kundedatabase"
-        Me.KDTab.UseVisualStyleBackColor = True
         '
         'GrbKndEndre
         '
@@ -1731,6 +1731,7 @@ Partial Class Form1
         '
         'InventarTab
         '
+        Me.InventarTab.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.InventarTab.Controls.Add(Me.LvInvSok)
         Me.InventarTab.Controls.Add(Me.GrpInvSok)
         Me.InventarTab.Controls.Add(Me.GrpInvRegistrerEndre)
@@ -1739,7 +1740,6 @@ Partial Class Form1
         Me.InventarTab.Size = New System.Drawing.Size(1340, 645)
         Me.InventarTab.TabIndex = 3
         Me.InventarTab.Text = "Inventar"
-        Me.InventarTab.UseVisualStyleBackColor = True
         '
         'LvInvSok
         '
@@ -2281,6 +2281,7 @@ Partial Class Form1
         '
         'InnleveringTab
         '
+        Me.InnleveringTab.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.InnleveringTab.Controls.Add(Me.GrpLogiKunde)
         Me.InnleveringTab.Controls.Add(Me.GrpLogiSokUtleie)
         Me.InnleveringTab.Controls.Add(Me.GrpLogiSokLeieResultat)
@@ -2289,7 +2290,6 @@ Partial Class Form1
         Me.InnleveringTab.Size = New System.Drawing.Size(1340, 645)
         Me.InnleveringTab.TabIndex = 5
         Me.InnleveringTab.Text = "Innlevering"
-        Me.InnleveringTab.UseVisualStyleBackColor = True
         '
         'GrpLogiKunde
         '
@@ -2716,6 +2716,7 @@ Partial Class Form1
         '
         'AdminTab
         '
+        Me.AdminTab.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.AdminTab.Controls.Add(Me.AdminMOTDGroup)
         Me.AdminTab.Controls.Add(Me.AdminBrukerSokGroup)
         Me.AdminTab.Controls.Add(Me.AdminEndreBrukerGroup)
@@ -2725,7 +2726,6 @@ Partial Class Form1
         Me.AdminTab.Size = New System.Drawing.Size(1340, 645)
         Me.AdminTab.TabIndex = 7
         Me.AdminTab.Text = "Admin"
-        Me.AdminTab.UseVisualStyleBackColor = True
         '
         'AdminMOTDGroup
         '
@@ -3401,6 +3401,7 @@ Partial Class Form1
         '
         'DBAdminTab
         '
+        Me.DBAdminTab.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.DBAdminTab.Controls.Add(Me.GrpDBADBS)
         Me.DBAdminTab.Controls.Add(Me.GrpDBANyUK)
         Me.DBAdminTab.Controls.Add(Me.GrpDBANyST)
@@ -3411,7 +3412,6 @@ Partial Class Form1
         Me.DBAdminTab.Size = New System.Drawing.Size(1340, 645)
         Me.DBAdminTab.TabIndex = 8
         Me.DBAdminTab.Text = "DB Admin"
-        Me.DBAdminTab.UseVisualStyleBackColor = True
         '
         'GrpDBADBS
         '
@@ -3994,6 +3994,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.ClientSize = New System.Drawing.Size(1350, 681)
         Me.Controls.Add(Me.HovedTab)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
