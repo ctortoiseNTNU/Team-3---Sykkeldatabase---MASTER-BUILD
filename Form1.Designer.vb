@@ -536,7 +536,6 @@ Partial Class Form1
         'BtnUtlBeregnPris
         '
         Me.BtnUtlBeregnPris.BackColor = System.Drawing.Color.Transparent
-        Me.BtnUtlBeregnPris.Enabled = False
         Me.BtnUtlBeregnPris.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtlBeregnPris.Location = New System.Drawing.Point(660, 548)
         Me.BtnUtlBeregnPris.Name = "BtnUtlBeregnPris"

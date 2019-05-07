@@ -26,8 +26,6 @@ Public Class Form1
     Dim LogiUtstyrLeveres, LogiSykkelLeveres As New ArrayList
 
 
-
-
 #End Region
 
 
@@ -305,7 +303,6 @@ Public Class Form1
                 LblUtleieSelgerF.Text = FornavnString
                 LblUtleieSelgerE.Text = EtternavnString
                 LblUtleieDatoTxt.Text = dato
-                'LblUtleieKlokke.Text = TimeOfDay
                 CboUtlAvd.SelectedIndex = 2
 
             Case 3 'Bestemmer det som skjer etter man har valgt Kundedatabasemeny.
@@ -387,9 +384,6 @@ Public Class Form1
     'Variabler som brukes her skal begynne med Leie. Dette er for å unngå klasj.
     'Husk kode kommentarer.
 
-    'Utstyr tilgjengelig for valgt sykkel kan legges i combobox som populeres automatisk ?
-    'If Kategori utstyr Then remove from utstyr else from sykkel  - overføring tilfra Lv
-
 
     'Metode som tømmer alle felt, kundeid og datatabeller for utstyr og sykler
     Private Sub UtleieReset()
@@ -467,11 +461,14 @@ Public Class Form1
     'Returnere dobbel pris. ikke debugget
     Private Sub UtlBeregnPris()
 
+        Dim UtlPrisRabattert, UtlRabatt, UtlAvgittRabatt As Integer
+
+        UtlRabatt = RabattSjekk()
+
         If UtlValgteSyklerID.Count < 1 And UtlValgtUtstyrID.Count < 1 Then
             MsgBox("Vennligst velg sykkel eller utstyr som skal leies.")
             'Return Nothing
         Else
-
 
             Dim rabatt As Integer = 5
             Dim UtlKatPrisDT As DataTable
@@ -507,25 +504,69 @@ Public Class Form1
                 UtlUtstyrPrisSum = UtlValgtUtstyrID.Count * UtlUtstyrPris * UtlLeieLengde * UtlUtstyrPrisFaktorUke
             End If
 
-            Dim rabattertpris
-            Dim avgittrabatt
-            Dim resultat(2)
+
+
             UtlPris = UtlLeieLengde * UtlPris
-            UtlPris += UtlPris
+            UtlPris += UtlUtstyrPrisSum
             LblUtlOrdinærpris.Text = UtlPris
-            rabattertpris = ((100 - rabatt) / 100) * (UtlPris)
-            LblUtlUtleieSum.Text = rabattertpris
-            avgittrabatt = (rabatt / 100) * UtlPris
-            LblUtlRabatt.Text = avgittrabatt
-            resultat(0) = UtlPris
-            resultat(1) = avgittrabatt
-            resultat(2) = rabattertpris
+            UtlPrisRabattert = ((100 - UtlRabatt) / 100) * (UtlPris)
+            LblUtlUtleieSum.Text = UtlPrisRabattert
+            UtlAvgittRabatt = (UtlRabatt / 100) * UtlPris
+            LblUtlRabatt.Text = UtlAvgittRabatt
+
+            'Dim rabattertpris
+            'Dim avgittrabatt
+            'Dim resultat(2)
+            'UtlPris = UtlLeieLengde * UtlPris
+            'UtlPris += UtlPris
+            'LblUtlOrdinærpris.Text = UtlPris
+            'rabattertpris = ((100 - rabatt) / 100) * (UtlPris)
+            'LblUtlUtleieSum.Text = rabattertpris
+            'avgittrabatt = (rabatt / 100) * UtlPris
+            'LblUtlRabatt.Text = avgittrabatt
+            'resultat(0) = UtlPris
+            'resultat(1) = avgittrabatt
+            'resultat(2) = rabattertpris
 
             'Return resultat
         End If
 
     End Sub
 
+
+
+    Private Function RabattSjekk()
+
+
+        Dim UtlRabattID As String
+        Dim UtlRabatt As Integer
+        Dim UtlRabattDT, UtlRabattIDDT As DataTable
+
+
+        If ChkUtlRabatOverstyr.Checked = True Then
+            UtlRabatt = CboUtlRabatt.SelectedItem
+            UtlRabattID = SQLHentIDNavn("kunder", "kunde_id", "rabatt_id", UtlKundeID)
+        Else
+            UtlRabattIDDT = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
+            If UtlRabattIDDT.Rows.Count > 0 Then
+                For Each r In UtlRabattIDDT.Rows
+                    UtlRabattID = r("rabatt_id")
+                Next
+                UtlRabattDT = SQLSelect("rabatter join kunder as k on rabatter.rabatt_id=k.rabatt_id", "rabatt_prosenter", "k.kunde_id='" _
+                                    & UtlKundeID & "'")
+                For Each r In UtlRabattDT.Rows
+                    UtlRabatt = r("rabatt_prosenter")
+                Next
+            ElseIf CboUtlRabatt.SelectedIndex > -1 Then
+                UtlRabatt = CboUtlRabatt.SelectedItem.ToString
+            Else
+                MsgBox("Kunde er ikke registert med rabatt. Venligst velg rabatt manuelt")
+                Return Nothing
+            End If
+        End If
+
+        Return UtlRabatt
+    End Function
     'Metode for registering av utleie
     Private Sub UtleieFullfør()
 
@@ -567,30 +608,7 @@ Public Class Form1
             UtlLeieLengde = TxtUtlAntall.Text
         End If
 
-
-        'Rabattsjekk
-        If ChkUtlRabatOverstyr.Checked = True Then
-            UtlRabatt = CboUtlRabatt.SelectedItem
-            UtlRabattID = SQLHentIDNavn("kunder", "kunde_id", "rabatt_id", UtlKundeID)
-        Else
-            UtlRabattIDDT = SQLSelect("kunder", "rabatt_id", "kunde_id='" & UtlKundeID & "'")
-            If UtlRabattIDDT.Rows.Count > 0 Then
-                For Each r In UtlRabattIDDT.Rows
-                    UtlRabattID = r("rabatt_id")
-                Next
-                UtlRabattDT = SQLSelect("rabatter join kunder as k on rabatter.rabatt_id=k.rabatt_id", "rabatt_prosenter", "k.kunde_id='" _
-                                    & UtlKundeID & "'")
-                For Each r In UtlRabattDT.Rows
-                    UtlRabatt = r("rabatt_prosenter")
-                Next
-            ElseIf CboUtlRabatt.SelectedIndex > -1 Then
-                UtlRabatt = CboUtlRabatt.SelectedItem.ToString
-            Else
-                MsgBox("Kunde er ikke registert med rabatt. Venligst velg rabatt manuelt")
-                Exit Sub
-            End If
-        End If
-
+        UtlRabatt = RabattSjekk()
 
         'Finner pris per sykkel avhenging om det er valgt time, dag eller ukepris
         For i = 0 To UtlValgteSyklerID.Count - 1
@@ -625,6 +643,7 @@ Public Class Form1
                 UtlUtstyrPrisSum = UtlValgtUtstyrID.Count * UtlUtstyrPris * UtlLeieLengde * UtlUtstyrPrisFaktorUke
             End If
 
+            'Beregning av pris og rabatt
             UtlPris = UtlLeieLengde * UtlPris
             UtlPris += UtlUtstyrPrisSum
             LblUtlOrdinærpris.Text = UtlPris
