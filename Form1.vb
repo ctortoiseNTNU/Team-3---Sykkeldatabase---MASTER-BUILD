@@ -145,7 +145,7 @@ Public Class Form1
 
             DBDisconnect()
             Return SisteID
-            MsgBox("Registrering (INSERT) vellykket")
+            'MsgBox("Registrering (INSERT) vellykket")
         Catch SQLex As MySqlException
             MsgBox("Feil ved innlegg (INSERT) i database:" & vbNewLine & SQLex.Message)
             Return Nothing
@@ -166,7 +166,7 @@ Public Class Form1
                                        & UpdateCriteria, Tilkobling)
         Try
             SqlCom.ExecuteNonQuery()
-            MsgBox("Oppdatering vellykket.")
+            'MsgBox("Oppdatering vellykket.")
         Catch SQLex As Exception
             MsgBox("Feil ved oppdatering (UPDATE) database:" & vbNewLine & SQLex.Message)
         End Try

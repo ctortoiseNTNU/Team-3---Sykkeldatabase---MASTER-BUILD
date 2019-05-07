@@ -180,7 +180,6 @@ Partial Class Form1
         Me.ChkInvBarneHenger = New System.Windows.Forms.CheckBox()
         Me.ChkInvBarnesete = New System.Windows.Forms.CheckBox()
         Me.ChkInvSykkelveske = New System.Windows.Forms.CheckBox()
-        Me.BtnInvTest = New System.Windows.Forms.Button()
         Me.BtnInvAvbrytEndre = New System.Windows.Forms.Button()
         Me.BtnInvTom = New System.Windows.Forms.Button()
         Me.LblInvAktivProdukt = New System.Windows.Forms.Label()
@@ -536,7 +535,7 @@ Partial Class Form1
         '
         'BtnUtlBeregnPris
         '
-        Me.BtnUtlBeregnPris.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtlBeregnPris.BackColor = System.Drawing.Color.Transparent
         Me.BtnUtlBeregnPris.Enabled = False
         Me.BtnUtlBeregnPris.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtlBeregnPris.Location = New System.Drawing.Point(660, 548)
@@ -569,7 +568,7 @@ Partial Class Form1
         '
         'BtnUtlAbort
         '
-        Me.BtnUtlAbort.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtlAbort.BackColor = System.Drawing.Color.Transparent
         Me.BtnUtlAbort.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtlAbort.Location = New System.Drawing.Point(660, 591)
         Me.BtnUtlAbort.Name = "BtnUtlAbort"
@@ -683,7 +682,7 @@ Partial Class Form1
         '
         'BtnUtleieFullfør
         '
-        Me.BtnUtleieFullfør.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtleieFullfør.BackColor = System.Drawing.Color.Transparent
         Me.BtnUtleieFullfør.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtleieFullfør.Location = New System.Drawing.Point(1218, 548)
         Me.BtnUtleieFullfør.Name = "BtnUtleieFullfør"
@@ -890,7 +889,7 @@ Partial Class Form1
         '
         'BtnUtlSokVare
         '
-        Me.BtnUtlSokVare.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtlSokVare.BackColor = System.Drawing.Color.Transparent
         Me.BtnUtlSokVare.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtlSokVare.Location = New System.Drawing.Point(105, 150)
         Me.BtnUtlSokVare.Name = "BtnUtlSokVare"
@@ -1071,7 +1070,7 @@ Partial Class Form1
         '
         'BtnUtleieNyKunde
         '
-        Me.BtnUtleieNyKunde.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtleieNyKunde.BackColor = System.Drawing.Color.Transparent
         Me.BtnUtleieNyKunde.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtleieNyKunde.Location = New System.Drawing.Point(181, 90)
         Me.BtnUtleieNyKunde.Name = "BtnUtleieNyKunde"
@@ -1082,7 +1081,7 @@ Partial Class Form1
         '
         'BtnUtleieKundeSok
         '
-        Me.BtnUtleieKundeSok.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnUtleieKundeSok.BackColor = System.Drawing.Color.Transparent
         Me.BtnUtleieKundeSok.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnUtleieKundeSok.Location = New System.Drawing.Point(181, 52)
         Me.BtnUtleieKundeSok.Name = "BtnUtleieKundeSok"
@@ -1322,23 +1321,25 @@ Partial Class Form1
         '
         'BtnKndEndre
         '
+        Me.BtnKndEndre.BackColor = System.Drawing.Color.Transparent
         Me.BtnKndEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnKndEndre.Location = New System.Drawing.Point(123, 466)
         Me.BtnKndEndre.Name = "BtnKndEndre"
         Me.BtnKndEndre.Size = New System.Drawing.Size(162, 23)
         Me.BtnKndEndre.TabIndex = 23
         Me.BtnKndEndre.Text = "Endre Bruker"
-        Me.BtnKndEndre.UseVisualStyleBackColor = True
+        Me.BtnKndEndre.UseVisualStyleBackColor = False
         '
         'BtnKndKundeID
         '
+        Me.BtnKndKundeID.BackColor = System.Drawing.Color.Transparent
         Me.BtnKndKundeID.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnKndKundeID.Location = New System.Drawing.Point(123, 73)
         Me.BtnKndKundeID.Name = "BtnKndKundeID"
         Me.BtnKndKundeID.Size = New System.Drawing.Size(55, 26)
         Me.BtnKndKundeID.TabIndex = 22
-        Me.BtnKndKundeID.Text = "Gå!"
-        Me.BtnKndKundeID.UseVisualStyleBackColor = True
+        Me.BtnKndKundeID.Text = "Hent"
+        Me.BtnKndKundeID.UseVisualStyleBackColor = False
         '
         'TxtKndKundeID
         '
@@ -1499,13 +1500,14 @@ Partial Class Form1
         '
         'BtnKndRegistrer
         '
+        Me.BtnKndRegistrer.BackColor = System.Drawing.Color.Transparent
         Me.BtnKndRegistrer.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnKndRegistrer.Location = New System.Drawing.Point(123, 325)
         Me.BtnKndRegistrer.Name = "BtnKndRegistrer"
         Me.BtnKndRegistrer.Size = New System.Drawing.Size(172, 23)
         Me.BtnKndRegistrer.TabIndex = 23
         Me.BtnKndRegistrer.Text = "Opprett Kunde"
-        Me.BtnKndRegistrer.UseVisualStyleBackColor = True
+        Me.BtnKndRegistrer.UseVisualStyleBackColor = False
         '
         'Label14
         '
@@ -1633,7 +1635,7 @@ Partial Class Form1
         Me.GrbKndSok.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrbKndSok.Location = New System.Drawing.Point(616, 2)
         Me.GrbKndSok.Name = "GrbKndSok"
-        Me.GrbKndSok.Size = New System.Drawing.Size(613, 292)
+        Me.GrbKndSok.Size = New System.Drawing.Size(717, 376)
         Me.GrbKndSok.TabIndex = 24
         Me.GrbKndSok.TabStop = False
         Me.GrbKndSok.Text = "Kundesøk"
@@ -1644,7 +1646,7 @@ Partial Class Form1
         Me.LvKndSok.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LvKndSok.Location = New System.Drawing.Point(4, 128)
         Me.LvKndSok.Name = "LvKndSok"
-        Me.LvKndSok.Size = New System.Drawing.Size(603, 158)
+        Me.LvKndSok.Size = New System.Drawing.Size(707, 242)
         Me.LvKndSok.TabIndex = 29
         Me.LvKndSok.UseCompatibleStateImageBehavior = False
         Me.LvKndSok.View = System.Windows.Forms.View.Details
@@ -1691,13 +1693,14 @@ Partial Class Form1
         '
         'BtnKndSok
         '
+        Me.BtnKndSok.BackColor = System.Drawing.Color.Transparent
         Me.BtnKndSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnKndSok.Location = New System.Drawing.Point(252, 73)
         Me.BtnKndSok.Name = "BtnKndSok"
         Me.BtnKndSok.Size = New System.Drawing.Size(62, 23)
         Me.BtnKndSok.TabIndex = 28
-        Me.BtnKndSok.Text = "Søk!"
-        Me.BtnKndSok.UseVisualStyleBackColor = True
+        Me.BtnKndSok.Text = "Søk"
+        Me.BtnKndSok.UseVisualStyleBackColor = False
         '
         'CboKndSok
         '
@@ -1843,7 +1846,6 @@ Partial Class Form1
         Me.GrpInvRegistrerEndre.Controls.Add(Me.ChkInvBarneHenger)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.ChkInvBarnesete)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.ChkInvSykkelveske)
-        Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvTest)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvAvbrytEndre)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.BtnInvTom)
         Me.GrpInvRegistrerEndre.Controls.Add(Me.LblInvAktivProdukt)
@@ -1931,32 +1933,27 @@ Partial Class Form1
         Me.ChkInvSykkelveske.Text = "Sykkelveske"
         Me.ChkInvSykkelveske.UseVisualStyleBackColor = True
         '
-        'BtnInvTest
-        '
-        Me.BtnInvTest.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInvTest.Location = New System.Drawing.Point(277, 592)
-        Me.BtnInvTest.Name = "BtnInvTest"
-        Me.BtnInvTest.Size = New System.Drawing.Size(85, 23)
-        Me.BtnInvTest.TabIndex = 50
-        Me.BtnInvTest.Text = "Test"
-        '
         'BtnInvAvbrytEndre
         '
+        Me.BtnInvAvbrytEndre.BackColor = System.Drawing.Color.Transparent
         Me.BtnInvAvbrytEndre.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInvAvbrytEndre.Location = New System.Drawing.Point(242, 500)
         Me.BtnInvAvbrytEndre.Name = "BtnInvAvbrytEndre"
         Me.BtnInvAvbrytEndre.Size = New System.Drawing.Size(85, 23)
         Me.BtnInvAvbrytEndre.TabIndex = 19
         Me.BtnInvAvbrytEndre.Text = "Avbryt"
+        Me.BtnInvAvbrytEndre.UseVisualStyleBackColor = False
         '
         'BtnInvTom
         '
+        Me.BtnInvTom.BackColor = System.Drawing.Color.Transparent
         Me.BtnInvTom.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInvTom.Location = New System.Drawing.Point(140, 500)
         Me.BtnInvTom.Name = "BtnInvTom"
         Me.BtnInvTom.Size = New System.Drawing.Size(85, 23)
         Me.BtnInvTom.TabIndex = 18
         Me.BtnInvTom.Text = "Tøm felt"
+        Me.BtnInvTom.UseVisualStyleBackColor = False
         '
         'LblInvAktivProdukt
         '
@@ -1970,12 +1967,14 @@ Partial Class Form1
         '
         'BtnInvSok
         '
+        Me.BtnInvSok.BackColor = System.Drawing.Color.Transparent
         Me.BtnInvSok.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInvSok.Location = New System.Drawing.Point(39, 471)
         Me.BtnInvSok.Name = "BtnInvSok"
         Me.BtnInvSok.Size = New System.Drawing.Size(85, 23)
         Me.BtnInvSok.TabIndex = 14
         Me.BtnInvSok.Text = "Søk"
+        Me.BtnInvSok.UseVisualStyleBackColor = False
         '
         'LblInvHentID
         '
@@ -1998,16 +1997,18 @@ Partial Class Form1
         '
         'BtnInvHent
         '
+        Me.BtnInvHent.BackColor = System.Drawing.Color.Transparent
         Me.BtnInvHent.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInvHent.Location = New System.Drawing.Point(39, 500)
         Me.BtnInvHent.Name = "BtnInvHent"
         Me.BtnInvHent.Size = New System.Drawing.Size(85, 23)
         Me.BtnInvHent.TabIndex = 17
         Me.BtnInvHent.Text = "Hent"
-        Me.BtnInvHent.UseVisualStyleBackColor = True
+        Me.BtnInvHent.UseVisualStyleBackColor = False
         '
         'BtnInvEndre
         '
+        Me.BtnInvEndre.BackColor = System.Drawing.Color.Transparent
         Me.BtnInvEndre.Enabled = False
         Me.BtnInvEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInvEndre.Location = New System.Drawing.Point(242, 470)
@@ -2015,7 +2016,7 @@ Partial Class Form1
         Me.BtnInvEndre.Size = New System.Drawing.Size(85, 23)
         Me.BtnInvEndre.TabIndex = 16
         Me.BtnInvEndre.Text = "Endre"
-        Me.BtnInvEndre.UseVisualStyleBackColor = True
+        Me.BtnInvEndre.UseVisualStyleBackColor = False
         '
         'LblInvSavnet
         '
@@ -2192,13 +2193,14 @@ Partial Class Form1
         '
         'BtnInvRegistrer
         '
+        Me.BtnInvRegistrer.BackColor = System.Drawing.Color.Transparent
         Me.BtnInvRegistrer.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInvRegistrer.Location = New System.Drawing.Point(140, 470)
         Me.BtnInvRegistrer.Name = "BtnInvRegistrer"
         Me.BtnInvRegistrer.Size = New System.Drawing.Size(85, 23)
         Me.BtnInvRegistrer.TabIndex = 15
         Me.BtnInvRegistrer.Text = "Registrer"
-        Me.BtnInvRegistrer.UseVisualStyleBackColor = True
+        Me.BtnInvRegistrer.UseVisualStyleBackColor = False
         '
         'CboInvForhandler
         '
@@ -2316,12 +2318,14 @@ Partial Class Form1
         '
         'BtnLogiKundeSok
         '
+        Me.BtnLogiKundeSok.BackColor = System.Drawing.Color.Transparent
         Me.BtnLogiKundeSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLogiKundeSok.Location = New System.Drawing.Point(317, 46)
         Me.BtnLogiKundeSok.Name = "BtnLogiKundeSok"
         Me.BtnLogiKundeSok.Size = New System.Drawing.Size(121, 30)
         Me.BtnLogiKundeSok.TabIndex = 56
         Me.BtnLogiKundeSok.Text = "Søk"
+        Me.BtnLogiKundeSok.UseVisualStyleBackColor = False
         '
         'LvLogiKundeSok
         '
@@ -2382,12 +2386,14 @@ Partial Class Form1
         '
         'BtnLogiSokUtleie
         '
+        Me.BtnLogiSokUtleie.BackColor = System.Drawing.Color.Transparent
         Me.BtnLogiSokUtleie.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLogiSokUtleie.Location = New System.Drawing.Point(273, 44)
         Me.BtnLogiSokUtleie.Name = "BtnLogiSokUtleie"
         Me.BtnLogiSokUtleie.Size = New System.Drawing.Size(121, 30)
         Me.BtnLogiSokUtleie.TabIndex = 54
         Me.BtnLogiSokUtleie.Text = "Søk"
+        Me.BtnLogiSokUtleie.UseVisualStyleBackColor = False
         '
         'LblLogiUtleieID
         '
@@ -2422,12 +2428,14 @@ Partial Class Form1
         '
         'BtnLogiInnlevert
         '
+        Me.BtnLogiInnlevert.BackColor = System.Drawing.Color.Transparent
         Me.BtnLogiInnlevert.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLogiInnlevert.Location = New System.Drawing.Point(203, 298)
         Me.BtnLogiInnlevert.Name = "BtnLogiInnlevert"
         Me.BtnLogiInnlevert.Size = New System.Drawing.Size(121, 30)
         Me.BtnLogiInnlevert.TabIndex = 55
         Me.BtnLogiInnlevert.Text = "Bekreft innlevering"
+        Me.BtnLogiInnlevert.UseVisualStyleBackColor = False
         '
         'LvLogiUtleieSokResultat
         '
@@ -2707,13 +2715,14 @@ Partial Class Form1
         '
         'BtnStaSok
         '
+        Me.BtnStaSok.BackColor = System.Drawing.Color.Transparent
         Me.BtnStaSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnStaSok.Location = New System.Drawing.Point(315, 71)
         Me.BtnStaSok.Name = "BtnStaSok"
         Me.BtnStaSok.Size = New System.Drawing.Size(69, 26)
         Me.BtnStaSok.TabIndex = 28
         Me.BtnStaSok.Text = "Søk!"
-        Me.BtnStaSok.UseVisualStyleBackColor = True
+        Me.BtnStaSok.UseVisualStyleBackColor = False
         '
         'CboStaAvdeling
         '
@@ -2762,13 +2771,14 @@ Partial Class Form1
         '
         'AdminMOTDEndreB
         '
+        Me.AdminMOTDEndreB.BackColor = System.Drawing.Color.Transparent
         Me.AdminMOTDEndreB.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AdminMOTDEndreB.Location = New System.Drawing.Point(113, 180)
         Me.AdminMOTDEndreB.Name = "AdminMOTDEndreB"
         Me.AdminMOTDEndreB.Size = New System.Drawing.Size(100, 23)
         Me.AdminMOTDEndreB.TabIndex = 26
         Me.AdminMOTDEndreB.Text = "Endre MOTD"
-        Me.AdminMOTDEndreB.UseVisualStyleBackColor = True
+        Me.AdminMOTDEndreB.UseVisualStyleBackColor = False
         '
         'TxtAdminMOTD
         '
@@ -2830,13 +2840,14 @@ Partial Class Form1
         '
         'AdminBSSokB
         '
+        Me.AdminBSSokB.BackColor = System.Drawing.Color.Transparent
         Me.AdminBSSokB.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AdminBSSokB.Location = New System.Drawing.Point(252, 73)
         Me.AdminBSSokB.Name = "AdminBSSokB"
         Me.AdminBSSokB.Size = New System.Drawing.Size(62, 23)
         Me.AdminBSSokB.TabIndex = 28
         Me.AdminBSSokB.Text = "Søk!"
-        Me.AdminBSSokB.UseVisualStyleBackColor = True
+        Me.AdminBSSokB.UseVisualStyleBackColor = False
         '
         'CboAdminBSEtter
         '
@@ -2921,23 +2932,25 @@ Partial Class Form1
         '
         'AdminEBEndreB
         '
+        Me.AdminEBEndreB.BackColor = System.Drawing.Color.Transparent
         Me.AdminEBEndreB.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AdminEBEndreB.Location = New System.Drawing.Point(103, 487)
         Me.AdminEBEndreB.Name = "AdminEBEndreB"
         Me.AdminEBEndreB.Size = New System.Drawing.Size(100, 23)
         Me.AdminEBEndreB.TabIndex = 23
         Me.AdminEBEndreB.Text = "Endre Bruker"
-        Me.AdminEBEndreB.UseVisualStyleBackColor = True
+        Me.AdminEBEndreB.UseVisualStyleBackColor = False
         '
         'AdminEBLastInnB
         '
+        Me.AdminEBLastInnB.BackColor = System.Drawing.Color.Transparent
         Me.AdminEBLastInnB.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AdminEBLastInnB.Location = New System.Drawing.Point(229, 36)
         Me.AdminEBLastInnB.Name = "AdminEBLastInnB"
         Me.AdminEBLastInnB.Size = New System.Drawing.Size(37, 23)
         Me.AdminEBLastInnB.TabIndex = 22
         Me.AdminEBLastInnB.Text = "Gå!"
-        Me.AdminEBLastInnB.UseVisualStyleBackColor = True
+        Me.AdminEBLastInnB.UseVisualStyleBackColor = False
         '
         'TxtAdminEBBID
         '
@@ -3184,13 +3197,14 @@ Partial Class Form1
         '
         'AdminNBOpprettB
         '
+        Me.AdminNBOpprettB.BackColor = System.Drawing.Color.Transparent
         Me.AdminNBOpprettB.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AdminNBOpprettB.Location = New System.Drawing.Point(94, 487)
         Me.AdminNBOpprettB.Name = "AdminNBOpprettB"
         Me.AdminNBOpprettB.Size = New System.Drawing.Size(110, 23)
         Me.AdminNBOpprettB.TabIndex = 23
         Me.AdminNBOpprettB.Text = "Opprett Bruker"
-        Me.AdminNBOpprettB.UseVisualStyleBackColor = True
+        Me.AdminNBOpprettB.UseVisualStyleBackColor = False
         '
         'LblBrukerIDNBVis
         '
@@ -3456,13 +3470,14 @@ Partial Class Form1
         '
         'BtnDBASok
         '
+        Me.BtnDBASok.BackColor = System.Drawing.Color.Transparent
         Me.BtnDBASok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDBASok.Location = New System.Drawing.Point(252, 73)
         Me.BtnDBASok.Name = "BtnDBASok"
         Me.BtnDBASok.Size = New System.Drawing.Size(62, 23)
         Me.BtnDBASok.TabIndex = 28
         Me.BtnDBASok.Text = "Søk!"
-        Me.BtnDBASok.UseVisualStyleBackColor = True
+        Me.BtnDBASok.UseVisualStyleBackColor = False
         '
         'CboDBASokeetter
         '
@@ -3538,33 +3553,36 @@ Partial Class Form1
         '
         'BtnDBAUKEndre
         '
+        Me.BtnDBAUKEndre.BackColor = System.Drawing.Color.Transparent
         Me.BtnDBAUKEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDBAUKEndre.Location = New System.Drawing.Point(184, 225)
         Me.BtnDBAUKEndre.Name = "BtnDBAUKEndre"
         Me.BtnDBAUKEndre.Size = New System.Drawing.Size(62, 23)
         Me.BtnDBAUKEndre.TabIndex = 32
         Me.BtnDBAUKEndre.Text = "Endre"
-        Me.BtnDBAUKEndre.UseVisualStyleBackColor = True
+        Me.BtnDBAUKEndre.UseVisualStyleBackColor = False
         '
         'UKLast
         '
+        Me.UKLast.BackColor = System.Drawing.Color.Transparent
         Me.UKLast.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.UKLast.Location = New System.Drawing.Point(302, 57)
         Me.UKLast.Name = "UKLast"
         Me.UKLast.Size = New System.Drawing.Size(62, 23)
         Me.UKLast.TabIndex = 32
         Me.UKLast.Text = "Last Inn"
-        Me.UKLast.UseVisualStyleBackColor = True
+        Me.UKLast.UseVisualStyleBackColor = False
         '
         'BtnDBAUKNy
         '
+        Me.BtnDBAUKNy.BackColor = System.Drawing.Color.Transparent
         Me.BtnDBAUKNy.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDBAUKNy.Location = New System.Drawing.Point(103, 225)
         Me.BtnDBAUKNy.Name = "BtnDBAUKNy"
         Me.BtnDBAUKNy.Size = New System.Drawing.Size(62, 23)
         Me.BtnDBAUKNy.TabIndex = 31
         Me.BtnDBAUKNy.Text = "Ny"
-        Me.BtnDBAUKNy.UseVisualStyleBackColor = True
+        Me.BtnDBAUKNy.UseVisualStyleBackColor = False
         '
         'LblDBAKID
         '
@@ -3681,33 +3699,36 @@ Partial Class Form1
         '
         'BtnDBASTLast
         '
+        Me.BtnDBASTLast.BackColor = System.Drawing.Color.Transparent
         Me.BtnDBASTLast.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDBASTLast.Location = New System.Drawing.Point(302, 52)
         Me.BtnDBASTLast.Name = "BtnDBASTLast"
         Me.BtnDBASTLast.Size = New System.Drawing.Size(62, 23)
         Me.BtnDBASTLast.TabIndex = 33
         Me.BtnDBASTLast.Text = "Last Inn"
-        Me.BtnDBASTLast.UseVisualStyleBackColor = True
+        Me.BtnDBASTLast.UseVisualStyleBackColor = False
         '
         'BtnDBASTEndre
         '
+        Me.BtnDBASTEndre.BackColor = System.Drawing.Color.Transparent
         Me.BtnDBASTEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDBASTEndre.Location = New System.Drawing.Point(184, 233)
         Me.BtnDBASTEndre.Name = "BtnDBASTEndre"
         Me.BtnDBASTEndre.Size = New System.Drawing.Size(62, 23)
         Me.BtnDBASTEndre.TabIndex = 31
         Me.BtnDBASTEndre.Text = "Endre"
-        Me.BtnDBASTEndre.UseVisualStyleBackColor = True
+        Me.BtnDBASTEndre.UseVisualStyleBackColor = False
         '
         'BtnDBASTNy
         '
+        Me.BtnDBASTNy.BackColor = System.Drawing.Color.Transparent
         Me.BtnDBASTNy.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDBASTNy.Location = New System.Drawing.Point(103, 233)
         Me.BtnDBASTNy.Name = "BtnDBASTNy"
         Me.BtnDBASTNy.Size = New System.Drawing.Size(62, 23)
         Me.BtnDBASTNy.TabIndex = 30
         Me.BtnDBASTNy.Text = "Ny"
-        Me.BtnDBASTNy.UseVisualStyleBackColor = True
+        Me.BtnDBASTNy.UseVisualStyleBackColor = False
         '
         'LblDBATypeID
         '
@@ -3797,33 +3818,36 @@ Partial Class Form1
         '
         'BtnDBAAvdLast
         '
+        Me.BtnDBAAvdLast.BackColor = System.Drawing.Color.Transparent
         Me.BtnDBAAvdLast.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDBAAvdLast.Location = New System.Drawing.Point(306, 52)
         Me.BtnDBAAvdLast.Name = "BtnDBAAvdLast"
         Me.BtnDBAAvdLast.Size = New System.Drawing.Size(62, 23)
         Me.BtnDBAAvdLast.TabIndex = 31
         Me.BtnDBAAvdLast.Text = "Last Inn"
-        Me.BtnDBAAvdLast.UseVisualStyleBackColor = True
+        Me.BtnDBAAvdLast.UseVisualStyleBackColor = False
         '
         'BtnDBAAvdEndre
         '
+        Me.BtnDBAAvdEndre.BackColor = System.Drawing.Color.Transparent
         Me.BtnDBAAvdEndre.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDBAAvdEndre.Location = New System.Drawing.Point(187, 233)
         Me.BtnDBAAvdEndre.Name = "BtnDBAAvdEndre"
         Me.BtnDBAAvdEndre.Size = New System.Drawing.Size(62, 23)
         Me.BtnDBAAvdEndre.TabIndex = 30
         Me.BtnDBAAvdEndre.Text = "Endre"
-        Me.BtnDBAAvdEndre.UseVisualStyleBackColor = True
+        Me.BtnDBAAvdEndre.UseVisualStyleBackColor = False
         '
         'BtnDBAAvdNy
         '
+        Me.BtnDBAAvdNy.BackColor = System.Drawing.Color.Transparent
         Me.BtnDBAAvdNy.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDBAAvdNy.Location = New System.Drawing.Point(105, 233)
         Me.BtnDBAAvdNy.Name = "BtnDBAAvdNy"
         Me.BtnDBAAvdNy.Size = New System.Drawing.Size(62, 23)
         Me.BtnDBAAvdNy.TabIndex = 29
         Me.BtnDBAAvdNy.Text = "Ny"
-        Me.BtnDBAAvdNy.UseVisualStyleBackColor = True
+        Me.BtnDBAAvdNy.UseVisualStyleBackColor = False
         '
         'LblDBALandsdel
         '
@@ -3867,6 +3891,7 @@ Partial Class Form1
         '
         'LoginTab
         '
+        Me.LoginTab.BackColor = System.Drawing.Color.Transparent
         Me.LoginTab.Controls.Add(Me.BtnLoginAvslutt)
         Me.LoginTab.Controls.Add(Me.BtnLoginLogin)
         Me.LoginTab.Controls.Add(Me.TxtLoginPassord)
@@ -3881,7 +3906,6 @@ Partial Class Form1
         Me.LoginTab.Size = New System.Drawing.Size(1340, 645)
         Me.LoginTab.TabIndex = 9
         Me.LoginTab.Text = "Login"
-        Me.LoginTab.UseVisualStyleBackColor = True
         '
         'BtnLoginAvslutt
         '
@@ -4226,7 +4250,6 @@ Partial Class Form1
     Friend WithEvents LblKndNyFN As Label
     Friend WithEvents LblKndNyBID As Label
     Friend WithEvents BtnInvTom As Button
-    Friend WithEvents BtnInvTest As Button
     Friend WithEvents BtnInvAvbrytEndre As Button
     Friend WithEvents GrpUtleieKundeInfo As GroupBox
     Friend WithEvents GrpUtleieKunde As GroupBox
