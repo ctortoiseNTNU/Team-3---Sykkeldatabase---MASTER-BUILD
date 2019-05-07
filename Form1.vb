@@ -2647,6 +2647,7 @@ Public Class Form1
                 MsgBox("Vennligst tast inn gyldig passord. (Minst 8 tegn med minst 1 bokstav, symbol og tall)")
                 Exit Sub
             End If
+        End If
             EBInputSjekk = CheckVarChar20(TxtAdminEBFornavn.Text)
         If EBInputSjekk = False Then
             MsgBox("Vennligst tast inn gyldig fornavn. (Mindre enn 20 char)")
