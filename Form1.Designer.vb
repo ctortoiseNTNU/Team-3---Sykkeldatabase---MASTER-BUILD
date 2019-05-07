@@ -388,6 +388,7 @@ Partial Class Form1
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.TmStartLoggUt = New System.Windows.Forms.Timer(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -3891,6 +3892,7 @@ Partial Class Form1
         'LoginTab
         '
         Me.LoginTab.BackColor = System.Drawing.Color.Transparent
+        Me.LoginTab.Controls.Add(Me.Button1)
         Me.LoginTab.Controls.Add(Me.BtnLoginAvslutt)
         Me.LoginTab.Controls.Add(Me.BtnLoginLogin)
         Me.LoginTab.Controls.Add(Me.TxtLoginPassord)
@@ -3995,6 +3997,15 @@ Partial Class Form1
         'TmStartLoggUt
         '
         Me.TmStartLoggUt.Interval = 600000
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(7, 600)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(111, 34)
+        Me.Button1.TabIndex = 9
+        Me.Button1.Text = "database"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -4440,4 +4451,5 @@ Partial Class Form1
     Friend WithEvents BtnLogiKundeSok As Button
     Friend WithEvents LvColLogiStatus As ColumnHeader
     Friend WithEvents LblUtleieSelgerE As Label
+    Friend WithEvents Button1 As Button
 End Class

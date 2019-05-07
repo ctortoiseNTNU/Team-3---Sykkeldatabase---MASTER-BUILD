@@ -24,21 +24,34 @@ Public Class Form1
     Dim UtlUtstyrPris As Integer = 50
     Dim UtlUtstyrPrisFaktorUke As Integer = 4
     Dim LogiUtstyrLeveres, LogiSykkelLeveres As New ArrayList
-
+    Dim server As String = "mysql-ait.stud.idi.ntnu.no"
+    Dim database As String = "colinft"
+    Dim brukernavn As String = "colinft"
+    Dim passord As String = "BJhYR1HS"
 
 #End Region
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+
+        server = InputBox("Server:")
+        database = InputBox("Database:")
+        brukernavn = InputBox("Brukernavn:")
+        passord = InputBox("Passord:")
+
+    End Sub
+
 
 
 #Region "GlobaleFunksjonerOgProsedyrer"
     'Her plasseres globale funksjoner og prosdyrer som gjenbrukes over programmet. De er uten navnekonvensjon
     'Husk å kommentere på kodensfunksjon og hvor i programmet den er tatt i bruk.
-
     Private Sub DBConnect()
         Tilkobling = New MySqlConnection(
-        "Server=mysql-ait.stud.idi.ntnu.no;" _
-        & "Database=colinft;" _
-        & "Uid=colinft;" _
-        & "Pwd=BJhYR1HS;")
+        "Server=" & server & ";" _
+        & "Database=" & database & ";" _
+        & "Uid=" & brukernavn & ";" _
+        & "Pwd=" & passord & ";")
+
         Try
             Tilkobling.Open()
         Catch ex As MySqlException
@@ -3221,7 +3234,6 @@ Public Class Form1
 
         DBAEndreAvdeling()
     End Sub
-
 
 
     Private Sub TxtUtlAntall_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtUtlAntall.KeyPress
