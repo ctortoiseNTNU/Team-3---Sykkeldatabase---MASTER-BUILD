@@ -97,6 +97,7 @@ Partial Class Form1
         Me.TxtUtleieKundeSok = New System.Windows.Forms.TextBox()
         Me.LblUtleieKundesok = New System.Windows.Forms.Label()
         Me.GrpUtleieSelger = New System.Windows.Forms.GroupBox()
+        Me.LblUtleieSelgerE = New System.Windows.Forms.Label()
         Me.LblUtleieSelgerF = New System.Windows.Forms.Label()
         Me.GrpUtleieAvd = New System.Windows.Forms.GroupBox()
         Me.CboUtlAvd = New System.Windows.Forms.ComboBox()
@@ -217,13 +218,13 @@ Partial Class Form1
         Me.LblInvKategori = New System.Windows.Forms.Label()
         Me.InnleveringTab = New System.Windows.Forms.TabPage()
         Me.GrpLogiKunde = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.ListView3 = New System.Windows.Forms.ListView()
+        Me.BtnLogiKundeSok = New System.Windows.Forms.Button()
+        Me.LvLogiKundeSok = New System.Windows.Forms.ListView()
         Me.ColumnHeader24 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader28 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader29 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TxtLogiKundeTlf = New System.Windows.Forms.TextBox()
         Me.GrpLogiSokUtleie = New System.Windows.Forms.GroupBox()
         Me.BtnLogiSokUtleie = New System.Windows.Forms.Button()
         Me.LblLogiUtleieID = New System.Windows.Forms.Label()
@@ -388,7 +389,6 @@ Partial Class Form1
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.TmStartLoggUt = New System.Windows.Forms.Timer(Me.components)
-        Me.LblUtleieSelgerE = New System.Windows.Forms.Label()
         Me.HovedTab.SuspendLayout()
         Me.StartTab.SuspendLayout()
         CType(Me.StartLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1121,6 +1121,16 @@ Partial Class Form1
         Me.GrpUtleieSelger.TabIndex = 1
         Me.GrpUtleieSelger.TabStop = False
         Me.GrpUtleieSelger.Text = "Selger:"
+        '
+        'LblUtleieSelgerE
+        '
+        Me.LblUtleieSelgerE.AutoSize = True
+        Me.LblUtleieSelgerE.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUtleieSelgerE.Location = New System.Drawing.Point(34, 73)
+        Me.LblUtleieSelgerE.Name = "LblUtleieSelgerE"
+        Me.LblUtleieSelgerE.Size = New System.Drawing.Size(85, 23)
+        Me.LblUtleieSelgerE.TabIndex = 1
+        Me.LblUtleieSelgerE.Text = "Etternavn"
         '
         'LblUtleieSelgerF
         '
@@ -2293,10 +2303,10 @@ Partial Class Form1
         '
         'GrpLogiKunde
         '
-        Me.GrpLogiKunde.Controls.Add(Me.Button1)
-        Me.GrpLogiKunde.Controls.Add(Me.ListView3)
+        Me.GrpLogiKunde.Controls.Add(Me.BtnLogiKundeSok)
+        Me.GrpLogiKunde.Controls.Add(Me.LvLogiKundeSok)
         Me.GrpLogiKunde.Controls.Add(Me.Label2)
-        Me.GrpLogiKunde.Controls.Add(Me.TextBox1)
+        Me.GrpLogiKunde.Controls.Add(Me.TxtLogiKundeTlf)
         Me.GrpLogiKunde.Location = New System.Drawing.Point(7, 292)
         Me.GrpLogiKunde.Name = "GrpLogiKunde"
         Me.GrpLogiKunde.Size = New System.Drawing.Size(459, 336)
@@ -2304,27 +2314,25 @@ Partial Class Form1
         Me.GrpLogiKunde.TabStop = False
         Me.GrpLogiKunde.Text = "Søk på leieforhold"
         '
-        'Button1
+        'BtnLogiKundeSok
         '
-        Me.Button1.Enabled = False
-        Me.Button1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(317, 50)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(121, 23)
-        Me.Button1.TabIndex = 56
-        Me.Button1.Text = "Innlevert"
+        Me.BtnLogiKundeSok.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnLogiKundeSok.Location = New System.Drawing.Point(317, 46)
+        Me.BtnLogiKundeSok.Name = "BtnLogiKundeSok"
+        Me.BtnLogiKundeSok.Size = New System.Drawing.Size(121, 30)
+        Me.BtnLogiKundeSok.TabIndex = 56
+        Me.BtnLogiKundeSok.Text = "Søk"
         '
-        'ListView3
+        'LvLogiKundeSok
         '
-        Me.ListView3.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader24, Me.ColumnHeader28, Me.ColumnHeader29})
-        Me.ListView3.Enabled = False
-        Me.ListView3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView3.Location = New System.Drawing.Point(9, 108)
-        Me.ListView3.Name = "ListView3"
-        Me.ListView3.Size = New System.Drawing.Size(429, 173)
-        Me.ListView3.TabIndex = 57
-        Me.ListView3.UseCompatibleStateImageBehavior = False
-        Me.ListView3.View = System.Windows.Forms.View.Details
+        Me.LvLogiKundeSok.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader24, Me.ColumnHeader28, Me.ColumnHeader29})
+        Me.LvLogiKundeSok.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LvLogiKundeSok.Location = New System.Drawing.Point(9, 108)
+        Me.LvLogiKundeSok.Name = "LvLogiKundeSok"
+        Me.LvLogiKundeSok.Size = New System.Drawing.Size(429, 173)
+        Me.LvLogiKundeSok.TabIndex = 57
+        Me.LvLogiKundeSok.UseCompatibleStateImageBehavior = False
+        Me.LvLogiKundeSok.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader24
         '
@@ -2347,19 +2355,18 @@ Partial Class Form1
         Me.Label2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(6, 52)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(116, 18)
+        Me.Label2.Size = New System.Drawing.Size(114, 18)
         Me.Label2.TabIndex = 8
-        Me.Label2.Text = "Telefonnr. kunde:"
+        Me.Label2.Text = "Telefonnr kunde:"
         '
-        'TextBox1
+        'TxtLogiKundeTlf
         '
-        Me.TextBox1.Enabled = False
-        Me.TextBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(162, 49)
-        Me.TextBox1.MaxLength = 20
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(121, 26)
-        Me.TextBox1.TabIndex = 7
+        Me.TxtLogiKundeTlf.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtLogiKundeTlf.Location = New System.Drawing.Point(162, 49)
+        Me.TxtLogiKundeTlf.MaxLength = 20
+        Me.TxtLogiKundeTlf.Name = "TxtLogiKundeTlf"
+        Me.TxtLogiKundeTlf.Size = New System.Drawing.Size(121, 26)
+        Me.TxtLogiKundeTlf.TabIndex = 7
         '
         'GrpLogiSokUtleie
         '
@@ -2376,9 +2383,9 @@ Partial Class Form1
         'BtnLogiSokUtleie
         '
         Me.BtnLogiSokUtleie.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnLogiSokUtleie.Location = New System.Drawing.Point(276, 48)
+        Me.BtnLogiSokUtleie.Location = New System.Drawing.Point(273, 44)
         Me.BtnLogiSokUtleie.Name = "BtnLogiSokUtleie"
-        Me.BtnLogiSokUtleie.Size = New System.Drawing.Size(121, 23)
+        Me.BtnLogiSokUtleie.Size = New System.Drawing.Size(121, 30)
         Me.BtnLogiSokUtleie.TabIndex = 54
         Me.BtnLogiSokUtleie.Text = "Søk"
         '
@@ -2416,11 +2423,11 @@ Partial Class Form1
         'BtnLogiInnlevert
         '
         Me.BtnLogiInnlevert.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnLogiInnlevert.Location = New System.Drawing.Point(205, 303)
+        Me.BtnLogiInnlevert.Location = New System.Drawing.Point(203, 298)
         Me.BtnLogiInnlevert.Name = "BtnLogiInnlevert"
-        Me.BtnLogiInnlevert.Size = New System.Drawing.Size(121, 23)
+        Me.BtnLogiInnlevert.Size = New System.Drawing.Size(121, 30)
         Me.BtnLogiInnlevert.TabIndex = 55
-        Me.BtnLogiInnlevert.Text = "Innlevert"
+        Me.BtnLogiInnlevert.Text = "Bekreft innlevering"
         '
         'LvLogiUtleieSokResultat
         '
@@ -3966,16 +3973,6 @@ Partial Class Form1
         '
         Me.TmStartLoggUt.Interval = 600000
         '
-        'LblUtleieSelgerE
-        '
-        Me.LblUtleieSelgerE.AutoSize = True
-        Me.LblUtleieSelgerE.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUtleieSelgerE.Location = New System.Drawing.Point(34, 73)
-        Me.LblUtleieSelgerE.Name = "LblUtleieSelgerE"
-        Me.LblUtleieSelgerE.Size = New System.Drawing.Size(85, 23)
-        Me.LblUtleieSelgerE.TabIndex = 1
-        Me.LblUtleieSelgerE.Text = "Etternavn"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4410,15 +4407,15 @@ Partial Class Form1
     Friend WithEvents LblLogiUtleieID As Label
     Friend WithEvents TxtLogiUtleieID As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TxtLogiKundeTlf As TextBox
     Friend WithEvents LvColLogiNavn As ColumnHeader
     Friend WithEvents GrpLogiKunde As GroupBox
-    Friend WithEvents ListView3 As ListView
+    Friend WithEvents LvLogiKundeSok As ListView
     Friend WithEvents ColumnHeader24 As ColumnHeader
     Friend WithEvents ColumnHeader28 As ColumnHeader
     Friend WithEvents ColumnHeader29 As ColumnHeader
     Friend WithEvents BtnLogiInnlevert As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents BtnLogiKundeSok As Button
     Friend WithEvents LvColLogiStatus As ColumnHeader
     Friend WithEvents LblUtleieSelgerE As Label
 End Class

@@ -2040,7 +2040,17 @@ Public Class Form1
         LogiSykkelLeveres.Clear()
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnLogiKundeSok.Click
+        Dim LogiKundeSokNr As String = SQLWhiteWash(TxtLogiKundeTlf.Text.Trim)
 
+        Dim LogiKundeSokDT As DataTable
+        LogiKundeSokDT = SQLSelect("utleie join kunder as k on utleie.kunde_id=k.kunde_id",
+                                   "utleie_id, utleie_start, utleie_slutt", "k.telefon='" & LogiKundeSokNr & "'")
+        For Each r In LogiKundeSokDT.Rows
+            LvLogiKundeSok.Items.Add(New ListViewItem({r("utleie_id"), r("utleie_start"), r("utleie_slutt")}))
+        Next
+
+    End Sub
 
 #End Region
 
@@ -3166,6 +3176,7 @@ Public Class Form1
 
         DBAEndreAvdeling()
     End Sub
+
 
 
     Private Sub TxtUtlAntall_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtUtlAntall.KeyPress
