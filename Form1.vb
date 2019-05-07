@@ -605,7 +605,7 @@ Public Class Form1
             MsgBox("Vennligst fyll inn leietid")
             Exit Sub
         Else
-            UtlLeieLengde = TxtUtlAntall.Text
+            UtlLeieLengde = SQLWhiteWash(TxtUtlAntall.Text)
         End If
 
         UtlRabatt = RabattSjekk()
